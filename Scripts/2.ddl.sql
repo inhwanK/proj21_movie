@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS proj21_movie.theater RESTRICT;
 DROP TABLE IF EXISTS proj21_movie.cinema RESTRICT;
 
 -- 상영정보
-DROP TABLE IF EXISTS proj21_movie.show RESTRICT;
+DROP TABLE IF EXISTS proj21_movie.showinfo RESTRICT;
 
 -- 극장상영관정보
 DROP TABLE IF EXISTS proj21_movie.theater_cinema RESTRICT;
@@ -60,7 +60,7 @@ CREATE TABLE proj21_movie.member (
 	mem_no        INT          NOT NULL COMMENT '회원번호', -- 회원번호
 	mem_email     VARCHAR(100) NOT NULL COMMENT '회원이메일', -- 회원이메일
 	mem_passwd    CHAR(41)     NOT NULL COMMENT '비밀번호', -- 비밀번호
-	mem_birthdate DATE         NOT NULL COMMENT '생년월일', -- 생년월일
+	mem_birthdate DATETIME     NOT NULL COMMENT '생년월일', -- 생년월일
 	mem_name      VARCHAR(100) NOT NULL COMMENT '이름', -- 이름
 	mem_phone     VARCHAR(13)  NOT NULL COMMENT '연락처', -- 연락처
 	mem_point     INT          NULL     COMMENT '포인트', -- 포인트
@@ -84,7 +84,7 @@ CREATE TABLE proj21_movie.no_member (
 	nom_phone     VARCHAR(13) NOT NULL COMMENT '연락처', -- 연락처
 	nom_passwd    CHAR(41)    NOT NULL COMMENT '비밀번호', -- 비밀번호
 	nom_name      VARCHAR(10) NOT NULL COMMENT '이름', -- 이름
-	nom_birthdate DATE        NOT NULL COMMENT '생년월일' -- 생년월일
+	nom_birthdate DATETIME    NOT NULL COMMENT '생년월일' -- 생년월일
 )
 COMMENT '비회원';
 
@@ -127,8 +127,8 @@ CREATE TABLE proj21_movie.movie (
 	mov_actor    VARCHAR(100)  NOT NULL COMMENT '출연진', -- 출연진
 	mov_detail   VARCHAR(1000) NOT NULL COMMENT '주요정보', -- 주요정보
 	mov_teaser   VARCHAR(1000) NULL     COMMENT '예고편URL', -- 예고편URL
-	mov_opendate DATE          NULL     COMMENT '개봉일', -- 개봉일
-	mov_enddate  DATE          NULL     COMMENT '종료일', -- 종료일
+	mov_opendate DATETIME      NULL     COMMENT '개봉일', -- 개봉일
+	mov_enddate  DATETIME      NULL     COMMENT '종료일', -- 종료일
 	mov_avgstar  DOUBLE        NULL     COMMENT '평균 별점', -- 평균 별점
 	mov_poster   BLOB          NULL     COMMENT '포스터' -- 포스터
 )
@@ -168,7 +168,7 @@ CREATE TABLE proj21_movie.comment (
 	com_user    VARCHAR(50)  NOT NULL COMMENT '작성자', -- 작성자
 	com_content VARCHAR(500) NOT NULL COMMENT '내용', -- 내용
 	com_star    TINYINT      NOT NULL COMMENT '별점', -- 별점
-	com_date    DATE         NOT NULL COMMENT '작성일' -- 작성일
+	com_date    DATETIME     NOT NULL COMMENT '작성일' -- 작성일
 )
 COMMENT '한줄평';
 
@@ -228,25 +228,25 @@ ALTER TABLE proj21_movie.cinema
 	MODIFY COLUMN cin_no INT NOT NULL AUTO_INCREMENT COMMENT '상영관번호';
 
 -- 상영정보
-CREATE TABLE proj21_movie.show (
+CREATE TABLE proj21_movie.showinfo (
 	shw_no        INT      NOT NULL COMMENT '상영정보번호', -- 상영정보번호
 	tht_no        INT      NOT NULL COMMENT '극장번호', -- 극장번호
 	cin_no        INT      NOT NULL COMMENT '상영관번호', -- 상영관번호
 	mov_no        INT      NOT NULL COMMENT '영화번호', -- 영화번호
-	shw_date      DATE     NOT NULL COMMENT '상영일', -- 상영일
+	shw_date      DATETIME NOT NULL COMMENT '상영일', -- 상영일
 	shw_starttime DATETIME NOT NULL COMMENT '시작시간', -- 시작시간
 	shw_endtime   DATETIME NOT NULL COMMENT '종료시간' -- 종료시간
 )
 COMMENT '상영정보';
 
 -- 상영정보
-ALTER TABLE proj21_movie.show
-	ADD CONSTRAINT PK_show -- 상영정보 기본키
+ALTER TABLE proj21_movie.showinfo
+	ADD CONSTRAINT PK_showinfo -- 상영정보 기본키
 		PRIMARY KEY (
 			shw_no -- 상영정보번호
 		);
 
-ALTER TABLE proj21_movie.show
+ALTER TABLE proj21_movie.showinfo
 	MODIFY COLUMN shw_no INT NOT NULL AUTO_INCREMENT COMMENT '상영정보번호';
 
 -- 극장상영관정보
@@ -266,16 +266,16 @@ ALTER TABLE proj21_movie.theater_cinema
 
 -- 예매
 CREATE TABLE proj21_movie.reservation (
-	res_no       INT  NOT NULL COMMENT '예매번호', -- 예매번호
-	shw_no       INT  NOT NULL COMMENT '상영정보번호', -- 상영정보번호
-	mem_no       INT  NOT NULL COMMENT '회원번호', -- 회원번호
-	nom_no       INT  NOT NULL COMMENT '비회원번호', -- 비회원번호
-	res_price    INT  NOT NULL COMMENT '결제금액', -- 결제금액
-	res_usepoint INT  NULL     COMMENT '사용포인트', -- 사용포인트
-	res_date     DATE NOT NULL COMMENT '예매일', -- 예매일
-	res_adult    INT  NULL     COMMENT '인원(어른)', -- 인원(어른)
-	res_teen     INT  NULL     COMMENT '인원(청소년)', -- 인원(청소년)
-	res_pref     INT  NULL     COMMENT '인원(우대)' -- 인원(우대)
+	res_no       INT      NOT NULL COMMENT '예매번호', -- 예매번호
+	shw_no       INT      NOT NULL COMMENT '상영정보번호', -- 상영정보번호
+	mem_no       INT      NOT NULL COMMENT '회원번호', -- 회원번호
+	nom_no       INT      NOT NULL COMMENT '비회원번호', -- 비회원번호
+	res_price    INT      NOT NULL COMMENT '결제금액', -- 결제금액
+	res_usepoint INT      NULL     COMMENT '사용포인트', -- 사용포인트
+	res_date     DATETIME NOT NULL COMMENT '예매일', -- 예매일
+	res_adult    INT      NULL     COMMENT '인원(어른)', -- 인원(어른)
+	res_teen     INT      NULL     COMMENT '인원(청소년)', -- 인원(청소년)
+	res_pref     INT      NULL     COMMENT '인원(우대)' -- 인원(우대)
 )
 COMMENT '예매';
 
@@ -295,7 +295,7 @@ CREATE TABLE proj21_movie.inquiry (
 	inq_title     VARCHAR(100)  NOT NULL COMMENT '문의제목', -- 문의제목
 	inq_user      VARCHAR(50)   NOT NULL COMMENT '작성자', -- 작성자
 	inq_detail    VARCHAR(1000) NOT NULL COMMENT '문의내용', -- 문의내용
-	inq_date      DATE          NOT NULL COMMENT '문의일', -- 문의일
+	inq_date      DATETIME      NOT NULL COMMENT '문의일', -- 문의일
 	inq_file      BLOB          NULL     COMMENT '첨부파일', -- 첨부파일
 	inq_re_ref    INT           NOT NULL COMMENT '관련글 번호', -- 관련글 번호
 	inq_re_lev    INT           NULL     COMMENT '답글 레벨', -- 답글 레벨
@@ -336,11 +336,11 @@ ALTER TABLE proj21_movie.coupon
 
 -- 회원보유쿠폰
 CREATE TABLE proj21_movie.member_coupon (
-	mc_no      INT  NOT NULL COMMENT '번호', -- 번호
-	mem_no     INT  NOT NULL COMMENT '회원번호', -- 회원번호
-	cou_no     INT  NOT NULL COMMENT '쿠폰번호', -- 쿠폰번호
-	mc_getdate DATE NOT NULL COMMENT '쿠폰획득일', -- 쿠폰획득일
-	mc_expdate DATE NOT NULL COMMENT '쿠폰만료일' -- 쿠폰만료일
+	mc_no      INT      NOT NULL COMMENT '번호', -- 번호
+	mem_no     INT      NOT NULL COMMENT '회원번호', -- 회원번호
+	cou_no     INT      NOT NULL COMMENT '쿠폰번호', -- 쿠폰번호
+	mc_getdate DATETIME NOT NULL COMMENT '쿠폰획득일', -- 쿠폰획득일
+	mc_expdate DATETIME NOT NULL COMMENT '쿠폰만료일' -- 쿠폰만료일
 )
 COMMENT '회원보유쿠폰';
 
@@ -360,9 +360,9 @@ CREATE TABLE proj21_movie.event (
 	ev_passwd    CHAR(41)      NOT NULL COMMENT '비밀번호', -- 비밀번호
 	ev_title     VARCHAR(100)  NOT NULL COMMENT '이벤트제목', -- 이벤트제목
 	ev_detail    VARCHAR(1000) NOT NULL COMMENT '이벤트내용', -- 이벤트내용
-	ev_startdate DATE          NULL     COMMENT '시작일', -- 시작일
-	ev_enddate   DATE          NULL     COMMENT '종료일', -- 종료일
-	ev_date      DATE          NOT NULL COMMENT '등록일', -- 등록일
+	ev_startdate DATETIME      NULL     COMMENT '시작일', -- 시작일
+	ev_enddate   DATETIME      NULL     COMMENT '종료일', -- 종료일
+	ev_date      DATETIME      NOT NULL COMMENT '등록일', -- 등록일
 	ev_file      BLOB          NULL     COMMENT '파일' -- 파일
 )
 COMMENT '이벤트';
@@ -383,7 +383,7 @@ CREATE TABLE proj21_movie.notice (
 	not_passwd CHAR(41)      NOT NULL COMMENT '비밀번호', -- 비밀번호
 	not_title  VARCHAR(100)  NOT NULL COMMENT '공지제목', -- 공지제목
 	not_detail VARCHAR(1000) NOT NULL COMMENT '공지내용', -- 공지내용
-	not_date   DATE          NOT NULL COMMENT '등록일', -- 등록일
+	not_date   DATETIME      NOT NULL COMMENT '등록일', -- 등록일
 	not_file   BLOB          NULL     COMMENT '파일' -- 파일
 )
 COMMENT '공지';
@@ -427,7 +427,8 @@ ALTER TABLE proj21_movie.movie_pic
 		)
 		REFERENCES proj21_movie.movie ( -- 영화
 			mov_no -- 영화번호
-		);
+		)
+		ON DELETE CASCADE;
 
 -- 한줄평
 ALTER TABLE proj21_movie.comment
@@ -437,11 +438,12 @@ ALTER TABLE proj21_movie.comment
 		)
 		REFERENCES proj21_movie.movie ( -- 영화
 			mov_no -- 영화번호
-		);
+		)
+		ON DELETE CASCADE;
 
 -- 상영정보
-ALTER TABLE proj21_movie.show
-	ADD CONSTRAINT FK_movie_TO_show -- 영화 -> 상영정보
+ALTER TABLE proj21_movie.showinfo
+	ADD CONSTRAINT FK_movie_TO_showinfo -- 영화 -> 상영정보
 		FOREIGN KEY (
 			mov_no -- 영화번호
 		)
@@ -450,8 +452,8 @@ ALTER TABLE proj21_movie.show
 		);
 
 -- 상영정보
-ALTER TABLE proj21_movie.show
-	ADD CONSTRAINT FK_theater_cinema_TO_show -- 극장상영관정보 -> 상영정보
+ALTER TABLE proj21_movie.showinfo
+	ADD CONSTRAINT FK_theater_cinema_TO_showinfo -- 극장상영관정보 -> 상영정보
 		FOREIGN KEY (
 			tht_no, -- 극장번호
 			cin_no  -- 상영관번호
@@ -483,11 +485,11 @@ ALTER TABLE proj21_movie.theater_cinema
 
 -- 예매
 ALTER TABLE proj21_movie.reservation
-	ADD CONSTRAINT FK_show_TO_reservation -- 상영정보 -> 예매
+	ADD CONSTRAINT FK_showinfo_TO_reservation -- 상영정보 -> 예매
 		FOREIGN KEY (
 			shw_no -- 상영정보번호
 		)
-		REFERENCES proj21_movie.show ( -- 상영정보
+		REFERENCES proj21_movie.showinfo ( -- 상영정보
 			shw_no -- 상영정보번호
 		);
 
@@ -519,7 +521,8 @@ ALTER TABLE proj21_movie.member_coupon
 		)
 		REFERENCES proj21_movie.member ( -- 회원
 			mem_no -- 회원번호
-		);
+		)
+		ON DELETE CASCADE;
 
 -- 회원보유쿠폰
 ALTER TABLE proj21_movie.member_coupon
@@ -533,11 +536,11 @@ ALTER TABLE proj21_movie.member_coupon
 
 -- 좌석
 ALTER TABLE proj21_movie.seat
-	ADD CONSTRAINT FK_show_TO_seat -- 상영정보 -> 좌석
+	ADD CONSTRAINT FK_showinfo_TO_seat -- 상영정보 -> 좌석
 		FOREIGN KEY (
 			shw_no -- 상영정보번호
 		)
-		REFERENCES proj21_movie.show ( -- 상영정보
+		REFERENCES proj21_movie.showinfo ( -- 상영정보
 			shw_no -- 상영정보번호
 		);
 
