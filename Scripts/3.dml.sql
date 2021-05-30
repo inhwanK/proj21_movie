@@ -54,9 +54,31 @@ insert into theater values (null, '북대구(칠곡)', ' 대구광역시 북구 
 
 -- 상영관
 select cin_no, cin_row, cin_col, cin_seat, cin_type, cin_adultprice, cin_teenprice, cin_prefprice from cinema;
+insert into cinema values (null, 10, 10, cin_row * cin_col, '2D', 10000, 8000, 5000);
+insert into cinema values (null, 8, 9, cin_row * cin_col, '3D', 15000, 13000, 10000);
+insert into cinema values (null, 6, 8, cin_row * cin_col, '4D', 20000, 18000, 15000);
+
+-- 극장상영관정보
+select * from theater_cinema;
+insert into theater_cinema values (1, 1);
+insert into theater_cinema values (1, 2);
+insert into theater_cinema values (1, 3);
+insert into theater_cinema values (2, 1);
+insert into theater_cinema values (2, 2);
+insert into theater_cinema values (2, 3);
+insert into theater_cinema values (3, 1);
+insert into theater_cinema values (3, 2);
+insert into theater_cinema values (3, 3);
 
 -- 상영정보
 select shw_no, tht_no, cin_no, mov_no, shw_date, shw_starttime, shw_endtime from showinfo;
+-- 상영정보 입력시 시작시간 설정 후 해당 영화의 런타임을 가져와서 시작시간에 더하여 shw_endtime에 넣어줄 것 
+-- insert into showinfo values (null, 1, 1, 1, '2021-05-30', '10:00:00', );
+-- delete from showinfo where shw_no = 1;
+-- alter table showinfo auto_increment = 1;
+-- 	date_add('10:00:00', interval (select mov_runtime from movie where mov_no = 1) minute));
+-- select date_add('2021-05-30 10:00:00', interval (select mov_runtime from movie where mov_no = 1) minute);
+-- select sec_to_time((select mov_runtime from movie where mov_no = 1) * 60); 
 
 -- 좌석
 select seat_no, res_no, shw_no, seat_rowno, seat_colno from seat;
@@ -66,9 +88,13 @@ select res_no, shw_no, mem_no, nom_no, res_price, res_usepoint, res_date, res_ad
 
 -- 쿠폰
 select cou_no, cou_name, cou_detail, cou_dc, cou_expire from coupon;
+insert into coupon values (null, '10% 할인 쿠폰', '영화 예매 10% 할인', 0.1, 30);
+insert into coupon values (null, '20% 할인 쿠폰', '영화 예매 20% 할인', 0.2, 30);
+insert into coupon values (null, '30% 할인 쿠폰', '영화 예매 30% 할인', 0.3, 30);
 
 -- 회원 보유 쿠폰
 select mc_no, mem_no, cou_no, mc_getdate, mc_expdate from member_coupon;
+-- 등록시 쿠폰 번호로 쿠폰획득일(mc_getdate)에 유효기간(cou_expire) 더하여 쿠폰만료일(mc_expdate)에 입력  
 
 -- 문의
 select inq_no, inq_title, inq_user, inq_detail, inq_date, inq_file, inq_re_ref, inq_re_lev, inq_re_seq, inq_readcount from inquiry;

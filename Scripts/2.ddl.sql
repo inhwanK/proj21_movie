@@ -60,7 +60,7 @@ CREATE TABLE proj21_movie.member (
 	mem_no        INT          NOT NULL COMMENT '회원번호', -- 회원번호
 	mem_email     VARCHAR(100) NOT NULL COMMENT '회원이메일', -- 회원이메일
 	mem_passwd    CHAR(41)     NOT NULL COMMENT '비밀번호', -- 비밀번호
-	mem_birthdate DATETIME     NOT NULL COMMENT '생년월일', -- 생년월일
+	mem_birthdate DATE         NOT NULL COMMENT '생년월일', -- 생년월일
 	mem_name      VARCHAR(100) NOT NULL COMMENT '이름', -- 이름
 	mem_phone     VARCHAR(13)  NOT NULL COMMENT '연락처', -- 연락처
 	mem_point     INT          NULL     COMMENT '포인트', -- 포인트
@@ -84,7 +84,7 @@ CREATE TABLE proj21_movie.no_member (
 	nom_phone     VARCHAR(13) NOT NULL COMMENT '연락처', -- 연락처
 	nom_passwd    CHAR(41)    NOT NULL COMMENT '비밀번호', -- 비밀번호
 	nom_name      VARCHAR(10) NOT NULL COMMENT '이름', -- 이름
-	nom_birthdate DATETIME    NOT NULL COMMENT '생년월일' -- 생년월일
+	nom_birthdate DATE        NOT NULL COMMENT '생년월일' -- 생년월일
 )
 COMMENT '비회원';
 
@@ -127,8 +127,8 @@ CREATE TABLE proj21_movie.movie (
 	mov_actor    VARCHAR(100)  NOT NULL COMMENT '출연진', -- 출연진
 	mov_detail   VARCHAR(1000) NOT NULL COMMENT '주요정보', -- 주요정보
 	mov_teaser   VARCHAR(1000) NULL     COMMENT '예고편URL', -- 예고편URL
-	mov_opendate DATETIME      NULL     COMMENT '개봉일', -- 개봉일
-	mov_enddate  DATETIME      NULL     COMMENT '종료일', -- 종료일
+	mov_opendate DATE          NULL     COMMENT '개봉일', -- 개봉일
+	mov_enddate  DATE          NULL     COMMENT '종료일', -- 종료일
 	mov_avgstar  DOUBLE        NULL     COMMENT '평균 별점', -- 평균 별점
 	mov_poster   BLOB          NULL     COMMENT '포스터' -- 포스터
 )
@@ -229,13 +229,13 @@ ALTER TABLE proj21_movie.cinema
 
 -- 상영정보
 CREATE TABLE proj21_movie.showinfo (
-	shw_no        INT      NOT NULL COMMENT '상영정보번호', -- 상영정보번호
-	tht_no        INT      NOT NULL COMMENT '극장번호', -- 극장번호
-	cin_no        INT      NOT NULL COMMENT '상영관번호', -- 상영관번호
-	mov_no        INT      NOT NULL COMMENT '영화번호', -- 영화번호
-	shw_date      DATETIME NOT NULL COMMENT '상영일', -- 상영일
-	shw_starttime DATETIME NOT NULL COMMENT '시작시간', -- 시작시간
-	shw_endtime   DATETIME NOT NULL COMMENT '종료시간' -- 종료시간
+	shw_no        INT  NOT NULL COMMENT '상영정보번호', -- 상영정보번호
+	tht_no        INT  NOT NULL COMMENT '극장번호', -- 극장번호
+	cin_no        INT  NOT NULL COMMENT '상영관번호', -- 상영관번호
+	mov_no        INT  NOT NULL COMMENT '영화번호', -- 영화번호
+	shw_date      DATE NOT NULL COMMENT '상영일', -- 상영일
+	shw_starttime TIME NOT NULL COMMENT '시작시간', -- 시작시간
+	shw_endtime   TIME NOT NULL COMMENT '종료시간' -- 종료시간
 )
 COMMENT '상영정보';
 
@@ -360,8 +360,8 @@ CREATE TABLE proj21_movie.event (
 	ev_passwd    CHAR(41)      NOT NULL COMMENT '비밀번호', -- 비밀번호
 	ev_title     VARCHAR(100)  NOT NULL COMMENT '이벤트제목', -- 이벤트제목
 	ev_detail    VARCHAR(1000) NOT NULL COMMENT '이벤트내용', -- 이벤트내용
-	ev_startdate DATETIME      NULL     COMMENT '시작일', -- 시작일
-	ev_enddate   DATETIME      NULL     COMMENT '종료일', -- 종료일
+	ev_startdate DATE          NULL     COMMENT '시작일', -- 시작일
+	ev_enddate   DATE          NULL     COMMENT '종료일', -- 종료일
 	ev_date      DATETIME      NOT NULL COMMENT '등록일', -- 등록일
 	ev_file      BLOB          NULL     COMMENT '파일' -- 파일
 )
