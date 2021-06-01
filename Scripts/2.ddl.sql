@@ -1,3 +1,6 @@
+-- 영화예매웹 DROP
+DROP SCHEMA IF EXISTS proj21_movie;
+
 -- 회원
 DROP TABLE IF EXISTS proj21_movie.member RESTRICT;
 
@@ -48,9 +51,6 @@ DROP TABLE IF EXISTS proj21_movie.notice RESTRICT;
 
 -- 좌석
 DROP TABLE IF EXISTS proj21_movie.seat RESTRICT;
-
--- 영화예매웹
-DROP SCHEMA IF EXISTS proj21_movie;
 
 -- 영화예매웹
 CREATE SCHEMA proj21_movie;
@@ -189,7 +189,7 @@ CREATE TABLE proj21_movie.theater (
 	tht_address VARCHAR(100)  NOT NULL COMMENT '주소', -- 주소
 	tht_lat     DOUBLE        NOT NULL COMMENT '위도', -- 위도
 	tht_long    DOUBLE        NOT NULL COMMENT '경도', -- 경도
-	tht_subs    BLOB          NULL     COMMENT '부대시설', -- 부대시설
+	tht_subs    VARCHAR(100)  NULL     COMMENT '부대시설', -- 부대시설
 	tht_detail  VARCHAR(1000) NULL     COMMENT '극장설명' -- 극장설명
 )
 COMMENT '극장';
@@ -268,8 +268,8 @@ ALTER TABLE proj21_movie.theater_cinema
 CREATE TABLE proj21_movie.reservation (
 	res_no       INT      NOT NULL COMMENT '예매번호', -- 예매번호
 	shw_no       INT      NOT NULL COMMENT '상영정보번호', -- 상영정보번호
-	mem_no       INT      NOT NULL COMMENT '회원번호', -- 회원번호
-	nom_no       INT      NOT NULL COMMENT '비회원번호', -- 비회원번호
+	mem_no       INT      NULL     COMMENT '회원번호', -- 회원번호
+	nom_no       INT      NULL     COMMENT '비회원번호', -- 비회원번호
 	res_price    INT      NOT NULL COMMENT '결제금액', -- 결제금액
 	res_usepoint INT      NULL     COMMENT '사용포인트', -- 사용포인트
 	res_date     DATETIME NOT NULL COMMENT '예매일', -- 예매일
@@ -291,16 +291,15 @@ ALTER TABLE proj21_movie.reservation
 
 -- 문의
 CREATE TABLE proj21_movie.inquiry (
-	inq_no        INT           NOT NULL COMMENT '문의번호', -- 문의번호
-	inq_title     VARCHAR(100)  NOT NULL COMMENT '문의제목', -- 문의제목
-	inq_user      VARCHAR(50)   NOT NULL COMMENT '작성자', -- 작성자
-	inq_detail    VARCHAR(1000) NOT NULL COMMENT '문의내용', -- 문의내용
-	inq_date      DATETIME      NOT NULL COMMENT '문의일', -- 문의일
-	inq_file      BLOB          NULL     COMMENT '첨부파일', -- 첨부파일
-	inq_re_ref    INT           NOT NULL COMMENT '관련글 번호', -- 관련글 번호
-	inq_re_lev    INT           NULL     COMMENT '답글 레벨', -- 답글 레벨
-	inq_re_seq    INT           NULL     COMMENT '출력순서', -- 출력순서
-	inq_readcount INT           NULL     COMMENT '조회수' -- 조회수
+	inq_no      INT           NOT NULL COMMENT '문의번호', -- 문의번호
+	inq_title   VARCHAR(100)  NOT NULL COMMENT '문의제목', -- 문의제목
+	inq_user    VARCHAR(50)   NOT NULL COMMENT '작성자', -- 작성자
+	inq_detail  VARCHAR(1000) NOT NULL COMMENT '문의내용', -- 문의내용
+	inq_date    DATETIME      NOT NULL COMMENT '문의일', -- 문의일
+	inq_file    BLOB          NULL     COMMENT '첨부파일', -- 첨부파일
+	inq_answer  VARCHAR(1000) NULL     COMMENT '답변내용', -- 답변내용
+	inq_ansdate DATETIME      NULL     COMMENT '답변일', -- 답변일
+	inq_status  TINYINT       NULL     COMMENT '답변상태' -- 답변상태
 )
 COMMENT '문의';
 

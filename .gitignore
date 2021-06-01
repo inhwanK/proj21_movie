@@ -5,6 +5,7 @@
 /.classpath
 /.settings/
 .project
+/.dbeaver/
 
 ### DBeaver ###
 # ide config file
@@ -101,3 +102,4 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
