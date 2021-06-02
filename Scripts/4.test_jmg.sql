@@ -1,1 +1,2 @@
 select user(), database();
+
