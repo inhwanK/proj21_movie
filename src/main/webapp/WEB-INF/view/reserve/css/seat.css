@@ -1,0 +1,255 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'IBMPlexSansKR-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* body */
+body {
+	font-family: 'IBMPlexSansKR-Regular', sans-serif;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	/* 	background-color: RGB(3, 22, 52); */
+}
+
+/* header */
+header {
+	margin: auto;
+	width: 70%;
+	position: relative;
+}
+
+#header_ci {
+	width: 150px;
+	margin: 0px auto;
+	align-items: center;
+	position: relative;
+	/* 	position: absolute; */
+	left: 120px;
+	/* left: 50%; */
+	/* 	transform: translate(-50%, 0); */
+	box-sizing: border-box;
+}
+
+header div {
+	display: inline;
+	float: right;
+	text-align: right;
+	padding-bottom: 10px;
+}
+
+header div a {
+	text-decoration: none;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 0.8em;
+	color: RGB(136, 136, 136);
+}
+
+/* <nav> */
+nav {
+	margin: auto;
+	width: 70%;
+	position: relative;
+	padding: 0px;
+}
+
+nav ul {
+/* 	padding-left */
+	list-style: none;
+	border-bottom: 0.5px solid RGB(3, 22, 52);
+	padding-bottom: 5px;
+	margin: 10px auto;
+	position: relative;
+}
+
+nav ul li {
+	display: inline-block;
+	padding-right: 50px;
+	padding-left: 50px;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+nav ul li a {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	padding-bottom: 5px;
+}
+
+nav ul li a:hover {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	padding-bottom: 4px;
+	border-bottom: 5px solid RGB(3, 22, 52);
+}
+
+/* section */
+section {
+	margin: 50px auto;
+	width: 1000px;
+	height: 900px;
+	text-align: center;
+}
+
+section h2 {
+	padding-left: 10px;
+	text-align: left;
+}
+
+#container {
+	border: 1px solid #ccc;
+	margin-bottom: 50px;
+	height: 700px;
+}
+#container h2{
+	display: inline-block;
+	margin-right: 700px;
+}
+
+#count{
+/* 	border: 1px solid green; */
+	background-color: #ccc;
+	margin-left: 50px;
+	margin-right: 50px;
+	
+}
+
+#count span{
+	font-size: 1.2em;
+	margin: 35px;
+}
+
+#menubar ul{
+	padding: 0;
+	margin-bottom: 0px;
+	list-style: none;
+	width: 100%;
+}
+
+#menubar ul li{
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	width: 32.5%;
+	height: 30px;
+	border: 1px solid #ccc;
+	text-align: center;
+/* 	border-collapse: collapse; */
+}
+
+#selected{
+	background-color: RGB(3, 22, 52);
+	color: white;
+}
+
+#seat-choice {
+	height: 600px;
+}
+
+#seat-area{
+	padding: 10px;
+	margin-top: 30px;
+	width: 570px;
+	height: 500px;
+	float: left;
+}
+
+#seat-area img{
+	width: 500px;
+	margin: 25px 0px;
+}
+
+#seat-area span{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border: 1px solid RGB(3, 22, 52);
+}
+
+#hiddenseat{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	visibility: hidden;
+}
+
+
+#seat-area span:hover{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border: 1px solid RGB(3, 22, 52);
+	background-color: RGB(3, 22, 52);
+	color: white;
+	cursor: pointer;
+}
+
+#seat-info{
+	padding: 10px;
+/* 	margin-top: 30px; */
+/* 	margin-left: 20px; */
+	width: 340px;
+	height: 500px;
+	float: left;
+	background-color: RGB(3, 22, 52);
+}
+
+#movie-info, #seat-info, #price-info{
+	margin: 50px auto;
+}
+
+#movie-info dt, #seat-info dt, #price-info dt{
+	font-size: 1.2em;
+	font-weight: bold;
+	color: white;
+	text-align: left;
+}
+
+#movie-info dd, #seat-info dd, #price-info dd{
+	font-size: 0.8em;
+	color: white;
+	text-align: left;
+	margin: 0;
+}
+
+#before, #next{
+	display:inline-block;
+	width: 100px;
+	background-color: white;
+	padding: 10px;
+	font-size: 1.2em;
+	margin: 0 10px;
+}
+
+
+/* footer */
+footer {
+	margin: 50px auto;
+	width: 70%
+}
+
+footer div {
+	border-top: 0.5px solid RGB(3, 22, 52);
+	text-align: left;
+	margin-top: 0;
+}
+
+footer div p {
+	margin-left: 80px;
+	color: black;
+	font-size: 0.8em;
+	margin-top: 22.5px;
+}
+
+#footer_ci {
+	width: 100px;
+	margin: 0px;
+	float: left;
+}

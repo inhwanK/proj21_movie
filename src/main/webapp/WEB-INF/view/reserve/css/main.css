@@ -1,0 +1,178 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'IBMPlexSansKR-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* body */
+body {
+	font-family: 'IBMPlexSansKR-Regular', sans-serif;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	background-color: RGB(3, 22, 52);
+}
+
+/* header */
+header {
+	margin: auto;
+	width: 70%;
+	position: relative;
+}
+
+#header_ci {
+	width: 150px;
+	margin: 0px auto;
+	align-items: center;
+	position: relative;
+/* 	position: absolute; */
+	left: 120px;
+/* left: 50%; */
+/* 	transform: translate(-50%, 0); */
+	box-sizing: border-box;
+	
+}
+
+header div {
+	display: inline;
+	float: right;
+	text-align: right;
+	padding-bottom: 10px;
+}
+
+header div a {
+	text-decoration: none;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 0.8em;
+	color: RGB(136, 136, 136);
+}
+
+
+/* <nav> */
+nav {
+	margin: auto;
+	width: 70%;
+	position: relative;
+	padding: 0px;
+}
+
+nav ul {
+	padding-left: 0;
+	list-style: none;
+	border-bottom: 0.5px solid RGB(136, 136, 136);
+	padding-bottom: 5px;
+	margin: 10px auto;
+	position: relative;
+}
+
+nav ul li {
+	display: inline-block;
+	padding-right: 50px;
+	padding-left: 50px;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+nav ul li a {
+	text-decoration: none;
+	color: RGB(232, 221, 203);
+	padding-bottom: 5px;
+}
+
+nav ul li a:hover {
+	text-decoration: none;
+	color: RGB(232, 221, 203);
+	padding-bottom: 4px;
+	border-bottom: 5px solid RGB(136, 136, 136);
+}
+
+/* section */
+section {
+	margin: auto;
+	width: 70%;
+	text-align: center;
+}
+
+section p {
+/* 	padding-top: 600px; */
+/* 	padding-bottom: 600px; */
+	color: white;
+}
+
+#slide{
+	height: 400px;
+	overflow: hidden;
+}
+
+#slide ul{
+	width:calc(100% * 4);display:flex;animation:slide 15s infinite;
+}
+
+#slide li{
+	width:calc(100% / 4);height:400px;
+}
+#slide li:nth-child(1){
+	background-image: url("../img/stillcut1.jpg");
+}
+
+#slide li:nth-child(2){
+	background-image: url("../img/stillcut2.jpg");
+}
+
+#slide li:nth-child(3){
+	background: #fff;
+}
+
+#slide li:nth-child(4){
+	background:#aaf;
+}
+
+#slide ul, li{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+@keyframes slide {
+      0% {margin-left:0;} /* 0 ~ 10  : 정지 */
+      10% {margin-left:0;} /* 10 ~ 25 : 변이 */
+      25% {margin-left:-100%;} /* 25 ~ 35 : 정지 */
+      35% {margin-left:-100%;} /* 35 ~ 50 : 변이 */
+      50% {margin-left:-200%;}
+      60% {margin-left:-200%;}
+      75% {margin-left:-300%;}
+      85% {margin-left:-300%;}
+      100% {margin-left:0;}
+}
+
+/* footer */
+footer {
+	margin: auto;
+	width: 70%
+}
+
+footer div {
+	border-top: 0.5px solid RGB(136, 136, 136);
+	text-align: left;
+	margin-top: 0;
+}
+
+footer div p {
+	margin-left: 80px;
+	color: RGB(136, 136, 136);
+	font-size: 0.8em;
+	margin-top: 22.5px;
+	
+}
+
+#footer_ci {
+	width: 100px;
+	margin: 0px;
+	float: left;
+}
