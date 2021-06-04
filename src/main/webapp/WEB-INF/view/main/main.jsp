@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 	body {
-		background-color: black;
+		background-color: lightgray;
 	}
 	
 	header {
@@ -48,7 +48,12 @@
 	    margin: 40px auto;
 		float:none;
 		text-align: center;
-		background-color: red;
+		background-color: white;
+	}
+	div.reserve-boxoffice{
+		color: white;
+		font-size: 20px;
+		font-weight: 800;
 	}
 	
 	div ul {
@@ -89,17 +94,25 @@
 				<ul>
 					<li>
 						<img src="https://img.megabox.co.kr/SharedImg/2021/05/12/J7vthd2FWEXswHD67dL2rQrMW4uhJQUF_420.jpg">
+						<div class="reserve-boxoffice"><h2>예매</h2></div>
 					</li>
 					<li style="margin-left: 40px;">
 						<img src="https://img.megabox.co.kr/SharedImg/2021/04/20/Pg9xMYRfMNouXwkqG2PeOGGqyUaQ9skl_420.jpg">
+						<div class="reserve-boxoffice"><h2>예매</h2></div>
 					</li>
 					<li style="margin-left: 40px;">
 						<img src="https://img.megabox.co.kr/SharedImg/2021/05/24/OPZRLPUEwlEliCfy6Li4gfhUFCJ52AE1_420.jpg">
+						<div class="reserve-boxoffice"><h2>예매</h2></div>
 					</li>
 				</ul>
 			</div>
 			<div class="search">
-				<h2>검색?</h2>
+				<ul>
+					<li><h2>검색</h2></li>
+					<li><h2>상영시간표</h2></li>
+					<li><h2>박스오피스</h2></li>				
+				</ul>
+
 			</div>
 		</div>
 	</section>
