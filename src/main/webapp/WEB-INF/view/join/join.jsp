@@ -6,11 +6,49 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <link rel="stylesheet" href="css/join.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<header></header>
-
-	<nav></nav>
+</head>
+<body>
+	<header>
+		<img id="header_ci" alt="" src="image/logow1_2.png">
+		<ul>
+			<li><a class="sub_menu" href="#">로그인</a></li>
+			<li><a class="sub_menu" href="#">회원가입</a></li>
+			<li><a class="sub_menu" href="#">바로예매</a></li>
+		</ul>
+	</header>
+	<nav role="navigation">
+		<ul id="main-menu">
+			<li><a href="#">영화</a>
+				<ul id="sub-menu">
+					<li><a href="#" aria-label="subemnu">submenu</a></li>
+					<li><a href="#" aria-label="subemnu">submenu</a></li>
+					<li><a href="#" aria-label="subemnu">submenu</a></li>
+					<li><a href="#" aria-label="subemnu">submenu</a></li>
+				</ul>
+			</li>
+			<li><a href="#">예매</a>
+				<ul id="sub-menu">
+					<li><a href="#" aria-label="subemnu">submenu</a></li>
+					<li><a href="#" aria-label="subemnu">submenu</a></li>
+					<li><a href="#" aria-label="subemnu">submenu</a></li>
+					<li><a href="#" aria-label="subemnu">submenu</a></li>
+				</ul>
+			</li>
+			<li><a href="#">극장</a>
+				<ul id="sub-menu">
+					<li><a href="#" aria-label="subemnu">submenu</a></li>
+					<li><a href="#" aria-label="subemnu">submenu</a></li>
+					<li><a href="#" aria-label="subemnu">submenu</a></li>
+					<li><a href="#" aria-label="subemnu">submenu</a></li>
+					<li><a href="#" aria-label="subemnu">submenu</a></li>
+				</ul>
+			</li>
+			<li><a href="#">고객센터</a></li>
+		</ul>
+	</nav>
 	
 	<section id="joinFormArea">
 		<br>
@@ -74,6 +112,11 @@
 		</form>
 	</section>
 
-	<footer></footer>
+	<footer>
+		<div>
+			<img id="footer_ci" alt="" src="image/logow1_2.png">
+			<p>COPYRIGHT © MegaboxJoongAng, Inc. All rights reserved</p>
+		</div>
+	</footer>
 </body>
 </html>
