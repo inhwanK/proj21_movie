@@ -34,7 +34,7 @@ header {
 	padding-left: 15px;
 	padding-right: 15px;
 	font-size: 0.8em;
-	color: #dadadf;
+	color: #fff;
 	position: relative;
 }
 
@@ -107,7 +107,7 @@ ul, li {
 
 section {
 	column-width: 15em;
-	background: #dadadf;
+	background: #fff;
 	padding: 2em 12em;
 }
 
@@ -120,7 +120,7 @@ section {
 
 div {
 	margin-top: 60px;
-	margin-left: 38%;
+
 }
 
 ul, li {
@@ -171,7 +171,6 @@ button {
 	
 .join_box {
 	float: left;
-	margin-left: 38%;
 	width: 450px;
 	height: 250px;
 	overflow: auto;
@@ -180,7 +179,7 @@ button {
 }
 
 .chbox {
-	float: inherit;
+	float: none;
 	color: #454545;
 }
 

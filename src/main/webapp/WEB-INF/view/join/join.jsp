@@ -70,9 +70,13 @@
 					바에 의하여 보장된다.
 				</p>
 		</ul>
-		<br><br><br><br><br><br><br><br><br><br><br>
-		<label class="chbox">
-		<input type="checkbox" name="chek_box" value="id_coki">이용약관에 동의합니다.</label> 
+		<br><br>
+		<ul>
+			<li>
+				<label class="chbox">
+				<input type="checkbox" name="chek_box" value="id_coki">이용약관에 동의합니다.</label>
+			</li>
+		</ul>
 			<form action="join">
 			<div>
 				<ul>
