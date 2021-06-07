@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="proj21_movie.mapper.MovieMapper">
+	
+	<select id="selectMovieAll" resultType="Movie">
+		select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster 
+		from movie
+	</select>
+	
+	<select id="selectMovieByNo" resultType="Movie">
+		select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster 
+		from movie
+		where mov_no = #{movNo}
+	</select>
+	
+	<insert id="insertMovie">
+		insert into movie values 
+		(null, #{movTitle}, #{movGrade}, #{movGenre}, #{movRuntime}, #{movDirector}, #{movActor}, #{movDetail}, #{movOpendate}, #{movEnddate}, #{movAvgstar}, #{movPoster})
+		<selectKey keyProperty="movNo" resultType="int">
+			SELECT LAST_INSERT_ID()		
+		</selectKey>
+	</insert>
+	
+	<update id="updateMovie">
+		update movie 
+		set mov_title = #{movTitle}, mov_grade = #{movGrade}, mov_genre = #{movGenre} 
+						, mov_runtime = #{movRuntime}, mov_director = #{movDirector} 
+						, mov_actor = #{movActor}, mov_detail = #{movDetail} 
+						, mov_opendate = #{movOpendate}, mov_enddate = #{movEnddate} 
+						, mov_avgstar = #{movAvgstar}, mov_poster = #{movPoster} 
+		where mov_no = #{movNo}
+	</update>
+	
+	<delete id="deleteMovie">
+		delete 
+		from movie 
+		where mov_no = #{movNo}
+	</delete>
+	
+</mapper>
