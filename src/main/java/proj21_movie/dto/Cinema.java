@@ -74,4 +74,12 @@ public class Cinema {
 		this.cinPrefPrice = cinPrefPrice;
 	}
 
+	@Override
+	public String toString() {
+		return String.format(
+				"Cinema [cinNo=%s, cinRow=%s, cinCol=%s, cinSeat=%s, cinType=%s, cinAdultPrice=%s, cinTeenPrice=%s, cinPrefPrice=%s]",
+				cinNo, cinRow, cinCol, cinSeat, cinType, cinAdultPrice, cinTeenPrice, cinPrefPrice);
+	}
+
+	
 }

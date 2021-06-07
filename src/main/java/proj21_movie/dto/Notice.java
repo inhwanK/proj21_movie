@@ -4,11 +4,10 @@ import java.time.LocalDateTime;
 
 public class Notice {
 	private int notNo;				// 공지번호
-	private String notPasswd;		// 글 비밀번호
 	private String notTitle;		// 제목
 	private String notDetail;		// 내용
 	private LocalDateTime notDate;	// 등록일
-	private char[] notFile;			// 첨부파일
+	private String notFile;			// 첨부파일
 
 	public int getNotNo() {
 		return notNo;
@@ -16,14 +15,6 @@ public class Notice {
 
 	public void setNotNo(int notNo) {
 		this.notNo = notNo;
-	}
-
-	public String getNotPasswd() {
-		return notPasswd;
-	}
-
-	public void setNotPasswd(String notPasswd) {
-		this.notPasswd = notPasswd;
 	}
 
 	public String getNotTitle() {
@@ -50,12 +41,18 @@ public class Notice {
 		this.notDate = notDate;
 	}
 
-	public char[] getNotFile() {
+	public String getNotFile() {
 		return notFile;
 	}
 
-	public void setNotFile(char[] notFile) {
+	public void setNotFile(String notFile) {
 		this.notFile = notFile;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Notice [notNo=%s, notTitle=%s, notDetail=%s, notDate=%s, notFile=%s]", notNo, notTitle,
+				notDetail, notDate, notFile);
 	}
 
 }

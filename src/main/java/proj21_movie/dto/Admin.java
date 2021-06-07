@@ -29,4 +29,9 @@ public class Admin {
 		this.admPasswd = admPasswd;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Admin [admNo=%s, admId=%s, admPasswd=%s]", admNo, admId, admPasswd);
+	}
+	
 }

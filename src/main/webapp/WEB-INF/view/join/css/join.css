@@ -1,24 +1,126 @@
 @charset "UTF-8";
 
-@import
-	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
-	;
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Roboto", serif;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	overflow-x: hidden;
+}
+
+h1 {
+	margin: 2em 0 1.5em 0;
+}
+
+header {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	position: relative;
+	background-color: #000;
+}
+
+.sub_menu {
+	display: inline;
+	float: right;
+	text-align: right;
+	padding-bottom: 10px;
+	text-decoration: none;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 0.8em;
+	color: #fff;
+	position: relative;
+}
+
+#header_ci {
+	width: 100px;
+	height: 60px;
+}
+
+nav {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	position: relative;
+	background: linear-gradient(180deg, #000, #282828, #4e4e4e, #282828, #000);
+}
+
+ul, li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#main-menu>li {
+	float: left;
+	position: relative;
+}
+
+#main-menu>li>a {
+	font-size: 0.85rem;
+	color: rgba(255, 255, 255, 0.85);
+	text-align: center;
+	text-decoration: none;
+	letter-spacing: 0.05em;
+	display: block;
+	padding: 14px 36px;
+	border-right: 1px solid rgba(0, 0, 0, 0.15);
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+#main-menu>li:nth-child(1)>a {
+	border-left: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+#sub-menu {
+	position: absolute;
+	background: #000;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.15s ease-in;
+}
+
+#sub-menu>li {
+	padding: 16px 28px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+#sub-menu>li>a {
+	color: rgba(255, 255, 255, 0.6);
+	text-decoration: none;
+}
+
+#main-menu>li:hover #sub-menu {
+	opacity: 1;
+	visibility: visible;
+}
+
+#sub-menu>li>a:hover {
+	text-decoration: underline;
+}
+
+section {
+	column-width: 15em;
+	background: #fff;
+	padding: 2em 12em;
+}
+
+
+<!---->
 * {
 	margin: 0;
 	padding: 0;
 }
 
-body {
-	margin: 0;
-	padding: 0;
-	text-align: center;
-	font-family: 'Noto Sans KR', sans-serif;
-}
-
 div {
 	margin-top: 60px;
-	margin-left: 38%;
+
 }
 
 ul, li {
@@ -69,7 +171,6 @@ button {
 	
 .join_box {
 	float: left;
-	margin-left: 38%;
 	width: 450px;
 	height: 250px;
 	overflow: auto;
@@ -78,6 +179,31 @@ button {
 }
 
 .chbox {
-	float: inherit;
+	float: none;
 	color: #454545;
+}
+
+
+footer {
+	margin: auto;
+	width: 70%
+}
+
+footer div {
+	border-top: 0.5px solid RGB(136, 136, 136);
+	text-align: left;
+	margin-top: 0;
+}
+
+footer div p {
+	margin-left: 80px;
+	color: RGB(136, 136, 136);
+	font-size: 0.8em;
+	margin-top: 22.5px;
+}
+
+#footer_ci {
+	width: 100px;
+	margin: 0px;
+	float: left;
 }

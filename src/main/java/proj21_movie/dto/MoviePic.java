@@ -3,7 +3,7 @@ package proj21_movie.dto;
 public class MoviePic {
 	private int mpNo;		// 영화사진 번호
 	private Movie movNo;	// 영화번호
-	private byte[] mpPic;	// 스틸컷들
+	private String mpPic;	// 스틸컷들
 
 	public int getMpNo() {
 		return mpNo;
@@ -21,12 +21,17 @@ public class MoviePic {
 		this.movNo = movNo;
 	}
 
-	public byte[] getMpPic() {
+	public String getMpPic() {
 		return mpPic;
 	}
 
-	public void setMpPic(byte[] mpPic) {
+	public void setMpPic(String mpPic) {
 		this.mpPic = mpPic;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("MoviePic [mpNo=%s, movNo=%s, mpPic=%s]", mpNo, movNo, mpPic);
 	}
 
 }

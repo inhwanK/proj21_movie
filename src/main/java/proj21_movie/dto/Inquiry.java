@@ -3,15 +3,15 @@ package proj21_movie.dto;
 import java.time.LocalDateTime;
 
 public class Inquiry {
-	private int inqNo;					// 문의번호
-	private String inqTitle;			// 문의제목
-	private String inqUser;				// 작성자
-	private String inqDetail;			// 문의내용
-	private LocalDateTime inqDate;		// 문의일
-	private char[] inqFile;				// 첨부파일
-	private String inqAnswer;			// 답변내용
-	private LocalDateTime inqAnsDate;	// 답변일
-	private boolean inqStatus;			// 답변상태
+	private int inqNo; // 문의번호
+	private String inqTitle; // 문의제목
+	private String inqUser; // 작성자
+	private String inqDetail; // 문의내용
+	private LocalDateTime inqDate; // 문의일
+	private String inqFile; // 첨부파일
+	private String inqAnswer; // 답변내용
+	private LocalDateTime inqAnsDate; // 답변일
+	private boolean inqStatus; // 답변상태
 
 	public int getInqNo() {
 		return inqNo;
@@ -53,11 +53,11 @@ public class Inquiry {
 		this.inqDate = inqDate;
 	}
 
-	public char[] getInqFile() {
+	public String getInqFile() {
 		return inqFile;
 	}
 
-	public void setInqFile(char[] inqFile) {
+	public void setInqFile(String inqFile) {
 		this.inqFile = inqFile;
 	}
 
@@ -85,4 +85,12 @@ public class Inquiry {
 		this.inqStatus = inqStatus;
 	}
 
+	@Override
+	public String toString() {
+		return String.format(
+				"Inquiry [inqNo=%s, inqTitle=%s, inqUser=%s, inqDetail=%s, inqDate=%s, inqFile=%s, inqAnswer=%s, inqAnsDate=%s, inqStatus=%s]",
+				inqNo, inqTitle, inqUser, inqDetail, inqDate, inqFile, inqAnswer, inqAnsDate, inqStatus);
+	}
+
+	
 }

@@ -68,4 +68,11 @@ public class ShowInfo {
 		this.shwEndtime = shwEndtime;
 	}
 
+	@Override
+	public String toString() {
+		return String.format(
+				"ShowInfo [shwNo=%s, thtNo=%s, cinNo=%s, movNo=%s, shwDate=%s, shwStarttime=%s, shwEndtime=%s]", shwNo,
+				thtNo, cinNo, movNo, shwDate, shwStarttime, shwEndtime);
+	}
+
 }
