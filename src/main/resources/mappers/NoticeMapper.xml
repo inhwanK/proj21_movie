@@ -21,7 +21,12 @@
 		from notice 
 		where not_no = #{notNo};
 	</select>
-
+	
+	<delete id="deleteNotice">
+		delete
+		from notice
+		where not_no = #{notNo};
+	</delete>
 
 
 

@@ -36,7 +36,7 @@ public class NoticeMapperTest {
 
 	@Test
 	public void testSelectNoticeByNo() {
-		Notice notice = mapper.selectNoticeByNo(4);
+		Notice notice = mapper.selectNoticeByNo(1);
 		Assert.assertNotNull(notice);
 	}
 
@@ -63,7 +63,8 @@ public class NoticeMapperTest {
 
 	@Test
 	public void test05DeleteNotice() {
-		fail("Not yet implemented");
+		int res = mapper.deleteNotice(3);
+		Assert.assertEquals(1, res);
 	}
 
 }
