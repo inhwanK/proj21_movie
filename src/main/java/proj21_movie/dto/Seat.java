@@ -47,4 +47,10 @@ public class Seat {
 		this.seatColNo = seatColNo;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Seat [seatNo=%s, resNo=%s, shwNo=%s, seatRowNo=%s, seatColNo=%s]", seatNo, resNo, shwNo,
+				seatRowNo, seatColNo);
+	}
+
 }

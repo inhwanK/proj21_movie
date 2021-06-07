@@ -6,9 +6,7 @@ public class Reservation {
 	private int resNo;				// 예매 번호
 	private ShowInfo shwNo;			// 상영정보 번호
 	private Member memNo;			// 회원 번호
-	private NoMember nomNo;			// 비회원 번호
 	private int resPrice;			// 결제 금액
-	private int resUsepoint;		// 사용포인트
 	private LocalDateTime resDate;	// 예매일
 	private int resAdult;			// 인원(어른)
 	private int resTeen;			// 인원(청소년)
@@ -38,28 +36,12 @@ public class Reservation {
 		this.memNo = memNo;
 	}
 
-	public NoMember getNomNo() {
-		return nomNo;
-	}
-
-	public void setNomNo(NoMember nomNo) {
-		this.nomNo = nomNo;
-	}
-
 	public int getResPrice() {
 		return resPrice;
 	}
 
 	public void setResPrice(int resPrice) {
 		this.resPrice = resPrice;
-	}
-
-	public int getResUsepoint() {
-		return resUsepoint;
-	}
-
-	public void setResUsepoint(int resUsepoint) {
-		this.resUsepoint = resUsepoint;
 	}
 
 	public LocalDateTime getResDate() {
@@ -92,6 +74,13 @@ public class Reservation {
 
 	public void setResPref(int resPref) {
 		this.resPref = resPref;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"Reservation [resNo=%s, shwNo=%s, memNo=%s, resPrice=%s, resDate=%s, resAdult=%s, resTeen=%s, resPref=%s]",
+				resNo, shwNo, memNo, resPrice, resDate, resAdult, resTeen, resPref);
 	}
 
 }

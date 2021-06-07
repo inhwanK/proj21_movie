@@ -14,7 +14,7 @@ public class Movie {
 	private LocalDate movOpendate;	// 개봉일
 	private LocalDate movEnddate;	// 종료일
 	private double movAvgstar;		// 평균 별점
-	private byte[] movPoster;		// 메인 포스터
+	private String movPoster;		// 메인 포스터
 
 	public int getMovNo() {
 		return movNo;
@@ -104,12 +104,20 @@ public class Movie {
 		this.movAvgstar = movAvgstar;
 	}
 
-	public byte[] getMovPoster() {
+	public String getMovPoster() {
 		return movPoster;
 	}
 
-	public void setMovPoster(byte[] movPoster) {
+	public void setMovPoster(String movPoster) {
 		this.movPoster = movPoster;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"Movie [movNo=%s, movTitle=%s, movGrade=%s, movRuntime=%s, movDirector=%s, movActor=%s, movDetail=%s, movTeaser=%s, movOpendate=%s, movEnddate=%s, movAvgstar=%s, movPoster=%s]",
+				movNo, movTitle, movGrade, movRuntime, movDirector, movActor, movDetail, movTeaser, movOpendate,
+				movEnddate, movAvgstar, movPoster);
 	}
 
 }

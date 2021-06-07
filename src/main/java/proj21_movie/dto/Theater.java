@@ -65,4 +65,11 @@ public class Theater {
 		this.thtDetail = thtDetail;
 	}
 
+	@Override
+	public String toString() {
+		return String.format(
+				"Theater [thtNo=%s, thtName=%s, thtAddress=%s, thtLat=%s, thtLong=%s, thtSubs=%s, thtDetail=%s]", thtNo,
+				thtName, thtAddress, thtLat, thtLong, thtSubs, thtDetail);
+	}
+
 }

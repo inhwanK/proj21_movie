@@ -9,8 +9,6 @@ public class Member {
 	private LocalDate memBirthdate;		// 생년월일
 	private String memName;				// 이름
 	private String memPhone;			// 연락처
-	private int memPoint;				// 포인트
-	private String memGrade;			// 등급
 
 	public int getMemNo() {
 		return memNo;
