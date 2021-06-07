@@ -85,4 +85,12 @@ public class Inquiry {
 		this.inqStatus = inqStatus;
 	}
 
+	@Override
+	public String toString() {
+		return String.format(
+				"Inquiry [inqNo=%s, inqTitle=%s, inqUser=%s, inqDetail=%s, inqDate=%s, inqFile=%s, inqAnswer=%s, inqAnsDate=%s, inqStatus=%s]",
+				inqNo, inqTitle, inqUser, inqDetail, inqDate, inqFile, inqAnswer, inqAnsDate, inqStatus);
+	}
+
+	
 }

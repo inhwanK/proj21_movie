@@ -58,19 +58,11 @@ public class Member {
 		this.memPhone = memPhone;
 	}
 
-	public int getMemPoint() {
-		return memPoint;
+	@Override
+	public String toString() {
+		return String.format("Member [memNo=%s, memEmail=%s, memPasswd=%s, memBirthdate=%s, memName=%s, memPhone=%s]",
+				memNo, memEmail, memPasswd, memBirthdate, memName, memPhone);
 	}
 
-	public void setMemPoint(int memPoint) {
-		this.memPoint = memPoint;
-	}
-
-	public String getMemGrade() {
-		return memGrade;
-	}
-
-	public void setMemGrade(String memGrade) {
-		this.memGrade = memGrade;
-	}
+	
 }

@@ -49,4 +49,11 @@ public class Comment {
 		this.comDate = comDate;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Comment [movNo=%s, comUser=%s, comContent=%s, comStar=%s, comDate=%s]", movNo, comUser,
+				comContent, comStar, comDate);
+	}
+
+	
 }
