@@ -1,1 +1,83 @@
 @charset "UTF-8";
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
+	;
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+div {
+	margin-top: 60px;
+	margin-left: 38%;
+}
+
+ul, li {
+	list-style: none;
+	color: #454545;
+}
+
+li {
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+.box {
+	width: 450px;
+	height: 30px;
+	border: 1px solid #666;
+	padding: 10px;
+}
+
+.pbox1 {
+	width: 120px;
+	height: 30px;
+	border: 1px solid #666;
+	padding: 10px;
+}
+
+.pbox2 {
+	width: 295px;
+	height: 30px;
+	border: 1px solid #666;
+	padding: 10px;
+}
+
+.necessary {
+	font-size: small;
+	color: red;
+}
+
+button {
+	background: #5700ae;
+	color: white;
+	width: 475px;
+	border: 1px solid #666;
+	height: 50px;
+	font-size: 20px;
+	text-align: center;
+}
+	
+.join_box {
+	float: left;
+	margin-left: 38%;
+	width: 450px;
+	height: 250px;
+	overflow: auto;
+	border: 1px solid black;
+	padding: 0 0.5em;
+}
+
+.chbox {
+	float: inherit;
+	color: #454545;
+}
