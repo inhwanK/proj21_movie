@@ -3,12 +3,37 @@ package proj21_movie.dto;
 import java.time.LocalDate;
 
 public class Member {
-	private int memNo;					// 회원번호
-	private String memEmail;			// 회원아이디(이메일)
-	private String memPasswd;			// 비밀번호
-	private LocalDate memBirthdate;		// 생년월일
-	private String memName;				// 이름
-	private String memPhone;			// 연락처
+	private int memNo; // 회원번호
+	private String memEmail; // 회원아이디(이메일)
+	private String memPasswd; // 비밀번호
+	private LocalDate memBirthdate; // 생년월일
+	private String memName; // 이름
+	private String memPhone; // 연락처
+
+	public Member() {
+	}
+
+	public Member(int memNo) {
+		this.memNo = memNo;
+	}
+
+	public Member(String memEmail, String memPasswd, LocalDate memBirthdate, String memName, String memPhone) {
+		this.memEmail = memEmail;
+		this.memPasswd = memPasswd;
+		this.memBirthdate = memBirthdate;
+		this.memName = memName;
+		this.memPhone = memPhone;
+	}
+
+	public Member(int memNo, String memEmail, String memPasswd, LocalDate memBirthdate, String memName,
+			String memPhone) {
+		this.memNo = memNo;
+		this.memEmail = memEmail;
+		this.memPasswd = memPasswd;
+		this.memBirthdate = memBirthdate;
+		this.memName = memName;
+		this.memPhone = memPhone;
+	}
 
 	public int getMemNo() {
 		return memNo;
@@ -64,5 +89,4 @@ public class Member {
 				memNo, memEmail, memPasswd, memBirthdate, memName, memPhone);
 	}
 
-	
 }
