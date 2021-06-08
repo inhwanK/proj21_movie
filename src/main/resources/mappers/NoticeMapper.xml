@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="proj21_movie.mapper.NoticeMapper">
+
+	<resultMap type="Notice" id="noticeList">
+		<id column="not_no" property="notNo" />
+		<result column="not_title" property="notTitle" />
+		<result column="not_detail" property="notDetail" />
+		<result column="not_date" property="notDate" />
+		<result column="not_file" property="notFile" />
+	</resultMap>
+
+
+	<select id="selectNoticeAll" resultMap="noticeList">
+		select not_no, not_title, not_detail, not_date, not_file 
+		from notice;
+	</select>
+
+	<select id="selectNoticeByNo" resultType="Notice">
+		select not_no, not_title, not_detail, not_date, not_file 
+		from notice 
+		where not_no = #{notNo};
+	</select>
+	
+	<insert id="insertNotice" parameterType="Notice">
+		insert into notice(not_title,not_detail,not_date,not_file)
+		values(#{notTitle},#{notDetail},now(),#{notFile});
+	</insert>
+	
+	<update id="updateNotice" parameterType="Notice">
+		update notice 
+		set not_title = #{notTitle} , not_detail = #{notDetail} , not_file = #{notFile}
+		where not_no = #{notNo};
+	</update>
+	
+	<delete id="deleteNotice">
+		delete
+		from notice
+		where not_no = #{notNo};
+	</delete>
+
+
+
+
+</mapper>
