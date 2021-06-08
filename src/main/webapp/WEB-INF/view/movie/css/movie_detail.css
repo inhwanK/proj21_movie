@@ -1,0 +1,618 @@
+@charset "UTF-8";
+
+/* Fontawesome 4.7 */
+@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+@font-face {
+	font-family: NanumBarunGothic;
+	font-weight: 400;
+	src:
+		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.eot);
+	src:
+		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.eot?#iefix)
+		format('embedded-opentype'),
+		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.woff)
+		format('woff'),
+		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.ttf)
+		format('truetype')
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-family: NanumBarunGothic, Dotum, '돋움', sans-serif
+}
+
+a:link {
+	text-decoration: none
+}
+
+a:active, a:focus, a:hover {
+	text-decoration: underline;
+}
+
+ol, ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0
+}
+
+/* header */
+header {
+	margin: auto;
+	width: 70%;
+	position: relative;
+}
+
+#header_ci {
+	width: 150px;
+	margin: 0px auto;
+	align-items: center;
+	position: relative;
+	/* 	position: absolute; */
+	left: 120px;
+	/* left: 50%; */
+	/* 	transform: translate(-50%, 0); */
+	box-sizing: border-box;
+}
+
+header div {
+	display: inline;
+	float: right;
+	text-align: right;
+	padding-bottom: 10px;
+	margin-top: 40px;
+}
+
+header div a {
+	text-decoration: none;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 0.9em;
+	color: RGB(136, 136, 136);
+}
+
+header div a:hover {
+	text-decoration: none;
+	padding-bottom: 4px;
+	border-bottom: 2px solid RGB(3, 22, 52);
+}
+
+/* <nav> */
+nav {
+	margin: auto;
+	width: 70%;
+	position: relative;
+	padding: 0px;
+}
+
+nav ul {
+	padding-left: 0;
+	list-style: none;
+	border-bottom: 0.5px solid RGB(3, 22, 52);
+	padding-bottom: 5px;
+	margin: 10px auto;
+	position: relative;
+}
+
+nav ul li {
+	display: inline-block;
+	padding-right: 50px;
+	padding-left: 50px;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+nav ul li a {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	padding-bottom: 5px;
+}
+
+nav ul li a:hover {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	padding-bottom: 4px;
+	border-bottom: 5px solid RGB(3, 22, 52);
+}
+
+/* section */
+
+/* container */
+.container {
+	width: 100%;
+	min-width: 1100px;
+	min-height: 100%;
+	margin: -92px 0 -200px 0;
+	padding: 92px 0 300px 0;
+}
+
+/* container */
+.container {
+	width: 100%;
+	min-width: 1100px;
+	min-height: 100%;
+	margin: -92px 0 -200px 0;
+	padding: 92px 0 300px 0;
+}
+
+/* contents */
+#contents {
+	width: 100%;
+	margin: 0;
+	padding: 40px 0 0 0;
+}
+
+h2.title {
+	padding: 0 0 16px 0;
+	font-size: 1.4666em;
+	font-weight: 400;
+	letter-spacing: -1px;
+	line-height: 1.1;
+	color: #503396;
+	width: 10%;
+	text-align: left;
+}
+
+h3.title {
+	margin: 0;
+	padding: 0 0 10px 0;
+	font-size: 1.2em;
+	font-weight: 400;
+	line-height: 1.1;
+	color: #222;
+	width: 10%;
+	text-align: left;
+}
+
+.inner-wrap {
+	width: 1100px;
+	margin: 0 auto;
+}
+
+/* tab-cont-wrap */
+.tab-cont-wrap > div{
+	display: none;
+}
+
+.tab-cont-wrap > div.active{
+	display: block;
+}
+
+/* tab-list */
+.tab-list {
+	margin-bottom: 60px;
+}
+
+.tab-list ul {
+	overflow: hidden; 
+	width: 100%; 
+	margin: 0 auto;
+	padding-top: 10px;
+}
+.tab-list li {
+	float: left; 
+	width: 210px; 
+	text-align: center; 
+	border: 1px solid #c4c4c4;
+	border-bottom: none; 
+	margin-right: -1px;
+}
+.tab-list li a {
+	display: block; 
+	padding: 15px 0; 
+	font-size: 17px;
+	color: #666; 
+	font-weight: 500;
+	border-bottom: 2px solid #0000d2;
+}
+.tab-list li.active a {
+	border: 2px solid #0000d2;
+	border-bottom: none;
+	font-weight: 800;
+	color: #0000d2;
+}
+
+/* movie-detail-page */
+.movie-detail-page {
+	position: relative;
+	z-index: 1;
+	height: 520px;
+	margin: 0 0 40px 0;
+	color: #ccc;
+	background-color: #151515;
+}
+
+.movie-detail-page p {
+	margin: 0;
+	padding: 0;
+}
+
+.movie-detail-page .bg-img {
+	position: absolute;
+	left: 50%;
+	top: 0;
+	z-index: 1;
+	width: 1100px;
+	margin: 0 0 0 -550px;
+	height: 100%;
+	background-position: center 0;
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	opacity: .8;
+}
+
+.movie-detail-page .bg-img:after {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(15, 15, 15, .5);
+}
+
+.movie-detail-cont {
+	position: relative;
+	z-index: 4;
+	width: 1100px;
+	height: 100%;
+	margin: 0 auto;
+	padding: 55px 0 0 0;
+}
+
+.movie-detail-cont > .title {
+	text-align: left;
+	position: static;
+	left: inherit;
+	top: inherit;
+	width: 800px;
+	padding: 33px 0 0 0;
+	color: #fff;
+	font-size: 3.0666em;
+	font-weight: 400;
+	line-height: 1.2;
+	text-shadow: 2px 2px 10px rgba(0, 0, 0, .7);
+}
+
+.movie-detail-cont .title-eng {
+	text-align: left;
+	width: 800px;
+	padding: 10px 0 0 0;
+	font-size: 1.3333em;
+	font-family: NanumBarunGothic;
+	color: #fff;
+	line-height: 1.1;
+	overflow: hidden;
+	max-width: 100%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.movie-detail-cont .info {
+	position: absolute;
+	left: 0;
+	bottom: 45px;
+	padding: 0;
+}
+
+.movie-detail-cont .info:after, .movie-detail-cont .info:before{
+	content: '';
+	display: table;
+}
+
+.movie-detail-cont .info:after {
+	clear: both;
+}
+
+.movie-detail-cont .info > .title {
+	display: block;
+	padding: 0 0 15px 0;
+	line-height: 1.1;
+	font-size: .9333em;
+}
+
+.movie-detail-cont .info .score {
+	float: left;
+	padding: 0;
+}
+
+.movie-detail-cont .info .score > .title{
+	position: relative;
+	margin: 0 0 15px 0;
+}
+
+.movie-detail-cont .info .score .number {
+	padding: 0 0 0 30px;
+	font-family: NanumBarunGothic, Dotum, '돋움', sans-serif;
+	font-weight: 400;
+}
+
+.movie-detail-cont .info .score .number>p {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 1.1;
+}
+
+.movie-detail-cont .info .score .number .before {
+	color: #59bec9;
+	font-size: 2.1333em;
+}
+
+.movie-detail-cont .info .rate {
+	float: left;
+	padding: 0 0 0 35px;
+}
+
+.movie-detail-cont .info .rate > .title {
+	position: relative;
+	margin: 0 35px 15px 0;
+}
+
+.movie-detail-cont .info .rate .cont {
+	display: inline-block;
+	min-height: 35px;
+	padding: 0 0 60px 30px;
+	vertical-align: middle;
+	line-height: 1.1;
+}
+
+.movie-detail-cont .info .rate .cont em {
+	margin: 0 4px 0 0;
+	color: #fff;
+	font-size: 2.1333em;
+	font-family: NanumBarunGothic, Dotum, '돋움', sans-serif;
+	font-weight: 400;
+}
+
+.movie-detail-cont .info .audience {
+	float: left;
+	padding: 0 0 0 35px;
+}
+
+.movie-detail-cont .info .audience > .title {
+	position: relative;
+	margin: 0 35px 20px 0;
+}
+
+.movie-detail-cont .info .audience .tooltip-cont {
+	position: absolute;
+	left: -77px;
+	top: -115px;
+}
+
+.movie-detail-cont .info .audience .cont {
+	display: inline-block;
+	padding: 0 0 0 30px;
+	vertical-align: middle;
+	line-height: 1.1;
+}
+
+.movie-detail-cont .info .audience .cont em {
+	margin: 0 4px 0 0;
+	color: #fff;
+	font-size: 2.1333em;
+	font-family: NanumBarunGothic, Dotum, '돋움', sans-serif;
+	font-weight: 400;
+}
+
+.movie-detail-cont .poster {
+	overflow: hidden;
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 45px;
+	z-index: 2;
+	width: 260px;
+	height: 374px;
+}
+
+.movie-detail-cont .poster .wrap {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	font-size: 0;
+	line-height: 0;
+}
+
+/* movie-grade */
+.movie-grade {
+	overflow: hidden;
+	display: inline-block;
+	width: 23px;
+	height: 23px;
+	margin: 0;
+	padding: 0;
+	text-indent: -9999px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.movie-detail-cont .poster .wrap .movie-grade {
+	overflow: hidden;
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	z-index: 4;
+}
+
+.grade-table .movie-grade {
+	width: 100%;
+	text-indent: 30px;
+	background-position: left;
+	font-weight: 400;
+}
+
+.age-all {
+	background-image:
+		url(../images/icon/age-all.png);
+}
+
+.age-12 {
+	background-image:
+		url(../images/icon/age-12.png);
+}
+
+.age-15 {
+	background-image:
+		url(../images/icon/age-15.png);
+}
+
+.age-19 {
+	background-image:
+		url(../images/icon/age-19.png);
+}
+
+.movie-detail-cont .poster .wrap img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+}
+
+.movie-detail-cont .screen-type {
+	overflow: hidden;
+	display: block;
+	position: absolute;
+	right: 0;
+	bottom: 45px;
+	width: 260px;
+}
+
+.movie-detail-cont .screen-type .btn {
+	display: block;
+	float: left;
+	height: 46px;
+	line-height: 44px;
+	font-size: 1.2em;
+	margin: 0;
+	padding: 0;
+	color: #fff;
+	text-align: center;
+	border: 0;
+	border-radius: 5px;
+	background-color: transparent;
+	text-decoration: none;
+	font-weight: 700;
+}
+
+.movie-detail-cont .screen-type .btn.reserve {
+	width: 130px;
+	border-radius: 5px;
+	background-color: #329eb1;
+	margin: 0 0 40px 60px;
+	border-radius: 5px !important;
+}
+
+.movie-detail-page.fixed {
+	position: fixed;
+	left: 0;
+	top: 42px;
+	z-index: 100;
+	width: 100%;
+	height: 80px;
+	margin: 0;
+}
+
+.movie-detail-page.fixed .bg-img {
+	background-attachment: scroll;
+	background-size: 100% auto;
+}
+
+.movie-detail-page.fixed .movie-detail-cont {
+	position: relative;
+	z-index: 104;
+	width: 1100px;
+	height: 80px;
+	margin: 0 auto;
+	padding-top: 0;
+}
+
+.movie-detail-page.fixed .movie-detail-cont .screen-type {
+	top: 22px;
+	bottom: inherit;
+	width: 130px;
+}
+
+/* movie-summary */
+.movie-summary {
+	margin: 20px 0 0 0;
+}
+
+.movie-summary .txt {
+	overflow: hidden;
+	text-align: left;
+	
+}
+
+.movie-summary.active .txt {
+	height: auto;
+}
+
+/* movie-info */
+.movie-info {
+	padding: 30px 0;
+	color: #222;
+	text-align: left;
+}
+
+.movie-info p {
+	margin: 0;
+	padding: 0;
+}
+
+.movie-info .line p {
+	display: inline-block;
+	position: relative;
+	margin: 0;
+	padding: 0 0 0 20px;
+}
+
+.movie-info .line p:before {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 9px;
+	top: 50%;
+	width: 1px;
+	height: 13px;
+	margin: -6px 0 0 0;
+	background-color: #d8d9db;
+}
+
+.movie-info .line p:first-child {
+	padding: 0;
+}
+
+.movie-info .line p:first-child:before {
+	display: none;
+}
+
+
+/* footer */
+footer {
+	margin: auto;
+	width: 70%;
+}
+
+footer div {
+	border-top: 0.5px solid RGB(3, 22, 52);
+	text-align: left;
+	margin-top: 0;
+}
+
+footer div p {
+	margin-left: 80px;
+	color: black;
+	font-size: 0.8em;
+	margin-top: 22.5px;
+}
+
+#footer_ci {
+	width: 100px;
+	margin: 0px;
+	float: left;
+}
