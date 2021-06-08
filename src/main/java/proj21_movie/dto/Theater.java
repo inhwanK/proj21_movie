@@ -8,6 +8,14 @@ public class Theater {
 	private double thtLong;		// 경도
 	private String thtSubs;		// 부대시설(이미지 이름)
 	private String thtDetail;	// 극장설명
+	
+	public Theater() {
+		
+	}
+
+	public Theater(int thtNo) {
+		this.thtNo = thtNo;
+	}
 
 	public int getThtNo() {
 		return thtNo;
