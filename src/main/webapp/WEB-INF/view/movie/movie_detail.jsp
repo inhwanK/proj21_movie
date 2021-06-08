@@ -61,10 +61,10 @@
 						<div class="info">
 							<div class="score">
 								<p class="title">실관람 평점</p>
-								<div class="number gt" id="mainMegaScore">
+								<div class="number">
 									<p title="실관람 평점" class="before">
 										<em>9.3</em>
-										<span class="ir">점</span>
+										<span>점</span>
 									</p>
 								</div>
 							</div>
@@ -76,22 +76,8 @@
 								</p>
 							</div>
 	
-							<div class="audience ">
-								<div class="title">
-									<span class="m-tooltip-wrap">누적관객수
-										<em class="m-tooltip ml05"> 
-											<i class="iconset ico-tooltip-gray">툴팁보기</i>
-											<div class="m-detail-tooltip"> 
-												<div class="bg-arr bottom"></div>
-												<div class="cont-area">
-													<p class="reset a-c">
-														누적관객 및 전일관객은 영화진흥 위원회<br> 영화관 입장권 통합전산망제공 기준입니다.<br>(2021.06.06기준)
-													</p>
-												</div>
-											</div>
-										</em>
-									</span>
-								</div>
+							<div class="audience">
+								<p class="title">누적관객수</p>
 								<p class="cont">
 									<em>664,320</em> 명
 								</p>
@@ -102,13 +88,11 @@
 						<div class="poster">
 							<div class="wrap">
 								<p class="movie-grade age-12">12세 이상 관람가</p>
-								<img src="images/movie-detail/Cruella-poster.jpg" alt="크루엘라" /> 
+								<img src="images/movie-detail/poster-Cruella.jpg" alt="크루엘라" /> 
 							</div>
 						</div>
-						<div class="reserve screen-type col-2">
-							<div class="reserve">
-								<a href="#" class="btn reserve" title="영화 예매하기">예매</a> 
-							</div>
+						<div class="screen-type">
+							<a href="#" class="btn reserve" title="영화 예매하기">예매</a> 
 						</div>
 					</div>
 				<!--// movie-detail-cont -->
@@ -138,7 +122,7 @@
 			    			<!-- movie-info-list -->
 			    			<div class="movie-info-list active">
 				    			<!-- movie-summary -->
-				    			<div class="movie-summary infoContent" id="info">
+				    			<div class="movie-summary">
 				    				<div class="txt">
 				    					처음부터 난 알았어. 내가 특별하단 걸
 				    					<br>
