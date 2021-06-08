@@ -1,9 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="<%=request.getContextPath() %>" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var contextPath = "${contextPath}";
+		$.get(contextPath+"/api/notice", function(json) {
+			var dataLength = json.length;
+			if(dataLength >= 1){
+				var list = "";	
+				for(i = 0; i < dataLength; i++){
+						list += json[i].notTitle;
+					}
+					$("#load:last-child").append(list);
+			};
+		});
+	});
+</script>
 <title>Insert title here</title>
 <style type="text/css">
 body {
