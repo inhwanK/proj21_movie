@@ -8,7 +8,7 @@ public class Notice {
 	private String notDetail;		// 내용
 	private LocalDateTime notDate;	// 등록일
 	private String notFile;			// 첨부파일
-
+	
 	public int getNotNo() {
 		return notNo;
 	}

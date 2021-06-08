@@ -22,6 +22,17 @@
 		where not_no = #{notNo};
 	</select>
 	
+	<insert id="insertNotice" parameterType="Notice">
+		insert into notice(not_title,not_detail,not_date,not_file)
+		values(#{notTitle},#{notDetail},now(),#{notFile});
+	</insert>
+	
+	<update id="updateNotice" parameterType="Notice">
+		update notice 
+		set not_title = #{notTitle} , not_detail = #{notDetail} , not_file = #{notFile}
+		where not_no = #{notNo};
+	</update>
+	
 	<delete id="deleteNotice">
 		delete
 		from notice

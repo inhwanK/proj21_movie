@@ -19,8 +19,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import proj21_movie.config.ContextRoot;
 import proj21_movie.dto.Notice;
 
-
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ContextRoot.class })
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -29,14 +27,14 @@ public class NoticeMapperTest {
 
 	@Autowired
 	private NoticeMapper mapper;
-	
+
 	@After
 	public void tearDown() throws Exception {
 	}
 
 	@Test
-	public void testSelectNoticeByNo() {
-		Notice notice = mapper.selectNoticeByNo(1);
+	public void test05SelectNoticeByNo() {
+		Notice notice = mapper.selectNoticeByNo(7);
 		Assert.assertNotNull(notice);
 	}
 
@@ -53,17 +51,28 @@ public class NoticeMapperTest {
 
 	@Test
 	public void test04UpdateNotice() {
-		fail("Not yet implemented");
+		Notice notice = new Notice();
+		notice.setNotNo(7);
+		notice.setNotTitle("inserttest 글 수정");
+		notice.setNotDetail("inserttest 글 세부내용 수정");
+		notice.setNotFile("inserttest 글 파일 경로 수정");
+		int res = mapper.updateNotice(notice);
+		Assert.assertEquals(1, res);
 	}
 
 	@Test
 	public void test01InsertNotice() {
-		fail("Not yet implemented");
+		Notice notice = new Notice();
+		notice.setNotTitle("inserttest 글");
+		notice.setNotDetail("inserttest 글 세부내용");
+		notice.setNotFile("inserttest 글 파일 경로");
+		int res = mapper.insertNotice(notice);
+		Assert.assertEquals(1, res);
 	}
 
 	@Test
-	public void test05DeleteNotice() {
-		int res = mapper.deleteNotice(3);
+	public void test06DeleteNotice() {
+		int res = mapper.deleteNotice(7);
 		Assert.assertEquals(1, res);
 	}
 
