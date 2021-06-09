@@ -26,6 +26,10 @@
   		</param-value>
   	</init-param>
   	<load-on-startup>1</load-on-startup>
+  	
+  	<multipart-config>
+  		<location>C:\\upload</location>
+  	</multipart-config>
   </servlet>
   
   <servlet-mapping>

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>영화 등록</title>
+<title>영화 수정</title>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
@@ -16,40 +16,56 @@
 <script type="text/javascript">
 	$(function(){
 		var contextPath = "${contextPath}";
+		var no = ${param.no};
 		
 		$('#cancel').on("click", function(e){
 			window.location.href = contextPath + "/movieManager";
 		});
 		
-		$('#new').on("click", function(e){
-			var name = document.getElementById("uploadFile").files;
-			alert(document.getElementById("uploadFile").files[0].name);
-			var newMovie = { movTitle: $('#title').val(),
-								movGenre: $('#genre').val(),
-								movGrade: $('#grade').val(),
-								movRuntime: $('#runtime').val(),
-								movDirector: $('#director').val(),
-								movActor: $('#actor').val(),
-								movDetail: $('#detail').val(),
-								movOpendate: $('#opendate').val(),
-								movEnddate: $('#enddate').val(),
-								movPoster: document.getElementById("uploadFile").files[0].name 
-							};
+		$.get(contextPath + "/api/movies/" + no,
+			function(json){
+			$('#no').val(json.movNo);
+			$('#title').val(json.movTitle);
+			$('#genre').val(json.movGenre);
+			$('#grade').val(json.movGrade);
+			$('#runtime').val(json.movRuntime);
+			$('#director').val(json.movDirector);
+			$('#actor').val(json.movActor);
+			$('#detail').val(json.movDetail);
+			$('#opendate').val(json.movOpendate);
+			$('#enddate').val(json.movEnddate);
+			$('#uploadFile').val(json.movPoster);
+		});
+		
+		$('#modify').on("click", function(e){
+			e.preventDefault();
+			var data = { 
+					movNo: $('#no').val(),
+					movTitle: $('#title').val(),
+					movGenre: $('#genre').val(),
+					movGrade: $('#grade').val(),
+					movRuntime: $('#runtime').val(),
+					movDirector: $('#director').val(),
+					movActor: $('#actor').val(),
+					movDetail: $('#detail').val(),
+					movOpendate: $('#opendate').val(),
+					movEnddate: $('#enddate').val(),
+					movPoster: document.getElementById("uploadFile").files[0].name 
+					};
+			alert("data > " + data.movTitle);
 			
-			alert("data > " + newMovie.movTitle);
-
 			$.ajax({
-				url: contextPath + "/api/movies",
-				type: "POST",
+				url: contextPath + "/api/movies/" + no,
+				type: 'PATCH',
 				contentType: "application/json; charset=utf-8",
-				datatype: "json",
+				dataType: 'json',
 				cache: false,
-				data: JSON.stringify(newMovie),
-				success: function(res){
-					alert(res);
+				data: JSON.stringify(data),
+				success: function(data) {
+					alert(data);
 					window.location.href = contextPath + "/movieManager";
 				},
-				error: function(request, status, error){
+				error: function(data, status, error){
 					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 					window.location.href = contextPath + "/movieManager";
 				}
@@ -115,6 +131,10 @@
          <div class="col-md-6 col-sm-12">
             <div class="form">
                <form:form>
+               	  <div class="form-group">
+                     <label>번호</label>
+                     <input type="text" id="no" class="form-control" readonly="readonly">
+                  </div>
                   <div class="form-group">
                      <label>제목</label>
                      <input type="text" id="title" class="form-control">
@@ -156,7 +176,7 @@
                      <input type="file" id="uploadFile" name="uploadFile" class="form-control">
                   </div>
                </form:form>
-                  <button id="new" class="btn btn-primary">등록</button>
+                  <button id="modify" class="btn btn-primary">수정</button>
                   <button id="cancel" class="btn btn-primary">취소</button>
             </div>
          </div>
