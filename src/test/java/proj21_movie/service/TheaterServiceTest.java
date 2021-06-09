@@ -47,11 +47,21 @@ public class TheaterServiceTest {
 	public void test02GetTheater() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
-		Theater selTheater = new Theater(2);
-		Theater theater = service.getTheater(selTheater);
+		Theater theater = service.getTheater(2);
 		Assert.assertNotNull(theater);
 		
 		log.debug(theater.toString());
 	}
-
+	
+	@Test
+	public void test03GetTheaterName() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Theater theater = service.getTheaterName("대구신세계%");
+		Assert.assertNotNull(theater);
+		
+		log.debug(theater.toString());
+	}
+	
+	
 }

@@ -17,6 +17,10 @@ public class Theater {
 		this.thtNo = thtNo;
 	}
 
+	public Theater(String thtName) {
+		this.thtName = thtName;
+	}
+
 	public int getThtNo() {
 		return thtNo;
 	}
