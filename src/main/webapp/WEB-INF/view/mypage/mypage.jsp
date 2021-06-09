@@ -5,12 +5,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>마이페이지</title>
-	<link rel="stylesheet" href="css/mypage.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/mypage.css">
 </head>
 <body>
 
 	<header>
-		<img id="header_ci" alt="브랜드 로고" src="img/ci.png">
+		<img id="header_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
 		<div>
 			<a href="#">로그인</a>
 			<a href="#">회원가입</a>
@@ -48,7 +48,7 @@
 			
 				<div id="user-info">
 					<div id="profile">
-						<img alt="프로필사진" src="img/profile-photo.png">
+						<img alt="프로필사진" src="<%=request.getContextPath()%>/resources/images/profile-photo.png">
 						<div id="textbox">
 							<p id="user">user님,</p>
 							<p id="welcome">환영합니다.</p>
@@ -78,7 +78,7 @@
 
 	<footer>
 		<div>
-			<img id="footer_ci" alt="브랜드 로고" src="img/ci.png">
+			<img id="footer_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
 			<p>
 			제1항의 해임건의는 국회재적의원 3분의 1 이상의 발의에 의하여 국회재적의원 과반수의 찬성이 있어야 한다.
 			<br>

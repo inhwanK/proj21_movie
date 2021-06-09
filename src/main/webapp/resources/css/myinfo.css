@@ -133,7 +133,7 @@ section {
 }
 
 #mypage-menubar h2{
-	background-image: url("../img/menubar_header.png");
+	background-color: RGB(3, 22, 52);
 	color: white;
 }
 

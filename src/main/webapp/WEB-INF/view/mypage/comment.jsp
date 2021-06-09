@@ -5,11 +5,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>한줄평 내역</title>
-	<link rel="stylesheet" href="css/comment.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/comment.css">
 </head>
 <body>
 	<header>
-		<img id="header_ci" alt="브랜드 로고" src="img/ci.png">
+		<img id="header_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
 		<div>
 			<a href="#">로그인</a>
 			<a href="#">회원가입</a>
@@ -51,7 +51,7 @@
 					<ul>
 						<li>
 							<div class="comment-list">
-								<img alt="포스터사진" src="img/stillcut1.jpg">
+								<img alt="포스터사진" src="<%=request.getContextPath()%>/resources/images/stillcut1.jpg">
 								<div class="textarea">
 									<h3>크루엘라</h3>
 									<p>2021-06-08</p>
@@ -70,7 +70,7 @@
 
 	<footer>
 		<div>
-			<img id="footer_ci" alt="브랜드 로고" src="img/ci.png">
+			<img id="footer_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
 			<p>
 			제1항의 해임건의는 국회재적의원 3분의 1 이상의 발의에 의하여 국회재적의원 과반수의 찬성이 있어야 한다.
 			<br>
