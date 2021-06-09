@@ -9,5 +9,6 @@ import proj21_movie.dto.Theater;
 @Component
 public interface TheaterMapper {
 	List<Theater> selectTheaterByAll();
-	Theater selectTheaterByNo(Theater theater);
+	Theater selectTheaterByNo(int thtNo);
+	Theater selectTheaterByName(String thtName);
 }

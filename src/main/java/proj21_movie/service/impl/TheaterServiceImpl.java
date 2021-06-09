@@ -26,8 +26,14 @@ public class TheaterServiceImpl implements TheaterService {
 	}
 
 	@Override
-	public Theater getTheater(Theater theater) {
-		log.debug("service - getTheater() > " + theater);
-		return mapper.selectTheaterByNo(theater);
+	public Theater getTheater(int thtNo) {
+		log.debug("service - getTheater() > " + thtNo);
+		return mapper.selectTheaterByNo(thtNo);
+	}
+
+	@Override
+	public Theater getTheaterName(String thtName) {
+		log.debug("service - getTheaterName() > " + thtName);
+		return mapper.selectTheaterByName(thtName);
 	}	
 }

@@ -150,7 +150,7 @@ nav ul li a:hover {
 	padding: 0;
 	text-indent: -9999px;
 	background:
-		url(../images/icon/home.png)
+		url(../../images/theater/icon/home.png)
 		no-repeat center
 }
 
@@ -175,8 +175,8 @@ nav ul li a:hover {
 	width: 5px;
 	height: 42px;
 	background:
-		url(../images/icon/homearr.png)
-		no-repeat left center
+		url(../../images/theater/icon/homearr.png)
+		no-repeat left center;
 }
 
 /* container */
@@ -185,7 +185,7 @@ nav ul li a:hover {
 	min-width: 1100px;
 	min-height: 100%;
 	margin: -92px 0 -200px 0;
-	padding: 92px 0 300px 0
+	padding: 92px 0 300px 0;
 }
 
 /* contents */
@@ -275,7 +275,7 @@ h3.title {
 	width: 23px;
 	height: 17px;
 	background:
-		url(../images/icon/location-map.png)
+		url(../../images/theater/icon/location-map.png)
 		0 0 no-repeat;
 	padding-right: 3px;
 	vertical-align: middle;
@@ -570,14 +570,14 @@ a.button.purple:active, a.button.purple:focus, a.button.purple:hover{
 	width: 111px;
 	height: 111px;
 	background-image:
-		url(../images/icon/facility-theater.png)
+		url(../../images/theater/icon/facility-theater.png)
 }
 
 .facility-disabled {
 	width: 111px;
 	height: 111px;
 	background-image:
-		url(../images/icon/facility-disabled.png)
+		url(../../images/theater/icon/facility-disabled.png)
 }
 
 .parking-info {
@@ -611,21 +611,21 @@ a.button.purple:active, a.button.purple:focus, a.button.purple:hover{
 	width: 67px;
 	height: 57px;
 	background-image:
-		url(../images/icon/ico-parking.png)
+		url(../../images/theater/icon/ico-parking.png)
 }
 
 .ico-confirm {
 	width: 70px;
 	height: 60px;
 	background-image:
-		url(../images/icon/ico-confirm.png)
+		url(../../images/theater/icon/ico-confirm.png)
 }
 
 .ico-cash {
 	width: 70px;
 	height: 68px;
 	background-image:
-		url(../images/icon/ico-cash.png)
+		url(../../images/theater/icon/ico-cash.png)
 }
 
 .parking-info .parking-section .info {
@@ -669,14 +669,14 @@ a.button.purple:active, a.button.purple:focus, a.button.purple:hover{
 	width: 67px;
 	height: 70px;
 	background-image:
-		url(../images/icon/ico-bus.png);
+		url(../../images/theater/icon/ico-bus.png);
 }
 
 .ico-metro {
 	width: 58px;
 	height: 70px;
 	background-image:
-		url(../images/icon/ico-metro.png)
+		url(../../images/theater/icon/ico-metro.png)
 }
 
 .public-transportation .transportation-section .info {
@@ -840,22 +840,22 @@ a.button.purple:active, a.button.purple:focus, a.button.purple:hover{
 
 .age-all {
 	background-image:
-		url(../images/icon/age-all.png);
+		url(../../images/theater/icon/age-all.png);
 }
 
 .age-12 {
 	background-image:
-		url(../images/icon/age-12.png);
+		url(../../images/theater/icon/age-12.png);
 }
 
 .age-15 {
 	background-image:
-		url(../images/icon/age-15.png);
+		url(../../images/theater/icon/age-15.png);
 }
 
 .age-19 {
 	background-image:
-		url(../images/icon/age-19.png);
+		url(../../images/theater/icon/age-19.png);
 }
 
 
@@ -988,8 +988,78 @@ a.button.purple:active, a.button.purple:focus, a.button.purple:hover{
 	background-position: bottom;
 	color: #01738b;
 }
-
 /* // 상영시간표 CSS */
+
+
+/* 관람료 CSS */
+
+/* price-table-box */
+.price-table-box {
+	width: 100%;
+	overflow: hidden;
+}
+
+.price-table-box .price-table-title {
+	position: relative;
+	text-align: left;
+	margin: 0;
+	padding: 0 0 10px 8px;
+	line-height: 1.1
+}
+
+.price-table-box .price-table-title:before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 5px;
+	left: 0;
+	background-color: #503396;
+	width: 3px;
+	height: 3px
+}
+
+/* data-table */
+.data-table {
+	border-top: 1px solid #555;
+	border-bottom: 1px solid #555;
+}
+
+.data-table td, .data-table th, .data-table tr {
+	padding: 10px 20px
+}
+
+.data-table thead th {
+	border-right: 2px solid #eaeaea;
+	border-bottom: 2px solid #eaeaea;
+	background-color: #f7f8f9
+}
+
+.data-table thead th:last-child {
+	border-right: 0
+}
+
+.data-table tbody th {
+	padding: 0;
+	text-align: center;
+	vertical-align: middle;
+	border-right: 2px solid #eaeaea;
+	border-bottom: 2px solid #eaeaea
+}
+
+.data-table tbody td {
+	border-right: 2px solid #eaeaea;
+	border-bottom: 2px solid #eaeaea
+}
+
+.data-table tbody td:last-child {
+	border-right: 0
+}
+
+.data-table.bg tbody th {
+	padding: 0 15px;
+	background-color: #f7f8f9
+}
+/* 관람료 CSS */
 
 
 /* footer */

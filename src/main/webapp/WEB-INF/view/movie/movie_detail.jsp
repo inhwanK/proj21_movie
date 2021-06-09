@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>크루엘라 영화 상세정보</title>
-<link rel="stylesheet" href="css/movie_detail.css">
+	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
+	<link rel="stylesheet" href="${contextPath}/resources/css/movie/movie_detail.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	$(function() {
@@ -21,8 +23,8 @@
 </head>
 <body>
 	<header>
-		<a href="#" title="박스무비 메인으로 가기"> 
-			<img id="header_ci" alt="브랜드 로고" src="images/ci.png">
+		<a href="${contextPath}/main" title="박스무비 메인으로 가기"> 
+			<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/movie/ci.png">
 		</a>
 		<div>
 			<a href="#">로그인</a> 
@@ -33,9 +35,9 @@
 
 	<nav>
 		<ul>
-			<li><a href="#">영화</a></li>
+			<li><a href="${contextPath}/movie">영화</a></li>
 			<li><a href="#">예매</a></li>
-			<li><a href="#">극장</a></li>
+			<li><a href="${contextPath}/theater">극장</a></li>
 			<li><a href="#">이벤트</a></li>
 			<li><a href="#">고객센터</a></li>
 		</ul>
@@ -49,7 +51,7 @@
 
 				<!-- movie-detail-page -->
 				<div class="movie-detail-page">
-					<div class="bg-img" style="background-image: url('images/movie-detail/bg-Cruella.jpg');"></div>
+					<div class="bg-img" style="background-image: url('${contextPath}/resources/images/movie/movie-detail/bg-Cruella.jpg');"></div>
 
 					<!-- movie-detail-cont -->
 					<div class="movie-detail-cont">
@@ -88,7 +90,7 @@
 						<div class="poster">
 							<div class="wrap">
 								<p class="movie-grade age-12">12세 이상 관람가</p>
-								<img src="images/movie-detail/poster-Cruella.jpg" alt="크루엘라" /> 
+								<img src="${contextPath}/resources/images/movie/movie-detail/poster-Cruella.jpg" alt="크루엘라" /> 
 							</div>
 						</div>
 						<div class="screen-type">
@@ -206,7 +208,7 @@
 
 	<footer>
 		<div>
-			<img id="footer_ci" alt="브랜드 로고" src="images/ci.png">
+			<img id="footer_ci" alt="브랜드 로고" src="${contextPath}/resources/images/movie/ci.png">
 			<p>
 				제1항의 해임건의는 국회재적의원 3분의 1 이상의 발의에 의하여 국회재적의원 과반수의 찬성이 있어야 한다. <br>
 				재판의 전심절차로서 행정심판을 할 수 있다. 행정심판의 절차는 법률로 정하되, 사법절차가 준용되어야 한다.

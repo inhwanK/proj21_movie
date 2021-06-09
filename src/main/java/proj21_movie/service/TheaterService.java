@@ -9,5 +9,6 @@ import proj21_movie.dto.Theater;
 @Service
 public interface TheaterService {
 	List<Theater> getLists();
-	Theater getTheater(Theater theater);
+	Theater getTheater(int thtNo);
+	Theater getTheaterName(String thtName);
 }

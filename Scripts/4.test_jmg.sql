@@ -9,6 +9,10 @@ select tht_no, tht_name, tht_address, tht_lat, tht_long, tht_subs, tht_detail
 select tht_no, tht_name, tht_address, tht_lat, tht_long, tht_subs, tht_detail 
 	from theater 
  where tht_no = 2;
+
+select tht_no, tht_name, tht_address, tht_lat, tht_long, tht_subs, tht_detail 
+	from theater 
+ where tht_name like "대구신세계%";
 		
 insert into theater values (
 			null, 
@@ -51,4 +55,8 @@ select cin_no, cin_row, cin_col, cin_seat, cin_type, cin_adultprice, cin_teenpri
 insert into cinema values (null, 10, 10, cin_row * cin_col, '2D', 10000, 8000, 5000);
 insert into cinema values (null, 8, 9, cin_row * cin_col, '3D', 15000, 13000, 10000);
 insert into cinema values (null, 6, 8, cin_row * cin_col, '4D', 20000, 18000, 15000);
+
+desc movie;
+
+select * from movie;
 			
