@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>영화리스트</title>
-	<link rel="stylesheet" href="css/box_office.css">
+	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
+	<link rel="stylesheet" href="${contextPath}/resources/css/movie/box_office.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 	$(function(){
@@ -26,8 +28,8 @@
 </head>
 <body>	
 	<header>
-		<a href="#" title="박스무비 메인으로 가기">
-			<img id="header_ci" alt="브랜드 로고" src="images/ci.png">
+		<a href="main" title="박스무비 메인으로 가기">
+			<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/movie/ci.png">
 		</a>
 		<div>
 			<a href="#">로그인</a>
@@ -39,9 +41,9 @@
 	
 	<nav>
 		<ul>
-			<li><a href="#">영화</a></li>
+			<li><a href="">영화</a></li>
 			<li><a href="#">예매</a></li>
-			<li><a href="#">극장</a></li>
+			<li><a href="theater">극장</a></li>
 			<li><a href="#">이벤트</a></li>
 			<li><a href="#">고객센터</a></li>
 		</ul>
@@ -52,8 +54,8 @@
 	    	<div class="page-util">	
 				<div class="location">
 	    			<span>Home</span>
-	    			<a href="#" title="영화 페이지로 이동">영화</a>
-	    			<a href="#" title="전체영화 페이지로 이동">전체영화</a>
+	    			<a href="" title="영화 페이지로 이동">영화</a>
+	    			<a href="" title="전체영화 페이지로 이동">전체영화</a>
 	    		</div>
 	    	</div>
 	    	
@@ -79,8 +81,8 @@
 									<li>
 										<div class="movie-list-info">
 											<p class="rank">1</p>		
-											<a href="#">
-												<img alt="크루엘라" src="images/box-office/Cruella.jpg">
+											<a href="movie/movieDetail/1">
+												<img alt="크루엘라" src="${contextPath}/resources/images/movie/box-office/Cruella.jpg">
 											</a>										
 										</div>
 										<div class="title-area">
@@ -105,7 +107,7 @@
 										<div class="movie-list-info">
 											<p class="rank">2</p>
 											<a href="#">
-												<img alt="캐시트럭" src="images/box-office/Wrath of Man.jpg">
+												<img alt="캐시트럭" src="${contextPath}/resources/images/movie/box-office/Wrath of Man.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -130,7 +132,7 @@
 										<div class="movie-list-info">
 											<p class="rank">3</p>
 											<a href="#">
-												<img alt=컨저링3 src="images/box-office/Conjuring3.jpg">
+												<img alt=컨저링3 src="${contextPath}/resources/images/movie/box-office/Conjuring3.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -155,7 +157,7 @@
 										<div class="movie-list-info">
 											<p class="rank">4</p>
 											<a href="#">
-												<img alt="분노의 질주" src="images/box-office/Fast & Furious.jpg">
+												<img alt="분노의 질주" src="${contextPath}/resources/images/movie/box-office/Fast & Furious.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -183,7 +185,7 @@
 										<div class="movie-list-info">
 											<p class="rank">5</p>
 											<a href="#">
-												<img alt="미스피츠" src="images/box-office/misfits.jpg">
+												<img alt="미스피츠" src="${contextPath}/resources/images/movie/box-office/misfits.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -208,7 +210,7 @@
 										<div class="movie-list-info">
 											<p class="rank">6</p>
 											<a href="#">
-												<img alt="극장판 귀멸의 칼날" src="images/box-office/Demon Slayer.jpg">
+												<img alt="극장판 귀멸의 칼날" src="${contextPath}/resources/images/movie/box-office/Demon Slayer.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -233,7 +235,7 @@
 										<div class="movie-list-info">
 											<p class="rank">7</p>
 											<a href="#">
-												<img alt="뱅드림! 로젤리아 에피소드Ⅰ: 약속" src="images/box-office/BanG Dream!.jpg">
+												<img alt="뱅드림! 로젤리아 에피소드Ⅰ: 약속" src="${contextPath}/resources/images/movie//box-office/BanG Dream!.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -258,7 +260,7 @@
 										<div class="movie-list-info">
 											<p class="rank">8</p>
 											<a href="#">
-												<img alt="프로세서 앤 매드맨" src="images/box-office/The Professor and the Madman.jpg">
+												<img alt="프로세서 앤 매드맨" src="${contextPath}/resources/images/movie/box-office/The Professor and the Madman.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -286,7 +288,7 @@
 										<div class="movie-list-info">
 											<p class="rank">9</p>
 											<a href="#">
-												<img alt="낫아웃" src="images/box-office/NOT OUT.jpg">
+												<img alt="낫아웃" src="${contextPath}/resources/images/movie/box-office/NOT OUT.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -311,7 +313,7 @@
 										<div class="movie-list-info">
 											<p class="rank">10</p>
 											<a href="#">
-												<img alt="2021 빈 필하모닉 여름음악회" src="images/box-office/Vienna Philharmonic 2021.jpg">
+												<img alt="2021 빈 필하모닉 여름음악회" src="${contextPath}/resources/images/movie/box-office/Vienna Philharmonic 2021.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -336,7 +338,7 @@
 										<div class="movie-list-info">
 											<p class="rank">11</p>
 											<a href="#">
-												<img alt="파이프라인" src="images/box-office/Pipeline.jpg">
+												<img alt="파이프라인" src="${contextPath}/resources/images/movie/box-office/Pipeline.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -361,7 +363,7 @@
 										<div class="movie-list-info">
 											<p class="rank">12</p>
 											<a href="#">
-												<img alt="보이저스" src="images/box-office/Voyagers.jpg">
+												<img alt="보이저스" src="${contextPath}/resources/images/movie/box-office/Voyagers.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -393,7 +395,7 @@
 										<div class="movie-list-info">
 											<p class="rank">1</p>		
 											<a href="#">
-												<img alt="쿠오바디스,아이다" src="images/commingsoon/Quo vadis, Aida.jpg">
+												<img alt="쿠오바디스,아이다" src="${contextPath}/resources/images/movie/commingsoon/Quo vadis, Aida.jpg">
 											</a>										
 										</div>
 										<div class="title-area">
@@ -418,7 +420,7 @@
 										<div class="movie-list-info">
 											<p class="rank">2</p>
 											<a href="#">
-												<img alt="캐시트럭" src="images/commingsoon/Wrath of Man.jpg">
+												<img alt="캐시트럭" src="${contextPath}/resources/images/movie/commingsoon/Wrath of Man.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -443,7 +445,7 @@
 										<div class="movie-list-info">
 											<p class="rank">3</p>
 											<a href="#">
-												<img alt="실크 로드" src="images/commingsoon/Silk Road.jpg">
+												<img alt="실크 로드" src="${contextPath}/resources/images/movie/commingsoon/Silk Road.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -468,7 +470,7 @@
 										<div class="movie-list-info">
 											<p class="rank">4</p>
 											<a href="#">
-												<img alt="화이트 온 화이트" src="images/commingsoon/White on White.jpg">
+												<img alt="화이트 온 화이트" src="${contextPath}/resources/images/movie/commingsoon/White on White.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -496,7 +498,7 @@
 										<div class="movie-list-info">
 											<p class="rank">5</p>
 											<a href="#">
-												<img alt="강호아녀" src="images/commingsoon/Ash Is Purest White.jpg">
+												<img alt="강호아녀" src="${contextPath}/resources/images/movie/commingsoon/Ash Is Purest White.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -521,7 +523,7 @@
 										<div class="movie-list-info">
 											<p class="rank">6</p>
 											<a href="#">
-												<img alt="플래시백" src="images/commingsoon/Flashback.jpg">
+												<img alt="플래시백" src="${contextPath}/resources/images/movie/commingsoon/Flashback.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -546,7 +548,7 @@
 										<div class="movie-list-info">
 											<p class="rank">7</p>
 											<a href="#">
-												<img alt="콰이어트 플레이스 2" src="images/commingsoon/A Quiet Place Part II.jpg">
+												<img alt="콰이어트 플레이스 2" src="${contextPath}/resources/images/movie/commingsoon/A Quiet Place Part II.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -571,7 +573,7 @@
 										<div class="movie-list-info">
 											<p class="rank">8</p>
 											<a href="#">
-												<img alt="그 여름, 가장 차가웠던" src="images/commingsoon/Summer is the coldest season.jpg">
+												<img alt="그 여름, 가장 차가웠던" src="${contextPath}/resources/images/movie/commingsoon/Summer is the coldest season.jpg">
 											</a>
 										</div>
 										<div class="title-area">
@@ -604,7 +606,7 @@
 	
 	<footer>
 		<div>
-			<img id="footer_ci" alt="브랜드 로고" src="images/ci.png">
+			<img id="footer_ci" alt="브랜드 로고" src="${contextPath}/resources/images/movie/ci.png">
 			<p>
 			제1항의 해임건의는 국회재적의원 3분의 1 이상의 발의에 의하여 국회재적의원 과반수의 찬성이 있어야 한다.
 			<br>

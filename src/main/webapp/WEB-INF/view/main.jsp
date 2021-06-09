@@ -94,15 +94,15 @@
 				<ul>
 					<li>
 						<img src="https://img.megabox.co.kr/SharedImg/2021/05/12/J7vthd2FWEXswHD67dL2rQrMW4uhJQUF_420.jpg">
-						<div class="reserve-boxoffice"><h2>예매</h2></div>
+						<div class="reserve-boxoffice"><h2><a href="#">예매</a></h2></div>
 					</li>
 					<li style="margin-left: 40px;">
 						<img src="https://img.megabox.co.kr/SharedImg/2021/04/20/Pg9xMYRfMNouXwkqG2PeOGGqyUaQ9skl_420.jpg">
-						<div class="reserve-boxoffice"><h2>예매</h2></div>
+						<div class="reserve-boxoffice"><h2><a href="#">예매</a></h2></div>
 					</li>
 					<li style="margin-left: 40px;">
 						<img src="https://img.megabox.co.kr/SharedImg/2021/05/24/OPZRLPUEwlEliCfy6Li4gfhUFCJ52AE1_420.jpg">
-						<div class="reserve-boxoffice"><h2>예매</h2></div>
+						<div class="reserve-boxoffice"><h2><a href="#">예매</a></h2></div>
 					</li>
 				</ul>
 			</div>

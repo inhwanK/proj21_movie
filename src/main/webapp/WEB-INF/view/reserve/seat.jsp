@@ -6,11 +6,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>좌석 선택</title>
-	<link rel="stylesheet" href="css/seat.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/seat.css">
 </head>
 <body>
 	<header>
-		<img id="header_ci" alt="브랜드 로고" src="img/ci.png">
+		<img id="header_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
 		<div>
 			<a href="#">로그인</a>
 			<a href="#">회원가입</a>
@@ -48,7 +48,7 @@
 			<div id="seat-choice">
 
 				<div id="seat-area">
-					<img alt="스크린 이미지" src="img/screen.png"> <br> <br>
+					<img alt="스크린 이미지" src="<%=request.getContextPath()%>/resources/images/screen.png"> <br> <br>
 					<c:forEach var="i" begin="1" end="50">
 						<span>${i }</span>
 						<c:if test="${i % 10 eq 0}">
@@ -94,7 +94,7 @@
 	
 	<footer>
 		<div>
-			<img id="footer_ci" alt="브랜드 로고" src="img/ci.png">
+			<img id="footer_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
 			<p>
 			제1항의 해임건의는 국회재적의원 3분의 1 이상의 발의에 의하여 국회재적의원 과반수의 찬성이 있어야 한다.
 			<br>

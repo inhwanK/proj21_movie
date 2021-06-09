@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>극장 상세정보</title>
-	<link rel="stylesheet" href="css/theater_detail.css">
+	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
+	<link rel="stylesheet" href="${contextPath}/resources/css/theater/theater_detail.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(function(){
@@ -16,13 +18,18 @@
 				$(".tab-cont-wrap > div").removeClass("active");
 				$(".tab-cont-wrap > div").eq($(this).index()).addClass("active");
 			});
+			
+			$(".date-area button").click(function(){ 
+				$(this).addClass("active");
+				$(this).siblings().removeClass("active"); 
+			});
 		});
 	</script>
 </head>
 <body>
 	<header>
-		<a href="#" title="박스무비 메인으로 가기">
-			<img id="header_ci" alt="브랜드 로고" src="images/ci.png">
+		<a href="${contextPath}/main" title="박스무비 메인으로 가기">
+			<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/theater/ci.png">
 		</a>
 		<div>
 			<a href="#">로그인</a>
@@ -34,9 +41,9 @@
 	
 	<nav>
 		<ul>
-			<li><a href="#">영화</a></li>
+			<li><a href="${contextPath}/movie">영화</a></li>
 			<li><a href="#">예매</a></li>
-			<li><a href="#">극장</a></li>
+			<li><a href="${contextPath}/theater">극장</a></li>
 			<li><a href="#">이벤트</a></li>
 			<li><a href="#">고객센터</a></li>
 		</ul>
@@ -47,9 +54,9 @@
 	    	<div class="page-util">	
 				<div class="location">
 	    			<span>Home</span>
-	    			<a href="#" title="극장 페이지로 이동">극장</a>
-	    			<a href="#" title="전체극장 페이지로 이동">전체극장</a>
-	    			<a href="#" title="극장정보 페이지로 이동">극장정보</a>
+	    			<a href="${contextPath}/theater" title="극장 페이지로 이동">극장</a>
+	    			<a href="${contextPath}/theater" title="전체극장 페이지로 이동">전체극장</a>
+	    			<a href="" title="극장정보 페이지로 이동">극장정보</a>
 	    		</div>
 	    	</div>
 	    	
@@ -57,7 +64,6 @@
    				<!-- theater-detail-page -->
 	     		<div class="theater-detail-page">
 					<div class="bg-img">
-						<!-- <img src="images/movies-rose-audience-boy-girl-retro.jpg" height="180" width="1500"> -->
 					</div>
 						
 					<!-- theater-all -->
@@ -286,12 +292,237 @@
 	    						</div>
 	    					</div>					    					
 						</div>
+						<!-- // 극장정보 리스트 -->
 						
 						<!-- 상영시간표 리스트 -->
 						<div id="tab02" class="tab-cont">
-							
+							<h2 class="title">상영시간표</h2>
+							<div class="time-schedule">
+								
+								<!-- date-list -->
+								<div class="date-list">
+									<!-- date-area -->
+									<div class="date-area" style="position: relative; width: 2100px; border: none; left: -70px;">								
+										<button></button>																			
+										<button class="active" type="button">
+											<span>8</span><span>오늘</span>																																				
+										</button>										
+										<button type="button">
+											<span>9</span><span>내일</span>																																				
+										</button>
+										<button type="button">
+											<span>10</span><span>목</span>																																				
+										</button>
+										<button type="button">
+											<span>11</span><span>금</span>																																				
+										</button>
+										<button class="sat" type="button">
+											<span>12</span><span>토</span>																																				
+										</button>
+										<button class="holi" type="button">
+											<span>13</span><span>일</span>																																			
+										</button>
+										<button class="disabled" type="button">
+											<span>14</span><span>월</span>																																				
+										</button>
+										<button class="disabled" type="button">
+											<span>15</span><span>화</span>																																				
+										</button>
+										<button class="disabled" type="button">
+											<span>16</span><span>수</span>																																				
+										</button>
+										<button class="disabled" type="button">
+											<span>17</span><span>목</span>																																				
+										</button>
+										<button class="disabled" type="button">
+											<span>18</span><span>금</span>																																				
+										</button>
+										<button class="sat" type="button">
+											<span>19</span><span>토</span>
+										</button>
+										<button class="disabled" type="button">
+											<span>20</span><span>일</span>																								
+										</button>										
+									</div>
+									<!-- // date-area -->
+								</div>
+								<!-- // date-list -->
+								
+								<!-- theater-list-box -->
+								<div class="reserve theater-list-box">
+								
+									<!-- 크루엘라 theater-list -->
+									<div class="theater-list">
+										<!-- theater-title -->
+										<div class="theater-title">
+											<p class="movie-grade age-12">
+												<a href="../../movie/movieDetail/1" title="크루엘라 상세보기">크루엘라</a>
+											</p>
+											<p class="information" style="float: right;">
+												<span style="color: #01738b;">상영중</span>/상영시간 134분
+											</p>
+										</div>
+										<!-- // theater-title -->
+										
+										<!-- theater-type-box -->
+										<div class="theater-type-box">
+											<div class="theater-type">
+												<p class="theater-name">3관</p>
+												<p class="chair">총 90석</p>
+ 											</div>
+ 											<div class="theater-time">
+ 												<div class="theater-type-area">2D(자막)</div>
+ 												<div class="theater-time-box">
+													<a href="#" title="영화 예매하기">
+														<span class="time">15:10
+														<span class="chair">63석 </span>
+														</span>
+													</a>	
+													<a href="#" title="영화 예매하기">
+														<span class="time">18:15
+														<span class="chair">75석</span>
+														</span>
+													</a>
+ 												</div>
+ 											</div>
+										</div>
+										<!-- // theater-type-box -->
+										
+										<!-- theater-type-box -->
+										<div class="theater-type-box">
+											<div class="theater-type">
+												<p class="theater-name">5관</p>
+												<p class="chair">총 80석</p>
+ 											</div>
+ 											<div class="theater-time">
+ 												<div class="theater-type-area">2D(자막)</div>
+ 												<div class="theater-time-box">
+													<a href="#" title="영화 예매하기">
+														<span class="time">12:10
+														<span class="chair">43석</span>
+														</span>
+													</a>	
+													<a href="#" title="영화 예매하기">
+														<span class="time">14:15
+														<span class="chair">35석</span>
+														</span>
+													</a>
+ 												</div>
+ 											</div>
+										</div>
+										<!-- // theater-type-box -->
+									</div>
+									<!-- // 크루엘라 theater-list -->
+									
+									<!-- 컨저링3: 악마가 시켰다 theater-list -->
+									<div class="theater-list">
+										<!-- theater-title -->
+										<div class="theater-title">
+											<p class="movie-grade age-15">
+												<a href="#" title="컨저링3: 악마가 시켰다 상세보기">컨저링3: 악마가 시켰다</a>
+											</p>
+											<p class="information" style="float: right;">
+												<span style="color: #01738b;">상영중</span>/상영시간 112분
+											</p>
+										</div>
+										<!-- // theater-title -->
+										
+										<!-- theater-type-box -->
+										<div class="theater-type-box">
+											<div class="theater-type">
+												<p class="theater-name">3관</p>
+												<p class="chair">총 78석</p>
+ 											</div>
+ 											<div class="theater-time">
+ 												<div class="theater-type-area">2D(자막)</div>
+ 												<div class="theater-time-box">
+													<a href="#" title="영화 예매하기">
+														<span class="time">12:05
+														<span class="chair">71석</span>
+														</span>
+													</a>	
+ 												</div>
+ 											</div>
+										</div>
+										<!-- // theater-type-box -->
+										
+										<!-- theater-type-box -->
+										<div class="theater-type-box">
+											<div class="theater-type">
+												<p class="theater-name">4관</p>
+												<p class="chair">총 66석</p>
+ 											</div>
+ 											<div class="theater-time">
+ 												<div class="theater-type-area">2D(자막)</div>
+ 												<div class="theater-time-box"> 
+													<a href="#" title="영화 예매하기">
+														<span class="time">13:25
+														<span class="chair">70석</span>
+														</span>
+													</a>	
+													<a href="#" title="영화 예매하기">
+														<span class="time">15:45
+														<span class="chair">68석</span>
+														</span>
+													</a>
+													<a href="#" title="영화 예매하기">
+														<span class="time">18:05
+														<span class="chair">64석</span>
+														</span>
+													</a>
+ 												</div>
+ 											</div>
+										</div>
+										<!-- // theater-type-box -->
+									</div>
+									<!-- // 컨저링3: 악마가 시켰다 theater-list -->																		
+								</div>
+								<!-- // theater-list-box -->								
+							</div>
 						</div>
-												
+						<!-- // 상영시간표 리스트 -->
+						
+						<!-- 관람료 리스트 -->
+						<div id="tab03" class="tab-cont">
+							<h2 class="title">영화관람료</h2>
+							<!-- price-table-box -->
+							<div class="price-table-box">
+								<p class="price-table-title">요금 정보</p>
+								<table class="data-table">
+									<thead> 
+										<tr> 
+											<th>상영 타입</th>
+											<th>일반</th>
+											<th>청소년</th>
+											<th>우대</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th>2D</th>
+											<td>10,000원</td>
+											<td>8,000원</td>
+											<td>5,000원</td>														
+										</tr>												
+										<tr>
+											<th>3D</th>
+											<td>15,000원</td>
+											<td>13,000원</td>
+											<td>10,000원</td>														
+										</tr>												
+										<tr>
+											<th>4D</th>
+											<td>20,000원</td>
+											<td>18,000원</td>
+											<td>15,000원</td>														
+										</tr>												
+									</tbody>
+								</table>
+							</div>
+							<!-- price-table-box -->
+						</div>
+						<!-- // 관람료 리스트 -->
+																		
 	    			</div>
 	    			<!-- // tab-cont-wrap -->	    			    			
     			</div>
@@ -302,7 +533,7 @@
 	
 	<footer>
 		<div>
-			<img id="footer_ci" alt="브랜드 로고" src="images/ci.png">
+			<img id="footer_ci" alt="브랜드 로고" src="${contextPath}/resources/images/theater/ci.png">
 			<p>
 			제1항의 해임건의는 국회재적의원 3분의 1 이상의 발의에 의하여 국회재적의원 과반수의 찬성이 있어야 한다.
 			<br>

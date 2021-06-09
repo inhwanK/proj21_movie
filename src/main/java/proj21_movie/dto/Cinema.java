@@ -9,6 +9,14 @@ public class Cinema {
 	private int cinAdultPrice;	// 어른요금
 	private int cinTeenPrice;	// 청소년요금
 	private int cinPrefPrice;	// 우대요금
+	
+	public Cinema() {
+		
+	}
+
+	public Cinema(int cinNo) {
+		this.cinNo = cinNo;
+	}
 
 	public int getCinNo() {
 		return cinNo;

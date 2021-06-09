@@ -13,7 +13,6 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -45,6 +44,7 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addViewController("/movieManager").setViewName("/manager/movieList");
 		registry.addViewController("/registMovie").setViewName("/manager/registMovie");
 		registry.addViewController("/updateMovie").setViewName("/manager/updateMovie");
+		registry.addViewController("/noticelist").setViewName("notice/noticeList");
 	}
 	
 	/* Bean의 아이디를 반드시 "messageSource"로 지정해야 됨

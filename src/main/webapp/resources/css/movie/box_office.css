@@ -144,7 +144,7 @@ nav ul li a:hover {
 	padding: 0;
 	text-indent: -9999px;
 	background:
-		url(../images/icon/home.png)
+		url(../../images/theater/icon/home.png)
 		no-repeat center
 }
 
@@ -169,7 +169,7 @@ nav ul li a:hover {
 	width: 5px;
 	height: 42px;
 	background:
-		url(../images/icon/homearr.png)
+		url(../../images/theater/icon/homearr.png)
 		no-repeat left center
 }
 
@@ -310,22 +310,22 @@ h2.title {
 
 .age-all {
 	background-image:
-		url(../images/icon/age-all.png)
+		url(../../images/theater/icon/age-all.png)
 }
 
 .age-12 {
 	background-image:
-		url(../images/icon/age-12.png)
+		url(../../images/theater/icon/age-12.png)
 }
 
 .age-15 {
 	background-image:
-		url(../images/icon/age-15.png)
+		url(../../images/theater/icon/age-15.png)
 }
 
 .age-19 {
 	background-image:
-		url(../images/icon/age-19.png)
+		url(../../images/theater/icon/age-19.png)
 }
 
 .rate-date {
