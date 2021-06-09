@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="proj21_movie.mapper.CinemaMapper">
+	
+	<select id="selectCinemaByAll" resultType="Cinema">
+		select cin_no, cin_row, cin_col, cin_seat, cin_type, cin_adultprice, cin_teenprice, cin_prefprice 
+			from cinema
+	</select>
+	
+	<select id="selectCinemaByNo" resultType="Cinema">
+		select cin_no, cin_row, cin_col, cin_seat, cin_type, cin_adultprice, cin_teenprice, cin_prefprice 
+			from cinema
+		where cin_no=#{cinNo}
+	</select>
+	
+</mapper>

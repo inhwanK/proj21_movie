@@ -69,7 +69,7 @@
 						<br>
 						<br>
 					<div class="text_h">
-						<a href="#">ID/PW 찾기</a> | <a href="#">회원가입</a> | <a href="#">비회원 조회</a>
+						<a href="#">ID/PW 찾기</a> | <a href="#">회원가입</a>
 					</div>
 				</div>
 			</fieldset>
