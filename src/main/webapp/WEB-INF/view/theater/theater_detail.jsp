@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>극장 상세정보</title>
-	<link rel="stylesheet" href="css/theater_detail.css">
+	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
+	<link rel="stylesheet" href="${contextPath}/resources/css/theater/theater_detail.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(function(){
@@ -26,8 +28,8 @@
 </head>
 <body>
 	<header>
-		<a href="#" title="박스무비 메인으로 가기">
-			<img id="header_ci" alt="브랜드 로고" src="images/ci.png">
+		<a href="${contextPath}/main" title="박스무비 메인으로 가기">
+			<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/theater/ci.png">
 		</a>
 		<div>
 			<a href="#">로그인</a>
@@ -39,9 +41,9 @@
 	
 	<nav>
 		<ul>
-			<li><a href="#">영화</a></li>
+			<li><a href="${contextPath}/movie">영화</a></li>
 			<li><a href="#">예매</a></li>
-			<li><a href="#">극장</a></li>
+			<li><a href="${contextPath}/theater">극장</a></li>
 			<li><a href="#">이벤트</a></li>
 			<li><a href="#">고객센터</a></li>
 		</ul>
@@ -52,9 +54,9 @@
 	    	<div class="page-util">	
 				<div class="location">
 	    			<span>Home</span>
-	    			<a href="#" title="극장 페이지로 이동">극장</a>
-	    			<a href="#" title="전체극장 페이지로 이동">전체극장</a>
-	    			<a href="#" title="극장정보 페이지로 이동">극장정보</a>
+	    			<a href="${contextPath}/theater" title="극장 페이지로 이동">극장</a>
+	    			<a href="${contextPath}/theater" title="전체극장 페이지로 이동">전체극장</a>
+	    			<a href="" title="극장정보 페이지로 이동">극장정보</a>
 	    		</div>
 	    	</div>
 	    	
@@ -354,7 +356,7 @@
 										<!-- theater-title -->
 										<div class="theater-title">
 											<p class="movie-grade age-12">
-												<a href="#" title="크루엘라 상세보기">크루엘라</a>
+												<a href="../../movie/movieDetail/1" title="크루엘라 상세보기">크루엘라</a>
 											</p>
 											<p class="information" style="float: right;">
 												<span style="color: #01738b;">상영중</span>/상영시간 134분
@@ -482,9 +484,45 @@
 						
 						<!-- 관람료 리스트 -->
 						<div id="tab03" class="tab-cont">
-							<p>관람료 입니다.</p>
+							<h2 class="title">영화관람료</h2>
+							<!-- price-table-box -->
+							<div class="price-table-box">
+								<p class="price-table-title">요금 정보</p>
+								<table class="data-table">
+									<thead> 
+										<tr> 
+											<th>상영 타입</th>
+											<th>일반</th>
+											<th>청소년</th>
+											<th>우대</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th>2D</th>
+											<td>10,000원</td>
+											<td>8,000원</td>
+											<td>5,000원</td>														
+										</tr>												
+										<tr>
+											<th>3D</th>
+											<td>15,000원</td>
+											<td>13,000원</td>
+											<td>10,000원</td>														
+										</tr>												
+										<tr>
+											<th>4D</th>
+											<td>20,000원</td>
+											<td>18,000원</td>
+											<td>15,000원</td>														
+										</tr>												
+									</tbody>
+								</table>
+							</div>
+							<!-- price-table-box -->
 						</div>
-												
+						<!-- // 관람료 리스트 -->
+																		
 	    			</div>
 	    			<!-- // tab-cont-wrap -->	    			    			
     			</div>
@@ -495,7 +533,7 @@
 	
 	<footer>
 		<div>
-			<img id="footer_ci" alt="브랜드 로고" src="images/ci.png">
+			<img id="footer_ci" alt="브랜드 로고" src="${contextPath}/resources/images/theater/ci.png">
 			<p>
 			제1항의 해임건의는 국회재적의원 3분의 1 이상의 발의에 의하여 국회재적의원 과반수의 찬성이 있어야 한다.
 			<br>
