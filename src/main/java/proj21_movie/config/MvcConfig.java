@@ -42,7 +42,7 @@ public class MvcConfig implements WebMvcConfigurer {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/main").setViewName("main");
-		registry.addViewController("/noticeList").setViewName("notice/notice");
+		registry.addViewController("/noticelist").setViewName("notice/noticeList");
 	}
 	
 	/* Bean의 아이디를 반드시 "messageSource"로 지정해야 됨
