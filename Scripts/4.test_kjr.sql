@@ -13,7 +13,7 @@ alter table movie auto_increment = 5;
 insert into movie values 
 (0, 'test movie', 12, '액션', 120, '감독', '배우들', '상세설명', '2021-06-07', '2021-06-10', 3.5, 'poster.jpg');
 
-delete from movie where mov_no = 11;
+delete from movie where mov_no > 4;
 
 update movie 
 set mov_title = 'test movie2', mov_grade = '15', mov_genre = '액션2'
