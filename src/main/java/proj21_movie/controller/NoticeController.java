@@ -1,20 +1,23 @@
 package proj21_movie.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import proj21_movie.service.NoticeService;
 
 @Controller
 public class NoticeController {
-
 	
-	@RequestMapping("/notice")
-	public String notice() {
-		return "notice/notice";
-	}
+	@Autowired
+	private NoticeService service;
 	
-	@RequestMapping("/noticeDetail/{id}")
-	public String noticeDetail(/* id 값 넣어주어야 함.*/) {
-		// 받은 id 값으로 공지 글 검색.
+	@RequestMapping("/notice/{notNo}")
+	public String noticeNo (@PathVariable("notNo") int notNo, HttpServletRequest request) {
+		request.setAttribute("notNo", notNo); //request 객체 받아야함.
 		return "notice/noticeDetail";
 	}
 }
