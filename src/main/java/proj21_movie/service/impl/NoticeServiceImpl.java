@@ -23,8 +23,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public Notice showNoticeDetail(int notNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.selectNoticeByNo(notNo);
 	}
 
 	@Override

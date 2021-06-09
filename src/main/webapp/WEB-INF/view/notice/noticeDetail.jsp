@@ -1,10 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="<%=request.getContextPath() %>" />
+<%-- <c:set var="notNo" value="<% %>"/> --%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var contextPath = "${contextPath}";
+		$.ajax({
+			url: contextPath +"/api/notice/" + <%=request.getAttribute("notNo")%> ,
+			method: "get",
+			dataType: "json"
+		})
+		.done(function(json){
+			var detail = "" + json.notTitle;
+			detail += <%=request.getAttribute("notNo")%>
+			$("h3").append(detail);
+		})
+	});
+</script>
 <style type="text/css">
 body {
     overflow: auto;
@@ -195,6 +215,8 @@ a.button {
 </style>
 </head>
 <body>
+	<h3>jquery 테스트용 태그<br> </h3>
+	
 	<div id="notice-detail-wrap">
 	<div id="contents">
 		<h2 class="tit">공지사항</h2>

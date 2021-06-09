@@ -16,22 +16,42 @@
 			return newDateForm; 
 		}
 		
-		
 		var contextPath = "${contextPath}";
 		$.get(contextPath+"/api/notice", function(json) {
+			
 			var dataLength = json.length;
 			if(dataLength >= 1){
 				var list = "";	
 				for(i = dataLength - 1 ; i > -1; i--){
 						list += "<tr>";
 						list += "<td>" + json[i].notNo + "</td>"; 
-						list += "<td><a href='#'>" + json[i].notTitle+  "</a></td>"; 
+						list += "<td><a href='${contextPath}/api/notice/" + json[i].notNo + "'>" + json[i].notTitle+  "</a></td>"; 
 						list += "<td>" + getFormatDate(json[i].notDate) + "</td>"; 
 						list += "<tr>"
-					}
-					$("tbody").append(list);
+				}
+				$("tbody").append(list);
 			};
+			
+			var page = Math.ceil(dataLength/10); // 소숫점도 표현되니까 바로 ceil해줌.
+			
+			var pageNo = "";	
+			for(i = 1; i < page + 1; i++){
+					pageNo += "<a title="+ i +"페이지보기 href=\"#\" pagenum="+ i + ">" + i + "</a>";
+			}
+			$("nav.pagination").append(pageNo);
+			$("nav.pagination").append(page);
 		});
+		/* 
+		$.get(contextPath+"/api/notice", function(json) {
+			var dataLength = json.length;
+			var page = (dataLength / 10) + 1; // 일단 +1 함. 원래는 나머지 계산해야함.
+			
+			var pageNo = "";	
+			for(i = 1; i < page + 1 ; i++){
+					pageNo += "<a title="+ i +"페이지보기 href=\"#\" pagenum="+ i + ">" + i + "</a>";
+			}
+			$("nav.pagination").append(pageNo);
+		}); */
 	});
 </script>
 <title>Insert title here</title>
@@ -248,12 +268,15 @@ article, aside, figcaption, figure, footer, header, main, nav, section {
 </style>
 </head>
 <body>
+
+
 <div id="notice-wrap">
 
 	<div id="contents">
 		<h2 class="tit">공지사항</h2>
 
 		<h3>
+		jquery 테스트용 태그<br> 
 		
 		</h3>
 
@@ -385,15 +408,16 @@ article, aside, figcaption, figure, footer, header, main, nav, section {
 		<!-- pagination -->
 		<nav class="pagination">
 			<strong class="active">1</strong> 
-			<a title="2페이지보기"href="javascript:void(0)" pagenum="2">2</a> 
-			<a title="3페이지보기" href="javascript:void(0)" pagenum="3">3</a> 
+			<a title="2페이지보기" href="javascript:void(0)" pagenum="2">2</a> 
+			
+			<!-- <a title="3페이지보기" href="javascript:void(0)" pagenum="3">3</a> 
 			<a title="4페이지보기" href="javascript:void(0)" pagenum="4">4</a> 
 			<a title="5페이지보기" href="javascript:void(0)" pagenum="5">5</a> 
 			<a title="6페이지보기" href="javascript:void(0)" pagenum="6">6</a> 
 			<a title="7페이지보기" href="javascript:void(0)" pagenum="7">7</a> 
 			<a title="8페이지보기" href="javascript:void(0)" pagenum="8">8</a> 
 			<a title="9페이지보기" href="javascript:void(0)" pagenum="9">9</a> 
-			<a title="10페이지보기" href="javascript:void(0)" pagenum="10">10</a> 
+			<a title="10페이지보기" href="javascript:void(0)" pagenum="10">10</a>  -->
 			<a title="이후 10페이지 보기" href="javascript:void(0)" class="control next" pagenum="11">next</a>
 			<a title="마지막 페이지 보기" href="javascript:void(0)" class="control last"pagenum="565">last</a>
 		</nav> 
