@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>결제</title>
-	<link rel="stylesheet" href="css/payment.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/payment.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
@@ -22,7 +22,7 @@
 </head>
 <body>
 	<header>
-		<img id="header_ci" alt="브랜드 로고" src="img/ci.png">
+		<img id="header_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
 		<div>
 			<a href="#">로그인</a>
 			<a href="#">회원가입</a>
@@ -97,7 +97,7 @@
 	
 	<footer>
 		<div>
-			<img id="footer_ci" alt="브랜드 로고" src="img/ci.png">
+			<img id="footer_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
 			<p>
 			제1항의 해임건의는 국회재적의원 3분의 1 이상의 발의에 의하여 국회재적의원 과반수의 찬성이 있어야 한다.
 			<br>

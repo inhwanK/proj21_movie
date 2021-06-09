@@ -1,0 +1,206 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'IBMPlexSansKR-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* body */
+body {
+	font-family: 'IBMPlexSansKR-Regular', sans-serif;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	/* 	background-color: RGB(3, 22, 52); */
+}
+
+/* header */
+header {
+	margin: auto;
+	width: 70%;
+	position: relative;
+}
+
+#header_ci {
+	width: 150px;
+	margin: 0px auto;
+	align-items: center;
+	position: relative;
+	/* 	position: absolute; */
+	left: 120px;
+	/* left: 50%; */
+	/* 	transform: translate(-50%, 0); */
+	box-sizing: border-box;
+}
+
+header div {
+	display: inline;
+	float: right;
+	text-align: right;
+	padding-bottom: 10px;
+}
+
+header div a {
+	text-decoration: none;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 0.8em;
+	color: RGB(136, 136, 136);
+}
+
+/* <nav> */
+nav {
+	margin: auto;
+	width: 70%;
+	position: relative;
+	padding: 0px;
+}
+
+nav ul {
+	padding-left: 0;
+	list-style: none;
+	border-bottom: 0.5px solid RGB(3, 22, 52);
+	padding-bottom: 5px;
+	margin: 10px auto;
+	position: relative;
+}
+
+nav ul li {
+	display: inline-block;
+	padding-right: 50px;
+	padding-left: 50px;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+nav ul li a {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	padding-bottom: 5px;
+}
+
+nav ul li a:hover {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	padding-bottom: 4px;
+	border-bottom: 5px solid RGB(3, 22, 52);
+}
+
+/* section */
+section {
+	margin: 50px auto;
+	width: 1300px;
+	height: 900px;
+	text-align: center;
+/* 	border: 1px solid green; */
+}
+
+#container{
+	display: flex;
+	flex-wrap: wrap;
+}
+#mypage-menubar{
+	border-right: 1px solid #ccc;
+	display: inline-block;
+	width: 250px;
+	height: 900px;
+/* 	float: left; */
+}
+
+#mypage-menubar ul{
+	padding: 0px;
+	list-style: none;
+	text-align: left;
+}
+
+#mypage-menubar ul li{
+	margin: 50px 0;
+}
+
+#mypage-menubar ul li a{
+	color: RGB(3, 22, 52);
+	font-size: 1.2em;
+	text-decoration: none;
+}
+
+#mypage-menubar ul li a:hover{
+	color: red;
+	font-size: 1.2em;
+	text-decoration: none;
+}
+
+#mypage-menubar h2{
+	background-image: url("../img/menubar_header.png");
+	color: white;
+}
+
+#inquiry-wrap{
+/* 	border: 1px solid yellow; */
+	width: 1045px;
+	height: 100%;
+	text-align: left;
+}
+
+#inquiry-wrap h2{
+	text-align: left;
+	margin-left: 40px;
+	margin-bottom: 40px;
+}
+#inquiry-content{
+	width: 900px;
+}
+#inquiry-count{
+	padding-left: 40px;
+ 	height: 30px;
+}
+#inquiry-list{
+	padding-left: 40px;
+}
+#inquiry-table{
+	margin: auto;
+	text-align: center;
+	width: 900px;
+	border-collapse: collapse;
+	border-bottom: 1px solid #ccc;
+}
+
+#inquiry-table th{
+	padding: 10px 20px;
+	background-color: RGB(247,247,247);
+	border-bottom: 1px solid #ccc;
+	border-top: 2px solid RGB(3, 22, 52);
+}
+
+#inquiry-table td{
+	padding: 10px;
+}
+
+
+/* footer */
+footer {
+	margin: auto;
+	width: 70%
+}
+
+footer div {
+	border-top: 0.5px solid RGB(3, 22, 52);
+	text-align: left;
+	margin-top: 0;
+}
+
+footer div p {
+	margin-left: 80px;
+	color: black;
+	font-size: 0.8em;
+	margin-top: 22.5px;
+}
+
+#footer_ci {
+	width: 100px;
+	margin: 0px;
+	float: left;
+}
