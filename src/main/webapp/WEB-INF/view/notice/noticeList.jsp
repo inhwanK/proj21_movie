@@ -1,9 +1,59 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="<%=request.getContextPath() %>" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+	$(function(){
+		function getFormatDate(date){
+			var subDateArray = date.substr(0,10).split('-');
+			var newDateForm = subDateArray[0] + "." + subDateArray[1] + "." + subDateArray[2];
+			return newDateForm; 
+		}
+		
+		var contextPath = "${contextPath}";
+		$.get(contextPath+"/api/notice", function(json) {
+			
+			var dataLength = json.length;
+			if(dataLength >= 1){
+				var list = "";	
+				for(i = dataLength - 1 ; i > -1; i--){
+						list += "<tr>";
+						list += "<td>" + json[i].notNo + "</td>"; 
+						list += "<td><a href='${contextPath}/api/notice/" + json[i].notNo + "'>" + json[i].notTitle+  "</a></td>"; 
+						list += "<td>" + getFormatDate(json[i].notDate) + "</td>"; 
+						list += "<tr>"
+				}
+				$("tbody").append(list);
+			};
+			
+			var page = Math.ceil(dataLength/10); // 소숫점도 표현되니까 바로 ceil해줌.
+			
+			var pageNo = "";	
+			for(i = 1; i < page + 1; i++){
+					pageNo += "<a title="+ i +"페이지보기 href=\"#\" pagenum="+ i + ">" + i + "</a>";
+			}
+			$("nav.pagination").append(pageNo);
+			$("nav.pagination").append(page);
+		});
+		/* 
+		$.get(contextPath+"/api/notice", function(json) {
+			var dataLength = json.length;
+			var page = (dataLength / 10) + 1; // 일단 +1 함. 원래는 나머지 계산해야함.
+			
+			var pageNo = "";	
+			for(i = 1; i < page + 1 ; i++){
+					pageNo += "<a title="+ i +"페이지보기 href=\"#\" pagenum="+ i + ">" + i + "</a>";
+			}
+			$("nav.pagination").append(pageNo);
+		}); */
+	});
+</script>
 <title>Insert title here</title>
 <style type="text/css">
 body {
@@ -218,10 +268,17 @@ article, aside, figcaption, figure, footer, header, main, nav, section {
 </style>
 </head>
 <body>
+
+
 <div id="notice-wrap">
 
 	<div id="contents">
 		<h2 class="tit">공지사항</h2>
+
+		<h3>
+		jquery 테스트용 태그<br> 
+		
+		</h3>
 
 		<!-- <div class="tab-block mb30">
 			<ul>
@@ -239,7 +296,7 @@ article, aside, figcaption, figure, footer, header, main, nav, section {
 
 
 <!-- 검색 기능 -->
-		 <div class="board-list-util">
+		  <div class="board-list-util">
 			<!-- <p class="result-count">
 				<strong>전체 <em class="font-gblue">5,645</em>건
 				</strong>
@@ -278,6 +335,7 @@ article, aside, figcaption, figure, footer, header, main, nav, section {
 					</div>
 					<span class="bs-caret"><span class="caret"></span></span>
 				</button>
+				
 				<div class="dropdown-menu open" role="combobox">
 					<div class="inner open" role="listbox" aria-expanded="false"
 						tabindex="-1">
@@ -326,16 +384,12 @@ article, aside, figcaption, figure, footer, header, main, nav, section {
 				<caption>번호, 극장, 구분, 제목, 등록일이 들어간 공지사항 전체 리스트</caption>
 				<colgroup>
 					<col style="width: 72px;">
-					<col style="width: 133px;">
-					<col style="width: 95px;">
 					<col>
 					<col style="width: 116px;">
 				</colgroup>
 				<thead>
 					<tr>
 						<th scope="col">번호</th>
-						<th scope="col">극장</th>
-						<th scope="col">구분</th>
 						<th scope="col">제목</th>
 						<th scope="col">등록일</th>
 					</tr>
@@ -343,79 +397,6 @@ article, aside, figcaption, figure, footer, header, main, nav, section {
 				<tbody>
 					<tr>
 						<td>1</td>
-						<td>내당</td>
-						<td>공지</td>
-						<th><a href="#" class="moveBtn" data-no="10349"
-							title="공지사항 상세보기">글제목</a></th>
-						<td>날짜</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>내당</td>
-						<td>공지</td>
-						<th><a href="#" class="moveBtn" data-no="10349"
-							title="공지사항 상세보기">글제목</a></th>
-						<td>날짜</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>내당</td>
-						<td>공지</td>
-						<th><a href="#" class="moveBtn" data-no="10349"
-							title="공지사항 상세보기">글제목</a></th>
-						<td>날짜</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>내당</td>
-						<td>공지</td>
-						<th><a href="#" class="moveBtn" data-no="10349"
-							title="공지사항 상세보기">글제목</a></th>
-						<td>날짜</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>내당</td>
-						<td>공지</td>
-						<th><a href="#" class="moveBtn" data-no="10349"
-							title="공지사항 상세보기">글제목</a></th>
-						<td>날짜</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>내당</td>
-						<td>공지</td>
-						<th><a href="#" class="moveBtn" data-no="10349"
-							title="공지사항 상세보기">글제목</a></th>
-						<td>날짜</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>내당</td>
-						<td>공지</td>
-						<th><a href="#" class="moveBtn" data-no="10349"
-							title="공지사항 상세보기">글제목</a></th>
-						<td>날짜</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>내당</td>
-						<td>공지</td>
-						<th><a href="#" class="moveBtn" data-no="10349"
-							title="공지사항 상세보기">글제목</a></th>
-						<td>날짜</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>내당</td>
-						<td>공지</td>
-						<th><a href="#" class="moveBtn" data-no="10349"
-							title="공지사항 상세보기">글제목</a></th>
-						<td>날짜</td>
-					</tr><tr>
-						<td>1</td>
-						<td>내당</td>
-						<td>공지</td>
 						<th><a href="#" class="moveBtn" data-no="10349"
 							title="공지사항 상세보기">글제목</a></th>
 						<td>날짜</td>
@@ -426,20 +407,21 @@ article, aside, figcaption, figure, footer, header, main, nav, section {
 
 		<!-- pagination -->
 		<nav class="pagination">
-			<strong class="active">1</strong> <a title="2페이지보기"
-				href="javascript:void(0)" pagenum="2">2</a> <a title="3페이지보기"
-				href="javascript:void(0)" pagenum="3">3</a> <a title="4페이지보기"
-				href="javascript:void(0)" pagenum="4">4</a> <a title="5페이지보기"
-				href="javascript:void(0)" pagenum="5">5</a> <a title="6페이지보기"
-				href="javascript:void(0)" pagenum="6">6</a> <a title="7페이지보기"
-				href="javascript:void(0)" pagenum="7">7</a> <a title="8페이지보기"
-				href="javascript:void(0)" pagenum="8">8</a> <a title="9페이지보기"
-				href="javascript:void(0)" pagenum="9">9</a> <a title="10페이지보기"
-				href="javascript:void(0)" pagenum="10">10</a> <a title="이후 10페이지 보기"
-				href="javascript:void(0)" class="control next" pagenum="11">next</a>
-			<a title="마지막 페이지 보기" href="javascript:void(0)" class="control last"
-				pagenum="565">last</a>
-		</nav>
+			<strong class="active">1</strong> 
+			<a title="2페이지보기" href="javascript:void(0)" pagenum="2">2</a> 
+			
+			<!-- <a title="3페이지보기" href="javascript:void(0)" pagenum="3">3</a> 
+			<a title="4페이지보기" href="javascript:void(0)" pagenum="4">4</a> 
+			<a title="5페이지보기" href="javascript:void(0)" pagenum="5">5</a> 
+			<a title="6페이지보기" href="javascript:void(0)" pagenum="6">6</a> 
+			<a title="7페이지보기" href="javascript:void(0)" pagenum="7">7</a> 
+			<a title="8페이지보기" href="javascript:void(0)" pagenum="8">8</a> 
+			<a title="9페이지보기" href="javascript:void(0)" pagenum="9">9</a> 
+			<a title="10페이지보기" href="javascript:void(0)" pagenum="10">10</a>  -->
+			<a title="이후 10페이지 보기" href="javascript:void(0)" class="control next" pagenum="11">next</a>
+			<a title="마지막 페이지 보기" href="javascript:void(0)" class="control last"pagenum="565">last</a>
+		</nav> 
+		
 		<!--// pagination -->
 	</div>
 	</div>

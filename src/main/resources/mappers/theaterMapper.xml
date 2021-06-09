@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="proj21_movie.mapper.TheaterMapper">
+
+	<select id="selectTheaterByAll" resultType="Theater">
+		select tht_no, tht_name, tht_address, tht_lat, tht_long, tht_subs, tht_detail 
+			from theater
+	</select>
+	
+	<select id="selectTheaterByNo" resultType="Theater">
+		select tht_no, tht_name, tht_address, tht_lat, tht_long, tht_subs, tht_detail 
+			from theater
+		where tht_no = #{thtNo} 
+	</select>
+	
+	<select id="selectTheaterByName" resultType="Theater">
+		select tht_no, tht_name, tht_address, tht_lat, tht_long, tht_subs, tht_detail 
+			from theater 
+		 where tht_name like #{thtName}
+	</select>
+	
+</mapper>

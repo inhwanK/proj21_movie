@@ -10,7 +10,7 @@ import proj21_movie.dto.Notice;
 public interface NoticeMapper {
 	
 	Notice selectNoticeByNo(int notNo);
-	Notice selectNoticeByTitle(String notTitle);
+	List<Notice> selectNoticeByTitle(String notTitle);
 	List<Notice> selectNoticeAll();
 
 	
