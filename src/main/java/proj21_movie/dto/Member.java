@@ -82,6 +82,10 @@ public class Member {
 	public void setMemPhone(String memPhone) {
 		this.memPhone = memPhone;
 	}
+	
+	public boolean matchPassword(String memPasswd) {
+        return this.memPasswd.equals(memPasswd);
+    }
 
 	@Override
 	public String toString() {

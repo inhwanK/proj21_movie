@@ -1,16 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-<link rel="stylesheet" href="css/login.css">
+<c:set var="contextPath" value="<%=request.getContextPath() %>"/>
+<link rel="stylesheet" href="${contextPath}/resources/css/login.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<header>
-		<img id="header_ci" alt="" src="image/logow1_2.png">
+		<img id="header_ci" alt="" src="${contextPath}/resources/image/logow1_2.png">
 		<ul>
 			<li><a class="sub_menu" href="#">로그인</a></li>
 			<li><a class="sub_menu" href="#">회원가입</a></li>

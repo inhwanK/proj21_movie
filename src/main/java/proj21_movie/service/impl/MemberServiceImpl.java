@@ -26,9 +26,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member getMember(Member member) {
-		log.debug("service - getMember() > " + member);
-		return mapper.selectMemberByNo(member);
+	public Member getMember(String memEmail) {
+		log.debug("service - getMember() > " + memEmail);
+		return mapper.selectMemberByEmail(memEmail);
 	}
 
 	@Override
@@ -44,9 +44,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int removeMember(Member member) {
-		log.debug("service - removeMember() > " + member);
-		return mapper.deleteMember(member);
+	public int removeMember(String memEmail) {
+		log.debug("service - removeMember() > " + memEmail);
+		return mapper.deleteMember(memEmail);
 	}
 
 }
