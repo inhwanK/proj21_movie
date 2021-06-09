@@ -13,6 +13,12 @@
 		 where mem_no = #{memNo}
 	</select>
 	
+	<select id="selectMemberByEmail" resultType="Member">
+		select mem_no, mem_email, mem_passwd, mem_birthdate, mem_name, mem_phone
+		  from member
+		 where mem_email = #{memEmail}
+	</select>
+	
 	<insert id="insertMember">
 		insert into member values 
 		(null, #{memEmail}, #{memPasswd}, #{memBirthdate}, #{memName}, #{memPhone})
@@ -34,7 +40,7 @@
 	<delete id="deleteMember">
 		delete
 		  from member
-		 where mem_no = #{memNo}
+		 where mem_email = #{memEmail}
 	</delete>
 	
 

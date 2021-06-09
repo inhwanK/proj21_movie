@@ -1,12 +1,49 @@
+<%@ page import="java.time.LocalDateTime"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
 <link rel="stylesheet" href="css/join.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script>
+$(function(){
+    var contextPath = "<%= request.getContextPath()%>";
+
+    $('#cancel').on("click", function(e){
+        window.location.href = contextPath + "/memberlist";
+    });
+
+    $('#new').on("click", function(e){
+        var newMember = {  email: $('#memEmail').val(), password: $('#memPasswd').val(), Birthday: $('#memBirthdate').val(), 
+        		name: $('#memBirthdate').val(), name: $('#memName').val(), name: $('#memPhone').val() };
+        alert("data > " + newMember.email );
+        $.ajax({
+            url         : contextPath + "/api/login/",
+            type        : "POST",
+            contentType : "application/json; charset=utf-8",
+            datatype    : "json",
+            cache       : false,
+            data        : JSON.stringify(newMember),
+            success     : function(res) {
+                alert(res);
+                window.location.href = contextPath + "/memberlist";
+            },
+            error       : function(request, status, error){
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                window.location.href = contextPath + "/memberlist";
+            }
+        }); 
+    });
+});
+
+</script>
 </head>
 <body>
 </head>
@@ -83,34 +120,34 @@
 					<li>
 						<span>아이디 </span> 
 						<br> 
-						<input type="text" placeholder="아이디를 입력하세요" class='box' /></li>
+						<input type="email" placeholder="아이디를 입력하세요" class='box' id="email"/></li>
 					<li>
 						<span>패스워드 </span> 
 						<br> 
-						<input type="password" placeholder="패스워드를 입력하세요" class='box' />
+						<input type="password" placeholder="패스워드를 입력하세요" class='box' id="password" />
 					</li>
 					<li>
 						<span>패스워드 확인 </span> 
 						<br> 
-						<input type="password" placeholder="다시 패스워드를 입력하세요" class='box' />
+						<input type="password" placeholder="다시 패스워드를 입력하세요" class='box' id="confirmPassword" />
 					</li>
 					<li>
 						<span>이름 </span> 
 						<br> 
-						<input type="text" placeholder="이름을 입력하세요" class='box' /></li>
+						<input type="text" placeholder="이름을 입력하세요" class='box' id="name" /></li>
 					<li>
 					<li>
 						<span>생년월일 </span> 
 						<br> 
-						<input type="date" placeholder="생년월일을 입력하세요." class='box' />
+						<input type="date" placeholder="생년월일을 입력하세요." class='box' id="birthday" />
 					</li>
 					<li>
 						<span>휴대폰번호 </span> 
 						<br> 
-						<input type="text" placeholder="휴대폰번호를 입력하세요" class='box' />
+						<input type="text" placeholder="휴대폰번호를 입력하세요" class='box' id="phone" />
 					</li>
 					
-					<li><button>가입하기</button></li>
+					<li><button id="new">가입하기</button></li>
 				</ul>
 			</div>
 		</form>
