@@ -6,6 +6,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<setting name="autoMappingBehavior" value="FULL"/>
 	</settings>
 	
 	<typeAliases>

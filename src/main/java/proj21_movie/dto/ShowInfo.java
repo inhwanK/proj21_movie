@@ -4,13 +4,31 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class ShowInfo {
-	private int shwNo;				// 상영정보 번호
-	private Theater thtNo;			// 극장 번호
-	private Cinema cinNo;			// 상영관 번호
-	private Movie movNo;			// 영화 번호
-	private LocalDate shwDate;		// 상영일
-	private LocalTime shwStarttime;	// 시작 시간
-	private LocalTime shwEndtime;	// 종료 시간
+	private int shwNo; // 상영정보 번호
+	private Theater thtNo; // 극장 번호
+	private Cinema cinNo; // 상영관 번호
+	private Movie movNo; // 영화 번호
+	private LocalDate shwDate; // 상영일
+	private LocalTime shwStarttime; // 시작 시간
+	private LocalTime shwEndtime; // 종료 시간
+
+	public ShowInfo() {
+	}
+
+	public ShowInfo(int shwNo) {
+		this.shwNo = shwNo;
+	}
+
+	public ShowInfo(int shwNo, Theater thtNo, Cinema cinNo, Movie movNo, LocalDate shwDate, LocalTime shwStarttime,
+			LocalTime shwEndtime) {
+		this.shwNo = shwNo;
+		this.thtNo = thtNo;
+		this.cinNo = cinNo;
+		this.movNo = movNo;
+		this.shwDate = shwDate;
+		this.shwStarttime = shwStarttime;
+		this.shwEndtime = shwEndtime;
+	}
 
 	public int getShwNo() {
 		return shwNo;

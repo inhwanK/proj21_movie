@@ -27,7 +27,7 @@ public class MovieServiceImpl implements MovieService {
 
 	@Override
 	public Movie getMovie(Movie movie) {
-		log.debug("service - getLists() > " + movie);
+		log.debug("service - getMovie() > " + movie);
 		return mapper.selectMovieByNo(movie);
 	}
 
