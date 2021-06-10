@@ -308,24 +308,24 @@ h2.title {
 	background-repeat: no-repeat
 }
 
-.age-all {
+.age-0 {
 	background-image:
-		url(../../images/theater/icon/age-all.png)
+		url(../../images/movie/icon/age-0.png)
 }
 
 .age-12 {
 	background-image:
-		url(../../images/theater/icon/age-12.png)
+		url(../../images/movie/icon/age-12.png)
 }
 
 .age-15 {
 	background-image:
-		url(../../images/theater/icon/age-15.png)
+		url(../../images/movie/icon/age-15.png)
 }
 
 .age-19 {
 	background-image:
-		url(../../images/theater/icon/age-19.png)
+		url(../../images/movie/icon/age-19.png)
 }
 
 .rate-date {

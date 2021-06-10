@@ -25,6 +25,116 @@
 		});
 	});
 	</script>
+	<script>
+	$(function(){
+		function getFormatDate(date){
+			var subDateArray = date.substr(0,10).split('-');
+			var newDateForm = subDateArray[0] + "." + subDateArray[1] + "." + subDateArray[2];
+			return newDateForm; 
+		}
+		
+		/* box-office-list (박스오피스 리스트 - 영화번호 ~12번 까지) */
+		var contextPath = "${contextPath}";
+		$.get(contextPath + "/api/movies",
+			function(json) {
+				var dataLength = json.length;
+				if (dataLength >= 1) {
+					var list = "";
+					for (i = 0; i < dataLength - 8; i++) {		// 임시 지정 - 등록된 총 20영화에서 -8한 12번 까지의 영화만 보여줌 (box_office 이미지)
+						list += "<li>";
+						/* movie-list-info */
+						list += "<div class='movie-list-info'>";
+						list += "<p class='rank'>" + json[i].movNo +  "</p>";	
+						list += "<a href='${contextPath}/api/movies/" + json[i].movNo + "'>"
+						list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
+							+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
+						list += "</div>";
+						/* // movie-list-info */
+						
+						/* title-area */
+						list += "<div class='title-area'>";
+						list += "<p class='movie-grade age-" + json[i].movGrade + "'</p>";	
+						list += "<p class='title' title='" + json[i].movTitle + "'>" + json[i].movTitle + "</p>";	
+						list += "</div>";
+						/* // title-area */
+						
+						/* rate-date */
+						list += "<div class='rate-date'>";
+						list += "<span class='rate'>" + "예매율 26.3%" + "</span>";	/* 예매율 DB에 없음 - 임시 부여 */
+						list += "<span class='date'>개봉일 " + getFormatDate(json[i].movOpendate) + "</span>";						
+						list += "</div>";
+						/* // rate-date */
+						
+						/* btn-util */
+						list += "<div class='btn-util'>";
+						/* btn-like */
+						list += "<button type='button' class='btn-like'>";
+						list += "<span class='like'></span>";
+						list += "<span class='like-quantity'>" + "1.1k" + "</span></button>";	/* 좋아요 수 미구현 - 임시 부여 */						
+						/* movie-reserve */
+						list += "<div class='movie-reserve'>";
+						list += "<a href='#' title='영화 예매하기'>예매</a></div>"
+						list += "</div>";
+						/* // btn-util */
+												
+						list += "</li>";	
+					}
+					$(".box-office-list ul").append(list);
+				}
+			});			
+		/* // box-office-list (박스오피스 리스트) */
+		
+		/* commingsoon-list (상영예정작 리스트 - 영화번호 13번부터~) */
+		var contextPath = "${contextPath}";
+		$.get(contextPath + "/api/movies",
+			function(json) {
+				var dataLength = json.length;
+				if (dataLength >= 1) {
+					var list = "";
+					for (i = 12; i < dataLength; i++) {		// 임시 지정 - 등록된 총 20영화에서 12번 부터의 영화만 보여줌 (commingsoon 이미지)
+						list += "<li>";
+						/* movie-list-info */
+						list += "<div class='movie-list-info'>";
+						list += "<a href='${contextPath}/api/movies/" + json[i].movNo + "'>"
+						list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
+							+ " 상세보기' src='${contextPath}/resources/images/movie/commingsoon/" + json[i].movPoster + "'></a>" 
+						list += "</div>";
+						/* // movie-list-info */
+						
+						/* title-area */
+						list += "<div class='title-area'>";
+						list += "<p class='movie-grade age-" + json[i].movGrade + "'</p>";	
+						list += "<p class='title' title='" + json[i].movTitle + "'>" + json[i].movTitle + "</p>";	
+						list += "</div>";
+						/* // title-area */
+						
+						/* rate-date */
+						list += "<div class='rate-date'>";
+						list += "<span class='rate'>" + "예매율 0%" + "</span>";	/* 예매율 DB에 없음 - 임시 부여 */
+						list += "<span class='date'>개봉일 " + getFormatDate(json[i].movOpendate) + "</span>";						
+						list += "</div>";
+						/* // rate-date */
+						
+						/* btn-util */
+						list += "<div class='btn-util'>";
+						/* btn-like */
+						list += "<button type='button' class='btn-like'>";
+						list += "<span class='like'></span>";
+						list += "<span class='like-quantity'>" + "1.1k" + "</span></button>";	/* 좋아요 수 미구현 - 임시 부여 */						
+						/* movie-reserve */
+						list += "<div class='movie-reserve'>";
+						list += "<a href='#' title='영화 예매하기'>예매</a></div>"
+						list += "</div>";
+						/* // btn-util */
+												
+						list += "</li>";	
+					}
+					$(".commingsoon-list ul").append(list);
+				}
+			});	
+			/* // commingsoon-list (상영예정작 리스트) */
+	});	
+	</script>	
 </head>
 <body>	
 	<header>
@@ -43,7 +153,7 @@
 		<ul>
 			<li><a href="">영화</a></li>
 			<li><a href="#">예매</a></li>
-			<li><a href="theater">극장</a></li>
+			<li><a href="theaterlist">극장</a></li>
 			<li><a href="#">이벤트</a></li>
 			<li><a href="#">고객센터</a></li>
 		</ul>
@@ -78,11 +188,12 @@
 	    					<!-- 박스오피스 리스트 -->
 							<div class="box-office-list active" >
 								<ul>
-									<li>
+									<%-- <li>
 										<div class="movie-list-info">
 											<p class="rank">1</p>		
-											<a href="movie/movieDetail/1">
-												<img alt="크루엘라" src="${contextPath}/resources/images/movie/box-office/Cruella.jpg">
+											<a href="movielist/movieDetail/1">
+												<img alt="크루엘라" title="크루엘라 상세보기" 
+												src="${contextPath}/resources/images/movie/box-office/Cruella.jpg">
 											</a>										
 										</div>
 										<div class="title-area">
@@ -102,483 +213,23 @@
 												<a href="#" title="영화 예매하기">예매</a>
 											</div>
 										</div>
-									</li>									
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">2</p>
-											<a href="#">
-												<img alt="캐시트럭" src="${contextPath}/resources/images/movie/box-office/Wrath of Man.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-19"></p>
-											<p class="title" title="캐시트럭">캐시트럭</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 18.1%</span>
-											<span class="date">개봉일 2021.06.09</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">255</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">3</p>
-											<a href="#">
-												<img alt=컨저링3 src="${contextPath}/resources/images/movie/box-office/Conjuring3.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-15"></p>
-											<p class="title" title="컨저링3: 악마가 시켰다">컨저링3: 악마가 시켰다</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 17.1%</span>
-											<span class="date">개봉일 2021.06.03</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">294</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">4</p>
-											<a href="#">
-												<img alt="분노의 질주" src="${contextPath}/resources/images/movie/box-office/Fast & Furious.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-12"></p>
-											<p class="title" title="분노의 질주 : 더 얼티메이트">분노의 질주 : 더 얼티메이트</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 10.7%</span>
-											<span class="date">개봉일 2021.05.19</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">1k</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li>
-									<!-- 1줄 -->
-									
-									<!-- 2줄 -->
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">5</p>
-											<a href="#">
-												<img alt="미스피츠" src="${contextPath}/resources/images/movie/box-office/misfits.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-15"></p>
-											<p class="title" title="미스피츠">미스피츠</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 5.8%</span>
-											<span class="date">개봉일 2021.06.03</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">46</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">6</p>
-											<a href="#">
-												<img alt="극장판 귀멸의 칼날" src="${contextPath}/resources/images/movie/box-office/Demon Slayer.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-15"></p>
-											<p class="title" title="극장판 귀멸의 칼날: 무한열차편">극장판 귀멸의 칼날: 무한열차편</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 3.7%</span>
-											<span class="date">개봉일 2021.01.27</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">7.6k</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">7</p>
-											<a href="#">
-												<img alt="뱅드림! 로젤리아 에피소드Ⅰ: 약속" src="${contextPath}/resources/images/movie//box-office/BanG Dream!.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-all"></p>
-											<p class="title" title="뱅드림! 로젤리아 에피소드Ⅰ: 약속">뱅드림! 로젤리아 에피소드Ⅰ: 약속</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 3.4%</span>
-											<span class="date">개봉일 2021.06.03</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">1.1k</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">8</p>
-											<a href="#">
-												<img alt="프로세서 앤 매드맨" src="${contextPath}/resources/images/movie/box-office/The Professor and the Madman.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-15"></p>
-											<p class="title" title="프로세서 앤 매드맨">프로세서 앤 매드맨</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 2.3%</span>
-											<span class="date">개봉일 2021.06.02</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">106</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li>
-									<!-- 2줄 -->
-									
-									<!-- 3줄 -->	
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">9</p>
-											<a href="#">
-												<img alt="낫아웃" src="${contextPath}/resources/images/movie/box-office/NOT OUT.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-15"></p>
-											<p class="title" title="낫아웃">낫아웃</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 2.1%</span>
-											<span class="date">개봉일 2021.06.03</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">20</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">10</p>
-											<a href="#">
-												<img alt="2021 빈 필하모닉 여름음악회" src="${contextPath}/resources/images/movie/box-office/Vienna Philharmonic 2021.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-all"></p>
-											<p class="title" title="2021 빈 필하모닉 여름음악회">2021 빈 필하모닉 여름음악회</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 1.8%</span>
-											<span class="date">개봉일 2021.06.19</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">82</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">11</p>
-											<a href="#">
-												<img alt="파이프라인" src="${contextPath}/resources/images/movie/box-office/Pipeline.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-12"></p>
-											<p class="title" title="파이프라인">파이프라인</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 1.3%</span>
-											<span class="date">개봉일 2021.05.26</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">260</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">12</p>
-											<a href="#">
-												<img alt="보이저스" src="${contextPath}/resources/images/movie/box-office/Voyagers.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-15"></p>
-											<p class="title" title="보이저스">보이저스</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 0.7%</span>
-											<span class="date">개봉일 2021.05.26</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">195</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li>
-									<!-- 3줄 -->									
+									</li> --%>															
 								</ul>		
 							</div>
 							
 							<!-- 상영예정작 리스트 -->
 							<div class="commingsoon-list">
 								<ul>
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">1</p>		
+									<%-- <li>
+										<div class="movie-list-info">	
 											<a href="#">
-												<img alt="쿠오바디스,아이다" src="${contextPath}/resources/images/movie/commingsoon/Quo vadis, Aida.jpg">
+												<img alt="여고괴담 여섯번째 이야기 : 모교" title="여고괴담 여섯번째 이야기 : 모교 상세보기" 
+												src="${contextPath}/resources/images/movie/commingsoon/Quo vadis, Aida.jpg">
 											</a>										
 										</div>
 										<div class="title-area">
 											<p class="movie-grade age-15"></p>
-											<p class="title" title="쿠오바디스,아이다">쿠오바디스,아이다</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 0%</span>
-											<span class="date">개봉일 2021.05</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">60</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li>									
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">2</p>
-											<a href="#">
-												<img alt="캐시트럭" src="${contextPath}/resources/images/movie/commingsoon/Wrath of Man.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-19"></p>
-											<p class="title" title="캐시트럭">캐시트럭</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 21.9%</span>
-											<span class="date">개봉일 2021.06.29</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">258</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">3</p>
-											<a href="#">
-												<img alt="실크 로드" src="${contextPath}/resources/images/movie/commingsoon/Silk Road.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-15"></p>
-											<p class="title" title="실크 로드">실크 로드</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 0%</span>
-											<span class="date">개봉일 2021.06.29</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">40</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">4</p>
-											<a href="#">
-												<img alt="화이트 온 화이트" src="${contextPath}/resources/images/movie/commingsoon/White on White.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-12"></p>
-											<p class="title" title="화이트 온 화이트">화이트 온 화이트</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 0%</span>
-											<span class="date">개봉일 2021.06.10</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">20</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li>
-									<!-- 1줄 -->
-									
-									<!-- 2줄 -->
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">5</p>
-											<a href="#">
-												<img alt="강호아녀" src="${contextPath}/resources/images/movie/commingsoon/Ash Is Purest White.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-15"></p>
-											<p class="title" title="강호아녀">강호아녀</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 0%</span>
-											<span class="date">개봉일 2021.06.10</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">20</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="상영예정">상영예정</a>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">6</p>
-											<a href="#">
-												<img alt="플래시백" src="${contextPath}/resources/images/movie/commingsoon/Flashback.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-15"></p>
-											<p class="title" title="플래시백">플래시백</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 0%</span>
-											<span class="date">개봉일 2021.06.10</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">62</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">7</p>
-											<a href="#">
-												<img alt="콰이어트 플레이스 2" src="${contextPath}/resources/images/movie/commingsoon/A Quiet Place Part II.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-15"></p>
-											<p class="title" title="콰이어트 플레이스 2">콰이어트 플레이스 2</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 0%</span>
-											<span class="date">개봉일 2021.06.16</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">586</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="상영예정">상영예정</a>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="movie-list-info">
-											<p class="rank">8</p>
-											<a href="#">
-												<img alt="그 여름, 가장 차가웠던" src="${contextPath}/resources/images/movie/commingsoon/Summer is the coldest season.jpg">
-											</a>
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-12"></p>
-											<p class="title" title="그 여름, 가장 차가웠던">그 여름, 가장 차가웠던</p>
+											<p class="title" title="여고괴담 여섯번째 이야기 : 모교">여고괴담 여섯번째 이야기 : 모교</p>
 										</div>
 										<div class="rate-date">
 											<span class="rate">예매율 0%</span>
@@ -587,14 +238,13 @@
 										<div class="btn-util">
 											<button type="button" class="btn-like">
 												<span class="like"></span>
-												<span class="like-quantity">40</span>
+												<span class="like-quantity">68</span>
 											</button>
 											<div class="movie-reserve">
-												<a href="#" title="상영예정">상영예정</a>
+												<a href="#" title="영화 예매하기">예매</a>
 											</div>
 										</div>
-									</li>
-									<!-- 2줄 -->								
+									</li> --%>															
 								</ul>
 							</div>
 						</div>

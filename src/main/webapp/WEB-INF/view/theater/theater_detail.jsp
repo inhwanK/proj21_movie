@@ -41,9 +41,9 @@
 	
 	<nav>
 		<ul>
-			<li><a href="${contextPath}/movie">영화</a></li>
+			<li><a href="${contextPath}/movielist">영화</a></li>
 			<li><a href="#">예매</a></li>
-			<li><a href="${contextPath}/theater">극장</a></li>
+			<li><a href="${contextPath}/theaterlist">극장</a></li>
 			<li><a href="#">이벤트</a></li>
 			<li><a href="#">고객센터</a></li>
 		</ul>
@@ -54,8 +54,8 @@
 	    	<div class="page-util">	
 				<div class="location">
 	    			<span>Home</span>
-	    			<a href="${contextPath}/theater" title="극장 페이지로 이동">극장</a>
-	    			<a href="${contextPath}/theater" title="전체극장 페이지로 이동">전체극장</a>
+	    			<a href="${contextPath}/theaterlist" title="극장 페이지로 이동">극장</a>
+	    			<a href="${contextPath}/theaterlist" title="전체극장 페이지로 이동">전체극장</a>
 	    			<a href="" title="극장정보 페이지로 이동">극장정보</a>
 	    		</div>
 	    	</div>
@@ -356,7 +356,7 @@
 										<!-- theater-title -->
 										<div class="theater-title">
 											<p class="movie-grade age-12">
-												<a href="../../movie/movieDetail/1" title="크루엘라 상세보기">크루엘라</a>
+												<a href="../../movielist/movieDetail/1" title="크루엘라 상세보기">크루엘라</a>
 											</p>
 											<p class="information" style="float: right;">
 												<span style="color: #01738b;">상영중</span>/상영시간 134분

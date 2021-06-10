@@ -9,7 +9,24 @@
 	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
 	<link rel="stylesheet" href="${contextPath}/resources/css/theater/theater_list.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
+	<script type="text/javascript">
+		$(function(){
+			var contextPath = "${contextPath}";
+			$.get(contextPath + "/api/theaters",
+				function(json) {
+					var dataLength = json.length;
+					if (dataLength >= 1) {
+						var list = "";
+						for (i = 0; i < dataLength; i++) {
+							list += "<li>";
+							list += "<a href='${contextPath}/api/theaters/" + json[i].thtNo 
+								+ "' title='" + json[i].thtName + " 상세보기'>" + json[i].thtName + "</a>"; 
+							list += "</li>";						
+						}
+						$(".theater-list ul").append(list);
+					}
+				});		
+		});	
 	</script>
 </head>
 <body>	
@@ -27,7 +44,7 @@
 	
 	<nav>
 		<ul>
-			<li><a href="movie">영화</a></li>
+			<li><a href="movielist">영화</a></li>
 			<li><a href="#">예매</a></li>
 			<li><a href="">극장</a></li>
 			<li><a href="#">이벤트</a></li>
@@ -56,16 +73,7 @@
 									<li class="active">
 										<button type="button" class="sel-city">대구</button>
 										<div class="theater-list">
-											<ul>		
-												<li>												
-													<a href="#" title="대구이시아 상세보기">대구이시아</a>												
-												</li>																																								
-												<li>												
-													<a href="theater/theaterDetail/1" title="대구신세계&#40;동대구&#41; 상세보기">대구신세계&#40;동대구&#41;</a>												
-												</li>																														
-												<li >											
-													<a href="#" title="북대구&#40;칠곡&#41; 상세보기">북대구&#40;칠곡&#41;</a>												
-												</li>																				
+											<ul>																					
 											</ul>
 										</div>
 									</li>

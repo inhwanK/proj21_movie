@@ -35,9 +35,9 @@
 
 	<nav>
 		<ul>
-			<li><a href="${contextPath}/movie">영화</a></li>
+			<li><a href="${contextPath}/movielist">영화</a></li>
 			<li><a href="#">예매</a></li>
-			<li><a href="${contextPath}/theater">극장</a></li>
+			<li><a href="${contextPath}/theaterlist">극장</a></li>
 			<li><a href="#">이벤트</a></li>
 			<li><a href="#">고객센터</a></li>
 		</ul>
