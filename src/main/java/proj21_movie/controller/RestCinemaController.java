@@ -12,30 +12,30 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import proj21_movie.dto.Theater;
-import proj21_movie.service.TheaterService;
+import proj21_movie.dto.Cinema;
+import proj21_movie.service.CinemaService;
 
 
 @RestController
 @RequestMapping("/api")
-public class RestTheaterController {
+public class RestCinemaController {
 	
 	@Autowired
-	private TheaterService service;
+	private CinemaService service;
 	
-	@GetMapping("/theaters")
-	public ResponseEntity<Object> theaters () {
-//		System.out.println("theaters()");
+	@GetMapping("/cinemas")
+	public ResponseEntity<Object> cinemas () {
+		System.out.println("cinemas()");
 		return ResponseEntity.ok(service.getLists());
 	}
 	
-	@GetMapping("/theaters/{thtNo}")
-	public ResponseEntity<Object> theater (@PathVariable int thtNo, HttpServletResponse response) throws IOException {
-		Theater theater = service.getTheater(thtNo);
-		if (theater == null) {
+	@GetMapping("/cinemas/{cinNo}")
+	public ResponseEntity<Object> cinema (@PathVariable int cinNo, HttpServletResponse response) throws IOException {
+		Cinema cinema = service.getCinema(new Cinema(cinNo));
+		if (cinema == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
-		return ResponseEntity.status(HttpStatus.OK).body(theater);
+		return ResponseEntity.status(HttpStatus.OK).body(cinema);
 	}
 
 }
