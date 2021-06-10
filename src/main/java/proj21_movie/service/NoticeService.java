@@ -10,7 +10,10 @@ import proj21_movie.dto.Notice;
 public interface NoticeService {
 	
 	List<Notice> showNoticeList();
+	List<Notice> showNoticeListByPage(int selectPage);
 	Notice showNoticeDetail(int notNo);
+	int getTotalNotice();
+	
 	
 	// 제목 검색. 아직 구현안함.
 	List<Notice> showNoticeByTitle(String notTitle);
