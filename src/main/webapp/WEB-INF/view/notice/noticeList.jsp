@@ -3,6 +3,7 @@
 	<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="<%=request.getContextPath() %>" />
+<%-- <c:set var="pageNo" value="<%=request.getAttribute("pageNo") %>"/> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,46 +13,36 @@
 	$(function(){
 		function getFormatDate(date){
 			var subDateArray = date.substr(0,10).split('-');
-			var newDateForm = subDateArray[0] + "." + subDateArray[1] + "." + subDateArray[2];
-			return newDateForm; 
-		}
+			return subDateArray[0] + "." + subDateArray[1] + "." + subDateArray[2]; 
+		} // js 파일로 관리할 필요 있음.
 		
 		var contextPath = "${contextPath}";
-		$.get(contextPath+"/api/notice", function(json) {
+		var totalNotice = "${totalNotice}";
+		var page = Math.ceil(totalNotice/10);
+		var selectPage = "${selectPage}";
+		
+		$.get(contextPath+"/api/noticelist/"+ selectPage, function(json) {
 			
 			var dataLength = json.length;
 			if(dataLength >= 1){
 				var list = "";	
-				for(i = dataLength - 1 ; i > -1; i--){
+				for(i = 0 ; i < dataLength; i++){
 						list += "<tr>";
 						list += "<td>" + json[i].notNo + "</td>"; 
-						list += "<td><a href='${contextPath}/api/notice/" + json[i].notNo + "'>" + json[i].notTitle+  "</a></td>"; 
-						list += "<td>" + getFormatDate(json[i].notDate) + "</td>"; 
+						list += "<td><a href='${contextPath}/notice?notNo=" + json[i].notNo + "'>" + json[i].notTitle+  "</a></td>"; //보여주면 안될 것 같은 정보.
+						list += "<td>" + getFormatDate(json[i].notDate) + "</td>";
 						list += "<tr>"
 				}
 				$("tbody").append(list);
 			};
 			
-			var page = Math.ceil(dataLength/10); // 소숫점도 표현되니까 바로 ceil해줌.
+			var pageBtn = "";
 			
-			var pageNo = "";	
 			for(i = 1; i < page + 1; i++){
-					pageNo += "<a title="+ i +"페이지보기 href=\"#\" pagenum="+ i + ">" + i + "</a>";
+					pageBtn += "<a title="+ i +"페이지보기 href=\"javascript:void(0)\" pageNo="+ i + ">" + i + "</a>";
 			}
-			$("nav.pagination").append(pageNo);
-			$("nav.pagination").append(page);
+			$("nav.pagination").append(pageBtn);
 		});
-		/* 
-		$.get(contextPath+"/api/notice", function(json) {
-			var dataLength = json.length;
-			var page = (dataLength / 10) + 1; // 일단 +1 함. 원래는 나머지 계산해야함.
-			
-			var pageNo = "";	
-			for(i = 1; i < page + 1 ; i++){
-					pageNo += "<a title="+ i +"페이지보기 href=\"#\" pagenum="+ i + ">" + i + "</a>";
-			}
-			$("nav.pagination").append(pageNo);
-		}); */
 	});
 </script>
 <title>Insert title here</title>
@@ -275,11 +266,6 @@ article, aside, figcaption, figure, footer, header, main, nav, section {
 	<div id="contents">
 		<h2 class="tit">공지사항</h2>
 
-		<h3>
-		jquery 테스트용 태그<br> 
-		
-		</h3>
-
 		<!-- <div class="tab-block mb30">
 			<ul>
 				<li class="on tabBtn"><button type="button" class="btn tabBtn"
@@ -395,25 +381,19 @@ article, aside, figcaption, figure, footer, header, main, nav, section {
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<th><a href="#" class="moveBtn" data-no="10349"
-							title="공지사항 상세보기">글제목</a></th>
-						<td>날짜</td>
-					</tr>
+					
 				</tbody>
 			</table>
 		</div>
 
 		<!-- pagination -->
 		<nav class="pagination">
-			<strong class="active">1</strong> 
+			<!-- <strong class="active">1</strong> 
 			<a title="2페이지보기" href="javascript:void(0)" pagenum="2">2</a> 
-			
-			<!-- <a title="3페이지보기" href="javascript:void(0)" pagenum="3">3</a> 
-			<a title="10페이지보기" href="javascript:void(0)" pagenum="10">10</a>  -->
+			<a title="3페이지보기" href="javascript:void(0)" pagenum="3">3</a> 
+			<a title="10페이지보기" href="javascript:void(0)" pagenum="10">10</a>  
 			<a title="이후 10페이지 보기" href="javascript:void(0)" class="control next" pagenum="11">next</a>
-			<a title="마지막 페이지 보기" href="javascript:void(0)" class="control last"pagenum="565">last</a>
+			<a title="마지막 페이지 보기" href="javascript:void(0)" class="control last"pagenum="565">last</a> -->
 		</nav> 
 		
 		<!--// pagination -->

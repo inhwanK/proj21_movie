@@ -3,7 +3,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="<%=request.getContextPath() %>" />
-<%-- <c:set var="notNo" value="<% %>"/> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,16 +11,25 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 	$(function(){
+		function getFormatDate(date){
+			var subDateArray = date.substr(0,10).split('-');
+			return subDateArray[0] + "." + subDateArray[1] + "." + subDateArray[2]; 
+		} // js 파일로 관리할 필요 있음.
+		
 		var contextPath = "${contextPath}";
+		var notNo = "${notNo}";
 		$.ajax({
-			url: contextPath +"/api/notice/" + <%=request.getAttribute("notNo")%> ,
+			url: contextPath +"/api/notice/" + notNo,
 			method: "get",
 			dataType: "json"
 		})
 		.done(function(json){
-			var detail = "" + json.notTitle;
-			detail += <%=request.getAttribute("notNo")%>
-			$("h3").append(detail);
+			
+			var dateForm = getFormatDate(json.notDate);
+			
+			$("p.tit[title = '제목']").append(json.notTitle);
+			$("span.txt[title = '등록일']").append(dateForm);
+			$("div.cont[title = '내용']").append(json.notDetail);
 		})
 	});
 </script>
@@ -215,8 +223,7 @@ a.button {
 </style>
 </head>
 <body>
-	<h3>jquery 테스트용 태그<br> </h3>
-	
+
 	<div id="notice-detail-wrap">
 	<div id="contents">
 		<h2 class="tit">공지사항</h2>
@@ -224,27 +231,20 @@ a.button {
 		<div class="table-wrap">
 			<div class="board-view">
 				<div class="tit-area">
-					<p class="tit">[지점] [강동] 건물 내 지하주차장 이용 불가 안내</p>
+					<p class="tit" title="제목">
+					
+					</p>
 				</div>
 
 				<div class="info">
 					<p>
-						<span class="tit">영화관</span> <span class="txt">강동</span>
-					</p>
-					<p>
-						<span class="tit">구분</span> <span class="txt">공지</span>
-					</p>
-					<p>
-						<span class="tit">등록일</span> <span class="txt">2021.06.03</span>
+						<span class="tit">등록일</span> 
+						<span class="txt" title="등록일"></span>
 					</p>
 				</div>
 
-				<div class="cont">
-					안녕하세요.<br> 메가박스 강동지점입니다.<br> <br> 지하주차장 내부 공사로 인해<br>
-					건물 내 주차가 불가하오니 영화관 이용에 참고 부탁드립니다.<br> <br> 1. 일시 :
-					2021.06.07(월) ~ 종료 시 까지<br> 2. 내용&nbsp;: 지하주차장 지하(1~2층) 내부 공사로
-					이용 불가<br> <br> 이용에 불편을 드린 점 진심으로 사과의 말씀 드리며, 고객 여러분의
-					양해&nbsp;부탁드립니다.<br> 감사합니다.
+				<div class="cont" title="내용">
+				
 				</div>
 			</div>
 		</div>
@@ -252,18 +252,18 @@ a.button {
 		<div class="prev-next">
 			<div class="line prev">
 				<p class="tit">이전</p>
-				<p class="link">이전글이 없습니다.</p>
+				<p class="link">이전글 제목</p> 
+				<!-- 글 존재하면 a태그 존재하지 않으면 p 태그  -->
 			</div>
 			<div class="line next">
 				<p class="tit">다음</p>
 
-				<a href="#" class="link moveBtn" data-no="10348"
-					title="[전대] 재오픈 안내 ">[전대] 재오픈 안내 </a>
+				<a href="#" class="link moveBtn" data-no="10348" title="">다음글 제목 </a>
 
 			</div>
 		</div>
 		<div class="btn-group pt40">
-			<a href="#" class="button large listBtn" title="목록">목록</a>
+			<a href="${contextPath}/noticelist" class="button large listBtn" title="">목록</a>
 		</div>
 	</div>
 	</div>
