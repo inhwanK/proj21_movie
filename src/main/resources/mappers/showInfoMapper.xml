@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="proj21_movie.mapper.ShowInfoMapper">
+	
+	<resultMap type="ShowInfo" id="resShowInfo">
+		<id column="shw_no" property="shwNo" />
+		<result column="shw_date" property="shwDate" />
+		<result column="shw_starttime" property="shwStarttime" jdbcType="TIMESTAMP"/>
+		<result column="shw_endtime" property="shwEndtime" jdbcType="TIMESTAMP"/>
+		<association property="thtNo" javaType="Theater"></association>
+		<association property="cinNo" javaType="Cinema"></association>
+		<association property="movNo" javaType="Movie"></association>
+	</resultMap>
+	
+	<select id="selectShowInfoAll" resultMap="resShowInfo">
+		select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, mov_no, mov_title
+		from vw_full_showinfo
+	</select>
+	
+	<select id="selectShowInfoByNo" resultMap="resShowInfo">
+		select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, mov_no, mov_title
+		from vw_full_showinfo
+		where shw_no = #{shwNo}
+	</select>
+	
+	<insert id="insertShowInfo">
+		insert into showinfo values
+		(null, #{thtNo.thtNo}, #{cinNo.cinNo}, #{movNo.movNo}, #{shwDate}, #{shwStarttime}, #{shwEndtime})
+		<selectKey keyProperty="shwNo" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="updateShowInfo">
+		update showinfo 
+		set tht_no = #{thtNo.thtNo}, 
+			cin_no = #{cinNo.cinNo}, 
+			mov_no = #{movNo.movNo}, 
+			shw_date = #{shwDate}, 
+			shw_starttime = #{shwStarttime}, 
+			shw_endtime = #{shwEndtime} 
+		where shw_no = #{shwNo}
+	</update>
+	
+	<delete id="deleteShowInfo">
+		delete from showinfo 
+		where shw_no = #{shwNo}
+	</delete>
+	
+</mapper>

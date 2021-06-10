@@ -35,7 +35,7 @@ import proj21_movie.service.MovieService;
 
 @RestController
 @RequestMapping("/api")
-public class RestMovieController {
+public class RestMovieManagerController {
 
 	@Autowired
 	private MovieService service;
@@ -68,6 +68,7 @@ public class RestMovieController {
 		}
 	}
 	
+	// 업로드 파일 처리
 	@PostMapping(value="/uploadAjaxAction", produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<AttachImage>> uploadAjaxActionPOST(MultipartFile[] uploadFile, HttpServletRequest request) {
 		String upload = request.getSession().getServletContext().getRealPath("/").concat("resources");

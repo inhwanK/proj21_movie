@@ -113,14 +113,12 @@
       </li>
       <li><a href="${contextPath }/main">HOME</a></li>
       <li><a href="${contextPath }/movieManager">영화 관리</a></li>
-      <li><a href="#">예매 관리</a></li>
-      <li><a href="#">상영시간 관리</a></li>
-      <li><a href="#">회원 관리</a></li>
-      <li><a href="#">쿠폰 관리</a></li>
-      <li><a href="#">매출 조회</a></li>
-      <li><a href="#">공지사항</a></li>
-      <li><a href="#">문의사항</a></li>
-      <li><a href="#">이벤트 관리</a></li>
+      <li><a href="${contextPath }/reserveManager">예매 관리</a></li>
+      <li><a href="${contextPath }/showInfoManager">상영시간 관리</a></li>
+      <li><a href="${contextPath }/memberManager">회원 관리</a></li>
+      <li><a href="${contextPath }/salesManager">매출 조회</a></li>
+      <li><a href="${contextPath }/noticeManager">공지사항</a></li>
+      <li><a href="${contextPath }/inquiryManager">문의사항</a></li>
     </ul>
   </div>
   <!-- /사이드바 -->
