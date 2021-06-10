@@ -31,4 +31,10 @@ public class NoticeRestController {
 		Notice notice = service.showNoticeDetail(notNo);
 		return ResponseEntity.status(HttpStatus.OK).body(notice);
 	}
+	
+	@GetMapping("/noticelist/{selectPage}")
+	public ResponseEntity<Object> getNoticeByPage(@PathVariable("selectPage") int selectPage) {
+		List<Notice> listNotice = service.showNoticeListByPage(selectPage); // 범위 지정해야함.
+		return ResponseEntity.status(HttpStatus.OK).body(listNotice);
+	}
 }

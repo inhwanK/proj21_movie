@@ -27,6 +27,10 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
+	public List<Notice> showNoticeListByPage(int selectPage) {
+		return mapper.selectNoticeByPage(selectPage);
+	}
+	@Override
 	public List<Notice> showNoticeByTitle(String notTitle) {
 		// TODO Auto-generated method stub
 		return null;
@@ -49,5 +53,12 @@ public class NoticeServiceImpl implements NoticeService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public int getTotalNotice() {
+		return mapper.countNotice();
+	}
+
+	
 	
 }

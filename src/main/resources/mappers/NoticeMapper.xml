@@ -5,21 +5,30 @@
 	<resultMap type="Notice" id="noticeList">
 		<id column="not_no" property="notNo" />
 		<result column="not_title" property="notTitle" />
-		<result column="not_detail" property="notDetail" />
 		<result column="not_date" property="notDate" />
-		<result column="not_file" property="notFile" />
 	</resultMap>
 
-
+	
 	<select id="selectNoticeAll" resultMap="noticeList">
-		select not_no, not_title, not_detail, not_date, not_file 
+		select not_no, not_title, not_date
 		from notice;
 	</select>
 
+	<select id="selectNoticeByPage" resultMap="noticeList">
+		SELECT not_no, not_title, not_date 
+		FROM notice
+		where not_no between (select count(*) from notice) - ((#{selectPage}*10)-1) and (select count(*) from notice) - ((#{selectPage}-1)*10);
+	</select> <!-- 쿼리가 너무 비효율적임. service 파라미터로 넘길 수 있도록 해야함. -->
+	
 	<select id="selectNoticeByNo" resultType="Notice">
 		select not_no, not_title, not_detail, not_date, not_file 
 		from notice 
 		where not_no = #{notNo};
+	</select>
+	
+	<select id="countNotice" resultType="int">
+		select count(*)
+		from notice;
 	</select>
 	
 	<insert id="insertNotice" parameterType="Notice">

@@ -3,7 +3,9 @@ select user(), database();
 
 
 
-SELECT * FROM notice;
+SELECT * 
+FROM notice
+order by not_no desc limit 10;
 
 insert into notice(not_title,not_detail,not_date) values('테스트 공지','테스트 공지 내용',now());
 insert into notice(not_title,not_detail,not_date) values ('공지테스트 10개이상', '공지테스트 10 개 이상 내용', now());
@@ -20,3 +22,8 @@ alter table notice auto_increment = 1;
 set @count=0;
 update notice set not_no = @count:=@count+1;
 
+
+-- 쿼리 수정 필요.
+SELECT not_no, not_title, not_date 
+FROM notice
+where not_no between (select count(*) from notice) - ((10 * 2)-1) and (select count(*) from notice) - (10 * 1);

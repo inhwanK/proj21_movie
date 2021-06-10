@@ -27,9 +27,9 @@
 			
 			var dateForm = getFormatDate(json.notDate);
 			
-			$("p.tit[title = 'tit']").append(json.notTitle);
-			$("span.txt[title = 'regDate']").append(dateForm);
-			$("div.cont[title = 'contents']").append(json.notDetail);
+			$("p.tit[title = '제목']").append(json.notTitle);
+			$("span.txt[title = '등록일']").append(dateForm);
+			$("div.cont[title = '내용']").append(json.notDetail);
 		})
 	});
 </script>
@@ -231,7 +231,7 @@ a.button {
 		<div class="table-wrap">
 			<div class="board-view">
 				<div class="tit-area">
-					<p class="tit" title="tit">
+					<p class="tit" title="제목">
 					
 					</p>
 				</div>
@@ -239,11 +239,11 @@ a.button {
 				<div class="info">
 					<p>
 						<span class="tit">등록일</span> 
-						<span class="txt" title="regDate"></span>
+						<span class="txt" title="등록일"></span>
 					</p>
 				</div>
 
-				<div class="cont" title="contents">
+				<div class="cont" title="내용">
 				
 				</div>
 			</div>
@@ -252,17 +252,18 @@ a.button {
 		<div class="prev-next">
 			<div class="line prev">
 				<p class="tit">이전</p>
-				<p class="link">이전글이 없습니다.</p>
+				<p class="link">이전글 제목</p> 
+				<!-- 글 존재하면 a태그 존재하지 않으면 p 태그  -->
 			</div>
 			<div class="line next">
 				<p class="tit">다음</p>
 
-				<a href="#" class="link moveBtn" data-no="10348" title="[전대] 재오픈 안내 ">[전대] 재오픈 안내 </a>
+				<a href="#" class="link moveBtn" data-no="10348" title="">다음글 제목 </a>
 
 			</div>
 		</div>
 		<div class="btn-group pt40">
-			<a href="${contextPath}/noticelist" class="button large listBtn" title="목록">목록</a>
+			<a href="${contextPath}/noticelist" class="button large listBtn" title="">목록</a>
 		</div>
 	</div>
 	</div>
