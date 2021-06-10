@@ -40,7 +40,7 @@ public class MvcConfig implements WebMvcConfigurer {
 	// 컨트롤러 구현 없는 경로 매핑
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/main").setViewName("/main");
+		registry.addViewController("/main").setViewName("main");
 		registry.addViewController("/movieManager").setViewName("/manager/movieList");
 		registry.addViewController("/registMovie").setViewName("/manager/registMovie");
 		registry.addViewController("/updateMovie").setViewName("/manager/updateMovie");
