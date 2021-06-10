@@ -25,8 +25,8 @@
 				for(i = dataLength - 1 ; i > -1; i--){
 						list += "<tr>";
 						list += "<td>" + json[i].notNo + "</td>"; 
-						list += "<td><a href='${contextPath}/api/notice/" + json[i].notNo + "'>" + json[i].notTitle+  "</a></td>"; 
-						list += "<td>" + getFormatDate(json[i].notDate) + "</td>"; 
+						list += "<td><a href='${contextPath}/notice?notNo=" + json[i].notNo + "'>" + json[i].notTitle+  "</a></td>"; //보여주면 안될 것 같은 정보.
+						list += "<td>" + getFormatDate(json[i].notDate) + "</td>";
 						list += "<tr>"
 				}
 				$("tbody").append(list);
