@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>회원정보 수정/탈퇴</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/checkpassword.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/mypage/checkpassword.css">
 </head>
 <body>
 	<header>

@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>회원정보 수정</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/myinfo.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/mypage/myinfo.css">
 </head>
 <body>
 	<header>

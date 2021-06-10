@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>한줄평 내역</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/comment.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/mypage/comment.css">
 </head>
 <body>
 	<header>

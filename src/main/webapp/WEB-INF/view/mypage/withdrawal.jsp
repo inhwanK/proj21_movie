@@ -5,8 +5,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>회원탈퇴</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/withdrawal.css">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/mypage/withdrawal.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet"> <!-- fontawesome 링크 -->
 </head>
 <body>
 	<header>

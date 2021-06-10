@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>예매내역</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reservelist.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/mypage/reservelist.css">
 </head>
 <body>
 	<header>

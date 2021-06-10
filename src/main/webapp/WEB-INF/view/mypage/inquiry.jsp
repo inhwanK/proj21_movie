@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>1대1 문의 내역</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/inquiry.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/mypage/inquiry.css">
 </head>
 <body>
 	<header>
