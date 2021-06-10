@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>바로예매</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/reserve.css">
 </head>
 <body>
 	<header>

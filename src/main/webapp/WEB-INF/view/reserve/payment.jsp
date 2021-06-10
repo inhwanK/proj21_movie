@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>결제</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/payment.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/payment.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
 		$(function(){

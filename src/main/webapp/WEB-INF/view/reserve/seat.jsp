@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>좌석 선택</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/seat.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/seat.css">
 </head>
 <body>
 	<header>
