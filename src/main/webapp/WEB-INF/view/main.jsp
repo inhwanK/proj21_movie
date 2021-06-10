@@ -1,121 +1,99 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-	body {
-		background-color: lightgray;
-	}
-	
-	header {
-		/* 		height: 170px;*/
-		text-align: center;
-	}
-	
-	section {
-		
-	}
-	
-	div.contentsBox {
-		text-align: center;
-		width:1280px;
-		margin: 0 auto;
-	}
-	
-	div.boxoffice {
-		margin: 170px 0 20px 0;
-		display: block;
-		/* background-color: black;  */
-	}
-	
-	div.main-movie-list {
-		 overflow: hidden;
-	     position: relative; 
-	    /* z-index: 3; */
-	    width: 1280px;
-	    height: auto;
-	    margin: 0 auto;
-	    /* padding: 0 0 80px 0; */
-		float:none;
-	}
-	div.search {
-	    /* position: relative;  */
-	    width: auto;
-	    height: 80px;
-	    margin: 40px auto;
-		float:none;
-		text-align: center;
-		background-color: white;
-	}
-	div.reserve-boxoffice{
-		color: white;
-		font-size: 20px;
-		font-weight: 800;
-	}
-	
-	div ul {
-		margin: 0px 0px;
-		padding: 0px 0px;
-	}
-	
-	div ul li {
- 		float:left;
-    	padding: 0;
-		list-style-type: none;
-		display: inline;
-		height: auto;
-		width: 400px; 
-	}
-	
-	button#btnBoxo {
-		margin: 0 auto;
-		padding: 0;
-		background-color: white;
-	}
-	
-	img {
-		height: auto;
-		width: 400px;
-	}
-
-</style>
+	<meta charset="UTF-8">
+	<title>메인화면</title>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/main.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-	<header> </header>
+	<header>
+		<img id="header_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci_bw.png">
+		<div>
+			<a href="#">로그인</a>
+			<a href="#">회원가입</a>
+			<a href="#">바로예매</a>
+		</div>
+
+	</header>
+	
+	<nav>
+		<ul>
+			<li class="nav"><a href="#">영화</a></li>
+			<li class="nav"><a href="#">예매</a></li>
+			<li class="nav"><a href="#">극장</a></li>
+			<li class="nav"><a href="#">이벤트</a></li>
+			<li class="nav"><a href="#">고객센터</a></li>
+			<li id="mypagebtn"><a href="#"><i class="far fa-user"></i></a></li>
+		</ul>
+	</nav>
+	
 	<section>
-		<div class="contentsBox">
+	<div id="slide">
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	
+	<div class="contentsBox">
 			<div class="boxoffice">
-				<button id="btnBoxo">박스오피스</button>
+				<h1>BOX OFFICE</h1>
 			</div>
+			
 			<div class="main-movie-list">
 				<ul>
 					<li>
 						<img src="https://img.megabox.co.kr/SharedImg/2021/05/12/J7vthd2FWEXswHD67dL2rQrMW4uhJQUF_420.jpg">
-						<div class="reserve-boxoffice"><h2><a href="#">예매</a></h2></div>
+						<div class="reserve-boxoffice">
+								<a href="#">예매</a>
+						</div>
 					</li>
-					<li style="margin-left: 40px;">
+					<li>
 						<img src="https://img.megabox.co.kr/SharedImg/2021/04/20/Pg9xMYRfMNouXwkqG2PeOGGqyUaQ9skl_420.jpg">
-						<div class="reserve-boxoffice"><h2><a href="#">예매</a></h2></div>
+						<div class="reserve-boxoffice">
+								<a href="#">예매</a>
+						</div>
 					</li>
-					<li style="margin-left: 40px;">
+					<li>
 						<img src="https://img.megabox.co.kr/SharedImg/2021/05/24/OPZRLPUEwlEliCfy6Li4gfhUFCJ52AE1_420.jpg">
-						<div class="reserve-boxoffice"><h2><a href="#">예매</a></h2></div>
+						<div class="reserve-boxoffice">
+								<a href="#">예매</a>
+						</div>
 					</li>
 				</ul>
 			</div>
+			
 			<div class="search">
 				<ul>
-					<li><h2>검색</h2></li>
+					<li id="search-box">
+						<input type="text" placeholder="영화제목" style="color:white">
+					</li>
 					<li><h2>상영시간표</h2></li>
-					<li><h2>박스오피스</h2></li>				
+					<li><h2>박스오피스</h2></li>
+					<li><h2>바로예매</h2></li>
 				</ul>
 
 			</div>
 		</div>
+	
+	
 	</section>
-	<footer> </footer>
+	
+	<footer>
+		<div id="content">
+			<img id="footer_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci_bw.png">
+			<div id="textarea">
+				<p>COPYRIGHT © BoxMovie, Inc. All rights reserved</p>
+				<p>대구광역시 서구 서대구로 7길2 (내당동 245-4번지 2층) ARS 053-555-1333</p>
+			</div>
+		</div>
+	</footer>
+	
+	
 </body>
 </html>
