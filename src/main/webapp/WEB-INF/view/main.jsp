@@ -23,9 +23,9 @@
 	
 	<nav>
 		<ul>
-			<li class="nav"><a href="${contextPath}/movie">영화</a></li>
+			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
 			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
-			<li class="nav"><a href="${contextPath}/theater">극장</a></li>
+			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
 			<li class="nav"><a href="#">이벤트</a></li>
 			<li class="nav"><a href="#">고객센터</a></li>
 			<li id="mypagebtn"><a href="#"><i class="far fa-user"></i></a></li>
