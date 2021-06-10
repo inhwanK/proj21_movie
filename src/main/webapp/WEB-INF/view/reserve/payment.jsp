@@ -7,13 +7,14 @@
 	<title>결제</title>
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/payment.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script type="text/javascript">
 		$(function(){
 			$(".title").click(function() {
 				$(this).addClass("active");
 				$(this).siblings(".title").removeClass("active");
 				
-				$(this).siblings(".desc").stop().slideUp(); // 그 전에 있는걸 일단 stop 시키고 slideup해야됨 << 안그러면 그 부분 안접히고 계속 열려있음
+				$(this).siblings(".desc").stop().slideUp();
 				$(this).next().stop().slideDown();
 				
 			})
@@ -33,11 +34,12 @@
 	
 	<nav>
 		<ul>
-			<li><a href="#">영화</a></li>
-			<li><a href="#">예매</a></li>
-			<li><a href="#">극장</a></li>
-			<li><a href="#">이벤트</a></li>
-			<li><a href="#">고객센터</a></li>
+			<li class="nav"><a href="#">영화</a></li>
+			<li class="nav"><a href="#">예매</a></li>
+			<li class="nav"><a href="#">극장</a></li>
+			<li class="nav"><a href="#">이벤트</a></li>
+			<li class="nav"><a href="#">고객센터</a></li>
+			<li id="mypagebtn"><a href="#"><i class="far fa-user"></i></a></li>
 		</ul>
 	</nav>
 	
@@ -96,13 +98,12 @@
 	</section>
 	
 	<footer>
-		<div>
-			<img id="footer_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
-			<p>
-			제1항의 해임건의는 국회재적의원 3분의 1 이상의 발의에 의하여 국회재적의원 과반수의 찬성이 있어야 한다.
-			<br>
-			재판의 전심절차로서 행정심판을 할 수 있다. 행정심판의 절차는 법률로 정하되, 사법절차가 준용되어야 한다.
-			</p>
+		<div id="content">
+			<img id="footer_ci" alt="브랜드 로고" src="img/ci.png">
+			<div id="textarea">
+				<p>COPYRIGHT © BoxMovie, Inc. All rights reserved</p>
+				<p>대구광역시 서구 서대구로 7길2 (내당동 245-4번지 2층) ARS 053-555-1333</p>
+			</div>
 		</div>
 	</footer>
 </body>
