@@ -21,11 +21,11 @@
 	
 	<nav>
 		<ul>
-			<li><a href="#">영화</a></li>
-			<li><a href="#">예매</a></li>
-			<li><a href="#">극장</a></li>
-			<li><a href="#">이벤트</a></li>
-			<li><a href="#">고객센터</a></li>
+			<li class="nav"><a href="#">영화</a></li>
+			<li class="nav"><a href="#">예매</a></li>
+			<li class="nav"><a href="#">극장</a></li>
+			<li class="nav"><a href="#">이벤트</a></li>
+			<li class="nav"><a href="#">고객센터</a></li>
 			<li id="mypagebtn"><a href="#"><i class="far fa-user"></i></a></li>
 		</ul>
 	</nav>
