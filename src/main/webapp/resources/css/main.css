@@ -98,7 +98,7 @@ nav ul {
 	border-bottom: 5px solid RGB(136, 136, 136);
 }
 
-.far{
+.fa-user{
 	text-decoration: none;
 	color: RGB(232, 221, 203);
 	display: inline-block;
@@ -112,7 +112,7 @@ section {
 }
 
 #slide{
-	height: 400px;
+	height: 500px;
 	overflow: hidden;
 }
 
@@ -121,22 +121,35 @@ section {
 }
 
 #slide li{
-	width:calc(100% / 4);height:400px;
+	width:calc(100% / 4);height:500px;
 }
-#slide li:nth-child(1){
-	background-image: url("../images/stillcut1.jpg");
+
+#slide li:nth-child(1) {
+	background-image: url("../images/slide1.jpg");
+	overflow: hidden;
+	background-size: cover;
+	border-radius: 5px;
 }
 
 #slide li:nth-child(2){
-	background-image: url("../../images/stillcut2.jpg");
+	background-image: url("../images/slide2.jpg");
+	overflow: hidden;
+    background-size: cover;
+    border-radius: 5px;
 }
 
 #slide li:nth-child(3){
-	background: #fff;
+	background-image: url("../images/slide3.jpg");
+	overflow: hidden;
+    background-size: cover;
+    border-radius: 5px;
 }
 
 #slide li:nth-child(4){
-	background:#aaf;
+	background-image: url("../images/slide4.jpg");
+	overflow: hidden;
+    background-size: cover;
+    border-radius: 5px;
 }
 
 #slide ul, li{
@@ -238,6 +251,14 @@ section {
 	display: inline-block;
 }
 
+.search a{
+	color: white;
+}
+
+.search a:hover{
+	color: rgba(255, 255, 255, 0.5);
+}
+
 #search-box div{
 	display: inline-block;
 }
@@ -269,6 +290,11 @@ section {
 
 .input-text{
 	color: white;	
+}
+
+.fa-calendar-alt, .fa-film, .fa-ticket-alt{
+	font-size: 1.2em;
+	margin-right: 10px;
 }
 
 div ul {

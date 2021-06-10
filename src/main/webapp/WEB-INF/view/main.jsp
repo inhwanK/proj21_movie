@@ -73,11 +73,10 @@
 					<li id="search-box">
 						<input type="text" placeholder="영화제목" style="color:white">
 					</li>
-					<li><h2>상영시간표</h2></li>
-					<li><h2>박스오피스</h2></li>
-					<li><h2>바로예매</h2></li>
+					<li><i class="far fa-calendar-alt"></i><a href="#"><h2>상영시간표</h2></a></li>
+					<li><i class="fas fa-film"></i><a href="#"><h2>박스오피스</h2></a></li>
+					<li><i class="fas fa-ticket-alt"></i><a href="#"><h2>바로예매</h2></a></li>
 				</ul>
-
 			</div>
 		</div>
 	
