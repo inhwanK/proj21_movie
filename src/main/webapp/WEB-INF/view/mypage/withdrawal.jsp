@@ -54,8 +54,17 @@
 	 			 	<p>예매내역, 메일주소, 핸드폰 번호/기타 연락처 등 회원정보가 모두 삭제되며, 삭제된 데이터는 복구되지 않습니다.</p>
  			 	</div>
  			 	
- 			 	<div>
+ 			 	<div id="passwordarea">
+ 			 		<label>비밀번호</label>
+ 			 		<input type="password">
+ 			 		<br>
+ 			 		<label>비밀번호 확인</label>
+ 			 		<input type="password">
+ 			 	</div>
  			 	
+ 			 	<div id="button-group">
+ 			 		<span><a herf="#">취소</a></span>
+					<span id="delete"><a herf="#">탈퇴</a></span>
  			 	</div>
 			</div>
 			

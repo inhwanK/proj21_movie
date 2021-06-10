@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 @font-face {
 	font-family: 'IBMPlexSansKR-Regular';
 	src:
@@ -7,7 +8,10 @@
 	font-weight: normal;
 	font-style: normal;
 }
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css');
+
+@import
+	url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css')
+	;
 
 /* body */
 body {
@@ -96,79 +100,128 @@ section {
 	width: 1300px;
 	height: 900px;
 	text-align: center;
-/* 	border: 1px solid green; */
+	/* 	border: 1px solid green; */
 }
 
-#container{
+#container {
 	display: flex;
 	flex-wrap: wrap;
 }
-#mypage-menubar{
+
+#mypage-menubar {
 	border-right: 1px solid #ccc;
 	display: inline-block;
 	width: 250px;
 	height: 900px;
-/* 	float: left; */
+	/* 	float: left; */
 }
 
-#mypage-menubar ul{
+#mypage-menubar ul {
 	padding: 0px;
 	list-style: none;
 	text-align: left;
 }
 
-#mypage-menubar ul li{
+#mypage-menubar ul li {
 	margin: 50px 0;
 }
 
-#mypage-menubar ul li a{
+#mypage-menubar ul li a {
 	color: RGB(3, 22, 52);
 	font-size: 1.2em;
 	text-decoration: none;
 }
 
-#mypage-menubar ul li a:hover{
+#mypage-menubar ul li a:hover {
 	color: red;
 	font-size: 1.2em;
 	text-decoration: none;
 }
 
-#mypage-menubar h2{
+#mypage-menubar h2 {
 	background-color: RGB(3, 22, 52);
 	color: white;
 }
 
-#mypage-wrap{
-/* 	border: 1px solid yellow; */
+#mypage-wrap {
+	/* 	border: 1px solid yellow; */
 	width: 1045px;
 	height: 100%;
 }
 
-#mypage-wrap h2{
+#mypage-wrap h2 {
 	text-align: left;
 	margin-left: 40px;
 	margin-bottom: 40px;
 }
 
-#textarea{
+#textarea {
 	text-align: left;
 	margin-left: 40px;
 }
 
-#textarea h3{
+#textarea h3 {
 	display: inline-block;
 	margin-bottom: 10px;
 }
 
-#textarea p{
+#textarea p {
 	margin: 0;
 }
 
-.fa-square{
+.fa-square {
 	color: RGB(3, 22, 52);
 }
 
+#passwordarea {
+	margin: 50px auto;
+}
 
+#passwordarea label {
+	display: inline-block;
+	width: 150px;
+	text-align: left;
+	font-size: 1.2em;
+}
+
+#passwordarea input {
+	display: inline-block;
+	width: 200px;
+	height: 20px;
+	padding-left: 10px;
+}
+
+#button-group {
+	padding: 20px;
+}
+
+#button-group span {
+	display: inline-flex;
+	border: 1px solid RGB(3, 22, 52);
+	border-radius: 10px;
+	margin: 0 30px;
+	width: 100px;
+	height: 50px;
+}
+
+#button-group span a {
+	font-size: 1.5em;
+	margin: auto;
+}
+
+#button-group span a:hover {
+	font-size: 1.5em;
+	margin: auto;
+	cursor: pointer;
+}
+
+#delete {
+	background-color: RGB(3, 22, 52);
+}
+
+#delete a {
+	color: white;
+}
 
 /* footer */
 footer {
