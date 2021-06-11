@@ -33,14 +33,16 @@ public class NoticeMapperTest {
 	
 	@After
 	public void tearDown() throws Exception {
-		mapper.setAutoIncrement();
+		mapper.setAutoIncrement(); 
+		//AfterClass로 수행하는 것이 바람직할 것 같지만...
+		//NoticeMapper 클래스 생성자를 만드는 등. 번거로워져서 일단 After로 수행.
 	}
 
 	@Test
 	public void test05SelectNoticeByNo() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
-		Notice notice = mapper.selectNoticeByNo(7);
+		Notice notice = mapper.selectNoticeByNo(4);
 		Assert.assertNotNull(notice);
 	}
 
@@ -56,7 +58,7 @@ public class NoticeMapperTest {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		Notice notice = new Notice();
-		notice.setNotNo(17);
+		notice.setNotNo(4);
 		notice.setNotTitle("inserttest 글 수정");
 		notice.setNotDetail("inserttest 글 세부내용 수정");
 		notice.setNotFile("inserttest 글 파일 경로 수정");
@@ -78,7 +80,7 @@ public class NoticeMapperTest {
 
 	@Test
 	public void test06DeleteNotice() {
-		int res = mapper.deleteNotice(17);
+		int res = mapper.deleteNotice(4);
 		Assert.assertEquals(1, res);
 	}
 
