@@ -15,13 +15,12 @@ body {
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	/* 	background-color: RGB(3, 22, 52); */
 }
 
 /* header */
 header {
 	margin: auto;
-	width: 70%;
+	width: 1273px;
 	position: relative;
 }
 
@@ -30,10 +29,7 @@ header {
 	margin: 0px auto;
 	align-items: center;
 	position: relative;
-	/* 	position: absolute; */
 	left: 120px;
-	/* left: 50%; */
-	/* 	transform: translate(-50%, 0); */
 	box-sizing: border-box;
 }
 
@@ -48,20 +44,20 @@ header div a {
 	text-decoration: none;
 	padding-left: 15px;
 	padding-right: 15px;
-	font-size: 0.8em;
+	font-size: 1.0em;
 	color: RGB(136, 136, 136);
 }
 
 /* <nav> */
 nav {
 	margin: auto;
-	width: 70%;
 	position: relative;
 	padding: 0px;
 }
 
 nav ul {
-/* 	padding-left */
+	width: 1273px;
+	padding-left: 0;
 	list-style: none;
 	border-bottom: 0.5px solid RGB(3, 22, 52);
 	padding-bottom: 5px;
@@ -69,31 +65,43 @@ nav ul {
 	position: relative;
 }
 
-nav ul li {
+.nav {
 	display: inline-block;
-	padding-right: 50px;
-	padding-left: 50px;
+	padding: 0 90px;
 	font-weight: bold;
 	font-size: 1.3em;
 }
 
-nav ul li a {
+#mypagebtn {
+	display: inline-block;
+	padding: 0 0 0 70px;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+.nav a {
 	text-decoration: none;
 	color: RGB(3, 22, 52);
 	padding-bottom: 5px;
 }
 
-nav ul li a:hover {
+.nav a:hover {
 	text-decoration: none;
 	color: RGB(3, 22, 52);
 	padding-bottom: 4px;
 	border-bottom: 5px solid RGB(3, 22, 52);
 }
 
+.fa-user {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	display: inline-block;
+}
+
 /* section */
 section {
 	margin: 50px auto;
-	width: 1000px;
+	width: 1273px;
 	height: 900px;
 	text-align: center;
 }
@@ -106,19 +114,28 @@ section h2 {
 #container {
 	border: 1px solid #ccc;
 	margin-bottom: 50px;
-	height: 700px;
+	height: 800px;
 }
+
+#title {
+	width: 700px;
+	margin: 50px 0 0 80px;
+}
+
 #container h2{
 	display: inline-block;
 	margin-right: 700px;
 }
 
 #count{
-/* 	border: 1px solid green; */
-	background-color: #ccc;
+	background-color: RGB(247,247,247);
 	margin-left: 50px;
 	margin-right: 50px;
-	
+}
+
+.fas{
+	color: RGB(3, 22, 52);
+	margin: 10px;
 }
 
 #count span{
@@ -137,7 +154,7 @@ section h2 {
 	margin: 0;
 	padding: 0;
 	display: inline-block;
-	width: 32.5%;
+	width: 418.3px;
 	height: 30px;
 	border: 1px solid #ccc;
 	text-align: center;
@@ -151,11 +168,13 @@ section h2 {
 
 #seat-choice {
 	height: 600px;
+	margin: 0 auto;
 }
 
 #seat-area{
 	padding: 10px;
 	margin-top: 30px;
+	margin-left: 150px;
 	width: 570px;
 	height: 500px;
 	float: left;
@@ -193,8 +212,6 @@ section h2 {
 
 #seat-info{
 	padding: 10px;
-/* 	margin-top: 30px; */
-/* 	margin-left: 20px; */
 	width: 340px;
 	height: 500px;
 	float: left;
@@ -231,21 +248,24 @@ section h2 {
 
 /* footer */
 footer {
-	margin: 50px auto;
-	width: 70%
+	margin: auto;
+	width: 1273px;
 }
 
-footer div {
+#content {
 	border-top: 0.5px solid RGB(3, 22, 52);
 	text-align: left;
 	margin-top: 0;
 }
 
-footer div p {
-	margin-left: 80px;
+#textarea {
+	margin-top: 22.5px;
+}
+
+#textarea p {
 	color: black;
 	font-size: 0.8em;
-	margin-top: 22.5px;
+	margin: 0;
 }
 
 #footer_ci {
