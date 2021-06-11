@@ -6,6 +6,7 @@
 	<meta charset="UTF-8">
 	<title>1대1 문의 내역</title>
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/mypage/inquiry.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 	<header>
