@@ -31,3 +31,8 @@ where not_no between (select count(*) from notice) - ((10 * 2)-1) and (select co
 select max(not_no) from notice;
 select count(*) from notice;
 select * from notice;
+
+SELECT * 
+FROM notice
+where not_no > (select count(*) from notice) - 20
+order by not_no asc limit 10;

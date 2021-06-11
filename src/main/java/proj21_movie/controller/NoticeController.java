@@ -19,24 +19,13 @@ public class NoticeController {
 		ModelAndView mav = new ModelAndView("notice/noticeDetail", "notNo", notNo);
 		return mav;
 	}
-
-//	@GetMapping("/noticelist")
-//	public ModelAndView noticeList(@RequestParam(value = "selectPage") int selectPage) {
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("totalNotice", service.getTotalNotice());
-//		mav.addObject("selectPage", selectPage);
-//
-//		mav.setViewName("notice/noticeList");
-//		return mav;
-//	}
 	
 	@GetMapping("/noticelist") 
-	public ModelAndView noticeList(@RequestParam(value = "selectPage") int selectPage) {
-		// required = false 써서 파라미터 없으면 1 페이지에 알아서 매핑되도록 해야함.
+	public ModelAndView noticeList(@RequestParam(required = false, defaultValue = "1") int selectPage) {
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("totalNotice", service.getTotalNotice());
-		mav.addObject("selectPage", selectPage);
+		mav.addObject("totalNotice", service.getTotalNotice()); // 페이지 개수 세기.
+		mav.addObject("selectPage", selectPage); // 선택된 페이지 값.
 		mav.setViewName("notice/noticeList");
 		return mav;
 	}
