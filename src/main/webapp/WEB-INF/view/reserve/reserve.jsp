@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="<%=request.getContextPath() %>" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +12,9 @@
 </head>
 <body>
 	<header>
-		<img id="header_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
+		<a href="main" title="박스무비 메인으로 가기">
+			<img id="header_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
+		</a>
 		<div>
 			<a href="#">로그인</a>
 			<a href="#">회원가입</a>
@@ -21,12 +25,12 @@
 	
 	<nav>
 		<ul>
-			<li class="nav"><a href="#">영화</a></li>
-			<li class="nav"><a href="#">예매</a></li>
-			<li class="nav"><a href="#">극장</a></li>
+			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
+			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
+			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
 			<li class="nav"><a href="#">이벤트</a></li>
 			<li class="nav"><a href="#">고객센터</a></li>
-			<li id="mypagebtn"><a href="#"><i class="far fa-user"></i></a></li>
+			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
 		</ul>
 	</nav>
 	

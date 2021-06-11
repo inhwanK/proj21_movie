@@ -19,11 +19,20 @@
 		format('truetype')
 }
 
+@font-face {
+	font-family: 'IBMPlexSansKR-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 body {
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	font-family: NanumBarunGothic, Dotum, '돋움', sans-serif
+	font-family: 'IBMPlexSansKR-Regular';
 }
 
 a:link {
@@ -43,7 +52,7 @@ ol, ul {
 /* header */
 header {
 	margin: auto;
-	width: 70%;
+	width: 1273px;
 	position: relative;
 }
 
@@ -52,10 +61,7 @@ header {
 	margin: 0px auto;
 	align-items: center;
 	position: relative;
-	/* 	position: absolute; */
 	left: 120px;
-	/* left: 50%; */
-	/* 	transform: translate(-50%, 0); */
 	box-sizing: border-box;
 }
 
@@ -64,32 +70,31 @@ header div {
 	float: right;
 	text-align: right;
 	padding-bottom: 10px;
-	margin-top: 40px;
 }
 
 header div a {
 	text-decoration: none;
 	padding-left: 15px;
 	padding-right: 15px;
-	font-size: 0.9em;
+	font-size: 1.0em;
 	color: RGB(136, 136, 136);
 }
 
-header div a:hover {
-	text-decoration: none;
-	padding-bottom: 4px;
-	border-bottom: 2px solid RGB(3, 22, 52);
-}
+/* header div a:hover { */
+/* 	text-decoration: none; */
+/* 	padding-bottom: 4px; */
+/* 	border-bottom: 2px solid RGB(3, 22, 52); */
+/* } */
 
 /* <nav> */
 nav {
 	margin: auto;
-	width: 70%;
 	position: relative;
 	padding: 0px;
 }
 
 nav ul {
+	width: 1273px;
 	padding-left: 0;
 	list-style: none;
 	border-bottom: 0.5px solid RGB(3, 22, 52);
@@ -98,25 +103,37 @@ nav ul {
 	position: relative;
 }
 
-nav ul li {
+.nav {
 	display: inline-block;
-	padding-right: 50px;
-	padding-left: 50px;
+	padding: 0 90px;
 	font-weight: bold;
 	font-size: 1.3em;
 }
 
-nav ul li a {
+#mypagebtn {
+	display: inline-block;
+	padding: 0 0 0 70px;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+.nav a {
 	text-decoration: none;
 	color: RGB(3, 22, 52);
 	padding-bottom: 5px;
 }
 
-nav ul li a:hover {
+.nav a:hover {
 	text-decoration: none;
 	color: RGB(3, 22, 52);
 	padding-bottom: 4px;
 	border-bottom: 5px solid RGB(3, 22, 52);
+}
+
+.fa-user {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	display: inline-block;
 }
 
 * {
@@ -1065,21 +1082,23 @@ a.button.purple:active, a.button.purple:focus, a.button.purple:hover{
 /* footer */
 footer {
 	margin: auto;
-	width: 70%;
-	/* padding-top: 50px; */
+	width: 1273px;
 }
 
-footer div {
+#content {
 	border-top: 0.5px solid RGB(3, 22, 52);
 	text-align: left;
 	margin-top: 0;
 }
 
-footer div p {
-	margin-left: 80px;
+#textarea {
+	margin-top: 22.5px;
+}
+
+#textarea p {
 	color: black;
 	font-size: 0.8em;
-	margin-top: 22.5px;
+	margin: 0;
 }
 
 #footer_ci {
