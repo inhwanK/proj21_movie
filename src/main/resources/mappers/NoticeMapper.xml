@@ -54,7 +54,7 @@
 	
 	<update id="setAutoIncrement">
 		alter table notice auto_increment = 1; 
-	</update><!-- auto_increment 초기화 test tearDown 메서드에 사용됨.  -->
+	</update> <!-- auto_increment 초기화 test tearDown 메서드에 사용됨.  -->
 
 
 </mapper>
