@@ -8,18 +8,19 @@
 <title>크루엘라 영화 상세정보</title>
 	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
 	<link rel="stylesheet" href="${contextPath}/resources/css/movie/movie_detail.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-	$(function() {
-		$(".btn li").click(function() {
-			$(this).addClass("active");
-			$(this).siblings().removeClass("active");
-
-			$(".tab-cont-wrap > div").removeClass("active");
-			$(".tab-cont-wrap > div").eq($(this).index()).addClass("active");
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(function() {
+			$(".btn li").click(function() {
+				$(this).addClass("active");
+				$(this).siblings().removeClass("active");
+	
+				$(".tab-cont-wrap > div").removeClass("active");
+				$(".tab-cont-wrap > div").eq($(this).index()).addClass("active");
+			});
 		});
-	});
-</script>
+	</script>
 </head>
 <body>
 	<header>
