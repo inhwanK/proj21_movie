@@ -9,15 +9,22 @@ import proj21_movie.dto.Notice;
 @Component
 public interface NoticeMapper {
 	
-	Notice selectNoticeByNo(int notNo);
-	List<Notice> selectNoticeByTitle(String notTitle);
-	List<Notice> selectNoticeAll(); // 불필요할 것도 같음.
-	List<Notice> selectNoticeByPage(int selectPage);
+	Notice selectNoticeByNo(int notNo); // 기본키로 검색.
 	
-	int countNotice();
+	List<Notice> selectNoticeByTitle(String notTitle); // 이름으로 검색. 검색 기능할 때 구현.
 	
+	List<Notice> selectNoticeAll(); // 공지 다 검색
+	
+	List<Notice> selectNoticeByPage(int selectPage); // 페이지마다 10개씩 검색. 
+	
+	int setAutoIncrement();
+	
+	int countNotice(); // 페이징을 위해 데이터 수 검색.
+			
 	int updateNotice(Notice notice);
 	int insertNotice(Notice notice);
+	
 	int deleteNotice(int notNo);
+	int deleteNoticeAuto();
 	
 }

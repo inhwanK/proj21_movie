@@ -27,3 +27,7 @@ update notice set not_no = @count:=@count+1;
 SELECT not_no, not_title, not_date 
 FROM notice
 where not_no between (select count(*) from notice) - ((10 * 2)-1) and (select count(*) from notice) - (10 * 1);
+
+select max(not_no) from notice;
+select count(*) from notice;
+select * from notice;
