@@ -26,6 +26,30 @@
 			});
 		});
 	</script>
+	<script>
+		$(function(){
+			
+			/* price-table-box(관람료 탭) */
+			var contextPath = "${contextPath}";
+			$.get(contextPath+"/api/cinemas",
+				function(json) {
+					var dataLength = json.length;
+					if (dataLength >= 1) {
+						var list = "";
+						for (i = 0; i < dataLength; i++) {
+							list += "<tr>";
+							list += "<td>" + json[i].cinType + "</td>";
+							list += "<td>" + json[i].cinAdultPrice + "원</td>";
+							list += "<td>" + json[i].cinTeenPrice + "원</td>";
+							list += "<td>" + json[i].cinPrefPrice + "원</td>";
+							list += "</tr>";
+						}
+						$(".data-table tbody").append(list);
+					}
+				});
+				/* // price-table-box(관람료 탭) */
+		});
+	</script>
 </head>
 <body>
 	<header>
@@ -499,25 +523,7 @@
 											<th>우대</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<th>2D</th>
-											<td>10,000원</td>
-											<td>8,000원</td>
-											<td>5,000원</td>														
-										</tr>												
-										<tr>
-											<th>3D</th>
-											<td>15,000원</td>
-											<td>13,000원</td>
-											<td>10,000원</td>														
-										</tr>												
-										<tr>
-											<th>4D</th>
-											<td>20,000원</td>
-											<td>18,000원</td>
-											<td>15,000원</td>														
-										</tr>												
+									<tbody>												
 									</tbody>
 								</table>
 							</div>
