@@ -1,60 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="proj21_movie.mapper.NoticeMapper">
-
 	<resultMap type="Notice" id="noticeList">
-		<id column="not_no" property="notNo" />
-		<result column="not_title" property="notTitle" />
-		<result column="not_date" property="notDate" />
-	</resultMap>
+      <id column="not_no" property="notNo" />
+      <result column="not_title" property="notTitle" />
+      <result column="not_date" property="notDate" />
+   </resultMap>
 
-	
-	<select id="selectNoticeAll" resultMap="noticeList">
-		select not_no, not_title, not_date
-		from notice;
-	</select>
+   
+   <select id="selectNoticeAll" resultMap="noticeList">
+      select not_no, not_title, not_date
+      from notice;
+   </select>
 
-	<select id="selectNoticeByPage" resultMap="noticeList">
-		SELECT * 
-		FROM notice
-		where not_no > (select count(*) from notice) - (#{selectPage} * 10)
-		order by not_no asc limit 10;
-	</select> <!-- 쿼리가 너무 비효율적임. service 파라미터로 넘길 수 있도록 해야함. -->
-	
-	<select id="selectNoticeByNo" resultType="Notice">
-		select not_no, not_title, not_detail, not_date, not_file 
-		from notice 
-		where not_no = #{notNo};
-	</select>
-	
-	<select id="countNotice" resultType="int">
-		select count(*)
-		from notice;
-	</select>
-	
-	<insert id="insertNotice" parameterType="Notice">
-		insert into notice(not_title,not_detail,not_date,not_file)
-		values(#{notTitle},#{notDetail},now(),#{notFile});
-		<selectKey resultType="int" keyProperty="notNo" order="AFTER">
-			select max(not_no) from notice;
-		</selectKey>
-	</insert>
-	
-	<update id="updateNotice" parameterType="Notice">
-		update notice 
-		set not_title = #{notTitle} , not_detail = #{notDetail} , not_file = #{notFile}
-		where not_no = #{notNo};
-	</update>
-	
-	<delete id="deleteNotice">
-		delete
-		from notice
-		where not_no = #{notNo};
-	</delete>
-	
-	<update id="setAutoIncrement">
-		alter table notice auto_increment = 1; 
-	</update> <!-- auto_increment 초기화 test tearDown 메서드에 사용됨.  -->
-
+   <select id="selectNoticeByPage" resultMap="noticeList">
+      SELECT not_no, not_title, not_date
+      FROM notice
+      where not_no between #{totalNumber} - ((#{selectPage} * 10)-1) and #{totalNumber} - ((#{selectPage}-1) * 10)
+      order by not_no desc;
+   </select> <!-- 쿼리가 너무 비효율적임. service 파라미터로 넘길 수 있도록 해야함. -->
+   
+   <select id="selectNoticeByNo" resultType="Notice">
+      select not_no, not_title, not_detail, not_date, not_file 
+      from notice 
+      where not_no = #{notNo};
+   </select>
+   
+   <select id="countNotice" resultType="int">
+      select count(*)
+      from notice;
+   </select>
+   
+   
+   <insert id="insertNotice" parameterType="Notice">
+      insert into notice(not_title,not_detail,not_date,not_file)
+      values(#{notTitle},#{notDetail},now(),#{notFile});
+      <selectKey resultType="int" keyProperty="notNo" order="AFTER">
+         select max(not_no) from notice;
+      </selectKey>
+   </insert>
+   
+   <update id="updateNotice" parameterType="Notice">
+      update notice 
+      set not_title = #{notTitle} , not_detail = #{notDetail} , not_file = #{notFile}
+      where not_no = #{notNo};
+   </update>
+   
+   <delete id="deleteNotice">
+      delete
+      from notice
+      where not_no = #{notNo};
+   </delete>
+   
+   <update id="setAutoIncrement">
+      alter table notice auto_increment = 1; 
+   </update> <!-- auto_increment 초기화 test tearDown 메서드에 사용됨.  -->
 
 </mapper>
