@@ -48,12 +48,6 @@ ol, ul {
 }
 
 /* body */
-body {
-	font-family: 'IBMPlexSansKR-Regular', sans-serif;
-	margin: 0;
-	padding: 0;
-	text-align: center;
-}
 
 /* header */
 header {
@@ -136,20 +130,24 @@ nav ul {
 }
 
 /* section */
+section{
+	margin: auto;
+	width: 1237px;
+}
 
 /* page-util */
 
 .page-util {
 	display: block;
-	position: static;
-	width: 70%;
+	position: relative;
+	width: 1237px;
 	height: 42px;
 }
 
 .page-util .location {
 	float: left;
 	height: 42px;
-	padding-left: 30%;
+	/* padding-left: 3%; */
 }
 
 .page-util .location span {
@@ -160,7 +158,6 @@ nav ul {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	text-indent: -9999px;
 	background:
 		url(../../images/theater/icon/home.png)
 		no-repeat center
@@ -177,8 +174,7 @@ nav ul {
 	color: #666;
 }
 
-.page-util .location a:before, .page-util .location span:before
-	{
+.page-util .location a:before{
 	content: '';
 	display: block;
 	position: absolute;
@@ -194,8 +190,8 @@ nav ul {
 /* contents */
 h2.title {
 	padding: 0 0 26px 0;
-	font-weight: 400;
-	width: 40%
+	font-weight: 600;
+	text-align: left;
 }
 
 /* tab-list */
@@ -204,8 +200,7 @@ h2.title {
 	margin-bottom: 60px;
 }
 .tab-list ul {
-	overflow: hidden; 
-	width: 63%; 
+	overflow: hidden;  
 	margin: 0 auto;
 }
 .tab-list li {
@@ -231,20 +226,16 @@ h2.title {
 	color: #0000d2;
 }
 
-.inner-wrap {
+/* .inner-wrap {
 	width: 1800px;
 	margin: 0 auto
-}
+} */
 
 /* movie-list */
 .movie-list {
 	display: table;
-	padding-left:300px;
+	text-align:left;
 	padding-bottom: 130px;
-}
-
-.movie-list ul{
-
 }
 
 .movie-list li{
@@ -252,10 +243,8 @@ h2.title {
 	float: left;
 	width: 270px;
 	height: 450px;
-	margin: 0 0 0 60px;
-	padding-bottom: 100px;
-	background-color: #fff;
-	
+	margin: 0 0 0 30px;
+	padding-bottom: 150px;	
 }
 
 .movie-list > div{
@@ -264,6 +253,10 @@ h2.title {
 }
 .movie-list > div.active{
 	display: block;
+}
+
+.movie-list-info img {
+	width: 270px;
 }
 
 .btn-util{
@@ -277,7 +270,7 @@ h2.title {
 	line-height: 1.1;
 	font-size: 2em;
 	font-style: italic;
-	font-family: NanumBarunGothic, Dotum, '돋움', sans-serif;
+	font-family: 'IBMPlexSansKR-Regular', sans-serif;
 	font-weight: 300;
 	color: #fff;
 	text-shadow: 2px 2px 2px rgba(0, 0, 0, .8);
@@ -301,7 +294,6 @@ h2.title {
 .title {
 	overflow: hidden;
 	display: block;
-	width: 30%;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	padding: 2px 0 0 1px;
