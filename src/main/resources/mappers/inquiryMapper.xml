@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="proj21_movie.mapper.InquiryMapper">
+
+	<select id="selectInquiryAll" resultType="Inquiry">
+		select inq_no, inq_title, inq_user, inq_detail, inq_date, inq_file, inq_answer, inq_ansdate, inq_status 
+		from inquiry
+	</select>
+	
+	<select id="selectInquiryByUser" resultType="Inquiry">
+		select inq_no, inq_title, inq_user, inq_detail, inq_date, inq_file, inq_answer, inq_ansdate, inq_status 
+		from inquiry
+		where inq_user = #{inqUser}
+	</select>
+	
+	<insert id="insertInquiry">
+		insert into inquiry(inq_no, inq_title, inq_user, inq_detail, inq_date, inq_file, inq_status) values
+		(null, #{inqTitle}, #{inqUser}, #{inqDetail}, now(), #{inqFile}, 0)
+		<selectKey keyProperty="inqNo" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="updateInquiry">
+		update inquiry
+		set inq_answer = #{inqAnswer}, inq_ansdate = now(), inq_status = 1
+		where inq_no = #{inqNo}
+	</update>
+	
+	<delete id="deleteInquiry">
+		delete from inquiry
+		where inq_no = #{inqNo}
+	</delete>
+	
+</mapper>

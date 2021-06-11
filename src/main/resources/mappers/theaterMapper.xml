@@ -16,7 +16,7 @@
 	<select id="selectTheaterByName" resultType="Theater">
 		select tht_no, tht_name, tht_address, tht_lat, tht_long, tht_subs, tht_detail 
 			from theater 
-		 where tht_name like #{thtName}
+		 where tht_name like CONCAT('%',#{thtName},'%')
 	</select>
 	
 </mapper>
