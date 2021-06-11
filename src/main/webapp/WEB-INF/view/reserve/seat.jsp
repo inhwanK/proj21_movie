@@ -113,7 +113,7 @@
 	
 	<footer>
 		<div id="content">
-			<img id="footer_ci" alt="브랜드 로고" src="img/ci.png">
+			<img id="footer_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
 			<div id="textarea">
 				<p>COPYRIGHT © BoxMovie, Inc. All rights reserved</p>
 				<p>대구광역시 서구 서대구로 7길2 (내당동 245-4번지 2층) ARS 053-555-1333</p>
