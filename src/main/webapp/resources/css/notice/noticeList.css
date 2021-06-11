@@ -1,19 +1,122 @@
 @charset "UTF-8";
+@font-face {
+	font-family: 'IBMPlexSansKR-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'IBMPlexSansKR-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 body {
-    overflow: auto;
+  	font-family: 'IBMPlexSansKR-Regular', sans-serif;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+/* header */
+header {
+	margin: auto;
+	width: 1273px;
+	position: relative;
+}
+
+#header_ci {
+	width: 150px;
+	margin: 0px auto;
+	align-items: center;
+	position: relative;
+	left: 120px;
+	box-sizing: border-box;
+}
+
+header div {
+	display: inline;
+	float: right;
+	text-align: right;
+	padding-bottom: 10px;
+}
+
+header div a {
+	text-decoration: none;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 1.0em;
+	color: RGB(136, 136, 136);
+}
+
+/* <nav> */
+nav {
+	margin: auto;
+	position: relative;
+	padding: 0px;
+}
+
+nav ul {
+	width: 1273px;
+	padding-left: 0;
+	list-style: none;
+	border-bottom: 0.5px solid RGB(3, 22, 52);
+	padding-bottom: 5px;
+	margin: 10px auto;
+	position: relative;
+}
+
+.nav {
+	display: inline-block;
+	padding: 0 90px;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+#mypagebtn {
+	display: inline-block;
+	padding: 0 0 0 70px;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+.nav a {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	padding-bottom: 5px;
+}
+
+.nav a:hover {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	padding-bottom: 4px;
+	border-bottom: 5px solid RGB(3, 22, 52);
+}
+
+.fa-user {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	display: inline-block;
+}
+
+/* section */
+section{
+	overflow: auto;
     overflow-y: scroll;
     letter-spacing: 0;
     line-height: 1.5;
     font-size: 15px;
     color: #444;
     font-weight: 400;
-    font-family: NanumBarunGothic,Dotum,'돋움',sans-serif;
 }
-
 #contents {
-    width: 100%;
+    width: 1273px;
     margin: 0;
-    padding: 40px 0 0 0;
 }
 
 .container.has-lnb #contents {
@@ -101,6 +204,7 @@ ol, ul {
 
 .table-wrap {
     position: relative;
+    width: 1273px;
     border-top: 1px solid #555;
 }
 
@@ -207,4 +311,32 @@ article, aside, figcaption, figure, footer, header, main, nav, section {
 #notice-wrap{
 	width:70%;
 	margin: 200px auto 0 auto;
+}
+
+/* footer */
+footer {
+	margin: auto;
+	width: 1273px;
+}
+
+#content {
+	border-top: 0.5px solid RGB(3, 22, 52);
+	text-align: left;
+	margin-top: 0;
+}
+
+#textarea {
+	margin-top: 22.5px;
+}
+
+#textarea p {
+	color: black;
+	font-size: 0.8em;
+	margin: 0;
+}
+
+#footer_ci {
+	width: 100px;
+	margin: 0px;
+	float: left;
 }
