@@ -33,3 +33,11 @@ select * from showinfo;
 
 delete from showinfo where shw_no > 4;
 alter table showinfo auto_increment = 5;
+
+
+-- 문의 ---------------------------------------------------------------------------
+select inq_no, inq_title, inq_user, inq_detail, inq_date, inq_file, inq_answer, inq_ansdate, inq_status from inquiry;
+
+
+
+-- 한줄평 --------------------------------------------------------------------------

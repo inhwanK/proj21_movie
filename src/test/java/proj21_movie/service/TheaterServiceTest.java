@@ -57,7 +57,7 @@ public class TheaterServiceTest {
 	public void test03GetTheaterName() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
-		Theater theater = service.getTheaterName("대구신세계%");
+		Theater theater = service.getTheaterName("대구신세계");
 		Assert.assertNotNull(theater);
 		
 		log.debug(theater.toString());
