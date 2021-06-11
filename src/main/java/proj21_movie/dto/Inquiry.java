@@ -13,6 +13,13 @@ public class Inquiry {
 	private LocalDateTime inqAnsDate; // 답변일
 	private boolean inqStatus; // 답변상태
 
+	public Inquiry() {
+	}
+
+	public Inquiry(int inqNo) {
+		this.inqNo = inqNo;
+	}
+
 	public int getInqNo() {
 		return inqNo;
 	}
@@ -92,5 +99,4 @@ public class Inquiry {
 				inqNo, inqTitle, inqUser, inqDetail, inqDate, inqFile, inqAnswer, inqAnsDate, inqStatus);
 	}
 
-	
 }
