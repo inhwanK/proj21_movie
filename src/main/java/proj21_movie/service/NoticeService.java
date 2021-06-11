@@ -15,9 +15,8 @@ public interface NoticeService {
 	int getTotalNotice();
 	
 	
-	// 제목 검색. 아직 구현안함.
-	List<Notice> showNoticeByTitle(String notTitle);
-	
+	List<Notice> showNoticeByTitle(String notTitle); // 제목 검색. 아직 구현안함.
+
 	int removeNotice(int notNo);
 	int modifyNotice(Notice notice);
 	int regidateNotice(Notice notice);

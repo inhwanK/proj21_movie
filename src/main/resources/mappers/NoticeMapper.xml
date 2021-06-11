@@ -34,6 +34,9 @@
 	<insert id="insertNotice" parameterType="Notice">
 		insert into notice(not_title,not_detail,not_date,not_file)
 		values(#{notTitle},#{notDetail},now(),#{notFile});
+		<selectKey resultType="int" keyProperty="notNo" order="AFTER">
+			select max(not_no) from notice;
+		</selectKey>
 	</insert>
 	
 	<update id="updateNotice" parameterType="Notice">
@@ -47,8 +50,10 @@
 		from notice
 		where not_no = #{notNo};
 	</delete>
-
-
+	
+	<update id="setAutoIncrement">
+		alter table notice auto_increment = 1; 
+	</update><!-- auto_increment 초기화 test tearDown 메서드에 사용됨.  -->
 
 
 </mapper>
