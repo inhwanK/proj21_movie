@@ -8,6 +8,7 @@
 	<title>영화리스트</title>
 	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
 	<link rel="stylesheet" href="${contextPath}/resources/css/movie/box_office.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 	$(function(){
@@ -151,11 +152,12 @@
 	
 	<nav>
 		<ul>
-			<li><a href="">영화</a></li>
-			<li><a href="#">예매</a></li>
-			<li><a href="theaterlist">극장</a></li>
-			<li><a href="#">이벤트</a></li>
-			<li><a href="#">고객센터</a></li>
+			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
+			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
+			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
+			<li class="nav"><a href="#">이벤트</a></li>
+			<li class="nav"><a href="#">고객센터</a></li>
+			<li id="mypagebtn"><a href="#"><i class="far fa-user"></i></a></li> <!-- mypage 연결 필요 -->
 		</ul>
 	</nav>
 	
@@ -255,13 +257,12 @@
 	</section>
 	
 	<footer>
-		<div>
-			<img id="footer_ci" alt="브랜드 로고" src="${contextPath}/resources/images/movie/ci.png">
-			<p>
-			제1항의 해임건의는 국회재적의원 3분의 1 이상의 발의에 의하여 국회재적의원 과반수의 찬성이 있어야 한다.
-			<br>
-			재판의 전심절차로서 행정심판을 할 수 있다. 행정심판의 절차는 법률로 정하되, 사법절차가 준용되어야 한다.
-			</p>
+		<div id="content">
+			<img id="footer_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png">
+			<div id="textarea">
+				<p>COPYRIGHT © BoxMovie, Inc. All rights reserved</p>
+				<p>대구광역시 서구 서대구로 7길2 (내당동 245-4번지 2층) ARS 053-555-1333</p>
+			</div>
 		</div>
 	</footer>
 </body>

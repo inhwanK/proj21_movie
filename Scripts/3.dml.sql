@@ -326,10 +326,6 @@ select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_a
 		mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster 
 from movie;
 
--- alter table movie auto_increment = 1;
-
--- delete from movie where mov_no > 0;
-
 -- 영화 사진
 select mp_no, mov_no, mp_pic from movie_pic;
 insert into movie_pic values (null, 1, 'test_pic1');
