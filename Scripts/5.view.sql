@@ -1,3 +1,4 @@
+-- 상영정보 view (상영정보, 극장, 상영관, 영화 join)
 create or replace view vw_full_showinfo 
 as 
 select s.shw_no, s.shw_date, s.shw_starttime, s.shw_endtime, 
