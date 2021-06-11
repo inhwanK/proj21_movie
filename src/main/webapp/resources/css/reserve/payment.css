@@ -115,6 +115,11 @@ section h2 {
 	border: 1px solid #ccc;
 	margin-bottom: 50px;
 	height: 700px;
+	margin: auto;
+}
+
+#title {
+	margin: 50px 0 0 100px;
 }
 
 #menubar ul{
@@ -128,11 +133,11 @@ section h2 {
 	margin: 0;
 	padding: 0;
 	display: inline-block;
-	width: 32.5%;
+	width: 418.3px;
 	height: 30px;
 	border: 1px solid #ccc;
 	text-align: center;
-/* 	border-collapse: collapse; */
+	overflow: hidden;
 }
 
 #selected{
@@ -143,12 +148,12 @@ section h2 {
 
 #seat-result{
 	padding: 10px;
-/* 	margin-top: 30px; */
-	width: 570px;
+	width: 700px;
 	height: 500px;
 	float: left;
-/* 	border: 1px solid blue; */
+	margin-left: 100px;
 }
+
 #seat-result h3{
 	text-align: left;
 	background-color: #ccc;
@@ -198,7 +203,6 @@ section h2 {
 }
 
 .desc span a{
-	
 	text-decoration: none;
 	color: RGB(3, 22, 52);
 }
@@ -209,7 +213,6 @@ section h2 {
 	height: 500px;
 	float: left;
 	background-color: RGB(3, 22, 52);
-/* 	border: 1px solid yellow; */
 }
 
 
