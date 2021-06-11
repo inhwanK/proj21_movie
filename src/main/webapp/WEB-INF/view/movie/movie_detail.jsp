@@ -92,7 +92,7 @@
 						<div class="poster">
 							<div class="wrap">
 								<p class="movie-grade age-12">12세 이상 관람가</p>
-								<img src="${contextPath}/resources/images/movie/movie-detail/poster-Cruella.jpg" alt="크루엘라" /> 
+								<img alt="크루엘라" src="${contextPath}/resources/images/movie/box-office/Cruella.jpg"/>
 							</div>
 						</div>
 						<div class="screen-type">
