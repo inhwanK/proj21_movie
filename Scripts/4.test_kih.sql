@@ -24,10 +24,6 @@ update notice set not_no = @count:=@count+1;
 
 
 -- 쿼리 수정 필요.
-SELECT not_no, not_title, not_date 
-FROM notice
-where not_no between (select count(*) from notice) - ((10 * 2)-1) and (select count(*) from notice) - (10 * 1);
-
 select max(not_no) from notice;
 select count(*) from notice;
 select * from notice;
@@ -36,3 +32,12 @@ SELECT *
 FROM notice
 where not_no > (select count(*) from notice) - 20
 order by not_no asc limit 10;
+
+select count(*)
+      from notice;
+      
+     
+SELECT * 
+      FROM notice
+      where not_no between 1 and 20
+      order by not_no desc;
