@@ -1,13 +1,10 @@
 package proj21_movie.mapper;
 
-import static org.junit.Assert.fail;
-
 import java.util.List;
 
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -42,7 +39,7 @@ public class NoticeMapperTest {
 	public void test05SelectNoticeByNo() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
-		Notice notice = mapper.selectNoticeByNo(4);
+		Notice notice = mapper.selectNoticeByNo(4); //데이터 row가 공통적으로 3 까지만 들어가 있기 때문에, 4로 값을 고정해놓는게 좋음.
 		Assert.assertNotNull(notice);
 	}
 
@@ -58,7 +55,7 @@ public class NoticeMapperTest {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		Notice notice = new Notice();
-		notice.setNotNo(4);
+		notice.setNotNo(4); //데이터 row가 공통적으로 3 까지만 들어가 있기 때문에, 4로 값을 고정해놓는게 좋음.
 		notice.setNotTitle("inserttest 글 수정");
 		notice.setNotDetail("inserttest 글 세부내용 수정");
 		notice.setNotFile("inserttest 글 파일 경로 수정");
@@ -80,7 +77,7 @@ public class NoticeMapperTest {
 
 	@Test
 	public void test06DeleteNotice() {
-		int res = mapper.deleteNotice(4);
+		int res = mapper.deleteNotice(4); //데이터 row가 공통적으로 3 까지만 들어가 있기 때문에, 4로 값을 고정해놓는게 좋음.
 		Assert.assertEquals(1, res);
 	}
 
