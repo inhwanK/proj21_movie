@@ -25,13 +25,13 @@
 			
 			var dataLength = json.length;
 			if(dataLength >= 1){
-				var list = "";	
-				for(i = 0 ; i < dataLength; i++){
-						list += "<tr>";
-						list += "<td>" + json[i].notNo + "</td>"; 
-						list += "<td><a href='${contextPath}/notice?notNo=" + json[i].notNo + "'>" + json[i].notTitle+  "</a></td>"; //보여주면 안될 것 같은 정보.
-						list += "<td>" + getFormatDate(json[i].notDate) + "</td>";
-						list += "<tr>"
+				var list = "";
+				for(i = 9 ; i > -1 ; i--){
+					list += "<tr>";
+					list += "<td>" + json[i].notNo + "</td>"; 
+					list += "<td><a href='${contextPath}/notice?notNo=" + json[i].notNo + "'>" + json[i].notTitle+  "</a></td>"; //보여주면 안될 것 같은 정보.
+					list += "<td>" + getFormatDate(json[i].notDate) + "</td>";
+					list += "<tr>"
 				}
 				$("tbody").append(list);
 			};

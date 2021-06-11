@@ -15,9 +15,10 @@
 	</select>
 
 	<select id="selectNoticeByPage" resultMap="noticeList">
-		SELECT not_no, not_title, not_date 
+		SELECT * 
 		FROM notice
-		where not_no between (select count(*) from notice) - ((#{selectPage}*10)-1) and (select count(*) from notice) - ((#{selectPage}-1)*10);
+		where not_no > (select count(*) from notice) - (#{selectPage} * 10)
+		order by not_no asc limit 10;
 	</select> <!-- 쿼리가 너무 비효율적임. service 파라미터로 넘길 수 있도록 해야함. -->
 	
 	<select id="selectNoticeByNo" resultType="Notice">
