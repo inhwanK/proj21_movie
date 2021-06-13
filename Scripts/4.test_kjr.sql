@@ -66,3 +66,10 @@ select res_no, shw_no, mem_no, res_price, res_date, res_adult, res_teen, res_pre
 select * from member;
 select * from showinfo;
 
+
+-- 상영정보에서 상영관의 기본요금 가져오기
+select s.shw_no, c.cin_no, c.cin_type, c.cin_adultprice, c.cin_teenprice, c.cin_prefprice 
+from showinfo s, cinema c 
+where s.cin_no = c.cin_no;
+
+
