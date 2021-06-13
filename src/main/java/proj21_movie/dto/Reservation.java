@@ -12,6 +12,10 @@ public class Reservation {
 	private int resTeen;			// 인원(청소년)
 	private int resPref;			// 인원(우대)
 
+	
+	public Reservation() {
+	}
+
 	public int getResNo() {
 		return resNo;
 	}

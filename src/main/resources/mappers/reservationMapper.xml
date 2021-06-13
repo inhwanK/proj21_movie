@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="proj21_movie.mapper.ReservationMapper">
+
+	<resultMap type="Reservation" id="resReservation">
+		<id column="res_no" property="resNo" />
+		<association property="shwNo" javaType="ShowInfo"></association>
+		<association property="memNo" javaType="Member"></association>
+	</resultMap>
+	
+	<select id="selectReservationAll" resultMap="resReservation">
+		select res_no, shw_no, mem_no, res_price, res_date, res_adult, res_teen, res_pref 
+		from reservation
+	</select>
+	
+	<select id="selectReservationByUser" resultMap="resReservation">
+		select res_no, shw_no, mem_no, res_price, res_date, res_adult, res_teen, res_pref 
+		from reservation 
+		where mem_no = #{memNo}
+	</select>
+	
+	<insert id="insertReservation">
+		insert into reservation values 
+		(null, #{shwNo.shwNo}, #{memNo.memNo}, #{resPrice}, now(), #{resAdult}, #{resTeen}, #{resPref})
+		<selectKey keyProperty="resNo" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<delete id="deleteReservation">
+		delete from reservation 
+		where res_no = #{resNo}
+	</delete>
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="proj21_movie.mapper.CommentMapper">
+	
+	<resultMap type="Comment" id="resComment">
+		<id column="com_no" property="comNo" />
+		<association property="movNo" javaType="Movie"></association>
+	</resultMap>
+	
+	
+	<select id="selectCommentAll" resultMap="resComment">
+		select c.com_no, m.mov_no, m.mov_title, c.com_user, c.com_content, c.com_star, c.com_date 
+		from comment c join movie m on c.mov_no = m.mov_no
+	</select>
+	
+	<select id="selectCommentByUser" resultMap="resComment">
+		select c.com_no, m.mov_no, m.mov_title, c.com_user, c.com_content, c.com_star, c.com_date 
+		from comment c join movie m on c.mov_no = m.mov_no 
+		where c.com_user = #{comUser}
+	</select>
+	
+	<insert id="insertComment">
+		insert into comment values 
+		(null, #{movNo.movNo}, #{comUser}, #{comContent}, #{comStar}, now())
+		<selectKey keyProperty="comNo" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="updateComment">
+		update comment 
+		set mov_no = #{movNo.movNo}, com_user = #{comUser}, com_content = #{comContent}, 
+			com_star = #{comStar}, com_date = now() 
+		where com_no = #{comNo}
+	</update>
+	
+	<delete id="deleteComment">
+		delete from comment
+		where com_no = #{comNo}
+	</delete>
+</mapper>
