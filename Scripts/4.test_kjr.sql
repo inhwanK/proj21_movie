@@ -41,3 +41,20 @@ select inq_no, inq_title, inq_user, inq_detail, inq_date, inq_file, inq_answer, 
 
 
 -- 한줄평 --------------------------------------------------------------------------
+select com_no, mov_no, com_user, com_content, com_star, com_date from comment;
+
+select c.com_no, m.mov_no, m.mov_title, c.com_user, c.com_content, c.com_star, c.com_date 
+from comment c join movie m on c.mov_no = m.mov_no;
+
+select c.com_no, m.mov_no, m.mov_title, c.com_user, c.com_content, c.com_star, c.com_date 
+from comment c join movie m on c.mov_no = m.mov_no
+where c.com_user = 'test1@test.com';
+
+select * from comment;
+
+insert into comment values 
+(null, 4, 'test2@test.com', '감상평테스트', 3, now());
+
+update comment 
+	set mov_no = 5, com_user = 'test22@test.com', com_content = '감상평테스트2', com_star = 4, com_date = now()
+	where com_no = 4;

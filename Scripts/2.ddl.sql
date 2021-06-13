@@ -132,6 +132,7 @@ ALTER TABLE proj21_movie.movie_pic
 
 -- 한줄평
 CREATE TABLE proj21_movie.comment (
+	com_no      INT          NOT NULL COMMENT '한줄평번호', -- 한줄평번호
 	mov_no      INT          NOT NULL COMMENT '영화번호', -- 영화번호
 	com_user    VARCHAR(50)  NOT NULL COMMENT '작성자', -- 작성자
 	com_content VARCHAR(500) NOT NULL COMMENT '내용', -- 내용
@@ -144,11 +145,11 @@ COMMENT '한줄평';
 ALTER TABLE proj21_movie.comment
 	ADD CONSTRAINT PK_comment -- 한줄평 기본키
 		PRIMARY KEY (
-			mov_no -- 영화번호
+			com_no -- 한줄평번호
 		);
 
 ALTER TABLE proj21_movie.comment
-	MODIFY COLUMN mov_no INT NOT NULL AUTO_INCREMENT COMMENT '영화번호';
+	MODIFY COLUMN com_no INT NOT NULL AUTO_INCREMENT COMMENT '한줄평번호';
 
 -- 극장
 CREATE TABLE proj21_movie.theater (

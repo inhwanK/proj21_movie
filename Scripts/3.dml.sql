@@ -335,16 +335,16 @@ insert into movie_pic values (null, 3, 'test_pic4');
 insert into movie_pic values (null, 4, 'test_pic5');
 
 -- 한줄평
-select mov_no, com_user, com_content, com_star, com_date from comment;
-insert into comment values (1, 'test1@test.com', '재미있음', 4, now());
-insert into comment values (2, 'test1@test.com', '그저그럼', 3, now());
-insert into comment values (3, 'test1@test.com', '노잼', 2, now());
+select com_no, mov_no, com_user, com_content, com_star, com_date from comment;
+insert into comment values (null, 1, 'test1@test.com', '재미있음', 4, now());
+insert into comment values (null, 2, 'test1@test.com', '그저그럼', 3, now());
+insert into comment values (null, 3, 'test1@test.com', '노잼', 2, now());
 
 -- 극장
 select tht_no, tht_name, tht_address, tht_lat, tht_long, tht_subs, tht_detail from theater;
 insert into theater values (null, '대구이시아', '대구광역시 동구 봉무동 팔공로49길 51', 35.92078372990312, 128.6356898243599, 'test', '[ 대구 프리미엄 영화관 ] 전 좌석 리클라이너 설치, 프라이빗한 모션베드 단독룸 보유, 전관 레이저 영사기 대구 최초 도입! 생생하고 선명한 화질');
 insert into theater values (null, '대구신세계(동대구)', '대구 동구 동부로 149 신세계백화점 8~9층 메가박스 대구신세계지점', 35.878055790480275, 128.62843124026253, 'test', '메가박스가 대구 지역 최초로 고화질 영상과 생생한 사운드를 선사하는 기술 특화관 MX관. 전 좌석 가죽시트와 JBL사운드에서 즐기는 일반관으로 총 6개의 상영관을 오픈합니다.');
-insert into theater values (null, '북대구(칠곡)', ' 대구광역시 북구 동암로 100', 35.944270157017534, 128.56170906909924, 'test', '인구 25만의 자족신도시 대구 칠곡 최초의 멀티플렉스. 쇼핑, 영화, 외식까지 한 번에 즐기는 칠곡 문화의 중심');
+insert into theater values (null, '북대구(칠곡)', '대구광역시 북구 동암로 100', 35.944270157017534, 128.56170906909924, 'test', '인구 25만의 자족신도시 대구 칠곡 최초의 멀티플렉스. 쇼핑, 영화, 외식까지 한 번에 즐기는 칠곡 문화의 중심');
 
 -- 상영관
 select cin_no, cin_row, cin_col, cin_seat, cin_type, cin_adultprice, cin_teenprice, cin_prefprice from cinema;
