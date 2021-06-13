@@ -58,3 +58,11 @@ insert into comment values
 update comment 
 	set mov_no = 5, com_user = 'test22@test.com', com_content = '감상평테스트2', com_star = 4, com_date = now()
 	where com_no = 4;
+	
+
+
+-- 예매(reservation) -------------------------------------------------------------------
+select res_no, shw_no, mem_no, res_price, res_date, res_adult, res_teen, res_pref from reservation;
+select * from member;
+select * from showinfo;
+

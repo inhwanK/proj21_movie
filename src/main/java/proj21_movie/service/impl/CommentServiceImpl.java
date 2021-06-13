@@ -11,7 +11,7 @@ import proj21_movie.mapper.CommentMapper;
 import proj21_movie.service.CommentService;
 
 public class CommentServiceImpl implements CommentService {
-	static final Log log= LogFactory.getLog(MovieServiceImpl.class);
+	static final Log log= LogFactory.getLog(CommentServiceImpl.class);
 
 	@Autowired
 	private CommentMapper mapper;
@@ -26,7 +26,7 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public List<Comment> getCommentByUser(String user) {
 		List<Comment> list = mapper.selectCommentByUser(user);
-		log.debug("service - getLists() > " + list.size());
+		log.debug("service - getCommentByUser() > " + list.size());
 		return list;
 	}
 
