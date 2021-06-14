@@ -39,7 +39,7 @@
 			var pageBtn = "";
 			
 			for(i = 1; i < page + 1; i++){
-					pageBtn += "<a title="+ i +"페이지보기 href=\"javascript:void(0)\" pageNo="+ i + ">" + i + "</a>";
+					pageBtn += "<a title="+ i +"페이지보기 href=\"noticelist?selectPage="+ i + "\">" + i + "</a>"; // 더 좋은 방법이 있을 거야....
 			}
 			$("nav.pagination").append(pageBtn);
 		});
@@ -199,12 +199,8 @@
 		
 				<!-- pagination -->
 				<nav class="pagination">
-					<!-- <strong class="active">1</strong> 
-					<a title="2페이지보기" href="javascript:void(0)" pagenum="2">2</a> 
-					<a title="3페이지보기" href="javascript:void(0)" pagenum="3">3</a> 
-					<a title="10페이지보기" href="javascript:void(0)" pagenum="10">10</a>  
-					<a title="이후 10페이지 보기" href="javascript:void(0)" class="control next" pagenum="11">next</a>
-					<a title="마지막 페이지 보기" href="javascript:void(0)" class="control last"pagenum="565">last</a> -->
+					
+					
 				</nav> 
 				
 				<!--// pagination -->
