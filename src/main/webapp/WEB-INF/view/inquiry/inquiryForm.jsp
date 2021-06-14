@@ -12,6 +12,11 @@
 <body>
 	<section>
 		<div id="contents" class="">
+				<h1 class="title">
+					<a href="noticelist" style="font-size:20px;">공지사항</a>
+					<a href="inquiry">고객문의</a>
+				</h1>
+				
 				<h2 class="tit">1:1 문의</h2>
 				<div class="mypage-infomation mb30">
 					<ul class="dot-list">
