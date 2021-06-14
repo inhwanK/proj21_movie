@@ -21,7 +21,7 @@
 	
 	<insert id="insertMember">
 		insert into member values 
-		(null, #{memEmail}, #{memPasswd}, #{memBirthdate}, #{memName}, #{memPhone})
+		(null, #{memEmail}, password(#{memPasswd}), #{memBirthdate}, #{memName}, #{memPhone})
 		<selectKey keyProperty="memNo" resultType="int">
 			SELECT LAST_INSERT_ID()	
 		</selectKey>

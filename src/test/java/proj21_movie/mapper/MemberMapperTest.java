@@ -34,7 +34,7 @@ public class MemberMapperTest {
 		System.out.println();
 	}
 
-	@Test
+//	@Test
 	public void test01selectMemberByAll() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		List<Member> list = mapper.selectMemberByAll();
@@ -43,7 +43,7 @@ public class MemberMapperTest {
 		list.forEach(s -> log.debug(s.toString()));
 	}
 
-	@Test
+//	@Test
 	public void test02selectMemberByNo() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
@@ -53,7 +53,7 @@ public class MemberMapperTest {
 		log.debug(member.toString());
 	}
 
-	@Test
+//	@Test
 	public void test03selectMemberByEmail() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
@@ -74,10 +74,10 @@ public class MemberMapperTest {
 		Assert.assertEquals(1, res);
 		log.debug("res id >> " + res);
 		
-		mapper.deleteMember(newMember.getMemEmail());
+//		mapper.deleteMember(newMember.getMemEmail());
 	}
 
-	@Test
+//	@Test
 	public void test05updateMember() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Member newMember = new Member("test4_2@test.com", "1234", LocalDate.of(2020, 6, 22), "테스트4_2", "010-2231-3232");
@@ -90,7 +90,7 @@ public class MemberMapperTest {
 		mapper.deleteMember(newMember.getMemEmail());
 	}
 
-	@Test
+//	@Test
 	public void test06deleteMember() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 

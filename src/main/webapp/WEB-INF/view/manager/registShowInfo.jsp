@@ -12,6 +12,27 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${contextPath}/resources/css/manager/sidebar.css">
+<script type="text/javascript">
+	$(function(){
+		var contextPath = "${contextPath}";
+		
+		$('#cancel').on("click", function(e){
+			e.preventDefault();
+			window.location.href = contextPath + "/showInfoManager";		
+		});
+		
+		$('#new').on("click", function(e){
+			var newShow = { 
+						thtNo: $('#theater option:selected').thtNo,
+						cinNo: $('#cinema option').index($("#cinema option:selected")),
+						movNo: $('#movie').val(),
+						shwDate: $('#date').val(),
+						shwStarttime: $('#start').val()
+					}
+			alert("data > " + newShow.thtNo);
+		});
+	});
+</script>
 </head>
 <body>
 <div id="page-wrapper">
@@ -40,39 +61,47 @@
             <div class="form">
                <form>
                   <div class="form-group">
-                     <label>극장번호</label>
-                     <select class="form-control">
-                     	<option>신세계</option>
-                     	<option>칠성</option>
-                     	<option>어디?</option>
+                     <label>극장</label>
+                     <select id="theater" class="form-control">
+                    	<option selected>극장</option>
+                     	<c:forEach items="${getTheaterList }" var="theater">
+                     		<option><c:out value="${theater }"/></option>
+                     	</c:forEach>
                      </select>
                   </div>
                   <div class="form-group">
-                     <label>상영관번호</label>
-                     <select class="form-control">
+                     <label>상영관</label>
+                     <select id="cinema" class="form-control">
+                     	<option selected>상영관</option>
                      	<option>1(2D)</option>
                      	<option>2(3D)</option>
                      	<option>3(4D)</option>
                      </select>
                   </div>
                   <div class="form-group">
-                     <label>영화번호</label>
-                     <select class="form-control">
-                     	<option>반지의제왕</option>
-                     	<option>해리포터</option>
-                     	<option>크루엘라</option>
+                     <label>영화제목</label>
+                     <select id="movie" class="form-control">
+                     	<option selected>영화</option>
+                     	<c:forEach items="${getMovieList }" var="movie">
+                     		<option><c:out value="${movie.movTitle }"/></option>
+                     	</c:forEach>
                      </select>
                   </div>
                   <div class="form-group">
                      <label>상영일</label>
-                     <input type="text" class="form-control" placeholder="2021-06-02">
+                     <input type="text" id="date" class="form-control" placeholder="2021-06-02">
                   </div>
                   <div class="form-group">
                      <label>시작시간</label>
-                     <input type="text" class="form-control">
+                     <select id="start" class="form-control">
+                     	<option selected>시작시간</option>
+                     	<option>10:00</option>
+                     	<option>14:00</option>
+                     	<option>20:00</option>
+                     </select>
                   </div>
-                  <button type="submit" class="btn btn-primary">등록</button>
-                  <button class="btn btn-primary">취소</button>
+                  <button id="new" class="btn btn-primary">등록</button>
+                  <button id="cancel" class="btn btn-primary">취소</button>
                </form>
             </div>
          </div>

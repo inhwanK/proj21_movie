@@ -72,4 +72,4 @@ select s.shw_no, c.cin_no, c.cin_type, c.cin_adultprice, c.cin_teenprice, c.cin_
 from showinfo s, cinema c 
 where s.cin_no = c.cin_no;
 
-
+select * from member;

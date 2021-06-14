@@ -12,6 +12,36 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${contextPath}/resources/css/manager/sidebar.css">
+<script type="text/javascript">
+	$(function(){
+		var contextPath = "${contextPath}"
+		$.get(contextPath + "/api/showinfo",
+			function(json){
+				var dataLength = json.length;
+				if (dataLength >= 1) {
+					var sCont = "";
+					for (i = 0; i < dataLength; i++) {
+						sCont += "<tr>";
+						sCont += "<td id='no'>" + json[i].shwNo + "</td>";
+						sCont += "<td>" + json[i].thtNo.thtName + "</td>";
+						sCont += "<td>" + json[i].cinNo.cinNo + "관</td>";
+						sCont += "<td>" + json[i].movNo.movTitle + "</td>";
+						sCont += "<td>" + json[i].shwDate + "</td>";
+						sCont += "<td>" + json[i].shwStarttime + "</td>";
+						sCont += "<td>" + json[i].shwEndtime + "</td>";
+						sCont += "<td><button id='modify' class='btn btn-primary'>수정</button></td>";
+						sCont += "<td><button id='remove' name='remove' class='btn btn-primary'>삭제</button></td>";
+						sCont += "</tr>";
+					}
+					$("#load:last-child").append(sCont);
+				}
+		});
+		
+		$('#new').on("click", function(){
+			window.location.href = contextPath + "/registShowInfo";
+		});
+	});
+</script>
 </head>
 <body>
 <div id="page-wrapper">
@@ -37,7 +67,7 @@
   <div id="page-content-wrapper">
     <div class="container-fluid">
       <h1 class="text-center">상영관리</h1>
-      <button class="btn btn-primary">상영 영화 추가</button>
+      <button id="new" class="btn btn-primary">상영 영화 추가</button>
       <table class="table table-hover table-striped text-center" style="border: 1px solid;">
       	<thead>
       		<tr>
@@ -52,40 +82,7 @@
       			<th></th>
       		</tr>
       	</thead>
-      	<tbody>
-      		<tr>
-      			<td>1</td>
-      			<td>신세계</td>
-      			<td>1관</td>
-      			<td>반지의제왕</td>
-      			<td>2021-05-30</td>
-      			<td>10:00</td>
-      			<td>13:00</td>
-      			<td><button class="btn btn-primary">수정</button></td>
-      			<td><button class="btn btn-primary">삭제</button></td>
-      		</tr>
-      		<tr>
-      			<td>2</td>
-      			<td>신세계</td>
-      			<td>1관</td>
-      			<td>반지의제왕</td>
-      			<td>2021-05-30</td>
-      			<td>10:00</td>
-      			<td>13:00</td>
-      			<td><button class="btn btn-primary">수정</button></td>
-      			<td><button class="btn btn-primary">삭제</button></td>
-      		</tr>
-      		<tr>
-      			<td>3</td>
-      			<td>신세계</td>
-      			<td>1관</td>
-      			<td>반지의제왕</td>
-      			<td>2021-05-30</td>
-      			<td>10:00</td>
-      			<td>13:00</td>
-      			<td><button class="btn btn-primary">수정</button></td>
-      			<td><button class="btn btn-primary">삭제</button></td>
-      		</tr>
+      	<tbody id="load">
       	</tbody>
       </table>
     </div>
