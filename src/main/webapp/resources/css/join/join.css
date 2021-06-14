@@ -134,11 +134,11 @@ nav ul {
 
 /* section */
 section {
-	width: auto;
-	margin: 0 auto;
-	margin-left: 38%;
-	position: static;
-	display: block;
+	margin: auto;
+	width: 1273px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 section #joinFormArea {

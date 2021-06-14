@@ -47,7 +47,7 @@ public class RestLoginController {
 		return ResponseEntity.ok(member);
 	}
 	
-	@PostMapping("/login/")
+	@PostMapping("/login")
 	public ResponseEntity<Object> newMember(@RequestBody Member member, Errors errors) {
 		if (errors.hasErrors()) {
 			return ResponseEntity.badRequest().build();
