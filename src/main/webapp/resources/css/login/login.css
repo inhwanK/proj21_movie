@@ -1,0 +1,237 @@
+@charset "UTF-8";
+
+/* Fontawesome 4.7 */
+@import
+	url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+	;
+
+@font-face {
+	font-family: NanumBarunGothic;
+	font-weight: 400;
+	src:
+		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.eot);
+	src:
+		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.eot?#iefix)
+		format('embedded-opentype'),
+		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.woff)
+		format('woff'),
+		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.ttf)
+		format('truetype')
+}
+
+@font-face {
+	font-family: 'IBMPlexSansKR-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-family: 'IBMPlexSansKR-Regular', sans-serif;
+}
+
+a:link {
+	text-decoration: none
+}
+
+a:active, a:focus, a:hover {
+	text-decoration: underline;
+}
+
+ol, ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0
+}
+
+/* body */
+
+/* header */
+header {
+	margin: auto;
+	width: 1273px;
+	position: relative;
+}
+
+#header_ci {
+	width: 150px;
+	margin: 0px auto;
+	align-items: center;
+	position: relative;
+	left: 120px;
+	box-sizing: border-box;
+}
+
+header div {
+	display: inline;
+	float: right;
+	text-align: right;
+}
+
+header div a {
+	text-decoration: none;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 1.0em;
+	color: RGB(136, 136, 136);
+}
+
+/* <nav> */
+nav {
+	margin: auto;
+	position: relative;
+	padding: 0px;
+}
+
+nav ul {
+	width: 1273px;
+	padding-left: 0;
+	list-style: none;
+	border-bottom: 0.5px solid RGB(3, 22, 52);
+	padding-bottom: 5px;
+	margin: 10px auto;
+	position: relative;
+}
+
+.nav {
+	display: inline-block;
+	padding: 0 90px;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+#mypagebtn {
+	display: inline-block;
+	padding: 0 0 0 70px;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+.nav a {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	padding-bottom: 5px;
+}
+
+.nav a:hover {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	padding-bottom: 4px;
+	border-bottom: 5px solid RGB(3, 22, 52);
+}
+
+.fa-user {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	display: inline-block;
+}
+
+/* section */
+section {
+	width: auto;
+	margin: 0 auto;
+	margin-left: 38%;
+	position: static;
+	display: block;
+}
+
+section #loginFormArea {
+	text-align: center;
+	column-width: 15em;
+	background: #ffffff;
+	padding: 2em 12em;
+	column-width: 15em;
+}
+
+.form {
+	height: 30px;
+	width: 250px;
+	text-align: center;
+	font-size: 15px;
+}
+
+.title {
+	width: 450px; /* 고정 너비 */
+	height: 50px; /* 높이 */
+	background: #3e2789; /* 배경색 */
+	margin-bottom: 30px;
+	padding: 0;
+	text-align: center;
+	line-height: 50px;
+	color: #fff;
+	margin-left: -1%;
+}
+
+.fm_box {
+	border: 1px solid #eee;
+	height: 330px;
+	width: 450px;
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 100px;
+}
+
+.bt {
+	height: 35px;
+	width: 258px;
+	text-align: center;
+	margin-left: 1%;
+	font-size: 15px;
+	margin-top: 10px;
+	background-color: #3e2789;
+	color: #fff;
+}
+
+a {
+	text-decoration: none;
+	color: #4b4b4b;
+}
+
+.text_h:link, .text_h:visited, .text_h:active, .text_h:hover {
+	text-decoration: none;
+	color: #000;
+}
+
+.chbox {
+	float: left;
+	margin-left: 22%;
+	color: #4b4b4b;
+}
+
+fieldset {
+	border: 2px solid #ffffff;
+	margin: 0;
+}
+
+/* footer */
+footer {
+	margin: auto;
+	width: 1273px;
+}
+
+#content {
+	border-top: 0.5px solid RGB(3, 22, 52);
+	text-align: left;
+	margin-top: 0;
+}
+
+#textarea {
+	margin-top: 22.5px;
+}
+
+#textarea p {
+	color: black;
+	font-size: 0.8em;
+	margin: 0;
+}
+
+#footer_ci {
+	width: 100px;
+	margin: 0px;
+	float: left;
+}
