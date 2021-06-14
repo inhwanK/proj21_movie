@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="contextPath" value="<%=request.getContextPath() %>" />
+<c:set var="contextPath" value="<%=request.getContextPath()%>" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,62 +23,59 @@
 			method: "get",
 			dataType: "json"
 		})
-		.done(function(json){
-			
+		.done(function(json){	
 			var dateForm = getFormatDate(json.notDate);
 			
 			$("p.tit[title = '제목']").append(json.notTitle);
 			$("span.txt[title = '등록일']").append(dateForm);
 			$("div.cont[title = '내용']").append(json.notDetail);
-		})
+		});
+		
 	});
+		
 </script>
-<link rel="stylesheet" href="${contextPath}/resources/css/notice/noticeDetail.css">
+<link rel="stylesheet"	href="${contextPath}/resources/css/notice/noticeDetail.css">
 </head>
 <body>
 
 	<div id="notice-detail-wrap">
-	<div id="contents">
-		<h2 class="tit">공지사항</h2>
+		<div id="contents">
+			<h2 class="tit">공지사항</h2>
 
-		<div class="table-wrap">
-			<div class="board-view">
-				<div class="tit-area">
-					<p class="tit" title="제목">
-					
-					</p>
-				</div>
+			<div class="table-wrap">
+				<div class="board-view">
+					<div class="tit-area">
+						<p class="tit" title="제목"></p>
+					</div>
 
-				<div class="info">
-					<p>
-						<span class="tit">등록일</span> 
-						<span class="txt" title="등록일"></span>
-					</p>
-				</div>
+					<div class="info">
+						<p>
+							<span class="tit">등록일</span> <span class="txt" title="등록일"></span>
+						</p>
+					</div>
 
-				<div class="cont" title="내용">
-				
+					<div class="cont" title="내용"></div>
 				</div>
 			</div>
-		</div>
 
-		<div class="prev-next">
-			<div class="line prev">
-				<p class="tit">이전</p>
-				<p class="link">이전글 제목</p> 
-				<!-- 글 존재하면 a태그 존재하지 않으면 p 태그  -->
+			<div class="prev-next">
+				<div class="line prev" title="이전">
+					<p class="tit" title="이전">이전</p>
+					<p class="link" title="이전">이전글 제목</p>
+					<!-- 글 존재하면 a태그 존재하지 않으면 p 태그  -->
+				</div>
+				<div class="line next" title="다음">
+					<p class="tit" title="다음">다음</p>
+
+					<a class="link moveBtn" data-no="10348" title="다음"> </a>
+
+				</div>
 			</div>
-			<div class="line next">
-				<p class="tit">다음</p>
-
-				<a href="#" class="link moveBtn" data-no="10348" title="">다음글 제목 </a>
-
+			<div class="btn-group pt40">
+				<a href="${contextPath}/noticelist" class="button large listBtn"
+					title="">목록</a>
 			</div>
 		</div>
-		<div class="btn-group pt40">
-			<a href="${contextPath}/noticelist" class="button large listBtn" title="">목록</a>
-		</div>
-	</div>
 	</div>
 </body>
 </html>

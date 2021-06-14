@@ -106,13 +106,13 @@ nav ul {
 
 /* section */
 section{
-	overflow: auto;
-    overflow-y: scroll;
     letter-spacing: 0;
     line-height: 1.5;
-    font-size: 15px;
+    font-size: 18px;
     color: #444;
     font-weight: 400;
+    margin: auto;
+	width: 1273px;
 }
 #contents {
     width: 1273px;
@@ -124,23 +124,14 @@ section{
     width: calc(100% - 260px);
 }
 
-h2.tit {
+h1.title {
     padding: 0 0 26px 0;
-    font-size: 1.8666em;
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: -1px;
     line-height: 1.1;
     color: #222;
-}
-
-h2 {
-    display: block;
-    font-size: 1.5em;
-    margin-block-start: 0.83em;
-    margin-block-end: 0.83em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
+    font-size: 40px;
+    /* display: inline; */
 }
 
 .tab-block:before {
@@ -243,15 +234,10 @@ tbody {
     border-color: inherit;
 }
 
-tr {
-    display: table-row;
-    vertical-align: inherit;
-    border-color: inherit;
-}
-
 .board-list>tbody>tr>td, .board-list>tbody>tr>th {
     height: 45px;
-    padding: 10px;
+    padding: 10px 20px 10px 20px;
+    font-size : 20px;
     border: 1px solid #eaeaea;
     border-width: 0 0 1px 0;
     text-align: center;
@@ -309,8 +295,8 @@ article, aside, figcaption, figure, footer, header, main, nav, section {
 }
 
 #notice-wrap{
-	width:70%;
-	margin: 200px auto 0 auto;
+	width:100%;
+	margin: 50px auto 50px auto;
 }
 
 /* footer */
