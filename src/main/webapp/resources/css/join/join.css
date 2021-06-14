@@ -1,0 +1,222 @@
+@charset "UTF-8";
+
+/* Fontawesome 4.7 */
+@import
+	url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+	;
+
+@font-face {
+	font-family: NanumBarunGothic;
+	font-weight: 400;
+	src:
+		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.eot);
+	src:
+		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.eot?#iefix)
+		format('embedded-opentype'),
+		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.woff)
+		format('woff'),
+		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.ttf)
+		format('truetype')
+}
+
+@font-face {
+	font-family: 'IBMPlexSansKR-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-family: 'IBMPlexSansKR-Regular', sans-serif;
+}
+
+a:link {
+	text-decoration: none
+}
+
+a:active, a:focus, a:hover {
+	text-decoration: underline;
+}
+
+ol, ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0
+}
+
+/* body */
+
+/* header */
+header {
+	margin: auto;
+	width: 1273px;
+	position: relative;
+}
+
+#header_ci {
+	width: 150px;
+	margin: 0px auto;
+	align-items: center;
+	position: relative;
+	left: 120px;
+	box-sizing: border-box;
+}
+
+header div {
+	display: inline;
+	float: right;
+	text-align: right;
+}
+
+header div a {
+	text-decoration: none;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 1.0em;
+	color: RGB(136, 136, 136);
+}
+
+/* <nav> */
+nav {
+	margin: auto;
+	position: relative;
+	padding: 0px;
+}
+
+nav ul {
+	width: 1273px;
+	padding-left: 0;
+	list-style: none;
+	border-bottom: 0.5px solid RGB(3, 22, 52);
+	padding-bottom: 5px;
+	margin: 10px auto;
+	position: relative;
+}
+
+.nav {
+	display: inline-block;
+	padding: 0 90px;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+#mypagebtn {
+	display: inline-block;
+	padding: 0 0 0 70px;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+.nav a {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	padding-bottom: 5px;
+}
+
+.nav a:hover {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	padding-bottom: 4px;
+	border-bottom: 5px solid RGB(3, 22, 52);
+}
+
+.fa-user {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	display: inline-block;
+}
+
+/* section */
+section {
+	width: auto;
+	margin: 0 auto;
+	margin-left: 38%;
+	position: static;
+	display: block;
+}
+
+section #joinFormArea {
+	column-width: 15em;
+	background: #fff;
+	padding: 2em 12em;
+}
+
+div {
+	margin-top: 10px;
+}
+
+ul, li {
+	list-style: none;
+	color: #454545;
+}
+
+li {
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+.box {
+	width: 450px;
+	height: 30px;
+	border: 1px solid #666;
+	padding: 10px;
+}
+
+button {
+	background: #5700ae;
+	color: white;
+	width: 475px;
+	border: 1px solid #666;
+	height: 50px;
+	font-size: 20px;
+	text-align: center;
+}
+
+/* 이용약관 */
+.join_box {
+	width: 450px;
+	height: 250px;
+	overflow: auto;
+	border: 1px solid black;
+	padding: 0 0.5em;
+	text-align: left;
+}
+
+.chbox {
+	float: none;
+	color: #454545;
+}
+
+
+/* footer */
+footer {
+	margin: auto;
+	width: 1273px;
+}
+
+#content {
+	border-top: 0.5px solid RGB(3, 22, 52);
+	text-align: left;
+	margin-top: 0;
+}
+
+#textarea {
+	margin-top: 22.5px;
+}
+
+#textarea p {
+	color: black;
+	font-size: 0.8em;
+	margin: 0;
+}
+
+#footer_ci {
+	width: 100px;
+	margin: 0px;
+	float: left;
+}

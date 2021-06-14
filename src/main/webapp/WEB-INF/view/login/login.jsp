@@ -1,52 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="<%=request.getContextPath() %>" />
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>로그인</title>
-<c:set var="contextPath" value="<%=request.getContextPath() %>"/>
-<link rel="stylesheet" href="${contextPath}/resources/css/login.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<meta charset="UTF-8">
+	<title>로그인</title>
+	<link rel="stylesheet" href="${contextPath}/resources/css/login/login.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 	<header>
-		<img id="header_ci" alt="" src="${contextPath}/resources/image/logow1_2.png">
-		<ul>
-			<li><a class="sub_menu" href="#">로그인</a></li>
-			<li><a class="sub_menu" href="#">회원가입</a></li>
-			<li><a class="sub_menu" href="#">바로예매</a></li>
-		</ul>
+		<a href="main" title="박스무비 메인으로 가기">
+			<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/movie/ci.png">
+		</a>
+		<div>
+			<a href="#">로그인</a>
+			<a href="#">회원가입</a>
+			<a href="#">바로예매</a>
+		</div>
+
 	</header>
-	<nav role="navigation">
-		<ul id="main-menu">
-			<li><a href="#">영화</a>
-				<ul id="sub-menu">
-					<li><a href="#" aria-label="subemnu">submenu</a></li>
-					<li><a href="#" aria-label="subemnu">submenu</a></li>
-					<li><a href="#" aria-label="subemnu">submenu</a></li>
-					<li><a href="#" aria-label="subemnu">submenu</a></li>
-				</ul>
-			</li>
-			<li><a href="#">예매</a>
-				<ul id="sub-menu">
-					<li><a href="#" aria-label="subemnu">submenu</a></li>
-					<li><a href="#" aria-label="subemnu">submenu</a></li>
-					<li><a href="#" aria-label="subemnu">submenu</a></li>
-					<li><a href="#" aria-label="subemnu">submenu</a></li>
-				</ul>
-			</li>
-			<li><a href="#">극장</a>
-				<ul id="sub-menu">
-					<li><a href="#" aria-label="subemnu">submenu</a></li>
-					<li><a href="#" aria-label="subemnu">submenu</a></li>
-					<li><a href="#" aria-label="subemnu">submenu</a></li>
-					<li><a href="#" aria-label="subemnu">submenu</a></li>
-					<li><a href="#" aria-label="subemnu">submenu</a></li>
-				</ul>
-			</li>
-			<li><a href="#">고객센터</a></li>
+	
+	<nav>
+		<ul>
+			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
+			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
+			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
+			<li class="nav"><a href="#">이벤트</a></li>
+			<li class="nav"><a href="#">고객센터</a></li>
+			<li id="mypagebtn"><a href="#"><i class="far fa-user"></i></a></li> <!-- mypage 연결 필요 -->
 		</ul>
 	</nav>
 
@@ -79,9 +63,12 @@
 	</section>
 
 	<footer>
-		<div>
-			<img id="footer_ci" alt="" src="image/logow1_2.png">
-			<p>COPYRIGHT © MegaboxJoongAng, Inc. All rights reserved</p>
+		<div id="content">
+			<img id="footer_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png">
+			<div id="textarea">
+				<p>COPYRIGHT © BoxMovie, Inc. All rights reserved</p>
+				<p>대구광역시 서구 서대구로 7길2 (내당동 245-4번지 2층) ARS 053-555-1333</p>
+			</div>
 		</div>
 	</footer>
 </body>
