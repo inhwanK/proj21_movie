@@ -3,13 +3,17 @@ package proj21_movie.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ShowInfo {
 	private int shwNo; // 상영정보 번호
 	private Theater thtNo; // 극장 번호
 	private Cinema cinNo; // 상영관 번호
 	private Movie movNo; // 영화 번호
 	private LocalDate shwDate; // 상영일
+	@JsonFormat(pattern = "HH:mm")
 	private LocalTime shwStarttime; // 시작 시간
+	@JsonFormat(pattern = "HH:mm")
 	private LocalTime shwEndtime; // 종료 시간
 
 	public ShowInfo() {

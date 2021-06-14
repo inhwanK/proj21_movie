@@ -7,13 +7,27 @@
 <head>
 	<meta charset="UTF-8">
 	<title>바로예매</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/reserve.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/reserve/reserve.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+	<script type="text/javascript">
+		var today = new Date();
+		
+		var year = today.getFullYear();
+		var month = today.getMonth()+1;
+		var date = today.getDate();
+		
+		month = month >= 10 ? month : "0" + month;
+		date = date >= 10 ? date : "0" + date;
+		
+		console.log(""+ year + "년" + month + "월" + date + "일");
+	
+	</script>
 </head>
 <body>
 	<header>
 		<a href="main" title="박스무비 메인으로 가기">
-			<img id="header_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
+			<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png">
 		</a>
 		<div>
 			<a href="#">로그인</a>
@@ -121,7 +135,7 @@
 	
 	<footer>
 		<div id="content">
-			<img id="footer_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
+			<img id="footer_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png">
 			<div id="textarea">
 				<p>COPYRIGHT © BoxMovie, Inc. All rights reserved</p>
 				<p>대구광역시 서구 서대구로 7길2 (내당동 245-4번지 2층) ARS 053-555-1333</p>
