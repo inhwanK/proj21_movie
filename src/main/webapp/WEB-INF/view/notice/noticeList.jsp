@@ -38,7 +38,7 @@
 				}
 				$("tbody").append(list);
 			}
-			;
+
 
 			var pageBtn = "";
 
@@ -49,6 +49,10 @@
 			}
 			$("nav.pagination").append(pageBtn);
 		});
+		
+		
+		// 이벤트 등록
+		
 	});
 </script>
 <link rel="stylesheet"
@@ -85,7 +89,10 @@
 		<div id="notice-wrap">
 
 			<div id="contents">
-				<h1 class="title"><span>공지사항</span> <span>고객문의</span></h1>
+				<h1 class="title">
+					<a href="noticelist">공지사항</a>
+					<a href="inquiry" style="font-size:20px;">고객문의</a>
+				</h1>
 
 
 				<!-- 검색 기능 -->
