@@ -22,8 +22,8 @@ import proj21_movie.exception.DuplicateMemberException;
 import proj21_movie.service.MemberService;
 
 @Controller
-@RequestMapping("/login")
-public class LoginController {
+@RequestMapping("/api")
+public class RestLoginController {
 
 	@Autowired
 	private MemberService service;

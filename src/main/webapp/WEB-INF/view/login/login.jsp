@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="<%=request.getContextPath() %>" />
 <!DOCTYPE html>
 <html>
@@ -9,6 +10,12 @@
 	<title>로그인</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/login/login.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			
+		});
+	</script>
 </head>
 <body>
 	<header>
@@ -43,10 +50,10 @@
 							<td><div class="title"><h1>로그인</h1></div></td>
 						</tr>
 						<tr>
-							<td><input class="form" type="text" name="id" id="id" placeholder="아이디" /></td>
+							<td><input class="form" type="text" name="id" id="id" placeholder="아이디" required /></td>
 						</tr>
 						<tr>
-							<td><input class="form" type="password" name="passwd" id="passwd" placeholder="비밀번호" /></td>
+							<td><input class="form" type="password" name="passwd" id="passwd" placeholder="비밀번호" required /></td>
 						</tr>
 					</table>
 					<label class="chbox"><input type="checkbox" name="chek_box" value="id_coki">아이디 저장</label> 

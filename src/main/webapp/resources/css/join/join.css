@@ -33,6 +33,7 @@ body {
 	padding: 0;
 	text-align: center;
 	font-family: 'IBMPlexSansKR-Regular', sans-serif;
+	margin-right: 1%;
 }
 
 a:link {
@@ -168,7 +169,7 @@ li {
 }
 
 button {
-	background: #5700ae;
+	background: #3e2789;
 	color: white;
 	width: 475px;
 	border: 1px solid #666;
