@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="contextPath" value="<%=request.getContextPath() %>" />
 <!DOCTYPE html>
 <html>
@@ -9,6 +11,12 @@
 	<title>회원가입</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/join/join.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		 
+	});
+	</script>
 </head>
 <body>
 	<header>
@@ -30,7 +38,8 @@
 			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
 			<li class="nav"><a href="#">이벤트</a></li>
 			<li class="nav"><a href="#">고객센터</a></li>
-			<li id="mypagebtn"><a href="#"><i class="far fa-user"></i></a></li> <!-- mypage 연결 필요 -->
+			<li id="mypagebtn"><a href="#"><i class="far fa-user"></i></a></li> 
+			<!-- mypage 연결 필요 -->
 		</ul>
 	</nav>
 
@@ -54,7 +63,8 @@
 		<ul>
 			<li>
 				<label class="chbox">
-				<input type="checkbox" name="chek_box" value="id_coki">이용약관에 동의합니다. </label>
+				<form name=Join action="/" onSubmit="return CheckForm(this)" />
+				<input name="checkAgre" type="checkbox" value="" id="checkAgre" class="inputCheck" />이용약관에 동의합니다.</label>
 			</li>
 		</ul>
 		<form action="join">
@@ -73,7 +83,7 @@
 					<li>
 						<span>패스워드 확인 </span> 
 						<br> 
-						<input type="password" placeholder="패스워드를 한번 더	 입력하세요" class='box' id="confirmPassword" required />
+						<input type="password" placeholder="패스워드를 한번 더	입력하세요" class='box' id="confirmPassword" required />
 					</li>
 					<li>
 						<span>이름 </span> 
