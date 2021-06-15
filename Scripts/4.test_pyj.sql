@@ -15,3 +15,8 @@ update `member`
  where mem_no = 4;
 
 delete from `member` where mem_no = 4;
+
+select mem_email, mem_passwd
+  from member
+ where mem_email and mem_passwd;
+   

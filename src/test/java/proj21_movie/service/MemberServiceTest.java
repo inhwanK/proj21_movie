@@ -101,5 +101,4 @@ public class MemberServiceTest {
 		
 		log.debug("res > " + res);
 	}
-
 }

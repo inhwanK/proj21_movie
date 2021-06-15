@@ -10,8 +10,7 @@ public class Member {
 	private String memName; // 이름
 	private String memPhone; // 연락처
 
-	public Member() {
-	}
+	public Member() {}
 
 	public Member(int memNo) {
 		this.memNo = memNo;

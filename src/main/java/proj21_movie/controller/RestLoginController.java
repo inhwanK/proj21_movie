@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import proj21_movie.dto.Member;
 import proj21_movie.exception.DuplicateMemberException;
 import proj21_movie.service.MemberService;
@@ -46,14 +47,15 @@ public class RestLoginController {
 
 		return ResponseEntity.ok(member);
 	}
-	
+
 	@PostMapping("/login")
 	public ResponseEntity<Object> newMember(@RequestBody Member member, Errors errors) {
 		if (errors.hasErrors()) {
 			return ResponseEntity.badRequest().build();
-		} try {
+		}
+		try {
 			service.registerMember(member);
-			
+
 			URI uri = URI.create("/api/login/" + member.getMemEmail());
 			System.out.println("member.getMemEmail() > " + member.getMemEmail());
 			return ResponseEntity.created(uri).body(member.getMemEmail());
@@ -61,13 +63,13 @@ public class RestLoginController {
 			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
 	}
-	
+
 	@PatchMapping()
 	public ResponseEntity<Object> updateMember(@PathVariable String memEmail, @RequestBody Member member) {
 		System.out.println("updateMember > " + member);
 		return ResponseEntity.ok(service.modifyMember(member));
 	}
-	
+
 	@DeleteMapping("/login/{memEmail}")
 	public ResponseEntity<Object> deleteMember(@PathVariable String memEmail) {
 		System.out.println("deleteMember > " + memEmail);

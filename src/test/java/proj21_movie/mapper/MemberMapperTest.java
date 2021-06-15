@@ -100,4 +100,5 @@ public class MemberMapperTest {
 		int res = mapper.deleteMember(newMember.getMemEmail());
 		Assert.assertEquals(1, res);
 	}
+	
 }
