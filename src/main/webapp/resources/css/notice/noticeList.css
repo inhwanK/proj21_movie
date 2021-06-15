@@ -1,108 +1,4 @@
 @charset "UTF-8";
-@font-face {
-	font-family: 'IBMPlexSansKR-Regular';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'IBMPlexSansKR-Regular';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-body {
-  	font-family: 'IBMPlexSansKR-Regular', sans-serif;
-	margin: 0;
-	padding: 0;
-	text-align: center;
-}
-/* header */
-header {
-	margin: auto;
-	width: 1273px;
-	position: relative;
-}
-
-#header_ci {
-	width: 150px;
-	margin: 0px auto;
-	align-items: center;
-	position: relative;
-	left: 120px;
-	box-sizing: border-box;
-}
-
-header div {
-	display: inline;
-	float: right;
-	text-align: right;
-	padding-bottom: 10px;
-}
-
-header div a {
-	text-decoration: none;
-	padding-left: 15px;
-	padding-right: 15px;
-	font-size: 1.0em;
-	color: RGB(136, 136, 136);
-}
-
-/* <nav> */
-nav {
-	margin: auto;
-	position: relative;
-	padding: 0px;
-}
-
-nav ul {
-	width: 1273px;
-	padding-left: 0;
-	list-style: none;
-	border-bottom: 0.5px solid RGB(3, 22, 52);
-	padding-bottom: 5px;
-	margin: 10px auto;
-	position: relative;
-}
-
-.nav {
-	display: inline-block;
-	padding: 0 90px;
-	font-weight: bold;
-	font-size: 1.3em;
-}
-
-#mypagebtn {
-	display: inline-block;
-	padding: 0 0 0 70px;
-	font-weight: bold;
-	font-size: 1.3em;
-}
-
-.nav a {
-	text-decoration: none;
-	color: RGB(3, 22, 52);
-	padding-bottom: 5px;
-}
-
-.nav a:hover {
-	text-decoration: none;
-	color: RGB(3, 22, 52);
-	padding-bottom: 4px;
-	border-bottom: 5px solid RGB(3, 22, 52);
-}
-
-.fa-user {
-	text-decoration: none;
-	color: RGB(3, 22, 52);
-	display: inline-block;
-}
 
 /* section */
 section{
@@ -111,8 +7,8 @@ section{
     font-size: 18px;
     color: #444;
     font-weight: 400;
-    margin: auto;
-	width: 1273px;
+    margin: 50px auto;
+    text-align: center;
 }
 #contents {
     width: 1273px;
@@ -137,29 +33,6 @@ h1.title {
  h1.title>a:link, h1.title>a:active, h1.title>a:hover, h1.title>a:visited{
 	color:#222; 
 }
-.tab-block:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 35px;
-    width: 100%;
-    height: 1px;
-    background-color: #d8d9db;
-}
-
-.tab-block ul:after, .tab-block ul:before {
-    content: '';
-    display: table;
-}
-
-.tab-block ul:after {
-    clear: both;
-}
-
-.tab-block ul:after, .tab-block ul:before {
-    content: '';
-    display: table;
-}
 
 ul {
     display: block;
@@ -169,12 +42,6 @@ ul {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     padding-inline-start: 40px;
-}
-
-ol, ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
 }
 
 .board-list-util:after, .board-list-util:before {
@@ -263,9 +130,9 @@ a:link {
     vertical-align: middle;
 }
 
-article, aside, figcaption, figure, footer, header, main, nav, section {
+/* article, aside, figcaption, figure, footer, header, main, nav, section {
     display: block;
-}
+} */
 
 .pagination {
     clear: both;
@@ -275,7 +142,7 @@ article, aside, figcaption, figure, footer, header, main, nav, section {
     text-align: center;
 }
 
-.pagination .control, .pagination a, .pagination strong {
+.pagination a {
     display: inline-block;
     position: relative;
     min-width: 32px;
@@ -291,41 +158,8 @@ article, aside, figcaption, figure, footer, header, main, nav, section {
     border-radius: 4px;
 }
 
-.pagination .active {
+.pagination .active{ /* 선택된 a 태그에 적용할 .active 클래스 스타일  */
     color: #fff;
     background-color: #01738b;
-    border-color: #01738b;
-}
-
-#notice-wrap{
-	width:100%;
-	margin: 50px auto 50px auto;
-}
-
-/* footer */
-footer {
-	margin: auto;
-	width: 1273px;
-}
-
-#content {
-	border-top: 0.5px solid RGB(3, 22, 52);
-	text-align: left;
-	margin-top: 0;
-}
-
-#textarea {
-	margin-top: 22.5px;
-}
-
-#textarea p {
-	color: black;
-	font-size: 0.8em;
-	margin: 0;
-}
-
-#footer_ci {
-	width: 100px;
-	margin: 0px;
-	float: left;
-}
+    border-color: #01738b;  
+} 

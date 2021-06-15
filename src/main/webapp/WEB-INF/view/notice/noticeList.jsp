@@ -22,48 +22,47 @@
 		var page = Math.ceil(totalNotice / 10);
 		var selectPage = "${selectPage}";
 
-		$.get(contextPath + "/api/noticelist/" + selectPage, function(json) {
+		$.get(contextPath + "/api/noticelist/"+selectPage,
+				function(json) {
 
-			var dataLength = json.length;
-			if (dataLength >= 1) {
-				var list = "";
-				for (i = 0; i < dataLength; i++) {
-					list += "<tr>";
-					list += "<td>" + json[i].notNo + "</td>";
-					list += "<td><a href='${contextPath}/notice?notNo="
-							+ json[i].notNo + "'>" + json[i].notTitle
-							+ "</a></td>"; //보여주면 안될 것 같은 정보.
-					list += "<td>" + getFormatDate(json[i].notDate) + "</td>";
-					list += "<tr>"
-				}
-				$("tbody").append(list);
-			}
+					var dataLength = json.length;
+					if (dataLength >= 1) {
+						var list = "";
+						for (i = 0; i < dataLength; i++) {
+							list += "<tr>";
+							list += "<td>" + json[i].notNo + "</td>";
+							list += "<td><a href='${contextPath}/notice?notNo="
+									+ json[i].notNo + "'>" + json[i].notTitle
+									+ "</a></td>"; //보여주면 안될 것 같은 정보.
+							list += "<td>" + getFormatDate(json[i].notDate)
+									+ "</td>";
+							list += "<tr>"
+						}
+						$("tbody").append(list);
+					}
 
+					var pageBtn = "";
 
-			var pageBtn = "";
+					for (i = 1; i < page + 1; i++) {
+						pageBtn += "<a title=" + i
+								+ "페이지보기 href=\"noticelist?selectPage=" + i
+								+ "\">" + i + "</a>"; // 더 좋은 방법이 있을 거야....
+					}
+					$("nav.pagination").append(pageBtn);
+				});
 
-			for (i = 1; i < page + 1; i++) {
-				pageBtn += "<a title=" + i
-						+ "페이지보기 href=\"noticelist?selectPage=" + i + "\">" + i
-						+ "</a>"; // 더 좋은 방법이 있을 거야....
-			}
-			$("nav.pagination").append(pageBtn);
-		});
-		
-		
 		// 이벤트 등록
-		
+
 	});
 </script>
-<link rel="stylesheet"
-	href="${contextPath}/resources/css/notice/noticeList.css">
+
+<link rel="stylesheet" href="${contextPath}/resources/css/notice/noticeList.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/notice/layout.css">
 <title>공지사항</title>
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css"
-	rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-	<header>
+	 <header>
 		<a href="${contextPath}/main"><img id="header_ci" alt="브랜드 로고"
 			src="${contextPath}/resources/images/ci.png"></a>
 		<div>
@@ -83,15 +82,15 @@
 			<li id="mypagebtn"><a href="${contextPath}/mypage"><i
 					class="far fa-user"></i></a></li>
 		</ul>
-	</nav>
+	</nav> 
 
 	<section>
-		<div id="notice-wrap">
+		<div>
 
 			<div id="contents">
 				<h1 class="title">
 					<a href="noticelist">공지사항</a>
-					<a href="inquiry" style="font-size:20px;">고객문의</a>
+					<a href="inquiry" style="font-size: 20px;">고객문의</a>
 				</h1>
 
 
@@ -119,9 +118,10 @@
 								<th scope="col">제목</th>
 								<th scope="col">등록일</th>
 							</tr>
+							
 						</thead>
 						<tbody>
-
+						
 						</tbody>
 					</table>
 				</div>
@@ -133,7 +133,7 @@
 			</div>
 		</div>
 	</section>
-	<footer>
+	 <footer>
 		<div id="content">
 			<img id="footer_ci" alt="브랜드 로고"
 				src="${contextPath}/resources/images/ci.png">

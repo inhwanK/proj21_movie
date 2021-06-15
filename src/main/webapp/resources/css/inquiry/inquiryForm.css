@@ -7,52 +7,13 @@ body {
     font-size: 15px;
     color: #444;
     font-weight: 400;
-    font-family: NanumBarunGothic,Dotum,'돋움',sans-serif;
 }
 
-h2 {
-    display: block;
-    font-size: 1.5em;
-    margin-block-start: 0.83em;
-    margin-block-end: 0.83em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
-}
-
-ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-}
-
-ol, ul {
+/* ol, ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-}
-
-li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-}
-
-dl {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-}
-
-dd, dl, dt {
-    margin: 0;
-    padding: 0;
-}
+} */
 
 form {
     display: block;
@@ -271,7 +232,63 @@ h2.tit {
 }
 
 #contents {
-    width: 70%;
-    margin: 200px auto 0 auto;
+    width: 100%;
+    margin: 50px auto 50px auto;
     padding: 0;
 }
+
+body
+header
+div
+nav
+ul
+li
+.nav
+#mypagebtn
+.far fa-user
+i
+
+h1
+.title
+#contents
+p
+.reset mt30 a-r font-orange
+
+form
+input
+div
+.table-wrap mt10 //
+table
+.board-form va-m
+
+tbody
+tr
+th
+label
+#qnaCustInqTitle
+.input-text
+.font-orange
+.input-text w150px
+#textarea //
+td
+.info-txt
+
+button
+#uploadBtn
+btn-image-add
+
+#imgList
+
+.btn-group pt40 //
+.button purple large //
+
+section
+footer
+#content
+#footer_ci
+
+
+
+ 
+ 
+ 
