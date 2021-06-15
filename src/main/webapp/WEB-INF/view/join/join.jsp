@@ -14,8 +14,35 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
 	$(function() {
+		 var contextPath = "<%=request.getContextPath() %>";
 		 
-	});
+		    $('#new').on("click", function(e){
+		        var newMember = {  memEmail: $('#memEmail').val()
+		        				 , memPasswd: $('#memPasswd').val()
+		        				 , confmemPasswd: $('#confmemPasswd').val()
+		        				 , memBirthdate: $('#memBirthdate').val()
+		        				 , memName: $('#memName').val()
+		        				 , memPhone: $('#memPhone').val()
+		        				 };
+		        alert("data > " + newMember.memEmail );
+		        $.ajax({
+		            url         : contextPath + "/api/join",
+		            type        : "POST",
+		            contentType : "application/json; charset=utf-8",
+		            datatype    : "json",
+		            cache       : false,
+		            data        : JSON.stringify(newMember),
+		            success     : function(res) {
+		                alert(res);
+		                window.location.href = contextPath + "/joinsuccess";
+		            },
+		            error       : function(request, status, error){
+		                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		                window.location.href = contextPath + "/joinsuccess";
+		            }
+		        }); 
+		    });
+		});
 	</script>
 </head>
 <body>
@@ -76,8 +103,10 @@
 			<br>
 		<ul>
 			<li>
+				<form action="joinsuccess" method="post">
 				<label class="chbox">
 				<input name="checkAgre" type="checkbox" value="" id="checkAgre" class="inputCheck" />이용약관에 동의합니다.</label>
+				</form>
 			</li>
 		</ul>
 		<br>
@@ -104,7 +133,6 @@
 						<br> 
 						<input type="text" placeholder="이름을 입력하세요" class='box' id="name" required />
 					</li>
-					<li class="li">
 					<li class="li">
 						<span>생년월일 </span> 
 						<br> 
