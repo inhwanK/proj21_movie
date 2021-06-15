@@ -29,4 +29,5 @@ public class NoticeController {
 		mav.setViewName("notice/noticeList");
 		return mav;
 	}
+	
 }

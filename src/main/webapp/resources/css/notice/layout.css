@@ -1,0 +1,123 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'IBMPlexSansKR-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* body */
+body {
+	font-family: 'IBMPlexSansKR-Regular', sans-serif;
+	margin: auto;
+	padding: 0;
+	width: 1273px;
+	text-align: center;
+}
+
+/* header */
+
+
+#header_ci {
+	width: 150px;
+	margin: 0px auto;
+	align-items: center;
+	position: relative;
+	left: 120px;
+	box-sizing: border-box;
+}
+
+header div {
+	display: inline;
+	float: right;
+	text-align: right;
+	padding-bottom: 10px;
+}
+
+header div a {
+	text-decoration: none;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 1.0em;
+	color: RGB(136, 136, 136);
+}
+
+/* <nav> */
+nav ul {
+	padding-left: 0;
+	list-style: none;
+	border-bottom: 0.5px solid RGB(3, 22, 52);
+	padding-bottom: 5px;
+	margin: 10px auto;
+	position: relative;
+}
+
+.nav {
+	display: inline-block;
+	padding: 0 90px;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+#mypagebtn {
+	display: inline-block;
+	padding: 0 0 0 70px;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+.nav a {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	padding-bottom: 5px;
+}
+
+.nav a:hover {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	padding-bottom: 4px;
+	border-bottom: 5px solid RGB(3, 22, 52);
+}
+
+.fa-user {
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	display: inline-block;
+}
+
+/* section */
+section {
+	margin: 50px auto;
+}
+
+/* 이 이후에 section 부분 작성해주시면 돼요 */
+
+/* footer */
+footer {
+
+}
+
+#content {
+	border-top: 0.5px solid RGB(3, 22, 52);
+	text-align: left;
+	margin-top: 0;
+}
+
+#textarea {
+	margin-top: 22.5px;
+}
+
+#textarea p {
+	color: black;
+	font-size: 0.8em;
+	margin: 0;
+}
+
+#footer_ci {
+	width: 100px;
+	margin: 0px;
+	float: left;
+}
