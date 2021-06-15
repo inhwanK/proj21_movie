@@ -20,7 +20,7 @@
 						var list = "";
 						for (i = 0; i < dataLength; i++) {
 							list += "<li>";
-							list += "<a href='${contextPath}/api/theaters/" + json[i].thtNo 
+							list += "<a href='${contextPath}/theater?thtNo=" + json[i].thtNo 
 								+ "' title='" + json[i].thtName + " 상세보기'>" + json[i].thtName + "</a>"; 
 							list += "</li>";						
 						}
