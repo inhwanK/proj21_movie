@@ -1,23 +1,7 @@
 @charset "UTF-8";
 
 /* Fontawesome 4.7 */
-@import
-	url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-	;
-
-@font-face {
-	font-family: NanumBarunGothic;
-	font-weight: 400;
-	src:
-		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.eot);
-	src:
-		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.eot?#iefix)
-		format('embedded-opentype'),
-		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.woff)
-		format('woff'),
-		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.ttf)
-		format('truetype')
-}
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@900&display=swap');
 
 @font-face {
 	font-family: 'IBMPlexSansKR-Regular';
@@ -29,15 +13,14 @@
 }
 
 body {
+	font-family: 'IBMPlexSansKR-Regular', sans-serif;
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	font-family: 'IBMPlexSansKR-Regular', sans-serif;
-	margin-right: 1%;
 }
 
 a:link {
-	text-decoration: none
+	text-decoration: none;
 }
 
 a:active, a:focus, a:hover {
@@ -47,10 +30,8 @@ a:active, a:focus, a:hover {
 ol, ul {
 	list-style-type: none;
 	margin: 0;
-	padding: 0
+	padding: 0;
 }
-
-/* body */
 
 /* header */
 header {
@@ -72,6 +53,7 @@ header div {
 	display: inline;
 	float: right;
 	text-align: right;
+	
 }
 
 header div a {
@@ -106,7 +88,7 @@ nav ul {
 	font-size: 1.3em;
 }
 
-#mypagebtn {
+#mypagebtn{
 	display: inline-block;
 	padding: 0 0 0 70px;
 	font-weight: bold;
@@ -122,7 +104,7 @@ nav ul {
 .nav a:hover {
 	text-decoration: none;
 	color: RGB(3, 22, 52);
-	padding-bottom: 4px;
+	padding-bottom: 3px;
 	border-bottom: 5px solid RGB(3, 22, 52);
 }
 
@@ -133,30 +115,29 @@ nav ul {
 }
 
 /* section */
-section {
+section{
 	margin: auto;
 	width: 1273px;
-	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
 }
 
+/* section 본문 */
 section #joinFormArea {
 	column-width: 15em;
 	background: #fff;
 	padding: 2em 12em;
 }
 
-div {
+.join_main {
 	margin-top: 10px;
+	margin-left: 31%;
 }
 
-ul, li {
+.ul, .li {
 	list-style: none;
 	color: #454545;
 }
 
-li {
+.li {
 	margin-bottom: 20px;
 	text-align: left;
 }
@@ -186,11 +167,14 @@ button {
 	border: 1px solid black;
 	padding: 0 0.5em;
 	text-align: left;
+	margin-left: 31%;
 }
 
 .chbox {
 	float: none;
 	color: #454545;
+	float: left;
+	margin-left: 31%;
 }
 
 

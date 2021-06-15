@@ -42,6 +42,5 @@
 		  from member
 		 where mem_email = #{memEmail}
 	</delete>
-	
 
 </mapper>
