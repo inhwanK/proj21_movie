@@ -569,6 +569,13 @@ h3.title {
 	height: auto;
 }
 
+.movie-summary .txt:first-line {
+	color: #222;
+	font-size: 1.9em;
+	font-weight: 600;
+	line-height: 70px
+}
+
 /* movie-info */
 .movie-info {
 	padding: 30px 0;

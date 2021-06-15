@@ -27,10 +27,36 @@
 		});
 	</script>
 	<script>
-		$(function(){
+		$(function(){		
+			var contextPath = "${contextPath}";
+			
+			/* 극장정보 탭 */
+			var thtNo = "${thtNo}";
+			$.get(contextPath+"/api/theaters/" + thtNo,
+				function(json) {
+					var name = "";
+					var detail = "";
+					var address = "";
+					var map = "";
+						/* 극장 이름 */
+						name += "<p class='theater-name'>" + json.thtName + "</p>";
+						/* 극장 설명 */
+						detail += "<h2 class='big-title'>" + json.thtDetail + "</h2>"
+						detail += "<p> 최고 수준의 영화 관람 환경을 제공하는 메가박스 대구 신세계점에서 안락한 문화생활을 즐겨보세요. </p>"	// ddl에 추가 하거나 없앨 예정
+						/* 극장 주소 */
+						address += "<li> <span class='font-gblue'> 도로명주소 : </span>" + json.thtAddress + "</li>";
+						/* 실시간 길찾기 */
+						map += "<a href='https://m.map.naver.com/map.naver?lng=" + json.thtLong + "&lat=" + json.thtLat 
+								+ "&level=2'" + "class='button purple' target='_blank' title='새창열림'>실시간 길찾기 </a>";
+													 
+					$(".contents .thtName").append(name);
+					$(".theater-info").append(detail);
+					$(".address").append(address);
+					$(".btn-group").append(map);
+			});
+			/* // 극장정보 탭 */
 			
 			/* price-table-box(관람료 탭) */
-			var contextPath = "${contextPath}";
 			$.get(contextPath+"/api/cinemas",
 				function(json) {
 					var dataLength = json.length;
@@ -86,44 +112,8 @@
 	    		</div>
 	    	</div>
 	    	
-	    	<div class="contents">	    				
-   				<!-- theater-detail-page -->
-	     		<div class="theater-detail-page">
-					<div class="bg-img">
-					</div>
-						
-					<!-- theater-all -->
-					<div class="theater-all">
-						<!-- theater-area-list -->
-						<div class="theater-area-list">
-							<ul class="area-depth1">					
-								<li>
-									<a href="#" class="depth1" title="대구 선택">대구</a>
-									<div class="area-depth2">
-										<ul>									
-											<li class="active">
-												<a href="#" title="대구신세계&#40;동대구&#41; 상세보기">대구신세계&#40;동대구&#41;
-												</a>
-											</li>										
-											<li>
-												<a href="#" title="대구이시아 상세보기">대구이시아													
-												</a>
-											</li>										
-											<li>
-												<a href="#" title="북대구&#40;칠곡&#41; 상세보기">북대구&#40;칠곡&#41;												
-												</a>
-											</li>			
-										</ul>
-									</div>
-								</li>
-							</ul>							
-						</div>		
-						<p class="theater-name">대구 신세계(동대구)</p>										
-		    		</div>		
-		    		<!-- // theater-all -->    		
-    			</div>
-   				<!-- // theater-detail-page -->
-    			
+	    	<div class="contents">
+	    		<div class="thtName"></div>	    												 		
     			<div class="inner-wrap">
     				<div class="tab-list">
 	    				<ul class="btn">
@@ -145,14 +135,6 @@
 	    				<div id="tab01" class="tab-cont active">
 	    					<!-- theater-info -->
 	    					<div class="theater-info">
-	    						<h2 class="big-title"> 
-	    							메가박스가 대구 지역 최초로 고화질 영상과 생생한 사운드를 선사하는 기술 특화관 MX관
-	    							<br>
-	    							전 좌석 가죽시트와 JBL사운드에서 즐기는 일반관으로 총 6개의 상영관을 오픈합니다.
-	    						</h2>
-	    						<p>
-	    						최고 수준의 영화 관람 환경을 제공하는 메가박스 대구 신세계점에서 안락한 문화생활을 즐겨보세요.
-	    						</p>
 	    					</div>
 	    					<!-- // theater-info -->
 	    					
@@ -185,17 +167,10 @@
 	    					<!-- 교통안내 -->
 	    					<h2 class="title">교통안내</h2>
 	    					<h3 class="title">약도</h3>
-	    					<ul class="dot-list">
-	    						<li>
-	    							<span class="font-gblue">도로명주소 : </span>
-	    							대구 동구 동부로 149 신세계백화점 8~9층 메가박스 대구신세계지점
-	    						</li>
+	    					<ul class="dot-list address">
 	    					</ul>
 	    					<div class="location-map-btn">
 	    						<div class="btn-group">
-	    							<a href="https://m.map.naver.com/map.naver?lng=128.6294&lat=35.877686&level=2"
-	    							 class="button purple" target="_blank" title="새창열림">실시간 길찾기
-	    							</a>
 	    						</div>
 	    					</div>
 	    					

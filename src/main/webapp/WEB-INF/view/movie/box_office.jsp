@@ -46,7 +46,7 @@
 						/* movie-list-info */
 						list += "<div class='movie-list-info'>";
 						list += "<p class='rank'>" + json[i].movNo +  "</p>";	
-						list += "<a href='${contextPath}/api/movies/" + json[i].movNo + "'>"
+						list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
 						list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
 							+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
 						list += "</div>";
@@ -96,9 +96,9 @@
 						list += "<li>";
 						/* movie-list-info */
 						list += "<div class='movie-list-info'>";
-						list += "<a href='${contextPath}/api/movies/" + json[i].movNo + "'>"
+						list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
 						list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
-							+ " 상세보기' src='${contextPath}/resources/images/movie/commingsoon/" + json[i].movPoster + "'></a>" 
+							+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
 						list += "</div>";
 						/* // movie-list-info */
 						

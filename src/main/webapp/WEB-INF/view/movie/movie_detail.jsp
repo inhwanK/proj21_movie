@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>크루엘라 영화 상세정보</title>
+<title>영화 상세정보</title>
 	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
 	<link rel="stylesheet" href="${contextPath}/resources/css/movie/movie_detail.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
@@ -19,6 +19,63 @@
 				$(".tab-cont-wrap > div").removeClass("active");
 				$(".tab-cont-wrap > div").eq($(this).index()).addClass("active");
 			});
+		});
+	</script>
+	<script>
+		$(function(){
+			function getFormatDate(date){
+				var subDateArray = date.substr(0,10).split('-');
+				return newDateForm = subDateArray[0] + "." + subDateArray[1] + "." + subDateArray[2];
+			}
+			
+			var contextPath = "${contextPath}";
+					
+			var movNo = "${movNo}";
+			$.get(contextPath+"/api/movies/" + movNo,
+				function(json) {	
+					var bg = "";
+					var title = "";
+					var sCont = "";
+					var poster = "";
+					
+						/* 영화 뒷 배경 */
+						bg += "<div class='bg-img' style='background-image:url("
+								+ "${contextPath}/resources/images/movie/movie-detail/bg-" + json.movPoster + ");'>";
+						bg += "</div>"; 
+						
+						/* 영화 제목 */			
+						title += "<p class='title'>" + json.movTitle + "</p>";
+						title += "<p class='title-eng'>" + 'Cruella' + "</p>";		// 영어 제목 컬럼 미지정	
+						
+						/* 영화 포스터 */
+						poster += "<p class='movie-grade age-" + json.movGrade + "'></p>";	
+						poster += "<img alt='" + json.movTitle + "'src="
+							+ "'${contextPath}/resources/images/movie/box-office/" + json.movPoster + "'/>";			
+						
+						// 주요정보 탭					
+						/* 영화 줄거리 */
+						sCont += "<div class='movie-summary'>";
+						sCont += "<div class='txt'>" + json.movDetail + "</div>";
+						sCont += "</div><br><hr>";
+						
+						/* 영화 정보 */
+						sCont += "<div class='movie-info'>";
+						sCont += "<p>상영타입 : " + '2D(자막)' + "</p>";	// 상영타입 컬럼 미 지정						
+						sCont += "<div class='line'>";						
+						sCont += "<p>감독&nbsp;: " + json.movDirector + "</p>";						
+						sCont += "<p>장르&nbsp;: " + json.movGrade + "/" + json.movRuntime + "분</p>";						
+						sCont += "<p>등급&nbsp;: " + json.movGrade + "세이상관람가</p>";						
+						sCont += "<p>개봉일&nbsp;: " + getFormatDate(json.movOpendate) + "</p>";											
+						sCont += "</div>";
+						sCont += "<p>출연진&nbsp;: " + json.movActor + "</p>";
+						sCont += "</div>";
+						
+					$(".movie-detail-page .movie-bg").append(bg);
+					$(".movie-detail-cont").append(title);
+					$(".poster .wrap").append(poster);
+					$(".movie-info-list").append(sCont);
+			});
+			/* // 주요정보 탭 */
 		});
 	</script>
 </head>
@@ -53,13 +110,10 @@
 
 				<!-- movie-detail-page -->
 				<div class="movie-detail-page">
-					<div class="bg-img" style="background-image: url('${contextPath}/resources/images/movie/movie-detail/bg-Cruella.jpg');"></div>
-
+				<div class="movie-bg"></div>
+					<%-- <div class="bg-img" style="background-image: url('${contextPath}/resources/images/movie/movie-detail/bg-Cruella.jpg');"></div> --%>
 					<!-- movie-detail-cont -->
 					<div class="movie-detail-cont">
-						<!-- 개봉 예매가능-->
-						<p class="title">크루엘라</p>
-						<p class="title-eng">Cruella</p>
 						
 						<!-- info -->
 						<div class="info">
@@ -91,8 +145,6 @@
 						
 						<div class="poster">
 							<div class="wrap">
-								<p class="movie-grade age-12">12세 이상 관람가</p>
-								<img alt="크루엘라" src="${contextPath}/resources/images/movie/box-office/Cruella.jpg"/>
 							</div>
 						</div>
 						<div class="screen-type">
@@ -124,69 +176,7 @@
 		    			<!-- tab-cont-wrap -->
 		    			<div class="tab-cont-wrap">
 			    			<!-- movie-info-list -->
-			    			<div class="movie-info-list active">
-				    			<!-- movie-summary -->
-				    			<div class="movie-summary">
-				    				<div class="txt">
-				    					처음부터 난 알았어. 내가 특별하단 걸
-				    					<br>
-				    					<br>
-				    					그게 불편한 인간들도 있겠지만 모두의 비위를 맞출 수는 없잖아?
-				    					<br>
-				    					그러다 보니 결국, 학교를 계속 다닐 수가 없었지
-				    					<br>
-				    					<br>
-				    					우여곡절 런던에 오게 된 나, 에스텔라는 재스퍼와 호레이스를 운명처럼 만났고
-				    					<br>
-				    					나의 뛰어난 패션 감각을 이용해 완벽한 변장과 빠른 손놀림으로 런던 거리를 싹쓸이 했어
-				    					<br>
-				    					<br>
-										도둑질이 지겹게 느껴질 때쯤, 꿈에 그리던 리버티 백화점에 낙하산(?)으로 들어가게 됐어
-										<br>
-										거리를 떠돌았지만 패션을 향한 나의 열정만큼은 언제나 진심이었거든
-										<br>
-										<br>
-										근데 이게 뭐야, 옷에는 손도 못 대보고 하루 종일 바닥 청소라니
-										<br>
-										인내심에 한계를 느끼고 있을 때, 런던 패션계를 꽉 쥐고 있는 남작 부인이 나타났어
-										<br>
-										천재는 천재를 알아보는 법! 난 남작 부인의 브랜드 디자이너로 들어가게 되었지
-										<br>
-										<br>
-										꿈을 이룰 것 같았던 순간도 잠시, 세상에 남작 부인이 ‘그런 사람’이었을 줄이야…
-										<br>
-										<br>
-										그래서 난 내가 누군지 보여주기로 했어
-										<br>
-										잘가, 에스텔라
-										<br>
-										<br>
-										난 이제 크루엘라야!	    					
-				    				</div>
-				    				<div class="btn-more toggle">
-				    					<!-- 줄거리 열기 닫기 미구현 -->
-				    				</div>
-				    			</div>
-				    			<!-- // movie-summary -->
-				    			
-				    			<!-- movie-info -->
-				    			<div class="movie-info">
-				    				<p>상영타입 : 2D(자막)</p>
-				    				<div class="line">
-				    					<p>감독&nbsp;: 크레이그 질레스피</p>
-				    					<p>장르&nbsp;: 드라마, 범죄, 코미디 / 133 분</p>
-				    					<p>등급&nbsp;: 12세이상관람가</p>
-				    					<p>개봉일&nbsp;: 2021.05.26</p>
-				    				</div>
-				    				<p>출연진&nbsp;: 엠마 스톤, 엠마 톰슨, 마크 스트롱</p>
-				    			</div>
-				    			<!-- // movie-info -->
-				    			
-				    			<!-- movie-graph -->
-				    			<div class="movie-graph">
-				    			<!-- 미구현함 -->
-				    			</div>
-				    			<!-- // movie-graph -->		    			
+			    			<div class="movie-info-list active">    			
 			    			 </div>
 			    			 <!-- //movie-info-list -->
 			    			 
