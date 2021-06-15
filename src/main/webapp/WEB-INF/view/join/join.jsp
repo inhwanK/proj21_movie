@@ -24,8 +24,8 @@
 			<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/movie/ci.png">
 		</a>
 		<div>
-			<a href="#">로그인</a>
-			<a href="#">회원가입</a>
+			<a href="${contextPath}/login">로그인</a>
+			<a href="${contextPath}/join">회원가입</a>
 			<a href="#">바로예매</a>
 		</div>
 
