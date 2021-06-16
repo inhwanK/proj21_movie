@@ -141,20 +141,22 @@ nav ul {
 }
 
 /* section */
+section {
+	margin: auto;
+	width: 1237px;
+}
 
 /* page-util */
-
 .page-util {
 	display: block;
-	position: static;
-	width: 70%;
+	position: relative;
+	width: 1237px;
 	height: 42px;
 }
 
 .page-util .location {
 	float: left;
 	height: 42px;
-	padding-left: 30%;
 }
 
 .page-util .location span {
@@ -165,7 +167,6 @@ nav ul {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	text-indent: -9999px;
 	background:
 		url(../../images/theater/icon/home.png)
 		no-repeat center
@@ -182,8 +183,7 @@ nav ul {
 	color: #666;
 }
 
-.page-util .location a:before, .page-util .location span:before
-	{
+.page-util .location a:before{
 	content: '';
 	display: block;
 	position: absolute;
@@ -193,8 +193,9 @@ nav ul {
 	height: 42px;
 	background:
 		url(../../images/theater/icon/homearr.png)
-		no-repeat left center;
+		no-repeat left center
 }
+
 
 /* container */
 .container {
@@ -232,11 +233,6 @@ h3.title {
 	color: #222;
 	width: 10%;
 	text-align: left;
-}
-
-.inner-wrap {
-	width: 1100px;
-	margin: 0 auto
 }
 
 /* tab-list */
@@ -392,6 +388,7 @@ a.button.purple:active, a.button.purple:focus, a.button.purple:hover{
 
 .thtName .theater-name {
 	overflow: hidden;
+	margin: 40px 0;
 	font-size: 3.0666em;
 	text-shadow: 2px 2px 10px rgba(0, 0, 0, .7)
 }
@@ -522,24 +519,6 @@ a.button.purple:active, a.button.purple:focus, a.button.purple:hover{
 	
 }
 
-.public-transportation {
-	padding: 0 0 30px 0;
-	border: 1px solid #d8d9db;
-	border-radius: 10px;
-	margin-top: 20px;
-	margin-bottom: 20px;
-}
-
-.public-transportation p {
-	padding: 0;
-	margin: 0
-}
-
-.transportation-section {
-	position: relative;
-	padding: 30px 0 0 0;
-}
-
 .icon-box {
 	position: absolute;
 	top: 30px;
@@ -562,15 +541,6 @@ a.button.purple:active, a.button.purple:focus, a.button.purple:hover{
 		url(../../images/theater/icon/ico-metro.png)
 }
 
-.public-transportation .transportation-section .info {
-	padding-left: 150px
-}
-
-.public-transportation .transportation-section .info .title {
-	margin: 0;
-	padding: 0 0 10px 0;
-	text-align: left;
-}
 /* // 극장 정보 CSS */
 
 
