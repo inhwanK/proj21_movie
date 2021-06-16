@@ -34,6 +34,28 @@
 	            }
 	        }
 	    });
+		<!-- 아이디 중복 확인 -->
+		function emailcheck() {
+			var email = #("#memEmail").val();
+			var sendData = {"#memEmail" : email}
+			$.ajax({
+				method : "POST",
+				url : "emailcheck",
+				data : sendData,
+				success : function(resp) {
+					if(resp == 'fail') {
+						$('#emailcheck').css('color','red')
+		                $('#emailcheck').html("사용할 수 없는 이메일입니다.")
+		                flag=false;
+		  
+		            }else{
+		                $('#emailcheck').css('color','blue')
+		                $('#emailcheck').html("사용할 수 있는 이메일입니다.")
+		                flag=true;
+		            }}
+		    })	
+		}
+		
 	});
 </script>
 </head>
@@ -68,9 +90,9 @@
 			<div class="join_main">
 				<ul class="ul">
 					<li class="li">
-						<span>아이디 </span> 
+						<span>아이디 </span><span id = "emailcheck"></span>
 						<br> 
-						<input type="email" placeholder="메일주소를 입력하세요" class="box1" id="memEmail" required />
+						<input type="email" placeholder="메일주소를 입력하세요" class="box1" id="memEmail" oninput = "checkId()" required />
 					</li>
 					<li class="li">
 						<span>패스워드 </span> 
@@ -79,7 +101,7 @@
 					</li>
 					<li class="li">
 						<span>패스워드 확인 </span> 
-    					<span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
+    					<span id="alert-success" style="display: none; color: #00498c; font-weight: bold;">비밀번호가 일치합니다.</span>
     					<span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
 						<br> 
 						<input type="password" placeholder="패스워드를 한번 더 입력하세요" class="box2" id="confmemPasswd" required />
@@ -87,17 +109,17 @@
 					<li class="li">
 						<span>이름 </span> 
 						<br> 
-						<input type="text" placeholder="이름을 입력하세요" id="memName" class="box1" required />
+						<input type="text" placeholder="이름을 입력하세요" id="memName" class="box3" required />
 					</li>
 					<li class="li">
 						<span>생년월일 </span> 
 						<br> 
-						<input type="date" placeholder="생년월일을 입력하세요." id="memBirthdate" class="box1" required />
+						<input type="date" placeholder="생년월일을 입력하세요." id="memBirthdate" class="box3" required />
 					</li>
 					<li class="li">
 						<span>휴대폰번호 </span> 
 						<br> 
-						<input type="text" placeholder="휴대폰번호를 입력하세요" id="memPhone" class="box1" required />
+						<input type="text" placeholder="휴대폰번호를 입력하세요" id="memPhone" class="box3" required />
 					</li>
 					<li class="li">
 						<button id="new">가입하기</button>

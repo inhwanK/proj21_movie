@@ -42,5 +42,12 @@
 		  from member
 		 where mem_email = #{memEmail}
 	</delete>
+	
+	<!-- 아이디 중복 검사 
+	<select id="selectMemberByEmail" parameterType="String" resultType="int">
+		select count(*)
+		  from member
+		 where mem_email = #{memEmail}
+	</select> -->
 
 </mapper>

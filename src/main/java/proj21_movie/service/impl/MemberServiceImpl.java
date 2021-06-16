@@ -48,5 +48,6 @@ public class MemberServiceImpl implements MemberService {
 		log.debug("service - removeMember() > " + memEmail);
 		return mapper.deleteMember(memEmail);
 	}
+
 	
 }
