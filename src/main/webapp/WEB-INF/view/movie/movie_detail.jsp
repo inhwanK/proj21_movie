@@ -45,7 +45,7 @@
 						
 						/* 영화 제목 */			
 						title += "<p class='title'>" + json.movTitle + "</p>";
-						title += "<p class='title-eng'>" + 'Cruella' + "</p>";		// 영어 제목 컬럼 미지정	
+						// title += "<p class='title-eng'>" + 'Cruella' + "</p>";		// 영어 제목 컬럼 미지정	
 						
 						/* 영화 포스터 */
 						poster += "<p class='movie-grade age-" + json.movGrade + "'></p>";	
@@ -85,8 +85,8 @@
 			<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/movie/ci.png">
 		</a>
 		<div>
-			<a href="#">로그인</a> 
-			<a href="#">회원가입</a> 
+			<a href="${contextPath}/login">로그인</a>
+			<a href="${contextPath}/join">회원가입</a> 
 			<a href="#">바로예매</a>
 		</div>
 	</header>
@@ -96,8 +96,8 @@
 			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
 			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
 			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
-			<li class="nav"><a href="#">이벤트</a></li>
-			<li class="nav"><a href="#">고객센터</a></li>
+			<li class="nav"><a href="${contextPath}/inquiry">이벤트</a></li>
+			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
 			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
 		</ul>
 	</nav>
@@ -112,6 +112,7 @@
 				<div class="movie-detail-page">
 				<div class="movie-bg"></div>
 					<%-- <div class="bg-img" style="background-image: url('${contextPath}/resources/images/movie/movie-detail/bg-Cruella.jpg');"></div> --%>
+					<div class="bg-mask"></div>
 					<!-- movie-detail-cont -->
 					<div class="movie-detail-cont">
 						
@@ -180,11 +181,49 @@
 			    			 </div>
 			    			 <!-- //movie-info-list -->
 			    			 
-			    			 <!-- audience-review-list -->
-			    			 <div class="audience-review-list">
-			    			 	<p>실관람평입니다. </p>
+			    			 <!-- movie-comment-list -->
+			    			 <div class="movie-comment-list">
+								<h2>영화 한줄평 내역</h2>
+								<div id="comment-count">
+									<b>전체 <span class="font-gblue">20</span> 건</b>								
+								</div>
+								<div class="comment-write">
+									<a href="#" title="관람평쓰기">관람평쓰기</a>
+								</div>
+								
+								<div class="movie-comment">
+									<ul>
+										<li>
+											<div class="comment-list">
+												<div class="prof">
+													<img src="${contextPath}/resources/images/movie/movie-detail/bg-profile.png">
+													<p class="user-id">test@test.com</p>
+												</div>	
+												<div class="textarea">
+													<h3>관람평</h3>
+													<h3>10</h3>
+													<p>긴장감이 있어서 재미 있었네요 👍</p>
+												</div>
+											</div>
+										</li> 
+										<li>
+											<div class="comment-list">
+												<div class="prof">
+													<img src="${contextPath}/resources/images/movie/movie-detail/bg-profile.png">
+													<p class="user-id">tes2@test.com</p>
+												</div>	
+												<div class="textarea">
+													<h3>관람평</h3>
+													<h3>1</h3>
+													<p>내 점수는 1점...</p>
+												</div>
+											</div>
+										</li> 
+									</ul>
+								</div>
+								
 			    			 </div>
-			    			 <!-- // audience-review-list -->
+			    			 <!-- // movie-comment-list -->
 			    			 
 		    			 </div>
 		    			 <!-- // tab-cont-wrap -->

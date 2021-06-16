@@ -183,11 +183,6 @@ h3.title {
 	text-align: left;
 }
 
-.inner-wrap {
-	width: 1100px;
-	margin: 0 auto;
-}
-
 /* tab-cont-wrap */
 .tab-cont-wrap > div{
 	display: none;
@@ -204,14 +199,10 @@ h3.title {
 
 .tab-list ul {
 	overflow: hidden; 
-	width: 100%; 
-	margin: 0 auto;
-	padding-top: 10px;
 }
 .tab-list li {
 	float: left; 
 	width: 210px; 
-	text-align: center; 
 	border: 1px solid #c4c4c4;
 	border-bottom: none; 
 	margin-right: -1px;
@@ -221,7 +212,6 @@ h3.title {
 	padding: 15px 0; 
 	font-size: 17px;
 	color: #666; 
-	font-weight: 500;
 	border-bottom: 2px solid #0000d2;
 }
 .tab-list li.active a {
@@ -270,6 +260,43 @@ h3.title {
 	width: 100%;
 	height: 100%;
 	background-color: rgba(15, 15, 15, .5);
+}
+
+/* bg-mask */
+.movie-detail-page .bg-mask {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 4;
+	width: 100%;
+	height: 100%;
+	background: -moz-linear-gradient(left, #0f0f0f 20%, rgba(15, 15, 15, 0)
+		50%, #0f0f0f 80%);
+	background: -webkit-linear-gradient(left, #0f0f0f 20%, rgba(15, 15, 15, 0)
+		50%, #0f0f0f 80%);
+	background: -o-linear-gradient(left, #0f0f0f 20%, rgba(15, 15, 15, 0)
+		50%, #0f0f0f 80%);
+	background: -ms-linear-gradient(left, #0f0f0f 20%, rgba(15, 15, 15, 0)
+		50%, #0f0f0f 80%);
+	background: linear-gradient(to right, #0f0f0f 20%, rgba(15, 15, 15, 0)
+		50%, #0f0f0f 80%)
+}
+
+.theater-detail-page .bg-mask {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 3;
+	width: 100%;
+	height: 100%;
+	background:
+		url(../../images/movie/movie-detail/bg-movie-detail-mask.png)
+		no-repeat center 0
+}
+
+#contentData {
+	margin: auto;
+	width: 1237px;
 }
 
 .movie-detail-cont {
@@ -573,7 +600,6 @@ h3.title {
 	color: #222;
 	font-size: 1.9em;
 	font-weight: 600;
-	line-height: 70px
 }
 
 /* movie-info */
@@ -615,6 +641,59 @@ h3.title {
 	display: none;
 }
 
+/* movie-comment-list */
+.movie-comment-list{
+	width: 1045px;
+	height: 100%;
+}
+
+.movie-comment-list h2, #comment-count{
+	text-align: left;
+}
+
+.comment-write {
+	text-align: right;
+	padding-bottom: 30px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #ccc;
+}
+
+.comment-write a {
+	border: 1px solid #503396;
+	padding: 8px;
+	color: #000;
+	border-radius: 5px;
+}
+
+.comment-write a:hover {
+	text-decoration: none;
+	background-color: #f0f0f0;
+	color: #503396;
+	font-weight: 600;
+}
+
+.font-gblue {
+	color: #01738b !important
+}
+
+.comment-list {
+	display: flex;
+	text-align: left;
+	background-color: RGB(247,247,247);
+	border-radius: 5px;
+	margin-bottom: 30px;
+}
+
+.comment-list img {
+	width: 40px;
+	margin: 20px 0 0 40px;
+	overflow: hidden;
+}
+
+.user-id {
+	margin: 0 10px 5px 10px;
+}
+
 /* footer */
 footer {
 	margin: auto;
@@ -627,14 +706,19 @@ footer {
 	margin-top: 0;
 }
 
-#textarea {
-	margin-top: 22.5px;
+.textarea {
+	margin-left: 20px;
 }
 
-#textarea p {
-	color: black;
-	font-size: 0.8em;
-	margin: 0;
+.textarea h3{
+	margin: 40px 40px 0 0;
+	float: left;
+	color: #503396;
+}
+
+.textarea p {
+	margin: 40px 0 0 0;
+	float: left;
 }
 
 #footer_ci {
