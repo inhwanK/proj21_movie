@@ -521,14 +521,18 @@ insert into theater_cinema values (3, 2);
 insert into theater_cinema values (3, 3);
 
 -- 상영정보
-select shw_no, tht_no, cin_no, mov_no, shw_date, shw_starttime, shw_endtime from showinfo;
-insert into showinfo values (null, 1, 1, 1, '2021-06-01', '14:00:00', '16:13:00');
-insert into showinfo values (null, 2, 2, 2, '2021-06-02', '14:00:00', '16:13:00');
-insert into showinfo values (null, 3, 3, 3, '2021-06-03', '14:00:00', '16:13:00');
-insert into showinfo values (null, 1, 2, 4, '2021-06-04', '14:00:00', '16:13:00');
 -- 상영정보 입력시 시작시간 설정 후 해당 영화의 런타임을 가져와서 시작시간에 더하여 shw_endtime에 넣어줄 것 
 -- delete from showinfo where shw_no = 1;
 -- alter table showinfo auto_increment = 1;
+select shw_no, tht_no, cin_no, mov_no, shw_date, shw_starttime, shw_endtime from showinfo;
+insert into showinfo values (null, 1, 1, 1, '2021-06-01', '14:00:00', 
+addtime('14:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));
+insert into showinfo values (null, 2, 2, 2, '2021-06-02', '14:00:00', 
+addtime('14:00:00', sec_to_time((select mov_runtime from movie where mov_no = 2) * 60)));
+insert into showinfo values (null, 3, 3, 3, '2021-06-03', '14:00:00', 
+addtime('14:00:00', sec_to_time((select mov_runtime from movie where mov_no = 3) * 60)));
+insert into showinfo values (null, 1, 2, 4, '2021-06-04', '14:00:00', 
+addtime('14:00:00', sec_to_time((select mov_runtime from movie where mov_no = 4) * 60)));
 
 -- 예매
 select res_no, shw_no, mem_no, res_price, res_date, res_adult, res_teen, res_pref from reservation;
