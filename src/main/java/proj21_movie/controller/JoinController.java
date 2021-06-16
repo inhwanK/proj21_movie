@@ -24,40 +24,34 @@ public class JoinController {
 	@Autowired
 	private MemberRegisterService memRservice;
 	
+	//약관 접속하기 (작동)
 	@RequestMapping("/join")
 	public String join() {
 		return "join/join";
 	}
 	
-	@PostMapping("/join/joinsuccess")
-	public String joinsuccess(@RequestParam(value="agree", defaultValue = "false") Boolean agree, Model model) {
-		if (!agree) {
-			return "join/join";
-		}
-		
-		model.addAttribute("registerRequest", new RegisterRequest());
+	//회원가입 접속하기 (작동)
+	@RequestMapping("/joinform")
+	public String joinform() {
+		return "join/joinform";
+	}
+	
+	//회원가입 접속하기 (작동)
+	@RequestMapping("/joinsuccess")
+	public String joinsuccess() {
 		return "join/joinsuccess";
 	}
-	
-	@GetMapping("/join/joinsuccess")
-	public String joinGet() {
-		return "redirect:/join/join";
-	}
-	
-	@PostMapping("/api/joinsuccess")
-	public String joinList(RegisterRequest regReq, Errors errors) {
-		if (errors.hasErrors())
-			return "join/join";
-		
-		try {
-			memRservice.regist(regReq);
-			return "join/join";
-		} catch (DuplicateMemberException ex) {
-			errors.rejectValue("memEmail", "duplicate");
+
+	//약관동의 (되고있는지모르겠음...)
+	@PostMapping("/joinform")
+	public String joinCookie(HttpServletRequest request) {
+		String agreeParam = request.getParameter("agree");
+		if (agreeParam == null || !agreeParam.equals("true")) {
 			return "join/join";
 		}
-		
-	}
+		return "join/joinform";
+	
+	}	
 	
 // 임시분리	
 /*
