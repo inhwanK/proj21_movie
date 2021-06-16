@@ -140,7 +140,6 @@ section{
 .page-util {
 	display: block;
 	position: relative;
-	width: 1237px;
 	height: 42px;
 }
 
@@ -226,11 +225,6 @@ h2.title {
 	color: #0000d2;
 }
 
-/* .inner-wrap {
-	width: 1800px;
-	margin: 0 auto
-} */
-
 /* movie-list */
 .movie-list {
 	display: table;
@@ -241,8 +235,8 @@ h2.title {
 .movie-list li{
 	position: relative;
 	float: left;
-	width: 270px;
-	height: 450px;
+	width: 275px;
+	height: 440px;
 	margin: 0 0 0 30px;
 	padding-bottom: 150px;	
 }
@@ -257,6 +251,7 @@ h2.title {
 
 .movie-list-info img {
 	width: 270px;
+	height: 387px;
 }
 
 .btn-util{
@@ -278,7 +273,6 @@ h2.title {
 /* title-area */
 .title-area {
 	position: relative;
-	width: 100%;
 	margin: 15px 0 0 0;
 	padding: 0 0 0 30px;
 	line-height: 25px
@@ -302,7 +296,6 @@ h2.title {
 }
 
 .title-area .title{
-	width: 80%;
 	text-align: left;
 }
 
@@ -340,7 +333,7 @@ h2.title {
 
 .rate-date {
 	overflow: hidden;
-	padding: 10px 0 0 0
+	padding: 0 0 10px 0;
 }
 
 .rate-date span {

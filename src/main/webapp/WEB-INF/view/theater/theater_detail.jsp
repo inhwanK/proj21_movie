@@ -42,7 +42,7 @@
 						name += "<p class='theater-name'>" + json.thtName + "</p>";
 						/* 극장 설명 */
 						detail += "<h2 class='big-title'>" + json.thtDetail + "</h2>"
-						detail += "<p> 최고 수준의 영화 관람 환경을 제공하는 메가박스 대구 신세계점에서 안락한 문화생활을 즐겨보세요. </p>"	// ddl에 추가 하거나 없앨 예정
+						detail += "<p> 최고 수준의 영화 관람 환경을 제공하는 메가박스 대구에서 안락한 문화생활을 즐겨보세요. </p>"	// 
 						/* 극장 주소 */
 						address += "<li> <span class='font-gblue'> 도로명주소 : </span>" + json.thtAddress + "</li>";
 						/* 실시간 길찾기 */
@@ -83,8 +83,8 @@
 			<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/theater/ci.png">
 		</a>
 		<div>
-			<a href="#">로그인</a>
-			<a href="#">회원가입</a>
+			<a href="${contextPath}/login">로그인</a>
+			<a href="${contextPath}/join">회원가입</a>
 			<a href="#">바로예매</a>
 		</div>
 
@@ -95,8 +95,8 @@
 			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
 			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
 			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
-			<li class="nav"><a href="#">이벤트</a></li>
-			<li class="nav"><a href="#">고객센터</a></li>
+			<li class="nav"><a href="${contextPath}/inquiry">이벤트</a></li>
+			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
 			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
 		</ul>
 	</nav>
@@ -105,7 +105,7 @@
 		<div class="container">
 	    	<div class="page-util">	
 				<div class="location">
-	    			<span>Home</span>
+	    			<span></span>
 	    			<a href="${contextPath}/theaterlist" title="극장 페이지로 이동">극장</a>
 	    			<a href="${contextPath}/theaterlist" title="전체극장 페이지로 이동">전체극장</a>
 	    			<a href="" title="극장정보 페이지로 이동">극장정보</a>
@@ -187,28 +187,11 @@
 	    								<p class="title">주차안내</p>
 		    							<ul class="dot-list">
 				    						<li>
-				    							대구 신세계 백화점(본관) 지하 주차장 & 파미에 주차 타운 이용
+				    							영화관 건물 지하 이용
 				    						</li>
 				    						<li>
-				    							메가박스 이용시 본관 주차 후 엘리베이터 3,4번홀 이용 시 보다 편리합니다. 3번홀(E/V NO.6,7,8호기), 
-				    							4번홀(E/V NO.9,10,11호기)
-				    						</li>
-				    						<li>
-				    							[본관]24시간 입차 가능 (단, 지하 3F만 적용)
-				    						</li>
-				    						<li>
-				    							[별관]24시간 개방 운영 – 파미에타운 (단, 영화관 동선과는 300M 이상)
-				    						</li>
-				    						<li>
-				    							차량 이용 고객 [본관] 지하 3F 주차[주차기둥 NO.22번열] 4번홀 엘리베이터 이용 ▶ 8F 메가박스 이동 또는 [주차기둥 NO. 20번열] 
-				    							3번홀 엘리베이터 이용 ▶ 8층 메가박스 이동 [파미에주차장] 주차 후 6층 연결 브릿지 이용, 본관 4층(환승센터)내 (음식점 마차이짬뽕) 
-				    							매장 맞은편 4번홀 엘리베이터 이용 ▶ 8층 메가박스 이동 ▶ 8층 메가박스 이동
-				    						</li>
-				    						<li>
-				    							대중교통 이용 및 도보고객 지하철 1호선(동대구역)하차 ▶ 지하철 1,3번 출구 ▶ 1F 동대구 복합환승센터 출입구 
-				    							▶ 수화물센터 진입(올리브영, 투썸 매장 우측) ▶ 4번홀 엘리베이터 이용 ▶ 8층 메가박스 이동 동대구 복합환승센터 3층 (쥬스식스 매장) 
-				    							맞은편 4번홀 엘리베이터 이용 또는 4층 (마차이짬뽕 매장) 맞은편 4번홀 엘리베이터 이용 ▶ 8층 메가박스로 이동
-				    						</li>				    						
+				    							주차공간 협소 하오니 대중교통 이용 바랍니다.
+				    						</li>		    						
 				    					</ul>	    								
 	    							</div>
 	    						</div>
@@ -222,8 +205,14 @@
 	    								<p class="title">주차확인</p>
 		    							<ul class="dot-list">
 				    						<li>
-				    							차량 번호 인증시 2시간 무료주차 적용. 차량 인증은 현장 매표소 및 입장시 직원에게 문의 바랍니다.
-				    						</li>				    						
+				    							차량 번호 인증시 3시간 무료주차 적용.
+				    						</li>
+				    						<li>
+				    							주차시간 초과 시, 별도 요금 부과 됩니다. 이후 30분 추가시 1,000원 징수
+				    						</li>					    						
+				    						<li>
+				    							차량 인증은 현장 매표소 및 입장시 직원에게 문의 바랍니다. (주차권을 반드시 지참하세요)
+				    						</li>				    									    						
 				    					</ul>	    								
 	    							</div>
 	    						</div>
@@ -237,61 +226,21 @@
 	    								<p class="title">주차요금</p>
 		    							<ul class="dot-list">
 				    						<li>
-				    							백화점 상품 3만원 이상 구매 시 1시간, 5만원 이상 구매 시 2시간, 10만원 이상 구매 시 3시간 추가 적용
+				    							주차 요금은 입차시간을 기준으로 합니다.
 				    						</li>				    						
 				    						<li>
-				    							주차 요금은 입차시간을 기준으로 합니다. 최초 30분 무료. 10분당 1천원
-				    						</li>				    						
+				    							차량 1대당 최초 30분 무료 30분 추가당 1,000원 징수
+				    						</li>				    									    						
 				    						<li>
-				    							주말 및 공휴일에는 주차장이 혼잡할 수 있으니, 대중교통을 이용 바랍니다. (1호선 동대구역 1,3번 출구)
+				    							주말 및 공휴일에는 주차장이 혼잡할 수 있으니, 대중교통을 이용 바랍니다.
 				    						</li>				    						
 				    					</ul>	    								
 	    							</div>
 	    						</div>
 	    						<!-- // parking-section -->	    							    					
 	    					</div>
-	    					<!-- // parking-info -->
-	    						    					
-	    					<h3 class="title">대중교통</h3>
-	    					<div class="public-transportation">
-	    						<!-- 버스 정보 -->
-	    						<div class="transportation-section">
-	    							<div class="icon-box">
-	    								<i class="iconset ico-bus" title="버스"></i>
-	    							</div>
-	    							<div class="info">
-	    								<p class="title">버스</p>
-		    							<ul class="dot-list">
-				    						<li>
-				    							신세계백화점 맞은편 하차(동부로) : 순환2, 156, 399, 413, 425, 524, 651, 708, 909, 818, 937, 동구1
-				    						</li>				    						
-				    						<li>
-				    							신세계백화점 하차(동대구역 복합환승센터앞) : 순환2, 156, 413, 425, 524, 651, 708, 909, 937, 동구1-1
-				    						</li>				    						
-				    					</ul>	    								
-	    							</div>
-	    						</div>
-	    					</div>
-	    					
-	    					<!-- 지하철 정보 -->
-	    					<div class="public-transportation">
-	    						<div class="transportation-section">
-	    							<div class="icon-box">
-	    								<i class="iconset ico-metro" title="지하철"></i>
-	    							</div>
-	    							<div class="info">
-	    								<p class="title">지하철</p>
-		    							<ul class="dot-list">
-				    						<li>
-				    							지하철 1호선 ‘동대구역’하차 → 지하철 1, 3번 출구 신세계 외부 출입구 이용, 2번 출구 지하 출입구 이용
-				    						</li>				    						
-				    						<li>
-				    							영업시간 외 1,3번 출구를 통하여 복합환승센터(터미널) 쪽으로 진입 4번홀 엘리베이터 이용
-				    						</li>				    						
-				    					</ul>	    								
-	    							</div>
-	    						</div>
-	    					</div>					    					
+	    					<!-- // parking-info -->	    						    				
+	    										    					
 						</div>
 						<!-- // 극장정보 리스트 -->
 						
