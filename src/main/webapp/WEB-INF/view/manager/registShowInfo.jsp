@@ -31,7 +31,7 @@
 						shwDate: $('#date').val(),
 						shwStarttime: $('#start').val()
 						}
-			alert("data: thtNo > " + newShow.thtNo + "\ncinNo > " + newShow.cinNo + 
+			alert("thtNo > " + newShow.thtNo + "\ncinNo > " + newShow.cinNo + 
 					"\nmovNo > " + newShow.movNo + "\nshwDate > " + newShow.shwDate + "\nshwStarttime > " + newShow.shwStarttime);
 			
 			$.ajax({
@@ -135,7 +135,7 @@
 <script type="text/javascript">
 	$(function(){
 		// 분을 시:분(00:00) 출력으로 바꿔주는 함수
-		function hhMMss(seconds){
+		function HHmmss(seconds){
 			var myNum = parseInt(seconds, 10);
 			var hours = Math.floor(myNum / 3600);
 			var minutes = Math.floor((myNum - (hours * 3600)) / 60);
@@ -165,7 +165,7 @@
 			
 			/* alert("starttime >> " + starttime + "\nruntime >> " + runtime + "\nstarttime_to_min >> " + starttime_to_min); */
 			
-			var changeTime = hhMMss((runtime + starttime_to_min) * 60);
+			var changeTime = HHmmss((runtime + starttime_to_min) * 60);
 			
 			$('#end').val(changeTime);
 		});
@@ -188,7 +188,7 @@
 			
 			/* alert("starttime >> " + starttime + "\nruntime >> " + runtime + "\nstarttime_to_min >> " + starttime_to_min); */
 			
-			var changeTime = hhMMss((runtime + starttime_to_min) * 60);
+			var changeTime = HHmmss((runtime + starttime_to_min) * 60);
 			
 			$('#end').val(changeTime);
 		});
