@@ -22,14 +22,34 @@
 		});
 		
 		$('#new').on("click", function(e){
+			e.preventDefault();
 			var newShow = { 
-						thtNo: $('#theater option:selected').thtNo,
-						cinNo: $('#cinema option').index($("#cinema option:selected")),
+						thtNo: Number($('#theater').val()),
+						/* cinNo: $('#cinema option').index($("#cinema option:selected")), */
+						cinNo: $('#cinema').val(),
 						movNo: $('#movie').val(),
 						shwDate: $('#date').val(),
 						shwStarttime: $('#start').val()
-					}
-			alert("data > " + newShow.thtNo);
+						}
+			alert("data: thtNo > " + newShow.thtNo + "\ncinNo > " + newShow.cinNo + 
+					"\nmovNo > " + newShow.movNo + "\nshwDate > " + newShow.shwDate + "\nshwStarttime > " + newShow.shwStarttime);
+			
+			$.ajax({
+				url: contextPath + "/api/showinfo",
+				type: "POST",
+				contentType: "application/json; charset=utf-8",
+				datatype: "json",
+				cache: false,
+				data: JSON.stringify(newShow),
+				success: function(res) {
+					alert(res);
+					window.location.href = contextPath + "/showInfoManager";
+				}, 
+				error: function(request, status, error){
+					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+					window.location.href = contextPath + "/showInfoManager";
+				}
+			});
 		});
 	});
 </script>
@@ -64,8 +84,8 @@
                      <label>극장</label>
                      <select id="theater" class="form-control">
                     	<option selected>극장</option>
-                     	<c:forEach items="${getTheaterList }" var="theater">
-                     		<option><c:out value="${theater }"/></option>
+                     	<c:forEach items="${getTheaterList }" var="tht">
+                     		<option value="${tht.thtNo }"><c:out value="${tht.thtName }"/></option>
                      	</c:forEach>
                      </select>
                   </div>
@@ -73,9 +93,9 @@
                      <label>상영관</label>
                      <select id="cinema" class="form-control">
                      	<option selected>상영관</option>
-                     	<option>1(2D)</option>
-                     	<option>2(3D)</option>
-                     	<option>3(4D)</option>
+                     	<c:forEach items="${getCinemaList }" var="cin">
+                     		<option value="${cin.cinNo }"><c:out value="${cin.cinType }"/></option>
+                     	</c:forEach>
                      </select>
                   </div>
                   <div class="form-group">
@@ -83,7 +103,7 @@
                      <select id="movie" class="form-control">
                      	<option selected>영화</option>
                      	<c:forEach items="${getMovieList }" var="movie">
-                     		<option><c:out value="${movie.movTitle }"/></option>
+                     		<option value="${movie.movNo }"><c:out value="${movie.movTitle }"/></option>
                      	</c:forEach>
                      </select>
                   </div>
@@ -100,6 +120,10 @@
                      	<option>20:00</option>
                      </select>
                   </div>
+                  <div class="form-group">
+                     <label>종료시간</label>
+                     <input type="text" id="start" class="form-control" readonly="readonly">
+                  </div>
                   <button id="new" class="btn btn-primary">등록</button>
                   <button id="cancel" class="btn btn-primary">취소</button>
                </form>
@@ -107,5 +131,8 @@
          </div>
       </div>
 </div>
+<script type="text/javascript">
+	
+</script>
 </body>
 </html>            

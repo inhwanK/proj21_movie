@@ -73,11 +73,12 @@ public class ShowInfoServiceTest {
 		newShow.setMovNo(new Movie(2));
 		newShow.setShwDate(LocalDate.of(2021, 6, 10));
 		newShow.setShwStarttime(LocalTime.of(20, 00));
-		newShow.setShwEndtime(LocalTime.of(22, 30));
+//		newShow.setShwEndtime(LocalTime.of(22, 30));
 		
 		int res = mapper.insertShowInfo(newShow);
 		Assert.assertEquals(1, res);
 		log.debug("res no >> " + res);
+		log.debug(newShow.toString());
 		
 		no = newShow.getShwNo();
 	}

@@ -13,19 +13,22 @@
 	</resultMap>
 	
 	<select id="selectShowInfoAll" resultMap="resShowInfo">
-		select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, mov_no, mov_title
+		select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, cin_type, mov_no, mov_title
 		from vw_full_showinfo
 	</select>
 	
 	<select id="selectShowInfoByNo" resultMap="resShowInfo">
-		select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, mov_no, mov_title
+		select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, cin_type, mov_no, mov_title
 		from vw_full_showinfo
 		where shw_no = #{shwNo}
 	</select>
 	
 	<insert id="insertShowInfo">
-		insert into showinfo values
-		(null, #{thtNo.thtNo}, #{cinNo.cinNo}, #{movNo.movNo}, #{shwDate}, #{shwStarttime}, #{shwEndtime})
+		insert into showinfo values 
+ 		(null, #{thtNo.thtNo}, #{cinNo.cinNo}, #{movNo.movNo}, #{shwDate}, #{shwStarttime}, 
+		addtime(#{shwStarttime}, sec_to_time((select mov_runtime from movie where mov_no = #{movNo.movNo}) * 60)))
+		<!-- insert into showinfo values
+		(null, #{thtNo.thtNo}, #{cinNo.cinNo}, #{movNo.movNo}, #{shwDate}, #{shwStarttime}, #{shwEndtime}) -->
 		<selectKey keyProperty="shwNo" resultType="int">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
