@@ -14,7 +14,28 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css"
 	rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		<!-- 비밀번호 일치 확인 -->
+		$('.box2').focusout(function () {
+	        var pwd1 = $("#memPasswd").val();
+	        var pwd2 = $("#confmemPasswd").val();
+	  
+	        if ( pwd1 != '' && pwd2 == '' ) {
+	            null;
+	        } else if (pwd1 != "" || pwd2 != "") {
+	            if (pwd1 == pwd2) {
+	            $("#alert-success").css('display', 'inline-block'); 
+	            $("#alert-danger").css('display', 'none');  
+	            } else {
+	                $("#alert-success").css('display', 'none'); 
+	                $("#alert-danger").css('display', 'inline-block');
+	            }
+	        }
+	    });
+	});
+</script>
 </head>
 <body>
 
@@ -43,38 +64,40 @@
 
 	<section>
 		<h1 class="join_title">회원가입</h1>
-		<form action="join">
+		<form action="joinsuccess" method="post">
 			<div class="join_main">
 				<ul class="ul">
 					<li class="li">
 						<span>아이디 </span> 
 						<br> 
-						<input type="email" placeholder="메일주소를 입력하세요" class="box" id="email" required />
+						<input type="email" placeholder="메일주소를 입력하세요" class="box1" id="memEmail" required />
 					</li>
 					<li class="li">
 						<span>패스워드 </span> 
 						<br> 
-						<input type="password" placeholder="패스워드를 입력하세요" class="box" id="password" required />
+						<input type="password" placeholder="패스워드를 입력하세요" class="box2" id="memPasswd" required />
 					</li>
 					<li class="li">
 						<span>패스워드 확인 </span> 
+    					<span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
+    					<span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
 						<br> 
-						<input type="password" placeholder="패스워드를 한번 더	입력하세요" class="box" id="confirmPassword" required />
+						<input type="password" placeholder="패스워드를 한번 더 입력하세요" class="box2" id="confmemPasswd" required />
 					</li>
 					<li class="li">
 						<span>이름 </span> 
 						<br> 
-						<input type="text" placeholder="이름을 입력하세요" class="box" id="name" required />
+						<input type="text" placeholder="이름을 입력하세요" id="memName" class="box1" required />
 					</li>
 					<li class="li">
 						<span>생년월일 </span> 
 						<br> 
-						<input type="date" placeholder="생년월일을 입력하세요." class="box" id="birthday" required />
+						<input type="date" placeholder="생년월일을 입력하세요." id="memBirthdate" class="box1" required />
 					</li>
 					<li class="li">
 						<span>휴대폰번호 </span> 
 						<br> 
-						<input type="text" placeholder="휴대폰번호를 입력하세요" class="box" id="phone" required />
+						<input type="text" placeholder="휴대폰번호를 입력하세요" id="memPhone" class="box1" required />
 					</li>
 					<li class="li">
 						<button id="new">가입하기</button>

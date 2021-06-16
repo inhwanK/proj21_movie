@@ -147,7 +147,14 @@ section #joinFormArea {
 	text-align: left;
 }
 
-.box {
+.box1 {
+	width: 450px;
+	height: 30px;
+	border: 1px solid #666;
+	padding: 10px;
+}
+
+.box2 {
 	width: 450px;
 	height: 30px;
 	border: 1px solid #666;

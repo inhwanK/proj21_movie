@@ -1,7 +1,5 @@
 package proj21_movie.service.impl;
 
-import java.util.DuplicateFormatFlagsException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +20,7 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 		if (member != null) {
 			throw new DuplicateMemberException("dup email" + req.getMemEmail());
 		}
-		Member newMember = new Member(null, req.getMemPasswd(), req.getMemBirthdate(), req.getMemName(), req.getMemPhone());
+		Member newMember = new Member(req.getMemEmail(), req.getMemPasswd(), req.getMemBirthdate(), req.getMemName(), req.getMemPhone());
 		memberMapper.insertMember(newMember);
 		
 		return newMember.getMemEmail();

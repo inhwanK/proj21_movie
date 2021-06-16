@@ -3,26 +3,20 @@ package proj21_movie.controller;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import proj21_movie.dto.Member;
 import proj21_movie.dto.RegisterRequest;
 import proj21_movie.exception.DuplicateMemberException;
 import proj21_movie.service.MemberRegisterService;
-import proj21_movie.service.MemberService;
 
 @Controller
 public class JoinController {
 
 	@Autowired
-	private MemberService service;
-	
-	@Autowired
 	private MemberRegisterService memRservice;
+
 	
 	//약관 접속하기 (작동)
 	@RequestMapping("/join")
@@ -36,13 +30,13 @@ public class JoinController {
 		return "join/joinform";
 	}
 	
-	//회원가입 접속하기 (작동)
+	//가입성공 접속하기 (작동)
 	@RequestMapping("/joinsuccess")
 	public String joinsuccess() {
 		return "join/joinsuccess";
 	}
 
-	//약관동의 (되고있는지모르겠음...)
+	//약관동의 (작동)
 	@PostMapping("/joinform")
 	public String joinCookie(HttpServletRequest request) {
 		String agreeParam = request.getParameter("agree");
@@ -50,8 +44,23 @@ public class JoinController {
 			return "join/join";
 		}
 		return "join/joinform";
+	}
 	
-	}	
+	//회원가입 (테스트중)
+	public void setMemberRegisterService(MemberRegisterService memberRegisterService) {
+		this.memRservice = memberRegisterService;
+	}
+	
+	@PostMapping("/joinsuccess")
+	public String joinformwrite(RegisterRequest regReq) {
+		try {
+			memRservice.regist(regReq);
+			return "/joinsuccess";
+		} catch (DuplicateMemberException ex) {
+			return "/joinform";
+		}
+	}
+
 	
 // 임시분리	
 /*
