@@ -95,28 +95,25 @@ section {
 
 /* 이 이후에 section 부분 작성해주시면 돼요 */
 
-/* footer */
-footer {
+/* footer 하위 영역*/
 
-}
-
-#content {
+div#content {
 	border-top: 0.5px solid RGB(3, 22, 52);
 	text-align: left;
 	margin-top: 0;
 }
 
-#textarea {
+div#textarea {
 	margin-top: 22.5px;
 }
 
-#textarea p {
+div#textarea p {
 	color: black;
 	font-size: 0.8em;
 	margin: 0;
 }
 
-#footer_ci {
+img#footer_ci {
 	width: 100px;
 	margin: 0px;
 	float: left;

@@ -3,7 +3,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="<%=request.getContextPath()%>" />
-<%-- <c:set var="pageNo" value="<%=request.getAttribute("pageNo") %>"/> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,8 +33,7 @@
 							list += "<td><a href='${contextPath}/notice?notNo="
 									+ json[i].notNo + "'>" + json[i].notTitle
 									+ "</a></td>"; //보여주면 안될 것 같은 정보.
-							list += "<td>" + getFormatDate(json[i].notDate)
-									+ "</td>";
+							list += "<td>" + getFormatDate(json[i].notDate) + "</td>";
 							list += "<tr>"
 						}
 						$("tbody").append(list);
@@ -57,7 +55,7 @@
 </script>
 
 <link rel="stylesheet" href="${contextPath}/resources/css/notice/noticeList.css">
-<link rel="stylesheet" href="${contextPath}/resources/css/notice/layout.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/notice/newlayout.css">
 <title>공지사항</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 </head>
