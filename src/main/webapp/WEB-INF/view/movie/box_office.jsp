@@ -143,8 +143,8 @@
 			<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/movie/ci.png">
 		</a>
 		<div>
-			<a href="#">로그인</a>
-			<a href="#">회원가입</a>
+			<a href="${contextPath}/login">로그인</a>
+			<a href="${contextPath}/join">회원가입</a>
 			<a href="#">바로예매</a>
 		</div>
 
@@ -155,9 +155,9 @@
 			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
 			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
 			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
-			<li class="nav"><a href="#">이벤트</a></li>
-			<li class="nav"><a href="#">고객센터</a></li>
-			<li id="mypagebtn"><a href="#"><i class="far fa-user"></i></a></li> <!-- mypage 연결 필요 -->
+			<li class="nav"><a href="${contextPath}/inquiry">이벤트</a></li>
+			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
+			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
 		</ul>
 	</nav>
 	

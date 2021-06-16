@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import proj21_movie.service.CinemaService;
 import proj21_movie.service.MovieService;
 import proj21_movie.service.TheaterService;
 
@@ -17,6 +18,9 @@ public class ShowInfoManagerController {
 	@Autowired
 	private TheaterService thtService;
 	
+	@Autowired
+	private CinemaService cinService;
+	
 	@RequestMapping("/showInfoManager")
 	public String showInfoList() {
 		return "manager/showInfoList";
@@ -26,6 +30,7 @@ public class ShowInfoManagerController {
 	public String registShowInfo(Model model) {
 		model.addAttribute("getMovieList", movService.getLists());
 		model.addAttribute("getTheaterList", thtService.getLists());
+		model.addAttribute("getCinemaList", cinService.getLists());
 		return "manager/registShowInfo";
 	}
 }

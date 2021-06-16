@@ -72,4 +72,15 @@ select s.shw_no, c.cin_no, c.cin_type, c.cin_adultprice, c.cin_teenprice, c.cin_
 from showinfo s, cinema c 
 where s.cin_no = c.cin_no;
 
-select * from member;
+select * from showinfo;
+select mov_runtime from movie where mov_no = 2;
+insert into showinfo 
+values (null, 3, 3, 3, '2021-06-05', '10:00:00'
+		, addtime('10:00:00', sec_to_time(130*60)));
+
+-- starttime만 입력하면 해당 영화의 runtime을 찾은뒤 starttime에 더하여 endtime 입력
+-- addtime(shw_starttime, sec_to_time(mov_runtime*60))
+insert into showinfo 
+values (null, 3, 3, 3, '2021-06-05', '10:00:00'
+		, addtime('10:00:00', sec_to_time((select mov_runtime from movie where mov_no = 3) * 60)));
+

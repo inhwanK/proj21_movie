@@ -24,7 +24,7 @@
 						sCont += "<tr>";
 						sCont += "<td id='no'>" + json[i].shwNo + "</td>";
 						sCont += "<td>" + json[i].thtNo.thtName + "</td>";
-						sCont += "<td>" + json[i].cinNo.cinNo + "관</td>";
+						sCont += "<td>" + json[i].cinNo.cinNo + "관(" + json[i].cinNo.cinType +")</td>";
 						sCont += "<td>" + json[i].movNo.movTitle + "</td>";
 						sCont += "<td>" + json[i].shwDate + "</td>";
 						sCont += "<td>" + json[i].shwStarttime + "</td>";
@@ -39,6 +39,29 @@
 		
 		$('#new').on("click", function(){
 			window.location.href = contextPath + "/registShowInfo";
+		});
+		
+		$(document).on("click", '[id=remove]', function(){
+			var tr = $(this).parent().parent();
+			var td = tr.children();
+			var no = td.eq(0).text();
+			
+			if (confirm("삭제하시겠습니까?")){
+				$.ajax({
+					url: contextPath + "/api/showinfo/" + no,
+					type: 'DELETE',
+					success: function(res) {
+						alert(res);
+						window.location.href = contextPath + "/showInfoManager";
+					},
+					error: function(request, status, error) {
+						alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+						window.location.href = contextPath + "/showInfoManager";
+					}
+				});
+			} else {
+				return false;
+			}
 		});
 	});
 </script>
