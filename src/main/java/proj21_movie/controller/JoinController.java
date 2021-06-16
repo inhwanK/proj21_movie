@@ -3,61 +3,64 @@ package proj21_movie.controller;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import proj21_movie.dto.Member;
 import proj21_movie.dto.RegisterRequest;
 import proj21_movie.exception.DuplicateMemberException;
 import proj21_movie.service.MemberRegisterService;
-import proj21_movie.service.MemberService;
 
 @Controller
 public class JoinController {
 
 	@Autowired
-	private MemberService service;
-	
-	@Autowired
 	private MemberRegisterService memRservice;
+
 	
+	//약관 접속하기 (작동)
 	@RequestMapping("/join")
 	public String join() {
 		return "join/join";
 	}
 	
-	@PostMapping("/join/joinsuccess")
-	public String joinsuccess(@RequestParam(value="agree", defaultValue = "false") Boolean agree, Model model) {
-		if (!agree) {
-			return "join/join";
-		}
-		
-		model.addAttribute("registerRequest", new RegisterRequest());
+	//회원가입 접속하기 (작동)
+	@RequestMapping("/joinform")
+	public String joinform() {
+		return "join/joinform";
+	}
+	
+	//가입성공 접속하기 (작동)
+	@RequestMapping("/joinsuccess")
+	public String joinsuccess() {
 		return "join/joinsuccess";
 	}
-	
-	@GetMapping("/join/joinsuccess")
-	public String joinGet() {
-		return "redirect:/join/join";
-	}
-	
-	@PostMapping("/api/joinsuccess")
-	public String joinList(RegisterRequest regReq, Errors errors) {
-		if (errors.hasErrors())
-			return "join/join";
-		
-		try {
-			memRservice.regist(regReq);
-			return "join/join";
-		} catch (DuplicateMemberException ex) {
-			errors.rejectValue("memEmail", "duplicate");
+
+	//약관동의 (작동)
+	@PostMapping("/joinform")
+	public String joinCookie(HttpServletRequest request) {
+		String agreeParam = request.getParameter("agree");
+		if (agreeParam == null || !agreeParam.equals("true")) {
 			return "join/join";
 		}
-		
+		return "join/joinform";
 	}
+	
+	//회원가입 (테스트중)
+	public void setMemberRegisterService(MemberRegisterService memberRegisterService) {
+		this.memRservice = memberRegisterService;
+	}
+	
+	@PostMapping("/joinsuccess")
+	public String joinformwrite(RegisterRequest regReq) {
+		try {
+			memRservice.regist(regReq);
+			return "/joinsuccess";
+		} catch (DuplicateMemberException ex) {
+			return "/joinform";
+		}
+	}
+
 	
 // 임시분리	
 /*

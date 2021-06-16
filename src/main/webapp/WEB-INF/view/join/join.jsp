@@ -8,42 +8,15 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>회원가입</title>
+	<title>약관동의</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/join/join.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 	<script type="text/javascript">
-	$(function() {
-		 var contextPath = "<%=request.getContextPath() %>";
-		 
-		    $('#new').on("click", function(e){
-		        var newMember = {  memEmail: $('#memEmail').val()
-		        				 , memPasswd: $('#memPasswd').val()
-		        				 , confmemPasswd: $('#confmemPasswd').val()
-		        				 , memBirthdate: $('#memBirthdate').val()
-		        				 , memName: $('#memName').val()
-		        				 , memPhone: $('#memPhone').val()
-		        				 };
-		        alert("data > " + newMember.memEmail );
-		        $.ajax({
-		            url         : contextPath + "/api/join",
-		            type        : "POST",
-		            contentType : "application/json; charset=utf-8",
-		            datatype    : "json",
-		            cache       : false,
-		            data        : JSON.stringify(newMember),
-		            success     : function(res) {
-		                alert(res);
-		                window.location.href = contextPath + "/joinsuccess";
-		            },
-		            error       : function(request, status, error){
-		                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		                window.location.href = contextPath + "/joinsuccess";
-		            }
-		        }); 
-		    });
-		});
+
 	</script>
+
 </head>
 <body>
 	<header>
@@ -72,6 +45,7 @@
 
 	<section id="joinFormArea">
 		<br>
+		<h1 class="join_title">회원가입</h1>
 		<ul class="join_box">
 			<h2>회원약관</h2>
 			<p>박스무비는 「개인정보보호법」 제15조제1항제1호, 제17조제1항제1호, 제23조제1호, 제24조제1항 제1호에 따라
@@ -103,52 +77,14 @@
 			<br>
 		<ul>
 			<li>
-				<form action="joinsuccess" method="post">
-				<label class="chbox">
-				<input name="checkAgre" type="checkbox" value="" id="checkAgre" class="inputCheck" />이용약관에 동의합니다.</label>
+				<form action="joinform" method="post">
+				<input type="checkbox" name="agree" value="true" class="chbox1"><label class="chbox2">이용약관에 동의합니다.</label>
+				<br><br>
+				<a href="${contextPath}/joinform"><input class="btn_joinform" id="button" type="submit" value="회원가입 화면으로"/></a>
 				</form>
 			</li>
 		</ul>
 		<br>
-		<form action="join">
-			<div class="join_main">
-				<ul class="ul">
-					<li class="li">
-						<span>아이디 </span> 
-						<br> 
-						<input type="email" placeholder="메일주소를 입력하세요" class='box' id="email" required />
-					</li>
-					<li class="li">
-						<span>패스워드 </span> 
-						<br> 
-						<input type="password" placeholder="패스워드를 입력하세요" class='box' id="password" required />
-					</li>
-					<li class="li">
-						<span>패스워드 확인 </span> 
-						<br> 
-						<input type="password" placeholder="패스워드를 한번 더	입력하세요" class='box' id="confirmPassword" required />
-					</li>
-					<li class="li">
-						<span>이름 </span> 
-						<br> 
-						<input type="text" placeholder="이름을 입력하세요" class='box' id="name" required />
-					</li>
-					<li class="li">
-						<span>생년월일 </span> 
-						<br> 
-						<input type="date" placeholder="생년월일을 입력하세요." class='box' id="birthday" required />
-					</li>
-					<li class="li">
-						<span>휴대폰번호 </span> 
-						<br> 
-						<input type="text" placeholder="휴대폰번호를 입력하세요" class='box' id="phone" required />
-					</li>
-					<li class="li">
-						<button id="new">가입하기</button>
-					</li>
-				</ul>
-			</div>
-		</form>
 	</section>
 
 	<footer>

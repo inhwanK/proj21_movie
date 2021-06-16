@@ -30,7 +30,7 @@
 	<update id="updateMember">
 		update member
 		   set mem_email = #{memEmail},
-		   	   mem_passwd = #{memPasswd},
+		   	   mem_passwd = password(#{memPasswd}),
 		       mem_birthdate = #{memBirthdate},
 		       mem_name = #{memName},
 		       mem_phone = #{memPhone}

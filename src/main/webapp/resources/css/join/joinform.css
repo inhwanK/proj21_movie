@@ -19,8 +19,6 @@ body {
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	margin-right: 17px; /* nav 길이조절 */
-	overflow: hidden; /* 스크롤 x */
 }
 
 a:link {
@@ -121,79 +119,58 @@ nav ul {
 section {
 	margin: auto;
 	width: 1273px;
-	text-align: center;
-	margin-left: 38%;
-	margin-right: auto;
 }
 
-/* section 로그인 */
-section #loginFormArea {
-	text-align: center;
+/* section 본문 */
+section #joinFormArea {
 	column-width: 15em;
-	background: #ffffff;
+	background: #fff;
 	padding: 2em 12em;
-	column-width: 15em;
 }
 
-.form {
-	height: 30px;
-	width: 250px;
-	text-align: center;
-	font-size: 15px;
+.join_title {
+	margin-right: 2%;
 }
 
-.title {
-	width: 451px; /* 고정 너비 */
-	height: 50px; /* 높이 */
-	background: #3e2789; /* 배경색 */
-	margin-bottom: 30px;
-	padding: 0;
-	text-align: center;
-	line-height: 50px;
-	color: #fff;
-	margin-left: -3px;
-}
-
-.fm_box {
-	border: 1px solid #eee;
-	height: 330px;
-	width: 450px;
-	text-align: center;
-	margin-top: 50px;
-	margin-bottom: 100px;
-}
-
-.bt {
-	height: 35px;
-	width: 258px;
-	text-align: center;
-	margin-left: 1%;
-	font-size: 15px;
+.join_main {
 	margin-top: 10px;
-	background-color: #3e2789;
+	margin-left: 31%;
+}
+
+.ul, .li {
+	list-style: none;
+	color: #454545;
+}
+
+.li {
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+.box1 {
+	width: 450px;
+	height: 30px;
+	border: 1px solid #666;
+	padding: 10px;
+}
+
+.box2 {
+	width: 450px;
+	height: 30px;
+	border: 1px solid #666;
+	padding: 10px;
+}
+
+button {
+	background: #3e2789;
 	color: #fff;
-	font-weight: 500 bolder;
-}
-
-a {
-	text-decoration: none;
-	color: #4b4b4b;
-}
-
-.text_h:link, .text_h:visited, .text_h:active, .text_h:hover {
-	text-decoration: none;
-	color: #000;
-}
-
-.chbox {
-	float: left;
-	margin-left: 22%;
-	color: #4b4b4b;
-}
-
-fieldset {
-	border: 2px solid #ffffff;
-	margin: 0;
+	width: 475px;
+	border: 1px solid #666;
+	height: 50px;
+	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 4%;
 }
 
 /* footer */
