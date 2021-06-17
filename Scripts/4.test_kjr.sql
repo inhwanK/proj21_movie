@@ -65,6 +65,7 @@ update comment
 select res_no, shw_no, mem_no, res_price, res_date, res_adult, res_teen, res_pref from reservation;
 select * from member;
 select * from showinfo;
+update showinfo set shw_no = 2 where shw_no = 28;
 
 
 -- 상영정보에서 상영관의 기본요금 가져오기

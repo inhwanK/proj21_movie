@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page import="java.time.LocalDate"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="tf" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -10,9 +12,7 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/join/joinform.css">
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css"
-	rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -34,42 +34,46 @@
 	            }
 	        }
 	    });
-		<!-- 아이디 중복 확인 -->
-		function emailcheck() {
-			var email = #("#memEmail").val();
-			var sendData = {"#memEmail" : email}
-			$.ajax({
-				method : "POST",
-				url : "emailcheck",
-				data : sendData,
-				success : function(resp) {
-					if(resp == 'fail') {
-						$('#emailcheck').css('color','red')
-		                $('#emailcheck').html("사용할 수 없는 이메일입니다.")
-		                flag=false;
-		  
-		            }else{
-		                $('#emailcheck').css('color','blue')
-		                $('#emailcheck').html("사용할 수 있는 이메일입니다.")
-		                flag=true;
-		            }}
-		    })	
-		}
 		
+		<!-- 회원가입 -->
+		var contextPath = "<%= request.getContextPath()%>";
+
+	    $('#new').on("click", function(e){
+	        var newMember = {  memEmail: $('#memEmail').val(), 
+	        				   memPasswd: $('#memPasswd').val(), 
+	       					   memBirthdate: $('#memBirthdate').val(),
+	        				   memName: $('#memName').val(),
+	        				   memPhone: $('#memPhone').val()
+	        				   };
+	        $.ajax({
+	            url         : contextPath + "/api/joinform/",
+	            type        : "POST",
+	            contentType : "application/json; charset=utf-8",
+	            datatype    : "json",
+	            cache       : false,
+	            data        : JSON.stringify(newMember),
+	            success     : function(res) {
+	                window.location.href = contextPath + "/joinsuccess";
+	            },
+	            error       : function(request, status, error){
+	                alert("회원가입 폼을 정확히 입력해주세요");
+	            }
+	        }); 
+	    });
+
 	});
 </script>
 </head>
 <body>
 
 	<header>
-		<a href="main" title="박스무비 메인으로 가기"> <img id="header_ci"
-			alt="브랜드 로고" src="${contextPath}/resources/images/movie/ci.png">
+		<a href="main" title="박스무비 메인으로 가기"> 
+		<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/movie/ci.png">
 		</a>
 		<div>
 			<a href="${contextPath}/login">로그인</a> <a href="${contextPath}/join">회원가입</a>
 			<a href="#">바로예매</a>
 		</div>
-
 	</header>
 
 	<nav>
@@ -79,8 +83,7 @@
 			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
 			<li class="nav"><a href="#">이벤트</a></li>
 			<li class="nav"><a href="#">고객센터</a></li>
-			<li id="mypagebtn"><a href="#"><i class="far fa-user"></i></a></li>
-			<!-- mypage 연결 필요 -->
+			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
 		</ul>
 	</nav>
 
@@ -90,7 +93,7 @@
 			<div class="join_main">
 				<ul class="ul">
 					<li class="li">
-						<span>아이디 </span><span id = "emailcheck"></span>
+						<span>아이디 </span><span id="emailcheck"></span>
 						<br> 
 						<input type="email" placeholder="메일주소를 입력하세요" class="box1" id="memEmail" oninput = "checkId()" required />
 					</li>

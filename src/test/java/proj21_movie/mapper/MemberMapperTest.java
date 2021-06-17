@@ -17,7 +17,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import proj21_movie.config.ContextRoot;
-import proj21_movie.config.ContextSqlSession;
 import proj21_movie.dto.Member;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -50,7 +49,6 @@ public class MemberMapperTest {
 
 		Member member = mapper.selectMemberByNo(1);
 		Assert.assertNotNull(member);
-
 		log.debug(member.toString());
 	}
 
@@ -58,7 +56,6 @@ public class MemberMapperTest {
 	public void test03selectMemberByEmail() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
-//		Member selMember = new Member(1);
 		String memEmail = "test1@test.com";
 		Member member = mapper.selectMemberByEmail(memEmail);
 		Assert.assertNotNull(member);
@@ -73,7 +70,7 @@ public class MemberMapperTest {
 
 		int res = mapper.insertMember(newMember);
 		Assert.assertEquals(1, res);
-		log.debug("res id >> " + res);
+		log.debug("res memEmail >> " + res);
 		
 		mapper.deleteMember(newMember.getMemEmail());
 	}
@@ -84,7 +81,11 @@ public class MemberMapperTest {
 		Member newMember = new Member("test4_2@test.com", "1234", LocalDate.of(2020, 6, 22), "테스트4_2", "010-2231-3232");
 		mapper.insertMember(newMember);
 
+		newMember.setMemEmail("test4_2@test.com");
 		newMember.setMemPasswd("1122");
+		newMember.setMemBirthdate(LocalDate.of(2020, 6, 22));
+		newMember.setMemName("테스트4_2");
+		newMember.setMemPhone("010-2231-3232");
 		int res = mapper.updateMember(newMember);
 		Assert.assertEquals(1, res);
 
@@ -98,6 +99,7 @@ public class MemberMapperTest {
 		Member newMember = new Member("test4_2@test.com", "1122", LocalDate.of(2020, 6, 22), "테스트4_2", "010-2231-3232");
 		mapper.insertMember(newMember);
 
+		newMember.setMemEmail("test4_2@test.com");
 		int res = mapper.deleteMember(newMember.getMemEmail());
 		Assert.assertEquals(1, res);
 	}

@@ -2,25 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="proj21_movie.mapper.MemberMapper">
 
-	<select id="selectMemberByAll" resultType="Member">
+	<resultMap type="Member" id="resMember">
+		<id column="memEmail" property="memEmail"/>
+		<result column="memBirthdate" property="memBirthdate"/>
+	</resultMap>
+
+	<select id="selectMemberByAll" resultMap="resMember">
 		select mem_no, mem_email, mem_passwd, mem_birthdate, mem_name, mem_phone
 		  from member
 	</select>
 	
-	<select id="selectMemberByNo" resultType="Member">
+	<select id="selectMemberByNo" resultMap="resMember">
 		select mem_no, mem_email, mem_passwd, mem_birthdate, mem_name, mem_phone
 		  from member
 		 where mem_no = #{memNo}
 	</select>
 	
-	<select id="selectMemberByEmail" resultType="Member">
+	<select id="selectMemberByEmail" resultMap="resMember">
 		select mem_no, mem_email, mem_passwd, mem_birthdate, mem_name, mem_phone
 		  from member
 		 where mem_email = #{memEmail}
 	</select>
 	
-	<insert id="insertMember">
-		insert into member values 
+	<insert id="insertMember" parameterType="Member">
+		insert into member 
+		values 
 		(null, #{memEmail}, password(#{memPasswd}), #{memBirthdate}, #{memName}, #{memPhone})
 		<selectKey keyProperty="memNo" resultType="int">
 			SELECT LAST_INSERT_ID()	
@@ -29,12 +35,12 @@
 	
 	<update id="updateMember">
 		update member
-		   set mem_email = #{memEmail},
+		   set mem_no = #{memNo},
 		   	   mem_passwd = password(#{memPasswd}),
 		       mem_birthdate = #{memBirthdate},
 		       mem_name = #{memName},
 		       mem_phone = #{memPhone}
-		 where mem_no = #{memNo}
+		 where mem_email = #{memEmail}
 	</update>
 	
 	<delete id="deleteMember">
