@@ -45,7 +45,6 @@
 	        				   memName: $('#memName').val(),
 	        				   memPhone: $('#memPhone').val()
 	        				   };
-	        alert("data > " + newMember.memEmail );
 	        $.ajax({
 	            url         : contextPath + "/api/joinform/",
 	            type        : "POST",
@@ -54,12 +53,10 @@
 	            cache       : false,
 	            data        : JSON.stringify(newMember),
 	            success     : function(res) {
-	                alert(res);
 	                window.location.href = contextPath + "/joinsuccess";
 	            },
 	            error       : function(request, status, error){
-	                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	                window.location.href = contextPath + "/joinform";
+	                alert("회원가입 폼을 정확히 입력해주세요");
 	            }
 	        }); 
 	    });
@@ -70,14 +67,13 @@
 <body>
 
 	<header>
-		<a href="main" title="박스무비 메인으로 가기"> <img id="header_ci"
-			alt="브랜드 로고" src="${contextPath}/resources/images/movie/ci.png">
+		<a href="main" title="박스무비 메인으로 가기"> 
+		<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/movie/ci.png">
 		</a>
 		<div>
 			<a href="${contextPath}/login">로그인</a> <a href="${contextPath}/join">회원가입</a>
 			<a href="#">바로예매</a>
 		</div>
-
 	</header>
 
 	<nav>
@@ -87,8 +83,7 @@
 			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
 			<li class="nav"><a href="#">이벤트</a></li>
 			<li class="nav"><a href="#">고객센터</a></li>
-			<li id="mypagebtn"><a href="#"><i class="far fa-user"></i></a></li>
-			<!-- mypage 연결 필요 -->
+			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
 		</ul>
 	</nav>
 
@@ -98,7 +93,7 @@
 			<div class="join_main">
 				<ul class="ul">
 					<li class="li">
-						<span>아이디 </span><span id = "emailcheck"></span>
+						<span>아이디 </span><span id="emailcheck"></span>
 						<br> 
 						<input type="email" placeholder="메일주소를 입력하세요" class="box1" id="memEmail" oninput = "checkId()" required />
 					</li>
