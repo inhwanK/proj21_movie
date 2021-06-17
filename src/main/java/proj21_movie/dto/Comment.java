@@ -17,6 +17,10 @@ public class Comment {
 		this.comNo = comNo;
 	}
 
+	public Comment(Movie movNo) {
+		this.movNo = movNo;
+	}
+
 	public Comment(int comNo, Movie movNo, String comUser, String comContent, int comStar, LocalDateTime comDate) {
 		this.comNo = comNo;
 		this.movNo = movNo;
