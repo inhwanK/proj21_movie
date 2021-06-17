@@ -23,7 +23,7 @@ public class ShowInfoManagerController {
 	
 	@RequestMapping("/showInfoManager")
 	public String showInfoList() {
-		return "manager/showInfoList";
+		return "manager/showInfoManager/showInfoList";
 	}
 	
 	@RequestMapping("/registShowInfo")
@@ -31,6 +31,6 @@ public class ShowInfoManagerController {
 		model.addAttribute("getMovieList", movService.getLists());
 		model.addAttribute("getTheaterList", thtService.getLists());
 		model.addAttribute("getCinemaList", cinService.getLists());
-		return "manager/registShowInfo";
+		return "manager/showInfoManager/registShowInfo";
 	}
 }

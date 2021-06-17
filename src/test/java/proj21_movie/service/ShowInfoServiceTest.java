@@ -55,7 +55,7 @@ public class ShowInfoServiceTest {
 	public void test02GetShowInfo() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
-		ShowInfo selShowInfo = new ShowInfo(1);
+		ShowInfo selShowInfo = new ShowInfo(2);
 		ShowInfo showInfo = mapper.selectShowInfoByNo(selShowInfo);
 		
 		Assert.assertNotNull(showInfo);
