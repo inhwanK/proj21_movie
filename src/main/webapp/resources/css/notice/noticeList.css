@@ -20,29 +20,38 @@ section{
     width: calc(100% - 260px);
 }
 
-h1.title {
-    padding: 0 0 26px 0;
-    font-weight: 600;
+div.title {
+/*     padding: 0 0 26px 0; */
+    font-weight: 100;
     letter-spacing: -1px;
     line-height: 1.1;
-    color: #222;
+    color: #aaa;
     font-size: 40px;
-    /* display: inline; */
+    display: inline-block; 
+    width: 200px;
+    margin: 0 auto;
+}
+div#title-wrap{
+	width:400px;
+	padding: 20px 10px;
+	margin: 0 auto;
+	border-style: solid;
+	border-color: purple;
+	border-radius: 15px 15px;
+	border-width: 3px;
+	
+	/* div 안에 양옆으로 정렬하는 거..  */
+	display: flex;
+	justify-content: space-between; 
 }
 
- h1.title>a:link, h1.title>a:active, h1.title>a:hover, h1.title>a:visited{
+div.title a{
+	color:#aaa;
+}
+/* div.title>a:link, div.title>a:active, div.title>a:hover, div.title>a:visited{
 	color:#222; 
-}
-
-ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-}
+	
+} */
 
 .board-list-util:after, .board-list-util:before {
     content: '';
@@ -118,10 +127,10 @@ td {
     vertical-align: inherit;
 }
 
-a:link {
-    color: #444;
-    text-decoration: none;
-}
+a{	
+	color: #222;
+	text-decoration: none;
+} 
 
 .board-list>tbody>tr>td>a, .board-list>tbody>tr>th>a {
     display: inline-block;
@@ -130,9 +139,7 @@ a:link {
     vertical-align: middle;
 }
 
-/* article, aside, figcaption, figure, footer, header, main, nav, section {
-    display: block;
-} */
+
 
 .pagination {
     clear: both;

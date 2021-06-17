@@ -10,27 +10,10 @@ section{
 body {
      overflow: auto;
     overflow-y: scroll;
-    letter-spacing: 0;
-    line-height: 1.5;
-    font-size: 15px;
+/*     letter-spacing: 0; */
+
     color: #444;
     font-weight: 400; 
-}
-
- ol, ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-} 
-
-
-input[type="hidden" i] {
-    display: none;
-    appearance: none;
-    background-color: initial;
-    cursor: default;
-    padding: initial;
-    border: initial;
 }
 
 button, input, optgroup, select, textarea {
@@ -75,7 +58,35 @@ th {
     font-weight: bold;
     text-align: -internal-center;
 }
+div#title-wrap{
+	width:400px;
+	padding: 20px 10px;
+	margin: 0 auto;
+	border-style: solid;
+	border-color: purple;
+	border-radius: 15px 15px;
+	border-width: 3px;
+	
+	/* div 안에 양옆으로 정렬하는 거..  */
+	display: flex;
+	justify-content: space-between; 
+}
 
+div.title {
+    font-weight: 100;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    color: #aaa;
+    font-size: 40px;
+    display: inline-block; 
+    width: 200px;
+    margin: 0 auto;
+}
+
+div.title a{
+	color:#aaa;
+	text-decoration: none;
+}
 
 a.button {
     text-decoration: none;
