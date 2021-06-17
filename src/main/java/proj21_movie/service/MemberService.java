@@ -8,8 +8,9 @@ import proj21_movie.dto.Member;
 
 @Service
 public interface MemberService {
-	List<Member> getLists();
+
 	Member getMember(String memEmail);
+	List<Member> getLists();
 
 	int registerMember(Member member);
 	int modifyMember(Member member);

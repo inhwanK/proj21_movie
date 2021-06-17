@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page import="java.time.LocalDate"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="tf" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -10,9 +12,7 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/join/joinform.css">
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css"
-	rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -34,28 +34,36 @@
 	            }
 	        }
 	    });
-		<!-- 아이디 중복 확인 -->
-		function emailcheck() {
-			var email = #("#memEmail").val();
-			var sendData = {"#memEmail" : email}
-			$.ajax({
-				method : "POST",
-				url : "emailcheck",
-				data : sendData,
-				success : function(resp) {
-					if(resp == 'fail') {
-						$('#emailcheck').css('color','red')
-		                $('#emailcheck').html("사용할 수 없는 이메일입니다.")
-		                flag=false;
-		  
-		            }else{
-		                $('#emailcheck').css('color','blue')
-		                $('#emailcheck').html("사용할 수 있는 이메일입니다.")
-		                flag=true;
-		            }}
-		    })	
-		}
 		
+		<!-- 회원가입 -->
+		var contextPath = "<%= request.getContextPath()%>";
+
+	    $('#new').on("click", function(e){
+	        var newMember = {  memEmail: $('#memEmail').val(), 
+	        				   memPasswd: $('#memPasswd').val(), 
+	       					   memBirthdate: $('#memBirthdate').val(),
+	        				   memName: $('#memName').val(),
+	        				   memPhone: $('#memPhone').val()
+	        				   };
+	        alert("data > " + newMember.memEmail );
+	        $.ajax({
+	            url         : contextPath + "/api/joinform/",
+	            type        : "POST",
+	            contentType : "application/json; charset=utf-8",
+	            datatype    : "json",
+	            cache       : false,
+	            data        : JSON.stringify(newMember),
+	            success     : function(res) {
+	                alert(res);
+	                window.location.href = contextPath + "/joinform";
+	            },
+	            error       : function(request, status, error){
+	                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	                window.location.href = contextPath + "/joinform";
+	            }
+	        }); 
+	    });
+
 	});
 </script>
 </head>
