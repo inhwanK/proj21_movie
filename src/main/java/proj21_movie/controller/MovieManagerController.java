@@ -8,16 +8,16 @@ public class MovieManagerController {
 
 	@RequestMapping("/movieManager")
 	public String movieList() {
-		return "manager/movieList";
+		return "manager/movieManager/movieList";
 	}
 	
 	@RequestMapping("/registMovie")
 	public String registMovie() {
-		return "manager/registMovie";
+		return "manager/movieManager/registMovie";
 	}
 	
 	@RequestMapping("/updateMovie")
 	public String updateMovie() {
-		return "manager/updateMovie";
+		return "manager/movieManager/updateMovie";
 	}
 }

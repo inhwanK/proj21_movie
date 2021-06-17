@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Hello
+	<a href="<%=request.getContextPath() %>/main">Welcome to <strong>BOX MOVIE</strong></a>
 </body>
 </html>

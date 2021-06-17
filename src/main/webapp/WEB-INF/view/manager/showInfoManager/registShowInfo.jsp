@@ -104,7 +104,6 @@
                      	<option selected>영화</option>
                      	<c:forEach items="${getMovieList }" var="movie">
                      		<option value="${movie.movNo }" data-time="${movie.movRuntime }"><c:out value="${movie.movTitle }"/></option>
-                     		<%-- <input type="hidden" id="runtime" value="${movie.movRuntime }"/> --%>
                      	</c:forEach>
                      </select>
                   </div>

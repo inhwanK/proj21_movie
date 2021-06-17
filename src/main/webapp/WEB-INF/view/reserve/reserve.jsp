@@ -11,16 +11,23 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 	<script type="text/javascript">
-		var today = new Date();
-		
-		var year = today.getFullYear();
-		var month = today.getMonth()+1;
-		var date = today.getDate();
-		
-		month = month >= 10 ? month : "0" + month;
-		date = date >= 10 ? date : "0" + date;
-		
-		console.log(""+ year + "년" + month + "월" + date + "일");
+		$(function(){
+			for (i = 0; i < 5; i++){
+				var today = new Date();
+				
+				var year = today.getFullYear();
+				var month = today.getMonth() + 1;
+				var date = today.getDate();
+				
+				var addDate = date + i;
+				
+				var today2 = new Date(year, month, addDate);
+				var month2 = today2.getMonth();
+				var date2 = today2.getDate();
+				
+				$("#calendar").append("<span><a href='#'>"+ month2 + "월" + date2 + "일" + "</a></span>");
+			}
+		});
 	
 	</script>
 </head>
@@ -52,45 +59,20 @@
 		<div id="containter">
 			<h2>바로예매</h2>
 			<div id="calendar">
-				<span><a href="#">6 / 1</a></span>
-				<span><a href="#">6 / 2</a></span>
-				<span><a href="#">6 / 3</a></span>
-				<span><a href="#">6 / 4</a></span>
-				<span><a href="#">6 / 5</a></span>
-				<span><a href="#">6 / 6</a></span>
-				<span><a href="#">6 / 7</a></span>
 			</div>
 			<div id="reserve-table">
 			<div id="movie-choice">
 				<h3>영화</h3>
 				<div id="movie-list">
 					<ul>
-						<li><a href="#">크루엘라</a></li>
-						<li><a href="#">캐시트럭</a></li>
-						<li><a href="#">미스피츠</a></li>
-						<li><a href="#">극장판 귀멸의 칼날:무한열차편</a></li>
-						<li><a href="#">컨져링3:악마가 시켰다</a></li>
-						<li><a href="#">분노의 질주: 더 얼티메이트</a></li>
-						<li><a href="#">파이프라인</a></li>
-						<li><a href="#">크루엘라</a></li>
-						<li><a href="#">캐시트럭</a></li>
-						<li><a href="#">미스피츠</a></li>
-						<li><a href="#">극장판 귀멸의 칼날:무한열차편</a></li>
-						<li><a href="#">컨져링3:악마가 시켰다</a></li>
-						<li><a href="#">분노의 질주: 더 얼티메이트</a></li>
-						<li><a href="#">파이프라인</a></li><li><a href="#">크루엘라</a></li>
-						<li><a href="#">캐시트럭</a></li>
-						<li><a href="#">미스피츠</a></li>
-						<li><a href="#">극장판 귀멸의 칼날:무한열차편</a></li>
-						<li><a href="#">컨져링3:악마가 시켰다</a></li>
-						<li><a href="#">분노의 질주: 더 얼티메이트</a></li>
-						<li><a href="#">파이프라인</a></li>
+						<c:forEach items="${getMovieList }" var="mov">
+							<li><a href="#"><c:out value="${mov.movTitle }"/></a></li>
+                     	</c:forEach>
 					</ul>
 				</div>
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 					Etiam hendrerit magna sit amet neque mattis porta. Nulla congue, 
-					
 				</p>
 				
 			</div>
@@ -99,9 +81,9 @@
 				<h3>극장</h3>
 				<div id="theater-list">
 					<ul>
-						<li><a href="#">대구(칠성로)</a></li>
-						<li><a href="#">대구신세계(동대구)</a></li>
-						<li><a href="#">대구이시아</a></li>
+						<c:forEach items="${getTheaterList }" var="tht">
+							<li><a href="#"><c:out value="${tht.thtName }"/></a></li>
+                     	</c:forEach>
 					</ul>
 				</div>	
 				<p>
@@ -125,7 +107,7 @@
 					<br> <br>
 					<span>10 : 00</span>
 					<span>14 : 00</span>
-					<span>20: 00</span>
+					<span>20 : 00</span>
 				</div>
 				
 			</div>
