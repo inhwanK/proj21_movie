@@ -19,6 +19,21 @@
 				$(".tab-cont-wrap > div").removeClass("active");
 				$(".tab-cont-wrap > div").eq($(this).index()).addClass("active");
 			});
+
+		   $("#cancel").click(function () {
+		        $(".contxt").val('');
+		        
+		   });
+			  
+		   $(document).ready( function() {
+			   $(".comment-write").click(function(){
+					$(this).addClass("active");
+					$(this).siblings().removeClass("active");
+					
+					$(".write-content").toggleClass("active");
+			     });
+		   });
+
 		});
 	</script>
 	<script>
@@ -35,8 +50,9 @@
 				function(json) {	
 					var bg = "";
 					var title = "";
-					var sCont = "";
+					var avgStar = "";
 					var poster = "";
+					var sCont = "";
 					
 						/* 영화 뒷 배경 */
 						bg += "<div class='bg-img' style='background-image:url("
@@ -45,7 +61,10 @@
 						
 						/* 영화 제목 */			
 						title += "<p class='title'>" + json.movTitle + "</p>";
-						// title += "<p class='title-eng'>" + 'Cruella' + "</p>";		// 영어 제목 컬럼 미지정	
+						// title += "<p class='title-eng'>" + 'Cruella' + "</p>";		// 영어 제목 컬럼 미지정
+						
+						/* 실시간 평점 (영화 평균 평점) */		
+						avgStar += json.movAvgstar;			// 영화 한줄평 추가시 평점 반영하여 업뎃 하기는 아직 미 구현
 						
 						/* 영화 포스터 */
 						poster += "<p class='movie-grade age-" + json.movGrade + "'></p>";	
@@ -72,10 +91,42 @@
 						
 					$(".movie-detail-page .movie-bg").append(bg);
 					$(".movie-detail-cont").append(title);
+					$(".number em").append(avgStar);
 					$(".poster .wrap").append(poster);
 					$(".movie-info-list").append(sCont);
 			});
 			/* // 주요정보 탭 */
+			
+			/* 실관람평  탭 */
+			var movNo = "${movNo}";
+			$.get(contextPath+"/api/comments/movie/" + movNo,
+				function(json) {
+					var dataLength = json.length;
+					if (dataLength >= 1) {
+						var sCont = "";				
+						var size = "";	
+							size += dataLength
+							
+						for (i = 0; i < dataLength; i++) {							
+							sCont += "<li>";
+							sCont += "<div class='comment-list'>";
+							sCont += "<div class='prof'>";						
+							sCont += "<img src='${contextPath}/resources/images/movie/movie-detail/bg-profile.png'>";
+							sCont += "<p class='user-id'>" + json[i].comUser + "</p>";
+							sCont += "</div>";
+							sCont += "<div class='textarea'>";
+							sCont += "<h3>한줄평</h3>";
+							sCont += "<h3>" + json[i].comStar + "</h3>";
+							sCont += "<p>" + json[i].comContent + "</p>";
+							sCont += "</div>";
+							sCont += "</div>";
+							sCont += "</li>";
+						}
+						$("#comment-count .font-gblue").append(size);
+						$(".movie-comment ul").append(sCont);
+					}
+				});
+			/* // 실관람평 탭 */
 		});
 	</script>
 </head>
@@ -122,7 +173,7 @@
 								<p class="title">실관람 평점</p>
 								<div class="number">
 									<p title="실관람 평점" class="before">
-										<em>9.3</em>
+										<em></em>
 										<span>점</span>
 									</p>
 								</div>
@@ -185,40 +236,32 @@
 			    			 <div class="movie-comment-list">
 								<h2>영화 한줄평 내역</h2>
 								<div id="comment-count">
-									<b>전체 <span class="font-gblue">20</span> 건</b>								
+									<b>전체 <span class="font-gblue"></span> 건</b>						
 								</div>
 								<div class="comment-write">
-									<a href="#" title="관람평쓰기">관람평쓰기</a>
+									<span title="한줄평쓰기">한줄평쓰기</span>
+									<div class="write-content">
+										<form action="" class="form-txt">									
+											<table>
+												<tr>
+													<td>
+														<div class="title"><h4>한줄평</h4></div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<textarea class="contxt" rows="4" cols="100" name="contents" placeholder="한줄평을 적어주세요"></textarea>
+													</td>
+												</tr>											
+											</table>
+										</form>
+										<input class="wtiteBtn" type="submit" value="쓰기"/> 
+										<input id="cancel" type="button" class="cancelBtn" value="취소"/> 
+									</div>
 								</div>
 								
 								<div class="movie-comment">
 									<ul>
-										<li>
-											<div class="comment-list">
-												<div class="prof">
-													<img src="${contextPath}/resources/images/movie/movie-detail/bg-profile.png">
-													<p class="user-id">test@test.com</p>
-												</div>	
-												<div class="textarea">
-													<h3>관람평</h3>
-													<h3>10</h3>
-													<p>긴장감이 있어서 재미 있었네요 👍</p>
-												</div>
-											</div>
-										</li> 
-										<li>
-											<div class="comment-list">
-												<div class="prof">
-													<img src="${contextPath}/resources/images/movie/movie-detail/bg-profile.png">
-													<p class="user-id">tes2@test.com</p>
-												</div>	
-												<div class="textarea">
-													<h3>관람평</h3>
-													<h3>1</h3>
-													<p>내 점수는 1점...</p>
-												</div>
-											</div>
-										</li> 
 									</ul>
 								</div>
 								
