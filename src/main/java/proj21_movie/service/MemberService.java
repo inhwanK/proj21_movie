@@ -10,7 +10,7 @@ import proj21_movie.dto.Member;
 public interface MemberService {
 	List<Member> getLists();
 	Member getMember(String memEmail);
-	
+
 	int registerMember(Member member);
 	int modifyMember(Member member);
 	int removeMember(String memEmail);

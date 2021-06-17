@@ -9,7 +9,7 @@ public class Member {
 	private LocalDate memBirthdate; // 생년월일
 	private String memName; // 이름
 	private String memPhone; // 연락처
-
+	
 	public Member() {}
 
 	public Member(int memNo) {
