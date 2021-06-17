@@ -4,12 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.sun.corba.se.spi.activation.Repository;
 
@@ -23,16 +25,6 @@ import proj21_movie.service.MemberService;
 @Controller
 public class JoinController {
 
-	@Autowired
-	private MemberRegisterService memRservice;
-	
-	@Autowired
-	private MemberService service;
-	
-	@Autowired
-	private MemberMapper memapper;
-
-	
 	//약관 접속하기 (작동)
 	@RequestMapping("/join")
 	public String join() {
@@ -50,6 +42,12 @@ public class JoinController {
 	public String joinsuccess() {
 		return "join/joinsuccess";
 	}
+	
+	// 리다이렉트(작동)
+	@GetMapping("/joinform")
+	public String joinformGet() {
+		return "redirect:/join";
+	}
 
 	//약관동의 (작동)
 	@PostMapping("/joinform")
@@ -60,68 +58,5 @@ public class JoinController {
 		}
 		return "join/joinform";
 	}
-			
-	//회원가입 (테스트중)
-	public void setMemberRegisterService(MemberRegisterService memberRegisterService) {
-		this.memRservice = memberRegisterService;
-	}
-	
-	@PostMapping("/joinsuccess")
-	public String joinformwrite(RegisterRequest regReq) {
-		try {
-			memRservice.regist(regReq);
-			return "/joinsuccess";
-		} catch (DuplicateMemberException ex) {
-			return "/joinform";
-		}
-	}
 
-	
-// 임시분리	
-/*
-	@PostMapping("/join/{memEmail}")
-	public ResponseEntity<Object> member(@PathVariable String memEmail, HttpServletResponse response) {
-		Member member = service.getMember(memEmail);
-		if (member == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
-		return ResponseEntity.ok(member);
-	}
-	
-	@GetMapping("/joinsuccess")
-	public ResponseEntity<Object> member(HttpServletResponse response) {
-		List<Member> member = service.getLists();
-		if (member == null) {
-			return ResponseEntity.noContent().build();
-		}
-		return ResponseEntity.ok(member);
-	}
-	
-	@PatchMapping("/join/{memEmail}")
-	public ResponseEntity<Object> updateMember(@PathVariable String memEmail, @RequestBody Member member) {
-		System.out.println("updateMember > " + member);
-		return ResponseEntity.ok(service.modifyMember(member));
-	}
-	
-	@PostMapping("/join/")
-	public ResponseEntity<Object> newMember(@RequestBody Member member, Errors errors) {
-		if (errors.hasErrors()) {
-			return ResponseEntity.badRequest().build();
-		} try {
-			service.registerMember(member);
-			
-			URI uri = URI.create("/api/join/" + member.getMemEmail());
-			System.out.println("member.getMemEmail() > " + member.getMemEmail());
-			return ResponseEntity.created(uri).body(member.getMemEmail());
-		} catch (DuplicateMemberException e) {
-			return ResponseEntity.status(HttpStatus.CONFLICT).build();
-		}
-	}
-	
-	@DeleteMapping("/join/{memEmail}")
-	public ResponseEntity<Object> deleteMember(@PathVariable String memEmail) {
-		System.out.println("deleteMember > " + memEmail);
-		return ResponseEntity.ok(service.removeMember(memEmail));
-	}
-*/
 }

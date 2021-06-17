@@ -2,6 +2,8 @@ package proj21_movie.dto;
 
 import java.time.LocalDate;
 
+import proj21_movie.exception.WrongIdPasswordException;
+
 public class Member {
 	private int memNo; // 회원번호
 	private String memEmail; // 회원아이디(이메일)
@@ -9,6 +11,18 @@ public class Member {
 	private LocalDate memBirthdate; // 생년월일
 	private String memName; // 이름
 	private String memPhone; // 연락처
+	
+	//비밀번호 변경
+	public void changePassword(String oldmemPasswd, String newmemPasswd) {
+		if (!memPasswd.equals(oldmemPasswd))
+			throw new WrongIdPasswordException();
+		this.memPasswd = newmemPasswd;
+	}
+	
+	//비밀번호 확인
+	public boolean matchPassword(String memPasswd) {
+        return this.memPasswd.equals(memPasswd);
+    }
 	
 	public Member() {}
 
@@ -81,10 +95,6 @@ public class Member {
 	public void setMemPhone(String memPhone) {
 		this.memPhone = memPhone;
 	}
-	
-	public boolean matchPassword(String memPasswd) {
-        return this.memPasswd.equals(memPasswd);
-    }
 
 	@Override
 	public String toString() {
