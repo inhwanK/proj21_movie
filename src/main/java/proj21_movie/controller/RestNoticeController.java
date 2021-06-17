@@ -15,7 +15,7 @@ import proj21_movie.service.NoticeService;
 
 @RestController
 @RequestMapping("/api")
-public class NoticeRestController {
+public class RestNoticeController {
 
 	@Autowired
 	private NoticeService service;

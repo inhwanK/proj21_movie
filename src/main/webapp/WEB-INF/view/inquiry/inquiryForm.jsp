@@ -15,23 +15,34 @@
 	$(function(json){
 		var contextPath = "${contextPath}";
 		$("button#regdate").on("click",function(){
-			var data = {name : $("#name").val()}
-			alert("data > " + data.name);
-		});
-		$.ajax({
-			url:
-			type:
-			data:
-			dataType:
-			success:
-			erroe:
+			var data = {
+					inqUser : $("input[name=inqUser]").val(),	
+					inqTitle : $("input[name=inqTitle]").val(),
+					inqDetail : $("textarea[name=inqDetail]").val(),
+					inqFile : $("input[name=inqFile]").val(),
+			}
+			alert("data > " + data.inqTitle);
+			$.ajax({
+				url:contextPath + "/api/inquiry",
+				type:"post",
+				contentType: "application/json; charset=utf-8",
+				dataType:"json",
+				data:JSON.stringify(data),
+				success: function(res){
+					alert(res);
+					window.location.href = contextPath + "/inquirycheck";
+				},
+				error: function(){
+					alert("error"+data)
+					alert("error"+JSON.stringify(data))
+				}
+			});
 		});
 	});
 </script>
 </head>
 <body>
-	<input id="jtest"></input>
-	<button id="testBtn" type="submit">asdfas</button>
+
 	<header>
 		<a href="${contextPath}/main"><img id="header_ci" alt="브랜드 로고"
 			src="${contextPath}/resources/images/ci.png"></a>
@@ -89,10 +100,12 @@
 									<em	class="font-orange">*</em>
 								</th>
 								<td>
-									<input type="text" id="name" name="inqurNm"
+									<input type="text" id="name" name="inqUser"
 									class="input-text w150px" value="" maxlength="15">
 								</td>
 							</tr>
+
+
 
 							<tr>
 								<th scope="row">
@@ -100,10 +113,11 @@
 									<em class="font-orange">*</em>
 								</th>
 								<td colspan="3">
-									<input type="text" name="custInqTitle"
+									<input type="text" name="inqTitle"
 									id="qnaCustInqTitle" class="input-text" maxlength="100">
 								</td>
 							</tr>
+							
 							<tr>
 								<th scope="row">
 									<label for="textarea">내용</label>
@@ -111,7 +125,7 @@
 								</th>
 								<td colspan="3">
 									<div class="textarea">
-										<textarea id="textarea" name="custInqCn" rows="7" cols="60"
+										<textarea id="textarea" name="inqDetail" rows="7" cols="60"
 											title="내용입력"
 											placeholder="※ 불편사항이나 문의사항을 남겨주시면 최대한 신속하게 답변 드리겠습니다."
 											class="input-textarea"></textarea>
@@ -123,7 +137,9 @@
 									</div>
 								</td>
 							</tr>
-							<!-- 2019-02-14 사진첨부 마크업 수정 -->
+							
+							
+
 							<tr>
 								<th scope="row">사진첨부</th>
 								<td colspan="3">
@@ -133,7 +149,7 @@
 											<p>* JPEG, PNG 형식의 5M 이하의 파일만 첨부 가능합니다. (최대 5개)</p>
 
 											<!-- to 개발 : 이미지 추가가 5개가 되면 버튼 숨김 -->
-											<button type="button" id="uploadBtn" class="btn-image-add">
+											<button type="button" id="uploadBtn" class="btn-image-add" name="inqFile">
 												<span>파일선택</span>
 											</button>
 											<!--// to 개발 : 이미지 추가가 5개가 되면 버튼 숨김 -->
@@ -145,10 +161,11 @@
 									</div>
 								</td>
 							</tr>
-							<!--// 2019-02-14 사진첨부 마크업 수정 -->
+
 						</tbody>
 					</table>
 				</div>
+
 
 				<div class="btn-group pt40">
 					<button type="submit" class="button purple large" id="regdate">등록</button>

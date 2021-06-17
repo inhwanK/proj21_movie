@@ -41,3 +41,6 @@ SELECT *
       FROM notice
       where not_no between 1 and 20
       order by not_no desc;
+      
+     
+select * from inquiry;
