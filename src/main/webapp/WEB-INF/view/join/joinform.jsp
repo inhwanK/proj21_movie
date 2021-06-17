@@ -55,7 +55,7 @@
 	            data        : JSON.stringify(newMember),
 	            success     : function(res) {
 	                alert(res);
-	                window.location.href = contextPath + "/joinform";
+	                window.location.href = contextPath + "/joinsuccess";
 	            },
 	            error       : function(request, status, error){
 	                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
