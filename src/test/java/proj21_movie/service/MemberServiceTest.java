@@ -48,10 +48,8 @@ public class MemberServiceTest {
 	public void test02getMember() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
-//		Member selMember = new Member(1);
 		Member member = mapper.selectMemberByNo(1);
 		Assert.assertNotNull(member);
-		
 		log.debug(member.toString());
 	}
 	
@@ -83,7 +81,6 @@ public class MemberServiceTest {
 		
 		int res = mapper.updateMember(newMember);
 		Assert.assertEquals(1, res);
-		
 		log.debug("res > " + res);
 		
 		mapper.deleteMember(newMember.getMemEmail());
@@ -98,7 +95,6 @@ public class MemberServiceTest {
 		mapper.insertMember(newMember);
 		int res = mapper.deleteMember(newMember.getMemEmail());
 		Assert.assertEquals(1, res);
-		
 		log.debug("res > " + res);
 	}
 }

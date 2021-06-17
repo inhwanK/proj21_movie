@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import proj21_movie.dto.Member;
 import proj21_movie.exception.DuplicateMemberException;
-import proj21_movie.mapper.MemberMapper;
-import proj21_movie.service.MemberRegisterService;
 import proj21_movie.service.MemberService;
 
 @RestController
@@ -30,12 +28,6 @@ public class RestJoinController {
 	
 	@Autowired
 	private MemberService service;
-
-	@Autowired
-	private MemberRegisterService memRservice;
-
-	@Autowired
-	private MemberMapper memapper;
 	
 	//get
 	@GetMapping("/joinform/{memEmail}")

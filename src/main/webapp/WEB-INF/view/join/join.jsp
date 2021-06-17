@@ -12,23 +12,17 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/join/join.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-	<script type="text/javascript">
-
-	</script>
-
 </head>
 <body>
 	<header>
 		<a href="main" title="박스무비 메인으로 가기">
-			<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/movie/ci.png">
+		<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/movie/ci.png">
 		</a>
 		<div>
 			<a href="${contextPath}/login">로그인</a>
 			<a href="${contextPath}/join">회원가입</a>
 			<a href="#">바로예매</a>
 		</div>
-
 	</header>
 	
 	<nav>
@@ -38,8 +32,7 @@
 			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
 			<li class="nav"><a href="#">이벤트</a></li>
 			<li class="nav"><a href="#">고객센터</a></li>
-			<li id="mypagebtn"><a href="#"><i class="far fa-user"></i></a></li> 
-			<!-- mypage 연결 필요 -->
+			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li> 
 		</ul>
 	</nav>
 
