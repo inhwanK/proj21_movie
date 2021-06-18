@@ -15,7 +15,10 @@ public interface CommentService {
 	
 	// 영화 상세 페이지 평점 관련 추가
 	List<Comment> getCommentByMovNo(Movie movNo);
-	Comment getCommentAvgStar(Comment comment);
+	// 기본 한줄평 번호로 검색
+	Comment getCommentByComNo(int comNo);
+	
+//	Comment getCommentAvgStar(Comment comment);		// 나중에 처리할 예정
 	
 	int registComment(Comment comment);
 	int modifyComment(Comment comment);

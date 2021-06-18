@@ -68,15 +68,25 @@ public class CommentServiceTest {
 	}
 	
 	@Test
-	public void test04GetCommentAvgStar() {
+	public void test04getCommentByComNo() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+
+		Comment comment = mapper.selectCommentByComNo(1);
 		
-		Comment selComment = new Comment(new Movie(2));
-		Comment comment = mapper.selectCommentAvgStar(selComment);
-		
-		Assert.assertNotNull(selComment);	// comment로 하면 안되지만 selComment로 테스트는 성공 
-		log.debug(selComment.toString());
+		Assert.assertNotNull(comment);
+		log.debug(comment.toString());
 	}
+	
+//	@Test
+//	public void testGetCommentAvgStar() {
+//		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+//		
+//		Comment selComment = new Comment(new Movie(2));
+//		Comment comment = mapper.selectCommentAvgStar(selComment);
+//		
+//		Assert.assertNotNull(selComment);	// comment로 하면 안되지만 selComment로 테스트는 성공 
+//		log.debug(selComment.toString());
+//	}
 
 	@Test
 	public void test05RegistComment() {
@@ -101,8 +111,6 @@ public class CommentServiceTest {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		Comment comment = new Comment(no);
-		comment.setMovNo(new Movie(2));
-		comment.setComUser("테스트유저2");
 		comment.setComContent("테스트2");
 		comment.setComStar(4);
 		

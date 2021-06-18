@@ -39,12 +39,18 @@ public class CommentServiceImpl implements CommentService {
 		log.debug("service - getCommentByMovNo() > " + list.size());
 		return list;
 	}
-
+	
 	@Override
-	public Comment getCommentAvgStar(Comment comment) {
-		log.debug("service - getCommentAvgStar() > " + comment);
-		return mapper.selectCommentAvgStar(comment);
+	public Comment getCommentByComNo(int comNo) {
+		log.debug("service - getCommentByComNo() > " + comNo);
+		return mapper.selectCommentByComNo(comNo);
 	}
+
+//	@Override
+//	public Comment getCommentAvgStar(Comment comment) {
+//		log.debug("service - getCommentAvgStar() > " + comment);
+//		return mapper.selectCommentAvgStar(comment);
+//	}
 
 	@Override
 	public int registComment(Comment comment) {
