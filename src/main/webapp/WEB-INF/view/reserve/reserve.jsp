@@ -12,20 +12,25 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 	<script type="text/javascript">
 		$(function(){
+			var week = ['일', '월', '화', '수', '목', '금', '토'];
+			var today = new Date();
+			
+			var year = today.getFullYear();
+			var month = today.getMonth() + 1;
+			var date = today.getDate();
+			var day = today.getDay();
+
 			for (i = 0; i < 5; i++){
-				var today = new Date();
-				
-				var year = today.getFullYear();
-				var month = today.getMonth() + 1;
-				var date = today.getDate();
-				
+								
 				var addDate = date + i;
 				
 				var today2 = new Date(year, month, addDate);
 				var month2 = today2.getMonth();
 				var date2 = today2.getDate();
+
+				var dayOfWeek = week[(day + i) % 7]; 
 				
-				$("#calendar").append("<span><a href='#'>"+ month2 + "월" + date2 + "일" + "</a></span>");
+				$("#calendar").append("<span><a href=''>"+ month2 + "월" + date2 + "일("+ dayOfWeek + ")</a></span>");
 			}
 		});
 	

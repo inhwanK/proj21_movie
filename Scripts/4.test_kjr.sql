@@ -85,3 +85,7 @@ insert into showinfo
 values (null, 3, 3, 3, '2021-06-05', '10:00:00'
 		, addtime('10:00:00', sec_to_time((select mov_runtime from movie where mov_no = 3) * 60)));
 
+
+-- 상영 영화 날짜로 검색 ----------------------------------------------------------------------------
+select * from showinfo;
+select * from showinfo where shw_date = '20210607';
