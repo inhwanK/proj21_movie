@@ -49,4 +49,11 @@ public class ShowInfoServiceImpl implements ShowInfoService {
 		return mapper.deleteShowInfo(showInfo);
 	}
 
+	@Override
+	public List<ShowInfo> getListsByDate(ShowInfo showInfo) {
+		List<ShowInfo> list = mapper.selectShowInfoByDate(showInfo);
+		log.debug("service - getListsByDate() > " + showInfo);
+		return list;
+	}
+
 }

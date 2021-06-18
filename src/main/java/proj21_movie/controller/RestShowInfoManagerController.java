@@ -60,4 +60,10 @@ public class RestShowInfoManagerController {
 	public ResponseEntity<Object> deleteShowInfo(@PathVariable int no) {
 		return ResponseEntity.ok(service.removeShowInfo(new ShowInfo(no)));
 	}
+	
+	@PostMapping("/showinfobydate")
+	public ResponseEntity<Object> showInfoListByDate(@RequestBody ShowInfo showInfo){
+		System.out.println("showInfoListByDate()");
+		return ResponseEntity.ok(service.getListsByDate(showInfo));
+	}
 }

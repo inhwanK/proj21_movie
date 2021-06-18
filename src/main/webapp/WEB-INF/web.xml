@@ -28,7 +28,7 @@
   	<load-on-startup>1</load-on-startup>
   	
   	<multipart-config>
-  		<location>C:\\upload</location>
+  		<location>""</location>
   	</multipart-config>
   </servlet>
   

@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="${contextPath}/resources/css/manager/sidebar.css">
 <script type="text/javascript">
 	$(function(){
 		var contextPath = "${contextPath}";
@@ -88,25 +87,11 @@
 </script>
 </head>
 <body>
+<header>
+	<jsp:include page="/WEB-INF/view/manager/sidebar.jsp"></jsp:include>
+</header>
 <div id="page-wrapper">
-  <!-- 사이드바 -->
-  <div id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-      <li class="sidebar-brand">
-        <a href="#">관리자 페이지</a>
-      </li>
-      <li><a href="${contextPath }/main">HOME</a></li>
-      <li><a href="${contextPath }/movieManager">영화 관리</a></li>
-      <li><a href="${contextPath }/reserveManager">예매 관리</a></li>
-      <li><a href="${contextPath }/showInfoManager">상영시간 관리</a></li>
-      <li><a href="${contextPath }/memberManager">회원 관리</a></li>
-      <li><a href="${contextPath }/salesManager">매출 조회</a></li>
-      <li><a href="${contextPath }/noticeManager">공지사항</a></li>
-      <li><a href="${contextPath }/inquiryManager">문의사항</a></li>
-    </ul>
-  </div>
-  <!-- /사이드바 -->
-
+  
   <!-- 본문 -->
   <div class="main">
   	<h1>영화관리</h1>

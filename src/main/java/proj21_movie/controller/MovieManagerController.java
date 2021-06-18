@@ -20,4 +20,5 @@ public class MovieManagerController {
 	public String updateMovie() {
 		return "manager/movieManager/updateMovie";
 	}
+	
 }
