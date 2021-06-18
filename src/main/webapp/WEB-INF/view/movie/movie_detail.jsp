@@ -21,18 +21,25 @@
 			});
 
 		   $("#cancel").click(function () {
-		        $(".contxt").val('');
-		        
+		        $(".contxt").val('');	        
 		   });
 			  
 		   $(document).ready( function() {
-			   $(".comment-write").click(function(){
+			   $(".comment-write > span").click(function(){
 					$(this).addClass("active");
-					$(this).siblings().removeClass("active");
+					$(this).removeClass("active");
 					
-					$(".write-content").toggleClass("active");
+					$(".write-content").toggleClass("active");  
 			     });
 		   });
+		   
+			$(".stars .fa").click(function(){ 
+				$(this).addClass("active");
+				$(this).prevAll().addClass("active"); 
+				$(this).nextAll().removeClass("active"); 
+				
+				var starRate = $(this).index() + 1;
+			});
 
 		});
 	</script>
@@ -109,17 +116,38 @@
 							
 						for (i = 0; i < dataLength; i++) {							
 							sCont += "<li>";
+							// comment-list
 							sCont += "<div class='comment-list'>";
+							// prof
 							sCont += "<div class='prof'>";						
 							sCont += "<img src='${contextPath}/resources/images/movie/movie-detail/bg-profile.png'>";
 							sCont += "<p class='user-id'>" + json[i].comUser + "</p>";
 							sCont += "</div>";
+							// // prof
+							
+							// textarea
 							sCont += "<div class='textarea'>";
 							sCont += "<h3>한줄평</h3>";
 							sCont += "<h3>" + json[i].comStar + "</h3>";
 							sCont += "<p>" + json[i].comContent + "</p>";
+							
+							/* // btn-util
+							sCont += "<div class='btn-util'>";
+							sCont += "<button type='button' class='btn-alert'>";
+							sCont += "</button>";
+							// btnSpace
+							sCont += "<div class='btnSpace'>";								
 							sCont += "</div>";
+							// // btnSpace
 							sCont += "</div>";
+							// // btn-util
+							sCont += "</div>"; */
+							
+							sCont += "</div>";
+							// // textarea
+							sCont += "</div>";
+							// // comment-list
+							sCont += "<h5>" + json[i].comDate + "</h5>";
 							sCont += "</li>";
 						}
 						$("#comment-count .font-gblue").append(size);
@@ -250,7 +278,16 @@
 												</tr>
 												<tr>
 													<td>
-														<textarea class="contxt" rows="4" cols="100" name="contents" placeholder="한줄평을 적어주세요"></textarea>
+														<textarea class="contxt" rows="3" cols="100" name="contents" placeholder="한줄평을 적어주세요"></textarea>
+														<div class="star-rating">
+															<div class="stars">
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+															</div>															
+														</div>
 													</td>
 												</tr>											
 											</table>
