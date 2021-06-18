@@ -35,7 +35,7 @@
 				data:JSON.stringify(inquiry),
 				success: function(res){
 					alert(res);
-					window.location.href = contextPath + "/inquirycheck";
+					window.location.href = contextPath + "/inquirySuccess";
 				},
 				error: function(){
 					alert("뭔가 잘못된게 분명합니다.");
@@ -43,12 +43,14 @@
 				}
 			});
 			
-			let formData = new FormData();
+			/* let formData = new FormData();
 			let fileInput = $('input[name="inqFile"]');
 			let fileList = fileInput[0].files;
 			let fileObj = fileList[0];
 			
-			formData.append("uploadFile", fileObj);
+			formData.append("uploadFile", fileObj); */
+			
+			
 			/*파일 input이 multiple라면 
 			for(let i = 0; i < fileList.length; i++){
 				formData.append("uploadFile", fileList[i]);
@@ -60,7 +62,7 @@
 			console.log("fileSize : " + fileObj.size);
 			console.log("fileType(MimeType) : " + fileObj.type)  */
 			
-			$.ajax({
+			/* $.ajax({
 				url: contextPath + '/api/uploadAjaxAction',
 				processData: false,
 				contentType: false,
@@ -70,7 +72,7 @@
 				success: function(result){
 					console.log(result);
 				}
-			});
+			}); */
 		});
 	});
 	

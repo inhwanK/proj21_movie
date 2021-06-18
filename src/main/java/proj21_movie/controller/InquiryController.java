@@ -11,8 +11,8 @@ public class InquiryController {
 		return "inquiry/inquiryForm";
 	}
 	
-	@RequestMapping("/inquirycheck")
+	@RequestMapping("/inquirySuccess")
 	public String inquiryCheck() {
-		return "inquiry/inquiryCheck";
+		return "inquiry/inquirySuccess";
 	}
 }

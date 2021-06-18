@@ -90,8 +90,8 @@ p#file{
 
 .btn-image-add{
 	font-size:18px;
-	
 }
+
 #essential{
 	text-align: left;
 	margin-left: 20px;
@@ -215,65 +215,3 @@ p#file{
 .board-form tbody th {
     background: #f7f8f9;
 }
-
-#contents {
-    width: 100%;
-    margin: 50px auto 50px auto;
-    padding: 0;
-}
-
-body
-header
-div
-nav
-ul
-li
-.nav
-#mypagebtn
-.far fa-user
-i
-
-h1
-.title
-#contents
-p
-.reset mt30 a-r font-orange
-
-form
-input
-div
-.table-wrap mt10 //
-table
-.board-form va-m
-
-tbody
-tr
-th
-label
-#qnaCustInqTitle
-.input-text
-.font-orange
-.input-text w150px
-#textarea //
-td
-.info-txt
-
-button
-#uploadBtn
-btn-image-add
-
-#imgList
-
-.btn-group pt40 //
-.button purple large //
-
-section
-footer
-#content
-#footer_ci
-
-
-
- 
- 
- 

@@ -100,9 +100,9 @@
 				<div class="board-list-util">
 					<div class="board-search">
 						<input type="text" id="searchTxt" title="검색어를 입력해 주세요."
-							placeholder="검색어를 입력해 주세요." class="input-text" value=""
+							placeholder="제목을 입력하세요." class="input-text" value=""
 							maxlength="15">
-						<button type="button" id="searchBtn" class="btn-search-input">검색</button>
+						<button type="button" id="searchBtn" class="button purple">검색</button>
 					</div>
 				</div>
 
