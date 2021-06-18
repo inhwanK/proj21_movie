@@ -19,4 +19,3 @@ delete from `member` where mem_no = 70;
 select mem_email, mem_passwd
   from member
  where mem_email and mem_passwd;
-   

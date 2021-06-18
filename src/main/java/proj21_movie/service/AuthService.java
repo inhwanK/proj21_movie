@@ -6,6 +6,5 @@ import proj21_movie.dto.AuthInfo;
 
 @Service
 public interface AuthService {
-	AuthInfo authenicate(String memEmail, String memPasswd);
-
+	AuthInfo authenicate(String memEmail, String memName);
 }

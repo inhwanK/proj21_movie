@@ -26,5 +26,4 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 		return newMember.getMemEmail();
 	}
 
-
 }

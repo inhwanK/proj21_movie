@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="tf" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <c:set var="contextPath" value="<%=request.getContextPath()%>" />
 <!DOCTYPE html>
 <html>
@@ -10,8 +12,39 @@
 <title>로그인</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/login/login.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
+<script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	<!-- 로그인 -->
+		$("#selButton").on("click", function(e){
+			 var contextPath = "<%= request.getContextPath()%>";
+			 var loginform = {
+								memEmail  : $("#memEmail").val(),
+								memPasswd : $("#memPasswd").val()
+							}; 
+			 $.ajax({
+				url			: contextPath + "/api/login/",
+				type		: "POST",
+				contentType : "application/json; charset=utf-8",
+				dataType 	: "json",
+	            cache       : false,
+	            data        : JSON.stringify(loginform),
+				success     : function(data) {
+					if(data == true) {
+						 window.location.href = contextPath + "/loginsuccess";
+					} else {
+						alert("아이디 또는 비밀번호가 잘못되었습니다.");
+					}
+				},
+				error       : function(request, status, error){
+					 alert("오류입니다");
+				}
+			}) 
+		})
+});
+</script>
 </head>
 <body>
 	<header>
@@ -22,7 +55,6 @@
 			<a href="${contextPath}/join">회원가입</a>
 			<a href="#">바로예매</a>
 		</div>
-
 	</header>
 
 	<nav>
@@ -37,7 +69,7 @@
 	</nav>
 
 	<section id="loginFormArea">
-		<form action="login">
+		<form action="login" method="POST" id="loginform">
 			<fieldset>
 				<div class="fm_box">
 					<table>
