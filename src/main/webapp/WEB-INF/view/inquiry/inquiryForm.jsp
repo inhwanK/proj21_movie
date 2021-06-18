@@ -43,8 +43,8 @@
 					dataType : "json",
 					data : JSON.stringify(inquiry),
 					success : function(res) {
-						alert(res);
-						//window.location.href = contextPath + "/inquirySuccess";
+						console.log(res);
+						window.location.href = contextPath + "/inquirySuccess";
 					},
 					error : function() {
 						alert("뭔가 잘못된게 분명합니다.");
@@ -69,7 +69,7 @@
 				data:formData,
 				type:"POST",
 				success:function(result){
-					alert("Uploaded");
+					console.log("Uploaded");
 				}
 			});
 		});

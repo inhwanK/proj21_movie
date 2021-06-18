@@ -8,10 +8,16 @@
    </resultMap>
 
    
-   <select id="selectNoticeAll" resultMap="noticeList">
+	<select id="selectNoticeAll" resultMap="noticeList">
       select not_no, not_title, not_date
       from notice;
-   </select>
+	</select>
+
+	<select id="selectNoticeByTitle" resultMap="noticeList">
+   		select not_no, not_title, not_date
+   		from notice
+   		where not_title like concat('%',#{notTitle},'%');
+	</select>
 
    <select id="selectNoticeByPage" resultMap="noticeList">
       SELECT not_no, not_title, not_date
@@ -25,6 +31,8 @@
       from notice 
       where not_no = #{notNo};
    </select>
+   
+   
    
    <select id="countNotice" resultType="int">
       select count(*)

@@ -49,7 +49,6 @@ public class RestInquiryController {
 	}
 	
 	@PostMapping("/inquiryFileUpload")
-
 	public void uploadInquiryFile(MultipartFile[] uploadFile, HttpServletRequest request) {
 		String upload = request.getSession().getServletContext().getRealPath("/").concat("resources");
 		String uploadFolder = upload + File.separator + "images" + File.separator + "inquiry";
