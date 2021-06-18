@@ -27,7 +27,7 @@
 }
 
 body {
-	margin: 0;
+	margin: 0 17px 0 0;		/* 극장 페이지는 body 넓이가 안맞아 margin-right를 17px 줌 */
 	padding: 0;
 	text-align: center;
 	font-family: 'IBMPlexSansKR-Regular', sans-serif;
