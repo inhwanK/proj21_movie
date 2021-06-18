@@ -7,75 +7,73 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${contextPath}/resources/css/notice/newlayout.css">
-<link rel="stylesheet" href="${contextPath}/resources/css/inquiry/inquiryForm.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" >
+<link rel="stylesheet"
+	href="${contextPath}/resources/css/notice/newlayout.css">
+<link rel="stylesheet"
+	href="${contextPath}/resources/css/inquiry/inquiryForm.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
-	$(function(json){
+	$(function(json) {
 		var contextPath = "${contextPath}";
-		$("button#regdate").on("click",function(){
-			// 파일이름 중복 처리, 필수항목 기입하지 않았을 때 에러 처리
-			
+		$("button#regdate").on("click", function() { 
+
 			var location = $("input[name='inqFile']").val().split('\\');
-			
+
 			var inquiry = {
-					inqUser : $("input[name=inqUser]").val(),	
-					inqTitle : $("input[name=inqTitle]").val(),
-					inqDetail : $("textarea[name=inqDetail]").val(),
-					inqFile : location[location.length-1]
+				inqUser : $("input[name=inqUser]").val(),
+				inqTitle : $("input[name=inqTitle]").val(),
+				inqDetail : $("textarea[name=inqDetail]").val(),
+				inqFile : location[location.length - 1]
 			};
 			
-			alert("data > " + inquiry.inqTitle);
+			// 필수항목 기입하지 않았을 때, 처리
+			if (inquiry.inqUser == "") {
+				alert("이름을 입력하세요.");
+			} else if(inquiry.inqTitle == ""){
+				alert("제목을 입력하세요.")
+			} else if(inquiry.inqDetail == ""){
+				alert("문의 내용을 입력하세요.")
+			} else {				
+				$.ajax({
+					url : contextPath + "/api/inquiry",
+					type : "post",
+					contentType : "application/json; charset=utf-8",
+					dataType : "json",
+					data : JSON.stringify(inquiry),
+					success : function(res) {
+						alert(res);
+						//window.location.href = contextPath + "/inquirySuccess";
+					},
+					error : function() {
+						alert("뭔가 잘못된게 분명합니다.");
+						alert("error" + JSON.stringify(data))
+					}
+				});
+			}
+			
+			var formData = new FormData();
+			var inputFile = $("input[name='inqFile']");
+			var files = inputFile[0].files;
+			console.log(files);
+			
+			for(var i=0; i<files.length; i++){
+				formData.append("uploadFile", files[i]);
+			}
+			
 			$.ajax({
-				url:contextPath + "/api/inquiry",
-				type:"post",
-				contentType: "application/json; charset=utf-8",
-				dataType:"json",
-				data:JSON.stringify(inquiry),
-				success: function(res){
-					alert(res);
-					window.location.href = contextPath + "/inquirySuccess";
-				},
-				error: function(){
-					alert("뭔가 잘못된게 분명합니다.");
-					alert("error"+JSON.stringify(data))
+				url:contextPath+"/api/inquiryFileUpload",
+				processData:false,
+				contentType:false,
+				data:formData,
+				type:"POST",
+				success:function(result){
+					alert("Uploaded");
 				}
 			});
-			
-			/* let formData = new FormData();
-			let fileInput = $('input[name="inqFile"]');
-			let fileList = fileInput[0].files;
-			let fileObj = fileList[0];
-			
-			formData.append("uploadFile", fileObj); */
-			
-			
-			/*파일 input이 multiple라면 
-			for(let i = 0; i < fileList.length; i++){
-				formData.append("uploadFile", fileList[i]);
-			} */
-			
-			/* console.log("fileList : " + fileList);
-			console.log("fileObj : " + fileObj);
-			console.log("fileName : " + fileObj.name);
-			console.log("fileSize : " + fileObj.size);
-			console.log("fileType(MimeType) : " + fileObj.type)  */
-			
-			/* $.ajax({
-				url: contextPath + '/api/uploadAjaxAction',
-				processData: false,
-				contentType: false,
-				data: formData,
-				type: 'POST',
-				dataType: 'json',
-				success: function(result){
-					console.log(result);
-				}
-			}); */
 		});
 	});
-	
 </script>
 </head>
 <body>
@@ -108,104 +106,96 @@
 				<a href="noticelist">공지사항</a>
 			</div>
 			<div class="title">
-				<a href="inquiry" style="font-weight:900; color: #222;">1:1 문의</a>
+				<a href="inquiry" style="font-weight: 900; color: #222;">1:1 문의</a>
 			</div>
 		</div>
 
 
 		<div id="contents" class="">
 
-			 <!-- <div class="mypage-infomation mb30">
+			<!-- <div class="mypage-infomation mb30">
 
 					<div class="btn-group right">
 						<a href="#" class="button purple" id="myQnaBtn" title="나의 문의내역 페이지로 이동">나의 문의내역</a>btn-layer-open
 					</div>
 				</div>  -->
 
-			<p id="essential" >* 필수</p>
+			<p id="essential">* 필수</p>
 
 
-				<div class="table-wrap mt10">
-					<table class="board-form va-m">
-						<colgroup>
-							<col style="width: 150px;">
-							<col>
-							<col style="width: 150px;">
-							<col>
-						</colgroup>
-						<tbody>
+			<div class="table-wrap mt10">
+				<table class="board-form va-m">
+					<colgroup>
+						<col style="width: 150px;">
+						<col>
+						<col style="width: 150px;">
+						<col>
+					</colgroup>
+					<tbody>
 
-							<tr>
-								<th scope="row">
-									<label for="name">이름</label> 
-									<em	class="font-orange">*</em>
-								</th>
-								<td>
-									<input type="text" id="name" name="inqUser"
-									class="input-text w150px" value="" maxlength="15">
-								</td>
-							</tr>
+						<tr>
+							<th scope="row"><label for="name">이름</label> <em
+								class="font-orange">*</em></th>
+							<td><input type="text" id="name" name="inqUser"
+								class="input-text w150px" value="" maxlength="15"></td>
+						</tr>
 
 
 
-							<tr>
-								<th scope="row">
-									<label for="qnaCustInqTitle">제목</label>
-									<em class="font-orange">*</em>
-								</th>
-								<td colspan="3">
-									<input type="text" name="inqTitle"
-									id="qnaCustInqTitle" class="input-text" maxlength="100">
-								</td>
-							</tr>
-							
-							<tr>
-								<th scope="row">
-									<label for="textarea">내용</label>
-									<em class="font-orange">*</em>
-								</th>
-								<td colspan="3">
-									<div class="textarea">
-										<textarea id="textarea" name="inqDetail" rows="7" cols="60"
-											title="내용입력"
-											placeholder="※ 불편사항이나 문의사항을 남겨주시면 최대한 신속하게 답변 드리겠습니다."
-											class="input-textarea"></textarea>
-										<div class="util">
-											<p class="count">
-												<span id="textareaCnt">0</span> / 2000
-											</p>
-										</div>
+						<tr>
+							<th scope="row"><label for="qnaCustInqTitle">제목</label> <em
+								class="font-orange">*</em></th>
+							<td colspan="3"><input type="text" name="inqTitle"
+								id="qnaCustInqTitle" class="input-text" maxlength="100">
+							</td>
+						</tr>
+
+						<tr>
+							<th scope="row"><label for="textarea">내용</label> <em
+								class="font-orange">*</em></th>
+							<td colspan="3">
+								<div class="textarea">
+									<textarea id="textarea" name="inqDetail" rows="7" cols="60"
+										title="내용입력"
+										placeholder="※ 불편사항이나 문의사항을 남겨주시면 최대한 신속하게 답변 드리겠습니다."
+										class="input-textarea"></textarea>
+									<div class="util">
+										<p class="count">
+											<span id="textareaCnt">0</span> / 2000
+										</p>
 									</div>
-								</td>
-							</tr>
-							
-							
+								</div>
+							</td>
+						</tr>
 
-							<tr>
-								<th scope="row">사진첨부</th>
-								<td colspan="3">
-									<div class="upload-image-box">
 
-										<div class="info-txt">
 
-											<input type="file" id="uploadFile" class="btn-image-add" name="inqFile">
-											<p id="file">* 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
-										</div>
+						<tr>
+							<th scope="row">사진첨부</th>
+							<td colspan="3">
+								<div class="upload-image-box">
 
-										<div id="imgList"></div>
-
+									<div class="info-txt">
+										
+											<input type="file" id="uploadFile" class="btn-image-add"
+												name="inqFile">
+										<p id="file">* 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
 									</div>
-								</td>
-							</tr>
 
-						</tbody>
-					</table>
-				</div>
+									<div id="imgList"></div>
+
+								</div>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
 
 
-				<div class="btn-group pt40">
-					<button type="submit" class="button purple large" id="regdate">등록</button>
-				</div>
+			<div class="btn-group pt40">
+				<button type="submit" class="button purple large" id="regdate">등록</button>
+			</div>
 
 		</div>
 	</section>
