@@ -187,7 +187,7 @@
 										<div class="info-txt">
 
 											<input type="file" id="uploadFile" class="btn-image-add" name="inqFile">
-											<p>* 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
+											<p id="file">* 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
 										</div>
 
 										<div id="imgList"></div>
