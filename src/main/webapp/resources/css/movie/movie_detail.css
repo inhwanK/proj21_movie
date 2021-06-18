@@ -4,20 +4,6 @@
 @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
 @font-face {
-	font-family: NanumBarunGothic;
-	font-weight: 400;
-	src:
-		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.eot);
-	src:
-		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.eot?#iefix)
-		format('embedded-opentype'),
-		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.woff)
-		format('woff'),
-		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.ttf)
-		format('truetype')
-}
-
-@font-face {
 	font-family: 'IBMPlexSansKR-Regular';
 	src:
 		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
@@ -327,7 +313,7 @@ h3.title {
 	width: 800px;
 	padding: 10px 0 0 0;
 	font-size: 1.3333em;
-	font-family: NanumBarunGothic;
+	font-family: IBMPlexSansKR-Regular;
 	color: #fff;
 	line-height: 1.1;
 	overflow: hidden;
@@ -371,7 +357,7 @@ h3.title {
 
 .movie-detail-cont .info .score .number {
 	padding: 0 0 0 30px;
-	font-family: NanumBarunGothic, Dotum, '돋움', sans-serif;
+	font-family: IBMPlexSansKR-Regular, sans-serif;
 	font-weight: 400;
 }
 
@@ -408,7 +394,7 @@ h3.title {
 	margin: 0 4px 0 0;
 	color: #fff;
 	font-size: 2.1333em;
-	font-family: NanumBarunGothic, Dotum, '돋움', sans-serif;
+	font-family: IBMPlexSansKR-Regular, sans-serif;
 	font-weight: 400;
 }
 
@@ -439,7 +425,7 @@ h3.title {
 	margin: 0 4px 0 0;
 	color: #fff;
 	font-size: 2.1333em;
-	font-family: NanumBarunGothic, Dotum, '돋움', sans-serif;
+	font-family: IBMPlexSansKR-Regular, sans-serif;
 	font-weight: 400;
 }
 
@@ -651,6 +637,10 @@ h3.title {
 	text-align: left;
 }
 
+#comment-count b{
+	font-size: 18px;
+}
+
 .comment-write {
 	text-align: right;
 	padding-bottom: 30px;
@@ -658,18 +648,45 @@ h3.title {
 	border-bottom: 1px solid #ccc;
 }
 
-.comment-write a {
+.comment-write.active > span{
+	background-color: #f0f0f0;
+	color: #503396;
+	font-weight: 600;
+}
+
+.write-content {
+	display: none;
+}
+
+.write-content.active{
+	display: block;
+}
+
+.comment-write > span {
+	cursor: pointer;
 	border: 1px solid #503396;
 	padding: 8px;
 	color: #000;
 	border-radius: 5px;
 }
 
-.comment-write a:hover {
+.comment-write > span:hover {
 	text-decoration: none;
 	background-color: #f0f0f0;
 	color: #503396;
-	font-weight: 600;
+	font-weight: 600;		
+}
+
+.form-txt {
+	margin: 10px 0 10px 200px;
+}
+
+input.wtiteBtn {
+	margin-right: 20px;	
+}
+
+.cancelBtn {
+	margin-right: 130px;
 }
 
 .font-gblue {
@@ -686,7 +703,7 @@ h3.title {
 
 .comment-list img {
 	width: 40px;
-	margin: 20px 0 0 40px;
+	margin: 10px 0 0 40px;
 	overflow: hidden;
 }
 
@@ -707,7 +724,8 @@ footer {
 }
 
 .textarea {
-	margin-left: 20px;
+	position: absolute;
+	margin-left: 150px;
 }
 
 .textarea h3{

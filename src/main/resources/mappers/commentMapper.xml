@@ -4,9 +4,14 @@
 	
 	<resultMap type="Comment" id="resComment">
 		<id column="com_no" property="comNo" />
-		<association property="movNo" javaType="Movie"></association>
+		<result column="com_user" property="comUser" />
+		<result column="com_content" property="comContent" />
+		<result column="com_star" property="comStar" />
+		<result column="com_date" property="comDate" />
+		<association property="movNo" javaType="Movie">
+			<result column="mov_no" property="movNo" />
+		</association>
 	</resultMap>
-	
 	
 	<select id="selectCommentAll" resultMap="resComment">
 		select c.com_no, m.mov_no, m.mov_title, c.com_user, c.com_content, c.com_star, c.com_date 
@@ -17,6 +22,19 @@
 		select c.com_no, m.mov_no, m.mov_title, c.com_user, c.com_content, c.com_star, c.com_date 
 		from comment c join movie m on c.mov_no = m.mov_no 
 		where c.com_user = #{comUser}
+	</select>
+	
+	<!-- 영화 상세 페이지에 평점 관련 select 추가 -->
+	<select id="selectCommentByMovNo" resultMap="resComment">
+		select c.com_no, m.mov_no, m.mov_title, c.com_user, c.com_content, c.com_star, c.com_date 
+			from comment c join movie m on c.mov_no = m.mov_no 
+		where m.mov_no = #{movNo}
+	</select>
+	
+	<select id="selectCommentAvgStar" resultMap="resComment" resultType="Comment">
+		select round(avg(com_star), 1) 
+			from comment c join movie m on c.mov_no = m.mov_no 
+		 where m.mov_no = #{movNo.movNo}
 	</select>
 	
 	<insert id="insertComment">

@@ -534,6 +534,64 @@ alter table movie auto_increment = 1;
 delete from movie where mov_no > 0;
 
 
+-- 회원 테스트
+select mem_no, mem_email, mem_passwd, mem_birthdate, mem_name, mem_phone
+  from member; 
+
+insert into member values
+(null, 'test1@test.com', password(1234), '2000-03-15', '테스트2', '010-3343-0343');
+
+alter table member auto_increment = 1;
+
+delete from member where mem_no > 0;
+
+
+-- 한줄평
+desc comment;
+
+select com_no, mov_no, com_user, com_content, com_star, com_date from comment;
+
+set autocommit = 0;
+
+insert into comment values (null, 1, 'test@test.com', '재미있음', 4, now());
+insert into comment values (null, 1, 'test2@test.com', '그저그럼', 3, now());
+insert into comment values (null, 1, 'test@test.com', '노잼', 2, now());
+insert into comment values (null, 1, 'test1@test.com', '노잼', 2, now());
+
+insert into comment values (null, 2, 'test@test.com', '재미있음2', 5, now());
+insert into comment values (null, 2, 'test@test.com', '그저그럼2', 3, now());
+insert into comment values (null, 2, 'test2@test.com', '노잼2', 2, now());
+
+commit;
+
+update comment 
+	set com_content = '다시 생각하니 좀 지루했음', com_star = 3, com_date = now()
+ where com_no = 1;
+
+rollback;
+commit;
+
+delete from comment where com_no > 0;
+alter table comment auto_increment = 1;
+
+select com_no, mov_no, com_user, com_content, com_star, com_date from comment;
+
+-- 유저로 한줄평 검색(마이페이지 용)
+select c.com_no, m.mov_no, m.mov_title, c.com_user, c.com_content, c.com_star, c.com_date 
+	from comment c join movie m on c.mov_no = m.mov_no 
+ where c.com_user = 'test@test.com';
+
+-- 영화 번호로 검색(영화 번호를 받아 한줄평에 리스트 보이기)
+select c.com_no, m.mov_no, m.mov_title, c.com_user, c.com_content, c.com_star, c.com_date 
+	from comment c join movie m on c.mov_no = m.mov_no 
+where m.mov_no = 1; 
+
+-- 영화 실시간 평점 (영화 평균 평점)
+select round(avg(com_star), 1) 
+	from comment c join movie m on c.mov_no = m.mov_no 
+ where m.mov_no = 2; 
+
+
 
 
 

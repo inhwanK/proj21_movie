@@ -5,11 +5,14 @@ import java.util.List;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import proj21_movie.dto.Comment;
+import proj21_movie.dto.Movie;
 import proj21_movie.mapper.CommentMapper;
 import proj21_movie.service.CommentService;
 
+@Service
 public class CommentServiceImpl implements CommentService {
 	static final Log log= LogFactory.getLog(CommentServiceImpl.class);
 
@@ -28,6 +31,19 @@ public class CommentServiceImpl implements CommentService {
 		List<Comment> list = mapper.selectCommentByUser(user);
 		log.debug("service - getCommentByUser() > " + list.size());
 		return list;
+	}
+		
+	@Override
+	public List<Comment> getCommentByMovNo(Movie movNo) {
+		List<Comment> list = mapper.selectCommentByMovNo(movNo);
+		log.debug("service - getCommentByMovNo() > " + list.size());
+		return list;
+	}
+
+	@Override
+	public Comment getCommentAvgStar(Comment comment) {
+		log.debug("service - getCommentAvgStar() > " + comment);
+		return mapper.selectCommentAvgStar(comment);
 	}
 
 	@Override
