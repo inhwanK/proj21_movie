@@ -10,6 +10,7 @@
 		<result column="com_date" property="comDate" />
 		<association property="movNo" javaType="Movie">
 			<result column="mov_no" property="movNo" />
+			<result column="mov_title" property="movTitle" />
 		</association>
 	</resultMap>
 	
@@ -31,11 +32,18 @@
 		where m.mov_no = #{movNo}
 	</select>
 	
-	<select id="selectCommentAvgStar" resultMap="resComment" resultType="Comment">
+	<!-- 기본 한줄평 번호로 검색 -->
+	<select id="selectCommentByComNo" resultMap="resComment">
+		select c.com_no, m.mov_no, m.mov_title, c.com_user, c.com_content, c.com_star, c.com_date 
+			from comment c join movie m on c.mov_no = m.mov_no 
+		where c.com_no = #{comNo}
+	</select>
+	
+	<!-- <select id="selectCommentAvgStar" resultMap="resComment" resultType="Comment">	나중에 처리할 예정
 		select round(avg(com_star), 1) 
 			from comment c join movie m on c.mov_no = m.mov_no 
 		 where m.mov_no = #{movNo.movNo}
-	</select>
+	</select> -->
 	
 	<insert id="insertComment">
 		insert into comment values 
@@ -47,8 +55,7 @@
 	
 	<update id="updateComment">
 		update comment 
-		set mov_no = #{movNo.movNo}, com_user = #{comUser}, com_content = #{comContent}, 
-			com_star = #{comStar}, com_date = now() 
+		set com_content = #{comContent}, com_star = #{comStar}, com_date = now() 
 		where com_no = #{comNo}
 	</update>
 	

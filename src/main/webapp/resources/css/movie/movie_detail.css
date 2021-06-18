@@ -648,12 +648,6 @@ h3.title {
 	border-bottom: 1px solid #ccc;
 }
 
-.comment-write.active > span{
-	background-color: #f0f0f0;
-	color: #503396;
-	font-weight: 600;
-}
-
 .write-content {
 	display: none;
 }
@@ -670,7 +664,7 @@ h3.title {
 	border-radius: 5px;
 }
 
-.comment-write > span:hover {
+.comment-write > span:hover, .comment-write > span.active {
 	text-decoration: none;
 	background-color: #f0f0f0;
 	color: #503396;
@@ -681,12 +675,32 @@ h3.title {
 	margin: 10px 0 10px 200px;
 }
 
+.contxt {
+
+}
+
 input.wtiteBtn {
-	margin-right: 20px;	
+	margin-right: 20px;
 }
 
 .cancelBtn {
 	margin-right: 130px;
+}
+
+input.wtiteBtn, .cancelBtn {
+	cursor: pointer;
+	height:30px;
+	width: 60px;
+	text-align: center;
+	font-size: 15px;
+	background-color: #329eb1;
+	color: #fff;
+	border: none;
+	border-radius: 5px;	
+}
+
+input.wtiteBtn:hover, .cancelBtn:hover {
+	background-color: #3ab1c7;
 }
 
 .font-gblue {
@@ -711,6 +725,53 @@ input.wtiteBtn {
 	margin: 0 10px 5px 10px;
 }
 
+.movie-comment ul li h5 {
+	text-align: right;
+	margin: -20px 20px 10px 0;
+}
+
+/* 별점 */
+
+.star-rating {
+	float: right;
+	/* background-color: #333; */
+	width: 130px;
+	text-align: center;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.star-rating div{
+	
+}
+
+.stars .fa{
+	color: #a0a0a0;
+	font-size: 18px;
+	cursor: pointer;	/* 커서에 올리면 강제로 손모양으로 변경하여 선택 가능 */
+}
+
+.stars .fa.active{	/* 띄우면 자식을찾아서 인식못함 */
+	color: yellow;
+	text-shadow: 0 0 5px yellow;	/* 상,하,좌우 */
+}
+
+.comment-list .textarea {
+	position: absolute;
+	margin-left: 150px;
+}
+
+.comment-list > .textarea h3{
+	margin: 30px 40px 0 0;
+	float: left;
+	color: #503396;
+}
+
+.comment-list > .textarea p {
+	margin: 30px 0 0 0;
+	float: left;
+}
+
 /* footer */
 footer {
 	margin: auto;
@@ -721,22 +782,6 @@ footer {
 	border-top: 0.5px solid RGB(3, 22, 52);
 	text-align: left;
 	margin-top: 0;
-}
-
-.textarea {
-	position: absolute;
-	margin-left: 150px;
-}
-
-.textarea h3{
-	margin: 40px 40px 0 0;
-	float: left;
-	color: #503396;
-}
-
-.textarea p {
-	margin: 40px 0 0 0;
-	float: left;
 }
 
 #footer_ci {
