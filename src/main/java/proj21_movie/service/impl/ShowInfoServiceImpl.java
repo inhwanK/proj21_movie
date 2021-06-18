@@ -50,8 +50,9 @@ public class ShowInfoServiceImpl implements ShowInfoService {
 	}
 
 	@Override
-	public List<ShowInfo> getListsByDate() {
-		List<ShowInfo> list = mapper.selectShowInfoByDate();
+	public List<ShowInfo> getListsByDate(ShowInfo showInfo) {
+		List<ShowInfo> list = mapper.selectShowInfoByDate(showInfo);
+		log.debug("service - getListsByDate() > " + showInfo);
 		return list;
 	}
 

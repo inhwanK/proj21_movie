@@ -21,8 +21,4 @@ public class MovieManagerController {
 		return "manager/movieManager/updateMovie";
 	}
 	
-//	@RequestMapping("/sidebar")
-//	public String sideBar() {
-//		return "manager/sidebar";
-//	}
 }

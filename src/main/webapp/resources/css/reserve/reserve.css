@@ -133,6 +133,10 @@ section h2 {
 	border-bottom: 5px solid RGB(3, 22, 52);
 }
 
+.date.active {
+	border-bottom: 5px solid RGB(3, 22, 52);
+}
+
 section h3 {
 	border-left: 2px solid RGB(3, 22, 52);
 	text-align: left;

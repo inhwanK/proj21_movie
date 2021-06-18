@@ -16,5 +16,5 @@ public interface ShowInfoMapper {
 	int deleteShowInfo(ShowInfo showInfo);
 	
 	// 날짜별로 검색하는 상영정보
-	List<ShowInfo> selectShowInfoByDate();
+	List<ShowInfo> selectShowInfoByDate(ShowInfo showInfo);
 }

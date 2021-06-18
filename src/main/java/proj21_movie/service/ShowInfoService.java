@@ -14,5 +14,5 @@ public interface ShowInfoService {
 	int modifyShowInfo(ShowInfo showInfo);
 	int removeShowInfo(ShowInfo showInfo);
 	
-	List<ShowInfo> getListsByDate();
+	List<ShowInfo> getListsByDate(ShowInfo showInfo);
 }

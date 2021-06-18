@@ -30,7 +30,7 @@
 
 				var dayOfWeek = week[(day + i) % 7]; 
 				
-				$("#calendar").append("<span><a href=''>"+ month2 + "월" + date2 + "일("+ dayOfWeek + ")</a></span>");
+				$("#calendar").append("<span><a href='' class='date'>"+ month2 + "월" + date2 + "일("+ dayOfWeek + ")</a></span>");
 			}
 		});
 	
@@ -55,7 +55,7 @@
 			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
 			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
 			<li class="nav"><a href="#">이벤트</a></li>
-			<li class="nav"><a href="#">고객센터</a></li>
+			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
 			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
 		</ul>
 	</nav>
@@ -63,13 +63,13 @@
 	<section>
 		<div id="containter">
 			<h2>바로예매</h2>
-			<div id="calendar">
+			<div id="calendar" class="calendar">
 			</div>
 			<div id="reserve-table">
 			<div id="movie-choice">
 				<h3>영화</h3>
 				<div id="movie-list">
-					<ul>
+					<ul id="movie-list-ul">
 						<c:forEach items="${getMovieList }" var="mov">
 							<li><a href="#"><c:out value="${mov.movTitle }"/></a></li>
                      	</c:forEach>
@@ -129,5 +129,49 @@
 			</div>
 		</div>
 	</footer>
+	
+	<script type="text/javascript">
+		$(document).on('click', '[class=date]', function(e){
+			e.preventDefault();
+			var currentClass = $(this).attr("class");
+			
+			$(this).addClass("active");
+			$(this).parent().siblings().children().removeClass("active"); 
+			
+			$("#movie-list").empty();
+			alert($(this).text());
+			
+			/* var contextPath = "${contextPath}";
+			var newShow = {shwDate: '2021-06-18'};
+			
+			$.ajax({
+				url: contextPath + "/api/showinfobydate",
+				type: "GET",
+				contentType: "application/json; charset=utf-8",
+				datatype: "json",
+				cache: false,
+				data: JSON.stringify(newShow),
+				success: function(res) {
+					alert(res);
+					var dataLength = json.length;
+					if (dataLength >= 1) {
+						var sCont = "";
+						for(i = 0; i < dataLength; i++) {
+							sCont += "<li>";
+							sCont += "<a href=''>";
+							sCont += json[i].movNo.movTitle;
+							sCont += "</a></li>";
+						}
+						$("#movie-list-ul:last-child").append(sCont);
+					}
+				}, 
+				error: function(request, status, error){
+					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				}
+			}); */
+			
+		});
+		
+	</script>
 </body>
 </html>
