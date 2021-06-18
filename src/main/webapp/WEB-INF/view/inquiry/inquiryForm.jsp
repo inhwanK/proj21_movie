@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${contextPath}/resources/css/inquiry/inquiryForm.css" />
 <link rel="stylesheet" href="${contextPath}/resources/css/notice/newlayout.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/inquiry/inquiryForm.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" >
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
@@ -120,7 +120,7 @@
 					</div>
 				</div>  -->
 
-			<p class="reset mt30 a-r font-orange">* 필수</p>
+			<p id="essential" >* 필수</p>
 
 
 				<div class="table-wrap mt10">

@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+/* 축하이미지 */
+
+.con_main {
+	border: 0.5px solid RGB(3, 22, 52); 
+	/* border: 2px solid purple; */
+	border-radius:10px 10px;
+	text-align: center;본질적인
+	width: 600px;
+	height: 310px;
+	margin: 0 auto;
+}
+
+#con_img {
+	width: 100px;
+	height: 100px;
+	padding-top: 30px;
+}
+
+/* 버튼 */
+#button {
+	background: #3e2789;
+	color: white;
+	width: 200px;
+	height: 50px;
+	font-size: 20px;
+	text-align: center;
+	line-height: 50px;
+	font-weight: bold;
+	border: 1px solid #666;
+	border-radius: 5px 5px;
+}
