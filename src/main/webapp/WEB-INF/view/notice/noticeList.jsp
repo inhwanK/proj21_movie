@@ -86,10 +86,14 @@
 		<div>
 
 			<div id="contents">
-				<h1 class="title">
-					<a href="noticelist">공지사항</a>
-					<a href="inquiry" style="font-size: 20px;">고객문의</a>
-				</h1>
+				<div id="title-wrap">
+						<div class="title">
+							<a href="noticelist" style="font-weight:900; color: #222;">공지사항</a>
+						</div>
+						<div class="title">
+							<a href="inquiry">1:1 문의</a>
+						</div>
+				</div>
 
 
 				<!-- 검색 기능 -->

@@ -10,4 +10,9 @@ public class InquiryController {
 	public String inquiry() {
 		return "inquiry/inquiryForm";
 	}
+	
+	@RequestMapping("/inquirycheck")
+	public String inquiryCheck() {
+		return "inquiry/inquiryCheck";
+	}
 }
