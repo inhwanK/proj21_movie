@@ -14,7 +14,7 @@ update `member`
        mem_phone = '010-2231-3232'
  where mem_no = 4;
 
-delete from `member` where mem_no = 70;
+delete from `member` where mem_no = 71;
 
 select mem_email, mem_passwd
   from member

@@ -33,12 +33,12 @@
 	                $("#alert-danger").css('display', 'inline-block');
 	            }
 	        }
-	    });
+		});
 		
 		<!-- 회원가입 -->
 		var contextPath = "<%= request.getContextPath()%>";
 
-	    $('#new').on("click", function(e){
+		$('#new').on("click", function(e){
 	        var newMember = {  memEmail: $('#memEmail').val(), 
 	        				   memPasswd: $('#memPasswd').val(), 
 	       					   memBirthdate: $('#memBirthdate').val(),
@@ -81,8 +81,8 @@
 			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
 			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
 			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
-			<li class="nav"><a href="#">이벤트</a></li>
-			<li class="nav"><a href="#">고객센터</a></li>
+			<li class="nav"><a href="${contextPath}/inquiry">이벤트</a></li>
+			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
 			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
 		</ul>
 	</nav>
