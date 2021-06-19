@@ -1,10 +1,7 @@
 @charset "UTF-8";
 section{
-    letter-spacing: 0;
     line-height: 1.5;
     font-size: 18px;
-    color: #444;
-    font-weight: 400;
 }
 
 body {
@@ -16,34 +13,10 @@ body {
     font-weight: 400; 
 }
 
-button, input, optgroup, select, textarea {
-    margin: 0;
-    font-family: inherit;
-    font-size: 1em;
-    line-height: 1.15;
-}
-
-button, input {
-    overflow: visible;
-}
-
 table {
     display: table;
-    border-collapse: separate;
     box-sizing: border-box;
-    text-indent: initial;
-    border-spacing: 2px;
     border-color: grey;
-}
-
-colgroup {
-    display: table-column-group;
-}
-
-tbody {
-    display: table-row-group;
-    vertical-align: middle;
-    border-color: inherit;
 }
 
 tr {
@@ -63,9 +36,9 @@ div#title-wrap{
 	padding: 20px 10px;
 	margin: 0 auto;
 	border-style: solid;
-	border-color: purple;
+	border-color: #032252;
 	border-radius: 15px 15px;
-	border-width: 3px;
+	border-width: 1.5px;
 	
 	/* div 안에 양옆으로 정렬하는 거..  */
 	display: flex;
@@ -99,6 +72,30 @@ h2.tit {
     letter-spacing: -1px;
     line-height: 1.1;
     color: #222;
+}
+button#regdate{
+	margin-top: 20px;
+	width: 80px;
+	height: 45px;
+	font-size: 20px;
+}
+
+textarea#textarea{
+	font-family: 'IBMPlexSansKR-Regular', sans-serif;
+	font-size: 15px;
+}
+p#file{
+	font-size: 15px;
+}
+
+.btn-image-add{
+	font-size:18px;
+}
+
+#essential{
+	text-align: left;
+	margin-left: 20px;
+	
 }
 
 .container.has-lnb #contents {
@@ -169,13 +166,10 @@ h2.tit {
 
 .button.purple {
     color: #fff;
+    font-weight: 600;
     line-height: 36px;
     border: 0;
     background: #503396;
-}
-
-.btn-group .button {
-    margin: 0 3px;
 }
 
 .agree-box {
@@ -221,65 +215,3 @@ h2.tit {
 .board-form tbody th {
     background: #f7f8f9;
 }
-
-#contents {
-    width: 100%;
-    margin: 50px auto 50px auto;
-    padding: 0;
-}
-
-body
-header
-div
-nav
-ul
-li
-.nav
-#mypagebtn
-.far fa-user
-i
-
-h1
-.title
-#contents
-p
-.reset mt30 a-r font-orange
-
-form
-input
-div
-.table-wrap mt10 //
-table
-.board-form va-m
-
-tbody
-tr
-th
-label
-#qnaCustInqTitle
-.input-text
-.font-orange
-.input-text w150px
-#textarea //
-td
-.info-txt
-
-button
-#uploadBtn
-btn-image-add
-
-#imgList
-
-.btn-group pt40 //
-.button purple large //
-
-section
-footer
-#content
-#footer_ci
-
-
-
- 
- 
- 

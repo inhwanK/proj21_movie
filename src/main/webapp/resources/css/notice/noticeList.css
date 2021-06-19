@@ -36,9 +36,9 @@ div#title-wrap{
 	padding: 20px 10px;
 	margin: 0 auto;
 	border-style: solid;
-	border-color: purple;
+	border-color: #032252;
 	border-radius: 15px 15px;
-	border-width: 3px;
+	border-width: 1.5px;
 	
 	/* div 안에 양옆으로 정렬하는 거..  */
 	display: flex;
@@ -170,3 +170,26 @@ a{
     background-color: #01738b;
     border-color: #01738b;  
 } 
+.borard-search{
+	height:40px;	
+}
+
+#searchTxt{
+	height:24px;
+	font-size: 15px;
+	border-radius: 5px 5px;
+}
+
+.button.purple{
+	color: #fff;
+    font-weight: 400;
+    line-height: 36px;
+    background: #503396;
+    border: 1px;
+    border-color: purple;
+    border-radius: 5px 5px;
+    width: 60px;
+	height:36px;
+    font-size: 15px;
+    cursor: pointer;
+}

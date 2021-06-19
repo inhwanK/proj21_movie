@@ -20,6 +20,7 @@
 		var totalNotice = "${totalNotice}";
 		var page = Math.ceil(totalNotice / 10);
 		var selectPage = "${selectPage}";
+		
 
 		$.get(contextPath + "/api/noticelist/"+selectPage,
 				function(json) {
@@ -50,7 +51,31 @@
 				});
 
 		// 이벤트 등록
-
+		$("#searchBtn").on("click", function(){
+			var notTitle = $("#searchTxt").val();
+			a = "notTitle="+notTitle;
+			// a로 하면 됨..
+			console.log(notTitle);
+			$.ajax({
+				url: contextPath + "/api/noticesearch",/*  + searchTit; */
+				type:"get",
+				contentType : "application/json; charset=utf-8",
+				dataType: "json",
+				// jsonp: 매개변수 이름.
+				// 
+				data : a,
+				success : function(a){
+					console.log("성공");
+					console.log(a);
+				},
+				error : function(){
+					/* console.log(data); */
+					/* console.log(json); */
+					console.log("error >" + a);
+				}
+				
+			});
+		});
 	});
 </script>
 
@@ -100,9 +125,8 @@
 				<div class="board-list-util">
 					<div class="board-search">
 						<input type="text" id="searchTxt" title="검색어를 입력해 주세요."
-							placeholder="검색어를 입력해 주세요." class="input-text" value=""
-							maxlength="15">
-						<button type="button" id="searchBtn" class="btn-search-input">검색</button>
+							placeholder="제목을 입력하세요." class="input-text" maxlength="15">
+						<button type="button" id="searchBtn" class="button purple">검색</button>
 					</div>
 				</div>
 

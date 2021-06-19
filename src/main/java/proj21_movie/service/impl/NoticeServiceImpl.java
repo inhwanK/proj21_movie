@@ -33,8 +33,7 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 	@Override
 	public List<Notice> showNoticeByTitle(String notTitle) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.selectNoticeByTitle(notTitle);
 	}
 
 	@Override

@@ -44,3 +44,10 @@ SELECT *
       
      
 select * from inquiry;
+
+select * from notice;
+
+-- 제목에 '공'이 들어가는 모든 공지사항 검색
+select * 
+from notice 
+where not_title like concat('%','공','%');

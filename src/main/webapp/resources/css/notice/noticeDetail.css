@@ -1,47 +1,26 @@
 @charset "UTF-8";
-body {
-    overflow: auto;
-    overflow-y: scroll;
-    letter-spacing: 0;
+body{
+	/* 스크롤 바때문에 마진 안맞음...*/
+}
+section{
+	letter-spacing: 0;
     line-height: 1.5;
-    font-size: 15px;
+    font-size: 18px;
     color: #444;
+
     font-weight: 400;
-    font-family: NanumBarunGothic,Dotum,'돋움',sans-serif;
+}
+#notice-detail-wrap{
+	text-align:left;
 }
 
-
 #contents {
-    width: 100%;
-    margin: 0;
+    margin:0;
     padding: 40px 0 0 0;
 }
 
-.container.has-lnb #contents {
-    float: right;
-    width: calc(100% - 260px);
-}
-
-h2 {
-    display: block;
-    font-size: 1.5em;
-    margin-block-start: 0.83em;
-    margin-block-end: 0.83em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
-}
-
-h2.tit {
-    padding: 0 0 26px 0;
-    font-size: 1.8666em;
-    font-weight: 400;
-    letter-spacing: -1px;
-    line-height: 1.1;
-    color: #222;
-}
-
 .table-wrap {
+	
     position: relative;
     border-top: 1px solid #555;
 }
@@ -52,7 +31,6 @@ h2.tit {
 
 .board-view .tit-area {
     display: table;
-    width: 100%;
     padding: 15px 0;
 }
 
@@ -65,6 +43,68 @@ h2.tit {
     font-weight: 400;
 }
 
+.board-view .info {
+    font-size: .9333em;
+}
+
+.board-view .cont {
+    overflow: hidden;
+    width: 100%;
+    padding: 20px 0;
+    border-top: 1px solid #555;
+}
+
+div.title {
+/*     padding: 0 0 26px 0; */
+    font-weight: 100;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    color: #aaa;
+    font-size: 40px;
+    display: inline-block; 
+    width: 200px;
+    margin: 0 auto;
+}
+div#title-wrap{
+	width:400px;
+	padding: 20px 10px;
+	margin: 0 auto;
+	border-style: solid;
+	border-color: #032252;
+	border-radius: 15px 15px;
+	border-width: 1.5px;
+	
+	/* div 안에 양옆으로 정렬하는 거..  */
+	display: flex;
+	justify-content: space-between; 
+}
+
+div.title a{
+	color:#aaa;
+}
+
+
+
+
+
+.container.has-lnb #contents {
+    float: right;
+    width: calc(100% - 260px);
+}
+
+h2.tit {
+    padding: 0 0 26px 0;
+    font-size: 1.8666em;
+    font-weight: 400;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    color: #222;
+}
+
+
+
+
+
 p {
     display: block;
     margin-block-start: 1em;
@@ -73,21 +113,7 @@ p {
     margin-inline-end: 0px;
 }
 
-.board-view .info {
-    padding-bottom: 20px;
-    font-size: .9333em;
-}
 
-.board-view {
-    word-break: break-all;
-}
-
-.board-view .cont {
-    overflow: hidden;
-    width: 100%;
-    padding: 20px 0;
-    border-top: 1px solid #eaeaea;
-}
 
 .prev-next {
     border: 1px solid #eaeaea;
@@ -112,12 +138,6 @@ p {
 
 .prev-next .line+.line {
     border-top: 1px solid #eaeaea;
-}
-
-a:-webkit-any-link {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
 }
 
 a {
@@ -181,7 +201,3 @@ a.button {
     margin: 0 3px;
 }
 
-#notice-detail-wrap{
-	margin: 200px auto 0 auto;
-	width: 70%;
-}
