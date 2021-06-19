@@ -18,10 +18,11 @@
 		 where mem_no = #{memNo}
 	</select>
 	
+	<!-- 로그인 -->
 	<select id="selectMemberByEmail" resultMap="resMember">
-		select mem_no, mem_email, mem_passwd, mem_birthdate, mem_name, mem_phone
+		select mem_email, mem_passwd, mem_name
 		  from member
-		 where mem_email = #{memEmail}
+		 where mem_email = #{memEmail} 
 	</select>
 	
 	<insert id="insertMember" parameterType="Member">

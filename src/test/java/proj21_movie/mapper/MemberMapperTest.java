@@ -57,6 +57,7 @@ public class MemberMapperTest {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		String memEmail = "test1@test.com";
+		
 		Member member = mapper.selectMemberByEmail(memEmail);
 		Assert.assertNotNull(member);
 

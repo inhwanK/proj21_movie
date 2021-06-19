@@ -2,6 +2,8 @@ package proj21_movie.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 
 import org.apache.ibatis.logging.Log;
@@ -49,5 +51,4 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.deleteMember(memEmail);
 	}
 
-	
 }

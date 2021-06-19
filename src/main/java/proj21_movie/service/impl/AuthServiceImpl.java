@@ -27,5 +27,6 @@ public class AuthServiceImpl implements AuthService {
 		}
 		return new AuthInfo(member.getMemEmail(), member.getMemName());
 	}
+
 	
 }
