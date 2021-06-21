@@ -50,6 +50,14 @@ public class RestNoticeController {
 		return ResponseEntity.status(HttpStatus.OK).body(listNotice);
 	}
 
+	@PostMapping("/noticesearch")
+	public ResponseEntity<Object> getNoticeTitleByPage(@RequestParam(value = "selectPage", defaultValue = "1") int selectPage, 
+			@RequestParam(value = "notTitle"/*,defaultValue = "" 디폴트가 나을지 required가 나을지 고민해봐야함.  */) String notTitle){
+		
+		
+		return null;
+	}
+	
 	
 	@PostMapping("/noticesearch")
 	public ResponseEntity<Object> getNoticeByTitle(@RequestParam(value= "notTitle") String notTitle) {

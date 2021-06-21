@@ -53,11 +53,12 @@ from notice
 where not_title like concat('%','공','%')
 order by not_no desc;
 
+
+-- 검색기능 쿼리. 아직 적용안함.
 SELECT not_no, not_title, not_date
 FROM notice
-where (not_title like concat('%','공','%')) and (not_no between 23 - ((1 * 10)-1) and 23 - ((1-1) * 10))
+where not_title like concat('%','','%')
 order by not_no desc;
-
 
 where 
 

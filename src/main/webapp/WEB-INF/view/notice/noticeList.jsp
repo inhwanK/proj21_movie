@@ -65,14 +65,16 @@
 				type:"post",
 				contentType : "application/json; charset=utf-8",
 				dataType: "json",
-				// jsonp: 매개변수 이름.
-				// 
 				data : notTitle,
 				success : function(json){
 					console.log("성공");
 					console.log(json);
 					
 					var dataLength = json.length;
+					
+					
+					
+					
 					if (dataLength >= 1) {
 						var list = "";
 						for (i = 0; i < dataLength; i++) {
