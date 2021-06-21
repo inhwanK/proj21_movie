@@ -155,7 +155,7 @@ section #loginFormArea {
 }
 
 .fm_box {
-	border: 1px solid #eee;
+	border: 1px solid RGB(3, 22, 52);
 	height: 330px;
 	width: 450px;
 	text-align: center;
@@ -163,7 +163,7 @@ section #loginFormArea {
 	margin-bottom: 100px;
 }
 
-.bt {
+.btn {
 	height: 35px;
 	width: 258px;
 	text-align: center;

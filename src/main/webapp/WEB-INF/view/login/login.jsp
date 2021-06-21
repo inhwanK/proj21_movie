@@ -17,32 +17,31 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	<!-- 로그인 -->
-		$("#selButton").on("click", function(e){
-			 var contextPath = "<%= request.getContextPath()%>";
-			 var loginform = {
-								memEmail  : $("#memEmail").val(),
-								memPasswd : $("#memPasswd").val()
-							}; 
-			 $.ajax({
-				url			: contextPath + "/api/login/",
-				type		: "POST",
-				contentType : "application/json; charset=utf-8",
-				dataType 	: "json",
-	            cache       : false,
-	            data        : JSON.stringify(loginform),
-				success     : function(data) {
-					if(data == true) {
-						 window.location.href = contextPath + "/loginsuccess";
-					} else {
-						alert("아이디 또는 비밀번호가 잘못되었습니다.");
-					}
-				},
-				error       : function(request, status, error){
-					 alert("오류입니다");
-				}
-			}) 
-		})
+	<!-- 회원 로그인 -->
+	var contextPath = "<%= request.getContextPath()%>";
+
+	$('#selButton').on("click", function(e){
+        var LoginCommand = {  
+        					  memEmail: $('#memEmail').val(), 
+        				   	  memPasswd: $('#memPasswd').val()
+  						   };
+        $.ajax({
+            url         : contextPath + "/login",
+            type        : "POST",
+            contentType : "application/json; charset=utf-8",
+            datatype    : "json",
+            cache       : false,
+            data        : JSON.stringify(LoginCommand),
+            success     : function(LoginCommand) {
+                window.location.href = contextPath + "/loginSuccess";
+            },
+            error       : function(request, status, error){
+                alert("아이디 또는 비밀번호를 확인해주세요");
+                window.location.href = contextPath + "/loginfail";
+            }
+        }); 
+    });
+
 });
 </script>
 </head>

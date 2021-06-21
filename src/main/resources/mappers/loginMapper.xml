@@ -7,13 +7,13 @@
 		<id column="memPasswd" property="memPasswd"/>
 	</resultMap>
 
-	<select id="loginCheck" resultType="LoginCommand">
+	<select id="login" resultType="loginCommand">
 		select COUNT(*)
 		  from member
 		 where mem_email = #{memEmail}
 		   and mem_passwd = #{memPasswd}
 	</select>
-	
+
 	<!-- 아이디 중복 검사 
 	<select id="selectMemberByEmail" parameterType="String" resultType="int">
 		select count(*)
