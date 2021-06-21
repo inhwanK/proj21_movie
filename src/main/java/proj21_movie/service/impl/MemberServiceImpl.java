@@ -1,14 +1,15 @@
 package proj21_movie.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Service;
 
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import proj21_movie.config.ContextSqlSession;
 import proj21_movie.dto.Member;
 import proj21_movie.mapper.MemberMapper;
 import proj21_movie.service.MemberService;
@@ -19,6 +20,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberMapper mapper;
+
+	@Autowired
+	private ContextSqlSession sql;
 
 	@Override
 	public List<Member> getLists() {
@@ -49,6 +53,12 @@ public class MemberServiceImpl implements MemberService {
 	public int removeMember(String memEmail) {
 		log.debug("service - removeMember() > " + memEmail);
 		return mapper.deleteMember(memEmail);
+	}
+
+	@Override
+	public Member selectMemberBymemEmail(String memEmail) {
+		log.debug("service - removeMember() > " + memEmail);
+		return mapper.selectMemberByEmail(memEmail);
 	}
 
 }

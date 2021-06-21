@@ -13,5 +13,7 @@ public interface MemberMapper {
 	int updateMember(Member member);
 	int deleteMember(String memEmail);
 	
+    int countMember();
+	
 	Member selectMemberByEmail(String memEmail);
 }

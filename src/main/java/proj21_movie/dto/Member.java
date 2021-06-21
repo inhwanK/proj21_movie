@@ -23,7 +23,7 @@ public class Member {
 	public boolean matchPassword(String memPasswd) {
         return this.memPasswd.equals(memPasswd);
     }
-	
+
 	public Member() {}
 
 	public Member(int memNo) {
