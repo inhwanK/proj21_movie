@@ -49,8 +49,9 @@ public class RestNoticeController {
 		return ResponseEntity.status(HttpStatus.OK).body(listNotice);
 	}
 
-	@RequestMapping(value = "/noticesearch", method=RequestMethod.GET)
-	public ResponseEntity<Object> getNoticeByTitle(String notTitle) {
+//	@RequestMapping(value = "/noticesearch", method=RequestMethod.GET)
+	@PostMapping("/noticesearch")
+	public ResponseEntity<Object> getNoticeByTitle(@RequestParam(value= "notTitle") String notTitle) {
 		System.out.println(notTitle);
 		List<Notice> listNotice = service.showNoticeByTitle(notTitle);
 		System.out.println(notTitle);
