@@ -1,6 +1,9 @@
 package proj21_movie.controller;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,9 +17,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import proj21_movie.dto.Movie;
 import proj21_movie.dto.ShowInfo;
+import proj21_movie.dto.Theater;
 import proj21_movie.service.ShowInfoService;
 
 @RestController
@@ -61,9 +67,17 @@ public class RestShowInfoManagerController {
 		return ResponseEntity.ok(service.removeShowInfo(new ShowInfo(no)));
 	}
 	
-	@PostMapping("/showinfobydate")
-	public ResponseEntity<Object> showInfoListByDate(@RequestBody ShowInfo showInfo){
+	@GetMapping("/showinfobydate/{movNo}/{thtNo}/{shwDate}")
+	public ResponseEntity<Object> showInfoListByDate(@PathVariable int movNo, @PathVariable int thtNo, @PathVariable String shwDate){
 		System.out.println("showInfoListByDate()");
+		
+		ShowInfo showInfo = new ShowInfo();
+		showInfo.setMovNo(new Movie(movNo));
+		showInfo.setThtNo(new Theater(thtNo));
+		
+		LocalDate shwLocalDate = LocalDate.parse(shwDate, DateTimeFormatter.ISO_DATE);
+		showInfo.setShwDate(shwLocalDate);
+		
 		return ResponseEntity.ok(service.getListsByDate(showInfo));
 	}
 }

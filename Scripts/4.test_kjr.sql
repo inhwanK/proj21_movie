@@ -90,8 +90,14 @@ values (null, 3, 3, 3, '2021-06-05', '10:00:00'
 select * from showinfo;
 select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, cin_type, mov_no, mov_title
 		from vw_full_showinfo
-		where shw_date = '20210618';
+		where shw_date = '20210621';
 		select * from movie;
 insert into showinfo(shw_no, tht_no, cin_no, mov_no, shw_date, shw_starttime, shw_endtime) 
-values (null, 2, 2, 2, now(), '20:00:00', 
+values (null, 1, 1, 1, '2021-06-22', '20:00:00', 
 addtime('20:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));
+
+select shw_starttime 
+from vw_full_showinfo 
+where tht_no = 2 and mov_no = 2 and shw_date = '20210621'
+order by shw_starttime;
+
