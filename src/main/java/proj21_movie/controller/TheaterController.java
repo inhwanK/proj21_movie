@@ -10,12 +10,12 @@ public class TheaterController {
 	
 	@GetMapping("/theaterlist")
 	public String theaterList() {
-		return "theater/theater_list";
+		return "theater/theaterList";
 	}
 	
 	@GetMapping("/theater")
 	public ModelAndView theater(@RequestParam(value = "thtNo") int thtNo) {
-		ModelAndView mav = new ModelAndView("theater/theater_detail", "thtNo", thtNo);
+		ModelAndView mav = new ModelAndView("theater/theaterDetail", "thtNo", thtNo);
 		return mav;
 	}
 }

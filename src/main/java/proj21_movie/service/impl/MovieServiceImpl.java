@@ -30,6 +30,20 @@ public class MovieServiceImpl implements MovieService {
 		log.debug("service - getMovie() > " + movie);
 		return mapper.selectMovieByNo(movie);
 	}
+	
+	@Override
+	public List<Movie> getMovieBoxOffice() {
+		List<Movie> list = mapper.selectMovieBoxOffice();
+		log.debug("service - getMovieBoxOffice() > " + list.size());
+		return list;
+	}
+
+	@Override
+	public List<Movie> getMovieCommingSoon() {
+		List<Movie> list = mapper.selectMovieCommingSoon();
+		log.debug("service - getMovieCommingSoon() > " + list.size());
+		return list;
+	}
 
 	@Override
 	public int registerMovie(Movie movie) {
@@ -48,6 +62,4 @@ public class MovieServiceImpl implements MovieService {
 		log.debug("service - removeMovie() > " + movie);
 		return mapper.deleteMovie(movie);
 	}
-	
-	
 }

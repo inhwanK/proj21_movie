@@ -1,15 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>영화 상세정보</title>
 	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
-	<link rel="stylesheet" href="${contextPath}/resources/css/movie/movie_detail.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/movie/movieDetail.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/movie/star/fontawesome-stars.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 	<!-- 이 js가 다른 js보다 낮으면 에러 뜸 -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">  
+    <script>
+    	window.jQuery || document.write('<script src="${contextPath}/resources/js/star/vendor/jquery-1.11.2.min.js"><\/script>')
+    </script>	
+    <script src="${contextPath}/resources/js/star/jquery.barrating.min.js"></script>	
 	<script>
 		$(function() {
 			$(".btn li").click(function() {
@@ -21,7 +28,9 @@
 			});
 
 		   $("#cancel").click(function () {
-		        $(".contxt").val('');	        
+		        $("#contxt").val('');	        
+		        $("#input-star").val('');	        
+		        $(".stars .fa").removeClass("active");        
 		   });
 			  
 		   $(document).ready( function() {
@@ -33,14 +42,10 @@
 			     });
 		   });
 		   
-			$(".stars .fa").click(function(){ 
-				$(this).addClass("active");
-				$(this).prevAll().addClass("active"); 
-				$(this).nextAll().removeClass("active"); 
-				
-				var starRate = $(this).index() + 1;
-			});
-
+		   /* 별점 테마 */
+		   $('#example-fontawesome').barrating({ 
+   				theme: 'fontawesome-stars' 
+  			});
 		});
 	</script>
 	<script>
@@ -122,6 +127,7 @@
 							sCont += "<div class='prof'>";						
 							sCont += "<img src='${contextPath}/resources/images/movie/movie-detail/bg-profile.png'>";
 							sCont += "<p class='user-id'>" + json[i].comUser + "</p>";
+							sCont += "<div class='divNo' style ='display:none'>" + json[i].comNo + "</div>"
 							sCont += "</div>";
 							// // prof
 							
@@ -129,22 +135,17 @@
 							sCont += "<div class='textarea'>";
 							sCont += "<h3>한줄평</h3>";
 							sCont += "<h3>" + json[i].comStar + "</h3>";
-							sCont += "<p>" + json[i].comContent + "</p>";
-							
-							/* // btn-util
-							sCont += "<div class='btn-util'>";
-							sCont += "<button type='button' class='btn-alert'>";
-							sCont += "</button>";
-							// btnSpace
-							sCont += "<div class='btnSpace'>";								
-							sCont += "</div>";
-							// // btnSpace
-							sCont += "</div>";
-							// // btn-util
-							sCont += "</div>"; */
-							
+							sCont += "<p>" + json[i].comContent + "</p>";							
 							sCont += "</div>";
 							// // textarea
+							
+							// btn-util
+							sCont += "<div class='btn-util'>";
+							sCont += "<button id='modify'>수정</button>";
+							sCont += "<button id='remove'>삭제</button>";					
+							sCont += "</div>";
+							// // btn-util
+							
 							sCont += "</div>";
 							// // comment-list
 							sCont += "<h5>" + json[i].comDate + "</h5>";
@@ -153,7 +154,86 @@
 						$("#comment-count .font-gblue").append(size);
 						$(".movie-comment ul").append(sCont);
 					}
+					
+					
 				});
+			
+			/* ajax */
+			$('#writeBtn').on("click", function(e){
+				var movNo = "${movNo}";
+				var newComment = { movNo: movNo, 
+									comUser : $('#user').val(), 
+									comContent: $('#contxt').val(),
+									comStar : $('.com-star').val()
+								};
+				
+				$.ajax({
+					url 		: contextPath + "/api/comments/",
+					type 		: "POST",
+					contentType : "application/json; charset=utf-8",
+					datatype 	: "json",
+					cache 		: false,
+					data 		: JSON.stringify(newComment),
+					success 	: function(res) {
+						alert(newComment.comUser + "님의 한줄평이 등록되었습니다.");
+						location.reload();
+					},
+					error : function(request, status, error){
+						alert("code:" + request.status+"\n" + "message:" + request.responseText+"\n" + "error:" + error);
+						location.reload();
+					}
+				}); 
+			});
+			
+			$(document).ready(function(){
+				$(this).on('click', '[id=modify]', function(){
+					var pa = $(this).parent().parent();
+					var ch = pa.children().children();
+					var comNo = ch.eq(2).text();
+					alert(comNo);	
+				    
+					/* 팝업 중앙에 띄우기 */
+				    function PopupCenter(url, title, w, h) {  
+				        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;  
+				        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;  
+				                  
+				        width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;  
+				        height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;  
+				                  
+				        var left = ((width / 2) - (w / 2)) + dualScreenLeft;  
+				        var top = ((height / 2) - (h / 2)) + dualScreenTop;  
+				        var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);  
+				      
+				        if (window.focus) {  
+				            newWindow.focus();  
+				        }  
+				    } 				    
+				    PopupCenter(contextPath + "/updateComment?comNo=" + comNo,'popup','550','400'); 
+				});
+			});
+				
+			$(document).on('click', '[id=remove]', function(){
+				var pa = $(this).parent().parent();
+				var ch = pa.children().children();
+				var comNo = ch.eq(2).text();
+				
+				if (confirm("삭제하시겠습니까?")){
+					$.ajax({
+						url: contextPath + "/api/comments/" + comNo,
+						type: 'DELETE',
+						success: function(res) {
+							alert(comNo + "번 한줄평 삭제 완료");
+							location.reload();
+						},
+						error: function(request, status, error) {
+							alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+							location.reload();
+						}
+					});
+				} else {
+					return false;
+				}			
+			});
 			/* // 실관람평 탭 */
 		});
 	</script>
@@ -269,30 +349,31 @@
 								<div class="comment-write">
 									<span title="한줄평쓰기">한줄평쓰기</span>
 									<div class="write-content">
-										<form action="" class="form-txt">									
-											<table>
-												<tr>
-													<td>
-														<div class="title"><h4>한줄평</h4></div>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<textarea class="contxt" rows="3" cols="100" name="contents" placeholder="한줄평을 적어주세요"></textarea>
-														<div class="star-rating">
-															<div class="stars">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-															</div>															
-														</div>
-													</td>
-												</tr>											
-											</table>
-										</form>
-										<input class="wtiteBtn" type="submit" value="쓰기"/> 
+										<form:form>
+											<div class="form-txt">									
+												<table>
+													<tr>
+														<td>
+															<input type="text" id="user" value="테스트 이메일" readonly/>
+															<div class="title"><h4>한줄평</h4></div>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<textarea id="contxt" rows="3" cols="100" name="contents" placeholder="한줄평을 적어주세요"></textarea>
+															<select id="example-fontawesome" class="com-star" name="rating">
+																<option value="1">1</option>
+																<option value="2">2</option>
+																<option value="3">3</option>
+																<option value="4">4</option>
+																<option value="5">5</option>
+															</select>
+														</td>
+													</tr>											
+												</table>
+											</div>
+										</form:form>
+										<input id="writeBtn" type="button" value="쓰기"/> 
 										<input id="cancel" type="button" class="cancelBtn" value="취소"/> 
 									</div>
 								</div>

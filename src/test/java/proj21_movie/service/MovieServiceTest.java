@@ -55,9 +55,27 @@ public class MovieServiceTest {
 		
 		log.debug(movie.toString());
 	}
+	
+	@Test
+	public void test03GetMovieBoxOffice() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		List<Movie> list = mapper.selectMovieBoxOffice();
+		Assert.assertNotNull(list);
+		
+		list.forEach(s -> log.debug(s.toString()));
+	}
+	
+	@Test
+	public void test04GetMovieCommingSoon() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		List<Movie> list = mapper.selectMovieCommingSoon();
+		Assert.assertNotNull(list);
+		
+		list.forEach(s -> log.debug(s.toString()));
+	}
 
 	@Test
-	public void test03RegisterMovie() {
+	public void test05RegisterMovie() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		LocalDate start = LocalDate.of(2021, 06, 07);
@@ -73,7 +91,7 @@ public class MovieServiceTest {
 	}
 
 	@Test
-	public void test04ModifyMovie() {
+	public void test06ModifyMovie() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		LocalDate start = LocalDate.of(2021, 06, 17);
@@ -101,7 +119,7 @@ public class MovieServiceTest {
 	}
 
 	@Test
-	public void test05RemoveMovie() {
+	public void test07RemoveMovie() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		LocalDate start = LocalDate.of(2021, 06, 17);
