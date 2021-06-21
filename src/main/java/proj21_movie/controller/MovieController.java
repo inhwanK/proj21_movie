@@ -10,12 +10,12 @@ public class MovieController {
 	
 	@GetMapping("/movielist")
 	public String movieList() {
-		return "movie/box_office";
+		return "movie/boxOffice";
 	}
 	
 	@GetMapping("/movie")
 	public ModelAndView movie(@RequestParam(value = "movNo") int movNo) {
-		ModelAndView mav = new ModelAndView("movie/movie_detail", "movNo", movNo);
+		ModelAndView mav = new ModelAndView("movie/movieDetail", "movNo", movNo);
 		return mav;
 	}
 }

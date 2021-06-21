@@ -1,17 +1,11 @@
 package proj21_movie.controller;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-import javax.imageio.ImageIO;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +38,16 @@ public class RestMovieManagerController {
 	public ResponseEntity<Object> movies(){
 		System.out.println("movies()");
 		return ResponseEntity.ok(service.getLists());
+	}
+	
+	@GetMapping("/movies/boxOffice")
+	public ResponseEntity<Object> boxOffice(){
+		return ResponseEntity.ok(service.getMovieBoxOffice());
+	}
+	
+	@GetMapping("/movies/commingSoon")
+	public ResponseEntity<Object> commingSoon(){
+		return ResponseEntity.ok(service.getMovieCommingSoon());
 	}
 	
 	@GetMapping("/movies/{no}")
