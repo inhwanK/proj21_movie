@@ -62,23 +62,26 @@
 	
 	<section>
 		<div id="containter">
+		
 			<h2>바로예매</h2>
+			
 			<div id="calendar" class="calendar">
 			</div>
+			
 			<div id="reserve-table">
 			<div id="movie-choice">
 				<h3>영화</h3>
 				<div id="movie-list">
 					<ul id="movie-list-ul">
 						<c:forEach items="${getMovieList }" var="mov">
-							<li><a href="#"><c:out value="${mov.movTitle }"/></a></li>
+							<li><a href="" class="movie"><c:out value="${mov.movTitle }"/>
+							<input type="hidden" value="${mov.movNo }"/></a></li>
                      	</c:forEach>
 					</ul>
 				</div>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-					Etiam hendrerit magna sit amet neque mattis porta. Nulla congue, 
-				</p>
+				<!-- <p>
+					영화를 선택해 주세요.
+				</p> -->
 				
 			</div>
 			
@@ -87,34 +90,30 @@
 				<div id="theater-list">
 					<ul>
 						<c:forEach items="${getTheaterList }" var="tht">
-							<li><a href="#"><c:out value="${tht.thtName }"/></a></li>
+							<li><a href="" class="theater"><c:out value="${tht.thtName }"/>
+							<input type="hidden" value="${tht.thtNo }"/></a></li>
                      	</c:forEach>
 					</ul>
 				</div>	
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-					Etiam hendrerit magna sit amet neque mattis porta. Nulla congue, 
-				</p>	
+				<div class="btntimediv">
+					<button class="btntime">시간 확인하기</button>
+				</div>
+				<!-- <p>
+					극장을 선택해 주세요.
+				</p> -->	
 			</div>
 	
 			<div id="time-choice">
 				<h3>시간</h3>
-				<div id="time-select">
-					<strong>크루엘라</strong>
-					<br> <br>
-					<span>10 : 00</span>
-					<span>14 : 00</span>
-					<span>20: 00</span>
-				</div>
-	
-				<div id="time-select">
-					<strong>캐시트럭</strong>
-					<br> <br>
-					<span>10 : 00</span>
-					<span>14 : 00</span>
-					<span>20 : 00</span>
-				</div>
 				
+				<div id="time-select">
+					<!-- <strong>크루엘라</strong>
+					<br> <br>
+					<span>10 : 00</span>
+					<span>14 : 00</span>
+					<span>20 : 00</span> -->
+				</div>	
+	
 			</div>
 			</div>
 		</div>
@@ -131,47 +130,95 @@
 	</footer>
 	
 	<script type="text/javascript">
+		var dateIdx = 0;
+		var movieNo = 0;
+		var theaterNo = 0;
+		
 		$(document).on('click', '[class=date]', function(e){
 			e.preventDefault();
-			var currentClass = $(this).attr("class");
 			
 			$(this).addClass("active");
 			$(this).parent().siblings().children().removeClass("active"); 
 			
-			$("#movie-list").empty();
-			alert($(this).text());
+			/* alert($(this).text()); */
 			
-			/* var contextPath = "${contextPath}";
-			var newShow = {shwDate: '2021-06-18'};
+			var idx = $("#calendar span a").index(this);
+			/* alert("날짜 인덱스 >> " + idx); */
 			
-			$.ajax({
-				url: contextPath + "/api/showinfobydate",
-				type: "GET",
-				contentType: "application/json; charset=utf-8",
-				datatype: "json",
-				cache: false,
-				data: JSON.stringify(newShow),
-				success: function(res) {
-					alert(res);
-					var dataLength = json.length;
-					if (dataLength >= 1) {
-						var sCont = "";
-						for(i = 0; i < dataLength; i++) {
-							sCont += "<li>";
-							sCont += "<a href=''>";
-							sCont += json[i].movNo.movTitle;
-							sCont += "</a></li>";
-						}
-						$("#movie-list-ul:last-child").append(sCont);
-					}
-				}, 
-				error: function(request, status, error){
-					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-				}
-			}); */
-			
+			dateIdx = idx;
 		});
 		
+		$(document).on('click', '[class=movie]', function(e){
+			e.preventDefault();
+			
+			$(this).addClass("active");
+			$(this).parent().siblings().children().removeClass("active"); 
+			
+			/* alert($(this).text()); */
+			/* alert("movNo >> " + $(this).children().val()); */
+			
+			movieNo = $(this).children().val();
+		});
+		
+		$(document).on('click', '[class=theater]', function(e){
+			e.preventDefault();
+			
+			$(this).addClass("active");
+			$(this).parent().siblings().children().removeClass("active"); 
+			
+			/* alert($(this).text()); */
+			/* alert("thtNo >> " + $(this).children().val()); */
+			
+			theaterNo = $(this).children().val();
+		});
+		
+		$(document).on('click', '[class=btntime]', function(e){
+			$("#time-select").empty();
+			alert("dateIdx >> " + dateIdx + "\nmovieNo >> " + movieNo + "\ntheaterNo >> " + theaterNo);
+			
+ 			var contextPath = "${contextPath}";
+ 			
+ 			var shwDate = date(dateIdx);
+ 			
+			$.get(contextPath + "/api/showinfobydate/" + movieNo + "/" + theaterNo + "/" + shwDate,
+					function(json) {
+						var dataLength = json.length;
+						if (dataLength >= 1) {
+							var sCont = "";
+							for (i = 0; i < dataLength; i++) {
+								/* if (sCont.indexOf("<strong>" === -1)) {
+									sCont += "<strong>" + json[i].movNo.movTitle + "</strong>";
+									sCont += "<br><br>";
+								} */
+								sCont += "<span class='time'>";
+								sCont += json[i].shwStarttime;
+								sCont += "</span>";
+							}
+							sCont += "<br><br><br><button id='btn-seat' class='btn-seat'>좌석 선택</button>";
+							$("#time-select:last-child").append(sCont);
+						}
+					});
+			});
+		
+		function date(idx){
+			var today = new Date();
+			
+			var year = today.getFullYear();
+			var month = today.getMonth() + 1;
+			var date = today.getDate();
+			
+			var addDate = date + idx;
+			
+			var today2 = new Date(year, month, addDate);
+			var year2 = today2.getFullYear();
+			var month2 = today2.getMonth();
+			var date2 = today2.getDate();
+			
+			if (month2 < 10) month2 = "0" + month2;
+			if (date2 < 10) date2 = "0" + date2;
+			
+			return year2 + "-" + month2 + "-" + date2;
+		}
 	</script>
 </body>
 </html>

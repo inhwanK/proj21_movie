@@ -153,6 +153,7 @@ section h3 {
 }
 
 /* 각 div */
+/* 영화선택 */
 #movie-choice {
 	padding: 10px;
 	margin-top: 30px;
@@ -190,6 +191,11 @@ section h3 {
 	color: red;
 }
 
+.movie.active {
+	border-bottom: 5px solid RGB(3, 22, 52);
+}
+
+/* 극장 선택 */
 #theater-choice {
 	padding: 10px;
 	margin-top: 30px;
@@ -229,6 +235,11 @@ section h3 {
 	color: red;
 }
 
+.theater.active {
+	border-bottom: 5px solid RGB(3, 22, 52);
+}
+
+/* 시간 선택 */
 #time-choice {
 	padding: 10px;
 	margin-top: 30px;
@@ -247,6 +258,9 @@ section h3 {
 
 #time-select {
 	margin-top: 50px;
+	/* overflow: auto; */
+	width: 100%;
+	height: 450px;
 }
 
 #time-select span {
@@ -266,6 +280,11 @@ section h3 {
 	color: white;
 	cursor: pointer;
 }
+
+#btnseatdiv {
+	margin-top: 100px;
+}
+
 /* footer */
 footer {
 	margin: auto;

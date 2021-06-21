@@ -10,6 +10,7 @@ public class ShowInfo {
 	private Theater thtNo; // 극장 번호
 	private Cinema cinNo; // 상영관 번호
 	private Movie movNo; // 영화 번호
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate shwDate; // 상영일
 	@JsonFormat(pattern = "HH:mm")
 	private LocalTime shwStarttime; // 시작 시간

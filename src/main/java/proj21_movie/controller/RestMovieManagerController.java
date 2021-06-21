@@ -72,7 +72,7 @@ public class RestMovieManagerController {
 	@PostMapping(value="/uploadAjaxAction", produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<AttachImage>> uploadAjaxActionPOST(MultipartFile[] uploadFile, HttpServletRequest request) {
 		String upload = request.getSession().getServletContext().getRealPath("/").concat("resources");
-		String imgUploadPath = upload + File.separator + "images" + File.separator + "movie";
+		String imgUploadPath = upload + File.separator + "images" + File.separator + "movie" + File.separator + "box-office";
 		System.out.println(imgUploadPath);
 		
 		// 폴더 생성

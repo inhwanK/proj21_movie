@@ -53,7 +53,8 @@
 	<select id="selectShowInfoByDate" resultMap="resShowInfo">
 		select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, cin_type, mov_no, mov_title
 		from vw_full_showinfo
-		where shw_date = #{shwDate}
+		where shw_date = #{shwDate} and mov_no = #{movNo.movNo} and tht_no = #{thtNo.thtNo}
+		order by shw_starttime;
 	</select>
 	
 </mapper>
