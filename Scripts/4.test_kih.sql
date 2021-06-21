@@ -50,4 +50,15 @@ select * from notice;
 -- 제목에 '공'이 들어가는 모든 공지사항 검색
 select * 
 from notice 
-where not_title like concat('%','공','%');
+where not_title like concat('%','공','%')
+order by not_no desc;
+
+
+-- 검색기능 쿼리. 아직 적용안함.
+SELECT not_no, not_title, not_date
+FROM notice
+where not_title like concat('%','','%')
+order by not_no desc;
+
+where 
+

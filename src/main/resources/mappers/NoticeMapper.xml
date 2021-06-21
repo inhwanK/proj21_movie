@@ -16,7 +16,8 @@
 	<select id="selectNoticeByTitle" resultMap="noticeList">
    		select not_no, not_title, not_date
    		from notice
-   		where not_title like concat('%',#{notTitle},'%');
+   		where not_title like concat('%',#{notTitle},'%')
+   		order by not_no desc;
 	</select>
 
    <select id="selectNoticeByPage" resultMap="noticeList">
@@ -24,7 +25,7 @@
       FROM notice
       where not_no between #{totalNumber} - ((#{selectPage} * 10)-1) and #{totalNumber} - ((#{selectPage}-1) * 10)
       order by not_no desc;
-   </select> <!-- 쿼리가 너무 비효율적임. service 파라미터로 넘길 수 있도록 해야함. -->
+   </select>
    
    <select id="selectNoticeByNo" resultType="Notice">
       select not_no, not_title, not_detail, not_date, not_file 
@@ -38,7 +39,6 @@
       select count(*)
       from notice;
    </select>
-   
    
    <insert id="insertNotice" parameterType="Notice">
       insert into notice(not_title,not_detail,not_date,not_file)

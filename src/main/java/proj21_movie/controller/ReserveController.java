@@ -24,4 +24,14 @@ public class ReserveController {
 		
 		return "reserve/reserve";
 	}
+	
+	@RequestMapping("/seat") // 임시로 매핑 설정함.
+	public String seat() {
+		return "reserve/seat";
+	}
+	
+	@RequestMapping("/payment") // 임시로 매핑 설정함.
+	public String payment() {
+		return "reserve/payment";
+	}
 }

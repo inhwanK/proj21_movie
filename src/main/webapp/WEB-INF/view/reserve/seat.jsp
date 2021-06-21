@@ -68,21 +68,40 @@
 
 				<div id="seat-area">
 					<img alt="스크린 이미지" src="<%=request.getContextPath()%>/resources/images/screen.png"> <br> <br>
-					<c:forEach var="i" begin="1" end="50">
-						<span>${i }</span>
-						<c:if test="${i % 10 eq 0}">
-							<br>
+					<c:forEach var="row" begin="1" end="5">
+					
+						<!-- 하드코딩 ... 무조건 수정 필요함. -->
+						<c:if test="${row eq 1 }">
+							a 열
 						</c:if>
-
-						<c:if test="${i % 10 eq 3}">
-							<span id="hiddenseat"></span>
+						<c:if test="${row eq 2 }">
+							b 열
 						</c:if>
-
-						<c:if test="${i % 10 eq 7}">
-							<span id="hiddenseat"></span>
+						<c:if test="${row eq 3 }">
+							c 열
 						</c:if>
+						<c:if test="${row eq 4 }">
+							d 열
+						</c:if>
+						<c:if test="${row eq 5 }">
+							e 열
+						</c:if>
+						<c:forEach var="i" begin="1" end="10">
+						
+							<span>${i }</span>
+							<c:if test="${i % 10 eq 0}">
+								<br>
+							</c:if>
+	
+							<c:if test="${i % 10 eq 3}">
+								<span id="hiddenseat"></span>
+							</c:if>
+	
+							<c:if test="${i % 10 eq 7}">
+								<span id="hiddenseat"></span>
+							</c:if>
+						</c:forEach>
 					</c:forEach>
-
 				</div>
 
 				<div id="seat-info">

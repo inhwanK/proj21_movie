@@ -28,7 +28,7 @@ public interface NoticeMapper {
 	
 	// 페이징을 위해 데이터 수 검색.
 	int countNotice(); 
-			
+	
 	int updateNotice(Notice notice);
 	int insertNotice(Notice notice);
 	int deleteNotice(int notNo);

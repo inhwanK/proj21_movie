@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import proj21_movie.dto.AttachImage;
 import proj21_movie.dto.Notice;
@@ -49,8 +50,17 @@ public class RestNoticeController {
 		return ResponseEntity.status(HttpStatus.OK).body(listNotice);
 	}
 
-	@RequestMapping(value = "/noticesearch", method=RequestMethod.GET)
-	public ResponseEntity<Object> getNoticeByTitle(String notTitle) {
+	@PostMapping("/noticesearch")
+	public ResponseEntity<Object> getNoticeTitleByPage(@RequestParam(value = "selectPage", defaultValue = "1") int selectPage, 
+			@RequestParam(value = "notTitle"/*,defaultValue = "" 디폴트가 나을지 required가 나을지 고민해봐야함.  */) String notTitle){
+		
+		
+		return null;
+	}
+	
+	
+	@PostMapping("/noticesearch")
+	public ResponseEntity<Object> getNoticeByTitle(@RequestParam(value= "notTitle") String notTitle) {
 		System.out.println(notTitle);
 		List<Notice> listNotice = service.showNoticeByTitle(notTitle);
 		System.out.println(notTitle);

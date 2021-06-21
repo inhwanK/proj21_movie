@@ -52,26 +52,58 @@
 
 		// 이벤트 등록
 		$("#searchBtn").on("click", function(){
-			var notTitle = $("#searchTxt").val();
-			a = "notTitle="+notTitle;
+			//var notTitle = $("#searchTxt").val();
+			var notTitle = $("#searchTxt").serialize();
+			console.log($("#searchTxt").val());
+			console.log($("#searchTxt").serialize());
+			
+			//a = "notTitle="+notTitle;
 			// a로 하면 됨..
 			console.log(notTitle);
 			$.ajax({
-				url: contextPath + "/api/noticesearch",/*  + searchTit; */
-				type:"get",
+				url: contextPath + "/api/noticesearch?"+notTitle,
+				type:"post",
 				contentType : "application/json; charset=utf-8",
 				dataType: "json",
-				// jsonp: 매개변수 이름.
-				// 
-				data : a,
-				success : function(a){
+				data : notTitle,
+				success : function(json){
 					console.log("성공");
-					console.log(a);
+					console.log(json);
+					
+					var dataLength = json.length;
+					
+					
+					
+					
+					if (dataLength >= 1) {
+						var list = "";
+						for (i = 0; i < dataLength; i++) {
+							list += "<tr>";
+							list += "<td>" + json[i].notNo + "</td>";
+							list += "<td><a href='${contextPath}/notice?notNo="
+									+ json[i].notNo + "'>" + json[i].notTitle
+									+ "</a></td>"; //보여주면 안될 것 같은 정보.
+							list += "<td>" + getFormatDate(json[i].notDate) + "</td>";
+							list += "<tr>"
+						}
+						$("tbody").empty();
+						$("tbody").append(list);
+					}
+					
+					var page = Math.ceil(dataLength / 10);
+					console.log(page);
+					var pageBtn = "";
+
+					for (i = 1; i < page + 1; i++) {
+						pageBtn += "<a title=" + i
+								+ "페이지보기 href=\"noticelist?selectPage=" + i
+								+ "\">" + i + "</a>"; // 더 좋은 방법이 있을 거야....
+					}
+					$("nav.pagination").empty();
+					$("nav.pagination").append(pageBtn);
 				},
 				error : function(){
-					/* console.log(data); */
-					/* console.log(json); */
-					console.log("error >" + a);
+					console.log("error > ");
 				}
 				
 			});
@@ -125,7 +157,7 @@
 				<div class="board-list-util">
 					<div class="board-search">
 						<input type="text" id="searchTxt" title="검색어를 입력해 주세요."
-							placeholder="제목을 입력하세요." class="input-text" maxlength="15">
+							placeholder="제목을 입력하세요." class="input-text" maxlength="15" name="notTitle">
 						<button type="button" id="searchBtn" class="button purple">검색</button>
 					</div>
 				</div>
