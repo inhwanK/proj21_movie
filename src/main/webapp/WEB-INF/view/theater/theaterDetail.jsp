@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	<title>극장 상세정보</title>
 	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
-	<link rel="stylesheet" href="${contextPath}/resources/css/theater/theater_detail.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/theater/theaterDetail.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>

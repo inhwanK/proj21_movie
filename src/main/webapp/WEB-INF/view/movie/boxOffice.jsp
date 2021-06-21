@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	<title>영화리스트</title>
 	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
-	<link rel="stylesheet" href="${contextPath}/resources/css/movie/box_office.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/movie/boxOffice.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
@@ -34,14 +34,14 @@
 			return newDateForm; 
 		}
 		
-		/* box-office-list (박스오피스 리스트 - 영화번호 ~12번 까지) */
+		/* box-office-list (박스오피스 리스트) */
 		var contextPath = "${contextPath}";
-		$.get(contextPath + "/api/movies",
+		$.get(contextPath + "/api/movies/boxOffice",
 			function(json) {
 				var dataLength = json.length;
 				if (dataLength >= 1) {
 					var list = "";
-					for (i = 0; i < dataLength - 8; i++) {		// 임시 지정 - 등록된 총 20영화에서 -8한 12번 까지의 영화만 보여줌 (box_office 이미지)
+					for (i = 0; i < dataLength; i++) {		// 오늘 날짜 or 이전 (상영중)
 						list += "<li>";
 						/* movie-list-info */
 						list += "<div class='movie-list-info'>";
@@ -85,14 +85,14 @@
 			});			
 		/* // box-office-list (박스오피스 리스트) */
 		
-		/* commingsoon-list (상영예정작 리스트 - 영화번호 13번부터~) */
+		/* commingsoon-list (상영예정작 리스트) */
 		var contextPath = "${contextPath}";
-		$.get(contextPath + "/api/movies",
+		$.get(contextPath + "/api/movies/commingSoon",
 			function(json) {
 				var dataLength = json.length;
 				if (dataLength >= 1) {
 					var list = "";
-					for (i = 12; i < dataLength; i++) {		// 임시 지정 - 등록된 총 20영화에서 12번 부터의 영화만 보여줌 (commingsoon 이미지)
+					for (i = 0; i < dataLength; i++) {		// 오늘 날짜 이후 (상영예정)
 						list += "<li>";
 						/* movie-list-info */
 						list += "<div class='movie-list-info'>";
