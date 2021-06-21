@@ -87,9 +87,21 @@
 						$("tbody").empty();
 						$("tbody").append(list);
 					}
+					
+					var page = Math.ceil(dataLength / 10);
+					console.log(page);
+					var pageBtn = "";
+
+					for (i = 1; i < page + 1; i++) {
+						pageBtn += "<a title=" + i
+								+ "페이지보기 href=\"noticelist?selectPage=" + i
+								+ "\">" + i + "</a>"; // 더 좋은 방법이 있을 거야....
+					}
+					$("nav.pagination").empty();
+					$("nav.pagination").append(pageBtn);
 				},
 				error : function(){
-					console.log("error > " + response);
+					console.log("error > ");
 				}
 				
 			});
