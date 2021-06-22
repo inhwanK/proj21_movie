@@ -39,11 +39,11 @@
 		where c.com_no = #{comNo}
 	</select>
 	
-	<!-- <select id="selectCommentAvgStar" resultMap="resComment" resultType="Comment">	나중에 처리할 예정
-		select round(avg(com_star), 1) 
-			from comment c join movie m on c.mov_no = m.mov_no 
-		 where m.mov_no = #{movNo.movNo}
-	</select> -->
+	<select id="selectCommentAvgStar" resultMap="resComment">
+		select ifnull(round(avg(com_star), 1), 0) as com_star
+			from comment
+		 where mov_no = #{movNo}
+	</select>
 	
 	<insert id="insertComment">
 		insert into comment values 
