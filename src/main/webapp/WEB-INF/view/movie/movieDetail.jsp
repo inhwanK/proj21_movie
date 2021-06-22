@@ -294,9 +294,9 @@
 						<!-- info -->
 						<div class="info">
 							<div class="score">
-								<p class="title">실관람 평점</p>
+								<p class="title">평균 별점</p>
 								<div class="number">
-									<p title="실관람 평점" class="before">
+									<p title="평균 별점" class="before">
 										<em></em>
 										<span>점</span>
 									</p>
