@@ -5,8 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>영화 상세정보</title>
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">	<!-- 파비콘 오류 메세지 해결 -->
+	<meta charset="UTF-8">
+	<title>영화 상세정보</title>
 	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
 	<link rel="stylesheet" href="${contextPath}/resources/css/movie/movieDetail.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/movie/star/fontawesome-stars.css">
@@ -19,7 +20,8 @@
     <script src="${contextPath}/resources/js/star/jquery.barrating.min.js"></script>	
 	<script>
 		$(function() {
-			$(".btn li").click(function() {
+			$(".btn li").click(function(e) {
+				e.preventDefault();
 				$(this).addClass("active");
 				$(this).siblings().removeClass("active");
 	
@@ -76,7 +78,7 @@
 						// title += "<p class='title-eng'>" + 'Cruella' + "</p>";		// 영어 제목 컬럼 미지정
 						
 						/* 실시간 평점 (영화 평균 평점) */		
-						avgStar += json.movAvgstar;			// 영화 한줄평 추가시 평점 반영하여 업뎃 하기는 아직 미 구현
+						//avgStar += json.movAvgstar;			// 영화 한줄평 추가시 평점 반영하여 업뎃 하기는 아직 미 구현
 						
 						/* 영화 포스터 */
 						poster += "<p class='movie-grade age-" + json.movGrade + "'></p>";	
@@ -103,10 +105,25 @@
 						
 					$(".movie-detail-page .movie-bg").append(bg);
 					$(".movie-detail-cont").append(title);
-					$(".number em").append(avgStar);
+					
 					$(".poster .wrap").append(poster);
 					$(".movie-info-list").append(sCont);
 			});
+			
+			/* 실시간 평점 (영화 평균 평점) */	
+			var movNo = "${movNo}";
+			$.get(contextPath+"/api/comments/avgstar/" + movNo,
+				function(json) {	
+					var dataLength = json.length;
+					if (dataLength >= 1) {
+						var avgStar = "";		
+						for (i = 0; i < dataLength; i++) {
+							avgStar += json[i].comStar;
+						}				
+						$(".number em").append(avgStar);
+					}
+				});	
+			
 			/* // 주요정보 탭 */
 			
 			/* 실관람평  탭 */
@@ -154,8 +171,7 @@
 						$("#comment-count .font-gblue").append(size);
 						$(".movie-comment ul").append(sCont);
 					}
-					
-					
+								
 				});
 			
 			/* ajax */
@@ -190,7 +206,7 @@
 					var pa = $(this).parent().parent();
 					var ch = pa.children().children();
 					var comNo = ch.eq(2).text();
-					alert(comNo);	
+					// alert(comNo);	
 				    
 					/* 팝업 중앙에 띄우기 */
 				    function PopupCenter(url, title, w, h) {  
