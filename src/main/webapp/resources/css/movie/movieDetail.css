@@ -503,7 +503,7 @@ h3.title {
 	border-radius: 10px;
 }
 
-.movie-detail-cont .screen-type {
+.screen-type {
 	overflow: hidden;
 	display: block;
 	position: absolute;
@@ -535,6 +535,10 @@ h3.title {
 	background-color: #329eb1;
 	margin: 0 0 40px 60px;
 	border-radius: 5px !important;
+}
+
+.movie-detail-cont .screen-type .btn.reserve:hover {
+	background-color: #2d8c9d;
 }
 
 .movie-detail-page.fixed {

@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">	<!-- 파비콘 오류 메세지 해결 -->
 	<meta charset="UTF-8">
 	<title>극장 상세정보</title>
 	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
@@ -12,7 +13,8 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(function(){
-			$(".btn li").click(function(){ 
+			$(".btn li").click(function(e){
+				e.preventDefault();
 				$(this).addClass("active");
 				$(this).siblings().removeClass("active"); 
 							

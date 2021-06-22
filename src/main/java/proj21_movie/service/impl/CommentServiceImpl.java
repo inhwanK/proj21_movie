@@ -46,11 +46,12 @@ public class CommentServiceImpl implements CommentService {
 		return mapper.selectCommentByComNo(comNo);
 	}
 
-//	@Override
-//	public Comment getCommentAvgStar(Comment comment) {
-//		log.debug("service - getCommentAvgStar() > " + comment);
-//		return mapper.selectCommentAvgStar(comment);
-//	}
+	@Override
+	public List<Comment> getCommentAvgStar(Movie movNo) {
+		List<Comment> list = mapper.selectCommentAvgStar(movNo);
+		log.debug("service - getCommentAvgStar() > " + list.size());
+		return mapper.selectCommentAvgStar(movNo);
+	}
 
 	@Override
 	public int registComment(Comment comment) {

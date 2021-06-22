@@ -4,26 +4,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">	<!-- 파비콘 오류 메세지 해결 -->
 	<meta charset="UTF-8">
 	<title>영화리스트</title>
 	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
 	<link rel="stylesheet" href="${contextPath}/resources/css/movie/boxOffice.css">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">	
 	<script>
 	$(function(){
-		$(".btn li").click(function(){ 
+		$(".btn li").click(function(e){
+			e.preventDefault();
 			$(this).addClass("active");
 			$(this).siblings().removeClass("active"); 
-			
-			
+					
 			$(".movie-list > div").removeClass("active");
 			$(".movie-list > div").eq($(this).index()).addClass("active");
 		});
 	
-		$(".btn-like").click(function(){ 
-			$(".like").toggleClass("active");
-		});
 	});
 	</script>
 	<script>
@@ -45,7 +43,7 @@
 						list += "<li>";
 						/* movie-list-info */
 						list += "<div class='movie-list-info'>";
-						list += "<p class='rank'>" + json[i].movNo +  "</p>";	
+						list += "<p id='rank'>" + json[i].movNo +  "</p>";	
 						list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
 						list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
 							+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
@@ -61,21 +59,14 @@
 						
 						/* rate-date */
 						list += "<div class='rate-date'>";
-						list += "<span class='rate'>" + "예매율 26.3%" + "</span>";	/* 예매율 DB에 없음 - 임시 부여 */
 						list += "<span class='date'>개봉일 " + getFormatDate(json[i].movOpendate) + "</span>";						
 						list += "</div>";
 						/* // rate-date */
 						
 						/* btn-util */
-						list += "<div class='btn-util'>";
-						/* btn-like */
-						list += "<button type='button' class='btn-like'>";
-						list += "<span class='like'></span>";
-						list += "<span class='like-quantity'>" + "1.1k" + "</span></button>";	/* 좋아요 수 미구현 - 임시 부여 */						
+						list += "<div class='btn-util'>";					
 						/* movie-reserve */
-						list += "<div class='movie-reserve'>";
-						list += "<a href='#' title='영화 예매하기'>예매</a></div>"
-						list += "</div>";
+						list +=	"<a href='${contextPath}/reserve'><button id='reserve' title='영화 예매하기'>예매</button></a>"
 						/* // btn-util */
 												
 						list += "</li>";	
@@ -96,6 +87,7 @@
 						list += "<li>";
 						/* movie-list-info */
 						list += "<div class='movie-list-info'>";
+						list += "<div id='rank' style ='display:none'>" + json[i].movNo + "</div>"
 						list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
 						list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
 							+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
@@ -111,21 +103,14 @@
 						
 						/* rate-date */
 						list += "<div class='rate-date'>";
-						list += "<span class='rate'>" + "예매율 0%" + "</span>";	/* 예매율 DB에 없음 - 임시 부여 */
 						list += "<span class='date'>개봉일 " + getFormatDate(json[i].movOpendate) + "</span>";						
 						list += "</div>";
 						/* // rate-date */
 						
 						/* btn-util */
-						list += "<div class='btn-util'>";
-						/* btn-like */
-						list += "<button type='button' class='btn-like'>";
-						list += "<span class='like'></span>";
-						list += "<span class='like-quantity'>" + "1.1k" + "</span></button>";	/* 좋아요 수 미구현 - 임시 부여 */						
+						list += "<div class='btn-util'>";					
 						/* movie-reserve */
-						list += "<div class='movie-reserve'>";
-						list += "<a href='#' title='영화 예매하기'>예매</a></div>"
-						list += "</div>";
+						list +=	"<button id='commingSoon'>상영예정</button>"
 						/* // btn-util */
 												
 						list += "</li>";	
@@ -134,6 +119,30 @@
 				}
 			});	
 			/* // commingsoon-list (상영예정작 리스트) */
+			
+			/* 실시간 평점 (영화 평균 평점) */	
+			/* $(document).ready(function(){
+				$(document).on('click', '[class=rate]', function(){
+					var pa = $(this).parent().parent();
+					var ch = pa.children();
+					var movNo = ch.eq(0).text();
+					
+					console.log(movNo);
+				});
+			}); */		// 영화 번호 아직 못찾음 
+			
+
+			$.get(contextPath + "/api/comments/avgstar/" + 1,
+				function(json) {	
+					var dataLength = json.length;
+					if (dataLength >= 1) {
+						var avgStar = "";		
+						for (i = 0; i < dataLength; i++) {
+							avgStar += "<span class='rate'>평균 별점 : " + json[i].comStar; + "</span>";	
+						}				
+						$(".rate-date").prepend(avgStar);
+					}
+				});
 	});	
 	</script>	
 </head>

@@ -7,7 +7,7 @@ public class Comment {
 	private Movie movNo; // 영화번호
 	private String comUser; // 작성자명
 	private String comContent; // 댓글내용
-	private int comStar; // 별점
+	private double comStar; // 별점
 	private LocalDateTime comDate; // 작성일
 
 	public Comment() {
@@ -21,7 +21,7 @@ public class Comment {
 		this.movNo = movNo;
 	}
 
-	public Comment(int comNo, Movie movNo, String comUser, String comContent, int comStar, LocalDateTime comDate) {
+	public Comment(int comNo, Movie movNo, String comUser, String comContent, double comStar, LocalDateTime comDate) {
 		this.comNo = comNo;
 		this.movNo = movNo;
 		this.comUser = comUser;
@@ -62,11 +62,11 @@ public class Comment {
 		this.comContent = comContent;
 	}
 
-	public int getComStar() {
+	public double getComStar() {
 		return comStar;
 	}
 
-	public void setComStar(int comStar) {
+	public void setComStar(double comStar) {
 		this.comStar = comStar;
 	}
 
@@ -83,5 +83,4 @@ public class Comment {
 		return String.format("Comment [comNo=%s, movNo=%s, comUser=%s, comContent=%s, comStar=%s, comDate=%s]", comNo,
 				movNo, comUser, comContent, comStar, comDate);
 	}
-
 }
