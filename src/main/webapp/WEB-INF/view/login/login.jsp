@@ -91,7 +91,7 @@ $(function(){
 						<label class="chbox"> 
 						<input type="checkbox" name="chek_box" value="id_check" id="coki">아이디 저장</label> 
 						<br> 
-						<input class="bt" type="submit" value="로그인" id="selButton" /> 
+						<input class="btn" type="submit" value="로그인" id="selButton" /> 
 						<br><br>
 					<div class="text_h">
 						<a href="#">ID/PW 찾기</a> | <a href="${contextPath}/join">회원가입</a>
