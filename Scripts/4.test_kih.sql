@@ -55,10 +55,19 @@ order by not_no desc;
 
 
 -- 검색기능 쿼리. 아직 적용안함.
-SELECT not_no, not_title, not_date
+@rownum:=@rownum+1 as a ;
+
+SELECT @rownum:=@rownum+1 as a,not_no, not_title, not_date
 FROM notice
-where not_title like concat('%','','%')
+where ((@rownum:=0)=0) and (not_title like concat('%','10','%'))
 order by not_no desc;
 
-where 
+select a.*
+from
+(SELECT @rownum:=@rownum+1 as a,not_no, not_title, not_date
+FROM notice
+where ((@rownum:=0)=0) and (not_title like concat('%','공','%'))
+order by not_no desc) a
+where a between 1 and 10;
+
 
