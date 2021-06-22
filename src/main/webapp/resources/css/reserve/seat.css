@@ -210,6 +210,11 @@ section h2 {
 	cursor: pointer;
 }
 
+.select-seat.active {
+	background-color: RGB(3, 22, 52);
+	color: white;
+}
+
 #seat-info{
 	padding: 10px;
 	width: 340px;

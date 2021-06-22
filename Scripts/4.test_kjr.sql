@@ -101,3 +101,19 @@ from vw_full_showinfo
 where tht_no = 2 and mov_no = 2 and shw_date = '20210621'
 order by shw_starttime;
 
+
+-- 좌석 선택 페이지에서 필요한 것 --------------------------------------------------------------------
+select * from member;
+select * from showinfo;
+select * from movie;
+select * from theater;
+select * from cinema;
+select * from seat;
+select * from reservation;
+
+insert into reservation(res_no, shw_no, mem_no, res_price, res_date, res_adult, res_teen, res_pref) values 
+(null, 42, 1, 20000, now(), 2, 0, 0);
+
+insert into seat(seat_no, res_no, shw_no, seat_rowno, seat_colno) values 
+(null, 7, 42, 1, 2);
+

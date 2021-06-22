@@ -133,7 +133,9 @@
 		var dateIdx = 0;
 		var movieNo = 0;
 		var theaterNo = 0;
+		var time = "";
 		
+		// 날짜 선택했을 시 효과 & 선택된 날짜 인덱스 리턴
 		$(document).on('click', '[class=date]', function(e){
 			e.preventDefault();
 			
@@ -148,6 +150,7 @@
 			dateIdx = idx;
 		});
 		
+		// 영화 선택 시 효과 & 영화 번호 리턴
 		$(document).on('click', '[class=movie]', function(e){
 			e.preventDefault();
 			
@@ -160,6 +163,7 @@
 			movieNo = $(this).children().val();
 		});
 		
+		// 극장 선택 시 효과 & 극장 번호 리턴
 		$(document).on('click', '[class=theater]', function(e){
 			e.preventDefault();
 			
@@ -172,9 +176,10 @@
 			theaterNo = $(this).children().val();
 		});
 		
+		// 시간확인 버튼. 날짜, 영화, 극장으로 찾아서 상영시간을 출력
 		$(document).on('click', '[class=btntime]', function(e){
 			$("#time-select").empty();
-			alert("dateIdx >> " + dateIdx + "\nmovieNo >> " + movieNo + "\ntheaterNo >> " + theaterNo);
+			/* alert("dateIdx >> " + dateIdx + "\nmovieNo >> " + movieNo + "\ntheaterNo >> " + theaterNo); */
 			
  			var contextPath = "${contextPath}";
  			
@@ -198,8 +203,30 @@
 							$("#time-select:last-child").append(sCont);
 						}
 					});
-			});
+		});
 		
+		// 시간 선택 시 효과
+		$(document).on('click', '[class=time]', function(e){
+			e.preventDefault();
+			
+			$(this).addClass("active");
+			$(this).siblings().removeClass("active"); 
+			
+			time = $(this).text();
+			
+		});
+		
+		// 좌석 선택 버튼 기능
+		$(document).on('click', '[class=btn-seat]', function(e){
+			var shwDate = date(dateIdx);
+			alert("shwDate >> " + shwDate + 
+					"\nmovieNo >> " + movieNo + 
+					"\ntheaterNo >> " + theaterNo +
+					"\ntime >> " + time);
+
+		});
+		
+		// 인덱스를 넣으면 해당 인덱스만큼 +된 날짜를 계산하여 "yyyy-MM-dd" 형식으로 리턴해주는 함수 
 		function date(idx){
 			var today = new Date();
 			
