@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">	<!-- 파비콘 오류 메세지 해결 -->
 	<meta charset="UTF-8">
 	<title>전체 극장 리스트</title>
 	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
