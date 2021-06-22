@@ -46,7 +46,7 @@ public class ContextTransaction {
     @Bean
     public Advisor transactionAdviceAdvisor() {
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
-        pointcut.setExpression("execution(public * spring5_webmvc_mybatis_study.service..*Service.*(..))");
+        pointcut.setExpression("execution(public * proj21_movie.service..*Service.*(..))");
         return new DefaultPointcutAdvisor(pointcut, transactionAdvice());
     }
 
