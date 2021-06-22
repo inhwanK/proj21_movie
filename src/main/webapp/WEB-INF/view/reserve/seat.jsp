@@ -1,17 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="<%=request.getContextPath() %>" />
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>좌석 선택</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/seat.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/reserve/seat.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+	<script type="text/javascript">
+		var contextPath = "${contextPath}";
+		var no = ${param.no};
+		
+		$.get(contextPath + "/api/showinfo/" + no,
+			function(json){
+				$("#mov-title").text(json.movNo.movTitle);			
+				$("#mov-date").text("상영일 : " + json.shwDate);
+				$("#mov-time").text("상영시간 : " + json.shwStarttime);
+		});		
+		
+	
+	</script>
 </head>
 <body>
 	<header>
-		<img id="header_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
+		<a href="main" title="박스무비 메인으로 가기">
+			<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png">
+		</a>
 		<div>
 			<a href="#">로그인</a>
 			<a href="#">회원가입</a>
@@ -22,12 +39,12 @@
 	
 	<nav>
 		<ul>
-			<li class="nav"><a href="#">영화</a></li>
-			<li class="nav"><a href="#">예매</a></li>
-			<li class="nav"><a href="#">극장</a></li>
+			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
+			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
+			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
 			<li class="nav"><a href="#">이벤트</a></li>
-			<li class="nav"><a href="#">고객센터</a></li>
-			<li id="mypagebtn"><a href="#"><i class="far fa-user"></i></a></li>
+			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
+			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
 		</ul>
 	</nav>
 	
@@ -46,49 +63,49 @@
 			<div id="count">
 				<span>일반</span>
 				<span>
-					<a href="#"><i class="fas fa-chevron-left"></i></a>
-					<label>0</label> 
-					<a href="#"><i class="fas fa-chevron-right"></i></a>
+					<a href="#" class="countMinus"><i class="fas fa-chevron-left"></i></a>
+					<label id="countAdult">0</label> 
+					<a href="#" class="countPlus"><i class="fas fa-chevron-right"></i></a>
 				</span>
 				<span>청소년</span>
 				<span>
-					<a href="#"><i class="fas fa-chevron-left"></i></a>
-					<label>0</label>
-					<a href="#"><i class="fas fa-chevron-right"></i></a>
+					<a href="#" class="countMinus"><i class="fas fa-chevron-left"></i></a>
+					<label id="countTeen">0</label>
+					<a href="#" class="countPlus"><i class="fas fa-chevron-right"></i></a>
 				</span>
 				<span>우대</span>
 				<span>
-					<a href="#"><i class="fas fa-chevron-left"></i></a>
-					<label>0</label>
-					<a href="#"><i class="fas fa-chevron-right"></i></a>
+					<a href="#" class="countMinus"><i class="fas fa-chevron-left"></i></a>
+					<label id="countPref">0</label>
+					<a href="#" class="countPlus"><i class="fas fa-chevron-right"></i></a>
 				</span>
 			</div>
 
 			<div id="seat-choice">
 
 				<div id="seat-area">
-					<img alt="스크린 이미지" src="<%=request.getContextPath()%>/resources/images/screen.png"> <br> <br>
+					<img alt="스크린 이미지" src="${contextPath}/resources/images/screen.png"> <br> <br>
 					<c:forEach var="row" begin="1" end="5">
 					
 						<!-- 하드코딩 ... 무조건 수정 필요함. -->
 						<c:if test="${row eq 1 }">
-							a 열
+							A 열
 						</c:if>
 						<c:if test="${row eq 2 }">
-							b 열
+							B 열
 						</c:if>
 						<c:if test="${row eq 3 }">
-							c 열
+							C 열
 						</c:if>
 						<c:if test="${row eq 4 }">
-							d 열
+							D 열
 						</c:if>
 						<c:if test="${row eq 5 }">
-							e 열
+							E 열
 						</c:if>
 						<c:forEach var="i" begin="1" end="10">
 						
-							<span>${i }</span>
+							<span class="select-seat">${i }</span>
 							<c:if test="${i % 10 eq 0}">
 								<br>
 							</c:if>
@@ -106,17 +123,23 @@
 
 				<div id="seat-info">
 					<div id="movie-info">
-						<dt>크루엘라</dt>
-						<dd>영화시간 영화시간</dd>
-						<dd>영화정보 영화정보</dd>
+						<dl>
+							<dt id="mov-title"></dt>
+							<dd id="mov-date"></dd>
+							<dd id="mov-time"></dd>
+						</dl>
 					</div>
 					<div id="select-info">
-						<dt>좌석번호</dt>
-						<dd>14</dd>
+						<dl>
+							<dt>좌석번호</dt>
+							<dd></dd>
+						</dl>
 					</div>
 					<div id="price-info">
-						<dt>최종결제금액</dt>
-						<dd>10,000 원</dd>
+						<dl>
+							<dt>결제금액</dt>
+							<dd>0 원</dd>
+						</dl>
 					</div>
 					
 					<div id="button-group"> 
@@ -132,12 +155,58 @@
 	
 	<footer>
 		<div id="content">
-			<img id="footer_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
+			<img id="footer_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png">
 			<div id="textarea">
 				<p>COPYRIGHT © BoxMovie, Inc. All rights reserved</p>
 				<p>대구광역시 서구 서대구로 7길2 (내당동 245-4번지 2층) ARS 053-555-1333</p>
 			</div>
 		</div>
 	</footer>
+	
+	<script type="text/javascript">
+		// 인원 수 늘리기
+		$(document).on('click', '[class=countPlus]', function(e){
+			e.preventDefault();
+			
+			var cnt = Number($(this).prev().text());
+			
+			if (cnt < 5) {
+				$(this).prev().text(cnt+1);
+			}
+		});
+		
+		// 인원 수 줄이기
+		$(document).on('click', '[class=countMinus]', function(e){
+			e.preventDefault();
+			
+			var cnt = Number($(this).next().text());
+
+			if (cnt > 0) {
+				$(this).next().text(cnt-1);
+			}
+		});
+		
+		// 좌석 선택
+		$("#seat-area").on('click', 'span', function(e){
+			var cntAdult = Number($("#countAdult").text());
+			var cntTeen = Number($("#countTeen").text());
+			var cntPref = Number($("#countPref").text());
+			var cntTotal = cntAdult + cntTeen + cntPref; // 선택한 인원 총합
+			
+			var activeLength = $(".select-seat.active").length; // 선택된 좌석 개수
+			
+			/* alert("cntTotal >> " + cntTotal + "\nactiveLength >> " + activeLength); */
+			
+			if (cntTotal <= activeLength) {
+				if ($(this).hasClass("active")){
+					$(this).removeClass("active");
+				} else {
+					alert("관람인원을 확인하세요.");
+				}
+			} else {
+				$(this).toggleClass("active");
+			}
+		});
+	</script>
 </body>
 </html>

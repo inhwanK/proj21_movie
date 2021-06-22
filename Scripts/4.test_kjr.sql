@@ -91,13 +91,44 @@ select * from showinfo;
 select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, cin_type, mov_no, mov_title
 		from vw_full_showinfo
 		where shw_date = '20210621';
-		select * from movie;
+select * from movie;
 insert into showinfo(shw_no, tht_no, cin_no, mov_no, shw_date, shw_starttime, shw_endtime) 
-values (null, 1, 1, 1, '2021-06-22', '20:00:00', 
-addtime('20:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));
+values (null, 1, 1, 1, '2021-06-23', '14:00:00', 
+addtime('14:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));
 
 select shw_starttime 
 from vw_full_showinfo 
 where tht_no = 2 and mov_no = 2 and shw_date = '20210621'
 order by shw_starttime;
+
+select *
+from vw_full_showinfo 
+where tht_no = 1 and mov_no = 1 and shw_date = '20210622' and shw_starttime = '10:00';
+
+
+-- 좌석 선택 페이지에서 필요한 것 --------------------------------------------------------------------
+select * from member;
+select * from showinfo;
+select * from movie;
+select * from theater;
+select * from cinema;
+select * from seat;
+select * from reservation;
+
+insert into reservation(res_no, shw_no, mem_no, res_price, res_date, res_adult, res_teen, res_pref) values 
+(null, 42, 1, 20000, now(), 2, 0, 0);
+
+insert into seat(seat_no, res_no, shw_no, seat_rowno, seat_colno) values 
+(null, 7, 42, 1, 2);
+
+-- 좌석까지 조인 ----------------------------------------------------
+select s.shw_no, s.shw_date, s.shw_starttime, s.shw_endtime, 
+	t.tht_no, t.tht_name, 
+	c.cin_no, c.cin_row, c.cin_col, c.cin_seat, c.cin_type, c.cin_adultprice, c.cin_teenprice, c.cin_prefprice,
+	m.mov_no, m.mov_title,
+	se.res_no, se.seat_rowno, se.seat_colno 
+from showinfo s join theater t on s.tht_no = t.tht_no 
+	join cinema c on s.cin_no = c.cin_no  
+	join movie m on s.mov_no = m.mov_no
+	join seat se on se.shw_no = s.shw_no ;
 

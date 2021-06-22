@@ -281,8 +281,9 @@ section h3 {
 	cursor: pointer;
 }
 
-#btnseatdiv {
-	margin-top: 100px;
+#time-select .time.active {
+	background-color: RGB(3, 22, 52);
+	color: white;
 }
 
 /* footer */

@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="<%=request.getContextPath() %>" />
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>결제</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/payment.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/reserve/payment.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script type="text/javascript">
@@ -23,7 +25,7 @@
 </head>
 <body>
 	<header>
-		<img id="header_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
+		<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png">
 		<div>
 			<a href="#">로그인</a>
 			<a href="#">회원가입</a>
@@ -34,12 +36,12 @@
 	
 	<nav>
 		<ul>
-			<li class="nav"><a href="#">영화</a></li>
-			<li class="nav"><a href="#">예매</a></li>
-			<li class="nav"><a href="#">극장</a></li>
+			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
+			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
+			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
 			<li class="nav"><a href="#">이벤트</a></li>
-			<li class="nav"><a href="#">고객센터</a></li>
-			<li id="mypagebtn"><a href="#"><i class="far fa-user"></i></a></li>
+			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
+			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
 		</ul>
 	</nav>
 	
@@ -72,22 +74,30 @@
 
 			<div id="payment-result">
 				<div id="movie-info">
-					<dt>크루엘라</dt>
-					<dd>영화시간 영화시간</dd>
-					<dd>영화정보 영화정보</dd>
+					<dl>
+						<dt>크루엘라</dt>
+						<dd>영화시간 영화시간</dd>
+						<dd>영화정보 영화정보</dd>
+					</dl>
 				</div>
 				<div id="time-info">
-					<dt>상영관</dt>
-					<dd>대구이시아</dd>
-					<dd>10:00 ~ 12:00</dd>
+					<dl>
+						<dt>상영관</dt>
+						<dd>대구이시아</dd>
+						<dd>10:00 ~ 12:00</dd>
+					</dl>
 				</div>
 				<div id="discount-info">
-					<dt>할인 금액</dt>
-					<dd>1,000 원</dd>
+					<dl>
+						<dt>할인 금액</dt>
+						<dd>1,000 원</dd>
+					</dl>
 				</div>
 				<div id="price-info">
-					<dt>최종결제금액</dt>
-					<dd>9,000 원</dd>
+					<dl>
+						<dt>최종결제금액</dt>
+						<dd>9,000 원</dd>
+					</dl>
 				</div>
 
 				<div id="button-group">
@@ -99,7 +109,7 @@
 	
 	<footer>
 		<div id="content">
-			<img id="footer_ci" alt="브랜드 로고" src="<%=request.getContextPath()%>/resources/images/ci.png">
+			<img id="footer_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png">
 			<div id="textarea">
 				<p>COPYRIGHT © BoxMovie, Inc. All rights reserved</p>
 				<p>대구광역시 서구 서대구로 7길2 (내당동 245-4번지 2층) ARS 053-555-1333</p>

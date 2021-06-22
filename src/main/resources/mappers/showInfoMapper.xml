@@ -13,12 +13,19 @@
 	</resultMap>
 	
 	<select id="selectShowInfoAll" resultMap="resShowInfo">
-		select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, cin_type, mov_no, mov_title
-		from vw_full_showinfo
+		select shw_no, shw_date, shw_starttime, shw_endtime, 
+			tht_no, tht_name, 
+			cin_no, cin_row, cin_col, cin_seat, cin_type, cin_adultprice, cin_teenprice, cin_prefprice, 
+			mov_no, mov_title
+		from vw_full_showinfo 
+		order by shw_no desc
 	</select>
 	
 	<select id="selectShowInfoByNo" resultMap="resShowInfo">
-		select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, cin_type, mov_no, mov_title
+		select shw_no, shw_date, shw_starttime, shw_endtime, 
+			tht_no, tht_name, 
+			cin_no, cin_row, cin_col, cin_seat, cin_type, cin_adultprice, cin_teenprice, cin_prefprice, 
+			mov_no, mov_title
 		from vw_full_showinfo
 		where shw_no = #{shwNo}
 	</select>
@@ -50,10 +57,30 @@
 		where shw_no = #{shwNo}
 	</delete>
 	
-	<select id="selectShowInfoByDate" resultMap="resShowInfo">
+	<!-- <select id="selectShowInfoByDate" resultMap="resShowInfo">
 		select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, cin_type, mov_no, mov_title
 		from vw_full_showinfo
 		where shw_date = #{shwDate} and mov_no = #{movNo.movNo} and tht_no = #{thtNo.thtNo}
+		order by shw_starttime;
+	</select> -->
+	
+	<select id="selectShowInfoByCondition" resultMap="resShowInfo">
+		select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, cin_type, mov_no, mov_title
+		from vw_full_showinfo
+		<where>
+			<if test="shwDate != null">
+				shw_date = #{shwDate}
+			</if>
+			<if test="movNo != null">
+				and mov_no = #{movNo.movNo}
+			</if>
+			<if test="thtNo != null">
+				and tht_no = #{thtNo.thtNo}
+			</if>
+			<if test="shwStarttime != null">
+				and shw_starttime = #{shwStarttime}
+			</if>
+		</where>
 		order by shw_starttime;
 	</select>
 	
