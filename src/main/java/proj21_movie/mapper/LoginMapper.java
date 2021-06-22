@@ -6,5 +6,5 @@ import proj21_movie.dto.RegisterRequest;
 
 @Component
 public interface LoginMapper {
-	RegisterRequest regireqt(String memEmail, String memPasswd);
+	RegisterRequest login(String memEmail, String memPasswd);
 }

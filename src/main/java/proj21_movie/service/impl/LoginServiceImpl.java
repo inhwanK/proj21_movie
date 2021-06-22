@@ -14,7 +14,7 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public RegisterRequest regireqt(String memEmail, String memPasswd) {
-		return logmapper.regireqt(memEmail, memPasswd);
+		return logmapper.login(memEmail, memPasswd);
 	}
 
 }
