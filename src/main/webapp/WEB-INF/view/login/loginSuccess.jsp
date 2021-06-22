@@ -14,9 +14,9 @@
 </head>
 <body>
 	<h1>memLoginOk</h1>
-	ID : ${memEmail}
+	ID : ${loginCommand.memEmail}
 	<br /> 
-	PW : ${memPasswd}
+	PW : ${loginCommand.memPasswd}
 	<br />
 	<a href="${contextPath}/main"> GO Main</a>
 

@@ -68,7 +68,7 @@ $(function(){
 	</nav>
 
 	<section id="loginFormArea">
-		<form action="login" method="POST" id="loginform">
+		<form action="/login" method="POST" id="loginform">
 			<fieldset>
 				<div class="fm_box">
 					<table>
@@ -79,12 +79,12 @@ $(function(){
 						</tr>
 						<tr>
 							<td>
-								<input class="form" type="text" name="id" id="memEmail" placeholder="아이디" required />
+								<input class="form" type="text" name="username" id="memEmail" placeholder="아이디" required />
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<input class="form" type="password" name="passwd" id="memPasswd" placeholder="비밀번호" required />
+								<input class="form" type="password" name="password" id="memPasswd" placeholder="비밀번호" required />
 							</td>
 						</tr>
 					</table>
