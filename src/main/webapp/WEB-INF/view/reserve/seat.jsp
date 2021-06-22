@@ -10,10 +10,25 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/reserve/seat.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+	<script type="text/javascript">
+		var contextPath = "${contextPath}";
+		var no = ${param.no};
+		
+		$.get(contextPath + "/api/showinfo/" + no,
+			function(json){
+				$("#mov-title").text(json.movNo.movTitle);			
+				$("#mov-date").text("상영일 : " + json.shwDate);
+				$("#mov-time").text("상영시간 : " + json.shwStarttime);
+		});		
+		
+	
+	</script>
 </head>
 <body>
 	<header>
-		<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png">
+		<a href="main" title="박스무비 메인으로 가기">
+			<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png">
+		</a>
 		<div>
 			<a href="#">로그인</a>
 			<a href="#">회원가입</a>
@@ -109,21 +124,21 @@
 				<div id="seat-info">
 					<div id="movie-info">
 						<dl>
-							<dt>크루엘라</dt>
-							<dd>영화시간 영화시간</dd>
-							<dd>영화정보 영화정보</dd>
+							<dt id="mov-title"></dt>
+							<dd id="mov-date"></dd>
+							<dd id="mov-time"></dd>
 						</dl>
 					</div>
 					<div id="select-info">
 						<dl>
 							<dt>좌석번호</dt>
-							<dd>14</dd>
+							<dd></dd>
 						</dl>
 					</div>
 					<div id="price-info">
 						<dl>
-							<dt>최종결제금액</dt>
-							<dd>10,000 원</dd>
+							<dt>결제금액</dt>
+							<dd>0 원</dd>
 						</dl>
 					</div>
 					

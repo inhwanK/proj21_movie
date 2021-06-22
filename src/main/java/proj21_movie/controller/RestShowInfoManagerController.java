@@ -67,9 +67,9 @@ public class RestShowInfoManagerController {
 		return ResponseEntity.ok(service.removeShowInfo(new ShowInfo(no)));
 	}
 	
-	@GetMapping("/showinfobydate/{movNo}/{thtNo}/{shwDate}")
-	public ResponseEntity<Object> showInfoListByDate(@PathVariable int movNo, @PathVariable int thtNo, @PathVariable String shwDate){
-		System.out.println("showInfoListByDate()");
+	@GetMapping("/showinfobycondition/{movNo}/{thtNo}/{shwDate}")
+	public ResponseEntity<Object> showInfoListByCondition(@PathVariable int movNo, @PathVariable int thtNo, @PathVariable String shwDate){
+		System.out.println("showInfoListByCondition()");
 		
 		ShowInfo showInfo = new ShowInfo();
 		showInfo.setMovNo(new Movie(movNo));
@@ -78,6 +78,6 @@ public class RestShowInfoManagerController {
 		LocalDate shwLocalDate = LocalDate.parse(shwDate, DateTimeFormatter.ISO_DATE);
 		showInfo.setShwDate(shwLocalDate);
 		
-		return ResponseEntity.ok(service.getListsByDate(showInfo));
+		return ResponseEntity.ok(service.getListsByCondition(showInfo));
 	}
 }

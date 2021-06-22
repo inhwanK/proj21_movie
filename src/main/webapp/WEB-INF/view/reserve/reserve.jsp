@@ -130,16 +130,18 @@
 	</footer>
 	
 	<script type="text/javascript">
+		var contextPath = "${contextPath}";
 		var dateIdx = 0;
 		var movieNo = 0;
 		var theaterNo = 0;
 		var time = "";
+		var showInfoNo = 0;
 		
 		// 날짜 선택했을 시 효과 & 선택된 날짜 인덱스 리턴
-		$(document).on('click', '[class=date]', function(e){
+		$("#calendar").on('click', 'a', function(e){
 			e.preventDefault();
 			
-			$(this).addClass("active");
+			$(this).toggleClass("active");
 			$(this).parent().siblings().children().removeClass("active"); 
 			
 			/* alert($(this).text()); */
@@ -151,10 +153,10 @@
 		});
 		
 		// 영화 선택 시 효과 & 영화 번호 리턴
-		$(document).on('click', '[class=movie]', function(e){
+		$("#movie-list").on('click', 'a', function(e){
 			e.preventDefault();
 			
-			$(this).addClass("active");
+			$(this).toggleClass("active");
 			$(this).parent().siblings().children().removeClass("active"); 
 			
 			/* alert($(this).text()); */
@@ -164,10 +166,10 @@
 		});
 		
 		// 극장 선택 시 효과 & 극장 번호 리턴
-		$(document).on('click', '[class=theater]', function(e){
+		$("#theater-list").on('click', 'a', function(e){
 			e.preventDefault();
 			
-			$(this).addClass("active");
+			$(this).toggleClass("active");
 			$(this).parent().siblings().children().removeClass("active"); 
 			
 			/* alert($(this).text()); */
@@ -185,7 +187,7 @@
  			
  			var shwDate = date(dateIdx);
  			
-			$.get(contextPath + "/api/showinfobydate/" + movieNo + "/" + theaterNo + "/" + shwDate,
+			$.get(contextPath + "/api/showinfobycondition/" + movieNo + "/" + theaterNo + "/" + shwDate,
 					function(json) {
 						var dataLength = json.length;
 						if (dataLength >= 1) {
@@ -198,6 +200,7 @@
 								sCont += "<span class='time'>";
 								sCont += json[i].shwStarttime;
 								sCont += "</span>";
+								sCont += "<input type='hidden' value='" + json[i].shwNo + "'/>";
 							}
 							sCont += "<br><br><br><button id='btn-seat' class='btn-seat'>좌석 선택</button>";
 							$("#time-select:last-child").append(sCont);
@@ -213,7 +216,7 @@
 			$(this).siblings().removeClass("active"); 
 			
 			time = $(this).text();
-			
+			showInfoNo = $(this).next().val();
 		});
 		
 		// 좌석 선택 버튼 기능
@@ -223,7 +226,8 @@
 					"\nmovieNo >> " + movieNo + 
 					"\ntheaterNo >> " + theaterNo +
 					"\ntime >> " + time);
-
+			
+			window.location.href = contextPath + "/seat?no=" + showInfoNo;
 		});
 		
 		// 인덱스를 넣으면 해당 인덱스만큼 +된 날짜를 계산하여 "yyyy-MM-dd" 형식으로 리턴해주는 함수 
