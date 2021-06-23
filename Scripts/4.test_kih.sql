@@ -71,3 +71,29 @@ order by not_no desc) a
 where a between 1 and 10;
 
 
+set @rownum:=0;
+
+-- 서브 쿼리 (@rownum:=0)=0 
+select not_no ,not_title ,not_date, rownum
+from 
+(select not_no, not_title, not_date, @rownum:=@rownum+1 as rownum
+from notice
+where (@rownum:=0)=0 and not_title like concat('%','공','%')
+order by not_no desc) as search
+having rownum >= 21 and rownum <= 30;
+
+-- 서브 쿼리 (@rownum:=0)=0 
+select not_no ,not_title ,not_date ,rownum 
+from 
+(select not_no, not_title, not_date, @rownum:=@rownum+1 as rownum
+from notice
+where (@rownum:=0)=0 and not_title like concat('%','공','%')
+order by not_no desc) as search
+having rownum >= (#{selectPage}-1)*10 + 1 and rownum <= #{selectPage} * 10;
+
+
+select not_no, not_title, not_date, @rownum:=@rownum+1 as rownum
+			from notice
+			where (@rownum:=0)=0 and not_title like concat('%','3','%')
+			order by not_no desc;
+

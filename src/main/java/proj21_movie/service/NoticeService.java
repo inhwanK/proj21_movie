@@ -11,7 +11,7 @@ public interface NoticeService {
 	
 	List<Notice> showNoticeList();
 	List<Notice> showNoticeListByPage(int selectPage); // 파라미터가 더 필요할 듯.
-	List<Notice> showNoticeByTitle(String notTitle); // 제목 검색. 아직 구현안함.
+	List<Notice> showNoticeByTitle(String notTitle, int selectPage); // 제목 검색. 아직 구현안함.
 	
 	Notice showNoticeDetail(int notNo);
 	
