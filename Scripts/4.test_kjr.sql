@@ -121,7 +121,7 @@ insert into reservation(res_no, shw_no, mem_no, res_price, res_date, res_adult, 
 insert into seat(seat_no, res_no, shw_no, seat_rowno, seat_colno) values 
 (null, 7, 42, 1, 2);
 
--- 좌석까지 조인 ----------------------------------------------------
+-- 좌석 ---------------------------------------------------------------------------
 select s.shw_no, s.shw_date, s.shw_starttime, s.shw_endtime, 
 	t.tht_no, t.tht_name, 
 	c.cin_no, c.cin_row, c.cin_col, c.cin_seat, c.cin_type, c.cin_adultprice, c.cin_teenprice, c.cin_prefprice,
@@ -132,3 +132,18 @@ from showinfo s join theater t on s.tht_no = t.tht_no
 	join movie m on s.mov_no = m.mov_no
 	join seat se on se.shw_no = s.shw_no ;
 
+select seat_no, res_no, shw_no, seat_rowno, seat_colno 
+from seat
+where shw_no = 46;
+
+select * from showinfo;
+select * from reservation;
+select * from seat;
+
+select * from showinfo where shw_no = 46;
+
+insert into reservation(res_no, shw_no, mem_no, res_price, res_date, res_adult, res_teen, res_pref) values 
+(null, 46, 1, 20000, now(), 2, 0, 0);
+
+insert into seat(seat_no, res_no, shw_no, seat_rowno, seat_colno) values 
+(null, 8, 46, 1, 1);

@@ -6,6 +6,13 @@ public class Seat {
 	private ShowInfo shwNo;		// 상영정보 번호
 	private int seatRowNo;		// 행 번호
 	private int seatColNo;		// 열 번호
+	
+	public Seat() {
+	}
+	
+	public Seat(int seatNo) {
+		this.seatNo = seatNo;
+	}
 
 	public int getSeatNo() {
 		return seatNo;

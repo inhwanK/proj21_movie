@@ -15,6 +15,10 @@ public class Reservation {
 	
 	public Reservation() {
 	}
+	
+	public Reservation(int resNo) {
+		this.resNo = resNo;
+	}
 
 	public int getResNo() {
 		return resNo;

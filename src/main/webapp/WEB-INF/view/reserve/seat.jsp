@@ -89,19 +89,19 @@
 					
 						<!-- 하드코딩 ... 무조건 수정 필요함. -->
 						<c:if test="${row eq 1 }">
-							A 열
+							A 
 						</c:if>
 						<c:if test="${row eq 2 }">
-							B 열
+							B 
 						</c:if>
 						<c:if test="${row eq 3 }">
-							C 열
+							C 
 						</c:if>
 						<c:if test="${row eq 4 }">
-							D 열
+							D 
 						</c:if>
 						<c:if test="${row eq 5 }">
-							E 열
+							E 
 						</c:if>
 						<c:forEach var="i" begin="1" end="10">
 						
