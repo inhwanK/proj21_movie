@@ -1,6 +1,5 @@
 package proj21_movie.service;
 
-import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import proj21_movie.dto.Member;
