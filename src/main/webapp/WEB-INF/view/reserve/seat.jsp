@@ -11,17 +11,33 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 	<script type="text/javascript">
-		var contextPath = "${contextPath}";
-		var no = ${param.no};
+		$(function(){
+			var contextPath = "${contextPath}";
+			var no = ${param.no};
+			var row = 0;
+			var col = 0;
+			
+			$.ajax({
+				type:"GET",
+				url: contextPath + "/api/showinfo/" + no,
+				contentType: "application/json; charset=utf-8",
+				async: false,
+				success: function(json){
+					$("#mov-title").text(json.movNo.movTitle);			
+					$("#mov-date").text("상영일 : " + json.shwDate);
+					$("#mov-time").text("상영시간 : " + json.shwStarttime);
+					$("#priceAdult").val(json.cinNo.cinAdultPrice);
+					$("#priceTeen").val(json.cinNo.cinTeenPrice);
+					$("#pricePref").val(json.cinNo.cinPrefPrice);
+					row = json.cinNo.cinRow;
+					col = json.cinNo.cinCol;
+				}
+			});
+			
+			console.log("row >> " + row + ", col >> " + col);
+		});
 		
-		$.get(contextPath + "/api/showinfo/" + no,
-			function(json){
-				$("#mov-title").text(json.movNo.movTitle);			
-				$("#mov-date").text("상영일 : " + json.shwDate);
-				$("#mov-time").text("상영시간 : " + json.shwStarttime);
-		});		
 		
-	
 	</script>
 </head>
 <body>
@@ -66,18 +82,21 @@
 					<a href="#" class="countMinus"><i class="fas fa-chevron-left"></i></a>
 					<label id="countAdult">0</label> 
 					<a href="#" class="countPlus"><i class="fas fa-chevron-right"></i></a>
+					<input type="hidden" id="priceAdult" value="0">
 				</span>
 				<span>청소년</span>
 				<span>
 					<a href="#" class="countMinus"><i class="fas fa-chevron-left"></i></a>
 					<label id="countTeen">0</label>
 					<a href="#" class="countPlus"><i class="fas fa-chevron-right"></i></a>
+					<input type="hidden" id="priceTeen" value="0">
 				</span>
 				<span>우대</span>
 				<span>
 					<a href="#" class="countMinus"><i class="fas fa-chevron-left"></i></a>
 					<label id="countPref">0</label>
 					<a href="#" class="countPlus"><i class="fas fa-chevron-right"></i></a>
+					<input type="hidden" id="pricePref" value="0">
 				</span>
 			</div>
 
@@ -89,19 +108,19 @@
 					
 						<!-- 하드코딩 ... 무조건 수정 필요함. -->
 						<c:if test="${row eq 1 }">
-							A 열
+							A 
 						</c:if>
 						<c:if test="${row eq 2 }">
-							B 열
+							B 
 						</c:if>
 						<c:if test="${row eq 3 }">
-							C 열
+							C 
 						</c:if>
 						<c:if test="${row eq 4 }">
-							D 열
+							D 
 						</c:if>
 						<c:if test="${row eq 5 }">
-							E 열
+							E 
 						</c:if>
 						<c:forEach var="i" begin="1" end="10">
 						
@@ -138,12 +157,12 @@
 					<div id="price-info">
 						<dl>
 							<dt>결제금액</dt>
-							<dd>0 원</dd>
+							<dd><span id="price">0</span> 원</dd>
 						</dl>
 					</div>
 					
 					<div id="button-group"> 
-						<span id="before">이전</span>
+						<!-- <span id="before">이전</span> -->
 						<span id="next">다음</span>
 					</div>
 					</div>
@@ -169,9 +188,12 @@
 			e.preventDefault();
 			
 			var cnt = Number($(this).prev().text());
+			var price = Number($(this).next().val());
+			var resPrice = Number($("#price").text());
 			
 			if (cnt < 5) {
 				$(this).prev().text(cnt+1);
+				$("#price").text(price + resPrice);
 			}
 		});
 		
@@ -180,9 +202,12 @@
 			e.preventDefault();
 			
 			var cnt = Number($(this).next().text());
+			var price = Number($(this).next().next().next().val());
+			var resPrice = Number($("#price").text());
 
 			if (cnt > 0) {
 				$(this).next().text(cnt-1);
+				$("#price").text(resPrice - price);
 			}
 		});
 		

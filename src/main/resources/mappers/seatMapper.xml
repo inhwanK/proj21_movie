@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="proj21_movie.mapper.SeatMapper">
+
+	<resultMap type="Seat" id="resSeat">
+		<id column="seat_no" property="seatNo" />
+		<association property="resNo" javaType="Reservation"></association>
+		<association property="shwNo" javaType="ShowInfo"></association>
+	</resultMap>
+
+	<select id="selectSeatByShowInfoNo" resultMap="resSeat">
+		select seat_no, res_no, shw_no, seat_rowno, seat_colno 
+		from seat
+		where shw_no = #{shwNo.shwNo};
+	</select>
+	
+	<insert id="insertSeat">
+		insert into seat(seat_no, res_no, shw_no, seat_rowno, seat_colno) values 
+		(null, #{resNo.resNo}, #{shwNo.shwNo}, #{seatRowNo}, #{seatColNo})
+		<selectKey keyProperty="seatNo" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<delete id="deleteSeat">
+		delete from seat
+		where seat_no = #{seatNo}
+	</delete>
+</mapper>
