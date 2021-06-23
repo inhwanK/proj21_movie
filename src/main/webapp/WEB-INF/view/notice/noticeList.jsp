@@ -20,9 +20,43 @@
 		var totalNotice = "${totalNotice}";
 		var page = Math.ceil(totalNotice / 10);
 		var selectPage = "${selectPage}";
+		var notTitle = "${notTitle}";
+		$.ajax({
+			url:contextPath+"/api/noticesearch?notTitle="+notTitle+"&selectPage="+selectPage,
+			type:"post",
+			contentType:"application/json; charset=utf-8",
+			dataType: "json",
+			/* data : json, */
+			success: function(json) {
+				var dataLength = json.length;
+				
+				if (dataLength >= 1) {
+					var list = "";
+					for (i = 0; i < dataLength; i++) {
+						list += "<tr>";
+						list += "<td>" + json[i].notNo + "</td>";
+						list += "<td><a href='${contextPath}/notice?notNo="
+								+ json[i].notNo + "'>" + json[i].notTitle
+								+ "</a></td>"; //보여주면 안될 것 같은 정보.
+						list += "<td>" + getFormatDate(json[i].notDate) + "</td>";
+						list += "<tr>"
+					}
+					$("tbody").append(list);
+				}
+
+				var pageBtn = "";
+
+				for (i = 1; i < page + 1; i++) {
+					pageBtn += "<a title=" + i
+							+ "페이지보기 href=\"noticelist?selectPage=" + i
+							+ "\">" + i + "</a>"; // 더 좋은 방법이 있을 거야....
+				}
+				$("nav.pagination").append(pageBtn);
+			}
+		});
 		
 
-		$.get(contextPath + "/api/noticelist/"+selectPage,
+		/* $.get(contextPath + "/api/noticelist/"+selectPage,
 				function(json) {
 
 					var dataLength = json.length;
@@ -48,10 +82,14 @@
 								+ "\">" + i + "</a>"; // 더 좋은 방법이 있을 거야....
 					}
 					$("nav.pagination").append(pageBtn);
-				});
+				}); */
 
+				
 		// 이벤트 등록
-		$("#searchBtn").on("click", function(){
+		/*
+		$("#searchBtn").on("click", search());
+		
+		function search(){
 			//var notTitle = $("#searchTxt").val();
 			var notTitle = $("#searchTxt").serialize();
 			console.log($("#searchTxt").val());
@@ -71,9 +109,6 @@
 					console.log(json);
 					
 					var dataLength = json.length;
-					
-					
-					
 					
 					if (dataLength >= 1) {
 						var list = "";
@@ -105,9 +140,12 @@
 				error : function(){
 					console.log("error > ");
 				}
-				
 			});
-		});
+		}
+		*/
+		
+		
+		
 	});
 </script>
 

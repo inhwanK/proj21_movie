@@ -15,17 +15,19 @@ public class NoticeController {
 	private NoticeService service;
 
 	@GetMapping("/notice")
-	public ModelAndView notice(@RequestParam(value = "notNo") int notNo) {
+	public ModelAndView notice(int notNo) { // @RequestParam 삭제함.
 		ModelAndView mav = new ModelAndView("notice/noticeDetail", "notNo", notNo);
 		return mav;
 	}
 	
-	@GetMapping("/noticelist") 
-	public ModelAndView noticeList(@RequestParam(required = false, defaultValue = "1") int selectPage) {
+	@GetMapping("/noticelist") // post 하면 좋을 듯?
+	public ModelAndView noticeList(@RequestParam(required = false, defaultValue = "1") int selectPage, 
+									@RequestParam(required = false, defaultValue = "") String notTitle) {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("totalNotice", service.getTotalNotice()); // 페이지 개수 세기.
 		mav.addObject("selectPage", selectPage); // 선택된 페이지 값.
+		mav.addObject("notTitle", notTitle);
 		mav.setViewName("notice/noticeList");
 		return mav;
 	}
