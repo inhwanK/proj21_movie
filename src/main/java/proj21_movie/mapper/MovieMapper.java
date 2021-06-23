@@ -15,6 +15,9 @@ public interface MovieMapper {
 	// 상영예정작
 	List<Movie> selectMovieCommingSoon();
 	
+	// 영화 제목으로 검색
+	List<Movie> selectMovieByTitle(String movTitle); 
+	
 	int insertMovie(Movie movie);
 	int updateMovie(Movie movie);
 	int deleteMovie(Movie movie);
