@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -57,6 +58,13 @@ public class RestMovieManagerController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		return ResponseEntity.ok(movie);
+	}
+	
+	// 검색
+	@GetMapping("/moviesearch")
+	public ResponseEntity<Object> movieSearch(@RequestParam(value = "movTitle") String movTitle) {
+		List<Movie> movieSearch = service.getMovieByTitle(movTitle);
+		return ResponseEntity.status(HttpStatus.OK).body(movieSearch);
 	}
 	
 	@PostMapping("/movies")

@@ -45,6 +45,13 @@
 		 where mov_no = #{movNo}
 	</select>
 	
+	<select id="selectCommentBoxOfficeAvgStarAll" resultMap="resComment">
+		select m.mov_no, m.mov_title, ifnull(round(avg(c.com_star), 1), 0) as com_star
+			from comment c join movie m on c.mov_no = m.mov_no
+		 where m.mov_opendate &lt;= now() and mov_enddate &gt; date_add(now(), interval -1 day)
+		group by m.mov_no
+	</select>
+	
 	<insert id="insertComment">
 		insert into comment values 
 		(null, #{movNo.movNo}, #{comUser}, #{comContent}, #{comStar}, now())

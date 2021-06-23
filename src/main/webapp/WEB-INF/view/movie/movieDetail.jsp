@@ -177,13 +177,14 @@
 			/* ajax */
 			$('#writeBtn').on("click", function(e){
 				var movNo = "${movNo}";
+				var user = $('#user').val();
 				var newComment = { movNo: movNo, 
 									comUser : $('#user').val(), 
 									comContent: $('#contxt').val(),
 									comStar : $('.com-star').val()
 								};
 				
-				$.ajax({
+	 			$.ajax({
 					url 		: contextPath + "/api/comments/",
 					type 		: "POST",
 					contentType : "application/json; charset=utf-8",
@@ -191,8 +192,14 @@
 					cache 		: false,
 					data 		: JSON.stringify(newComment),
 					success 	: function(res) {
-						alert(newComment.comUser + "님의 한줄평이 등록되었습니다.");
-						location.reload();
+						if(user != ""){
+							alert(newComment.comUser + "님의 한줄평이 등록되었습니다.");
+							location.reload();
+						} else {
+							
+							alert("권한이 없습니다. 로그인 해주세요.");	// 유저 이메일값이 null일때 post 요청 취소하기는 아직 미구현..
+							window.location.href = contextPath + "/login";
+						}
 					},
 					error : function(request, status, error){
 						alert("code:" + request.status+"\n" + "message:" + request.responseText+"\n" + "error:" + error);
@@ -296,7 +303,7 @@
 							<div class="score">
 								<p class="title">평균 별점</p>
 								<div class="number">
-									<p title="평균 별점" class="before">
+									<p title="평균 별점 " class="before">
 										<em></em>
 										<span>점</span>
 									</p>

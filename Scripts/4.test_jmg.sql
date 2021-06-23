@@ -640,16 +640,46 @@ where m.mov_no = 1;
 
 select ifnull(round(avg(com_star), 1),0) as com_star
 	from comment
- where mov_no = 4; 
+ where mov_no = 3; 
 
 select * from comment where mov_no = 1;
 
--- 영화 실시간 평점 (영화 평균 평점)
+-- 영화 실시간 평점 업데이트 (영화 평균 평점)
 update movie 
 	set mov_avgstar = (select * from (select round(avg(com_star), 1) 
 						from comment c join movie m on c.mov_no = m.mov_no 
 					 where m.mov_no = 1)as a)
  where mov_no = 1;
+
+-- --------------------------------------------------------- 
+
+-- 영화 별 평점 평균 리스트 구하기
+select ifnull(round(avg(com_star), 1),0) as com_star
+	from comment
+ where mov_no = 3; 
+
+select m.mov_no, m.mov_title, c.com_user, c.com_content, c.com_star
+	from comment c join movie m on c.mov_no = m.mov_no ; 
+
+-- 박스 오피스 리스트 (평균 별점은 한줄평 테이블의 별점 평균)
+select m.mov_no, m.mov_title, m.mov_grade, m.mov_genre, m.mov_runtime, m.mov_director, m.mov_actor, m.mov_detail, 		m.mov_opendate, m.mov_enddate, ifnull(round(avg(c.com_star), 1), 0) as com_star, m.mov_poster
+	from comment c right join movie m on c.mov_no = m.mov_no
+ where m.mov_opendate <= now() and m.mov_enddate > date_add(now(), interval -1 day)
+group by m.mov_no;
+
+-- 상영 예정작 리스트 (평균 별점은 한줄평 테이블의 별점 평균)
+select m.mov_no, m.mov_title, m.mov_grade, m.mov_genre, m.mov_runtime, m.mov_director, m.mov_actor, m.mov_detail, 		m.mov_opendate, m.mov_enddate, ifnull(round(avg(c.com_star), 1), 0) as com_star, m.mov_poster
+	from comment c right join movie m on c.mov_no = m.mov_no
+ where m.mov_opendate > now()
+group by m.mov_no;
+
+
+-- 영화 검색 (현재 상영중인 박스오피스 영화만 검색됨)
+select m.mov_no, m.mov_title, m.mov_grade, m.mov_genre, m.mov_runtime, m.mov_director, m.mov_actor, m.mov_detail, 		m.mov_opendate, m.mov_enddate, ifnull(round(avg(c.com_star), 1), 0) as com_star, m.mov_poster
+	from comment c right join movie m on c.mov_no = m.mov_no
+ where m.mov_opendate <= now() and m.mov_enddate > date_add(now(), interval -1 day)
+ 		and mov_title like concat('%', '크', '%')
+group by m.mov_no;
 
 
 		
