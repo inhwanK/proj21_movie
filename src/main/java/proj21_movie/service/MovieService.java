@@ -14,6 +14,10 @@ public interface MovieService {
 	List<Movie> getMovieBoxOffice();
 	// 상영예정작
 	List<Movie> getMovieCommingSoon();
+	
+	// 영화 제목으로 검색
+	List<Movie> getMovieByTitle(String movTitle); 
+	
 	int registerMovie(Movie movie);
 	int modifyMovie(Movie movie);
 	int removeMovie(Movie movie);

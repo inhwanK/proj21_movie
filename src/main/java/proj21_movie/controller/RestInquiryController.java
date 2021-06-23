@@ -60,7 +60,7 @@ public class RestInquiryController {
 			
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
 			File saveFile = new File(uploadFolder, uploadFileName);
-			
+			System.out.println(uploadFolder);
 			try {
 				multipartFile.transferTo(saveFile);
 			}catch(Exception e) {

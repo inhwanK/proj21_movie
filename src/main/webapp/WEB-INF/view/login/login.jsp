@@ -19,7 +19,6 @@
 $(function(){
 	<!-- 회원 로그인 -->
 	var contextPath = "<%= request.getContextPath()%>";
-
 	$('#selButton').on("click", function(e){
         var LoginCommand = {  
         					  memEmail: $('#memEmail').val(), 
@@ -41,7 +40,6 @@ $(function(){
             }
         }); 
     });
-
 });
 </script>
 </head>

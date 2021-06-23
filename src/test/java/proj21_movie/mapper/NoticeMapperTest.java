@@ -80,5 +80,12 @@ public class NoticeMapperTest {
 		int res = mapper.deleteNotice(4); //데이터 row가 공통적으로 3 까지만 들어가 있기 때문에, 4로 값을 고정해놓는게 좋음.
 		Assert.assertEquals(1, res);
 	}
+	
+	@Test
+	public void test07SelectNoticeByTitle() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		List<Notice> listNotice = mapper.selectNoticeByTitle("공", 1);
+		Assert.assertNotNull(listNotice);
+	}
 
 }

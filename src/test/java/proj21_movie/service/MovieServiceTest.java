@@ -73,9 +73,19 @@ public class MovieServiceTest {
 		
 		list.forEach(s -> log.debug(s.toString()));
 	}
+	
+	@Test
+	public void test05GetMovieByTitle() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		List<Movie> list = mapper.selectMovieByTitle("크루");
+		Assert.assertNotNull(list);
+		
+		list.forEach(s -> log.debug(s.toString()));
+	}
 
 	@Test
-	public void test05RegisterMovie() {
+	public void test06RegisterMovie() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		LocalDate start = LocalDate.of(2021, 06, 07);
@@ -86,12 +96,11 @@ public class MovieServiceTest {
 		Assert.assertEquals(1, res);
 		log.debug("res no >> " + res);
 		
-		mapper.deleteMovie(newMovie);
-		
+		mapper.deleteMovie(newMovie);	
 	}
 
 	@Test
-	public void test06ModifyMovie() {
+	public void test07ModifyMovie() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		LocalDate start = LocalDate.of(2021, 06, 17);
@@ -119,7 +128,7 @@ public class MovieServiceTest {
 	}
 
 	@Test
-	public void test07RemoveMovie() {
+	public void test08RemoveMovie() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		LocalDate start = LocalDate.of(2021, 06, 17);

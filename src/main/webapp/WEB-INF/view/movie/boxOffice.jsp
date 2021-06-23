@@ -4,26 +4,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">	<!-- 파비콘 오류 메세지 해결 -->
 	<meta charset="UTF-8">
 	<title>영화리스트</title>
 	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
 	<link rel="stylesheet" href="${contextPath}/resources/css/movie/boxOffice.css">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">	
 	<script>
 	$(function(){
-		$(".btn li").click(function(){ 
+		$(".btn li").click(function(e){
+			e.preventDefault();
 			$(this).addClass("active");
 			$(this).siblings().removeClass("active"); 
-			
-			
+					
 			$(".movie-list > div").removeClass("active");
 			$(".movie-list > div").eq($(this).index()).addClass("active");
 		});
 	
-		$(".btn-like").click(function(){ 
-			$(".like").toggleClass("active");
-		});
 	});
 	</script>
 	<script>
@@ -41,11 +39,14 @@
 				var dataLength = json.length;
 				if (dataLength >= 1) {
 					var list = "";
+					var count = "";
+						count += dataLength + "개";
+					
 					for (i = 0; i < dataLength; i++) {		// 오늘 날짜 or 이전 (상영중)
 						list += "<li>";
 						/* movie-list-info */
 						list += "<div class='movie-list-info'>";
-						list += "<p class='rank'>" + json[i].movNo +  "</p>";	
+						list += "<p id='rank'>" + json[i].movNo +  "</p>";	
 						list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
 						list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
 							+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
@@ -61,26 +62,40 @@
 						
 						/* rate-date */
 						list += "<div class='rate-date'>";
-						list += "<span class='rate'>" + "예매율 26.3%" + "</span>";	/* 예매율 DB에 없음 - 임시 부여 */
-						list += "<span class='date'>개봉일 " + getFormatDate(json[i].movOpendate) + "</span>";						
+						list += "<span class='rate'>평균 별점 : " + json[i].movAvgstar + "</span>";
+						list += "<span class='date'>개봉일 " + getFormatDate(json[i].movOpendate) + "</span>";																		
 						list += "</div>";
 						/* // rate-date */
 						
 						/* btn-util */
-						list += "<div class='btn-util'>";
-						/* btn-like */
-						list += "<button type='button' class='btn-like'>";
-						list += "<span class='like'></span>";
-						list += "<span class='like-quantity'>" + "1.1k" + "</span></button>";	/* 좋아요 수 미구현 - 임시 부여 */						
+						list += "<div class='btn-util'>";					
 						/* movie-reserve */
-						list += "<div class='movie-reserve'>";
-						list += "<a href='#' title='영화 예매하기'>예매</a></div>"
-						list += "</div>";
+						list +=	"<a href='${contextPath}/reserve'><button id='reserve' title='영화 예매하기'>예매</button></a>"
 						/* // btn-util */
 												
 						list += "</li>";	
 					}
+					$(".box-office-list .movie-count b").append(count);
 					$(".box-office-list ul").append(list);
+					
+					// 영화 번호 각각 찾기 못함.. 다른 방법 사용해야 할듯
+					/* var pa = $('.box-office-list ul li').parent();
+					var ch = pa.children();
+					var movNo = ch.eq(1).find('#rank').text();
+					console.log(movNo);		
+					
+					$.get(contextPath + "/api/comments/avgstar/" + movNo,
+						function(json) {	
+							var dataLength = json.length;
+							if (dataLength >= 1) {
+								var avgStar = "";		
+								for (i = 0; i < dataLength; i++) {
+									avgStar += "<span class='rate'>평균 별점 : " + json[i].comStar; + "</span>";	
+								}				
+								$(".rate-date").prepend(avgStar);
+							}
+						}); */
+					
 				}
 			});			
 		/* // box-office-list (박스오피스 리스트) */
@@ -92,10 +107,14 @@
 				var dataLength = json.length;
 				if (dataLength >= 1) {
 					var list = "";
+					var count = "";
+						count += dataLength + "개";
+						
 					for (i = 0; i < dataLength; i++) {		// 오늘 날짜 이후 (상영예정)
 						list += "<li>";
 						/* movie-list-info */
 						list += "<div class='movie-list-info'>";
+						list += "<div id='rank' style ='display:none'>" + json[i].movNo + "</div>"
 						list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
 						list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
 							+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
@@ -111,29 +130,101 @@
 						
 						/* rate-date */
 						list += "<div class='rate-date'>";
-						list += "<span class='rate'>" + "예매율 0%" + "</span>";	/* 예매율 DB에 없음 - 임시 부여 */
+						list += "<span class='rate'>평균 별점 : " + json[i].movAvgstar + "</span>";
 						list += "<span class='date'>개봉일 " + getFormatDate(json[i].movOpendate) + "</span>";						
 						list += "</div>";
 						/* // rate-date */
 						
 						/* btn-util */
-						list += "<div class='btn-util'>";
-						/* btn-like */
-						list += "<button type='button' class='btn-like'>";
-						list += "<span class='like'></span>";
-						list += "<span class='like-quantity'>" + "1.1k" + "</span></button>";	/* 좋아요 수 미구현 - 임시 부여 */						
+						list += "<div class='btn-util'>";					
 						/* movie-reserve */
-						list += "<div class='movie-reserve'>";
-						list += "<a href='#' title='영화 예매하기'>예매</a></div>"
-						list += "</div>";
+						list +=	"<button id='commingSoon'>상영예정</button>"
 						/* // btn-util */
 												
 						list += "</li>";	
 					}
+					$(".commingsoon-list .movie-count b").append(count);
 					$(".commingsoon-list ul").append(list);
 				}
 			});	
-			/* // commingsoon-list (상영예정작 리스트) */
+			
+		/* ajax */
+		$("#btnMovieSearch").on("click", function(){	// 박스 오피스에 들어있는 영화만 검색되도록 함 (상영예정작 탭은 안 바뀌고 검색 안됨)
+			var movTitle = $("#searchMovieName").val();
+			$.ajax({
+				url: contextPath + "/api/moviesearch?movTitle="+movTitle,
+				type:"get",
+				contentType : "application/json; charset=utf-8",
+				dataType: "json",
+				data : movTitle,
+				success : function(json){
+					console.log(movTitle);
+					console.log(json);
+					
+					if (movTitle != '') {  				
+						var dataLength = json.length;
+						if (dataLength >= 1) {
+							var list = "";
+							var count = "";
+								count += dataLength + "개";
+								
+							for (i = 0; i < dataLength; i++) {
+								list += "<li>";
+								/* movie-list-info */
+								list += "<div class='movie-list-info'>";
+								list += "<p id='rank'>" + json[i].movNo +  "</p>";	
+								list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
+								list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
+									+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
+								list += "</div>";
+								/* // movie-list-info */
+								
+								/* title-area */
+								list += "<div class='title-area'>";
+								list += "<p class='movie-grade age-" + json[i].movGrade + "'</p>";	
+								list += "<p class='title' title='" + json[i].movTitle + "'>" + json[i].movTitle + "</p>";	
+								list += "</div>";
+								/* // title-area */
+								
+								/* rate-date */
+								list += "<div class='rate-date'>";
+								list += "<span class='rate'>평균 별점 : " + json[i].movAvgstar + "</span>";
+								list += "<span class='date'>개봉일 " + getFormatDate(json[i].movOpendate) + "</span>";																		
+								list += "</div>";
+								/* // rate-date */
+								
+								/* btn-util */
+								list += "<div class='btn-util'>";					
+								/* movie-reserve */
+								list +=	"<a href='${contextPath}/reserve'><button id='reserve' title='영화 예매하기'>예매</button></a>"
+								/* // btn-util */
+														
+								list += "</li>";	
+							}
+							$(".box-office-list ul").empty();
+							$(".box-office-list ul").append(list);
+							$(".box-office-list .movie-count b").empty();
+							$(".box-office-list .movie-count b").append(count);							
+						}
+					} else if (movTitle == '') {		// 검색 단어를 입력안하고 검색 버튼을 클릭시
+						alert('검색할 영화명을 입력해주세요.');
+						location.reload();
+					} else if (json == null) {		// 검색 했을때 검색된 영화가 없을 경우 (아직 미구현)
+						alert('없음');
+					
+						$(".box-office-list ul").empty();
+						$(".box-office-list .movie-count b").empty();
+						$(".box-office-list .movie-count b").append('0개');
+						$('#noDataDiv').show();
+					}
+				},
+				error : function(){
+					console.log("error > ");
+				}
+				
+			});
+		});
+
 	});	
 	</script>	
 </head>
@@ -174,6 +265,11 @@
 	    	<div class="contents">
 	    		<div class="inner-wrap">
 	    			<h2 class="title">전체영화</h2>
+	    			<!-- 영화 검색 -->
+	    			<div class="movieSearch"> 
+	    				<input type="text" id="searchMovieName" class="input-text" title="검색" placeholder="영화를 검색하세요">
+	    				<button type="button" id="btnMovieSearch"></button>
+	    			</div>
 	    			
 	    			<div class="tab-list">
 	    				<ul class="btn">
@@ -186,70 +282,80 @@
 	    				</ul>
 	    			</div>
 	    				
-	    				<div class="movie-list">
-	    					<!-- 박스오피스 리스트 -->
-							<div class="box-office-list active" >
-								<ul>
-									<%-- <li>
-										<div class="movie-list-info">
-											<p class="rank">1</p>		
-											<a href="movielist/movieDetail/1">
-												<img alt="크루엘라" title="크루엘라 상세보기" 
-												src="${contextPath}/resources/images/movie/box-office/Cruella.jpg">
-											</a>										
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-12"></p>
-											<p class="title" title="크루엘라">크루엘라</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 26.3%</span>
-											<span class="date">개봉일 2021.05.26</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">1.1k</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li> --%>															
-								</ul>		
-							</div>
-							
-							<!-- 상영예정작 리스트 -->
-							<div class="commingsoon-list">
-								<ul>
-									<%-- <li>
-										<div class="movie-list-info">	
-											<a href="#">
-												<img alt="여고괴담 여섯번째 이야기 : 모교" title="여고괴담 여섯번째 이야기 : 모교 상세보기" 
-												src="${contextPath}/resources/images/movie/commingsoon/Quo vadis, Aida.jpg">
-											</a>										
-										</div>
-										<div class="title-area">
-											<p class="movie-grade age-15"></p>
-											<p class="title" title="여고괴담 여섯번째 이야기 : 모교">여고괴담 여섯번째 이야기 : 모교</p>
-										</div>
-										<div class="rate-date">
-											<span class="rate">예매율 0%</span>
-											<span class="date">개봉일 2021.06.17</span>
-										</div>
-										<div class="btn-util">
-											<button type="button" class="btn-like">
-												<span class="like"></span>
-												<span class="like-quantity">68</span>
-											</button>
-											<div class="movie-reserve">
-												<a href="#" title="영화 예매하기">예매</a>
-											</div>
-										</div>
-									</li> --%>															
-								</ul>
-							</div>
+	    			
+	    				
+    				<div class="movie-list">
+    					<!-- 박스오피스 리스트 -->
+						<div class="box-office-list active" >
+						<div class="movie-count"><b></b>의 영화가 검색되었습니다.</div>
+						
+						<!-- 검색결과 없을 때 -->
+						<div class="movie-list-no-result" id="noDataDiv" style="display: none;">
+							<p>현재 상영중인 영화가 없습니다.</p>
 						</div>
+						
+							<ul>
+								<%-- <li>
+									<div class="movie-list-info">
+										<p class="rank">1</p>		
+										<a href="movielist/movieDetail/1">
+											<img alt="크루엘라" title="크루엘라 상세보기" 
+											src="${contextPath}/resources/images/movie/box-office/Cruella.jpg">
+										</a>										
+									</div>
+									<div class="title-area">
+										<p class="movie-grade age-12"></p>
+										<p class="title" title="크루엘라">크루엘라</p>
+									</div>
+									<div class="rate-date">
+										<span class="rate">예매율 26.3%</span>
+										<span class="date">개봉일 2021.05.26</span>
+									</div>
+									<div class="btn-util">
+										<button type="button" class="btn-like">
+											<span class="like"></span>
+											<span class="like-quantity">1.1k</span>
+										</button>
+										<div class="movie-reserve">
+											<a href="#" title="영화 예매하기">예매</a>
+										</div>
+									</div>
+								</li> --%>															
+							</ul>		
+						</div>
+						
+						<!-- 상영예정작 리스트 -->
+						<div class="commingsoon-list">
+						<div class="movie-count"><b></b>의 영화가 검색되었습니다.</div>
+							<ul>
+								<%-- <li>
+									<div class="movie-list-info">	
+										<a href="#">
+											<img alt="여고괴담 여섯번째 이야기 : 모교" title="여고괴담 여섯번째 이야기 : 모교 상세보기" 
+											src="${contextPath}/resources/images/movie/commingsoon/Quo vadis, Aida.jpg">
+										</a>										
+									</div>
+									<div class="title-area">
+										<p class="movie-grade age-15"></p>
+										<p class="title" title="여고괴담 여섯번째 이야기 : 모교">여고괴담 여섯번째 이야기 : 모교</p>
+									</div>
+									<div class="rate-date">
+										<span class="rate">예매율 0%</span>
+										<span class="date">개봉일 2021.06.17</span>
+									</div>
+									<div class="btn-util">
+										<button type="button" class="btn-like">
+											<span class="like"></span>
+											<span class="like-quantity">68</span>
+										</button>
+										<div class="movie-reserve">
+											<a href="#" title="영화 예매하기">예매</a>
+										</div>
+									</div>
+								</li> --%>															
+							</ul>
+						</div>
+					</div>
 						
 	    		</div>
 	    	</div>

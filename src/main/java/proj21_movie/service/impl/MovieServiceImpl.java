@@ -44,6 +44,11 @@ public class MovieServiceImpl implements MovieService {
 		log.debug("service - getMovieCommingSoon() > " + list.size());
 		return list;
 	}
+	
+	@Override
+	public List<Movie> getMovieByTitle(String movTitle) {
+		return mapper.selectMovieByTitle(movTitle);
+	}
 
 	@Override
 	public int registerMovie(Movie movie) {

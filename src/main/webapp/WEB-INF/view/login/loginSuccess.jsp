@@ -13,12 +13,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<h1>memLoginOk</h1>
-	ID : ${loginCommand.memEmail}
-	<br /> 
-	PW : ${loginCommand.memPasswd}
-	<br />
-	<a href="${contextPath}/main"> GO Main</a>
-
+<c:choose>
+		<%-- 로그인 상태면 다른 정보 보여주기 --%>
+		<c:when test="${sessionScope.memberVO != null}">
+			<strong>${sessionScope.memberVO.name}님 로그인 상태</strong><hr>
+		</c:when>
+</c:choose>
 </body>
 </html>

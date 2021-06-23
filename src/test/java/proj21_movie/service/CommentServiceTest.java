@@ -71,25 +71,33 @@ public class CommentServiceTest {
 	public void test04getCommentByComNo() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
-		Comment comment = mapper.selectCommentByComNo(1);
+		Comment comment = mapper.selectCommentByComNo(2);
 		
 		Assert.assertNotNull(comment);
 		log.debug(comment.toString());
 	}
 	
-//	@Test
-//	public void testGetCommentAvgStar() {
-//		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-//		
-//		Comment selComment = new Comment(new Movie(2));
-//		Comment comment = mapper.selectCommentAvgStar(selComment);
-//		
-//		Assert.assertNotNull(selComment);	// comment로 하면 안되지만 selComment로 테스트는 성공 
-//		log.debug(selComment.toString());
-//	}
+	@Test
+	public void test05GetCommentAvgStar() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		List<Comment> list = mapper.selectCommentAvgStar(new Movie(3));
+		Assert.assertNotNull(list);
+		
+		list.forEach(s -> log.debug(s.toString()));
+	}
+	
+	@Test
+	public void test06GetCommentBoxOfficeAvgStarLists() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		List<Comment> list = mapper.selectCommentBoxOfficeAvgStarAll();
+		Assert.assertNotNull(list);
+		
+		list.forEach(s -> log.debug(s.toString()));
+	}
 
 	@Test
-	public void test05RegistComment() {
+	public void test07RegistComment() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		Comment comment = new Comment();
@@ -107,7 +115,7 @@ public class CommentServiceTest {
 	}
 
 	@Test
-	public void test06ModifyComment() {
+	public void test08ModifyComment() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		Comment comment = new Comment(no);
@@ -120,7 +128,7 @@ public class CommentServiceTest {
 	}
 
 	@Test
-	public void test07RemoveComment() {
+	public void test09RemoveComment() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		Comment comment = new Comment(no);

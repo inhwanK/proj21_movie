@@ -32,7 +32,7 @@ public class RestCommentController {
 	
 	@GetMapping("/comments")
 	public ResponseEntity<Object> comments () {
-		System.out.println("cinemas()");
+//		System.out.println("cinemas()");
 		return ResponseEntity.ok(service.getLists());
 	}
 	
@@ -65,16 +65,20 @@ public class RestCommentController {
 		return ResponseEntity.ok(comment);
 	}
 	
+	@GetMapping("/comments/avgstar/{movNo}")	
+	public ResponseEntity<Object> commentAvgStar(@PathVariable int movNo, HttpServletResponse response) {
+		List<Comment> comment = service.getCommentAvgStar(new Movie(movNo));
+		if (comment == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+		return ResponseEntity.ok(comment);
+	}
 	
-	// 아직 미구현 - 나중에 처리할 예정
-//	@GetMapping("/comments/avgstar/{movNo}")	// json으로 받기는 아직 못함		
-//	public ResponseEntity<Object> commentAvgStar(@PathVariable int movNo, HttpServletResponse response) {
-//		Comment comment = service.getCommentAvgStar(new Comment(movNo));
-//		if (comment == null) {
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//		}
-//		return ResponseEntity.ok(comment);
-//	}
+	// 임시
+	@GetMapping("/comments/commentStars")
+	public ResponseEntity<Object> commentStars () {
+		return ResponseEntity.ok(service.getCommentBoxOfficeAvgStarLists());
+	}
 	
 	@PostMapping("/comments")
 	public ResponseEntity<Object> newComment(@RequestBody Comment comment) {

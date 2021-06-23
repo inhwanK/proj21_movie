@@ -17,8 +17,12 @@ public interface CommentMapper {
 	List<Comment> selectCommentByMovNo(Movie movNo);
 	// 기본 한줄평 번호로 검색
 	Comment selectCommentByComNo(int comNo);
+	// 영화 별 한줄평 평균 별점 검색
+	List<Comment> selectCommentAvgStar(Movie movNo);
 	
-//	Comment selectCommentAvgStar(Comment comment);	// 나중에 처리할 예정
+	// 박스오피스 평균 별점 리스트 (임시)
+	List<Comment> selectCommentBoxOfficeAvgStarAll();
+	
 	
 	int insertComment(Comment comment);
 	int updateComment(Comment comment);
