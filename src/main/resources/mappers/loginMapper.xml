@@ -8,10 +8,10 @@
 	</resultMap>
 
 	<select id="login" resultType="loginCommand">
-		select COUNT(*)
+		select mem_no, mem_email, mem_passwd, mem_birthdate, mem_name, mem_phone
 		  from member
 		 where mem_email = #{memEmail}
-		   and mem_passwd = #{memPasswd}
+		   and mem_passwd = password(#{memPasswd})
 	</select>
 
 	<!-- 아이디 중복 검사 
