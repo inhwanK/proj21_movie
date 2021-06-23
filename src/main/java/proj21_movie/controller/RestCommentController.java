@@ -32,7 +32,7 @@ public class RestCommentController {
 	
 	@GetMapping("/comments")
 	public ResponseEntity<Object> comments () {
-		System.out.println("cinemas()");
+//		System.out.println("cinemas()");
 		return ResponseEntity.ok(service.getLists());
 	}
 	
@@ -72,6 +72,12 @@ public class RestCommentController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		return ResponseEntity.ok(comment);
+	}
+	
+	// 임시
+	@GetMapping("/comments/commentStars")
+	public ResponseEntity<Object> commentStars () {
+		return ResponseEntity.ok(service.getCommentBoxOfficeAvgStarLists());
 	}
 	
 	@PostMapping("/comments")

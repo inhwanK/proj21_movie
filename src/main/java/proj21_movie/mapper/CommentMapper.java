@@ -20,6 +20,10 @@ public interface CommentMapper {
 	// 영화 별 한줄평 평균 별점 검색
 	List<Comment> selectCommentAvgStar(Movie movNo);
 	
+	// 박스오피스 평균 별점 리스트 (임시)
+	List<Comment> selectCommentBoxOfficeAvgStarAll();
+	
+	
 	int insertComment(Comment comment);
 	int updateComment(Comment comment);
 	int deleteComment(Comment comment);

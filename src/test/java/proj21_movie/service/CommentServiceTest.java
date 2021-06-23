@@ -78,7 +78,7 @@ public class CommentServiceTest {
 	}
 	
 	@Test
-	public void testGetCommentAvgStar() {
+	public void test05GetCommentAvgStar() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		List<Comment> list = mapper.selectCommentAvgStar(new Movie(3));
@@ -86,9 +86,18 @@ public class CommentServiceTest {
 		
 		list.forEach(s -> log.debug(s.toString()));
 	}
+	
+	@Test
+	public void test06GetCommentBoxOfficeAvgStarLists() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		List<Comment> list = mapper.selectCommentBoxOfficeAvgStarAll();
+		Assert.assertNotNull(list);
+		
+		list.forEach(s -> log.debug(s.toString()));
+	}
 
 	@Test
-	public void test05RegistComment() {
+	public void test07RegistComment() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		Comment comment = new Comment();
@@ -106,7 +115,7 @@ public class CommentServiceTest {
 	}
 
 	@Test
-	public void test06ModifyComment() {
+	public void test08ModifyComment() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		Comment comment = new Comment(no);
@@ -119,7 +128,7 @@ public class CommentServiceTest {
 	}
 
 	@Test
-	public void test07RemoveComment() {
+	public void test09RemoveComment() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		Comment comment = new Comment(no);

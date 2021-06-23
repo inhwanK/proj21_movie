@@ -20,6 +20,9 @@ public interface CommentService {
 	// 영화 별 한줄평 평균 별점 검색
 	List<Comment> getCommentAvgStar(Movie movNo);
 	
+	// 박스오피스 평균 별점 리스트 (임시)
+	List<Comment> getCommentBoxOfficeAvgStarLists();
+	
 	int registComment(Comment comment);
 	int modifyComment(Comment comment);
 	int removeComment(Comment comment);
