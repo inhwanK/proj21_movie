@@ -137,13 +137,14 @@ from seat
 where shw_no = 46;
 
 select * from showinfo;
+select * from vw_full_showinfo where shw_no = 7;
 select * from reservation;
 select * from seat;
 
 select * from showinfo where shw_no = 46;
 
 insert into reservation(res_no, shw_no, mem_no, res_price, res_date, res_adult, res_teen, res_pref) values 
-(null, 46, 1, 20000, now(), 2, 0, 0);
+(null, 7, 1, 20000, now(), 2, 0, 0);
 
 insert into seat(seat_no, res_no, shw_no, seat_rowno, seat_colno) values 
-(null, 8, 46, 1, 1);
+(null, 8, 7, 1, 1);
