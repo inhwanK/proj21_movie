@@ -36,23 +36,6 @@
 							};
 			
 			alert("data > " + newMovie.movTitle);
-
-			$.ajax({
-				url: contextPath + "/api/movies",
-				type: "POST",
-				contentType: "application/json; charset=utf-8",
-				datatype: "json",
-				cache: false,
-				data: JSON.stringify(newMovie),
-				success: function(res){
-					alert(res);
-					window.location.href = contextPath + "/movieManager";
-				},
-				error: function(request, status, error){
-					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-					window.location.href = contextPath + "/movieManager";
-				}
-			});
 			
 			let formData = new FormData();
 			let fileInput = $('input[name="uploadFile"]');
@@ -65,14 +48,15 @@
 				formData.append("uploadFile", fileList[i]);
 			} */
 			
-			/* console.log("fileList : " + fileList);
+			console.log("fileList : " + fileList);
 			console.log("fileObj : " + fileObj);
 			console.log("fileName : " + fileObj.name);
 			console.log("fileSize : " + fileObj.size);
-			console.log("fileType(MimeType) : " + fileObj.type)  */
+			console.log("fileType(MimeType) : " + fileObj.type);
 			
 			$.ajax({
-				url: contextPath + '/api/uploadAjaxAction',
+				url: contextPath + '/api/uploadPoster',
+				enctype: 'multipart/form-data',
 				processData: false,
 				contentType: false,
 				data: formData,
@@ -80,8 +64,29 @@
 				dataType: 'json',
 				success: function(result){
 					console.log(result);
+				}, error: function(e){
+					alert("실패");
 				}
 			});
+
+			$.ajax({
+				url: contextPath + "/api/movies",
+				type: "POST",
+				contentType: "application/json; charset=utf-8",
+				datatype: "json",
+				cache: false,
+				data: JSON.stringify(newMovie),
+				success: function(res){
+					alert(res);
+					/* window.location.href = contextPath + "/movieManager"; */
+				},
+				error: function(request, status, error){
+					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+					/* window.location.href = contextPath + "/movieManager"; */
+				}
+			});
+			
+			
 		});
 	});
 </script>

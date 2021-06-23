@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -73,7 +76,8 @@ public class RestMovieManagerController {
 	}
 	
 	// 업로드 파일 처리
-	@PostMapping(value="/uploadAjaxAction", produces=MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value="/uploadPoster", produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody 
 	public ResponseEntity<List<AttachImage>> uploadAjaxActionPOST(MultipartFile[] uploadFile, HttpServletRequest request) {
 		String upload = request.getSession().getServletContext().getRealPath("/").concat("resources");
 		String imgUploadPath = upload + File.separator + "images" + File.separator + "movie" + File.separator + "box-office";
@@ -99,12 +103,13 @@ public class RestMovieManagerController {
 			// 파일 이름
 			String uploadFileName = multipartFile.getOriginalFilename();
 //			ai.setFileName(uploadFileName);
-//			
-//			// uuid 적용 파일 이름
+			
+			// uuid 적용 파일 이름
 //			String uuid = UUID.randomUUID().toString();
 //			ai.setUuid(uuid);
-//			
+			
 //			uploadFileName = uuid + "_" + uploadFileName;
+//			System.out.println("uploadFileName >> " + uploadFileName);
 			
 			// 파일 위치, 파일 이름은 합친 File 객체
 			File saveFile = new File(uploadPath, uploadFileName);

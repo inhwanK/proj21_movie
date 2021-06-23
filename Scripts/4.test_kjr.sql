@@ -148,3 +148,6 @@ insert into reservation(res_no, shw_no, mem_no, res_price, res_date, res_adult, 
 
 insert into seat(seat_no, res_no, shw_no, seat_rowno, seat_colno) values 
 (null, 8, 7, 1, 1);
+
+select * from movie;
+delete from movie where mov_no > 20;
