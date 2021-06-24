@@ -19,27 +19,11 @@
 $(function(){
 	<!-- 회원 로그인 -->
 	var contextPath = "<%= request.getContextPath()%>";
-	$('#selButton').on("click", function(e){
-        var LoginCommand = {  
-        					  memEmail: $('#memEmail').val(), 
-        				   	  memPasswd: $('#memPasswd').val()
-  						   };
-        $.ajax({
-            url         : contextPath + "/login",
-            type        : "POST",
-            contentType : "application/json; charset=utf-8",
-            datatype    : "json",
-            cache       : false,
-            data        : JSON.stringify(LoginCommand),
-            success     : function(LoginCommand) {
-                window.location.href = contextPath + "/loginSuccess";
-            },
-            error       : function(request, status, error){
-                alert("아이디 또는 비밀번호를 확인해주세요");
-                window.location.href = contextPath + "/loginfail";
-            }
-        }); 
-    });
+	$('#selButton').click(function(){
+        /* 로그인 메서드 서버 요청 */
+        $("#login_form").attr("action", "/login");
+        $("#login_form").submit();
+ 
 });
 </script>
 </head>
@@ -66,7 +50,7 @@ $(function(){
 	</nav>
 
 	<section id="loginFormArea">
-		<form action="/login" method="POST" id="loginform">
+		<form action="login" id="login_form" method="POST">
 			<fieldset>
 				<div class="fm_box">
 					<table>
@@ -77,12 +61,12 @@ $(function(){
 						</tr>
 						<tr>
 							<td>
-								<input class="form" type="text" name="username" id="memEmail" placeholder="아이디" required />
+								<input class="id_input" type="text" name="memEmail" placeholder="아이디" />
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<input class="form" type="password" name="password" id="memPasswd" placeholder="비밀번호" required />
+								<input class="pw_iput" type="password" name="memPasswd" placeholder="비밀번호" />
 							</td>
 						</tr>
 					</table>

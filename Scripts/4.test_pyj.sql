@@ -14,20 +14,10 @@ update `member`
        mem_phone = '010-2231-3232'
  where mem_no = 4;
 
-delete from `member` where mem_no = 71;
+delete from `member` where mem_no = 4;
 
 select mem_email, mem_passwd
   from member
  where mem_email and mem_passwd;
 
-CREATE TABLE login ( 
-                      member_num int(11)  not null auto_increment
-					, id VARCHAR(100) not null
-                    , pw varchar(100) not null
-                    , regdate datetime not null default current_timestamp
-					, PRIMARY KEY(member_num)
-					);
-				
-select member_num, id, pw, regdate
- from login;
 					
