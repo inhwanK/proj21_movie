@@ -4,7 +4,6 @@ import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,9 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,17 +44,26 @@ public class RestMovieManagerController {
 	
 	@GetMapping("/movies/boxOffice")
 	public ResponseEntity<Object> boxOffice(){
-		return ResponseEntity.ok(service.getMovieBoxOffice());
+		return ResponseEntity.ok(service.getMovieBoxOfficeLists());
 	}
 	
 	@GetMapping("/movies/commingSoon")
 	public ResponseEntity<Object> commingSoon(){
-		return ResponseEntity.ok(service.getMovieCommingSoon());
+		return ResponseEntity.ok(service.getMovieCommingSoonLists());
 	}
 	
 	@GetMapping("/movies/{no}")
 	public ResponseEntity<Object> movie(@PathVariable int no, HttpServletResponse response) {
 		Movie movie = service.getMovie(new Movie(no));
+		if (movie == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+		return ResponseEntity.ok(movie);
+	}
+	
+	@GetMapping("/movies/boxOffice/{no}")
+	public ResponseEntity<Object> boxOfficeMovie(@PathVariable int no, HttpServletResponse response) {
+		Movie movie = service.getMovieBoxOffice(new Movie(no));
 		if (movie == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}

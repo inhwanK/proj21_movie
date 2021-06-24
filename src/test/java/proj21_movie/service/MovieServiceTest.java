@@ -59,23 +59,34 @@ public class MovieServiceTest {
 	@Test
 	public void test03GetMovieBoxOffice() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		List<Movie> list = mapper.selectMovieBoxOffice();
-		Assert.assertNotNull(list);
 		
-		list.forEach(s -> log.debug(s.toString()));
+		Movie selMovie = new Movie(14);		// 상영예정작인 15번 영화는 안보임
+		Movie movie = mapper.selectMovieByBoxofficeNo(selMovie);
+		Assert.assertNotNull(movie);
+		
+		log.debug(movie.toString());
 	}
 	
 	@Test
-	public void test04GetMovieCommingSoon() {
+	public void test04GetMovieBoxOfficeLists() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		List<Movie> list = mapper.selectMovieCommingSoon();
+		List<Movie> list = mapper.selectMovieBoxOfficeAll();
 		Assert.assertNotNull(list);
 		
 		list.forEach(s -> log.debug(s.toString()));
 	}
 	
 	@Test
-	public void test05GetMovieByTitle() {
+	public void test05GetMovieCommingSoonLists() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		List<Movie> list = mapper.selectMovieCommingSoonAll();
+		Assert.assertNotNull(list);
+		
+		list.forEach(s -> log.debug(s.toString()));
+	}
+	
+	@Test
+	public void test06GetMovieByTitle() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		List<Movie> list = mapper.selectMovieByTitle("크루");
@@ -85,7 +96,7 @@ public class MovieServiceTest {
 	}
 
 	@Test
-	public void test06RegisterMovie() {
+	public void test07RegisterMovie() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		LocalDate start = LocalDate.of(2021, 06, 07);
@@ -100,7 +111,7 @@ public class MovieServiceTest {
 	}
 
 	@Test
-	public void test07ModifyMovie() {
+	public void test08ModifyMovie() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		LocalDate start = LocalDate.of(2021, 06, 17);
@@ -128,7 +139,7 @@ public class MovieServiceTest {
 	}
 
 	@Test
-	public void test08RemoveMovie() {
+	public void test09RemoveMovie() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		LocalDate start = LocalDate.of(2021, 06, 17);
