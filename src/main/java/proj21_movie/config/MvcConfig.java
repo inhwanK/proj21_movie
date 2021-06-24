@@ -11,6 +11,8 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -76,5 +78,11 @@ public class MvcConfig implements WebMvcConfigurer {
 				.simpleDateFormat("yyyy-MM-dd HH:mm:ss")
 				.build();
 		converters.add(0, new MappingJackson2HttpMessageConverter(objectMapper));
+	}
+	
+	@Bean
+	public MultipartResolver multipartResolver() {
+		StandardServletMultipartResolver resolver = new StandardServletMultipartResolver();
+		return resolver;
 	}
 }
