@@ -5,8 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">	<!-- 파비콘 오류 메세지 해결 -->
 	<meta charset="UTF-8">
-	<title>바로예매</title>
+	<title>바로예매(임시)</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/reserve/reserve.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
@@ -34,6 +35,39 @@
 			}
 		});
 	
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			var contextPath = "${contextPath}";
+			var no = ${param.no};
+			
+			$.ajax({
+				type:"GET",
+				url: contextPath + "/api/movies/boxOffice/" + no,
+				contentType: "application/json; charset=utf-8",
+				async: false,
+				success: function(json){
+					var poster = "";
+						poster += "<input id='hidden-title' type='hidden' value='" + json.movTitle + "'/>";
+						poster += "<img alt='' src='${contextPath}/resources/images/movie/box-office/" + json.movPoster + "'>";
+					$("#movie-poster").append(poster);
+					
+					/* var pa = $("#movie-list-ul").parent();
+					var ch = pa.children();
+					var mTitle = ch.eq(0).text();
+					
+					var pTitle = $("#hidden-title").val();
+					
+					console.log(mTitle);
+					console.log(pTitle); */
+				},
+				error : function(){
+					alert("해당 영화는 없습니다.");
+					window.location.href = contextPath + "/reserve";
+					console.log("error > ");
+				}	
+			});
+		});
 	</script>
 </head>
 <body>
@@ -78,6 +112,9 @@
 							<input type="hidden" value="${mov.movNo }"/></a></li>
                      	</c:forEach>
 					</ul>
+				</div>
+				<!-- 영화 포스터 - 영화에서 받아옴  -->
+				<div id="movie-poster">
 				</div>
 				<!-- <p>
 					영화를 선택해 주세요.

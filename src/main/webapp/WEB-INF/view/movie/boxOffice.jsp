@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/movie/boxOffice.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script>
 	$(function(){
 		$(".btn li").click(function(e){
@@ -21,7 +22,6 @@
 			$(".movie-list > div").removeClass("active");
 			$(".movie-list > div").eq($(this).index()).addClass("active");
 		});
-	
 	});
 	</script>
 	<script>
@@ -70,32 +70,13 @@
 						/* btn-util */
 						list += "<div class='btn-util'>";					
 						/* movie-reserve */
-						list +=	"<a href='${contextPath}/reserve'><button id='reserve' title='영화 예매하기'>예매</button></a>"
+						list +=	"<button id='reserve' title='영화 예매하기'>예매</button>"
 						/* // btn-util */
 												
 						list += "</li>";	
 					}
 					$(".box-office-list .movie-count b").append(count);
-					$(".box-office-list ul").append(list);
-					
-					// 영화 번호 각각 찾기 못함.. 다른 방법 사용해야 할듯
-					/* var pa = $('.box-office-list ul li').parent();
-					var ch = pa.children();
-					var movNo = ch.eq(1).find('#rank').text();
-					console.log(movNo);		
-					
-					$.get(contextPath + "/api/comments/avgstar/" + movNo,
-						function(json) {	
-							var dataLength = json.length;
-							if (dataLength >= 1) {
-								var avgStar = "";		
-								for (i = 0; i < dataLength; i++) {
-									avgStar += "<span class='rate'>평균 별점 : " + json[i].comStar; + "</span>";	
-								}				
-								$(".rate-date").prepend(avgStar);
-							}
-						}); */
-					
+					$(".box-office-list ul").append(list);				
 				}
 			});			
 		/* // box-office-list (박스오피스 리스트) */
@@ -152,16 +133,16 @@
 		$("#btnMovieSearch").on("click", function(){	// 박스 오피스에 들어있는 영화만 검색되도록 함 (상영예정작 탭은 안 바뀌고 검색 안됨)
 			var movTitle = $("#searchMovieName").val();
 			$.ajax({
-				url: contextPath + "/api/moviesearch?movTitle="+movTitle,
-				type:"get",
+				url			: contextPath + "/api/moviesearch?movTitle="+movTitle,
+				type		:"get",
 				contentType : "application/json; charset=utf-8",
-				dataType: "json",
-				data : movTitle,
-				success : function(json){
-					console.log(movTitle);
+				dataType	: "json",
+				data 		: movTitle,
+				success 	: function(json){
 					console.log(json);
+					console.log(json.length);
 					
-					if (movTitle != '') {  				
+					if (movTitle != '') {  		// 검색시 영화데이터가 있을시			
 						var dataLength = json.length;
 						if (dataLength >= 1) {
 							var list = "";
@@ -196,7 +177,7 @@
 								/* btn-util */
 								list += "<div class='btn-util'>";					
 								/* movie-reserve */
-								list +=	"<a href='${contextPath}/reserve'><button id='reserve' title='영화 예매하기'>예매</button></a>"
+								list +=	"<button id='reserve' title='영화 예매하기'>예매</button>"
 								/* // btn-util */
 														
 								list += "</li>";	
@@ -204,27 +185,46 @@
 							$(".box-office-list ul").empty();
 							$(".box-office-list ul").append(list);
 							$(".box-office-list .movie-count b").empty();
-							$(".box-office-list .movie-count b").append(count);							
+							$(".box-office-list .movie-count b").append(count);		
+							$('#noDataDiv').hide();
 						}
 					} else if (movTitle == '') {		// 검색 단어를 입력안하고 검색 버튼을 클릭시
-						alert('검색할 영화명을 입력해주세요.');
-						location.reload();
-					} else if (json == null) {		// 검색 했을때 검색된 영화가 없을 경우 (아직 미구현)
-						alert('없음');
-					
+						//alert('검색할 영화명을 입력해주세요');
+						Swal.fire({						// Alert창 디자인 sweetalert2 Test <-- get을 제외한 다른 방식은 나중에..
+		                    icon: 'warning',
+		                    title: '검색할 영화명을 입력해주세요.'
+		                }).then((result) => { 
+							if (result.isConfirmed) { 
+								location.reload(); 
+							} 
+						});
+					}
+				},
+				error : function(){
+					console.log("error > ");
+				},	
+				complete : function(xhr) {			
+					if (xhr.responseJSON == ''){		// 검색 했을때 검색된 영화가 없을 경우
 						$(".box-office-list ul").empty();
 						$(".box-office-list .movie-count b").empty();
 						$(".box-office-list .movie-count b").append('0개');
 						$('#noDataDiv').show();
 					}
-				},
-				error : function(){
-					console.log("error > ");
+					console.log(xhr.responseJSON);
 				}
-				
 			});
 		});
-
+		
+		// 예매버튼 클릭시 영화 번호를 reserve 페이지에 전달
+		$(document).ready(function(){
+			$(document).on('click', '[id=reserve]', function(e){
+				var pa = $(this).parent().parent();
+				var ch = pa.children();
+				var movNo = ch.eq(0).text();
+				
+				window.location.href = contextPath + "/reserve?no=" + movNo;
+			});
+		});
 	});	
 	</script>	
 </head>

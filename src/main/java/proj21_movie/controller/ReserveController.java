@@ -19,7 +19,7 @@ public class ReserveController {
 	
 	@RequestMapping("/reserve")
 	public String reserve(Model model) {
-		model.addAttribute("getMovieList", movService.getMovieBoxOffice());
+		model.addAttribute("getMovieList", movService.getMovieBoxOfficeLists());
 		model.addAttribute("getTheaterList", thtService.getLists());
 		
 		return "reserve/reserve";
