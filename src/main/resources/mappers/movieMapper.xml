@@ -5,6 +5,7 @@
 	<select id="selectMovieAll" resultType="Movie">
 		select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster 
 		from movie
+		order by mov_no desc
 	</select>
 	
 	<select id="selectMovieByNo" resultType="Movie">
