@@ -530,11 +530,17 @@ h3.title {
 }
 
 .movie-detail-cont .screen-type .btn.reserve {
-	width: 130px;
-	border-radius: 5px;
+	width: 90%;
 	background-color: #329eb1;
-	margin: 0 0 40px 60px;
-	border-radius: 5px !important;
+	margin: 0 0 40px 13px;
+	cursor: pointer;
+}
+
+.movie-detail-cont .screen-type .btn.comming {
+	width: 90%;
+	background-color: #666;
+	margin: 0 0 40px 13px;
+	cursor: pointer;
 }
 
 .movie-detail-cont .screen-type .btn.reserve:hover {

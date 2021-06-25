@@ -14,8 +14,15 @@
 		where mov_no = #{movNo}
 	</select>
 	
+	<!-- 박스오피스의 상세보기만 나오도록 -->
+	<select id="selectMovieByBoxofficeNo" resultType="Movie">
+		select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster 
+		from movie
+		where mov_opendate &lt;= now() and mov_enddate &gt; date_add(now(), interval -1 day) and mov_no = #{movNo}
+	</select>
+	
 	<!-- 영화 평균 평점은 한줄평의 영화별 평균 별점으로 쿼리 바꿈 -->
-	<select id="selectMovieBoxOffice" resultType="Movie">
+	<select id="selectMovieBoxOfficeAll" resultType="Movie">
 		select m.mov_no, m.mov_title, m.mov_grade, m.mov_genre, m.mov_runtime, m.mov_director, m.mov_actor, m.mov_detail, 		
 				m.mov_opendate, m.mov_enddate, ifnull(round(avg(c.com_star), 1), 0) as mov_avgstar, m.mov_poster
 			from comment c right join movie m on c.mov_no = m.mov_no
@@ -23,7 +30,7 @@
 		group by m.mov_no
 	</select>
 	
-	<select id="selectMovieCommingSoon" resultType="Movie">
+	<select id="selectMovieCommingSoonAll" resultType="Movie">
 		select m.mov_no, m.mov_title, m.mov_grade, m.mov_genre, m.mov_runtime, m.mov_director, m.mov_actor, m.mov_detail, 		
 				m.mov_opendate, m.mov_enddate, ifnull(round(avg(c.com_star), 1), 0) as mov_avgstar, m.mov_poster
 			from comment c right join movie m on c.mov_no = m.mov_no

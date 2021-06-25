@@ -286,6 +286,12 @@ section h3 {
 	color: white;
 }
 
+/* 영화 포스터 */
+#movie-poster img {
+	width: 90px;
+	margin-top: 15px;
+}
+
 /* footer */
 footer {
 	margin: auto;

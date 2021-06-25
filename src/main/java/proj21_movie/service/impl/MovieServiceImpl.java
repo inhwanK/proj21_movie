@@ -32,16 +32,22 @@ public class MovieServiceImpl implements MovieService {
 	}
 	
 	@Override
-	public List<Movie> getMovieBoxOffice() {
-		List<Movie> list = mapper.selectMovieBoxOffice();
-		log.debug("service - getMovieBoxOffice() > " + list.size());
+	public Movie getMovieBoxOffice(Movie movie) {
+		log.debug("service - getMovieBoxOffice() > " + movie);
+		return mapper.selectMovieByBoxofficeNo(movie);
+	}
+	
+	@Override
+	public List<Movie> getMovieBoxOfficeLists() {
+		List<Movie> list = mapper.selectMovieBoxOfficeAll();
+		log.debug("service - getMovieBoxOfficeLists() > " + list.size());
 		return list;
 	}
 
 	@Override
-	public List<Movie> getMovieCommingSoon() {
-		List<Movie> list = mapper.selectMovieCommingSoon();
-		log.debug("service - getMovieCommingSoon() > " + list.size());
+	public List<Movie> getMovieCommingSoonLists() {
+		List<Movie> list = mapper.selectMovieCommingSoonAll();
+		log.debug("service - getMovieCommingSoonLists() > " + list.size());
 		return list;
 	}
 	

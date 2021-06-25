@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/movie/star/fontawesome-stars.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 	<!-- 이 js가 다른 js보다 낮으면 에러 뜸 -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">  
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <script>
     	window.jQuery || document.write('<script src="${contextPath}/resources/js/star/vendor/jquery-1.11.2.min.js"><\/script>')
     </script>	
@@ -50,6 +50,27 @@
   			});
 		});
 	</script>
+	<script type="text/javascript">
+		$(function(){
+			var contextPath = "${contextPath}";
+			var no = "${movNo}";
+			
+			$.ajax({
+				type:"GET",
+				url: contextPath + "/api/movies/boxOffice/" + no,
+				contentType: "application/json; charset=utf-8",
+				success: function(json){
+					var btn = "";
+						btn += "<button type='button' id='reserve' class='btn reserve' title='영화 예매하기'>예매</button>";
+					$(".screen-type").append(btn);			
+				},
+				error : function(request, status, error){
+					$('#comming').show();
+					console.log("error > ");
+				}	
+			});
+		});
+	</script>
 	<script>
 		$(function(){
 			function getFormatDate(date){
@@ -76,9 +97,6 @@
 						/* 영화 제목 */			
 						title += "<p class='title'>" + json.movTitle + "</p>";
 						// title += "<p class='title-eng'>" + 'Cruella' + "</p>";		// 영어 제목 컬럼 미지정
-						
-						/* 실시간 평점 (영화 평균 평점) */		
-						//avgStar += json.movAvgstar;			// 영화 한줄평 추가시 평점 반영하여 업뎃 하기는 아직 미 구현
 						
 						/* 영화 포스터 */
 						poster += "<p class='movie-grade age-" + json.movGrade + "'></p>";	
@@ -178,34 +196,45 @@
 			$('#writeBtn').on("click", function(e){
 				var movNo = "${movNo}";
 				var user = $('#user').val();
+				var content = $('#contxt').val();
 				var newComment = { movNo: movNo, 
 									comUser : $('#user').val(), 
 									comContent: $('#contxt').val(),
 									comStar : $('.com-star').val()
 								};
 				
-	 			$.ajax({
-					url 		: contextPath + "/api/comments/",
-					type 		: "POST",
-					contentType : "application/json; charset=utf-8",
-					datatype 	: "json",
-					cache 		: false,
-					data 		: JSON.stringify(newComment),
-					success 	: function(res) {
-						if(user != ""){
-							alert(newComment.comUser + "님의 한줄평이 등록되었습니다.");
+				if (confirm("등록 하시겠습니까?")){
+		 			$.ajax({
+						url 		: contextPath + "/api/comments/",
+						type 		: "POST",
+						contentType : "application/json; charset=utf-8",
+						datatype 	: "json",
+						cache 		: false,
+						data 		: JSON.stringify(newComment),
+						beforeSend  : function(xhr) {			// success로 넘어가기 전에 조건 만족시 success로 넘어가지 않고 beforeSend에서 멈춤
+					        if (user == "") {			// 한줄평 유저 (user)에 값이 없을시 success로 넘어가지 않고 로그인으로 이동
+					            xhr.abort();
+					        	alert("권한이 없습니다. 로그인 해주세요.");
+					            window.location.href = contextPath + "/login";
+					        }else if (content == "") {	// 한줄평 내용이 없을때
+					        	xhr.abort();
+					        	alert("내용을 입력해주세요!");
+					        }
+					    },
+						success 	: function(res) {
+							if(user != ""){			// 유저가 있으면 등록후 새로고침
+								alert(newComment.comUser + "님의 한줄평이 등록되었습니다.");
+								location.reload();
+							}
+						},
+						error : function(request, status, error){
+							alert("code:" + request.status+"\n" + "message:" + request.responseText+"\n" + "error:" + error);
 							location.reload();
-						} else {
-							
-							alert("권한이 없습니다. 로그인 해주세요.");	// 유저 이메일값이 null일때 post 요청 취소하기는 아직 미구현..
-							window.location.href = contextPath + "/login";
 						}
-					},
-					error : function(request, status, error){
-						alert("code:" + request.status+"\n" + "message:" + request.responseText+"\n" + "error:" + error);
-						location.reload();
-					}
-				}); 
+					}); 
+				} else {
+					return false;
+				}
 			});
 			
 			$(document).ready(function(){
@@ -258,6 +287,13 @@
 				}			
 			});
 			/* // 실관람평 탭 */
+			
+			// 예매버튼 클릭시 영화 번호를 reserve 페이지에 전달
+			$(document).on('click', '[id=reserve]', function(e){
+				var movNo = ${movNo};
+				
+				window.location.href = contextPath + "/reserve?no=" + movNo;
+			});
 		});
 	</script>
 </head>
@@ -331,7 +367,7 @@
 							</div>
 						</div>
 						<div class="screen-type">
-							<a href="#" class="btn reserve" title="영화 예매하기">예매</a> 
+							<button type='button' id='comming' class='btn comming' style="display: none;">상영예정</button>
 						</div>
 					</div>
 				<!--// movie-detail-cont -->
@@ -395,9 +431,9 @@
 													</tr>											
 												</table>
 											</div>
+											<input id="writeBtn" type="button" value="쓰기"/> 
+											<input id="cancel" type="button" class="cancelBtn" value="취소"/> 
 										</form:form>
-										<input id="writeBtn" type="button" value="쓰기"/> 
-										<input id="cancel" type="button" class="cancelBtn" value="취소"/> 
 									</div>
 								</div>
 								

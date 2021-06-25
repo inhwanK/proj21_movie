@@ -10,10 +10,12 @@ import proj21_movie.dto.Movie;
 public interface MovieService {
 	List<Movie> getLists();
 	Movie getMovie(Movie movie);
+	// 박스오피스 번호
+	Movie getMovieBoxOffice(Movie movie);
 	// 박스 오피스
-	List<Movie> getMovieBoxOffice();
+	List<Movie> getMovieBoxOfficeLists();
 	// 상영예정작
-	List<Movie> getMovieCommingSoon();
+	List<Movie> getMovieCommingSoonLists();
 	
 	// 영화 제목으로 검색
 	List<Movie> getMovieByTitle(String movTitle); 

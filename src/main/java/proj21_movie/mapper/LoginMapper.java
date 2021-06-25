@@ -1,10 +1,10 @@
 package proj21_movie.mapper;
 
-import java.util.Map;
 import org.springframework.stereotype.Component;
-import proj21_movie.dto.RegisterRequest;
+import proj21_movie.dto.Member;
 
 @Component
 public interface LoginMapper {
-	RegisterRequest login(String memEmail, String memPasswd);
+	//로그인
+    public Member LoginCommand(Member member);
 }
