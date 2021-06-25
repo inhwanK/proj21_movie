@@ -31,7 +31,6 @@
 			type:"get",
 			contentType:"application/json; charset=utf-8",
 			dataType: "json",
-			/* data : json, */
 			success: function(json) {
 				var dataLength = json.length;
 				if(dataLength == 0){

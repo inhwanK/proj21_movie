@@ -22,7 +22,7 @@ public class RestNoticeController {
 	@Autowired
 	private NoticeService service;
 
-	@GetMapping("/notice") // 리스트 전체 빼오는 건데 . 곧 삭제 예정.
+	@GetMapping("/noticelist") // 리스트 전체 빼오기. 관리자 페이지에서 사용.
 	public ResponseEntity<Object> getNoticeList() {
 		List<Notice> listNotice = service.showNoticeList();
 		return ResponseEntity.status(HttpStatus.OK).body(listNotice);
@@ -43,7 +43,4 @@ public class RestNoticeController {
 		List<Notice> listNotice = service.showNoticeByTitle(notTitle, selectPage);
 		return ResponseEntity.status(HttpStatus.OK).body(listNotice);
 	}
-
-
-
 }

@@ -10,7 +10,8 @@
    
 	<select id="selectNoticeAll" resultMap="noticeList">
       select not_no, not_title, not_date
-      from notice;
+      from notice
+      order by not_no desc;
 	</select>
 
 	<select id="selectNoticeByTitle" resultMap="noticeList">

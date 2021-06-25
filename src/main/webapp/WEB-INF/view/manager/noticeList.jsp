@@ -11,6 +11,44 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+		function getFormatDate(date) { // date 폼 관리.
+			var subDateArray = date.substr(0, 10).split('-');
+			return subDateArray[0] + "." + subDateArray[1] + "."
+					+ subDateArray[2];
+		} // js 파일로 관리할 필요 있음.
+		
+		var contextPath = "${contextPath}";
+		
+		$.ajax({
+			url: contextPath+"/api/noticelist",
+			type:"get",
+			contentType:"application/json; charset=utf-8",
+			dataType:"json",
+			success:function(json){
+				var list="";
+				if(json.length >= 1){
+					for(i=0;i<json.length;i++){
+						list += "<tr>";
+						list += "<td>"+json[i].notNo+"</td>";
+						list += "<td>"+json[i].notTitle+"</td>";
+		      			list += "<td>"+getFormatDate(json[i].notDate)+"</td>";
+		      			console.log(json[i].notNo);
+		      			list += "<td><button class=\"btn btn-primary\">수정</button></td>";
+		      			list += "<td><button class=\"btn btn-primary\">삭제</button></td>";
+		      			list += "</tr>";
+					} // end of for
+					$("tbody").append(list);
+				} // end of if
+			} // end of success
+			
+		});
+		
+	});
+
+</script>
 <link rel="stylesheet" href="${contextPath}/resources/css/manager/sidebar.css">
 </head>
 <body>
@@ -49,27 +87,7 @@
       		</tr>
       	</thead>
       	<tbody>
-      		<tr>
-      			<td>1</td>
-      			<td>공지1</td>
-      			<td>2021-05-30</td>
-      			<td><button class="btn btn-primary">수정</button></td>
-      			<td><button class="btn btn-primary">삭제</button></td>
-      		</tr>
-      		<tr>
-      			<td>2</td>
-      			<td>공지2</td>
-      			<td>2021-05-31</td>
-      			<td><button class="btn btn-primary">수정</button></td>
-      			<td><button class="btn btn-primary">삭제</button></td>
-      		</tr>
-      		<tr>
-      			<td>3</td>
-      			<td>공지3</td>
-      			<td>2021-06-01</td>
-      			<td><button class="btn btn-primary">수정</button></td>
-      			<td><button class="btn btn-primary">삭제</button></td>
-      		</tr>
+      		
       	</tbody>
       </table>
     </div>
