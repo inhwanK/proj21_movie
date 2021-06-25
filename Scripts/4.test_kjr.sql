@@ -145,10 +145,10 @@ select * from cinema;
 select * from showinfo where shw_no = 46;
 
 insert into reservation(res_no, shw_no, mem_no, res_price, res_date, res_adult, res_teen, res_pref) values 
-(null, 11, 1, 20000, now(), 2, 0, 0);
+(null, 12, 1, 20000, now(), 1, 0, 0);
 
 insert into seat(seat_no, res_no, shw_no, seat_rowno, seat_colno) values 
-(null, 6, 11, 1, 2);
+(null, 7, 12, 5, 5);
 
 select * from vw_full_showinfo;
 
