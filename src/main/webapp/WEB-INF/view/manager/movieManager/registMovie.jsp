@@ -9,9 +9,9 @@
 <head>
 <meta charset="UTF-8">
 <title>영화 등록</title>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
-<script src="//code.jquery.com/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		var contextPath = "${contextPath}";
@@ -20,74 +20,6 @@
 			window.location.href = contextPath + "/movieManager";
 		});
 		
-		$('#new').on("click", function(e){
-			var name = document.getElementById("uploadFile").files;
-			alert(document.getElementById("uploadFile").files[0].name);
-			var newMovie = { movTitle: $('#title').val(),
-								movGenre: $('#genre').val(),
-								movGrade: $('#grade').val(),
-								movRuntime: $('#runtime').val(),
-								movDirector: $('#director').val(),
-								movActor: $('#actor').val(),
-								movDetail: $('#detail').val(),
-								movOpendate: $('#opendate').val(),
-								movEnddate: $('#enddate').val(),
-								movPoster: document.getElementById("uploadFile").files[0].name 
-							};
-			
-			alert("data > " + newMovie.movTitle);
-			
-			let formData = new FormData();
-			let fileInput = $('input[name="uploadFile"]');
-			let fileList = fileInput[0].files;
-			let fileObj = fileList[0];
-			
-			formData.append("uploadFile", fileObj);
-			/*파일 input이 multiple라면 
-			for(let i = 0; i < fileList.length; i++){
-				formData.append("uploadFile", fileList[i]);
-			} */
-			
-			console.log("fileList : " + fileList);
-			console.log("fileObj : " + fileObj);
-			console.log("fileName : " + fileObj.name);
-			console.log("fileSize : " + fileObj.size);
-			console.log("fileType(MimeType) : " + fileObj.type);
-			
-			$.ajax({
-				url: contextPath + '/api/uploadPoster',
-				enctype: 'multipart/form-data',
-				processData: false,
-				contentType: false,
-				data: formData,
-				type: 'POST',
-				dataType: 'json',
-				success: function(result){
-					console.log(result);
-				}, error: function(e){
-					alert("실패");
-				}
-			});
-
-			$.ajax({
-				url: contextPath + "/api/movies",
-				type: "POST",
-				contentType: "application/json; charset=utf-8",
-				datatype: "json",
-				cache: false,
-				data: JSON.stringify(newMovie),
-				success: function(res){
-					alert(res);
-					/* window.location.href = contextPath + "/movieManager"; */
-				},
-				error: function(request, status, error){
-					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-					/* window.location.href = contextPath + "/movieManager"; */
-				}
-			});
-			
-			
-		});
 	});
 </script>
 </head>
@@ -144,11 +76,80 @@
                      <input type="file" id="uploadFile" name="uploadFile" class="form-control">
                   </div>
                </form:form>
-                  <button id="new" class="btn btn-primary">등록</button>
+                  <button id="uploadBtn" class="btn btn-primary">등록</button>
                   <button id="cancel" class="btn btn-primary">취소</button>
             </div>
          </div>
       </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	var contextPath = "${contextPath}";
+	
+	$("#uploadBtn").on("click", function(e){
+		var formData = new FormData();
+		var inputFile = $("input[name='uploadFile']");
+		var files = inputFile[0].files;
+		console.log(files);
+		
+		for (var key of formData.keys()){
+			console.log(key);
+		}
+		for (var value of formData.values()) {
+			console.log(value);
+		}
+		
+		for(var i = 0; i < files.length; i++){
+			formData.append("uploadFile", files[i]);
+		}
+		
+		$.ajax({
+			url: contextPath + '/api/uploadAjaxAction',
+			processData: false,
+			contentType: false,
+			data: formData,
+			type: 'POST',
+			success: function(result){
+				alert("Uploaded");
+			}
+		});
+		
+		var name = document.getElementById("uploadFile").files;
+		
+		var newMovie = { movTitle: $('#title').val(),
+				movGenre: $('#genre').val(),
+				movGrade: $('#grade').val(),
+				movRuntime: $('#runtime').val(),
+				movDirector: $('#director').val(),
+				movActor: $('#actor').val(),
+				movDetail: $('#detail').val(),
+				movOpendate: $('#opendate').val(),
+				movEnddate: $('#enddate').val(),
+				movPoster: document.getElementById("uploadFile").files[0].name 
+			};
+		
+		$.ajax({
+			url: contextPath + "/api/movies",
+			type: "POST",
+			contentType: "application/json; charset=utf-8",
+			datatype: "json",
+			cache: false,
+			data: JSON.stringify(newMovie),
+			success: function(res){
+				alert(res);
+				window.location.href = contextPath + "/movieManager";
+			},
+			error: function(request, status, error){
+				alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				window.location.href = contextPath + "/movieManager";
+			}
+		});
+	});
+});
+
+</script>
+
+
 </body>
 </html>

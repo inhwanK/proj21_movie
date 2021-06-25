@@ -24,15 +24,18 @@
 			<param-value>
 			proj21_movie.config.ContextRoot
   		</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-
-		<multipart-config>
-			<location>""</location>
-		</multipart-config>
-	</servlet>
-
-	<servlet-mapping>
+  	</init-param>
+  	<load-on-startup>1</load-on-startup>
+  	
+  	<multipart-config>
+  		<location>C:\\upload</location>	<!-- 임시경로 -->
+  		<max-file-size>20971520</max-file-size>	<!-- 업로드 가능한 최대 파일 크기 : 1MB * 20 -->
+  		<max-request-size>41943040</max-request-size>	<!-- 업로드 되는 파일의 최대 크기 : 40MB -->
+  		<file-size-threshold>20971520</file-size-threshold>	<!-- 임시파일로 저장여부를 결정할 데이터 크기 : 20MB -->
+  	</multipart-config>
+  </servlet>
+  
+  <servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>

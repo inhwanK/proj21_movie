@@ -149,5 +149,6 @@ insert into reservation(res_no, shw_no, mem_no, res_price, res_date, res_adult, 
 insert into seat(seat_no, res_no, shw_no, seat_rowno, seat_colno) values 
 (null, 8, 7, 1, 1);
 
-select * from movie;
+select * from movie order by mov_no desc;
 delete from movie where mov_no > 20;
+alter table movie auto_increment = 21;

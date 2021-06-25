@@ -2,7 +2,6 @@ package proj21_movie.controller;
 
 import java.io.File;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import proj21_movie.dto.AttachImage;
 import proj21_movie.dto.Movie;
 import proj21_movie.exception.DuplicateMovieException;
 import proj21_movie.service.MovieService;
@@ -91,54 +88,73 @@ public class RestMovieManagerController {
 	}
 	
 	// 업로드 파일 처리
-	@PostMapping(value="/uploadPoster", produces=MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody 
-	public ResponseEntity<List<AttachImage>> uploadAjaxActionPOST(MultipartFile[] uploadFile, HttpServletRequest request) {
+	@PostMapping("/uploadAjaxAction")
+	public  void uploadPoster(MultipartFile[] uploadFile, HttpServletRequest request) {
 		String upload = request.getSession().getServletContext().getRealPath("/").concat("resources");
-		String imgUploadPath = upload + File.separator + "images" + File.separator + "movie" + File.separator + "box-office";
-		System.out.println(imgUploadPath);
+		String uploadFolder = upload + File.separator + "images" + File.separator + "movie" + File.separator + "box-office";
+		System.out.println(uploadFolder);
 		
-		// 폴더 생성
-		File uploadPath = new File(imgUploadPath);
-		if (uploadPath.exists() == false) {
-			uploadPath.mkdirs();
-		}
-		
-		List<AttachImage> list = new ArrayList<>();
-		
-		for(MultipartFile multipartFile : uploadFile) {
+		for (MultipartFile multipartFile : uploadFile) {
 			System.out.println("================================");
 			System.out.println("파일 이름 : " + multipartFile.getOriginalFilename());
 			System.out.println("파일 타입 : " + multipartFile.getContentType());
 			System.out.println("파일 크기 : " + multipartFile.getSize());
 			
-			// 이미지 정보 객체
-//			AttachImage ai = new AttachImage();
-			
-			// 파일 이름
 			String uploadFileName = multipartFile.getOriginalFilename();
-//			ai.setFileName(uploadFileName);
 			
-			// uuid 적용 파일 이름
+			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
+			
+			File saveFile = new File(uploadFolder, uploadFileName);
+			
+			try {
+				
+				multipartFile.transferTo(saveFile);
+			} catch (Exception e) {
+				e.getMessage();
+			}
+		}
+
+//		// 폴더 생성
+//		File uploadPath = new File(imgUploadPath);
+//		if (uploadPath.exists() == false) {
+//			uploadPath.mkdirs();
+//		}
+
+//		List<AttachImage> list = new ArrayList<>();
+
+//		for(MultipartFile multipartFile : uploadFile) {
+//			System.out.println("================================");
+//			System.out.println("파일 이름 : " + multipartFile.getOriginalFilename());
+//			System.out.println("파일 타입 : " + multipartFile.getContentType());
+//			System.out.println("파일 크기 : " + multipartFile.getSize());
+//			
+//			// 이미지 정보 객체
+//			AttachImage ai = new AttachImage();
+//			
+//			// 파일 이름
+//			String uploadFileName = multipartFile.getOriginalFilename();
+//			ai.setFileName(uploadFileName);
+//			
+//			// uuid 적용 파일 이름
 //			String uuid = UUID.randomUUID().toString();
 //			ai.setUuid(uuid);
-			
+//			
 //			uploadFileName = uuid + "_" + uploadFileName;
 //			System.out.println("uploadFileName >> " + uploadFileName);
-			
-			// 파일 위치, 파일 이름은 합친 File 객체
-			File saveFile = new File(uploadPath, uploadFileName);
-			
-			// 파일 저장
-			try {
-				multipartFile.transferTo(saveFile);
-				
-//				// 썸네일 생성
+//			
+//			// 파일 위치, 파일 이름은 합친 File 객체
+//			File saveFile = new File(uploadPath, uploadFileName);
+//			
+//			// 파일 저장
+//			try {
+//				multipartFile.transferTo(saveFile);
+//				
+//			// 썸네일 생성
 //				File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
 //				
 //				BufferedImage bo_image = ImageIO.read(saveFile);
 //				
-//				// 썸네일 비율
+//			// 썸네일 비율
 //				double ratio = 3;
 //				int width = (int) (bo_image.getWidth() / ratio);
 //				int height = (int) (bo_image.getHeight() / ratio);
@@ -151,14 +167,14 @@ public class RestMovieManagerController {
 //				graphic.drawImage(bo_image, 0, 0, width, height, null);
 //				
 //				ImageIO.write(bt_image, "jpg", thumbnailFile);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
 //			list.add(ai);
-		} // end of for
-		
-		ResponseEntity<List<AttachImage>> result = new ResponseEntity<List<AttachImage>>(list, HttpStatus.OK);
-		return result;
+//		} // end of for
+//		
+//		ResponseEntity<List<AttachImage>> result = new ResponseEntity<List<AttachImage>>(list, HttpStatus.OK);
+//		return result;
 	}
 	
 	@PatchMapping("/movies/{no}")
@@ -170,4 +186,5 @@ public class RestMovieManagerController {
 	public ResponseEntity<Object> deleteMovie(@PathVariable int no) {
 		return ResponseEntity.ok(service.removeMovie(new Movie(no)));
 	}
+	
 }
