@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">	<!-- 파비콘 오류 메세지 해결 -->
 	<meta charset="UTF-8">
 	<title>댓글 수정</title>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
@@ -31,45 +32,71 @@
    				theme: 'fontawesome-stars' 
   			});
 			
+		    /* 취소 버튼 누를시  */
 			$('#cancel').on("click", function(e){
 				$('#comContent').val('');
+				$(".br-widget a").removeClass();	               
+		        $(".br-widget a:first-child").addClass("br-selected br-current");	               	   
+		        $('.com-star').val("1");
+		        $(".br-current-rating").text("1");
+		        $(".br-widget").unbind('mouseleave');
 			});
 			
+		    /* 나가기 버튼 누를시 */
 			$('#exit').on("click", function(e){
 		        window.close();
 			});
+		    
+			/* 엔터 쳤을때 버튼 누른것과 동일한 이벤트 */
+			$("#comContent").on("keyup", function(key) {
+		        if (key.keyCode == 13) {
+		        	$('#modify').click();
+		        	return false;
+		        }
+		    });
 			
+			/* 값 받아올때 */
 			$.get(contextPath + "/api/comments/" + comNo,
 				function(json){
-				$('#comNo').val(json.comNo);
-				$('#comContent').val(json.comContent);
-				$('.com-star').val(json.comStar);
+					$('#comNo').val(json.comNo);
+					$('#comContent').val(json.comContent);
+					$('.com-star').val(json.comStar);
 			});
 			
+			/* ajax */
 			$('#modify').on("click", function(e){
+				var content = $('#comContent').val();
 				var data = {comNo: $('#comNo').val(),
 							comContent: $('#comContent').val(),
 							comStar: $('.com-star').val(),
 						};
-				
-				$.ajax({
-					url			: contextPath + "/api/comments/" + comNo,
-					type		: 'PATCH',
-					contentType : "application/json; charset=utf-8",
-					dataType	: 'json',
-					cache		: false,
-					data		: JSON.stringify(data),
-					success		: function(data) {
-						alert(comNo + "번 댓글 수정 완료");
-						window.opener.location.reload();
-				        window.close();
-					},
-					error: function(data, status, error){
-						alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-						window.close();
-					}
-				});
-				
+				if (confirm("수정 하시겠습니까?")){
+					$.ajax({
+						url			: contextPath + "/api/comments/" + comNo,
+						type		: 'PATCH',
+						contentType : "application/json; charset=utf-8",
+						dataType	: 'json',
+						cache		: false,
+						data		: JSON.stringify(data),
+						beforeSend  : function(xhr) {	// success로 넘어가기 전에 조건 만족시 success로 넘어가지 않고 beforeSend에서 멈춤
+					        if (content == "") {		// 한줄평 내용이 없을때
+					        	xhr.abort();
+					        	alert("내용을 입력해주세요!");
+					        }
+					    },
+						success		: function(data) {
+							alert(comNo + "번 댓글 수정 완료");
+							window.opener.location.reload();
+					        window.close();
+						},
+						error: function(data, status, error){
+							alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+							window.close();
+						}
+					});
+				} else {
+					return false;
+				}	
 			});
 		});
 	</script>
@@ -87,7 +114,7 @@
                   </div>
                   <div class="form-group">
                      <label>내용</label>
-                     <input type="text" id="comContent" class="form-control">
+                     <input type="text" id="comContent" class="form-control" maxlength="40" placeholder="수정하고자 할 한줄평을 적어주세요 (40자 이내)">
                   </div>
                   <div class="form-group">
                      <label>별점</label>
