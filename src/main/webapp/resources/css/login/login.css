@@ -135,7 +135,14 @@ section #loginFormArea {
 	column-width: 15em;
 }
 
-.form {
+.id_input {
+	height: 30px;
+	width: 250px;
+	text-align: center;
+	font-size: 15px;
+}
+
+.pw_iput {
 	height: 30px;
 	width: 250px;
 	text-align: center;
