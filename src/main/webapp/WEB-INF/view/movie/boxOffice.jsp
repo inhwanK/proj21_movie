@@ -14,6 +14,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script>
 	$(function(){
+		/* 박스오피스/상영예정작 탭 이벤트 */
 		$(".btn li").click(function(e){
 			e.preventDefault();
 			$(this).addClass("active");
@@ -22,6 +23,14 @@
 			$(".movie-list > div").removeClass("active");
 			$(".movie-list > div").eq($(this).index()).addClass("active");
 		});
+		
+		/* 엔터 쳤을때 버튼 누른것과 동일한 이벤트 */
+		$("#searchMovieName").on("keyup", function(key) {
+	        if (key.keyCode == 13) {
+	        	$('#btnMovieSearch').click();
+	        	return false;	// 검색 버튼을 눌렀을 경우에 해당 버튼이 활성화 (다른 의도하지 않은 동작 방지)
+	        }
+	    });
 	});
 	</script>
 	<script>
@@ -202,7 +211,7 @@
 				},
 				error : function(){
 					console.log("error > ");
-				},	
+				},
 				complete : function(xhr) {			
 					if (xhr.responseJSON == ''){		// 검색 했을때 검색된 영화가 없을 경우
 						$(".box-office-list ul").empty();
