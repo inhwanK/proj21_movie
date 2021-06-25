@@ -193,6 +193,11 @@ section h2 {
 	margin: 5px;
 }
 
+.reserved {
+	border: 1px solid RGB(3, 22, 52);
+	background-color: gray;
+}
+
 .select-seat {
 	border: 1px solid RGB(3, 22, 52);
 }

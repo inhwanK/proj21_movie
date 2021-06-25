@@ -196,15 +196,15 @@
 				for (j = 1; j <= row; j++) {
 					for (i = 1; i <= col; i++) {
 						if (i % col == 0) {
-							makeTag += "<span class='select-seat'>" + col + "</span>";
+							makeTag += "<span class='select-seat' id='" + j + "" + i + "'>" + col + "</span>";
 							makeTag += "<br>";
 							makeTag += "</div>";
 						} else if (i % col == 1) {
 							makeTag += "<div class='row-index'>"
 							makeTag += "<span class='matrix'>" + String.fromCharCode(65+(j-1)) + "</span>";
-							makeTag += "<span class='select-seat'>" + (i % col) + "</span>"
+							makeTag += "<span class='select-seat' id='" + j + "" + i + "'>" + (i % col) + "</span>"
 						} else {
-							makeTag += "<span class='select-seat'>" + (i % col) + "</span>";
+							makeTag += "<span class='select-seat' id='" + j + "" + i + "'>" + (i % col) + "</span>";
 						}
 					}
 				}
@@ -222,10 +222,9 @@
 					var dataLength = json.length;
 					if (dataLength >= 1) {
 						for (i = 0; i < dataLength; i++){
-							console.log(json[i].seatNo);
-							console.log(json[i].resNo.resNo);
-							console.log(json[i].shwNo.shwNo);
-							console.log("행 >> " + json[i].seatRowNo + ", 열 >> " + json[i].seatColNo);
+							console.log("예약된 좌석 - 행 >> " + json[i].seatRowNo + ", 열 >> " + json[i].seatColNo);
+							$("#" + json[i].seatRowNo + json[i].seatColNo).removeClass('select-seat');
+							$("#" + json[i].seatRowNo + json[i].seatColNo).addClass('reserved');
 						}
 					}
 				}

@@ -18,7 +18,6 @@ public class RestSeatController {
 	
 	@GetMapping("/seat/{no}")
 	public ResponseEntity<Object> seatList(@PathVariable int no){
-		System.out.println("seatList()");
 		return ResponseEntity.ok(service.getListByShowInfoNo(no));
 	}
 
