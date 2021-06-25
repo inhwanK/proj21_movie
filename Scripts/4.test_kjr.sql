@@ -136,19 +136,27 @@ select seat_no, res_no, shw_no, seat_rowno, seat_colno
 from seat
 where shw_no = 46;
 
-select * from showinfo;
+select * from showinfo order by shw_no desc;
 select * from vw_full_showinfo where shw_no = 7;
 select * from reservation;
 select * from seat;
+select * from cinema;
 
 select * from showinfo where shw_no = 46;
 
 insert into reservation(res_no, shw_no, mem_no, res_price, res_date, res_adult, res_teen, res_pref) values 
-(null, 7, 1, 20000, now(), 2, 0, 0);
+(null, 11, 1, 20000, now(), 2, 0, 0);
 
 insert into seat(seat_no, res_no, shw_no, seat_rowno, seat_colno) values 
-(null, 8, 7, 1, 1);
+(null, 6, 11, 1, 2);
 
-select * from movie order by mov_no desc;
-delete from movie where mov_no > 20;
-alter table movie auto_increment = 21;
+select * from vw_full_showinfo;
+
+select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, cin_type, mov_no, mov_title
+		from vw_full_showinfo
+		where shw_date = '20210625'	
+			and mov_no = 1
+			and tht_no = 1
+			and shw_starttime > now();
+		order by shw_starttime;
+

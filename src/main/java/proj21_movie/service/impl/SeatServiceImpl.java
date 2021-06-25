@@ -19,8 +19,8 @@ public class SeatServiceImpl implements SeatService {
 	private SeatMapper mapper;
 
 	@Override
-	public List<Seat> getListByShowInfoNo(Seat seat) {
-		List<Seat> list = mapper.selectSeatByShowInfoNo(seat);
+	public List<Seat> getListByShowInfoNo(int showNo) {
+		List<Seat> list = mapper.selectSeatByShowInfoNo(showNo);
 		log.debug("service - getListByShowInfoNo() > " + list.size());
 		return list;
 	}
