@@ -16,22 +16,36 @@
 					+ subDateArray[2];
 		} // js 파일로 관리할 필요 있음.
 
-		var contextPath = "${contextPath}";
-		var totalNotice = "${totalNotice}";
-		var page = Math.ceil(totalNotice / 10);
-		var selectPage = "${selectPage}";
-		var notTitle = "${notTitle}";
+		var contextPath = "${contextPath}"; // 절대 경로
+		var totalNotice = "${totalNotice}"; // 검색된 공지 전체 개수
+		var page = Math.ceil(totalNotice / 10); // 페이징 계산
+		var selectPage = "${selectPage}"; // 선택한 페이지
+		var notTitle = "${notTitle}"; // 검색어, 제목.
+		
+		console.log(notTitle);
+		console.log(selectPage);
+		console.log(totalNotice);
+		
 		$.ajax({
 			url:contextPath+"/api/noticesearch?notTitle="+notTitle+"&selectPage="+selectPage,
-			type:"post",
+			type:"get",
 			contentType:"application/json; charset=utf-8",
 			dataType: "json",
 			/* data : json, */
 			success: function(json) {
 				var dataLength = json.length;
-				
-				if (dataLength >= 1) {
+				if(dataLength == 0){
 					var list = "";
+					list += "<div id=\"notfound\">";
+					list += "<h2>\""+notTitle+"\"에 대한 검색 결과가 없습니다.</h2>";
+					list += "</div>";
+					
+					$("tbody").empty(); // 목록 지우기
+					$("nav.pagination").remove(); // 페이지 버튼 지우기
+					$("div#notfound").remove(); // 이전 검색 결과 메세지 지우기
+					$("div.table-wrap").append(list); // list 문자열 마지막에 추가하기. css 적용안되서 tbody에 안넣고 div.table-wrap에 넣음.
+				}else{
+					list = "";
 					for (i = 0; i < dataLength; i++) {
 						list += "<tr>";
 						list += "<td>" + json[i].notNo + "</td>";
@@ -48,114 +62,46 @@
 
 				for (i = 1; i < page + 1; i++) {
 					pageBtn += "<a title=" + i
-							+ "페이지보기 href=\"noticelist?selectPage=" + i
+							+ "페이지보기 href=\""+contextPath+"/noticelist?notTitle="+notTitle+ "&selectPage=" + i
 							+ "\">" + i + "</a>"; // 더 좋은 방법이 있을 거야....
 				}
 				$("nav.pagination").append(pageBtn);
 			}
 		});
 		
-
-		/* $.get(contextPath + "/api/noticelist/"+selectPage,
-				function(json) {
-
-					var dataLength = json.length;
-					if (dataLength >= 1) {
-						var list = "";
-						for (i = 0; i < dataLength; i++) {
-							list += "<tr>";
-							list += "<td>" + json[i].notNo + "</td>";
-							list += "<td><a href='${contextPath}/notice?notNo="
-									+ json[i].notNo + "'>" + json[i].notTitle
-									+ "</a></td>"; //보여주면 안될 것 같은 정보.
-							list += "<td>" + getFormatDate(json[i].notDate) + "</td>";
-							list += "<tr>"
-						}
-						$("tbody").append(list);
-					}
-
-					var pageBtn = "";
-
-					for (i = 1; i < page + 1; i++) {
-						pageBtn += "<a title=" + i
-								+ "페이지보기 href=\"noticelist?selectPage=" + i
-								+ "\">" + i + "</a>"; // 더 좋은 방법이 있을 거야....
-					}
-					$("nav.pagination").append(pageBtn);
-				}); */
-
-				
-		// 이벤트 등록
-		/*
-		$("#searchBtn").on("click", search());
-		
-		function search(){
-			//var notTitle = $("#searchTxt").val();
-			var notTitle = $("#searchTxt").serialize();
-			console.log($("#searchTxt").val());
-			console.log($("#searchTxt").serialize());
+		// 검색 기능.
+		$("#searchBtn").on("click", function(){
 			
-			//a = "notTitle="+notTitle;
-			// a로 하면 됨..
-			console.log(notTitle);
-			$.ajax({
-				url: contextPath + "/api/noticesearch?"+notTitle,
-				type:"post",
-				contentType : "application/json; charset=utf-8",
-				dataType: "json",
-				data : notTitle,
-				success : function(json){
-					console.log("성공");
-					console.log(json);
-					
-					var dataLength = json.length;
-					
-					if (dataLength >= 1) {
-						var list = "";
-						for (i = 0; i < dataLength; i++) {
-							list += "<tr>";
-							list += "<td>" + json[i].notNo + "</td>";
-							list += "<td><a href='${contextPath}/notice?notNo="
-									+ json[i].notNo + "'>" + json[i].notTitle
-									+ "</a></td>"; //보여주면 안될 것 같은 정보.
-							list += "<td>" + getFormatDate(json[i].notDate) + "</td>";
-							list += "<tr>"
-						}
-						$("tbody").empty();
-						$("tbody").append(list);
-					}
-					
-					var page = Math.ceil(dataLength / 10);
-					console.log(page);
-					var pageBtn = "";
-
-					for (i = 1; i < page + 1; i++) {
-						pageBtn += "<a title=" + i
-								+ "페이지보기 href=\"noticelist?selectPage=" + i
-								+ "\">" + i + "</a>"; // 더 좋은 방법이 있을 거야....
-					}
-					$("nav.pagination").empty();
-					$("nav.pagination").append(pageBtn);
-				},
-				error : function(){
-					console.log("error > ");
-				}
-			});
-		}
-		*/
-		
-		
-		
+			var notTitle = $("#searchTxt").val();
+			if(notTitle == ""){
+				var list = "";
+				list += "<div id=\"notfound\">";
+				list += "<h2>\""+notTitle+"\"에 대한 검색 결과가 없습니다.</h2>";
+				list += "</div>";
+				
+				$("tbody").empty(); // 목록 지우기
+				$("nav.pagination").remove(); // 페이지 버튼 지우기
+				$("div#notfound").remove(); // 이전 검색 결과 메세지 지우기
+				$("div.table-wrap").append(list); // list 문자열 마지막에 추가하기. css 적용안되서 tbody에 안넣고 div.table-wrap에 넣음.
+			}else{
+				window.location.href = contextPath + "/noticelist?notTitle="+notTitle;
+			}
+		});
 	});
+
 </script>
 
-<link rel="stylesheet" href="${contextPath}/resources/css/notice/noticeList.css">
-<link rel="stylesheet" href="${contextPath}/resources/css/notice/newlayout.css">
+<link rel="stylesheet"
+	href="${contextPath}/resources/css/notice/noticeList.css">
+<link rel="stylesheet"
+	href="${contextPath}/resources/css/notice/newlayout.css">
 <title>공지사항</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css"
+	rel="stylesheet">
 </head>
 <body>
-	 <header>
+	<header>
 		<a href="${contextPath}/main"><img id="header_ci" alt="브랜드 로고"
 			src="${contextPath}/resources/images/ci.png"></a>
 		<div>
@@ -175,19 +121,19 @@
 			<li id="mypagebtn"><a href="${contextPath}/mypage"><i
 					class="far fa-user"></i></a></li>
 		</ul>
-	</nav> 
+	</nav>
 
 	<section>
 		<div>
 
 			<div id="contents">
 				<div id="title-wrap">
-						<div class="title">
-							<a href="noticelist" style="font-weight:900; color: #222;">공지사항</a>
-						</div>
-						<div class="title">
-							<a href="inquiry">1:1 문의</a>
-						</div>
+					<div class="title">
+						<a href="noticelist" style="font-weight: 900; color: #222;">공지사항</a>
+					</div>
+					<div class="title">
+						<a href="inquiry">1:1 문의</a>
+					</div>
 				</div>
 
 
@@ -195,7 +141,8 @@
 				<div class="board-list-util">
 					<div class="board-search">
 						<input type="text" id="searchTxt" title="검색어를 입력해 주세요."
-							placeholder="제목을 입력하세요." class="input-text" maxlength="15" name="notTitle">
+							placeholder="제목을 입력하세요." class="input-text" maxlength="15"
+							name="notTitle">
 						<button type="button" id="searchBtn" class="button purple">검색</button>
 					</div>
 				</div>
@@ -214,10 +161,10 @@
 								<th scope="col">제목</th>
 								<th scope="col">등록일</th>
 							</tr>
-							
+
 						</thead>
 						<tbody>
-						
+
 						</tbody>
 					</table>
 				</div>
@@ -229,7 +176,7 @@
 			</div>
 		</div>
 	</section>
-	 <footer>
+	<footer>
 		<div id="content">
 			<img id="footer_ci" alt="브랜드 로고"
 				src="${contextPath}/resources/images/ci.png">

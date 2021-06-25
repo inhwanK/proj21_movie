@@ -13,14 +13,14 @@
       from notice;
 	</select>
 
-	<select id="selectNoticeByTitle" parameterType="String" resultMap="noticeList">
+	<select id="selectNoticeByTitle" resultMap="noticeList">
    		select not_no ,not_title ,not_date ,rownum 
 		from (select not_no, not_title, not_date, @rownum:=@rownum+1 as rownum
 			from notice
 			where (@rownum:=0)=0 and not_title like concat('%',#{notTitle},'%')
 			order by not_no desc) 
 		as search
-		having rownum <![CDATA[>=]]> (1-1)*10 + 1 and rownum <![CDATA[<=]]> 1 * 10;
+		having rownum <![CDATA[>=]]> (#{selectPage}-1)*10 + 1 and rownum <![CDATA[<=]]> #{selectPage} * 10;
 	</select>
 
    <select id="selectNoticeByPage" resultMap="noticeList">
@@ -38,7 +38,8 @@
    
    <select id="countNotice" resultType="int">
       select count(*)
-      from notice;
+	  from notice
+	  where  not_title like concat('%',#{notTitle},'%');
    </select>
    
    <insert id="insertNotice" parameterType="Notice">

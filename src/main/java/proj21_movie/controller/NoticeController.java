@@ -25,7 +25,7 @@ public class NoticeController {
 									@RequestParam(required = false, defaultValue = "") String notTitle) {
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("totalNotice", service.getTotalNotice()); // 페이지 개수 세기.
+		mav.addObject("totalNotice", service.getNumberOfNotices(notTitle)); // 페이지 개수 세기.
 		mav.addObject("selectPage", selectPage); // 선택된 페이지 값.
 		mav.addObject("notTitle", notTitle);
 		mav.setViewName("notice/noticeList");

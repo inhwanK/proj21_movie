@@ -34,13 +34,8 @@ public class RestNoticeController {
 		return ResponseEntity.status(HttpStatus.OK).body(notice);
 	}
 
-	@GetMapping("/noticelist/{selectPage}") // 공지 페이지마다 10개씩 불러오기.
-	public ResponseEntity<Object> getNoticeByPage(@PathVariable("selectPage") int selectPage) {
-		List<Notice> listNotice = service.showNoticeListByPage(selectPage); // 범위 지정해야함.
-		return ResponseEntity.status(HttpStatus.OK).body(listNotice);
-	}
 
-	@PostMapping("/noticesearch")
+	@GetMapping("/noticesearch")
 	public ResponseEntity<Object> getNoticeTitleByPage(
 			@RequestParam(value = "selectPage", defaultValue = "1") int selectPage, 
 			@RequestParam(value = "notTitle", defaultValue = "") String notTitle){
@@ -50,12 +45,5 @@ public class RestNoticeController {
 	}
 
 
-//	@PostMapping("/noticesearch")
-//	public ResponseEntity<Object> getNoticeByTitle(@RequestParam(value = "notTitle") String notTitle) {
-//		System.out.println(notTitle);
-//		List<Notice> listNotice = service.showNoticeByTitle(notTitle);
-//		System.out.println(notTitle);
-//		return ResponseEntity.status(HttpStatus.OK).body(listNotice);
-//	}
 
 }
