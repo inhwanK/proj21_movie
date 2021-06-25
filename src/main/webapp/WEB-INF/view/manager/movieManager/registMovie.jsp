@@ -20,81 +20,6 @@
 			window.location.href = contextPath + "/movieManager";
 		});
 		
-		/* $('#new').on("click", function(e){
-			var name = document.getElementById("uploadFile").files;
-			alert(document.getElementById("uploadFile").files[0].name);
-			var newMovie = { movTitle: $('#title').val(),
-								movGenre: $('#genre').val(),
-								movGrade: $('#grade').val(),
-								movRuntime: $('#runtime').val(),
-								movDirector: $('#director').val(),
-								movActor: $('#actor').val(),
-								movDetail: $('#detail').val(),
-								movOpendate: $('#opendate').val(),
-								movEnddate: $('#enddate').val(),
-								movPoster: document.getElementById("uploadFile").files[0].name 
-							};
-			
-			alert("data > " + newMovie.movTitle); */
-			
-			/* let formData = new FormData();
-			let fileInput = $('input[name="uploadFile"]');
-			let fileList = fileInput[0].files;
-			let fileObj = fileList[0];
-			
-			formData.append("uploadFile", fileObj);
-			파일 input이 multiple라면 
-			for(let i = 0; i < fileList.length; i++){
-				formData.append("uploadFile", fileList[i]);
-			}
-			
-			console.log("fileList : " + fileList);
-			console.log("fileObj : " + fileObj);
-			console.log("fileName : " + fileObj.name);
-			console.log("fileSize : " + fileObj.size);
-			console.log("fileType(MimeType) : " + fileObj.type);
-			
-			for (var key of formData.keys()){
-				console.log(key);
-			}
-			for (var value of formData.values()) {
-				console.log(value);
-			}
-			
-			$.ajax({
-				url: contextPath + '/api/movies',
-				type: 'POST',
-				processData: false,
-				contentType: false,
-				data: formData,
-				datatype: "json",
-				cache: false,
-				success: function(result){
-					console.log(result);
-				}, error: function(e){
-					console.log(formData);
-					alert("파일업로드 실패");
-				}
-			}); */
-
-			/* $.ajax({
-				url: contextPath + "/api/movies",
-				type: "POST",
-				contentType: "application/json; charset=utf-8",
-				datatype: "json",
-				cache: false,
-				data: JSON.stringify(newMovie),
-				success: function(res){
-					alert(res);
-					window.location.href = contextPath + "/movieManager";
-				},
-				error: function(request, status, error){
-					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-					window.location.href = contextPath + "/movieManager";
-				}
-			}); */
-			
-		});
 	});
 </script>
 </head>
@@ -148,7 +73,7 @@
                   </div>
                    <div class="form-group">
                      <label>파일 첨부</label>
-                     <input type="file" id="uploadFile" name="uploadFile" class="form-control" multiple>
+                     <input type="file" id="uploadFile" name="uploadFile" class="form-control">
                   </div>
                </form:form>
                   <button id="uploadBtn" class="btn btn-primary">등록</button>
@@ -168,6 +93,13 @@ $(document).ready(function(){
 		var files = inputFile[0].files;
 		console.log(files);
 		
+		for (var key of formData.keys()){
+			console.log(key);
+		}
+		for (var value of formData.values()) {
+			console.log(value);
+		}
+		
 		for(var i = 0; i < files.length; i++){
 			formData.append("uploadFile", files[i]);
 		}
@@ -179,9 +111,7 @@ $(document).ready(function(){
 			data: formData,
 			type: 'POST',
 			success: function(result){
-				alert(contextPath);
 				alert("Uploaded");
-				window.location.href('/main')
 			}
 		});
 		
@@ -215,8 +145,6 @@ $(document).ready(function(){
 				window.location.href = contextPath + "/movieManager";
 			}
 		});
-		
-		
 	});
 });
 

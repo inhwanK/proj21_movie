@@ -82,8 +82,14 @@ public class RestMovieManagerController {
 	public  void uploadPoster(MultipartFile[] uploadFile, HttpServletRequest request) {
 		String upload = request.getSession().getServletContext().getRealPath("/").concat("resources");
 		String uploadFolder = upload + File.separator + "images" + File.separator + "movie" + File.separator + "box-office";
+		System.out.println(uploadFolder);
 		
 		for (MultipartFile multipartFile : uploadFile) {
+			System.out.println("================================");
+			System.out.println("파일 이름 : " + multipartFile.getOriginalFilename());
+			System.out.println("파일 타입 : " + multipartFile.getContentType());
+			System.out.println("파일 크기 : " + multipartFile.getSize());
+			
 			String uploadFileName = multipartFile.getOriginalFilename();
 			
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
@@ -91,26 +97,21 @@ public class RestMovieManagerController {
 			File saveFile = new File(uploadFolder, uploadFileName);
 			
 			try {
+				
 				multipartFile.transferTo(saveFile);
 			} catch (Exception e) {
 				e.getMessage();
 			}
 		}
-//		String upload = request.getSession().getServletContext().getRealPath("/").concat("resources");
-//		String imgUploadPath = upload + File.separator + "images" + File.separator + "movie" + File.separator + "box-office";
-//		
-//		System.out.println(imgUploadPath);
-//		
+
 //		// 폴더 생성
 //		File uploadPath = new File(imgUploadPath);
-//		System.out.println("1");
 //		if (uploadPath.exists() == false) {
-//			System.out.println("2");
 //			uploadPath.mkdirs();
 //		}
-//		System.out.println("3");
-////		List<AttachImage> list = new ArrayList<>();
-//		System.out.println(uploadFile);
+
+//		List<AttachImage> list = new ArrayList<>();
+
 //		for(MultipartFile multipartFile : uploadFile) {
 //			System.out.println("================================");
 //			System.out.println("파일 이름 : " + multipartFile.getOriginalFilename());
@@ -118,18 +119,18 @@ public class RestMovieManagerController {
 //			System.out.println("파일 크기 : " + multipartFile.getSize());
 //			
 //			// 이미지 정보 객체
-////			AttachImage ai = new AttachImage();
+//			AttachImage ai = new AttachImage();
 //			
 //			// 파일 이름
 //			String uploadFileName = multipartFile.getOriginalFilename();
-////			ai.setFileName(uploadFileName);
+//			ai.setFileName(uploadFileName);
 //			
 //			// uuid 적용 파일 이름
-////			String uuid = UUID.randomUUID().toString();
-////			ai.setUuid(uuid);
+//			String uuid = UUID.randomUUID().toString();
+//			ai.setUuid(uuid);
 //			
-////			uploadFileName = uuid + "_" + uploadFileName;
-////			System.out.println("uploadFileName >> " + uploadFileName);
+//			uploadFileName = uuid + "_" + uploadFileName;
+//			System.out.println("uploadFileName >> " + uploadFileName);
 //			
 //			// 파일 위치, 파일 이름은 합친 File 객체
 //			File saveFile = new File(uploadPath, uploadFileName);
@@ -138,32 +139,32 @@ public class RestMovieManagerController {
 //			try {
 //				multipartFile.transferTo(saveFile);
 //				
-////				// 썸네일 생성
-////				File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
-////				
-////				BufferedImage bo_image = ImageIO.read(saveFile);
-////				
-////				// 썸네일 비율
-////				double ratio = 3;
-////				int width = (int) (bo_image.getWidth() / ratio);
-////				int height = (int) (bo_image.getHeight() / ratio);
-////				
-////				
-////				BufferedImage bt_image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
-////				
-////				Graphics2D graphic = bt_image.createGraphics();
-////				
-////				graphic.drawImage(bo_image, 0, 0, width, height, null);
-////				
-////				ImageIO.write(bt_image, "jpg", thumbnailFile);
+//			// 썸네일 생성
+//				File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
+//				
+//				BufferedImage bo_image = ImageIO.read(saveFile);
+//				
+//			// 썸네일 비율
+//				double ratio = 3;
+//				int width = (int) (bo_image.getWidth() / ratio);
+//				int height = (int) (bo_image.getHeight() / ratio);
+//				
+//				
+//				BufferedImage bt_image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+//				
+//				Graphics2D graphic = bt_image.createGraphics();
+//				
+//				graphic.drawImage(bo_image, 0, 0, width, height, null);
+//				
+//				ImageIO.write(bt_image, "jpg", thumbnailFile);
 //			} catch (Exception e) {
 //				e.printStackTrace();
 //			}
-////			list.add(ai);
+//			list.add(ai);
 //		} // end of for
 //		
-////		ResponseEntity<List<AttachImage>> result = new ResponseEntity<List<AttachImage>>(list, HttpStatus.OK);
-////		return result;
+//		ResponseEntity<List<AttachImage>> result = new ResponseEntity<List<AttachImage>>(list, HttpStatus.OK);
+//		return result;
 	}
 	
 	@PatchMapping("/movies/{no}")
