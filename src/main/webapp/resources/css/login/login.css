@@ -182,6 +182,13 @@ section #loginFormArea {
 	font-weight: 500 bolder;
 }
 
+/* 로그인 실패시 경고글 */
+.login_warn{
+    margin-top: 30px;
+    text-align: center;
+    color : red;
+}
+
 a {
 	text-decoration: none;
 	color: #4b4b4b;

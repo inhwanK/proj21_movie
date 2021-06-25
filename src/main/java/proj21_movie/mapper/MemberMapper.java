@@ -16,4 +16,8 @@ public interface MemberMapper {
     int countMember();
 	
 	Member selectMemberByEmail(String memEmail);
+	
+	 /* 로그인 */
+    public Member memberLogin(Member member);
+
 }

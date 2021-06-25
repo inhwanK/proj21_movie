@@ -49,7 +49,7 @@
 		  from member
 		 where mem_email = #{memEmail}
 	</delete>
-	
+
 <!-- 	<select id="selectMemberByEmail" parameterType="String" resultType="int">
 		select count(*)
 		  from member

@@ -7,8 +7,8 @@
 		<id column="memPasswd" property="memPasswd"/>
 	</resultMap>
 
-	<select id="LoginCommand" parameterType="String" resultType="loginCommand">
-		select COUNT(*)
+	<select id="LoginCommand" resultType="loginCommand">
+		select count(*)
 		  from member
 		 where mem_email = #{memEmail}
 		   and mem_passwd = password(#{memPasswd})

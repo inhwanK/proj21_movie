@@ -18,12 +18,29 @@
 <script type="text/javascript">
 $(function(){
 	<!-- 회원 로그인 -->
-	var contextPath = "<%= request.getContextPath()%>";
-	$('#selButton').click(function(){
-        /* 로그인 메서드 서버 요청 */
-        $("#login_form").attr("action", "/login");
-        $("#login_form").submit();
- 
+	$("#selButton").click(function(){
+		var contextPath = "<%= request.getContextPath()%>";
+		var LoginCommand = {  
+                 memEmail: $("#memEmail").val(), 
+                 memPasswd: $("#memPasswd").val()
+               };
+		$.ajax({
+    		url         : contextPath + "/login",
+    		type        : "POST",
+    		contentType : "application/json; charset=utf-8",
+    		datatype    : "json",
+    		cache       : false,
+    		data        : JSON.stringify(LoginCommand),
+    		success     : function(member) {
+    			alert("로그인에 성공했습니다");
+        		window.location.href = contextPath + "/loginSuccess";
+    		},
+    		error       : function(request, status, error){
+        		alert("아이디 또는 비밀번호를 확인해주세요");
+        		window.location.href = contextPath + "/loginfail";
+    		}
+		});
+	}); 
 });
 </script>
 </head>
@@ -37,7 +54,6 @@ $(function(){
 			<a href="#">바로예매</a>
 		</div>
 	</header>
-
 	<nav>
 		<ul>
 			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
@@ -48,7 +64,6 @@ $(function(){
 			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
 		</ul>
 	</nav>
-
 	<section id="loginFormArea">
 		<form action="login" id="login_form" method="POST">
 			<fieldset>
@@ -70,6 +85,9 @@ $(function(){
 							</td>
 						</tr>
 					</table>
+					<c:if test = "${result == 0 }">
+					<div class="login_warn">사용자 ID 또는 비밀번호를 잘못 입력하셨습니다.</div>
+					</c:if>
 						<label class="chbox"> 
 						<input type="checkbox" name="chek_box" value="id_check" id="coki">아이디 저장</label> 
 						<br> 
