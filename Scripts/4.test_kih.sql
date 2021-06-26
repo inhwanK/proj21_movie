@@ -47,6 +47,11 @@ select * from inquiry;
 
 select * from notice;
 
+delete 
+from notice
+where not_no = 23;
+
+insert into notice(not_title,not_detail,not_date) values ('공지테스트 10개이상', '공지테스트 10 개 이상 내용', now());
 -- 제목에 '공'이 들어가는 모든 공지사항 검색
 select * 
 from notice 
@@ -92,8 +97,8 @@ order by not_no desc) as search
 having rownum >= (#{selectPage}-1)*10 + 1 and rownum <= #{selectPage} * 10;
 
 
-select not_no, not_title, not_date, @rownum:=@rownum+1 as rownum
-			from notice
-			where (@rownum:=0)=0 and not_title like concat('%','3','%')
-			order by not_no desc;
+select not_no, not_title, not_date
+from notice
+where  not_title like concat('%','이상','%')
+order by not_no desc;
 

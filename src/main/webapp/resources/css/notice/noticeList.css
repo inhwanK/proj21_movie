@@ -48,10 +48,6 @@ div#title-wrap{
 div.title a{
 	color:#aaa;
 }
-/* div.title>a:link, div.title>a:active, div.title>a:hover, div.title>a:visited{
-	color:#222; 
-	
-} */
 
 .board-list-util:after, .board-list-util:before {
     content: '';
@@ -107,12 +103,6 @@ th {
     background-color: #f2f4f5;
 }
 
-tbody {
-    display: table-row-group;
-    vertical-align: middle;
-    border-color: inherit;
-}
-
 .board-list>tbody>tr>td, .board-list>tbody>tr>th {
     height: 45px;
     padding: 10px 20px 10px 20px;
@@ -132,6 +122,12 @@ a{
 	text-decoration: none;
 } 
 
+div#notfound{
+	margin: auto auto;
+	width:800px;
+	height:40px;
+	text-align: center;
+}
 .board-list>tbody>tr>td>a, .board-list>tbody>tr>th>a {
     display: inline-block;
     margin: 0;

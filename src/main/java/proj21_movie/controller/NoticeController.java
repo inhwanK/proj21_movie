@@ -20,16 +20,21 @@ public class NoticeController {
 		return mav;
 	}
 	
-	@GetMapping("/noticelist") // post 하면 좋을 듯?
+	@GetMapping("/noticelist") 
 	public ModelAndView noticeList(@RequestParam(required = false, defaultValue = "1") int selectPage, 
 									@RequestParam(required = false, defaultValue = "") String notTitle) {
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("totalNotice", service.getTotalNotice()); // 페이지 개수 세기.
+		mav.addObject("totalNotice", service.getNumberOfNotices(notTitle)); // 페이지 개수 세기.
 		mav.addObject("selectPage", selectPage); // 선택된 페이지 값.
 		mav.addObject("notTitle", notTitle);
 		mav.setViewName("notice/noticeList");
 		return mav;
+	}
+	
+	@GetMapping("/noticeManager")
+	public String noticeManager() {
+		return "manager/noticeList";
 	}
 	
 }

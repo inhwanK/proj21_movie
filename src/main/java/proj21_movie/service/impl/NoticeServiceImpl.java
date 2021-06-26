@@ -27,8 +27,8 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public List<Notice> showNoticeListByPage(int selectPage) {
-		int totalNumber = mapper.countNotice();
+	public List<Notice> showNoticeListByPage(String notTitle, int selectPage) {
+		int totalNumber = mapper.countNotice(notTitle);
 		return mapper.selectNoticeByPage(selectPage, totalNumber);
 	}
 	@Override
@@ -55,8 +55,8 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public int getTotalNotice() {
-		return mapper.countNotice();
+	public int getNumberOfNotices(String notTitle) {
+		return mapper.countNotice(notTitle);
 	}
 
 	
