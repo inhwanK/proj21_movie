@@ -1,6 +1,7 @@
 package proj21_movie.dto;
 
 public class AuthInfo {
+	//회원 정보 세션 유지
 	private String memEmail; // 회원아이디(이메일)
 	private String memName; // 이름
 

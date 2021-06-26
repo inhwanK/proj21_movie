@@ -31,7 +31,7 @@ public class MemberLoginMapperTest {
         member.setMemPasswd("1234");
         
         mapper.LoginCommand(member);
-        System.out.println("결과 값 : " + mapper.LoginCommand(member));    
+        System.out.println("결과 값 : " + member);    
     }
  
 
