@@ -7,7 +7,7 @@
 <head>
 	<link rel="icon" href="data:;base64,iVBORw0KGgo=">	<!-- 파비콘 오류 메세지 해결 -->
 	<meta charset="UTF-8">
-	<title>바로예매(임시)</title>
+	<title>예매</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/reserve/reserve.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>

@@ -8,7 +8,7 @@ import proj21_movie.dto.Seat;
 
 @Service
 public interface SeatService {
-	List<Seat> getListByShowInfoNo(Seat seat);
+	List<Seat> getListByShowInfoNo(int showNo);
 	
 	int registSeat(Seat seat);
 	int removeSeat(int no);

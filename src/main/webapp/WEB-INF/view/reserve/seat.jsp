@@ -10,35 +10,6 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/reserve/seat.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
-	<script type="text/javascript">
-		$(function(){
-			var contextPath = "${contextPath}";
-			var no = ${param.no};
-			var row = 0;
-			var col = 0;
-			
-			$.ajax({
-				type:"GET",
-				url: contextPath + "/api/showinfo/" + no,
-				contentType: "application/json; charset=utf-8",
-				async: false,
-				success: function(json){
-					$("#mov-title").text(json.movNo.movTitle);			
-					$("#mov-date").text("상영일 : " + json.shwDate);
-					$("#mov-time").text("상영시간 : " + json.shwStarttime);
-					$("#priceAdult").val(json.cinNo.cinAdultPrice);
-					$("#priceTeen").val(json.cinNo.cinTeenPrice);
-					$("#pricePref").val(json.cinNo.cinPrefPrice);
-					row = json.cinNo.cinRow;
-					col = json.cinNo.cinCol;
-				}
-			});
-			
-			console.log("row >> " + row + ", col >> " + col);
-		});
-		
-		
-	</script>
 </head>
 <body>
 	<header>
@@ -103,8 +74,8 @@
 			<div id="seat-choice">
 
 				<div id="seat-area">
-					<img alt="스크린 이미지" src="${contextPath}/resources/images/screen.png"> <br> <br>
-					<c:forEach var="row" begin="1" end="5">
+					<%-- <img alt="스크린 이미지" src="${contextPath}/resources/images/screen.png"> <br> <br> --%>
+					<%-- c:forEach var="row" begin="1" end="5">
 					
 						<!-- 하드코딩 ... 무조건 수정 필요함. -->
 						<c:if test="${row eq 1 }">
@@ -137,7 +108,7 @@
 								<span id="hiddenseat"></span>
 							</c:if>
 						</c:forEach>
-					</c:forEach>
+					</c:forEach> --%>
 				</div>
 
 				<div id="seat-info">
@@ -146,12 +117,13 @@
 							<dt id="mov-title"></dt>
 							<dd id="mov-date"></dd>
 							<dd id="mov-time"></dd>
+							<dd id="mov-type"></dd>
 						</dl>
 					</div>
 					<div id="select-info">
 						<dl>
 							<dt>좌석번호</dt>
-							<dd></dd>
+							<dd id="seat-no"></dd>
 						</dl>
 					</div>
 					<div id="price-info">
@@ -183,54 +155,150 @@
 	</footer>
 	
 	<script type="text/javascript">
-		// 인원 수 늘리기
-		$(document).on('click', '[class=countPlus]', function(e){
-			e.preventDefault();
+		$(function(){
+			var contextPath = "${contextPath}";
+			var no = ${param.no};
+			var row = 0;
+			var col = 0;
 			
-			var cnt = Number($(this).prev().text());
-			var price = Number($(this).next().val());
-			var resPrice = Number($("#price").text());
-			
-			if (cnt < 5) {
-				$(this).prev().text(cnt+1);
-				$("#price").text(price + resPrice);
-			}
-		});
-		
-		// 인원 수 줄이기
-		$(document).on('click', '[class=countMinus]', function(e){
-			e.preventDefault();
-			
-			var cnt = Number($(this).next().text());
-			var price = Number($(this).next().next().next().val());
-			var resPrice = Number($("#price").text());
-
-			if (cnt > 0) {
-				$(this).next().text(cnt-1);
-				$("#price").text(resPrice - price);
-			}
-		});
-		
-		// 좌석 선택
-		$("#seat-area").on('click', 'span', function(e){
-			var cntAdult = Number($("#countAdult").text());
-			var cntTeen = Number($("#countTeen").text());
-			var cntPref = Number($("#countPref").text());
-			var cntTotal = cntAdult + cntTeen + cntPref; // 선택한 인원 총합
-			
-			var activeLength = $(".select-seat.active").length; // 선택된 좌석 개수
-			
-			/* alert("cntTotal >> " + cntTotal + "\nactiveLength >> " + activeLength); */
-			
-			if (cntTotal <= activeLength) {
-				if ($(this).hasClass("active")){
-					$(this).removeClass("active");
-				} else {
-					alert("관람인원을 확인하세요.");
+			$.ajax({
+				type:"GET",
+				url: contextPath + "/api/showinfo/" + no,
+				contentType: "application/json; charset=utf-8",
+				async: false,
+				success: function(json){
+					$("#mov-title").text(json.movNo.movTitle);			
+					$("#mov-date").text("상영일 : " + json.shwDate);
+					$("#mov-time").text("상영시간 : " + json.shwStarttime);
+					$("#mov-type").text("상영타입 : " + json.cinNo.cinType);
+					$("#priceAdult").val(json.cinNo.cinAdultPrice);
+					$("#priceTeen").val(json.cinNo.cinTeenPrice);
+					$("#pricePref").val(json.cinNo.cinPrefPrice);
+					row = json.cinNo.cinRow;
+					col = json.cinNo.cinCol;
 				}
-			} else {
-				$(this).toggleClass("active");
+			});
+			/* console.log("row >> " + row + ", col >> " + col); */
+			
+			// 상영관의 행과 열로 좌석 넣어주는 함수
+			var updateView = function(){
+				var makeTag = "";
+				var i = 1;
+				var leng = row * col;
+				/* console.log("updateView >> " + row + ", " + col); */
+				
+				makeTag += "<img alt='스크린 이미지' src='${contextPath}/resources/images/screen.png'><br><br>";
+				makeTag += "<span id='hiddenseat'></span>";
+				for (i = 1; i <= col; i++){
+					makeTag += "<span class=matrix>" + i + "</span>";
+				}
+				makeTag += "<br>";
+				for (j = 1; j <= row; j++) {
+					for (i = 1; i <= col; i++) {
+						if (i % col == 0) {
+							makeTag += "<span class='select-seat' id='" + j + "" + i + "'>" + col + "</span>";
+							makeTag += "<br>";
+							makeTag += "</div>";
+						} else if (i % col == 1) {
+							makeTag += "<div class='row-index'>"
+							makeTag += "<span class='matrix'>" + String.fromCharCode(65+(j-1)) + "</span>";
+							makeTag += "<span class='select-seat' id='" + j + "" + i + "'>" + (i % col) + "</span>"
+						} else {
+							makeTag += "<span class='select-seat' id='" + j + "" + i + "'>" + (i % col) + "</span>";
+						}
+					}
+				}
+				$("#seat-area").html(makeTag);
 			}
+			
+			updateView();
+			
+			$.ajax({
+				type:"GET",
+				url: contextPath + "/api/seat/" + no,
+				contentType: "application/json; charset=utf-8",
+				async: false,
+				success: function(json){
+					var dataLength = json.length;
+					if (dataLength >= 1) {
+						for (i = 0; i < dataLength; i++){
+							console.log("예약된 좌석 - 행 >> " + json[i].seatRowNo + ", 열 >> " + json[i].seatColNo);
+							$("#" + json[i].seatRowNo + json[i].seatColNo).removeClass('select-seat');
+							$("#" + json[i].seatRowNo + json[i].seatColNo).addClass('reserved');
+						}
+					}
+				}
+			});
+			
+			// 인원 수 늘리기
+			$(document).on('click', '[class=countPlus]', function(e){
+				e.preventDefault();
+				
+				var cnt = Number($(this).prev().text());
+				var price = Number($(this).next().val());
+				var resPrice = Number($("#price").text());
+				
+				if (cnt < 5) {
+					$(this).prev().text(cnt+1);
+					$("#price").text(price + resPrice);
+				}
+			});
+			
+			// 인원 수 줄이기
+			$(document).on('click', '[class=countMinus]', function(e){
+				e.preventDefault();
+				
+				var cnt = Number($(this).next().text());
+				var price = Number($(this).next().next().next().val());
+				var resPrice = Number($("#price").text());
+				
+				var cntAdult = Number($("#countAdult").text());
+				var cntTeen = Number($("#countTeen").text());
+				var cntPref = Number($("#countPref").text());
+				var cntTotal = cntAdult + cntTeen + cntPref; // 선택한 인원 총합
+				var activeLength = $(".select-seat.active").length; // 선택된 좌석 개수
+				
+				if (cnt > 0) {
+					if (cntTotal <= activeLength){
+						alert("좌석이 선택되어 있습니다.");
+						return;
+					}
+					$(this).next().text(cnt-1);
+					$("#price").text(resPrice - price);
+				} 
+			});
+			
+			// 좌석 선택
+			$("#seat-area").on('click', '.select-seat', function(e){
+				var cntAdult = Number($("#countAdult").text());
+				var cntTeen = Number($("#countTeen").text());
+				var cntPref = Number($("#countPref").text());
+				var cntTotal = cntAdult + cntTeen + cntPref; // 선택한 인원 총합
+				
+				var activeLength = $(".select-seat.active").length; // 선택된 좌석 개수
+				
+				var selectCol = Number($(this).text());		// 열번호
+				var selectRow = $(this).parent().children().first().text();		// 행번호
+				var selectSeat = selectRow + selectCol;
+				var sCont = "<span id='" + selectSeat + "'>"+ selectSeat + " </span>";
+				
+				if (cntTotal <= activeLength) {
+					if ($(this).hasClass("active")){
+						$(this).removeClass("active");
+						$("#seat-no span").remove('#' + selectSeat);
+					} else {
+						alert("관람인원을 확인하세요.");
+					}
+				} else {
+					if ($(this).hasClass("active")){
+						$(this).toggleClass("active");
+						$("#seat-no span").remove('#' + selectSeat);			
+					} else {
+						$(this).toggleClass("active");
+						$("#seat-no").append(sCont);
+					}
+				}
+			});
 		});
 	</script>
 </body>

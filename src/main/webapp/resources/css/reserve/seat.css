@@ -173,7 +173,7 @@ section h2 {
 
 #seat-area{
 	padding: 10px;
-	margin-top: 30px;
+	/* margin-top: 30px; */
 	margin-left: 150px;
 	width: 570px;
 	height: 500px;
@@ -187,23 +187,37 @@ section h2 {
 
 #seat-area span{
 	display: inline-block;
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 28px;
+	/* border: 1px solid RGB(3, 22, 52); */
+	margin: 5px;
+}
+
+.reserved {
+	border: 1px solid RGB(3, 22, 52);
+	background-color: gray;
+}
+
+.select-seat {
 	border: 1px solid RGB(3, 22, 52);
 }
 
 #hiddenseat{
 	display: inline-block;
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 28px;
 	visibility: hidden;
 }
 
+.matrix {
+	border: 1px solid RGB(255, 255, 255);;
+}
 
-#seat-area span:hover{
+
+#seat-area .select-seat:hover{
 	display: inline-block;
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 28px;
 	border: 1px solid RGB(3, 22, 52);
 	background-color: RGB(3, 22, 52);
 	color: white;
@@ -227,15 +241,19 @@ section h2 {
 	margin: 50px auto;
 }
 
+#select-info {
+	height: 70px;
+}
+
 #movie-info dt, #seat-info dt, #price-info dt{
-	font-size: 1.2em;
+	font-size: 1.5em;
 	font-weight: bold;
 	color: white;
 	text-align: left;
 }
 
 #movie-info dd, #seat-info dd, #price-info dd{
-	font-size: 0.8em;
+	font-size: 1.0em;
 	color: white;
 	text-align: left;
 	margin: 0;

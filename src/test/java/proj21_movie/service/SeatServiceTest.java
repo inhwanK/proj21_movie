@@ -42,9 +42,9 @@ public class SeatServiceTest {
 	public void test01GetListByShowInfoNo() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
-		Seat seat = new Seat();
-		seat.setShwNo(new ShowInfo(1));
-		List<Seat> list = mapper.selectSeatByShowInfoNo(seat);
+//		Seat seat = new Seat();
+//		seat.setShwNo(new ShowInfo(1));
+		List<Seat> list = mapper.selectSeatByShowInfoNo(1);
 		Assert.assertNotNull(list);
 		
 		list.forEach(s -> log.debug(s.toString()));
