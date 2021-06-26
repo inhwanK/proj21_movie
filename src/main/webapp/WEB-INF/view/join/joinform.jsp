@@ -60,6 +60,30 @@
 	            }
 	        }); 
 	    });
+		
+		<!-- 아이디 중복 확인 , 지금 무조건 사용가능으로 뜸-->
+		$('#memEmail').on("click", function(e){
+
+			var memEmail = $('#memEmail').val();			// .id_input에 입력되는 값
+			var data = {memEmail : memEmail}				// '컨트롤에 넘길 데이터 이름' : '데이터(.id_input에 입력되는 값)'
+			
+			$.ajax({
+				type : "post",
+				url  : contextPath + "/joinform",
+				data : data,
+				success : function(result){
+					if(result != "fail"){
+						$('.id_input_re_1').css("display","inline-block");
+						$('.id_input_re_2').css("display", "none");				
+					} else {
+						$('.id_input_re_2').css("display","inline-block");
+						$('.id_input_re_1').css("display", "none");				
+					}
+					
+				}// success 종료
+
+			});
+		});
 
 	});
 </script>
@@ -93,9 +117,11 @@
 			<div class="join_main">
 				<ul class="ul">
 					<li class="li">
-						<span>아이디 </span><span id="emailcheck"></span>
+						<span>아이디 </span>
+						<span class="id_input_re_1">사용 가능한 아이디입니다.</span>
+						<span class="id_input_re_2">아이디가 이미 존재합니다.</span>
 						<br> 
-						<input type="email" placeholder="메일주소를 입력하세요" class="box1" id="memEmail" oninput = "checkId()" required />
+						<input type="email" placeholder="메일주소를 입력하세요" class="box1" id="memEmail" required />
 					</li>
 					<li class="li">
 						<span>패스워드 </span> 

@@ -16,4 +16,7 @@ public interface MemberService {
 	
 	Member selectMemberBymemEmail(String memEmail);
 	
+	// 아이디 중복 검사
+	public int idCheck(String memEmail) throws Exception;
+	
 }
