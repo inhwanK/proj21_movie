@@ -42,9 +42,4 @@ public class LoginCommand {
 		return String.format("LoginCommand [memEmail=%s, memPasswd=%s, rememEmail=%s]", memEmail, memPasswd, rememEmail);
 	}
 
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
