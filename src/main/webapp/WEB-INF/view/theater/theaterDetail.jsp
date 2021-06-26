@@ -11,8 +11,43 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/theater/theaterDetail.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
+	<script type="text/javascript">
 		$(function(){
+			/* 날짜 불러오기 */
+			var week = ['일', '월', '화', '수', '목', '금', '토'];
+			var today = new Date();
+			
+			var year = today.getFullYear();
+			var month = today.getMonth() + 1;
+			var date = today.getDate();
+			var day = today.getDay();
+
+			for (i = 0; i < 7; i++){			
+				var addDate = date + i;
+				
+				var today2 = new Date(year, month, addDate);
+				var month2 = today2.getMonth();
+				var date2 = today2.getDate();
+
+				var dayOfWeek = week[(day + i) % 7]; 
+				
+				$(".date-list").append("<button type='button'><span>" + month2 + "월 " + date2 + "일</span><span>"+ dayOfWeek + "요일</span></button>");
+			}
+			
+			/* 기본 active 클래스 활성화 */
+			$(".date-list button:first").addClass("active");
+			
+			/* 해당요일이 토요일/일요일일시 class 추가 */
+		    var spanSat = $('.date-list button span:nth-child(2):contains("토요일")').parent();
+		    var spanHoli = $('.date-list button span:nth-child(2):contains("일요일")').parent();
+		    spanSat.addClass('sat');
+		    spanHoli.addClass('holi'); 
+			
+		    /* 텍스트 변경(토/일 클래스 추가 후) */
+			$('.date-list button:first span:nth-child(2)').text("오늘");
+			$('.date-list button:nth-child(2) span:nth-child(2)').text("내일");
+		    
+			/* 극장정보 등 탭 클릭 */
 			$(".btn li").click(function(e){
 				e.preventDefault();
 				$(this).addClass("active");
@@ -22,10 +57,12 @@
 				$(".tab-cont-wrap > div").eq($(this).index()).addClass("active");
 			});
 			
-			$(".date-area button").click(function(){ 
+			/* 날짜 선택시 */
+			$(".date-list button").click(function(){ 
 				$(this).addClass("active");
 				$(this).siblings().removeClass("active"); 
 			});
+			
 		});
 	</script>
 	<script>
@@ -252,51 +289,13 @@
 							<div class="time-schedule">
 								
 								<!-- date-list -->
-								<div class="date-list">
-									<!-- date-area -->
-									<div class="date-area" style="position: relative; width: 2100px; border: none; left: -70px;">								
-										<button></button>																			
-										<button class="active" type="button">
-											<span>8</span><span>오늘</span>																																				
-										</button>										
-										<button type="button">
-											<span>9</span><span>내일</span>																																				
-										</button>
-										<button type="button">
-											<span>10</span><span>목</span>																																				
-										</button>
-										<button type="button">
-											<span>11</span><span>금</span>																																				
-										</button>
-										<button class="sat" type="button">
-											<span>12</span><span>토</span>																																				
-										</button>
-										<button class="holi" type="button">
-											<span>13</span><span>일</span>																																			
-										</button>
-										<button class="disabled" type="button">
-											<span>14</span><span>월</span>																																				
-										</button>
-										<button class="disabled" type="button">
-											<span>15</span><span>화</span>																																				
-										</button>
-										<button class="disabled" type="button">
-											<span>16</span><span>수</span>																																				
-										</button>
-										<button class="disabled" type="button">
-											<span>17</span><span>목</span>																																				
-										</button>
-										<button class="disabled" type="button">
-											<span>18</span><span>금</span>																																				
-										</button>
-										<button class="sat" type="button">
-											<span>19</span><span>토</span>
-										</button>
-										<button class="disabled" type="button">
-											<span>20</span><span>일</span>																								
-										</button>										
-									</div>
-									<!-- // date-area -->
+								<div class="date-list">													
+									<!-- <button class="disabled" type="button">
+										<span>7월 2일</span><span>금</span>																																				
+									</button>									
+									<button class="sat" type="button">
+										<span>7월 3일</span><span>토</span>																																			
+									</button> -->
 								</div>
 								<!-- // date-list -->
 								
@@ -308,7 +307,7 @@
 										<!-- theater-title -->
 										<div class="theater-title">
 											<p class="movie-grade age-12">
-												<a href="../../movielist/movieDetail/1" title="크루엘라 상세보기">크루엘라</a>
+												<a href="${contextPath}/movie?movNo=1" title="크루엘라 상세보기">크루엘라</a>
 											</p>
 											<p class="information" style="float: right;">
 												<span style="color: #01738b;">상영중</span>/상영시간 134분
@@ -371,7 +370,7 @@
 										<!-- theater-title -->
 										<div class="theater-title">
 											<p class="movie-grade age-15">
-												<a href="#" title="컨저링3: 악마가 시켰다 상세보기">컨저링3: 악마가 시켰다</a>
+												<a href="${contextPath}/movie?movNo=3" title="컨저링3: 악마가 시켰다 상세보기">컨저링3: 악마가 시켰다</a>
 											</p>
 											<p class="information" style="float: right;">
 												<span style="color: #01738b;">상영중</span>/상영시간 112분

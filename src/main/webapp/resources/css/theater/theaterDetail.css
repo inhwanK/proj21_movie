@@ -1,23 +1,7 @@
 @charset "UTF-8";
 
-@charset "UTF-8";
-
 /* Fontawesome 4.7 */
 @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-
-@font-face {
-	font-family: NanumBarunGothic;
-	font-weight: 400;
-	src:
-		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.eot);
-	src:
-		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.eot?#iefix)
-		format('embedded-opentype'),
-		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.woff)
-		format('woff'),
-		url(https://img.megabox.co.kr/static/pc/font/nanum/NanumBarunGothicSubset.ttf)
-		format('truetype')
-}
 
 @font-face {
 	font-family: 'IBMPlexSansKR-Regular';
@@ -79,12 +63,6 @@ header div a {
 	font-size: 1.0em;
 	color: RGB(136, 136, 136);
 }
-
-/* header div a:hover { */
-/* 	text-decoration: none; */
-/* 	padding-bottom: 4px; */
-/* 	border-bottom: 2px solid RGB(3, 22, 52); */
-/* } */
 
 /* <nav> */
 nav {
@@ -216,7 +194,7 @@ section {
 h2.title {
 	padding: 0 0 16px 0;
 	font-size: 1.4666em;
-	font-weight: 400;
+	font-weight: 600;
 	letter-spacing: -1px;
 	line-height: 1.1;
 	color: #503396;
@@ -358,7 +336,6 @@ a.button.purple:active, a.button.purple:focus, a.button.purple:hover{
 	padding-top: 5px
 }
 
-/*  */
 .tab-cont {
 	display: none;
 }
@@ -553,121 +530,76 @@ a.button.purple:active, a.button.purple:focus, a.button.purple:hover{
 	display: table;
 }
 
-.time-schedule .date-area {
-	float: left;
-}
-
-.time-schedule .date-area button {
-	width: 70px;
-	height: 72px;
-	border: 0;
-	background-color: transparent;
-	float: left;
-	border-bottom: 3px solid transparent;
-	font-weight: 400;
-}
-
-.time-schedule .date-area button span {
-	display: block;
-	font-size: 1.2em;
-	line-height: 1.1;
-	padding: 5px 0;
-	font-family: NanumBarunGothic;
-	font-weight: 300;
-}
-
-.time-schedule .date-area button.holi:hover, .time-schedule .date-area button.sat:hover,
-	.time-schedule .date-area button:focus, .time-schedule .date-area button:hover
-	{
-	border-bottom: 3px solid #503396;
-}
-
-.time-schedule.date-area button .disabled.holi:hover, .time-schedule .date-area button.disabled.sat:hover
-	{
-	border-bottom: 2px solid transparent !important;
-}
-
-.time-schedule .date-area button.active {
-	background-color: #f7f8f9;
-	border-bottom: 3px solid #503396;
-}
-
-.time-schedule .date-area button.sat {
-	color: #3b5fcb;
-}
-
-.time-schedule .date-area button.holi {
-	color: #e81002;
-}
-
-.time-schedule .date-area button.disabled {
-	font-weight: 400;
-	opacity: .5;
-	cursor: default;
-}
-
-.time-schedule .date-area button.disabled:focus {
-	outline: 0;
-	border-bottom: 2px solid transparent;
-}
-
-.time-schedule .date-area button.disabled:hover {
-	outline: 0;
-	border-bottom: 2px solid transparent;
-}
-
-.time-schedule .date-area button.disabled span {
-	color: #666 !important;
-	font-weight: 400;
-}
-
 .time-schedule .date-list {
-	width: 980px;
-	overflow: hidden;
-	float: left;
-	height: 72px;
 	border-top: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
 	margin-bottom: 30px;	
 }
 
-.time-schedule .date-area {
-	height: 39px;
-	float: left;
+.time-schedule .date-list button {
+	width: 90px;
+	height: 72px;
+	margin-right: 50px;
+	border: 0;
+	background-color: transparent;
+	border-bottom: 3px solid transparent;
 }
 
-.time-schedule .date-area button.disabled {
+.time-schedule .date-list button span {
+	display: block;
+	font-size: 1.2em;
+	line-height: 1.1;
+	padding: 5px 0;
+	font-family: 'IBMPlexSansKR-Regular';
+}
+
+.time-schedule .date-list button.holi:hover, .time-schedule .date-list button.sat:hover,
+	.time-schedule .date-list button:focus, .time-schedule .date-list button:hover
+	{
+	border-bottom: 3px solid #503396;
+}
+
+.time-schedule.date-list button .disabled.holi:hover, .time-schedule .date-list button.disabled.sat:hover
+	{
+	border-bottom: 2px solid transparent !important;
+}
+
+.time-schedule .date-list button.active {
+	background-color: #f7f8f9;
+	border-bottom: 3px solid #503396;
+}
+
+.time-schedule .date-list button.sat {
+	color: #3b5fcb;
+}
+
+.time-schedule .date-list button.holi {
+	color: #e81002;
+}
+
+.time-schedule .date-list button.disabled {
+	font-weight: 400;
+	opacity: .5;
 	cursor: default;
 }
 
-.time-schedule.date-list {
-	height: 39px;
-}
-
-.time-schedule.date-area button {
-	height: 39px;
-	font-size: .8667em;
+.time-schedule .date-list button.disabled:focus {
+	outline: 0;
 	border-bottom: 2px solid transparent;
 }
 
-.time-schedule.date-area button.holi:hover, .time-schedule.date-area button.sat:hover,
-	.time-schedule.date-area button:focus, .time-schedule.date-area button:hover
-	{
-	border-bottom: 2px solid #503396;
+.time-schedule .date-list button.disabled:hover {
+	outline: 0;
+	border-bottom: 2px solid transparent;
 }
 
-.time-schedule.date-area button.active {
-	background-color: #f7f8f9;
-	border-bottom: 2px solid #503396;
+.time-schedule .date-list button.disabled span {
+	color: #666 !important;
+	font-weight: 400;
 }
 
-.time-schedule.date-area button span {
-	position: relative;
-	display: inline-block;
-	line-height: 1.1;
-	padding: 0 9px 0 0;
-	vertical-align: middle;
-	font-family: NanumBarunGothic;
+.time-schedule .date-list button.disabled {
+	cursor: default;
 }
 /* // time-schedule */
 
@@ -833,7 +765,7 @@ a.button.purple:active, a.button.purple:focus, a.button.purple:hover{
 	text-align: center;
 	font-weight: 400;
 	line-height: 1em;
-	font-family: NanumBarunGothic;
+	font-family: 'IBMPlexSansKR-Regular';
 	margin: 20px 0;
 }
 

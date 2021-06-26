@@ -20,6 +20,7 @@
     <script src="${contextPath}/resources/js/star/jquery.barrating.min.js"></script>	
 	<script>
 		$(function() {
+			/* 주요정보 등 탭 클릭시 */
 			$(".btn li").click(function(e) {
 				e.preventDefault();
 				$(this).addClass("active");
@@ -28,19 +29,20 @@
 				$(".tab-cont-wrap > div").removeClass("active");
 				$(".tab-cont-wrap > div").eq($(this).index()).addClass("active");
 			});
-
+			
+		   /* 취소 버튼 누를시  */
 		   $("#cancel").click(function () {
 		        $("#contxt").val('');	        
-		        $("#input-star").val('');	        
-		        $(".stars .fa").removeClass("active");        
+		        $(".br-widget a").removeClass();	               
+		        $(".br-widget a:first-child").addClass("br-selected br-current");	               
+		        $(".br-current-rating").text("1");	         
+		        $(".br-widget").unbind('mouseleave');
 		   });
-			  
+		   
+		   /* 한줄평쓰기 버튼 누를시 */
 		   $(document).ready( function() {
 			   $(".comment-write > span").click(function(){
-					$(this).addClass("active");
-					$(this).removeClass("active");
-					
-					$(".write-content").toggleClass("active");  
+					$(".write-content").slideToggle().toggleClass("active");  
 			     });
 		   });
 		   
@@ -48,10 +50,20 @@
 		   $('#example-fontawesome').barrating({ 
    				theme: 'fontawesome-stars' 
   			});
+		   
+		   /* 엔터 쳤을때 버튼 누른것과 동일한 이벤트 */
+			$("#contxt").on("keyup", function(key) {
+		        if (key.keyCode == 13) {
+		        	$('#writeBtn').click();
+		        	return false;	// 검색 버튼을 눌렀을 경우에 해당 버튼이 활성화 (다른 의도하지 않은 동작 방지)
+		        }
+		    });
+		   
 		});
 	</script>
 	<script type="text/javascript">
 		$(function(){
+			/* ajax - 박스오피스 데이터만 예매버튼 활성화 */
 			var contextPath = "${contextPath}";
 			var no = "${movNo}";
 			
@@ -111,10 +123,10 @@
 						
 						/* 영화 정보 */
 						sCont += "<div class='movie-info'>";
-						sCont += "<p>상영타입 : " + '2D(자막)' + "</p>";	// 상영타입 컬럼 미 지정						
+						sCont += "<p class='p-type'></p>";		
 						sCont += "<div class='line'>";						
 						sCont += "<p>감독&nbsp;: " + json.movDirector + "</p>";						
-						sCont += "<p>장르&nbsp;: " + json.movGrade + "/" + json.movRuntime + "분</p>";						
+						sCont += "<p>장르&nbsp;: " + json.movGenre + "/" + json.movRuntime + "분</p>";						
 						sCont += "<p>등급&nbsp;: " + json.movGrade + "세이상관람가</p>";						
 						sCont += "<p>개봉일&nbsp;: " + getFormatDate(json.movOpendate) + "</p>";											
 						sCont += "</div>";
@@ -127,6 +139,15 @@
 					$(".poster .wrap").append(poster);
 					$(".movie-info-list").append(sCont);
 			});
+			
+			/* 상영타입 (전부 2d로 넣어놓음) */
+			var cinNo = "1";
+			$.get(contextPath + "/api/cinemas/" + cinNo,
+				function(json){
+					var cinType = "";
+						cinType += "상영타입 : " + json.cinType + "(자막)";
+					$(".movie-info .p-type").append(cinType);
+				});
 			
 			/* 실시간 평점 (영화 평균 평점) */	
 			var movNo = "${movNo}";
@@ -237,6 +258,7 @@
 				}
 			});
 			
+			/* 수정 버튼 누를시 팝업 */
 			$(document).ready(function(){
 				$(this).on('click', '[id=modify]', function(){
 					var pa = $(this).parent().parent();
@@ -263,7 +285,8 @@
 				    PopupCenter(contextPath + "/updateComment?comNo=" + comNo,'popup','550','400'); 
 				});
 			});
-				
+			
+			/* 한줄평 삭제 */
 			$(document).on('click', '[id=remove]', function(){
 				var pa = $(this).parent().parent();
 				var ch = pa.children().children();
@@ -419,7 +442,7 @@
 													</tr>
 													<tr>
 														<td>
-															<textarea id="contxt" rows="3" cols="100" name="contents" placeholder="한줄평을 적어주세요"></textarea>
+															<input type="text" id="contxt" class="form-control" maxlength="40" placeholder="한줄평을 적어주세요 (40자 이내)" autocomplete="off"/>
 															<select id="example-fontawesome" class="com-star" name="rating">
 																<option value="1">1</option>
 																<option value="2">2</option>
