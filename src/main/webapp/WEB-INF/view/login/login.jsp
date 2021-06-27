@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="tf" tagdir="/WEB-INF/tags" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tf" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -21,7 +21,7 @@ $(function(){
 	<!-- 회원 로그인 -->
 	/* 로그인 버튼 클릭 메서드 */
     $(".btn").click(function(){
-    	var contextPath = "<%= request.getContextPath()%>";
+    	var contextPath = "<%=request.getContextPath()%>";
         /* 로그인 메서드 서버 요청 */
         $("#login_form").attr("action", contextPath + "/login");
         $("#login_form").submit();
@@ -31,7 +31,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<%@include file ="../login/header.jsp" %>
+	<%@include file="../login/header.jsp"%>
 	<section id="loginFormArea">
 		<form id="login_form" method="POST">
 			<fieldset>
@@ -65,6 +65,6 @@ $(function(){
 			</fieldset>
 		</form>
 	</section>
-	<%@include file ="../login/footer.jsp" %>
+	<%@include file="../login/footer.jsp"%>
 </body>
 </html>
