@@ -66,10 +66,4 @@
   		 where mem_email = #{memEmail}
   	</select>
 
-<!-- 	<select id="selectMemberByEmail" parameterType="String" resultType="int">
-		select count(*)
-		  from member
-		 where mem_email = #{memEmail}
-	</select>
- -->
 </mapper>

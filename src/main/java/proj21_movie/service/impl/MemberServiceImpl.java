@@ -55,16 +55,17 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.selectMemberByEmail(memEmail);
 	}
 
-	@Override
-	public int idCheck(String memEmail) throws Exception {
-		log.debug("service - idCheck() > " + memEmail);
-		return mapper.idCheck(memEmail);
-	}
-
 	// 로그인
 	@Override
 	public Member memberLogin(Member member) throws Exception {
 		log.debug("service - memberLogin() > " + member);
 		return mapper.memberLogin(member);
+	}
+	
+	// 아이디 중복검사
+	@Override
+	public int idCheck(String memEmail) throws Exception {
+		log.debug("service - idCheck() > " + memEmail);
+		return mapper.idCheck(memEmail);
 	}
 }

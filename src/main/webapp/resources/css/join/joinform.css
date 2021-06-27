@@ -182,15 +182,13 @@ button {
 
 /* 중복아이디 존재하지 않는경우 */
 .id_input_re_1 {
-	color: #00498c;
+	color: green;
 	display: none;
-	font-weight: bold;
 }
 /* 중복아이디 존재하는 경우 */
 .id_input_re_2 {
-	color: #d92742;
+	color: red;
 	display: none;
-	font-weight: bold;
 }
 
 /* footer */

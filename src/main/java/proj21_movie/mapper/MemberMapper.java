@@ -20,6 +20,5 @@ public interface MemberMapper {
 	//로그인
     public Member memberLogin(Member member);
     // 아이디 중복 검사
- 	public int idCheck(String memEmail);
-
+    public int idCheck(String memEmail) throws Exception;
 }
