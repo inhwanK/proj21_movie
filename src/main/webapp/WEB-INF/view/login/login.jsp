@@ -15,6 +15,7 @@
 <script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	<!-- 회원 로그인 -->
@@ -24,31 +25,13 @@ $(function(){
         /* 로그인 메서드 서버 요청 */
         $("#login_form").attr("action", contextPath + "/login");
         $("#login_form").submit();
-        
     });
+
 });
 </script>
 </head>
 <body>
-	<header>
-		<a href="${contextPath}/main"> 
-		<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png"></a>
-		<div>
-			<a href="${contextPath}/login">로그인</a> 
-			<a href="${contextPath}/join">회원가입</a>
-			<a href="#">바로예매</a>
-		</div>
-	</header>
-	<nav>
-		<ul>
-			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
-			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
-			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
-			<li class="nav"><a href="${contextPath}/inquiry">이벤트</a></li>
-			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
-			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
-		</ul>
-	</nav>
+	<%@include file ="../login/header.jsp" %>
 	<section id="loginFormArea">
 		<form id="login_form" method="POST">
 			<fieldset>
@@ -70,9 +53,6 @@ $(function(){
 							</td>
 						</tr>
 					</table>
-					<c:if test = "${result == 0 }">
-					<div class="login_warn">사용자 ID 또는 비밀번호를 잘못 입력하셨습니다.</div>
-					</c:if>
 						<label class="chbox"> 
 						<input type="checkbox" name="chek_box" value="id_check" id="coki">아이디 저장</label> 
 						<br> 
@@ -85,15 +65,6 @@ $(function(){
 			</fieldset>
 		</form>
 	</section>
-	
-	<footer>
-		<div id="content">
-			<img id="footer_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png">
-			<div id="textarea">
-				<p>COPYRIGHT © BoxMovie, Inc. All rights reserved</p>
-				<p>대구광역시 서구 서대구로 7길2 (내당동 245-4번지 2층) ARS 053-555-1333</p>
-			</div>
-		</div>
-	</footer>
+	<%@include file ="../login/footer.jsp" %>
 </body>
 </html>
