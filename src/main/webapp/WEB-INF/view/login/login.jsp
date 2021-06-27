@@ -18,29 +18,14 @@
 <script type="text/javascript">
 $(function(){
 	<!-- 회원 로그인 -->
-	var contextPath = "<%= request.getContextPath()%>";
-	$("#selButton").click(function(e){
-		var LoginCommand = {  
-                 memEmail: $("#memEmail").val(), 
-                 memPasswd: $("#memPasswd").val()
-               };
-		$.ajax({
-    		url         : contextPath + "/api/login",
-    		type        : "POST",
-    		contentType : "application/json; charset=utf-8",
-    		datatype    : "json",
-    		cache       : false,
-    		data        : JSON.stringify(LoginCommand),
-    		success     : function(data) {
-    			alert("로그인에 성공했습니다");
-        		window.location.href = contextPath + "/loginSuccess";
-    		},
-    		error       : function(request, status, error){
-        		alert("아이디 또는 비밀번호를 확인해주세요");
-        		window.location.href = contextPath + "/loginfail";
-    		}
-		});
-	}); 
+	/* 로그인 버튼 클릭 메서드 */
+    $(".btn").click(function(){
+    	var contextPath = "<%= request.getContextPath()%>";
+        /* 로그인 메서드 서버 요청 */
+        $("#login_form").attr("action", contextPath + "/login");
+        $("#login_form").submit();
+        
+    });
 });
 </script>
 </head>
@@ -65,7 +50,7 @@ $(function(){
 		</ul>
 	</nav>
 	<section id="loginFormArea">
-		<form action="/login" id="login_form" method="POST">
+		<form id="login_form" method="POST">
 			<fieldset>
 				<div class="fm_box">
 					<table>

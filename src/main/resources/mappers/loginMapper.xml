@@ -5,6 +5,7 @@
 	<resultMap type="RegisterRequest" id="resRegi">
 		<id column="memEmail" property="memEmail"/>
 		<id column="memPasswd" property="memPasswd"/>
+		
 	</resultMap>
 
 	<select id="logincheck" resultMap="resRegi">
