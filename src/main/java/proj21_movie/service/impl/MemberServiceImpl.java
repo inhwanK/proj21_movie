@@ -60,4 +60,11 @@ public class MemberServiceImpl implements MemberService {
 		log.debug("service - idCheck() > " + memEmail);
 		return mapper.idCheck(memEmail);
 	}
+
+	// 로그인
+	@Override
+	public Member memberLogin(Member member) throws Exception {
+		log.debug("service - memberLogin() > " + member);
+		return mapper.memberLogin(member);
+	}
 }

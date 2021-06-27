@@ -20,18 +20,25 @@ public class MemberLoginMapperTest {
 	
 	@Autowired
 	private LoginMapper mapper;
+	
+	@Autowired
+	private MemberMapper memMapper;
 
 	@Test
     public void memberLogin() throws Exception{
         
         Member member = new Member();    // Member 변수 선언 및 초기화
         
-        /* 올바른 아이디 비번 입력경우 */
+        // 올바른 아이디 비번 입력경우
         member.setMemEmail("test1@test.com");
         member.setMemPasswd("1234");
         
-        mapper.logincheck(member);
-        System.out.println("결과 값 : " + member);    
+        // 틀린 비번 입력경우
+//        member.setMemEmail("test13@test.com");
+//        member.setMemPasswd("12345");
+        
+        memMapper.memberLogin(member);
+        System.out.println("결과 값 : " + memMapper.memberLogin(member));    
     }
  
 
