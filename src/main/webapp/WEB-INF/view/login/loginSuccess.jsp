@@ -13,11 +13,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	 <h1>전달받은 데이터</h1>
-        <ul>
-            <li>이메일: <%= request.getParameter("memEmail") %></li>
-            <li>비밀번호: <%= request.getParameter("memPasswd") %></li>
-        </ul>
+
+${Member.memEmail}
+
 </body>
 </body>
 </html>

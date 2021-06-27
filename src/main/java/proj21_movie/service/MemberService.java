@@ -8,18 +8,21 @@ import proj21_movie.dto.Member;
 public interface MemberService {
 
 	Member getMember(String memEmail);
+
 	List<Member> getLists();
 
 	int registerMember(Member member);
-	int modifyMember(Member member);
-	int removeMember(String memEmail);
-	
-	Member selectMemberBymemEmail(String memEmail);
-	
 
-    // 로그인
-    public Member memberLogin(Member member) throws Exception;
+	int modifyMember(Member member);
+
+	int removeMember(String memEmail);
+
+	Member selectMemberBymemEmail(String memEmail);
+
+	// 로그인
+	public Member memberLogin(Member member) throws Exception;
+
 	// 아이디 중복 검사
 	public int idCheck(String memEmail) throws Exception;
-	
+
 }
