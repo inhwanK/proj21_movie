@@ -1,7 +1,5 @@
 package proj21_movie.controller;
 
-import java.io.IOException;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,15 +41,6 @@ public class LoginController {
 	private AuthService authService;
 
 	@Autowired
-	private LoginService logService;
-
-	@Autowired
-	private MemberMapper memMapper;
-
-	@Autowired
-	private LoginMapper logMapper;
-
-	@Autowired
 	private MemberService memService;
 
 	// 로그인 화면 연결(성공)
@@ -72,7 +61,7 @@ public class LoginController {
 		return "login/loginfail";
 	}
 
-	// 로그인
+	// 로그인(성공)
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String loginPOST(HttpServletRequest request, Member member, RedirectAttributes rttr) throws Exception {
 
@@ -89,7 +78,6 @@ public class LoginController {
 		}
 		session.setAttribute("member", mem); // 일치하는 아이디, 비밀번호 경우 (로그인 성공)
 		return "redirect:/loginSuccess";
-
 	}
 
 }
