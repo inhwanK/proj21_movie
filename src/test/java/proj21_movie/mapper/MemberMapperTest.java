@@ -55,9 +55,9 @@ public class MemberMapperTest {
 	@Test
 	public void test03selectMemberByEmail() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		
+
 		String memEmail = "test1@test.com";
-		
+
 		Member member = mapper.selectMemberByEmail(memEmail);
 		Assert.assertNotNull(member);
 
@@ -72,7 +72,7 @@ public class MemberMapperTest {
 		int res = mapper.insertMember(newMember);
 		Assert.assertEquals(1, res);
 		log.debug("res memEmail >> " + res);
-		
+
 		mapper.deleteMember(newMember.getMemEmail());
 	}
 
@@ -104,5 +104,16 @@ public class MemberMapperTest {
 		int res = mapper.deleteMember(newMember.getMemEmail());
 		Assert.assertEquals(1, res);
 	}
-	
+
+	// 아이디 중복검사
+	@Test
+	public void test07memberIdChk() throws Exception {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		String id = "test1@test.com"; // 존재하는 아이디
+		String id2 = "test123@test.com"; // 존재하지 않는 아이디
+		mapper.idCheck(id);
+		mapper.idCheck(id2);
+	}
+
 }

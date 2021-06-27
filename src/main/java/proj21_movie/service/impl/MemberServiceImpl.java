@@ -55,4 +55,9 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.selectMemberByEmail(memEmail);
 	}
 
+	@Override
+	public int idCheck(String memEmail) throws Exception {
+		log.debug("service - idCheck() > " + memEmail);
+		return mapper.idCheck(memEmail);
+	}
 }

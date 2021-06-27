@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="proj21_movie.mapper.LoginMapper">
 
-	<resultMap type="LoginCommand" id="resLoginCommand">
+	<resultMap type="RegisterRequest" id="resRegi">
 		<id column="memEmail" property="memEmail"/>
 		<id column="memPasswd" property="memPasswd"/>
 	</resultMap>
 
-	<select id="LoginCommand" resultType="loginCommand">
-		select count(*)
+	<select id="logincheck" resultMap="resRegi">
+		select mem_email, password(mem_passwd)
 		  from member
 		 where mem_email = #{memEmail}
 		   and mem_passwd = password(#{memPasswd})

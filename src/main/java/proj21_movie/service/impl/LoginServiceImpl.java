@@ -2,6 +2,7 @@ package proj21_movie.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import proj21_movie.dto.Member;
 import proj21_movie.dto.RegisterRequest;
 import proj21_movie.mapper.LoginMapper;
@@ -14,7 +15,7 @@ public class LoginServiceImpl implements LoginService {
 	LoginMapper logmapper;
 
 	@Override
-	public Member LoginCommand(Member member) throws Exception {
+	public Member LoginCommand(Member member) {
 		return logmapper.LoginCommand(member);
 	}
 

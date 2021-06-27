@@ -26,7 +26,7 @@ import proj21_movie.mapper.MemberMapper;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MemberServiceTest {
 	protected static final Log log = LogFactory.getLog(MemberServiceTest.class);
-	
+
 	@Autowired
 	private MemberMapper mapper;
 
@@ -40,61 +40,62 @@ public class MemberServiceTest {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		List<Member> list = mapper.selectMemberByAll();
 		Assert.assertNotNull(list);
-		
+
 		list.forEach(s -> log.debug(s.toString()));
 	}
-	
+
 	@Test
 	public void test02getMember() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		
+
 		Member member = mapper.selectMemberByNo(1);
 		Assert.assertNotNull(member);
 		log.debug(member.toString());
 	}
-	
+
 	@Test
 	public void test03registerMember() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		
+
 		Member newMember = new Member("test4@test.com", "1234", LocalDate.of(2020, 7, 4), "테스트4", "010-3343-0343");
-		
+
 		int res = mapper.insertMember(newMember);
 		Assert.assertEquals(1, res);
 		log.debug("res no >> " + res);
-		
+
 		mapper.deleteMember(newMember.getMemEmail());
 	}
-	
+
 	@Test
 	public void test04modifyMember() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		
+
 		Member newMember = new Member("test4_2@test.com", "1234", LocalDate.of(2020, 6, 22), "테스트4_2", "010-2231-3232");
 		mapper.insertMember(newMember);
-		
+
 		newMember.setMemEmail("test4_2@test.com");
 		newMember.setMemPasswd("1234");
 		newMember.setMemBirthdate(LocalDate.of(2020, 6, 22));
 		newMember.setMemName("테스트4_2");
 		newMember.setMemPhone("010-2231-3232");
-		
+
 		int res = mapper.updateMember(newMember);
 		Assert.assertEquals(1, res);
 		log.debug("res > " + res);
-		
+
 		mapper.deleteMember(newMember.getMemEmail());
 	}
-	
+
 	@Test
 	public void test05removeMember() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		
+
 		Member newMember = new Member("test4_2@test.com", "1234", LocalDate.of(2020, 6, 22), "테스트4_2", "010-2231-3232");
-		
+
 		mapper.insertMember(newMember);
 		int res = mapper.deleteMember(newMember.getMemEmail());
 		Assert.assertEquals(1, res);
 		log.debug("res > " + res);
 	}
+	
 }

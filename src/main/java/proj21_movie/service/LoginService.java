@@ -8,7 +8,7 @@ import proj21_movie.dto.RegisterRequest;
 @Service
 public interface LoginService {
 	//로그인
-    public Member LoginCommand(Member member) throws Exception;
+    public Member LoginCommand(Member member);
     
     RegisterRequest logincheck(String memEmail, String memPasswd);
 }

@@ -30,7 +30,7 @@ public class MemberLoginMapperTest {
         member.setMemEmail("test1@test.com");
         member.setMemPasswd("1234");
         
-        mapper.LoginCommand(member);
+        mapper.logincheck(member);
         System.out.println("결과 값 : " + member);    
     }
  

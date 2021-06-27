@@ -13,11 +13,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<c:choose>
-		<%-- 로그인 상태면 다른 정보 보여주기 --%>
-		<c:when test="${sessionScope.memberVO != null}">
-			<strong>${sessionScope.memberVO.name}님 로그인 상태</strong><hr>
-		</c:when>
-</c:choose>
+	 <h1>전달받은 데이터</h1>
+        <ul>
+            <li>이메일: <%= request.getParameter("memEmail") %></li>
+            <li>비밀번호: <%= request.getParameter("memPasswd") %></li>
+        </ul>
+</body>
 </body>
 </html>
