@@ -53,6 +53,8 @@
 				
 				var td = $(this).parent().prevUntil();
 				var notNo = td.last().text(); 
+				// serialize() 생각해보기.
+				
 				console.log(notNo);
 				//window.location.href = contextPath + "/updateMovie?no=" + no;
 			});
