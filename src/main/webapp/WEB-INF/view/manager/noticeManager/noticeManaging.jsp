@@ -32,12 +32,11 @@
 				if(json.length >= 1){
 					for(i=0;i<json.length;i++){
 						list += "<tr>";
-						list += "<td>"+json[i].notNo+"</td>";
+						list += "<td name=\"notNo\">"+json[i].notNo+"</td>";
 						list += "<td>"+json[i].notTitle+"</td>";
 		      			list += "<td>"+getFormatDate(json[i].notDate)+"</td>";
-		      			console.log(json[i].notNo);
-		      			list += "<td><button class=\"btn btn-primary\">수정</button></td>";
-		      			list += "<td><button class=\"btn btn-primary\">삭제</button></td>";
+		      			list += "<td><button id=\"modify\" class=\"btn btn-primary\">수정</button></td>";
+		      			list += "<td><button id=\"delete\" class=\"btn btn-primary\">삭제</button></td>";
 		      			list += "</tr>";
 					} // end of for
 					$("tbody").append(list);
@@ -46,6 +45,18 @@
 			
 		});
 		
+		$(document).ready(function(){
+			$(this).on('click', '[id=modify]', function(){
+				//var tr = $(this).parent().parent();
+				//var td = tr.children();
+				//var notNo = td.eq(0).text();
+				
+				var td = $(this).parent().prevUntil();
+				var notNo = td.last().text(); 
+				console.log(notNo);
+				//window.location.href = contextPath + "/updateMovie?no=" + no;
+			});
+		});
 	});
 
 </script>

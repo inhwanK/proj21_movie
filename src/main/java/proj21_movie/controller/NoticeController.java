@@ -34,7 +34,12 @@ public class NoticeController {
 	
 	@GetMapping("/noticeManager")
 	public String noticeManager() {
-		return "manager/noticeList";
+		return "manager/noticeManager/noticeManaging";
+	}
+	
+	@GetMapping("/updateNotice")
+	public String updateNotice() {
+		return "manager/noticeManager/updateNotice";
 	}
 	
 }
