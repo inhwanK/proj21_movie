@@ -36,6 +36,9 @@ $(function(){
 		<form id="login_form" method="POST">
 			<fieldset>
 				<div class="fm_box">
+				<c:if test = "${result == 0 }">
+                	<div class = "login_warn">사용자 ID 또는 비밀번호를 잘못 입력하셨습니다.</div>
+            	</c:if>
 					<table>
 						<tr>
 							<td>
@@ -53,6 +56,7 @@ $(function(){
 							</td>
 						</tr>
 					</table>
+						
 						<label class="chbox"> 
 						<input type="checkbox" name="chek_box" value="id_check" id="coki">아이디 저장</label> 
 						<br> 

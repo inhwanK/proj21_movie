@@ -103,10 +103,10 @@ section #loginFormArea {
 }
 
 /* 로그인 실패시 경고글 */
-.login_warn{
-    margin-top: 30px;
-    text-align: center;
-    color : red;
+.login_warn {
+	margin-top: 30px;
+	text-align: center;
+	color: red;
 }
 
 a {
@@ -128,4 +128,12 @@ a {
 fieldset {
 	border: 2px solid #ffffff;
 	margin: 0;
+}
+
+/* 로그인 실패시 경고글 */
+.login_warn {
+	margin-top: 30px;
+	text-align: center;
+	color: #d92742;
+	font-weight: bolder;
 }

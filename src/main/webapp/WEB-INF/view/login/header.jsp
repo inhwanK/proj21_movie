@@ -18,11 +18,24 @@
 </head>
 <body>
 	<header>
-		<a href="${contextPath}/main"> <img id="header_ci" alt="브랜드 로고"
-			src="${contextPath}/resources/images/ci.png"></a>
+		<a href="${contextPath}/main"> <img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png"></a>
 		<div>
+		
+		<!-- 로그인 하지 않은 상태 -->
+        <c:if test = "${member == null }">
 			<a href="${contextPath}/login">로그인</a> <a href="${contextPath}/join">회원가입</a>
 			<a href="#">바로예매</a>
+		</c:if>
+			
+		<!-- 로그인한 상태 -->
+        <c:if test="${ member != null }">
+            <div class="login_success_area">
+            	<span>안녕하세요. ${member.memEmail} 회원님!</span>
+            	<a href="${contextPath}/main.do">로그아웃</a>
+            	<a href="#">바로예매</a>
+            </div>
+        </c:if>
+   
 		</div>
 	</header>
 	<nav>

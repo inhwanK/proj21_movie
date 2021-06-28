@@ -29,9 +29,9 @@ public class LoginController {
 	}
 
 	// 임시 로그인성공 화면 연결(성공)
-	@RequestMapping("/loginSuccess")
+	@RequestMapping("/loginsuccess")
 	public String loginSuccess() {
-		return "login/loginSuccess";
+		return "login/loginsuccess";
 	}
 
 	// 임시 로그인실패(성공)
@@ -44,19 +44,19 @@ public class LoginController {
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String loginPOST(HttpServletRequest request, Member member, RedirectAttributes rttr) throws Exception {
 
-//        System.out.println("login 메서드 진입");
-//        System.out.println("전달된 데이터 : " + member);
+        System.out.println("login 메서드 진입");
+        System.out.println("전달된 데이터 : " + member);
 
 		HttpSession session = request.getSession();
 		Member mem = memService.memberLogin(member);
-		if (mem == null) { // 일치하지 않는 아이디, 비밀번호 입력 경우
+		if (mem == null) { // 일치하지 않는 아이디, 비밀번호를 입력한 경우
 
 			int result = 0;
 			rttr.addFlashAttribute("result", result);
-			return "redirect:/member/loginfail";
+			return "redirect:/login";
 		}
-		session.setAttribute("member", mem); // 일치하는 아이디, 비밀번호 경우 (로그인 성공)
-		return "redirect:/loginSuccess";
+		session.setAttribute("member", mem); // 일치하는 아이디, 비밀번호를 입력한 경우 (로그인 성공)
+		return "redirect:/loginsuccess";
 	}
 
 }

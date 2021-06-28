@@ -17,8 +17,7 @@
       </RollingFile>
    </Appenders>
    <Loggers>
-      <Logger name="proj21_movie" level="trace"
-         additivity="false">
+      <Logger name="proj21_movie" level="trace" additivity="false">
          <AppenderRef ref="Console" />
          <AppenderRef ref="RollingFile_Daily" />
       </Logger>
