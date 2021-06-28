@@ -15,4 +15,5 @@ public interface ShowInfoService {
 	int removeShowInfo(ShowInfo showInfo);
 	
 	List<ShowInfo> getListsByCondition(ShowInfo showInfo);
+	List<ShowInfo> getShowInfoListByTheater(ShowInfo showInfo);
 }

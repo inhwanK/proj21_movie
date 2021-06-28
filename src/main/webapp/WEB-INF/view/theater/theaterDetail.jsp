@@ -18,7 +18,7 @@
 			var today = new Date();
 			
 			var year = today.getFullYear();
-			var month = today.getMonth() + 1;
+			var month = today.getMonth();
 			var date = today.getDate();
 			var day = today.getDay();
 
@@ -26,7 +26,7 @@
 				var addDate = date + i;
 				
 				var today2 = new Date(year, month, addDate);
-				var month2 = today2.getMonth();
+				var month2 = today2.getMonth() + 1;
 				var date2 = today2.getDate();
 
 				var dayOfWeek = week[(day + i) % 7]; 
@@ -35,7 +35,7 @@
 			}
 			
 			/* 기본 active 클래스 활성화 */
-			$(".date-list button:first").addClass("active");
+			//$(".date-list button:first").addClass("active");
 			
 			/* 해당요일이 토요일/일요일일시 class 추가 */
 		    var spanSat = $('.date-list button span:nth-child(2):contains("토요일")').parent();
@@ -56,13 +56,6 @@
 				$(".tab-cont-wrap > div").removeClass("active");
 				$(".tab-cont-wrap > div").eq($(this).index()).addClass("active");
 			});
-			
-			/* 날짜 선택시 */
-			$(".date-list button").click(function(){ 
-				$(this).addClass("active");
-				$(this).siblings().removeClass("active"); 
-			});
-			
 		});
 	</script>
 	<script>
@@ -81,7 +74,7 @@
 						name += "<p class='theater-name'>" + json.thtName + "</p>";
 						/* 극장 설명 */
 						detail += "<h2 class='big-title'>" + json.thtDetail + "</h2>"
-						detail += "<p> 최고 수준의 영화 관람 환경을 제공하는 메가박스 대구에서 안락한 문화생활을 즐겨보세요. </p>"	// 
+						detail += "<p> 최고 수준의 영화 관람 환경을 제공하는 메가박스 대구에서 안락한 문화생활을 즐겨보세요. </p>"
 						/* 극장 주소 */
 						address += "<li> <span class='font-gblue'> 도로명주소 : </span>" + json.thtAddress + "</li>";
 						/* 실시간 길찾기 */
@@ -114,6 +107,181 @@
 				});
 				/* // price-table-box(관람료 탭) */
 		});
+	</script>
+	<script>
+		$(function(){		
+			/* 상영시간표 탭 */
+			
+			var contextPath = "${contextPath}";
+			var dateIdx = 0;
+			var movieNo = 0;
+			var theaterNo = 0;
+			var time = "";
+			var showInfoNo = 0;
+			
+			// 날짜 선택했을 시 효과 & 선택된 날짜 인덱스 리턴
+			$(".date-list button").click(function(e){ 
+				e.preventDefault();
+				
+				$(this).addClass("active");
+				$(this).siblings().removeClass("active"); 
+				
+				// alert($(this).text());
+				
+				var idx = $(".date-list button").index(this);
+				// alert("날짜 인덱스 >> " + idx);
+				
+				dateIdx = idx;
+			});
+			
+			/* 날짜 클릭시 날짜계산하여 상영시간 출력 */
+			$(".date-list button").click(function(e){		
+				$(function(){
+					var contextPath = "${contextPath}";
+					var no = "${thtNo}";
+					var shwDate = date(dateIdx);
+					
+					$.ajax({
+						type:"GET",
+						url: contextPath + "/api/showInfoListByTheater/" + no + "/" + shwDate,
+						contentType: "application/json; charset=utf-8",
+						success: function(json){
+							
+							// 영화번호가 같으면 중복 제거 (좌석도 같이 제거 됨 - 후에 처리할 예정)
+							var result = json.filter((item1, idx1)=>{
+							    return json.findIndex((item2, idx2)=>{
+							        return item1.movNo.movNo == item2.movNo.movNo;
+							    }) == idx1;
+							});
+							
+							console.table(result);
+							
+							var resultLength = result.length;
+							if (resultLength >= 1) {
+								var sCont = "";
+								
+								for (i = 0; i < resultLength; i++) {
+									sCont += "<div class='theater-list'>";
+									
+									/* theater-title */
+									sCont += "<div class='theater-title'>";
+									sCont += "<p class='movie-grade age-" + result[i].movNo.movGrade + "'>";
+									sCont += "<a href='${contextPath}/movie?movNo=" + result[i].movNo.movNo + "' title='" 
+											+ result[i].movNo.movTitle + " 상세보기'>" + result[i].movNo.movTitle + "</a></p>";
+									sCont += "<p class='information'>";
+									sCont += "<span>상영중</span>/상영시간" + result[i].movNo.movRuntime + "분</p>";
+									sCont += "</div>";					
+									sCont += "</div>"
+									
+									// theater-type-box
+									sCont += "<div class='theater-type-box'>";
+									sCont += "<div class='theater-type'>";
+									sCont += "<p class='theater-name'>" + result[i].cinNo.cinNo + "관</p>";
+									sCont += "<p class='chair'>총 " + result[i].cinNo.cinSeat + "석</p>";
+									sCont += "</div>";
+									sCont += "<div class='theater-time'>";
+									sCont += "<div class='theater-type-area'>" + result[i].cinNo.cinType + "(자막)</div>";
+									sCont += "<div class='theater-time-box'>";
+									sCont += "<a href='#' title='영화 예매하기'>";
+									sCont += "<span class='time'>" + result[i].shwStarttime;
+									sCont += "<span class='chair'>" + result[i].cinNo.cinSeat + "석 </span></span></a>";
+									sCont += "</div></div></div>";
+								}
+								$(".theater-list-box").empty();		
+								$(".theater-list-box").append(sCont);	
+								
+							}else {
+								var sEmp = "";
+									sEmp = "<p class='no-showInfo-list'>선택하신 날짜의 상영중인 영화가 없습니다. 다른 날짜를 선택해주세요.</p>"
+								$(".theater-list-box").empty();
+								$(".theater-list-box").append(sEmp);
+							}
+						},
+						error : function(request, status, error){
+							var sEmp = "";
+								sEmp = "<p class='no-showInfo-list'>선택하신 날짜의 상영중인 영화가 없습니다. 다른 날짜를 선택해주세요.</p>"
+							$(".theater-list-box").empty();
+							$(".theater-list-box").append(sEmp);
+							console.log("error > ");
+						}
+							
+							// 원래 데이터(영화 중복 제거 안됨)
+							
+							/* var dataLength = json.length;
+							if (dataLength >= 1) {
+								var sCont = "";
+								
+								for (i = 0; i < dataLength; i++) {
+									sCont += "<div class='theater-list'>";
+									
+									// theater-title
+									sCont += "<div class='theater-title'>";
+									sCont += "<p class='movie-grade age-" + json[i].movNo.movGrade + "'>";
+									sCont += "<a href='${contextPath}/movie?movNo=" + json[i].movNo.movNo + "' title='" 
+											+ json[i].movNo.movTitle + " 상세보기'>" + json[i].movNo.movTitle + "</a></p>";
+									sCont += "<p class='information'>";
+									sCont += "<span>상영중</span>/상영시간" + json[i].movNo.movRuntime + "분</p>";
+									sCont += "</div>";					
+									sCont += "</div>";
+									
+									// theater-type-box
+									sCont += "<div class='theater-type-box'>";
+									sCont += "<div class='theater-type'>";
+									sCont += "<p class='theater-name'>" + json[i].cinNo.cinNo + "관</p>";
+									sCont += "<p class='chair'>총 " + json[i].cinNo.cinSeat + "석</p>";
+									sCont += "</div>";
+									sCont += "<div class='theater-time'>";
+									sCont += "<div class='theater-type-area'>" + json[i].cinNo.cinType + "(자막)</div>";
+									sCont += "<div class='theater-time-box'>";
+									sCont += "<a href='#' title='영화 예매하기'>";
+									sCont += "<span class='time'>" + json[i].shwStarttime;
+									sCont += "<span class='chair'>" + json[i].cinNo.cinSeat + "석 </span></span></a>";
+									sCont += "</div></div></div>";
+								}
+								$(".theater-list-box").empty();		
+								$(".theater-list-box").append(sCont);	
+								
+							}else {
+								var sEmp = "";
+									sEmp = "<p class='no-showInfo-list'>선택하신 날짜의 상영중인 영화가 없습니다. 다른 날짜를 선택해주세요.</p>"
+								$(".theater-list-box").empty();
+								$(".theater-list-box").append(sEmp);
+							}
+						},
+						error : function(request, status, error){
+							var sEmp = "";
+								sEmp = "<p class='no-showInfo-list'>선택하신 날짜의 상영중인 영화가 없습니다. 다른 날짜를 선택해주세요.</p>"
+							$(".theater-list-box").empty();
+							$(".theater-list-box").append(sEmp);
+							console.log("error > ");
+						} */	
+					});
+				});
+			});
+			
+		});
+		
+		// 인덱스를 넣으면 해당 인덱스만큼 +된 날짜를 계산하여 "yyyy-MM-dd" 형식으로 리턴해주는 함수 
+		function date(idx){
+			var today = new Date();
+			
+			var year = today.getFullYear();
+			var month = today.getMonth() + 1;
+			var date = today.getDate();
+			
+			var addDate = date + idx;
+			
+			var today2 = new Date(year, month, addDate);
+			var year2 = today2.getFullYear();
+			var month2 = today2.getMonth();
+			var date2 = today2.getDate();
+			
+			if (month2 < 10) month2 = "0" + month2;
+			if (date2 < 10) date2 = "0" + date2;
+			
+			return year2 + "-" + month2 + "-" + date2;
+		}
+		/* // 상영시간표 탭 */
 	</script>
 </head>
 <body>
@@ -301,69 +469,7 @@
 								
 								<!-- theater-list-box -->
 								<div class="reserve theater-list-box">
-								
-									<!-- 크루엘라 theater-list -->
-									<div class="theater-list">
-										<!-- theater-title -->
-										<div class="theater-title">
-											<p class="movie-grade age-12">
-												<a href="${contextPath}/movie?movNo=1" title="크루엘라 상세보기">크루엘라</a>
-											</p>
-											<p class="information" style="float: right;">
-												<span style="color: #01738b;">상영중</span>/상영시간 134분
-											</p>
-										</div>
-										<!-- // theater-title -->
-										
-										<!-- theater-type-box -->
-										<div class="theater-type-box">
-											<div class="theater-type">
-												<p class="theater-name">3관</p>
-												<p class="chair">총 90석</p>
- 											</div>
- 											<div class="theater-time">
- 												<div class="theater-type-area">2D(자막)</div>
- 												<div class="theater-time-box">
-													<a href="#" title="영화 예매하기">
-														<span class="time">15:10
-														<span class="chair">63석 </span>
-														</span>
-													</a>	
-													<a href="#" title="영화 예매하기">
-														<span class="time">18:15
-														<span class="chair">75석</span>
-														</span>
-													</a>
- 												</div>
- 											</div>
-										</div>
-										<!-- // theater-type-box -->
-										
-										<!-- theater-type-box -->
-										<div class="theater-type-box">
-											<div class="theater-type">
-												<p class="theater-name">5관</p>
-												<p class="chair">총 80석</p>
- 											</div>
- 											<div class="theater-time">
- 												<div class="theater-type-area">2D(자막)</div>
- 												<div class="theater-time-box">
-													<a href="#" title="영화 예매하기">
-														<span class="time">12:10
-														<span class="chair">43석</span>
-														</span>
-													</a>	
-													<a href="#" title="영화 예매하기">
-														<span class="time">14:15
-														<span class="chair">35석</span>
-														</span>
-													</a>
- 												</div>
- 											</div>
-										</div>
-										<!-- // theater-type-box -->
-									</div>
-									<!-- // 크루엘라 theater-list -->
+									<p class="no-showInfo-list">날짜를 선택해주세요</p>
 									
 									<!-- 컨저링3: 악마가 시켰다 theater-list -->
 									<div class="theater-list">
@@ -372,8 +478,8 @@
 											<p class="movie-grade age-15">
 												<a href="${contextPath}/movie?movNo=3" title="컨저링3: 악마가 시켰다 상세보기">컨저링3: 악마가 시켰다</a>
 											</p>
-											<p class="information" style="float: right;">
-												<span style="color: #01738b;">상영중</span>/상영시간 112분
+											<p class="information">
+												<span>상영중</span>/상영시간 112분
 											</p>
 										</div>
 										<!-- // theater-title -->

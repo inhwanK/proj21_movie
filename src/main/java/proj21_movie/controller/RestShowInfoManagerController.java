@@ -3,7 +3,6 @@ package proj21_movie.controller;
 import java.net.URI;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import proj21_movie.dto.Movie;
@@ -79,5 +77,19 @@ public class RestShowInfoManagerController {
 		showInfo.setShwDate(shwLocalDate);
 		
 		return ResponseEntity.ok(service.getListsByCondition(showInfo));
+	}
+	
+	// 극장별 상영정보
+	@GetMapping("/showInfoListByTheater/{thtNo}/{shwDate}")
+	public ResponseEntity<Object> showInfoListByTheater(@PathVariable int thtNo, @PathVariable String shwDate){
+		System.out.println("showInfoListByTheater()");
+		
+		ShowInfo showInfo = new ShowInfo();
+		showInfo.setThtNo(new Theater(thtNo));
+		
+		LocalDate shwLocalDate = LocalDate.parse(shwDate, DateTimeFormatter.ISO_DATE);
+		showInfo.setShwDate(shwLocalDate);
+		
+		return ResponseEntity.ok(service.getShowInfoListByTheater(showInfo));
 	}
 }
