@@ -48,7 +48,7 @@ header {
 	width: 150px;
 	margin: 0px auto;
 	align-items: center;
-	position: relative;
+	position: static;
 	left: 120px;
 	box-sizing: border-box;
 }
@@ -64,6 +64,15 @@ header div a {
 	padding-left: 15px;
 	padding-right: 15px;
 	font-size: 1.0em;
+	color: RGB(136, 136, 136);
+}
+
+/* 로그인 성공 영역 */
+.login_success_area {
+	color: #3e2789;
+}
+
+.login_success_area a {
 	color: RGB(136, 136, 136);
 }
 
