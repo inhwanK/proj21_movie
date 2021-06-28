@@ -531,10 +531,19 @@ select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_a
 		mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster 
 from movie;
 
+select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, 
+		mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster 
+	from movie
+ where mov_no = 1;
+
+select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, 
+		mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster 
+	from movie
+ where mov_opendate <= now() and mov_enddate > date_add(now(), interval -1 day) and mov_no = 1;
+
 alter table movie auto_increment = 1;
 
 delete from movie where mov_no > 0;
-
 
 -- 회원 테스트
 select mem_no, mem_email, mem_passwd, mem_birthdate, mem_name, mem_phone
@@ -545,7 +554,7 @@ insert into member values
 
 alter table member auto_increment = 1;
 
-delete from member where mem_no > 0;
+delete from member where mem_no > 9;
 
 
 -- 한줄평
@@ -682,4 +691,60 @@ select m.mov_no, m.mov_title, m.mov_grade, m.mov_genre, m.mov_runtime, m.mov_dir
 group by m.mov_no;
 
 
-		
+-- 극장 관련 ---------------------------------------------------------------------
+
+-- 상영관 
+select cin_no, cin_row, cin_col, cin_seat, cin_type, cin_adultprice, cin_teenprice, cin_prefprice 
+	from cinema;
+
+select cin_no, cin_row, cin_col, cin_seat, cin_type, cin_adultprice, cin_teenprice, cin_prefprice 
+	from cinema
+ where cin_no = 1;
+
+insert into cinema values (null, 10, 10, cin_row * cin_col, '2D', 10000, 8000, 5000);
+insert into cinema values (null, 8, 10, cin_row * cin_col, '2D', 10000, 8000, 5000);
+
+-- 상영정보
+select shw_no, tht_no, cin_no, mov_no, shw_date, shw_starttime, shw_endtime from showinfo;
+insert into showinfo values (null, 1, 1, 1, '2021-06-01', '14:00:00', '16:13:00');
+
+-- 상영정보 입력시 시작시간 설정 후 해당 영화의 런타임을 가져와서 시작시간에 더하여 shw_endtime에 넣어줄 것 
+delete from showinfo where shw_no > 0;
+alter table showinfo auto_increment = 1;
+
+-- 상영정보 view (상영정보, 극장, 상영관, 영화 join)
+create or replace view vw_full_showinfo 
+as 
+select s.shw_no, s.shw_date, s.shw_starttime, s.shw_endtime, 
+	t.tht_no, t.tht_name, 
+	c.cin_no, c.cin_row, c.cin_col, c.cin_seat, c.cin_type, c.cin_adultprice, c.cin_teenprice, c.cin_prefprice,
+	m.mov_no, m.mov_title 
+from showinfo s join theater t on s.tht_no = t.tht_no 
+	join cinema c on s.cin_no = c.cin_no  
+	join movie m on s.mov_no = m.mov_no;
+
+-- join ------------
+select s.shw_no, s.shw_date, s.shw_starttime, s.shw_endtime, 
+	t.tht_no, t.tht_name, 
+	c.cin_no, c.cin_row, c.cin_col, c.cin_seat, c.cin_type, c.cin_adultprice, c.cin_teenprice, c.cin_prefprice,
+	m.mov_no, m.mov_title 
+from showinfo s join theater t on s.tht_no = t.tht_no 
+	join cinema c on s.cin_no = c.cin_no  
+	join movie m on s.mov_no = m.mov_no;
+
+-- 
+select s.shw_no, s.shw_date, s.shw_starttime, 
+	t.tht_no, t.tht_name, 
+	c.cin_no, c.cin_seat, c.cin_type,
+	m.mov_no, m.mov_title, m.mov_grade, m.mov_runtime
+from showinfo s join theater t on s.tht_no = t.tht_no 
+	join cinema c on s.cin_no = c.cin_no  
+	join movie m on s.mov_no = m.mov_no
+where m.mov_no = 1 and t.tht_no = 1 and s.shw_date = '2021-06-29'
+order by mov_no, shw_starttime;
+
+
+
+
+
+
