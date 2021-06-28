@@ -56,4 +56,11 @@ public class ShowInfoServiceImpl implements ShowInfoService {
 		return list;
 	}
 
+	@Override
+	public List<ShowInfo> getShowInfoListByTheater(ShowInfo showInfo) {
+		List<ShowInfo> list = mapper.selectShowInfoListByTheater(showInfo);
+		log.debug("service - getShowInfoListByTheater() > " + showInfo);
+		return list;
+	}
+
 }

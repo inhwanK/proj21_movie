@@ -17,4 +17,7 @@ public interface ShowInfoMapper {
 	
 	// 날짜, 영화, 극장, 시간으로 검색하는 상영정보
 	List<ShowInfo> selectShowInfoByCondition(ShowInfo showInfo);
+	
+	// 극장, 날짜으로 검색하는 극장 상영시간표
+	List<ShowInfo> selectShowInfoListByTheater(ShowInfo showInfo);
 }

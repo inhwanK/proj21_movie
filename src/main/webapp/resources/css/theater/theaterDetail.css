@@ -643,11 +643,17 @@ a.button.purple:active, a.button.purple:focus, a.button.purple:hover{
 		url(../../images/theater/icon/age-19.png);
 }
 
+.information {
+	float: right;
+}
+
+.information span {
+	color: #01738b;
+}
 
 /* movie-list-box */
 .theater-list-box {
 	width: 100%;
-	border-top: 1px solid #000;
 	position: relative;
 	display: table;
 }
@@ -772,6 +778,16 @@ a.button.purple:active, a.button.purple:focus, a.button.purple:hover{
 .theater-time-box a span.chair{
 	background-position: bottom;
 	color: #01738b;
+}
+
+/* no-showInfo-list */
+.no-showInfo-list {
+	width: 1200px;
+	font-size: 1.3333em;
+	margin: 0;
+	padding: 50px 0;
+	border: 1px solid #f5f5f5;
+	border-width: 1px 0 1px 0
 }
 /* // 상영시간표 CSS */
 
