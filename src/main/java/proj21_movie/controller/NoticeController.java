@@ -19,7 +19,7 @@ public class NoticeController {
 		ModelAndView mav = new ModelAndView("notice/noticeDetail", "notNo", notNo);
 		return mav;
 	}
-	
+
 	// 처음 공지사항 페이지를 여는 메서드. 이기 때문에
 	// defaultValue 옵션이 필요함.
 	@GetMapping("/noticelist") 

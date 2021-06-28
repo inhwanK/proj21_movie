@@ -50,7 +50,7 @@
 						list += "<td>" + json[i].notNo + "</td>";
 						list += "<td><a href='${contextPath}/notice?notNo="
 								+ json[i].notNo + "'>" + json[i].notTitle
-								+ "</a></td>"; //보여주면 안될 것 같은 정보.
+								+ "</a></td>";
 						list += "<td>" + getFormatDate(json[i].notDate) + "</td>";
 						list += "<tr>"
 					}

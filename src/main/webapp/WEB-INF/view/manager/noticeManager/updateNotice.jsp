@@ -16,6 +16,7 @@
 	$(function(){
 		
 		var contextPath = "${contextPath}";
+		console.log(contextPath);
 		var notNo = "${notNo}"; 
 		console.log(notNo);
 		$("#no").attr('value',notNo);
@@ -29,14 +30,41 @@
 				$("#no").attr('value',json.notNo);
 				$("#regdate").attr('value',json.notDate);
 				$("#title").attr('value',json.notTitle);
-				$("#content").attr('value',json.notDetail);
-				$("#uploadFile").attr('value',json.notNo);
+				$("#content").empty();
+				$("#content").append(json.notDetail);
+				
+				// 파일 다운로드 구현해야함.
 			},
 			error:function(){
 				alert("뭔가 잘못되긴 했어용");
 			}
 		}); 
 		
+		$("#modify").on('click', function(){
+			var data ={
+				notNo: $("#no").val(),
+				notTitle: $("#title").val(),
+				notDetail: $("#content").val(),
+				// date 이슈 발생.
+				notFile: null
+			}
+			
+			$.ajax({
+				url:contextPath+"/api/notice",
+				type:"patch",
+				dataType:"json",
+				data:JSON.stringify(data),
+				contentType:"application/json; charset=utf-8",
+				success: function(json){
+					alert(JSON.stringify(data)+"수정이 완료되었습니다.");
+					//목록 페이지로 이동.
+				},
+				error: function(){
+					alert("뭔가 잘못된 것이 분명합니다.");	
+				}
+			});
+			
+		});
 	});
 </script>
 </head>
@@ -65,7 +93,8 @@
                   </div>
                   <div class="form-group">
                      <label>내용</label>
-                     <input type="text" id="content" class="form-control">
+                     <textarea rows="10" cols="500" id="content" class="form-control">
+                     </textarea>
                   </div>
                    <div class="form-group">
                      <label>파일 첨부</label>

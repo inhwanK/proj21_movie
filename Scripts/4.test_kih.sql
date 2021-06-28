@@ -12,7 +12,7 @@ insert into notice(not_title,not_detail,not_date) values ('공지테스트 10개
 
 update notice 
 set not_title = 'insertnotice 공지 수정' , not_detail = 'inserttest 글 세부내용 수정' , not_file = 'inserttest 글 파일 경로'
-where not_no = 5;
+where not_no = 21;
 
 -- 게시글 delete 할 때 auto_increment 값을 초기화해야 not_no 값이 정리가 됨.
 -- auto_increment 초기화 하는 쿼리. 
@@ -26,7 +26,7 @@ update notice set not_no = @count:=@count+1;
 -- 쿼리 수정 필요.
 select max(not_no) from notice;
 select count(*) from notice;
-select * from notice;
+select * from notice where not_no = 21;
 
 SELECT * 
 FROM notice

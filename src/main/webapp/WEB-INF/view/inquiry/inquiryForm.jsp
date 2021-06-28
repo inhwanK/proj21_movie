@@ -61,7 +61,7 @@
 			for(var i=0; i<files.length; i++){
 				formData.append("uploadFile", files[i]);
 			}
-			
+
 			$.ajax({
 				url:contextPath+"/api/inquiryFileUpload",
 				processData:false,
