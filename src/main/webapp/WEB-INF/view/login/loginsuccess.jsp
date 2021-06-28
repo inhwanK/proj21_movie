@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>로그인</title>
-	<link rel="stylesheet" href="${contextPath}/resources/css/join/joinsuccess.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/login/loginsuccess.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>

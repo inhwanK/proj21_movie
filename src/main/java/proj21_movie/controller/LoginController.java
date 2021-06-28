@@ -28,18 +28,12 @@ public class LoginController {
 		return "login/login";
 	}
 
-	// 임시 로그인성공 화면 연결(성공)
+	// 로그인성공 화면 연결(갑자기안됨)
 	@RequestMapping("/loginsuccess")
 	public String loginSuccess() {
 		return "login/loginsuccess";
 	}
-
-	// 임시 로그인실패(성공)
-	@RequestMapping("/loginfail")
-	public String loginfail() {
-		return "login/loginfail";
-	}
-
+	
 	// 로그인(성공)
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String loginPOST(HttpServletRequest request, Member member, RedirectAttributes rttr) throws Exception {
