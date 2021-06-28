@@ -17,7 +17,7 @@
 			var today = new Date();
 			
 			var year = today.getFullYear();
-			var month = today.getMonth() + 1;
+			var month = today.getMonth();
 			var date = today.getDate();
 			var day = today.getDay();
 
@@ -26,7 +26,7 @@
 				var addDate = date + i;
 				
 				var today2 = new Date(year, month, addDate);
-				var month2 = today2.getMonth();
+				var month2 = today2.getMonth() + 1;
 				var date2 = today2.getDate();
 
 				var dayOfWeek = week[(day + i) % 7]; 
@@ -132,9 +132,9 @@
                      	</c:forEach>
 					</ul>
 				</div>	
-				<div class="btntimediv">
+				<!-- <div class="btntimediv">
 					<button class="btntime">시간 확인하기</button>
-				</div>
+				</div> -->
 				<!-- <p>
 					극장을 선택해 주세요.
 				</p> -->	
@@ -182,6 +182,17 @@
 			/* alert("날짜 인덱스 >> " + idx); */
 			
 			dateIdx = idx;
+			
+			var dateActive = $(".date.active").length;
+			var movieActive = $(".movie.active").length;
+			var theaterActive = $(".theater.active").length;
+			var activeLength = dateActive + movieActive + theaterActive; // 날짜, 영화, 극장 active 클래스의 수
+			
+			if (activeLength == 3){
+				selTime();
+			} else {
+				$("#time-select").empty();
+			}
 		});
 		
 		// 영화 선택 시 효과 & 영화 번호 리턴
@@ -195,6 +206,17 @@
 			/* alert("movNo >> " + $(this).children().val()); */
 			
 			movieNo = $(this).children().val();
+			
+			var dateActive = $(".date.active").length;
+			var movieActive = $(".movie.active").length;
+			var theaterActive = $(".theater.active").length;
+			var activeLength = dateActive + movieActive + theaterActive; // 날짜, 영화, 극장 active 클래스의 수
+			
+			if (activeLength == 3){
+				selTime();
+			} else {
+				$("#time-select").empty();
+			}
 		});
 		
 		// 극장 선택 시 효과 & 극장 번호 리턴
@@ -208,21 +230,24 @@
 			/* alert("thtNo >> " + $(this).children().val()); */
 			
 			theaterNo = $(this).children().val();
+			
+			var dateActive = $(".date.active").length;
+			var movieActive = $(".movie.active").length;
+			var theaterActive = $(".theater.active").length;
+			var activeLength = dateActive + movieActive + theaterActive; // 날짜, 영화, 극장 active 클래스의 수
+			
+			if (activeLength == 3){
+				selTime();
+			} else {
+				$("#time-select").empty();
+			}
 		});
 		
-		// 시간확인 버튼. 날짜, 영화, 극장으로 찾아서 상영시간을 출력
-		$(document).on('click', '[class=btntime]', function(e){
+		// 영화번호, 극장번호, 날짜로 상영정보(시간) 조회
+		function selTime(){
 			$("#time-select").empty();
 			
-			var activeLength = $(".active").length; // active 클래스의 수
-			
-			// 날짜, 영화, 극장을 선택하지 않으면 경고창
-			if (activeLength < 3) {
-				alert("선택을 확인하세요.");
-				return;
-			}
-			
- 			var contextPath = "${contextPath}";
+			var contextPath = "${contextPath}";
  			
  			var shwDate = date(dateIdx);
  			
@@ -255,34 +280,14 @@
 					}
 				}
 			});
- 			
-			/* $.get(contextPath + "/api/showinfobycondition/" + movieNo + "/" + theaterNo + "/" + shwDate,
-					function(json) {
-						var dataLength = json.length;
-						if (dataLength >= 1) {
-							var sCont = "";
-							for (i = 0; i < dataLength; i++) {
-								var selTime = "";
-								if (i % 3 == 0 && i != 0) {
-									selTime += "<br><br><br><br>";									
-								}
-								selTime += "<span class='time'>";
-								selTime += json[i].shwStarttime;
-								selTime += "</span>";
-								selTime += "<input type='hidden' value='" + json[i].shwNo + "'/>";
-								$("#2D:last-child").append(selTime);
-							}
-							sCont += "<br><br><br><button id='btn-seat' class='btn-seat'>좌석 선택</button>";
-							$("#time-select").append(selTime);
-						}
-					}); */
-		});
+		}
 		
+	
 		// 시간 선택 시 효과
 		$(document).on('click', '[class=time]', function(e){
 			e.preventDefault();
 			
-			$(this).addClass("active");
+			$(this).toggleClass("active");
 			$(this).siblings().removeClass("active"); 
 			
 			time = $(this).text();
@@ -305,14 +310,14 @@
 			var today = new Date();
 			
 			var year = today.getFullYear();
-			var month = today.getMonth() + 1;
+			var month = today.getMonth();
 			var date = today.getDate();
 			
 			var addDate = date + idx;
 			
 			var today2 = new Date(year, month, addDate);
 			var year2 = today2.getFullYear();
-			var month2 = today2.getMonth();
+			var month2 = today2.getMonth() + 1;
 			var date2 = today2.getDate();
 			
 			if (month2 < 10) month2 = "0" + month2;

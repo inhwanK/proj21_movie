@@ -160,3 +160,7 @@ select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, c
 			and shw_starttime > if ('20210628' > now(), 0, now())
 		order by cin_no asc, shw_starttime asc;
 
+
+-- 예매 진행중 -----------------------------------------------------------------------
+select * from reserving;
+
