@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,20 +25,26 @@ public class RestNoticeController {
 		List<Notice> listNotice = service.showNoticeList();
 		return ResponseEntity.status(HttpStatus.OK).body(listNotice);
 	}
-
-	@GetMapping("/notice/{notNo}")
-	public ResponseEntity<Object> getNoticeByNo(@PathVariable("notNo") int notNo) {
+	
+	
+	// noticeDetail, 관리자 수정에 사용됨.
+	@GetMapping("/notice")
+	public ResponseEntity<Object> getNoticeByNo(int notNo) {
 		Notice notice = service.showNoticeDetail(notNo);
 		return ResponseEntity.status(HttpStatus.OK).body(notice);
 	}
 
 
+	// noticeList.jsp 클라이언트에서 이미 변수명과 값이 맞춰져서 오기 때문에 
+	// 정상적인 접근이라면 @RequestParam 은 굳이 필요햐지 않은 것으로 판단됨.
+	// 단, api에 직접 접근한다면 필요한 사항임.
 	@GetMapping("/noticesearch")
 	public ResponseEntity<Object> getNoticeTitleByPage(
-			@RequestParam(value = "selectPage", defaultValue = "1") int selectPage, 
-			@RequestParam(value = "notTitle", defaultValue = "") String notTitle){
+			@RequestParam(defaultValue = "1")  int selectPage, 
+			@RequestParam(defaultValue = "") String notTitle){
 		
 		List<Notice> listNotice = service.showNoticeByTitle(notTitle, selectPage);
 		return ResponseEntity.status(HttpStatus.OK).body(listNotice);
 	}
+	
 }

@@ -20,8 +20,9 @@
 
 		var contextPath = "${contextPath}";
 		var notNo = "${notNo}";
+		// console.log(notNo.serialize());
 		$.ajax({
-			url : contextPath + "/api/notice/" + notNo,
+			url : contextPath + "/api/notice?notNo=" + notNo,
 			method : "get",
 			dataType : "json"
 		}).done(function(json) {

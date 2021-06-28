@@ -15,6 +15,28 @@
 <script type="text/javascript">
 	$(function(){
 		
+		var contextPath = "${contextPath}";
+		var notNo = "${notNo}"; 
+		console.log(notNo);
+		$("#no").attr('value',notNo);
+		
+		$.ajax({
+			url: contextPath + "/api/notice?notNo="+notNo,
+			type:"get",
+			contentType:"application/json; charset=utf-8",
+			dataType:"json",
+			success:function(json){
+				$("#no").attr('value',json.notNo);
+				$("#regdate").attr('value',json.notDate);
+				$("#title").attr('value',json.notTitle);
+				$("#content").attr('value',json.notDetail);
+				$("#uploadFile").attr('value',json.notNo);
+			},
+			error:function(){
+				alert("뭔가 잘못되긴 했어용");
+			}
+		}); 
+		
 	});
 </script>
 </head>
@@ -31,7 +53,11 @@
                <form:form>
                	  <div class="form-group">
                      <label>번호</label>
-                     <input type="text" id="no" class="form-control" readonly="readonly">
+                     <input type="text" id="no" value="231231" class="form-control" readonly="readonly">
+                  </div>
+                   <div class="form-group">
+                     <label>등록일</label>
+                     <input type="text" id="regdate" class="form-control" readonly="readonly">
                   </div>
                   <div class="form-group">
                      <label>제목</label>
@@ -39,7 +65,7 @@
                   </div>
                   <div class="form-group">
                      <label>내용</label>
-                     <input type="text" id="genre" class="form-control">
+                     <input type="text" id="content" class="form-control">
                   </div>
                    <div class="form-group">
                      <label>파일 첨부</label>
