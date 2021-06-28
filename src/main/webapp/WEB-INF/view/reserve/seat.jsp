@@ -213,6 +213,7 @@
 			
 			updateView();
 			
+			// 예약된 좌석 비활성화
 			$.ajax({
 				type:"GET",
 				url: contextPath + "/api/seat/" + no,

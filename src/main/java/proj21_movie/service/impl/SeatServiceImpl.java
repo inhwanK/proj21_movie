@@ -13,7 +13,7 @@ import proj21_movie.service.SeatService;
 
 @Service
 public class SeatServiceImpl implements SeatService {
-	static final Log log= LogFactory.getLog(ReservationServiceImpl.class);
+	static final Log log= LogFactory.getLog(SeatServiceImpl.class);
 	
 	@Autowired
 	private SeatMapper mapper;
