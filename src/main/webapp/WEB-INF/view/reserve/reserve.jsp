@@ -144,14 +144,6 @@
 				<h3>시간</h3>
 				
 				<div id="time-select">
-					<div id="time-select-2D">123</div>
-					<div id="time-select-3D">123</div>
-					<div id="time-select-4D">12</div>
-					<!-- <strong>크루엘라</strong>
-					<br> <br>
-					<span>10 : 00</span>
-					<span>14 : 00</span>
-					<span>20 : 00</span> -->
 				</div>	
 	
 			</div>
@@ -221,10 +213,14 @@
 		// 시간확인 버튼. 날짜, 영화, 극장으로 찾아서 상영시간을 출력
 		$(document).on('click', '[class=btntime]', function(e){
 			$("#time-select").empty();
-			$("#time-select-2D").empty();
-			$("#time-select-3D").empty();
-			$("#time-select-4D").empty();
-			/* alert("dateIdx >> " + dateIdx + "\nmovieNo >> " + movieNo + "\ntheaterNo >> " + theaterNo); */
+			
+			var activeLength = $(".active").length; // active 클래스의 수
+			
+			// 날짜, 영화, 극장을 선택하지 않으면 경고창
+			if (activeLength < 3) {
+				alert("선택을 확인하세요.");
+				return;
+			}
 			
  			var contextPath = "${contextPath}";
  			
@@ -240,12 +236,16 @@
 					if (dataLength >= 1) {
 						var sCont = "";
 						var cinemaNo = 1;
+						sCont += "<label class='type'>2D</label>";
+						sCont += "<br><br>";
 						for (i = 0; i < dataLength; i++) {
 							if (json[i].cinNo.cinNo != cinemaNo) {
-								sCont += "<br><br><br><br>";
+								sCont += "<br><br><br>";
+								sCont += "<label class='type'>" + json[i].cinNo.cinType + "</label>";
+								sCont += "<br><br>";
 								cinemaNo = json[i].cinNo.cinNo;
 							}
-							sCont += "<span class='time'>" + json[i].cinNo.cinType;
+							sCont += "<span class='time'>";
 							sCont += json[i].shwStarttime;
 							sCont += "</span>";
 							sCont += "<input type='hidden' value='" + json[i].shwNo + "'/>";
