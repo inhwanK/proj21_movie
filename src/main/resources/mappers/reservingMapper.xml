@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="proj21_movie.mapper.ReservingMapper">
+
+	<select id="selectReservingByShowNo" resultType="Reserving">
+		select * 
+		from reserving 
+		where shw_no = #{shwNo}	
+	</select>
+	
+	<select id="selectReservingByIngNo" resultType="Reserving">
+		select * 
+		from reserving 
+		where ing_no = #{ingNo}	
+	</select>
+	
+	<insert id="insertReserving">
+		insert into reserving values 
+		(null, #{memNo}, #{shwNo}, #{ingPrice}, now(), #{ingSeat}, #{ingAdult}, #{ingTeen}, #{ingPref})
+		<selectKey keyProperty="ingNo" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<delete id="deleteReserving">
+		delete from reserving 
+		where ing_no = #{ingNo}
+	</delete>
+
+</mapper>
