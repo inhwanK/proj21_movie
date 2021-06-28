@@ -116,5 +116,14 @@
 			</div>
 		</div>
 	</footer>
+	
+	<script type="text/javascript">
+		$(function(){
+			var contextPath = "${contextPath}";
+			var showNo = ${param.shwNo};
+			var reservingNo = ${param.reservingNo};
+			
+		});
+	</script>
 </body>
 </html>

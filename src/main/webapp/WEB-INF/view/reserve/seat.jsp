@@ -72,43 +72,8 @@
 			</div>
 
 			<div id="seat-choice">
-
+			
 				<div id="seat-area">
-					<%-- <img alt="스크린 이미지" src="${contextPath}/resources/images/screen.png"> <br> <br> --%>
-					<%-- c:forEach var="row" begin="1" end="5">
-					
-						<!-- 하드코딩 ... 무조건 수정 필요함. -->
-						<c:if test="${row eq 1 }">
-							A 
-						</c:if>
-						<c:if test="${row eq 2 }">
-							B 
-						</c:if>
-						<c:if test="${row eq 3 }">
-							C 
-						</c:if>
-						<c:if test="${row eq 4 }">
-							D 
-						</c:if>
-						<c:if test="${row eq 5 }">
-							E 
-						</c:if>
-						<c:forEach var="i" begin="1" end="10">
-						
-							<span class="select-seat">${i }</span>
-							<c:if test="${i % 10 eq 0}">
-								<br>
-							</c:if>
-	
-							<c:if test="${i % 10 eq 3}">
-								<span id="hiddenseat"></span>
-							</c:if>
-	
-							<c:if test="${i % 10 eq 7}">
-								<span id="hiddenseat"></span>
-							</c:if>
-						</c:forEach>
-					</c:forEach> --%>
 				</div>
 
 				<div id="seat-info">
@@ -299,6 +264,55 @@
 						$("#seat-no").append(sCont);
 					}
 				}
+			});
+			
+			$("#button-group").on('click', '[id=next]', function(e){
+				var activeLength = $(".select-seat.active").length; // 선택된 좌석 개수
+				if (activeLength <= 0) {
+					alert("좌석을 선택해 주세요.");
+					return;
+				}
+				
+				var cntAdult = Number($("#countAdult").text());
+				var cntTeen = Number($("#countTeen").text());
+				var cntPref = Number($("#countPref").text());
+				var cntTotal = cntAdult + cntTeen + cntPref; // 선택한 인원 총합
+				
+				if (activeLength != cntTotal) {
+					alert("인원과 좌석수를 확인하세요.");
+					return;
+				}
+				
+				alert("shwNo >> " + no + "\ningPrice >> " + $("#price").text() + "\ningSeat >> " + $("#seat-no").text() 
+						+ "\ningAdult >> " + $("#countAdult").text() 
+						+ "\ningTeen >> " + $("#countTeen").text() 
+						+ "\ningPref >> " + $("#countPref").text());
+				
+				var newReserving = {
+						memNo: 1,
+						shwNo: no,
+						ingPrice: Number($("#price").text()),
+						ingSeat: $("#seat-no").text(),
+						ingAdult: Number($("#countAdult").text()),
+						ingTeen: Number($("#countTeen").text()),
+						ingPref: Number($("#countPref").text())
+				};
+				
+				$.ajax({
+					url: contextPath + "/api/reserving",
+					type: "POST",
+					contentType: "application/json; charset=utf-8",
+					datatype: "json",
+					cache: false,
+					data: JSON.stringify(newReserving),
+					success: function(res) {
+						alert(res);
+						window.location.href = contextPath + "/payment?shwNo=" + no + "&reservingNo=" + res;
+					}, 
+					error: function(request, status, error) {
+						alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+					}
+				});
 			});
 		});
 	</script>
