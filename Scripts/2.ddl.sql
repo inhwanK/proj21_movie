@@ -40,6 +40,9 @@ DROP TABLE IF EXISTS proj21_movie.notice RESTRICT;
 -- 좌석
 DROP TABLE IF EXISTS proj21_movie.seat RESTRICT;
 
+-- 예매진행중
+DROP TABLE IF EXISTS proj21_movie.reserving RESTRICT;
+
 -- 영화예매웹
 DROP SCHEMA IF EXISTS proj21_movie;
 
@@ -320,6 +323,30 @@ ALTER TABLE proj21_movie.seat
 
 ALTER TABLE proj21_movie.seat
 	MODIFY COLUMN seat_no INT NOT NULL AUTO_INCREMENT COMMENT '좌석예약번호';
+
+-- 예매진행중
+CREATE TABLE proj21_movie.reserving (
+	ing_no    INT          NOT NULL COMMENT '예매진행번호', -- 예매진행번호
+	mem_no    INT          NULL     COMMENT '회원번호', -- 회원번호
+	shw_no    INT          NULL     COMMENT '상영정보번호', -- 상영정보번호
+	ing_price INT          NULL     COMMENT '결제금액', -- 결제금액
+	ing_date  DATETIME     NULL     COMMENT '예매일', -- 예매일
+	ing_seat  VARCHAR(100) NULL     COMMENT '좌석', -- 좌석
+	ing_adult INT          NULL     COMMENT '인원(어른)', -- 인원(어른)
+	ing_teen  INT          NULL     COMMENT '인원(청소년)', -- 인원(청소년)
+	ing_pref  INT          NULL     COMMENT '인원(우대)' -- 인원(우대)
+)
+COMMENT '예매진행중';
+
+-- 예매진행중
+ALTER TABLE proj21_movie.reserving
+	ADD CONSTRAINT PK_reserving -- 예매진행중 기본키
+		PRIMARY KEY (
+			ing_no -- 예매진행번호
+		);
+
+ALTER TABLE proj21_movie.reserving
+	MODIFY COLUMN ing_no INT NOT NULL AUTO_INCREMENT COMMENT '예매진행번호';
 
 -- 영화사진
 ALTER TABLE proj21_movie.movie_pic

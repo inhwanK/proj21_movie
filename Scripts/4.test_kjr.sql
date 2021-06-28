@@ -154,9 +154,13 @@ select * from vw_full_showinfo;
 
 select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, cin_type, mov_no, mov_title
 		from vw_full_showinfo
-		where shw_date = '20210629'	
+		where shw_date = '20210628'
 			and mov_no = 1
 			and tht_no = 1
-			and shw_starttime > now()
+			and shw_starttime > if ('20210628' > now(), 0, now())
 		order by cin_no asc, shw_starttime asc;
+
+
+-- 예매 진행중 -----------------------------------------------------------------------
+select * from reserving;
 

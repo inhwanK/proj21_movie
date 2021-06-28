@@ -13,7 +13,7 @@ import proj21_movie.service.InquiryService;
 
 @Service
 public class InquiryServiceImpl implements InquiryService {
-	static final Log log= LogFactory.getLog(MovieServiceImpl.class);
+	static final Log log= LogFactory.getLog(InquiryServiceImpl.class);
 
 	@Autowired
 	private InquiryMapper mapper;

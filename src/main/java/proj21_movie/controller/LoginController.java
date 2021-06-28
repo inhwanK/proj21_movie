@@ -34,7 +34,7 @@ public class LoginController {
 		return "login/login";
 	}
 
-	// 임시 로그인성공 화면 연결(성공)
+	// 로그인성공 화면 연결(갑자기안됨)
 	@RequestMapping("/loginsuccess")
 	public String loginSuccess() {
 		return "login/loginsuccess";
@@ -57,7 +57,7 @@ public class LoginController {
         return "/login/login";
     }
     
-    
+	// 로그인(성공)
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String loginPOST(LoginCommand loginCommand, HttpServletRequest request, Member member, 
 			RedirectAttributes rttr, HttpServletResponse response) throws Exception {

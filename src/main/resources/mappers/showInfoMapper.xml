@@ -59,7 +59,7 @@
 		select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, cin_type, mov_no, mov_title
 		from vw_full_showinfo
 		<where>
-			shw_starttime &gt; now()
+			shw_starttime &gt; if (#{shwDate} > now(), 0, now())
 			<if test="shwDate != null">
 				and shw_date = #{shwDate}
 			</if>
