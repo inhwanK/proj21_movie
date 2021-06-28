@@ -35,7 +35,7 @@
 		<!-- 로그인한 상태 -->
         <c:if test="${ member != null }">
             <div class="login_success_area">
-            	<span>안녕하세요. ${member.memEmail} 회원님!</span>
+            	<span>안녕하세요. ${member.memName} 회원님!</span>
             	<a href="${contextPath}/main.do">로그아웃</a>
             	<a href="#">바로예매</a>
             </div>
