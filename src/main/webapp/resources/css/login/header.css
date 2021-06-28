@@ -48,8 +48,17 @@ header {
 	width: 150px;
 	margin: 0px auto;
 	align-items: center;
-	position: static;
+	position: relative;
 	left: 120px;
+	box-sizing: border-box;
+}
+
+#header_ci2 {
+	width: 150px;
+	margin: 0px auto;
+	align-items: center;
+	position: relative;
+	left: 206px;
 	box-sizing: border-box;
 }
 
