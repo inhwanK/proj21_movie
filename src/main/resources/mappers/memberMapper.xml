@@ -52,7 +52,7 @@
 	
 	<!-- 로그인 -->
     <select id="memberLogin" resultType="Member">
-    	select mem_email, password(mem_passwd)
+    	select mem_email, password(mem_passwd), mem_name
     	  from member 
     	 where mem_email = #{memEmail}
     	   and mem_passwd = password(#{memPasswd})

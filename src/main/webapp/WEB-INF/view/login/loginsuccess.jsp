@@ -17,7 +17,7 @@
 		<div class="con_main">
 			<img id="con_img2" alt="축하이미지" src="${contextPath}/resources/images/join/icon-movie.png">
 			<div class="con_text">
-				<h3>반갑습니다! ${member.memEmail} 회원님, 로그인 되셨습니다.</h3>
+				<h3>반갑습니다! ${member.memName} 회원님, 로그인 되셨습니다.</h3>
 				<a href="${contextPath}/main"><input class="btn_main" id="button" type="submit" value="메인으로 돌아가기"/></a>
 				<a href="${contextPath}/mypage"><input class="btn_mypage" id="button" type="submit" value="마이페이지"/></a>
 			</div>
