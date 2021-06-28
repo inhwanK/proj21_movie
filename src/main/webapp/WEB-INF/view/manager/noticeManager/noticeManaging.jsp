@@ -32,7 +32,7 @@
 				if(json.length >= 1){
 					for(i=0;i<json.length;i++){
 						list += "<tr>";
-						list += "<td name=\"notNo\">"+json[i].notNo+"</td>";
+						list += "<td>"+json[i].notNo+"</td>";
 						list += "<td>"+json[i].notTitle+"</td>";
 		      			list += "<td>"+getFormatDate(json[i].notDate)+"</td>";
 		      			list += "<td><button id=\"modify\" class=\"btn btn-primary\">수정</button></td>";
@@ -53,10 +53,9 @@
 				
 				var td = $(this).parent().prevUntil();
 				var notNo = td.last().text(); 
-				// serialize() 생각해보기.
 				
 				console.log(notNo);
-				//window.location.href = contextPath + "/updateMovie?no=" + no;
+				window.location.href = contextPath + "/updateNotice?notNo=" + notNo;
 			});
 		});
 	});

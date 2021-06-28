@@ -19,10 +19,13 @@ public class NoticeController {
 		ModelAndView mav = new ModelAndView("notice/noticeDetail", "notNo", notNo);
 		return mav;
 	}
-	
+
+	// 처음 공지사항 페이지를 여는 메서드. 이기 때문에
+	// defaultValue 옵션이 필요함.
 	@GetMapping("/noticelist") 
-	public ModelAndView noticeList(@RequestParam(required = false, defaultValue = "1") int selectPage, 
-									@RequestParam(required = false, defaultValue = "") String notTitle) {
+	public ModelAndView noticeList(
+			@RequestParam(defaultValue = "1")  int selectPage, 
+			@RequestParam(defaultValue = "")  String notTitle) {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("totalNotice", service.getNumberOfNotices(notTitle)); // 페이지 개수 세기.
@@ -38,8 +41,12 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/updateNotice")
-	public String updateNotice() {
-		return "manager/noticeManager/updateNotice";
+	public ModelAndView updateNotice(int notNo) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("notNo", notNo);
+		mav.setViewName("manager/noticeManager/updateNotice");
+		return mav;
 	}
+	
 	
 }
