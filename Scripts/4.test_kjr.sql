@@ -154,9 +154,9 @@ select * from vw_full_showinfo;
 
 select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, cin_type, mov_no, mov_title
 		from vw_full_showinfo
-		where shw_date = '20210625'	
+		where shw_date = '20210629'	
 			and mov_no = 1
 			and tht_no = 1
-			and shw_starttime > now();
-		order by shw_starttime;
+			and shw_starttime > now()
+		order by cin_no asc, shw_starttime asc;
 

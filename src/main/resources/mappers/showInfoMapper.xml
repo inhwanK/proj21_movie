@@ -73,7 +73,7 @@
 				and shw_starttime = #{shwStarttime}
 			</if>
 		</where>
-		order by shw_starttime;
+		order by cin_no asc, shw_starttime asc;
 	</select>
 	
 </mapper>

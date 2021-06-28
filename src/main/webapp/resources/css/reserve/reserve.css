@@ -286,6 +286,10 @@ section h3 {
 	color: white;
 }
 
+#2D, #3D, #4D {
+	height: 100px;
+}
+
 /* 영화 포스터 */
 #movie-poster img {
 	width: 90px;

@@ -36,7 +36,7 @@
 		});
 	
 	</script>
-	<script type="text/javascript">
+<!-- 	<script type="text/javascript">
 		$(function(){
 			var contextPath = "${contextPath}";
 			var no = ${param.no};
@@ -68,7 +68,7 @@
 				}	
 			});
 		});
-	</script>
+	</script> -->
 </head>
 <body>
 	<header>
@@ -144,6 +144,9 @@
 				<h3>시간</h3>
 				
 				<div id="time-select">
+					<div id="time-select-2D">123</div>
+					<div id="time-select-3D">123</div>
+					<div id="time-select-4D">12</div>
 					<!-- <strong>크루엘라</strong>
 					<br> <br>
 					<span>10 : 00</span>
@@ -218,31 +221,61 @@
 		// 시간확인 버튼. 날짜, 영화, 극장으로 찾아서 상영시간을 출력
 		$(document).on('click', '[class=btntime]', function(e){
 			$("#time-select").empty();
+			$("#time-select-2D").empty();
+			$("#time-select-3D").empty();
+			$("#time-select-4D").empty();
 			/* alert("dateIdx >> " + dateIdx + "\nmovieNo >> " + movieNo + "\ntheaterNo >> " + theaterNo); */
 			
  			var contextPath = "${contextPath}";
  			
  			var shwDate = date(dateIdx);
  			
-			$.get(contextPath + "/api/showinfobycondition/" + movieNo + "/" + theaterNo + "/" + shwDate,
+ 			$.ajax({
+				type:"GET",
+				url: contextPath + "/api/showinfobycondition/" + movieNo + "/" + theaterNo + "/" + shwDate,
+				contentType: "application/json; charset=utf-8",
+				async: false,
+				success: function(json){
+					var dataLength = json.length;
+					if (dataLength >= 1) {
+						var sCont = "";
+						var cinemaNo = 1;
+						for (i = 0; i < dataLength; i++) {
+							if (json[i].cinNo.cinNo != cinemaNo) {
+								sCont += "<br><br><br><br>";
+								cinemaNo = json[i].cinNo.cinNo;
+							}
+							sCont += "<span class='time'>" + json[i].cinNo.cinType;
+							sCont += json[i].shwStarttime;
+							sCont += "</span>";
+							sCont += "<input type='hidden' value='" + json[i].shwNo + "'/>";
+						}
+						sCont += "<br><br><br><button id='btn-seat' class='btn-seat'>좌석 선택</button>";
+						$("#time-select:last-child").append(sCont);
+					}
+				}
+			});
+ 			
+			/* $.get(contextPath + "/api/showinfobycondition/" + movieNo + "/" + theaterNo + "/" + shwDate,
 					function(json) {
 						var dataLength = json.length;
 						if (dataLength >= 1) {
 							var sCont = "";
 							for (i = 0; i < dataLength; i++) {
-								/* if (sCont.indexOf("<strong>" === -1)) {
-									sCont += "<strong>" + json[i].movNo.movTitle + "</strong>";
-									sCont += "<br><br>";
-								} */
-								sCont += "<span class='time'>";
-								sCont += json[i].shwStarttime;
-								sCont += "</span>";
-								sCont += "<input type='hidden' value='" + json[i].shwNo + "'/>";
+								var selTime = "";
+								if (i % 3 == 0 && i != 0) {
+									selTime += "<br><br><br><br>";									
+								}
+								selTime += "<span class='time'>";
+								selTime += json[i].shwStarttime;
+								selTime += "</span>";
+								selTime += "<input type='hidden' value='" + json[i].shwNo + "'/>";
+								$("#2D:last-child").append(selTime);
 							}
 							sCont += "<br><br><br><button id='btn-seat' class='btn-seat'>좌석 선택</button>";
-							$("#time-select:last-child").append(sCont);
+							$("#time-select").append(selTime);
 						}
-					});
+					}); */
 		});
 		
 		// 시간 선택 시 효과
