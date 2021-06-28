@@ -18,7 +18,12 @@
 </head>
 <body>
 	<header>
+		<c:if test = "${member == null }">
 		<a href="${contextPath}/main"> <img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png"></a>
+		</c:if>
+		<c:if test = "${member != null }">
+		<a href="${contextPath}/main"> <img id="header_ci2" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png"></a>
+		</c:if>
 		<div>
 		
 		<!-- 로그인 하지 않은 상태 -->
