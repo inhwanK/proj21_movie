@@ -103,11 +103,13 @@ button {
 
 /* 중복아이디 존재하지 않는경우 */
 .id_input_re_1 {
-	color: green;
+	color: #00498c;
 	display: none;
+	font-weight: bolder;
 }
 /* 중복아이디 존재하는 경우 */
 .id_input_re_2 {
-	color: red;
+	color: #d92742;
 	display: none;
+	font-weight: bolder;
 }

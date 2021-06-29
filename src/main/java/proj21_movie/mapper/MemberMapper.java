@@ -22,12 +22,6 @@ public interface MemberMapper {
 
 	// 로그인
 	public Member memberLogin(Member member);
-
-	// 아이디 중복체크
-//	public int idOverlap(Member member) throws Exception;
-	
-	// 아이디 중복체크
-	public Member selectIdCheck(String memEmail);
-	// 아이디 중복체크 회원가입 폼에 전달
-	public int insertUsedMemEmail(Member member);
+	// 아이디 중복 검사
+	public int idCheck(String memEmail);
 }

@@ -104,16 +104,13 @@ public class MemberMapperTest {
 		int res = mapper.deleteMember(newMember.getMemEmail());
 		Assert.assertEquals(1, res);
 	}
-
-	// 아이디 중복검사
+	
 	@Test
-	public void test07memberIdChk() throws Exception {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		
-		String id = "test1@test.com"; // 존재하는 아이디
-		String id2 = "test123@test.com"; // 존재하지 않는 아이디
-		mapper.selectIdCheck(id);
-		mapper.selectIdCheck(id2);
+	public void test07memberIdChk() throws Exception{
+		String id = "test1@test.com";	// 존재하는 아이디
+		String id2 = "test123";	// 존재하지 않는 아이디
+		mapper.idCheck(id);
+		mapper.idCheck(id2);
 	}
 
 }
