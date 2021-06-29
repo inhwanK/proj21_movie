@@ -28,7 +28,8 @@
 	</update>
 	
 	<delete id="deleteInquiry">
-		delete from inquiry
+		delete 
+		from inquiry
 		where inq_no = #{inqNo}
 	</delete>
 	

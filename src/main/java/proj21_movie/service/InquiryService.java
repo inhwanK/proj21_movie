@@ -14,5 +14,5 @@ public interface InquiryService {
 	
 	int registInquiry(Inquiry inquiry);
 	int modifyInquiry(Inquiry inquiry);
-	int removeInquiry(Inquiry inquiry);
+	int removeInquiry(int inqNo);
 }

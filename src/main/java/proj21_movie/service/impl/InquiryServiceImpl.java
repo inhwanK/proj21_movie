@@ -45,9 +45,9 @@ public class InquiryServiceImpl implements InquiryService {
 	}
 
 	@Override
-	public int removeInquiry(Inquiry inquiry) {
-		log.debug("service - removeInquiry() > " + inquiry);
-		return mapper.deleteInquiry(inquiry);
+	public int removeInquiry(int inqNo) {
+		log.debug("service - removeInquiry() > " + inqNo);
+		return mapper.deleteInquiry(inqNo);
 	}
 
 }

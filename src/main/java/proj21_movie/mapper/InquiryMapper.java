@@ -14,5 +14,5 @@ public interface InquiryMapper {
 	
 	int insertInquiry(Inquiry inquiry);
 	int updateInquiry(Inquiry inquiry);
-	int deleteInquiry(Inquiry inquiry);
+	int deleteInquiry(int inqNo);
 }
