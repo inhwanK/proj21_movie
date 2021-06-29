@@ -48,5 +48,9 @@ public class NoticeController {
 		return mav;
 	}
 	
+	@GetMapping("/registNotice")
+	public String registNotice() {
+		return "manager/noticeManager/registNotice";
+	}
 	
 }

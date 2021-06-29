@@ -38,8 +38,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public int removeNotice(int notNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.deleteNotice(notNo);
 	}
 
 	@Override
@@ -48,9 +47,8 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public int regidateNotice(Notice notice) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int registerNotice(Notice notice) {
+		return mapper.insertNotice(notice);
 	}
 
 	@Override

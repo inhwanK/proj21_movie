@@ -4,7 +4,6 @@ import java.io.File;
 import java.net.URI;
 import java.util.List;
 
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,24 +47,25 @@ public class RestInquiryController {
 		}
 	}
 	
-	@PostMapping("/inquiryFileUpload")
-	public void uploadInquiryFile(MultipartFile[] uploadFile, HttpServletRequest request) {
-		String upload = request.getSession().getServletContext().getRealPath("/").concat("resources");
-		String uploadFolder = upload + File.separator + "images" + File.separator + "inquiry";
-		
+	@PostMapping("/inquiryFileUpload") 
+	public void uploadInquiryFile(MultipartFile uploadFile, HttpServletRequest request) {
+		String upload = request.getSession().getServletContext().getRealPath("resources");
+		String uploadFolder = upload + File.separator + "attachments" + File.separator + "inquiry" + File.separator + "question" ;
 		System.out.println(uploadFolder);
 		
-		for(MultipartFile multipartFile : uploadFile) {
-			String uploadFileName = multipartFile.getOriginalFilename();
-			
-			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
-			File saveFile = new File(uploadFolder, uploadFileName);
-			System.out.println(uploadFolder);
-			try {
-				multipartFile.transferTo(saveFile);
-			}catch(Exception e) {
-				System.out.println("에러");
-			}
+		
+		// 중복처리 고민중.
+		String uploadFileName = uploadFile.getOriginalFilename();
+		System.out.println(uploadFile);
+
+		System.out.println(uploadFileName);
+		uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1); // 이거 왜있는지 모르겠음... 추후 삭제
+		File saveFile = new File(uploadFolder, uploadFileName);
+		System.out.println(uploadFileName);
+		try {
+			uploadFile.transferTo(saveFile);
+		} catch (Exception e) {
+			System.out.println("에러");
 		}
 		
 	}

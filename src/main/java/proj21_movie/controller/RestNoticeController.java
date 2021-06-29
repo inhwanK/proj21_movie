@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.mysql.fabric.Response;
 
 import proj21_movie.dto.Notice;
 import proj21_movie.service.NoticeService;
@@ -60,5 +63,38 @@ public class RestNoticeController {
 		System.out.println(notice);
 		
 		return ResponseEntity.ok(service.modifyNotice(notice));
+	}
+	
+	@PostMapping("/notice")
+	public ResponseEntity<Object> registNotice(@RequestBody Notice notice){
+		return ResponseEntity.ok(service.registerNotice(notice));
+	}
+	
+	@PostMapping("/noticeFileUpload") 
+	public void uploadInquiryFile(MultipartFile uploadFile, HttpServletRequest request) {
+		String upload = request.getSession().getServletContext().getRealPath("resources");
+		String uploadFolder = upload + File.separator + "attachments" + File.separator + "notice";
+		System.out.println(uploadFolder);
+		
+		
+		// 중복처리... 해?
+		String uploadFileName = uploadFile.getOriginalFilename();
+		System.out.println(uploadFile);
+
+		System.out.println(uploadFileName);
+		uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1); // 이거 왜있는지 모르겠음... 추후 삭제
+		File saveFile = new File(uploadFolder, uploadFileName);
+		System.out.println(uploadFileName);
+		try {
+			uploadFile.transferTo(saveFile);
+		} catch (Exception e) {
+			System.out.println("에러");
+		}
+	}
+	
+	@DeleteMapping("/notice")
+	public ResponseEntity<Object> deleteNotice(int notNo){
+		
+		return ResponseEntity.ok(service.removeNotice(notNo));
 	}
 }

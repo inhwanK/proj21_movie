@@ -57,7 +57,36 @@
 				console.log(notNo);
 				window.location.href = contextPath + "/updateNotice?notNo=" + notNo;
 			});
+			
+			$(this).on('click','[id=regist]',function(){
+				window.location.href = contextPath+"/registNotice";
+			});
+			
+			$(this).on('click','[id=delete]',function(){
+				var td = $(this).parent().prevUntil();
+				var notNo = td.last().text(); 
+				
+				$.ajax({
+					url:contextPath + "/api/notice?notNo="+notNo,
+					type:"delete",
+					contentType:"application/json; charset=utf-8",
+					dataType:"json",
+					data: notNo,
+					success:function(){
+						var conf = confirm("정말 삭제하시겠습니까?");
+						if(conf){
+							alert("삭제되었습니다.");
+							location.reload(); // 페이지 새로고침.
+						}
+					},
+					error: function(){
+						alert("문제가 생긴것이 분명하답니다?")
+					}
+				});
+			});
 		});
+		
+		
 	});
 
 </script>
@@ -87,7 +116,7 @@
   <div id="page-content-wrapper">
     <div class="container-fluid">
       <h1 class="text-center">공지사항</h1>
-      <button class="btn btn-primary">등록</button>
+      <button class="btn btn-primary" id="regist">등록</button>
       <table class="table table-hover table-striped text-center" style="border: 1px solid;">
       	<thead>
       		<tr>

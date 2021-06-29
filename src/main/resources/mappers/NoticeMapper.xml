@@ -63,8 +63,8 @@
       where not_no = #{notNo};
    </delete>
    
-   <update id="setAutoIncrement">
+   <update id="setAutoIncrement"> <!-- auto_increment 초기화 test tearDown 메서드에 사용됨.  -->
       alter table notice auto_increment = 1; 
-   </update> <!-- auto_increment 초기화 test tearDown 메서드에 사용됨.  -->
+   </update> 
 
 </mapper>
