@@ -595,7 +595,7 @@ select c.com_no, m.mov_no, m.mov_title, c.com_user, c.com_content, c.com_star, c
 -- 영화 번호로 검색(영화 번호를 받아 한줄평에 리스트 보이기)
 select c.com_no, m.mov_no, m.mov_title, c.com_user, c.com_content, c.com_star, c.com_date 
 	from comment c join movie m on c.mov_no = m.mov_no 
-where m.mov_no = 2; 
+where m.mov_no = 4; 
 
 -- 영화 실시간 평점 (영화 평균 평점)
 select round(avg(com_star), 1) 
@@ -630,7 +630,7 @@ from movie;
 select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, 
 		mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster 
 from movie
-where mov_no = 2;
+where mov_no = 15;
 
 update movie set mov_avgstar = 3
  where mov_no = 2;
@@ -653,13 +653,16 @@ select ifnull(round(avg(com_star), 1),0) as com_star
 
 select * from comment where mov_no = 1;
 
+select * from (select ifnull(round(avg(com_star), 1), 0)
+						from comment c join movie m on c.mov_no = m.mov_no 
+					 where m.mov_no = 3)as mov_avgstar;
+					
 -- 영화 실시간 평점 업데이트 (영화 평균 평점)
 update movie 
-	set mov_avgstar = (select * from (select round(avg(com_star), 1) 
+	set mov_avgstar = (select * from (select ifnull(round(avg(com_star), 1), 0) 
 						from comment c join movie m on c.mov_no = m.mov_no 
-					 where m.mov_no = 1)as a)
- where mov_no = 1;
-
+					 where m.mov_no = 3)as mov_avgstar)
+ where mov_no = 4;
 -- --------------------------------------------------------- 
 
 -- 영화 별 평점 평균 리스트 구하기
@@ -691,6 +694,7 @@ select m.mov_no, m.mov_title, m.mov_grade, m.mov_genre, m.mov_runtime, m.mov_dir
 group by m.mov_no;
 
 
+
 -- 극장 관련 ---------------------------------------------------------------------
 
 -- 상영관 
@@ -713,24 +717,18 @@ delete from showinfo where shw_no > 0;
 alter table showinfo auto_increment = 1;
 
 -- 상영정보 view (상영정보, 극장, 상영관, 영화 join)
-create or replace view vw_full_showinfo 
-as 
-select s.shw_no, s.shw_date, s.shw_starttime, s.shw_endtime, 
-	t.tht_no, t.tht_name, 
-	c.cin_no, c.cin_row, c.cin_col, c.cin_seat, c.cin_type, c.cin_adultprice, c.cin_teenprice, c.cin_prefprice,
-	m.mov_no, m.mov_title 
-from showinfo s join theater t on s.tht_no = t.tht_no 
-	join cinema c on s.cin_no = c.cin_no  
-	join movie m on s.mov_no = m.mov_no;
+
 
 -- join ------------
-select s.shw_no, s.shw_date, s.shw_starttime, s.shw_endtime, 
+select s.shw_no, s.shw_date, s.shw_starttime, 
 	t.tht_no, t.tht_name, 
-	c.cin_no, c.cin_row, c.cin_col, c.cin_seat, c.cin_type, c.cin_adultprice, c.cin_teenprice, c.cin_prefprice,
-	m.mov_no, m.mov_title 
+	c.cin_no, c.cin_seat, c.cin_type,
+	m.mov_no, m.mov_title, m.mov_grade, m.mov_runtime
 from showinfo s join theater t on s.tht_no = t.tht_no 
 	join cinema c on s.cin_no = c.cin_no  
-	join movie m on s.mov_no = m.mov_no;
+	join movie m on s.mov_no = m.mov_no
+where m.mov_no = 3 and t.tht_no = 1 and s.shw_date = '2021-06-30'
+order by mov_no, shw_starttime;
 
 -- 
 select s.shw_no, s.shw_date, s.shw_starttime, 
@@ -740,10 +738,11 @@ select s.shw_no, s.shw_date, s.shw_starttime,
 from showinfo s join theater t on s.tht_no = t.tht_no 
 	join cinema c on s.cin_no = c.cin_no  
 	join movie m on s.mov_no = m.mov_no
-where m.mov_no = 1 and t.tht_no = 1 and s.shw_date = '2021-06-29'
+where shw_starttime > if (2021-06-30 > now(), 0, now()) 
+and t.tht_no = 1 and s.shw_date = '2021-06-30'
 order by mov_no, shw_starttime;
 
-
+select * from vw_full_showinfo where shw_date >= '2021-06-30';
 
 
 
