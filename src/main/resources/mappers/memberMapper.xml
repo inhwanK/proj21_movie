@@ -18,7 +18,6 @@
 		 where mem_no = #{memNo}
 	</select>
 	
-	<!-- 로그인 -->
 	<select id="selectMemberByEmail" resultMap="resMember">
 		select mem_email, mem_passwd, mem_name
 		  from member
@@ -49,7 +48,7 @@
 		  from member
 		 where mem_email = #{memEmail}
 	</delete>
-	
+
 	<!-- 로그인 -->
     <select id="memberLogin" resultType="Member">
     	select mem_no, mem_email, password(mem_passwd), mem_name
@@ -57,13 +56,26 @@
     	 where mem_email = #{memEmail}
     	   and mem_passwd = password(#{memPasswd})
     </select>
+    
+    <!-- 로그인 -->
+    <insert id="insertUsedMemEmail" parameterType="Member">
+    	insert into member(mem_email)
+    	     values (#{memEmail})
+    </insert>
  
 	
-	<!-- 아이디 중복검사 -->
-  	<select id="idCheck" resultType="int">
-  		select mem_email
+	<!-- 아이디 중복검사
+  	<select id="idOverlap" resultType="int">
+  		select count(mem_email)
   		  from member 
   		 where mem_email = #{memEmail}
+  	</select> -->
+  	
+  	<select id="selectIdCheck" parameterType="String" resultType="Member">
+  		select memEmail as memEmail
+  		  from member
+  		 where mem_email = #{memEmail}
   	</select>
+  	
 
 </mapper>

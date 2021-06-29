@@ -42,5 +42,11 @@ public class JoinController {
 		}
 		return "join/joinform";
 	}
+	
+	// 아이디 중복확인
+	@RequestMapping("/memberIdCheck")
+	public String memberIdCheck() {
+		return "join/memberIdCheck";
+	}
 
 }
