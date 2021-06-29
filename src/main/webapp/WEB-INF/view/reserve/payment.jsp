@@ -75,28 +75,29 @@
 			<div id="payment-result">
 				<div id="movie-info">
 					<dl>
-						<dt>크루엘라</dt>
-						<dd>영화시간 영화시간</dd>
-						<dd>영화정보 영화정보</dd>
+						<dt id="mov-title"></dt>
+						<dd id="mov-date"></dd>
+						<dd id="mov-time"></dd>
+						<dd id="mov-type"></dd>
 					</dl>
 				</div>
 				<div id="time-info">
 					<dl>
 						<dt>상영관</dt>
-						<dd>대구이시아</dd>
-						<dd>10:00 ~ 12:00</dd>
+						<dd id="cinema"></dd>
+						<dd></dd>
 					</dl>
 				</div>
-				<div id="discount-info">
+				<!-- <div id="discount-info">
 					<dl>
 						<dt>할인 금액</dt>
 						<dd>1,000 원</dd>
 					</dl>
-				</div>
+				</div> -->
 				<div id="price-info">
 					<dl>
 						<dt>최종결제금액</dt>
-						<dd>9,000 원</dd>
+						<dd><span id="price"></span> 원</dd>
 					</dl>
 				</div>
 
@@ -122,7 +123,45 @@
 			var contextPath = "${contextPath}";
 			var showNo = ${param.shwNo};
 			var reservingNo = ${param.reservingNo};
+			var seat = "";
 			
+			$.ajax({
+				type:"GET",
+				url: contextPath + "/api/showinfo/" + showNo,
+				contentType: "application/json; charset=utf-8",
+				async: false,
+				success: function(json){
+					$("#mov-title").text(json.movNo.movTitle);			
+					$("#mov-date").text("상영일 : " + json.shwDate);
+					$("#mov-time").text("상영시간 : " + json.shwStarttime);
+					$("#mov-type").text("상영타입 : " + json.cinNo.cinType);
+					$("#cinema").text(json.thtNo.thtName);
+				}
+			});
+			
+			$.ajax({
+				type:"GET",
+				url: contextPath + "/api/reserving/" + reservingNo,
+				contentType: "application/json; charset=utf-8",
+				async: false,
+				success: function(json) {
+					$("#price").text(json.ingPrice);
+					seat = json.ingSeat;
+				}
+			});
+			
+			var arrSeat = seat.split(" ");	// 공백 기준으로 나눠서 배열화
+			arrSeat.pop();	// 마지막 공백 제거
+			
+			var row = [];
+			var col = [];
+			
+			for (i = 0; i < arrSeat.length; i++) {
+				row.push(arrSeat[i].charAt(0).charCodeAt(0)-64);
+				col.push(Number(arrSeat[i].charAt(1)));
+			}
+			console.log(row);
+			console.log(col);
 		});
 	</script>
 </body>
