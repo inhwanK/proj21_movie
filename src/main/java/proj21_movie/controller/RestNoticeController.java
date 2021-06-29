@@ -61,4 +61,27 @@ public class RestNoticeController {
 		
 		return ResponseEntity.ok(service.modifyNotice(notice));
 	}
+	
+	@PostMapping("/noticeFileUpload") 
+	public void uploadInquiryFile(MultipartFile uploadFile, HttpServletRequest request) {
+		String upload = request.getSession().getServletContext().getRealPath("resources");
+		String uploadFolder = upload + File.separator + "attachments" + File.separator + "notice";
+		System.out.println(uploadFolder);
+		
+		
+		// 중복처리... 해?
+		String uploadFileName = uploadFile.getOriginalFilename();
+		System.out.println(uploadFile);
+
+		System.out.println(uploadFileName);
+		uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1); // 이거 왜있는지 모르겠음... 추후 삭제
+		File saveFile = new File(uploadFolder, uploadFileName);
+		System.out.println(uploadFileName);
+		try {
+			uploadFile.transferTo(saveFile);
+		} catch (Exception e) {
+			System.out.println("에러");
+		}
+		
+	}
 }
