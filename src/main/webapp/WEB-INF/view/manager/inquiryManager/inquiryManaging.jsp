@@ -12,6 +12,77 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${contextPath}/resources/css/manager/sidebar.css">
+<script type="text/javascript">
+	$(function(){
+		function getFormatDate(date) { // date 폼 관리.
+			var subDateArray = date.substr(0, 10).split('-');
+			return subDateArray[0] + "." + subDateArray[1] + "."
+					+ subDateArray[2];
+		} // js 파일로 관리할 필요 있음.
+		
+		var contextPath = "${contextPath}";
+		
+		$.ajax({
+			url: contextPath+"/api/inquirylist",
+			type:"get",
+			contentType:"application/json; charset=utf-8",
+			dataType:"json",
+			success:function(json){
+				var list="";
+				if(json.length >= 1){
+					for(i=0;i<json.length;i++){
+						list += "<tr>";
+						list += "<td>"+json[i].inqNo+"</td>";
+						list += "<td>"+json[i].inqTitle+"</td>";
+						list += "<td>"+json[i].inqUser+"</td>";
+		      			list += "<td>"+getFormatDate(json[i].inqDate)+"</td>";
+		      			if(json[i].inqAnswer ==null){
+		      				list += "<td>N</td>";
+		      			}else{
+		      				list += "<td>Y</td>";
+		      			}
+		      			list += "<td><button id=\"answer\" class=\"btn btn-primary\">답변</button></td>";
+		      			list += "<td><button id=\"delete\" class=\"btn btn-primary\">삭제</button></td>";
+		      			list += "</tr>";
+					} // end of for
+					$("tbody").append(list);
+				} // end of if
+			} // end of success
+			
+		});
+		
+		$(document).ready(function(){
+			
+			// 삭제
+			$(this).on('click','[id=delete]',function(){
+				var td = $(this).parent().prevUntil();
+				var inqNo = td.last().text(); 
+				
+				$.ajax({
+					url:contextPath + "/api/inquiry?inqNo="+inqNo,
+					type:"delete",
+					contentType:"application/json; charset=utf-8",
+					dataType:"json",
+					data: inqNo,
+					success:function(){
+						var conf = confirm("정말 삭제하시겠습니까?");
+						if(conf){
+							alert("삭제되었습니다.");
+							location.reload(); // 페이지 새로고침.
+						}
+					},
+					error: function(){
+						alert("문제가 생긴것이 분명하답니다?")
+					}
+					
+				}); // end of ajax
+			}); // end of function
+			
+		});
+		
+	});
+
+</script>
 </head>
 <body>
 <div id="page-wrapper">
@@ -50,24 +121,7 @@
       		</tr>
       	</thead>
       	<tbody>
-      		<tr>
-      			<td>1</td>
-      			<td>이거 안됨</td>
-      			<td>test1@test.com</td>
-      			<td>2021-05-30</td>
-      			<td>Y</td>
-      			<td><button class="btn btn-primary">답변</button></td>
-      			<td><button class="btn btn-primary">삭제</button></td>
-      		</tr>
-      		<tr>
-      			<td>2</td>
-      			<td>저거 안됨</td>
-      			<td>test2@test.com</td>
-      			<td>2021-05-30</td>
-      			<td>N</td>
-      			<td><button class="btn btn-primary">답변</button></td>
-      			<td><button class="btn btn-primary">삭제</button></td>
-      		</tr>
+      		
       	</tbody>
       </table>
     </div>

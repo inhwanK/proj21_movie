@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,12 +28,11 @@ public class RestInquiryController {
 	@Autowired
 	private InquiryService service;
 	
-	@GetMapping("/inquiry")
+	@GetMapping("/inquirylist")
 	public ResponseEntity<Object> getIquiryList(){
 		List<Inquiry> listInquiry = service.getLists();
 		return ResponseEntity.status(HttpStatus.OK).body(listInquiry); 
 	}
-	
 	
 	@PostMapping("/inquiry")
 	public ResponseEntity<Object> newInquiry(@RequestBody Inquiry inquiry){
@@ -45,6 +45,11 @@ public class RestInquiryController {
 		} catch (DuplicateMovieException e) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
+	}
+	
+	@DeleteMapping("/inquiry")
+	public ResponseEntity<Object> deleteInauiry(int inqNo){
+		return ResponseEntity.ok(service.removeInquiry(inqNo));
 	}
 	
 	@PostMapping("/inquiryFileUpload") 
@@ -69,5 +74,7 @@ public class RestInquiryController {
 		}
 		
 	}
+	
+	
 
 }
