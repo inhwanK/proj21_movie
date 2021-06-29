@@ -37,7 +37,7 @@
 					divFile += "</div>";
 				}else{
 					divFile += "<div class=\"form-group\">";
-					divFile += "<a href=\"/proj21_movie/resources/attachemnts/notice/\""+json.notFile +" class=\"form-control\">"+json.notFile+"</a>";
+					divFile += "<a href=\"/proj21_movie/resources/attachments/notice/"+json.notFile +"\" class=\"form-control\">"+json.notFile+"</a>";
 					divFile += "</div>";
 				}
 				
@@ -56,12 +56,42 @@
 		
 		// 수정 버튼
 		$("#modify").on('click', function(){
+			// 업로드되는 파일이 있다면. 파일 업로드 수행.
+			var fileName;
+			if($("input#uploadFile") != null){
+				
+				// 파일 이름만 뽑아내기.
+				var filePath = $("#uploadFile").val().split('\\');
+				fileName = filePath[filePath.length - 1];
+			
+				// 업로드 수행.
+				var formData = new FormData();
+				var inputFile = $("input#uploadFile");
+				var files = inputFile[0].files;
+				console.log(files);
+				
+				for(var i=0; i<files.length; i++){
+					formData.append("uploadFile", files[i]);
+				}
+	
+				$.ajax({
+					url:contextPath+"/api/noticeFileUpload",
+					processData:false,
+					contentType:false,
+					data:formData,
+					type:"POST",
+					success:function(result){
+						console.log("Uploaded");
+					}
+				});
+			}
+			
 			var data ={
 				notNo: $("#no").val(),
 				notTitle: $("#title").val(),
 				notDetail: $("#content").val(),
 				// date 이슈 발생.
-				notFile: null // 파일 업로드 구현해야함....
+				notFile: fileName // 파일 업로드 구현해야함....
 			}
 			
 			$.ajax({
@@ -80,8 +110,13 @@
 				error: function(){
 					alert("뭔가 잘못된 것이 분명합니다.");	
 				}
-			});			
+			});		
+			
+			
+			
 		});
+		
+		
 		
 		// 취소 버튼
 		$("#cancel").on('click', function(){

@@ -48,9 +48,8 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public int regidateNotice(Notice notice) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int registerNotice(Notice notice) {
+		return mapper.insertNotice(notice);
 	}
 
 	@Override

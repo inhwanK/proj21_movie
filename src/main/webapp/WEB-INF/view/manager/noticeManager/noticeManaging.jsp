@@ -57,6 +57,10 @@
 				console.log(notNo);
 				window.location.href = contextPath + "/updateNotice?notNo=" + notNo;
 			});
+			
+			$(this).on('click','[id=regist]',function(){
+				window.location.href = contextPath+"/registNotice";
+			});
 		});
 	});
 
@@ -87,7 +91,7 @@
   <div id="page-content-wrapper">
     <div class="container-fluid">
       <h1 class="text-center">공지사항</h1>
-      <button class="btn btn-primary">등록</button>
+      <button class="btn btn-primary" id="regist">등록</button>
       <table class="table table-hover table-striped text-center" style="border: 1px solid;">
       	<thead>
       		<tr>

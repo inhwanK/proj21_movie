@@ -54,7 +54,7 @@ public class RestInquiryController {
 		System.out.println(uploadFolder);
 		
 		
-		// 중복처리... 해?
+		// 중복처리 고민중.
 		String uploadFileName = uploadFile.getOriginalFilename();
 		System.out.println(uploadFile);
 

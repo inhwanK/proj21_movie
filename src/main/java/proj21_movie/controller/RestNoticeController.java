@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mysql.fabric.Response;
+
 import proj21_movie.dto.Notice;
 import proj21_movie.service.NoticeService;
 
@@ -60,6 +62,11 @@ public class RestNoticeController {
 		System.out.println(notice);
 		
 		return ResponseEntity.ok(service.modifyNotice(notice));
+	}
+	
+	@PostMapping("/notice")
+	public ResponseEntity<Object> registerNotice(@RequestBody Notice notice){
+		return ResponseEntity.ok(service.registerNotice(notice));
 	}
 	
 	@PostMapping("/noticeFileUpload") 
