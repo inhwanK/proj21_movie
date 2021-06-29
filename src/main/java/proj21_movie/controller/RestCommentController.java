@@ -84,7 +84,7 @@ public class RestCommentController {
 	public ResponseEntity<Object> newComment(@RequestBody Comment comment) {
 		System.out.println("newComment > " + comment);
 		try {
-			service.registComment(comment);
+			service.trRegistComment(comment);
 			URI uri = URI.create("/api/comments/" + comment.getComNo());
 			return ResponseEntity.created(uri).body(comment.getComNo());
 			
@@ -95,11 +95,11 @@ public class RestCommentController {
 	
 	@PatchMapping("/comments/{comNo}")
 	public ResponseEntity<Object> updateComment(@PathVariable int comNo, @RequestBody Comment comment) {
-		return ResponseEntity.ok(service.modifyComment(comment));
+		return ResponseEntity.ok(service.trModifyComment(comment));
 	}
 	
 	@DeleteMapping("/comments/{comNo}")
 	public ResponseEntity<Object> deleteComment(@PathVariable int comNo) {
-		return ResponseEntity.ok(service.removeComment(new Comment(comNo)));
+		return ResponseEntity.ok(service.trRemoveComment(new Comment(comNo)));
 	}
 }

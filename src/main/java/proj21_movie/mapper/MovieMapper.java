@@ -23,4 +23,7 @@ public interface MovieMapper {
 	int insertMovie(Movie movie);
 	int updateMovie(Movie movie);
 	int deleteMovie(Movie movie);
+	
+	// 영화 실시간 평점 업뎃 구상중
+	int updateMovieAvgStar(Movie movie);
 }

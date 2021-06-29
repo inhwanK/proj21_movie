@@ -6,10 +6,12 @@ import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import proj21_movie.dto.Comment;
 import proj21_movie.dto.Movie;
 import proj21_movie.mapper.CommentMapper;
+import proj21_movie.mapper.MovieMapper;
 import proj21_movie.service.CommentService;
 
 @Service
@@ -18,6 +20,9 @@ public class CommentServiceImpl implements CommentService {
 
 	@Autowired
 	private CommentMapper mapper;
+	
+	@Autowired
+	private MovieMapper movMapper;
 	
 	@Override
 	public List<Comment> getLists() {
@@ -76,5 +81,45 @@ public class CommentServiceImpl implements CommentService {
 	public int removeComment(Comment comment) {
 		log.debug("service - removeComment() > " + comment);
 		return mapper.deleteComment(comment);
+	}
+
+	// 트랜잭션 -> 한줄평 추가시 / 영화 평점이 update(서브쿼리)
+	@Override
+	@Transactional
+	public int trRegistComment(Comment comment) {
+		int res = mapper.insertComment(comment);
+		System.out.println("한줄평등록 >> " + comment.getComNo());
+		
+		res += movMapper.updateMovieAvgStar(comment.getMovNo());
+		if (res != 2) throw new RuntimeException();
+		return res;
+	}
+	
+	// 트랜잭션 -> 한줄평 수정시 / 영화 평점이 update(서브쿼리)
+	@Override
+	@Transactional
+	public int trModifyComment(Comment comment) {
+		int res = mapper.updateComment(comment);
+		System.out.println("한줄평수정 >> " + comment.getComNo());
+		
+		Comment newComment = mapper.selectCommentByComNo(comment.getComNo());
+		
+		res += movMapper.updateMovieAvgStar(newComment.getMovNo());
+		if (res != 2) throw new RuntimeException();
+		return res;
+	}
+
+	// 트랜잭션 -> 한줄평 삭제시 / 영화 평점이 update(서브쿼리)
+	@Override
+	@Transactional
+	public int trRemoveComment(Comment comment) {
+		Comment newComment = mapper.selectCommentByComNo(comment.getComNo());
+		
+		int res = mapper.deleteComment(newComment);
+		System.out.println("한줄평삭제 >> " + comment.getComNo());
+
+		res += movMapper.updateMovieAvgStar(newComment.getMovNo());
+		if (res != 2) throw new RuntimeException();
+		return res;
 	}
 }

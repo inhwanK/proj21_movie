@@ -73,4 +73,10 @@ public class MovieServiceImpl implements MovieService {
 		log.debug("service - removeMovie() > " + movie);
 		return mapper.deleteMovie(movie);
 	}
+
+	@Override
+	public int modifyMovieAvgStar(Movie movie) {
+		log.debug("service - modifyMovieAvgStarMovie() > " + movie);
+		return mapper.updateMovieAvgStar(movie);
+	}
 }
