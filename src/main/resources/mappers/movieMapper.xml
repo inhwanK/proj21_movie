@@ -24,7 +24,7 @@
 	<!-- 영화 평균 평점은 한줄평의 영화별 평균 별점으로 쿼리 바꿈 -->
 	<select id="selectMovieBoxOfficeAll" resultType="Movie">
 		select m.mov_no, m.mov_title, m.mov_grade, m.mov_genre, m.mov_runtime, m.mov_director, m.mov_actor, m.mov_detail, 		
-				m.mov_opendate, m.mov_enddate, ifnull(round(avg(c.com_star), 1), 0) as mov_avgstar, m.mov_poster
+				m.mov_opendate, m.mov_enddate, mov_avgstar, m.mov_poster
 			from comment c right join movie m on c.mov_no = m.mov_no
 		 where m.mov_opendate &lt;= now() and m.mov_enddate &gt; date_add(now(), interval -1 day)
 		group by m.mov_no
@@ -32,7 +32,7 @@
 	
 	<select id="selectMovieCommingSoonAll" resultType="Movie">
 		select m.mov_no, m.mov_title, m.mov_grade, m.mov_genre, m.mov_runtime, m.mov_director, m.mov_actor, m.mov_detail, 		
-				m.mov_opendate, m.mov_enddate, ifnull(round(avg(c.com_star), 1), 0) as mov_avgstar, m.mov_poster
+				m.mov_opendate, m.mov_enddate, mov_avgstar, m.mov_poster
 			from comment c right join movie m on c.mov_no = m.mov_no
 		 where m.mov_opendate &gt; now()
 		group by m.mov_no
@@ -40,7 +40,7 @@
 	
 	<select id="selectMovieByTitle" resultType="Movie">
 		select m.mov_no, m.mov_title, m.mov_grade, m.mov_genre, m.mov_runtime, m.mov_director, m.mov_actor, m.mov_detail, 		
-				m.mov_opendate, m.mov_enddate, ifnull(round(avg(c.com_star), 1), 0) as mov_avgstar, m.mov_poster
+				m.mov_opendate, m.mov_enddate, mov_avgstar, m.mov_poster
 			from comment c right join movie m on c.mov_no = m.mov_no
 		 where m.mov_opendate &lt;= now() and m.mov_enddate &gt; date_add(now(), interval -1 day)
 		 		and mov_title like concat('%', #{movTitle}, '%')
@@ -70,5 +70,13 @@
 		from movie 
 		where mov_no = #{movNo}
 	</delete>
+	
+	<update id="updateMovieAvgStar">
+		update movie 
+			set mov_avgstar = (select * from (select ifnull(round(avg(com_star), 1), 0) 
+								from comment c join movie m on c.mov_no = m.mov_no 
+							 where m.mov_no = #{movNo})as mov_avgstar)
+		 where mov_no = #{movNo}
+	</update>
 	
 </mapper>

@@ -26,4 +26,11 @@ public interface CommentService {
 	int registComment(Comment comment);
 	int modifyComment(Comment comment);
 	int removeComment(Comment comment);
+	
+	// 트랜잭션 -> 한줄평 추가시 / 영화 평점이 update(서브쿼리)
+	int trRegistComment(Comment comment);
+	// 트랜잭션 -> 한줄평 수정시 / 영화 평점이 update(서브쿼리)
+	int trModifyComment(Comment comment);
+	// 트랜잭션 -> 한줄평 삭제시 / 영화 평점이 update(서브쿼리)
+	int trRemoveComment(Comment comment);
 }

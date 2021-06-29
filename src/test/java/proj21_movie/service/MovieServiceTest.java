@@ -150,5 +150,17 @@ public class MovieServiceTest {
 		int res = mapper.deleteMovie(newMovie);
 		Assert.assertEquals(1, res);
 	}
+	
+	@Test
+	public void test10modifyMovieAvgStar() {		
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Movie movie = new Movie();
+		movie.setMovNo(1);
+		
+		int res = mapper.updateMovieAvgStar(movie);
+		Assert.assertEquals(1, res);
+		log.debug("res no >> " + res);
+	}
 
 }

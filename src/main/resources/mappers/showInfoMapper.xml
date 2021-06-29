@@ -85,6 +85,7 @@
 			join cinema c on s.cin_no = c.cin_no  
 			join movie m on s.mov_no = m.mov_no
 		<where>
+			shw_starttime &gt; if (#{shwDate} > now(), 0, now())
 			<if test="shwDate != null">
 				and s.shw_date = #{shwDate}
 			</if>

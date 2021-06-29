@@ -106,6 +106,9 @@
 								+ "${contextPath}/resources/images/movie/movie-detail/bg-" + json.movPoster + ");'>";
 						bg += "</div>"; 
 						
+						/* 실시간 평점 (영화 평균 평점) <-- 트랜젝션 사용 */ 
+						avgStar += json.movAvgstar;
+						
 						/* 영화 제목 */			
 						title += "<p class='title'>" + json.movTitle + "</p>";
 						// title += "<p class='title-eng'>" + 'Cruella' + "</p>";		// 영어 제목 컬럼 미지정
@@ -134,8 +137,8 @@
 						sCont += "</div>";
 						
 					$(".movie-detail-page .movie-bg").append(bg);
+					$(".number em").append(avgStar);
 					$(".movie-detail-cont").append(title);
-					
 					$(".poster .wrap").append(poster);
 					$(".movie-info-list").append(sCont);
 			});
@@ -148,21 +151,7 @@
 						cinType += "상영타입 : " + json.cinType + "(자막)";
 					$(".movie-info .p-type").append(cinType);
 				});
-			
-			/* 실시간 평점 (영화 평균 평점) */	
-			var movNo = "${movNo}";
-			$.get(contextPath+"/api/comments/avgstar/" + movNo,
-				function(json) {	
-					var dataLength = json.length;
-					if (dataLength >= 1) {
-						var avgStar = "";		
-						for (i = 0; i < dataLength; i++) {
-							avgStar += json[i].comStar;
-						}				
-						$(".number em").append(avgStar);
-					}
-				});	
-			
+		
 			/* // 주요정보 탭 */
 			
 			/* 실관람평  탭 */

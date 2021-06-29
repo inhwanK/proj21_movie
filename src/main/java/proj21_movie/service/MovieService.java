@@ -23,4 +23,7 @@ public interface MovieService {
 	int registerMovie(Movie movie);
 	int modifyMovie(Movie movie);
 	int removeMovie(Movie movie);
+	
+	// 영화 실시간 평점 업뎃 구상중
+	int modifyMovieAvgStar(Movie movie);
 }

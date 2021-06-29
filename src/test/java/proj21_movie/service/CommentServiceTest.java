@@ -31,6 +31,9 @@ public class CommentServiceTest {
 	@Autowired
 	private CommentMapper mapper;
 	
+	@Autowired
+	private CommentService service;
+	
 	static int no = 0;
 	
 	@After
@@ -136,6 +139,40 @@ public class CommentServiceTest {
 		int res = mapper.deleteComment(comment);
 		Assert.assertEquals(1, res);
 		log.debug("res no >> " + res);
+	}
+	
+	// 트랜젝션 테스트
+	//@Test
+	public void test10TrRegistComment() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Comment comment = new Comment();
+		comment.setMovNo(new Movie(4));
+		comment.setComUser("테스트유저");
+		comment.setComContent("테스트");
+		comment.setComStar(5);
+		
+		service.trRegistComment(comment);
+	}
+	
+	//@Test
+	public void test11TrModifyComment() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Comment comment = new Comment(270);
+		comment.setComContent("테스트2");
+		comment.setComStar(3);
+		
+		service.trModifyComment(comment);
+	}
+	
+	//@Test
+	public void test12TrRemoveComment() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Comment comment = new Comment(270);
+		
+		service.trRemoveComment(comment);
 	}
 
 }
