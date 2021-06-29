@@ -89,8 +89,7 @@ public class InquiryServiceTest {
 	public void test05RemoveInquiry() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
-		Inquiry inquiry = new Inquiry(no);
-		int res = mapper.deleteInquiry(inquiry);
+		int res = mapper.deleteInquiry(no);
 		Assert.assertEquals(1, res);
 	}
 
