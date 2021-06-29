@@ -124,6 +124,10 @@
 			var showNo = ${param.shwNo};
 			var reservingNo = ${param.reservingNo};
 			var seat = "";
+			var price = 0;
+			var cntAdult = 0;
+			var cntTeen = 0;
+			var cntPref = 0;
 			
 			$.ajax({
 				type:"GET",
@@ -147,6 +151,10 @@
 				success: function(json) {
 					$("#price").text(json.ingPrice);
 					seat = json.ingSeat;
+					price = json.ingPrice;
+					cntAdult = json.ingAdult;
+					cntTeen = json.ingTeen;
+					cntPref = json.ingPref;
 				}
 			});
 			
@@ -160,8 +168,47 @@
 				row.push(arrSeat[i].charAt(0).charCodeAt(0)-64);
 				col.push(Number(arrSeat[i].charAt(1)));
 			}
-			console.log(row);
-			console.log(col);
+			
+			$("#button-group").on('click', '[id=next]', function(e){
+				alert("memNo >> " + 1 
+						+ "\nshwNo >> " + showNo
+						+ "\nreservingNo >> " + reservingNo
+						+ "\nprice >> " + price
+						+ "\ncntAdult >> " + cntAdult
+						+ "\ncntTeen >> " + cntTeen
+						+ "\ncntPref >> " + cntPref
+						+ "\nrow >> " + row
+						+ "\ncol >> " + col
+						);
+				
+				var resCommand = {
+						memNo: 1,
+						shwNo: showNo,
+						reservingNo: reservingNo,
+						price: price,
+						cntAdult: cntAdult,
+						cntTeen: cntTeen,
+						cntPref: cntPref,
+						row: row,
+						col: col
+				}
+				
+				$.ajax({
+					url: contextPath + "/api/trReserving",
+					type: "POST",
+					contentType: "application/json; charset=utf-8",
+					datatype: "json",
+					cache: false,
+					data: JSON.stringify(resCommand),
+					success: function(res) {
+						alert("성공");
+					}, 
+					error: function(request, status, error) {
+						alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+					}
+				});
+			});
+			
 		});
 	</script>
 </body>

@@ -163,3 +163,5 @@ select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, c
 
 -- 예매 진행중 -----------------------------------------------------------------------
 select * from reserving;
+select * from reservation;
+select * from seat;

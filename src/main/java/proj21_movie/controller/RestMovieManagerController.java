@@ -107,7 +107,6 @@ public class RestMovieManagerController {
 			File saveFile = new File(uploadFolder, uploadFileName);
 			
 			try {
-				
 				multipartFile.transferTo(saveFile);
 			} catch (Exception e) {
 				e.getMessage();
