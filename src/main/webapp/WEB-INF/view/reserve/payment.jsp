@@ -135,6 +135,7 @@
 			var cntAdult = 0;
 			var cntTeen = 0;
 			var cntPref = 0;
+			var checkUnload = true;
 			
 			// 상영정보 받아옴
 			$.ajax({
@@ -179,7 +180,7 @@
 			
 			for (i = 0; i < arrSeat.length; i++) {
 				row.push(arrSeat[i].charAt(0).charCodeAt(0)-64);
-				col.push(Number(arrSeat[i].charAt(1)));
+				col.push(Number(arrSeat[i].substring(1)));
 			}
 			
 			// 결제 버튼 누르면 예매, 좌석 테이블에 등록되고 예매진행중 테이블에서 데이터 삭제
@@ -223,6 +224,7 @@
 						data: JSON.stringify(resCommand),
 						success: function(res) {
 							alert("결제완료");
+							checkUnload = false;
 							window.location.href = contextPath + "/reserve";
 						}, 
 						error: function(request, status, error) {
@@ -234,8 +236,6 @@
 				}
 				
 			});
-			
-			var checkUnload = true;
 			
 			// 이전 버튼 누르면 예매진행중인 내용 삭제되고 이전페이지로 돌아감
 			$("#button-group").on('click', '[id=before]', function(e){

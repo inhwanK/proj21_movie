@@ -214,9 +214,9 @@
 								var row = "";
 								var col = "";
 								row += arrSeat[j].charAt(0).charCodeAt(0)-64;
-								col += arrSeat[j].charAt(1);
-								$("#" + row + col).removeClass('select-seat');
-								$("#" + row + col).addClass('reserving');
+								col += arrSeat[j].substring(1);
+								$("#" + row + "" + col).removeClass('select-seat');
+								$("#" + row + "" + col).addClass('reserving');
 							}
 						}
 					}

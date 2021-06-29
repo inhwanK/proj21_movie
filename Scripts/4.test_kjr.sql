@@ -166,5 +166,6 @@ select * from reserving;
 select * from reservation;
 select * from seat;
 
+select * from seat where shw_no = 22;
 select * from reserving where shw_no = 24;
 delete from reserving where ing_no = 8;

@@ -91,6 +91,7 @@ public class ReservingServiceImpl implements ReservingService {
 			seat.setSeatRowNo(row.get(i));
 			seat.setSeatColNo(col.get(i));
 			res += seatMapper.insertSeat(seat);
+			System.out.println("row >> " + row.get(i) + ", col >> " + col.get(i));
 		}
 		System.out.println("좌석등록");
 		
