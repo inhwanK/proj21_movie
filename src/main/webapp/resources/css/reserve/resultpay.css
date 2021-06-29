@@ -8,6 +8,8 @@
 	font-weight: normal;
 	font-style: normal;
 }
+/* Fontawesome 4.7 */
+@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
 /* body */
 body {
@@ -105,7 +107,6 @@ section {
 	height: 900px;
 	text-align: center;
 }
-
 section h2 {
 	padding-left: 10px;
 	text-align: left;
@@ -114,33 +115,12 @@ section h2 {
 #container {
 	border: 1px solid #ccc;
 	margin-bottom: 50px;
-	height: 800px;
+	height: 700px;
+	margin: auto;
 }
 
 #title {
-	width: 700px;
-	margin: 50px 0 0 80px;
-}
-
-#container h2{
-	display: inline-block;
-	margin-right: 700px;
-}
-
-#count{
-	background-color: RGB(247,247,247);
-	margin-left: 50px;
-	margin-right: 50px;
-}
-
-.fas{
-	color: RGB(3, 22, 52);
-	margin: 10px;
-}
-
-#count span{
-	font-size: 1.2em;
-	margin: 35px;
+	margin: 50px 0 0 100px;
 }
 
 #menubar ul{
@@ -158,7 +138,7 @@ section h2 {
 	height: 30px;
 	border: 1px solid #ccc;
 	text-align: center;
-/* 	border-collapse: collapse; */
+	overflow: hidden;
 }
 
 #selected{
@@ -166,75 +146,91 @@ section h2 {
 	color: white;
 }
 
-#seat-choice {
-	height: 600px;
+#table-div{
 	margin: 0 auto;
+	width: 350px;
 }
 
-#seat-area{
+#result-table {
+	width: 700px;
+}
+
+.info {
+	width: 200px;
+	text-align: left;
+	padding-left: 10px;
+}
+
+.result {
+	width: 500px;
+	text-align: left;
+	padding-left: 10px;
+}
+
+/* #seat-result{
 	padding: 10px;
-	/* margin-top: 30px; */
-	margin-left: 150px;
-	width: 570px;
+	width: 1151px;
 	height: 500px;
 	float: left;
+	margin-left: 100px;
 }
 
-#seat-area img{
-	width: 500px;
-	margin: 25px 0px;
+#seat-result h3{
+	text-align: left;
+	background-color: #ccc;
+	padding: 10px;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
-#seat-area span{
-	display: inline-block;
-	width: 30px;
-	height: 28px;
-	/* border: 1px solid RGB(3, 22, 52); */
-	margin: 5px;
+.title{
+	border: 1px solid #ddd;	
+	padding: 5px;
+	border-radius: 3px;
+	cursor: pointer;
+	padding-left: 15px;
+	margin-bottom: 10px;
+	text-align: left;
+	font-size: 1.2em;
 }
 
-.reserved {
+
+.title:hover,
+.title.active{
+ 	background-color: #203049;
+ 	color: #fff;
+}
+
+
+.desc{
+	padding: 20px;
+	display: none; active 되지 않은 desc는 숨김
+}
+
+.desc.active{
+	display: block; active 됐을 때 block으로 보이게 만듦
+}
+
+
+.desc span{
+	display:inline-block;
+	width: 120px;
+	background-color: white;
+	padding: 10px;
+	font-size: 1.2em;
+	margin: 0 50px;
+	text-decoration: none;
 	border: 1px solid RGB(3, 22, 52);
-	background-color: gray;
-}
-
-.reserving {
-	border: 1px solid RGB(3, 22, 52);
-	background-color: orange;
-}
-
-.select-seat {
-	border: 1px solid RGB(3, 22, 52);
-}
-
-#hiddenseat{
-	display: inline-block;
-	width: 30px;
-	height: 28px;
-	visibility: hidden;
-}
-
-.matrix {
-	border: 1px solid RGB(255, 255, 255);;
-}
-
-
-#seat-area .select-seat:hover{
-	display: inline-block;
-	width: 30px;
-	height: 28px;
-	border: 1px solid RGB(3, 22, 52);
-	background-color: RGB(3, 22, 52);
-	color: white;
+	color: RGB(3, 22, 52);
 	cursor: pointer;
 }
 
-.select-seat.active {
+.paytype.active {
 	background-color: RGB(3, 22, 52);
 	color: white;
 }
 
-#seat-info{
+#payment-result{
 	padding: 10px;
 	width: 340px;
 	height: 500px;
@@ -242,22 +238,19 @@ section h2 {
 	background-color: RGB(3, 22, 52);
 }
 
-#movie-info, #seat-info, #price-info{
-	margin: 50px auto;
+
+#movie-info, #time-info, #price-info, #discount-info{
+	margin: 30px auto;
 }
 
-#select-info {
-	height: 70px;
-}
-
-#movie-info dt, #seat-info dt, #price-info dt{
+#movie-info dt, #time-info dt, #price-info dt, #discount-info dt{
 	font-size: 1.5em;
 	font-weight: bold;
 	color: white;
 	text-align: left;
 }
 
-#movie-info dd, #seat-info dd, #price-info dd{
+#movie-info dd, #time-info dd, #price-info dd, #discount-info dd{
 	font-size: 1.0em;
 	color: white;
 	text-align: left;
@@ -273,7 +266,7 @@ section h2 {
 	margin: 0 10px;
 	cursor: pointer;
 }
-
+ */
 
 /* footer */
 footer {

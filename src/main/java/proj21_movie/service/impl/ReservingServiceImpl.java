@@ -82,6 +82,7 @@ public class ReservingServiceImpl implements ReservingService {
 		
 		int res = resMapper.insertReservation(reservation);
 		System.out.println("예매등록 >> " + reservation.getResNo());
+		int resNo = reservation.getResNo();
 		
 		// 좌석 정보 등록
 		Seat seat = new Seat();
@@ -91,6 +92,7 @@ public class ReservingServiceImpl implements ReservingService {
 			seat.setSeatRowNo(row.get(i));
 			seat.setSeatColNo(col.get(i));
 			res += seatMapper.insertSeat(seat);
+			System.out.println("row >> " + row.get(i) + ", col >> " + col.get(i));
 		}
 		System.out.println("좌석등록");
 		
@@ -98,7 +100,7 @@ public class ReservingServiceImpl implements ReservingService {
 		res += ingMapper.deleteReserving(reservingNo);
 		System.out.println("임시테이블에서 데이터 삭제");
 		
-		return res;
+		return resNo;
 	}
 
 }

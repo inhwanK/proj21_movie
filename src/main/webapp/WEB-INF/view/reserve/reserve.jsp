@@ -97,7 +97,7 @@
 	<section>
 		<div id="containter">
 		
-			<h2>바로예매</h2>
+			<h2 id="menu-title">바로예매</h2>
 			
 			<div id="calendar" class="calendar">
 			</div>
@@ -297,12 +297,12 @@
 		// 좌석 선택 버튼 기능
 		$(document).on('click', '[class=btn-seat]', function(e){
 			var shwDate = date(dateIdx);
-			alert("shwDate >> " + shwDate + 
+			/* alert("shwDate >> " + shwDate + 
 					"\nmovieNo >> " + movieNo + 
 					"\ntheaterNo >> " + theaterNo +
-					"\ntime >> " + time);
+					"\ntime >> " + time); */
 			
-			window.location.href = contextPath + "/seat?no=" + showInfoNo;
+			window.location.href = contextPath + "/seat?no=" + showInfoNo + "#menu-title";
 		});
 		
 		// 인덱스를 넣으면 해당 인덱스만큼 +된 날짜를 계산하여 "yyyy-MM-dd" 형식으로 리턴해주는 함수 

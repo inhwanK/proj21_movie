@@ -36,7 +36,7 @@
 	</nav>
 	
 	<section>
-			<h2>바로예매</h2>
+			<h2 id="menu-title">바로예매</h2>
 			<div id="menubar">
 				<ul>
 					<li id="selected">인원 / 좌석</li>
@@ -99,7 +99,7 @@
 					</div>
 					
 					<div id="button-group"> 
-						<!-- <span id="before">이전</span> -->
+						<span id="before">이전</span>
 						<span id="next">다음</span>
 					</div>
 					</div>
@@ -173,6 +173,7 @@
 						}
 					}
 				}
+				makeTag += "<span style='background-color:gray;'>&nbsp;</span>예매된 좌석 <span style='background-color:orange;'>&nbsp;</span>예매중인 좌석";
 				$("#seat-area").html(makeTag);
 			}
 			
@@ -191,6 +192,32 @@
 							console.log("예약된 좌석 - 행 >> " + json[i].seatRowNo + ", 열 >> " + json[i].seatColNo);
 							$("#" + json[i].seatRowNo + json[i].seatColNo).removeClass('select-seat');
 							$("#" + json[i].seatRowNo + json[i].seatColNo).addClass('reserved');
+						}
+					}
+				}
+			});
+			
+			// 예약중인 좌석 비활성화
+			$.ajax({
+				type:"GET",
+				url: contextPath + "/api/reservingByShowNo/" + no,
+				contentType: "application/json; charset=utf-8",
+				async: false,
+				success: function(json) {
+					var dataLength = json.length;
+					if (dataLength >= 1) {
+						for (i = 0; i < dataLength; i++) {
+							var arrSeat = json[i].ingSeat.split(" ");
+							arrSeat.pop();
+							console.log("예약중인 좌석 >> " + arrSeat);
+							for (j = 0; j < arrSeat.length; j++) {
+								var row = "";
+								var col = "";
+								row += arrSeat[j].charAt(0).charCodeAt(0)-64;
+								col += arrSeat[j].substring(1);
+								$("#" + row + "" + col).removeClass('select-seat');
+								$("#" + row + "" + col).addClass('reserving');
+							}
 						}
 					}
 				}
@@ -306,13 +333,19 @@
 					cache: false,
 					data: JSON.stringify(newReserving),
 					success: function(res) {
-						alert(res);
-						window.location.href = contextPath + "/payment?shwNo=" + no + "&reservingNo=" + res;
+						/* alert(res); */
+						window.location.href = contextPath + "/payment?shwNo=" + no + "&reservingNo=" + res + "#menu-title";
 					}, 
 					error: function(request, status, error) {
 						alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 					}
 				});
+			});
+			
+			$("#button-group").on('click', '[id=before]', function(e){
+				if (confirm("이전 화면으로 돌아가시겠습니까?")){
+					window.location.href = contextPath + "/reserve#menu-title";
+				}
 			});
 		});
 	</script>

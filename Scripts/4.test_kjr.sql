@@ -165,3 +165,7 @@ select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, c
 select * from reserving;
 select * from reservation;
 select * from seat;
+
+select * from seat where shw_no = 22;
+select * from reserving where shw_no = 22;
+delete from reserving where ing_no = 8;

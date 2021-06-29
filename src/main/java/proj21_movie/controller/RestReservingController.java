@@ -1,10 +1,12 @@
 package proj21_movie.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,10 +47,20 @@ public class RestReservingController {
 		return ResponseEntity.ok(reserving);
 	}
 	
+	@GetMapping("/reservingByShowNo/{no}")
+	public ResponseEntity<Object> getReservingByShowNo(@PathVariable int no) {
+		return ResponseEntity.ok(service.getListByShowNo(no));
+	}
+	
 	@PostMapping("/trReserving")
 	public ResponseEntity<Object> trReserving(@RequestBody ReserveCommand command) {
 		System.out.println("확인 >> " + command);
 		return ResponseEntity.ok(service.trReserving(command));
+	}
+	
+	@DeleteMapping("delReserving/{no}")
+	public ResponseEntity<Object> deleteReserving(@PathVariable int no) {
+		return ResponseEntity.ok(service.removeReserving(no));
 	}
 	
 }
