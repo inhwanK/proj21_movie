@@ -5,6 +5,7 @@
 	<select id="selectInquiryAll" resultType="Inquiry">
 		select inq_no, inq_title, inq_user, inq_detail, inq_date, inq_file, inq_answer, inq_ansdate, inq_status 
 		from inquiry
+		order by inq_no desc;
 	</select>
 	
 	<select id="selectInquiryByUser" resultType="Inquiry">
