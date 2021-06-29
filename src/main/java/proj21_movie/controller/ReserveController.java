@@ -35,5 +35,10 @@ public class ReserveController {
 		return "reserve/payment";
 	}
 	
+	@RequestMapping("/resultpay")
+	public String result() {
+		return "reserve/resultpay";
+	}
+	
 	
 }

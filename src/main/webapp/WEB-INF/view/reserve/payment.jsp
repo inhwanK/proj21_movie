@@ -52,7 +52,7 @@
 	</nav>
 	
 	<section>
-		<h2>바로예매</h2>
+		<h2 id="menu-title">바로예매</h2>
 			<div id="menubar">
 				<ul>
 					<li>인원 / 좌석</li>
@@ -107,7 +107,7 @@
 						<dd><span id="price"></span> 원</dd>
 					</dl>
 				</div>
-
+				<br><br>
 				<div id="button-group">
 					<span id="before">이전</span> <span id="next">결제</span>
 				</div>
@@ -223,9 +223,9 @@
 						cache: false,
 						data: JSON.stringify(resCommand),
 						success: function(res) {
-							alert("결제완료");
+							alert("결제완료" + res);
 							checkUnload = false;
-							window.location.href = contextPath + "/reserve";
+							window.location.href = contextPath + "/resultpay?resNo=" + res +"#menu-title";
 						}, 
 						error: function(request, status, error) {
 							alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
@@ -246,7 +246,7 @@
 						success: function(res) {
 							/* alert(res); */
 							checkUnload = false;
-							window.location.href = contextPath + "/seat?no=" + showNo;
+							window.location.href = contextPath + "/seat?no=" + showNo + "#menu-title";
 						},
 						error: function(request, status, error) {
 							alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);

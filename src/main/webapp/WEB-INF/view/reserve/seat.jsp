@@ -36,7 +36,7 @@
 	</nav>
 	
 	<section>
-			<h2>바로예매</h2>
+			<h2 id="menu-title">바로예매</h2>
 			<div id="menubar">
 				<ul>
 					<li id="selected">인원 / 좌석</li>
@@ -334,7 +334,7 @@
 					data: JSON.stringify(newReserving),
 					success: function(res) {
 						/* alert(res); */
-						window.location.href = contextPath + "/payment?shwNo=" + no + "&reservingNo=" + res;
+						window.location.href = contextPath + "/payment?shwNo=" + no + "&reservingNo=" + res + "#menu-title";
 					}, 
 					error: function(request, status, error) {
 						alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
@@ -344,7 +344,7 @@
 			
 			$("#button-group").on('click', '[id=before]', function(e){
 				if (confirm("이전 화면으로 돌아가시겠습니까?")){
-					window.location.href = contextPath + "/reserve";
+					window.location.href = contextPath + "/reserve#menu-title";
 				}
 			});
 		});
