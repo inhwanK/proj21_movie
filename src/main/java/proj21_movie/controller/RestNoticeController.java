@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,7 +66,7 @@ public class RestNoticeController {
 	}
 	
 	@PostMapping("/notice")
-	public ResponseEntity<Object> registerNotice(@RequestBody Notice notice){
+	public ResponseEntity<Object> registNotice(@RequestBody Notice notice){
 		return ResponseEntity.ok(service.registerNotice(notice));
 	}
 	
@@ -89,6 +90,11 @@ public class RestNoticeController {
 		} catch (Exception e) {
 			System.out.println("에러");
 		}
+	}
+	
+	@DeleteMapping("/notice")
+	public ResponseEntity<Object> deleteNotice(int notNo){
 		
+		return ResponseEntity.ok(service.removeNotice(notNo));
 	}
 }

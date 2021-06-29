@@ -61,7 +61,32 @@
 			$(this).on('click','[id=regist]',function(){
 				window.location.href = contextPath+"/registNotice";
 			});
+			
+			$(this).on('click','[id=delete]',function(){
+				var td = $(this).parent().prevUntil();
+				var notNo = td.last().text(); 
+				
+				$.ajax({
+					url:contextPath + "/api/notice?notNo="+notNo,
+					type:"delete",
+					contentType:"application/json; charset=utf-8",
+					dataType:"json",
+					data: notNo,
+					success:function(){
+						var conf = confirm("정말 삭제하시겠습니까?");
+						if(conf){
+							alert("삭제되었습니다.");
+							location.reload(); // 페이지 새로고침.
+						}
+					},
+					error: function(){
+						alert("문제가 생긴것이 분명하답니다?")
+					}
+				});
+			});
 		});
+		
+		
 	});
 
 </script>
