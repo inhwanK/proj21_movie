@@ -196,6 +196,32 @@
 				}
 			});
 			
+			// 예약중인 좌석 비활성화
+			$.ajax({
+				type:"GET",
+				url: contextPath + "/api/reservingByShowNo/" + no,
+				contentType: "application/json; charset=utf-8",
+				async: false,
+				success: function(json) {
+					var dataLength = json.length;
+					if (dataLength >= 1) {
+						for (i = 0; i < dataLength; i++) {
+							var arrSeat = json[i].ingSeat.split(" ");
+							arrSeat.pop();
+							console.log("예약중인 좌석 >> " + arrSeat);
+							for (j = 0; j < arrSeat.length; j++) {
+								var row = "";
+								var col = "";
+								row += arrSeat[j].charAt(0).charCodeAt(0)-64;
+								col += arrSeat[j].charAt(1);
+								$("#" + row + col).removeClass('select-seat');
+								$("#" + row + col).addClass('reserving');
+							}
+						}
+					}
+				}
+			});
+			
 			// 인원 수 늘리기
 			$(document).on('click', '[class=countPlus]', function(e){
 				e.preventDefault();
