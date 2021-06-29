@@ -112,8 +112,8 @@ public class MemberMapperTest {
 		
 		String id = "test1@test.com"; // 존재하는 아이디
 		String id2 = "test123@test.com"; // 존재하지 않는 아이디
-		mapper.idCheck(id);
-		mapper.idCheck(id2);
+		mapper.selectIdCheck(id);
+		mapper.selectIdCheck(id2);
 	}
 
 }

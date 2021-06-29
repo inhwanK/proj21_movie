@@ -18,8 +18,28 @@
 <script type="text/javascript">
 	$(function(){	
 		<!-- 이메일 중복체크() -->
-		
-		
+<%-- 		function fn_idOverlap() {
+			var contextPath = "<%= request.getContextPath()%>";
+			$.ajax({
+				url : contextPath + "/idOverlap",
+				type : "post",
+				dataType : "json",
+				data : { "memEmail" : $("#memEmail").val()},
+				success : function(data) {
+					if(data == 1) {
+						alert("중복된 아이디 입니다.");
+						$("#new").attr("disabled", "disabled");
+					} else if(data == 0) {
+						alert("사용가능한 아이디 입니다.");
+						$("#new").removeAttr("disabled");
+						}
+					}
+				});
+			} --%>
+			
+		<!-- 아이디 중복검사!!! -->
+
+			
 		<!-- 비밀번호 일치 확인 -->
 		$('.box2').focusout(function () {
 	        var pwd1 = $("#memPasswd").val();
@@ -42,7 +62,6 @@
 		
 		<!-- 회원가입 -->
 		var contextPath = "<%= request.getContextPath()%>";
-
 		$('#new').on("click", function(e){
 	        var newMember = {  memEmail: $('#memEmail').val(), 
 	        				   memPasswd: $('#memPasswd').val(), 
@@ -76,11 +95,9 @@
 			<div class="join_main">
 				<ul class="ul">
 					<li class="li">
-						<span>아이디 </span>
-						<span id="id_input_re_1" style="display: none; color: #00498c; font-weight: bold;">중복된 아이디가 없습니다.</span>
-    					<span id="id_input_re_2" style="display: none; color: #d92742; font-weight: bold; ">이미 존재하는 아이디입니다.</span>
+						<span>아이디 </span><a href="${contextPath}/memberIdCheck"><button type="button" id="memberIdCheck">중복확인</button></a>
 						<br> 
-						<input type="email" placeholder="메일주소를 입력하세요" class="box1" id="memEmail" name="memEmail" required />
+						<input type="email" placeholder="메일주소를 입력하세요" class="box1" id="memEmail" name="memEmail" value="${memEmail }" required />
 					</li>
 					<li class="li">
 						<span>패스워드 </span> 
@@ -110,7 +127,7 @@
 						<input type="number" placeholder="하이픈('-')없이 숫자만 입력하세요" id="memPhone" class="box3" required />
 					</li>
 					<li class="li">
-						<button id="new">가입하기</button>
+						<button id="new" disabled="disabled">가입하기</button>
 					</li>
 				</ul>
 			</div>

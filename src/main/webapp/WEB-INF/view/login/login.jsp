@@ -19,10 +19,8 @@
 <script type="text/javascript">
 $(function(){
 	<!-- 회원 로그인 -->
-	/* 로그인 버튼 클릭 메서드 */
     $(".btn").click(function(){
     	var contextPath = "<%=request.getContextPath()%>";
-        /* 로그인 메서드 서버 요청 */
         $("#login_form").attr("action", contextPath + "/login");
         $("#login_form").submit();
     });

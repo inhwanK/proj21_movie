@@ -61,11 +61,33 @@ public class MemberServiceImpl implements MemberService {
 		log.debug("service - memberLogin() > " + member);
 		return mapper.memberLogin(member);
 	}
-	
-	// 아이디 중복검사
+
+	// 아이디 중복체크
 	@Override
-	public int idCheck(String memEmail) throws Exception {
-		log.debug("service - idCheck() > " + memEmail);
-		return mapper.idCheck(memEmail);
+	public boolean memberIdCheck(String memEmail) {
+		boolean idCheck = false;
+		System.out.println(memEmail);
+		System.out.println("[memberService idCheck]" + mapper.selectIdCheck(memEmail));
+		
+		if (mapper.selectIdCheck(memEmail) == null) {
+			idCheck = true;
+		}
+		return idCheck;
 	}
+	
+	// 아이디 중복체크 바로 추가
+	@Override
+	public int addMail(Member member) {
+		mapper.insertMember(member);
+		mapper.insertUsedMemEmail(member);
+		return mapper.insertMember(member);
+	}
+
+	// 아이디 중복체크
+//	@Override
+//	public int idOverlap(Member member) throws Exception {
+//		int result = mapper.idOverlap(member);
+//		return result;
+//	}
+
 }
