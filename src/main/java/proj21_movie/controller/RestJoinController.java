@@ -85,7 +85,7 @@ public class RestJoinController {
 		return ResponseEntity.ok(service.removeMember(memEmail));
 	}
 
-	// 이메일 중복 검사
+	// 이메일 중복 검사(구현이안되고있음)
 	@RequestMapping(value = "/memberIdChk", method = RequestMethod.POST)
 	@ResponseBody
 	public String memberIdChkPOST(String memEmail) throws Exception {
@@ -99,6 +99,7 @@ public class RestJoinController {
 
 		} else {
 			return "success"; // 중복 아이디 x
+
 		}
 
 	} // memberIdChkPOST() 종료
