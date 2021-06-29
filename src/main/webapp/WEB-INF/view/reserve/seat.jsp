@@ -99,7 +99,7 @@
 					</div>
 					
 					<div id="button-group"> 
-						<!-- <span id="before">이전</span> -->
+						<span id="before">이전</span>
 						<span id="next">다음</span>
 					</div>
 					</div>
@@ -173,6 +173,7 @@
 						}
 					}
 				}
+				makeTag += "<span style='background-color:gray;'>&nbsp;</span>예매된 좌석 <span style='background-color:orange;'>&nbsp;</span>예매중인 좌석";
 				$("#seat-area").html(makeTag);
 			}
 			
@@ -332,13 +333,19 @@
 					cache: false,
 					data: JSON.stringify(newReserving),
 					success: function(res) {
-						alert(res);
+						/* alert(res); */
 						window.location.href = contextPath + "/payment?shwNo=" + no + "&reservingNo=" + res;
 					}, 
 					error: function(request, status, error) {
 						alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 					}
 				});
+			});
+			
+			$("#button-group").on('click', '[id=before]', function(e){
+				if (confirm("이전 화면으로 돌아가시겠습니까?")){
+					window.location.href = contextPath + "/reserve";
+				}
 			});
 		});
 	</script>

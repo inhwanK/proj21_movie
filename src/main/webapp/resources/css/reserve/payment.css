@@ -200,11 +200,13 @@ section h2 {
 	margin: 0 50px;
 	text-decoration: none;
 	border: 1px solid RGB(3, 22, 52);
+	color: RGB(3, 22, 52);
+	cursor: pointer;
 }
 
-.desc span a{
-	text-decoration: none;
-	color: RGB(3, 22, 52);
+.paytype.active {
+	background-color: RGB(3, 22, 52);
+	color: white;
 }
 
 #payment-result{
