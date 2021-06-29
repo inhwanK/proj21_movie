@@ -135,9 +135,8 @@
 			});
 			
 			/* 날짜 클릭시 날짜계산하여 상영시간 출력 */
-			$(".date-list button").click(function(e){		
+			/* $(".date-list button").click(function(e){		
 				$(function(){
-					var contextPath = "${contextPath}";
 					var no = "${thtNo}";
 					var shwDate = date(dateIdx);
 					
@@ -156,40 +155,45 @@
 							
 							console.table(result);
 							
+							var dataLength = json.length;
 							var resultLength = result.length;
-							if (resultLength >= 1) {
+							if (dataLength >= 1) {
 								var sCont = "";
+								var sCont2 = "";
 								
 								for (i = 0; i < resultLength; i++) {
 									sCont += "<div class='theater-list'>";
 									
-									/* theater-title */
+									// theater-title
 									sCont += "<div class='theater-title'>";
 									sCont += "<p class='movie-grade age-" + result[i].movNo.movGrade + "'>";
 									sCont += "<a href='${contextPath}/movie?movNo=" + result[i].movNo.movNo + "' title='" 
 											+ result[i].movNo.movTitle + " 상세보기'>" + result[i].movNo.movTitle + "</a></p>";
+									sCont += "<input id=hidden-movNo type='hidden' value='" + result[i].movNo.movNo + "'/>";
 									sCont += "<p class='information'>";
 									sCont += "<span>상영중</span>/상영시간" + result[i].movNo.movRuntime + "분</p>";
 									sCont += "</div>";					
-									sCont += "</div>"
+									sCont += "</div>";
+								}
+								for (i = 0; i < dataLength; i++) {
 									
 									// theater-type-box
-									sCont += "<div class='theater-type-box'>";
-									sCont += "<div class='theater-type'>";
-									sCont += "<p class='theater-name'>" + result[i].cinNo.cinNo + "관</p>";
-									sCont += "<p class='chair'>총 " + result[i].cinNo.cinSeat + "석</p>";
-									sCont += "</div>";
-									sCont += "<div class='theater-time'>";
-									sCont += "<div class='theater-type-area'>" + result[i].cinNo.cinType + "(자막)</div>";
-									sCont += "<div class='theater-time-box'>";
-									sCont += "<a href='#' title='영화 예매하기'>";
-									sCont += "<span class='time'>" + result[i].shwStarttime;
-									sCont += "<span class='chair'>" + result[i].cinNo.cinSeat + "석 </span></span></a>";
-									sCont += "</div></div></div>";
+									sCont2 += "<div class='theater-type-box'>";
+									sCont2 += "<div class='theater-type'>";
+									sCont2 += "<p class='theater-name'>" + json[i].cinNo.cinNo + "관</p>";
+									sCont2 += "<p class='chair'>총 " + json[i].cinNo.cinSeat + "석</p>";
+									sCont2 += "</div>";
+									sCont2 += "<div class='theater-time'>";
+									sCont2 += "<div class='theater-type-area'>" + json[i].cinNo.cinType + "(자막)</div>";
+									sCont2 += "<div class='theater-time-box'>";
+									sCont2 += "<a href='#' title='영화 예매하기'>";
+									sCont2 += "<span class='time'>" + json[i].shwStarttime;
+									sCont2 += "<span class='chair'>" + json[i].cinNo.cinSeat + "석 </span></span></a>";
+									sCont2 += "</div></div></div>";
 								}
 								$(".theater-list-box").empty();		
 								$(".theater-list-box").append(sCont);	
-								
+								$(".theater-list").append(sCont2);					
 							}else {
 								var sEmp = "";
 									sEmp = "<p class='no-showInfo-list'>선택하신 날짜의 상영중인 영화가 없습니다. 다른 날짜를 선택해주세요.</p>"
@@ -204,21 +208,36 @@
 							$(".theater-list-box").append(sEmp);
 							console.log("error > ");
 						}
+					});
+				});
+			}); */
+			
+
+			$(".date-list button").click(function(e){
+				$(function(){
+					var thtNo = "${thtNo}";
+					var shwDate = date(dateIdx);
+
+					$.ajax({
+						type:"GET",
+						url: contextPath + "/api/showInfoListByTheater/" + thtNo + "/" + shwDate,
+						contentType: "application/json; charset=utf-8",
+						success: function(json){
 							
-							// 원래 데이터(영화 중복 제거 안됨)
+							console.table(json);
 							
-							/* var dataLength = json.length;
+							var dataLength = json.length;
 							if (dataLength >= 1) {
 								var sCont = "";
 								
 								for (i = 0; i < dataLength; i++) {
-									sCont += "<div class='theater-list'>";
 									
 									// theater-title
 									sCont += "<div class='theater-title'>";
 									sCont += "<p class='movie-grade age-" + json[i].movNo.movGrade + "'>";
 									sCont += "<a href='${contextPath}/movie?movNo=" + json[i].movNo.movNo + "' title='" 
 											+ json[i].movNo.movTitle + " 상세보기'>" + json[i].movNo.movTitle + "</a></p>";
+									sCont += "<input id=hidden-movNo type='hidden' value='" + json[i].movNo.movNo + "'/>";
 									sCont += "<p class='information'>";
 									sCont += "<span>상영중</span>/상영시간" + json[i].movNo.movRuntime + "분</p>";
 									sCont += "</div>";					
@@ -237,24 +256,23 @@
 									sCont += "<span class='time'>" + json[i].shwStarttime;
 									sCont += "<span class='chair'>" + json[i].cinNo.cinSeat + "석 </span></span></a>";
 									sCont += "</div></div></div>";
-								}
+								}	
 								$(".theater-list-box").empty();		
-								$(".theater-list-box").append(sCont);	
-								
+								$(".theater-list-box").append(sCont);										
 							}else {
 								var sEmp = "";
-									sEmp = "<p class='no-showInfo-list'>선택하신 날짜의 상영중인 영화가 없습니다. 다른 날짜를 선택해주세요.</p>"
-								$(".theater-list-box").empty();
-								$(".theater-list-box").append(sEmp);
-							}
-						},
-						error : function(request, status, error){
-							var sEmp = "";
 								sEmp = "<p class='no-showInfo-list'>선택하신 날짜의 상영중인 영화가 없습니다. 다른 날짜를 선택해주세요.</p>"
 							$(".theater-list-box").empty();
 							$(".theater-list-box").append(sEmp);
-							console.log("error > ");
-						} */	
+						}
+					},
+					error : function(request, status, error){
+						var sEmp = "";
+							sEmp = "<p class='no-showInfo-list'>선택하신 날짜의 상영중인 영화가 없습니다. 다른 날짜를 선택해주세요.</p>"
+						$(".theater-list-box").empty();
+						$(".theater-list-box").append(sEmp);
+						console.log("error > ");
+					}
 					});
 				});
 			});
@@ -266,14 +284,14 @@
 			var today = new Date();
 			
 			var year = today.getFullYear();
-			var month = today.getMonth() + 1;
+			var month = today.getMonth();
 			var date = today.getDate();
 			
 			var addDate = date + idx;
 			
 			var today2 = new Date(year, month, addDate);
 			var year2 = today2.getFullYear();
-			var month2 = today2.getMonth();
+			var month2 = today2.getMonth() + 1;
 			var date2 = today2.getDate();
 			
 			if (month2 < 10) month2 = "0" + month2;
