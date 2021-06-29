@@ -16,7 +16,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-	$(function(){		
+	$(function(){	
+		<!-- 이메일 중복체크() -->
+		
+		
 		<!-- 비밀번호 일치 확인 -->
 		$('.box2').focusout(function () {
 	        var pwd1 = $("#memPasswd").val();
@@ -31,6 +34,8 @@
 	            } else {
 	                $("#alert-success").css('display', 'none'); 
 	                $("#alert-danger").css('display', 'inline-block');
+		    	    $('#confmemPasswd').val('');
+			        $('#confmemPasswd').focus();
 	            }
 	        }
 		});
@@ -53,14 +58,13 @@
 	            cache       : false,
 	            data        : JSON.stringify(newMember),
 	            success     : function(res) {
-	                window.location.href = contextPath + "/joinsuccess";
+    	                window.location.href = contextPath + "/joinsuccess";
 	            },
 	            error       : function(request, status, error){
 	                alert("회원가입 폼을 정확히 입력해주세요");
 	            }
 	        }); 
 	    });
-		
 	});
 </script>
 </head>
@@ -73,8 +77,10 @@
 				<ul class="ul">
 					<li class="li">
 						<span>아이디 </span>
+						<span id="id_input_re_1" style="display: none; color: #00498c; font-weight: bold;">중복된 아이디가 없습니다.</span>
+    					<span id="id_input_re_2" style="display: none; color: #d92742; font-weight: bold; ">이미 존재하는 아이디입니다.</span>
 						<br> 
-						<input type="email" placeholder="메일주소를 입력하세요" class="box1" id="memEmail" required />
+						<input type="email" placeholder="메일주소를 입력하세요" class="box1" id="memEmail" name="memEmail" required />
 					</li>
 					<li class="li">
 						<span>패스워드 </span> 
@@ -96,12 +102,12 @@
 					<li class="li">
 						<span>생년월일 </span> 
 						<br> 
-						<input type="date" placeholder="생년월일을 입력하세요." id="memBirthdate" class="box3" required />
+						<input type="date" id="memBirthdate" class="box3" required />
 					</li>
 					<li class="li">
 						<span>휴대폰번호 </span> 
 						<br> 
-						<input type="text" placeholder="휴대폰번호를 입력하세요" id="memPhone" class="box3" required />
+						<input type="number" placeholder="하이픈('-')없이 숫자만 입력하세요" id="memPhone" class="box3" required />
 					</li>
 					<li class="li">
 						<button id="new">가입하기</button>

@@ -52,7 +52,7 @@
 	
 	<!-- 로그인 -->
     <select id="memberLogin" resultType="Member">
-    	select mem_email, password(mem_passwd), mem_name
+    	select mem_no, mem_email, password(mem_passwd), mem_name
     	  from member 
     	 where mem_email = #{memEmail}
     	   and mem_passwd = password(#{memPasswd})
@@ -61,7 +61,7 @@
 	
 	<!-- 아이디 중복검사 -->
   	<select id="idCheck" resultType="int">
-  		select count(*)
+  		select mem_email
   		  from member 
   		 where mem_email = #{memEmail}
   	</select>
