@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import proj21_movie.dto.Reservation;
+import proj21_movie.dto.ReserveCommand;
 import proj21_movie.dto.Reserving;
 import proj21_movie.exception.DuplicateMovieException;
-import proj21_movie.service.ReservationService;
 import proj21_movie.service.ReservingService;
 
 @RestController
@@ -47,8 +46,9 @@ public class RestReservingController {
 	}
 	
 	@PostMapping("/trReserving")
-	public ResponseEntity<Object> trReserving(@RequestBody Reservation reservation) {
-		return null;
+	public ResponseEntity<Object> trReserving(@RequestBody ReserveCommand command) {
+		System.out.println("확인 >> " + command);
+		return ResponseEntity.ok(service.trReserving(command));
 	}
 	
 }
