@@ -171,10 +171,6 @@
 		var time = "";
 		var showInfoNo = 0;
 		
-		if (${member != null}) {
-			console.log("회원번호" + ${member.memNo});	
-		}
-		
 		// 날짜 선택했을 시 효과 & 선택된 날짜 인덱스 리턴
 		$("#calendar").on('click', 'a', function(e){
 			e.preventDefault();
@@ -307,6 +303,12 @@
 					"\nmovieNo >> " + movieNo + 
 					"\ntheaterNo >> " + theaterNo +
 					"\ntime >> " + time); */
+					
+			if (${member == null}) {
+				alert("로그인이 필요한 서비스입니다.");
+				window.location.href = contextPath + "/login";
+				return;
+			}
 			
 			window.location.href = contextPath + "/seat?no=" + showInfoNo + "#menu-title";
 		});

@@ -123,6 +123,14 @@
 	<%@include file="/WEB-INF/view/footer.jsp"%>	
 	
 	<script type="text/javascript">
+		$(document).ready(function(){
+			if (${member == null}) {
+				var contextPath = "${contextPath}";
+				alert("로그인이 필요한 서비스입니다.");
+				window.location.href = contextPath + "/login";
+			}
+		});
+		
 		$(function(){
 			var contextPath = "${contextPath}";
 			var no = ${param.no};
@@ -130,10 +138,14 @@
 			var col = 0;
 			var memNo = 0;
 			
-			if (${member != null}) {
+			/* if (${member == null}) {
+				alert("로그인이 필요한 서비스입니다.");
+				window.location.href = contextPath + "/login";
+				return;
+			} else {
 				memNo = ${member.memNo};
-				console.log("회원번호" + memNo);	
-			}
+				console.log("회원번호" + memNo);
+			} */
 			
 			$.ajax({
 				type:"GET",
