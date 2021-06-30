@@ -42,11 +42,18 @@ section {
 	margin: auto;
 	width: 1273px;
 	text-align: center;
-	margin-left: 38%;
+	margin-left: 25%;
 	margin-right: auto;
+	margin-top: 10%;
+	margin-bottom: 5%;
 }
 
 /* section 이메일찾기*/
+.findid {
+	width: 150px;
+	height: 220px;
+}
+
 #findform {
 	border: 2px solid #ffffff;
 	text-align: center;
@@ -55,12 +62,6 @@ section {
 }
 
 #id_img {
-	width: 100px;
-	height: 100px;
-	padding-top: 30px;
-}
-
-#pw_img {
 	width: 100px;
 	height: 100px;
 	padding-top: 30px;
@@ -83,12 +84,4 @@ input {
 	background-color: #3e2789;
 	color: #fff;
 	font-weight: 500 bolder;
-}
-
-.findid {
-	float: left;
-}
-
-.findpw {
-	float: left;
 }

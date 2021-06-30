@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+/* Fontawesome 4.7 */
+@import
+	url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@900&display=swap')
+	;
+
+@font-face {
+	font-family: 'IBMPlexSansKR-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-family: 'IBMPlexSansKR-Regular', sans-serif;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	margin-right: 17px; /* nav 길이조절 */
+	overflow: hidden; /* 스크롤 x */
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:active, a:focus, a:hover {
+	text-decoration: underline;
+}
+
+ol, ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* section */
+section {
+	margin: auto;
+	width: 1273px;
+	text-align: center;
+	margin-left: 12%;
+	margin-right: auto;
+	padding: 5%;
+}
+
+/* section 로그인 */
+.find_m {
+	margin: 0 auto;
+	border: 0.5px solid RGB(3, 22, 52);
+	width: 600px;
+	height: 310px;
+	text-align: center;
+}
+
+#find_account {
+	width: 100px;
+	height: 100px;
+	padding-top: 30px;
+}
+
+#button {
+	background: #3e2789;
+	color: white;
+	width: 200px;
+	height: 50px;
+	font-size: 20px;
+	text-align: center;
+	line-height: 50px;
+	font-weight: bold;
+	border: 1px solid #666;
+}

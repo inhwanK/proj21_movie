@@ -1,6 +1,9 @@
 package proj21_movie.service;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Service;
 import proj21_movie.dto.Member;
 import proj21_movie.mapper.MemberMapper;
@@ -26,4 +29,6 @@ public interface MemberService {
 	public int idCheck(String memEmail) throws Exception;
 	// 아이디 찾기
 	public Member findId(Member member);
+	// 비밀번호 찾기
+//	public void find_pw(HttpServletResponse response, Member member) throws Exception;
 }
