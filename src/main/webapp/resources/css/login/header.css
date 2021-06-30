@@ -58,7 +58,7 @@ header {
 	margin: 0px auto;
 	align-items: center;
 	position: relative;
-	left: 206px;
+	left: 175px;
 	box-sizing: border-box;
 }
 
@@ -136,10 +136,10 @@ nav ul {
 }
 
 /* section */
-section {
+/* section {
 	margin: auto;
 	width: 1273px;
 	text-align: center;
 	margin-left: 38%;
 	margin-right: auto;
-}
+} */
