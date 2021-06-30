@@ -19,16 +19,10 @@ public class FindIDController {
 	@Autowired
 	private MemberService service;
 
-	// 아이디 패스워드 찾기 메인 접속(성공)
-	@RequestMapping("/find_main")
-	public String findmain() {
-		return "login/find_main";
-	}
-
-	// 아이디 찾기 접속(성공)
-	@RequestMapping("/find_ID")
+	// 아이디 패스워드 찾기 접속(성공)
+	@RequestMapping("/find_IDPW")
 	public String findid() {
-		return "login/find_ID";
+		return "login/find_IDPW";
 	}
 
 	// 아이디 찾기 실행
@@ -42,7 +36,7 @@ public class FindIDController {
 			model.addAttribute("check", 0);
 			model.addAttribute("memEmail", memb.getMemEmail());
 		}
-		return "login/find_ID";
+		return "login/find_IDPW";
 	}
 
 }

@@ -47,14 +47,20 @@ section {
 }
 
 /* section 이메일찾기*/
-form {
+#findform {
 	border: 2px solid #ffffff;
 	text-align: center;
 	padding: 10%;
 	width: 120px;
 }
 
-img {
+#id_img {
+	width: 100px;
+	height: 100px;
+	padding-top: 30px;
+}
+
+#pw_img {
 	width: 100px;
 	height: 100px;
 	padding-top: 30px;
@@ -77,4 +83,12 @@ input {
 	background-color: #3e2789;
 	color: #fff;
 	font-weight: 500 bolder;
+}
+
+.findid {
+	float: left;
+}
+
+.findpw {
+	float: left;
 }
