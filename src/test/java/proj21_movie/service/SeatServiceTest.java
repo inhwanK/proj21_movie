@@ -69,11 +69,21 @@ public class SeatServiceTest {
 	}
 
 	@Test
-	public void test03RemoveSeat() {
+	public void test04RemoveSeat() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		int res = mapper.deleteSeat(no);
 		Assert.assertEquals(1, res);
+	}
+	
+	@Test
+	public void test03GetListByResNo() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		List<Seat> list = mapper.selectSeatByResNo(2);
+		Assert.assertNotNull(list);
+		
+		list.forEach(s -> log.debug(s.toString()));
 	}
 
 }

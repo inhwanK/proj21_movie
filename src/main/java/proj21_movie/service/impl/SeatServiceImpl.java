@@ -37,4 +37,11 @@ public class SeatServiceImpl implements SeatService {
 		return mapper.deleteSeat(no);
 	}
 
+	@Override
+	public List<Seat> getListByResNo(int no) {
+		List<Seat> list = mapper.selectSeatByResNo(no);
+		log.debug("service - getListByResNo() > " + no);
+		return list;
+	}
+
 }

@@ -29,7 +29,7 @@
 		<!-- 로그인 하지 않은 상태 -->
         <c:if test = "${member == null }">
 			<a href="${contextPath}/login">로그인</a> <a href="${contextPath}/join">회원가입</a>
-			<a href="#">바로예매</a>
+			<a href="${contextPath}/reserve">바로예매</a>
 		</c:if>
 			
 		<!-- 로그인한 상태 -->
@@ -37,7 +37,7 @@
             <div class="login_success_area">
             	<span>안녕하세요. ${member.memName} 회원님!</span>
             	<a href="${contextPath}/main.do">로그아웃</a>
-            	<a href="#">바로예매</a>
+            	<a href="${contextPath}/reserve">바로예매</a>
             </div>
         </c:if>
    

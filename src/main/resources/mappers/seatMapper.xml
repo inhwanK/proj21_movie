@@ -26,4 +26,10 @@
 		delete from seat
 		where seat_no = #{seatNo}
 	</delete>
+	
+	<select id="selectSeatByResNo" resultMap="resSeat">
+		select seat_no, res_no, shw_no, seat_rowno, seat_colno 
+		from seat
+		where res_no = #{resNo};
+	</select>
 </mapper>

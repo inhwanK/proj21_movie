@@ -37,6 +37,15 @@ header {
 	box-sizing: border-box;
 }
 
+#header_ci2 {
+	width: 150px;
+	margin: 0px auto;
+	align-items: center;
+	position: relative;
+	left: 175px;
+	box-sizing: border-box;
+}
+
 header div {
 	display: inline;
 	float: right;
@@ -52,6 +61,14 @@ header div a {
 	color: RGB(136, 136, 136);
 }
 
+/* 로그인 성공 영역 */
+.login_success_area {
+	color: RGB(232, 221, 203);
+}
+
+.login_success_area a {
+	color: RGB(136, 136, 136);
+}
 
 /* <nav> */
 nav {

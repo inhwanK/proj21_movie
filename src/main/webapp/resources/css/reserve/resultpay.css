@@ -159,114 +159,36 @@ section h2 {
 	width: 200px;
 	text-align: left;
 	padding-left: 10px;
+	font-size: 1.2em;
 }
 
 .result {
 	width: 500px;
 	text-align: left;
 	padding-left: 10px;
-}
-
-/* #seat-result{
-	padding: 10px;
-	width: 1151px;
-	height: 500px;
-	float: left;
-	margin-left: 100px;
-}
-
-#seat-result h3{
-	text-align: left;
-	background-color: #ccc;
-	padding: 10px;
-	margin-left: 20px;
-	margin-right: 20px;
-}
-
-.title{
-	border: 1px solid #ddd;	
-	padding: 5px;
-	border-radius: 3px;
-	cursor: pointer;
-	padding-left: 15px;
-	margin-bottom: 10px;
-	text-align: left;
 	font-size: 1.2em;
 }
 
-
-.title:hover,
-.title.active{
- 	background-color: #203049;
- 	color: #fff;
-}
-
-
-.desc{
-	padding: 20px;
-	display: none; active 되지 않은 desc는 숨김
-}
-
-.desc.active{
-	display: block; active 됐을 때 block으로 보이게 만듦
-}
-
-
-.desc span{
-	display:inline-block;
-	width: 120px;
-	background-color: white;
-	padding: 10px;
-	font-size: 1.2em;
-	margin: 0 50px;
+#table-div a {
+	color: blue;
 	text-decoration: none;
-	border: 1px solid RGB(3, 22, 52);
-	color: RGB(3, 22, 52);
-	cursor: pointer;
-}
-
-.paytype.active {
-	background-color: RGB(3, 22, 52);
-	color: white;
-}
-
-#payment-result{
-	padding: 10px;
-	width: 340px;
-	height: 500px;
-	float: left;
-	background-color: RGB(3, 22, 52);
-}
-
-
-#movie-info, #time-info, #price-info, #discount-info{
-	margin: 30px auto;
-}
-
-#movie-info dt, #time-info dt, #price-info dt, #discount-info dt{
-	font-size: 1.5em;
-	font-weight: bold;
-	color: white;
-	text-align: left;
-}
-
-#movie-info dd, #time-info dd, #price-info dd, #discount-info dd{
-	font-size: 1.0em;
-	color: white;
-	text-align: left;
-	margin: 0;
-}
-
-#before, #next{
-	display:inline-block;
-	width: 100px;
-	background-color: white;
-	padding: 10px;
 	font-size: 1.2em;
-	margin: 0 10px;
-	cursor: pointer;
 }
- */
+
+#table-div a:visited {
+	color: blue;
+	text-decoration: none;
+}
+
+#table_div a:hover {
+	color: red;
+	text-decoration: underline;
+}
+
+.main-link {
+	text-align: left;	
+	padding-left: 20%;
+}
 
 /* footer */
 footer {

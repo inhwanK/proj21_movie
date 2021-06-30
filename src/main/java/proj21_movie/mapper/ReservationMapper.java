@@ -15,4 +15,7 @@ public interface ReservationMapper {
 	
 	int insertReservation(Reservation reservation);
 	int deleteReservation(Reservation reservation);
+	
+	// 예매번호로 정보 가져오기
+	Reservation selectReservationByNo(int no);
 }

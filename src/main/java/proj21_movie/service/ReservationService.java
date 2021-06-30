@@ -15,4 +15,6 @@ public interface ReservationService {
 	
 	int registReservation(Reservation reservation);
 	int removeReservation(Reservation reservation);
+	
+	Reservation getReservationInfoByNo(int no);
 }
