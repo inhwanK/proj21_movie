@@ -11,6 +11,9 @@
 	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
 	<link rel="stylesheet" href="${contextPath}/resources/css/movie/movieDetail.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/movie/star/fontawesome-stars.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/header.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/footer.css">
+	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 	<!-- 이 js가 다른 js보다 낮으면 에러 뜸 -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
@@ -72,12 +75,15 @@
 				url: contextPath + "/api/movies/boxOffice/" + no,
 				contentType: "application/json; charset=utf-8",
 				success: function(json){
-					var btn = "";
-						btn += "<button type='button' id='reserve' class='btn reserve' title='영화 예매하기'>예매</button>";
-					$(".screen-type").append(btn);			
+					if (json != '') {
+						var btn = "";
+							btn += "<button type='button' id='reserve' class='btn reserve' title='영화 예매하기'>예매</button>";
+						$(".screen-type").append(btn);
+					}else if (json == ''){
+						$('#comming').show();
+					}
 				},
 				error : function(request, status, error){
-					$('#comming').show();
 					console.log("error > ");
 				}	
 			});
@@ -91,10 +97,14 @@
 			}
 			
 			var contextPath = "${contextPath}";
-					
 			var movNo = "${movNo}";
-			$.get(contextPath+"/api/movies/" + movNo,
-				function(json) {	
+			
+			$.ajax({
+				type:"GET",
+				url: contextPath + "/api/movies/" + movNo,
+				contentType: "application/json; charset=utf-8",
+				success: function(json){
+	
 					var bg = "";
 					var title = "";
 					var avgStar = "";
@@ -141,6 +151,10 @@
 					$(".movie-detail-cont").append(title);
 					$(".poster .wrap").append(poster);
 					$(".movie-info-list").append(sCont);
+				},
+				error : function(request, status, error){
+					window.location.href = contextPath + "/movielist";	// 데이터에 없는 영화번호를 검색시 전체영화 페이지로 이동
+				}
 			});
 			
 			/* 상영타입 (전부 2d로 넣어놓음) */
@@ -310,8 +324,41 @@
 	</script>
 </head>
 <body>
-	
-	<%@include file="/WEB-INF/view/header.jsp"%>
+	<header>
+		<c:if test = "${member == null }">
+		<a href="${contextPath}/main"> <img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png"></a>
+		</c:if>
+		<c:if test = "${member != null }">
+		<a href="${contextPath}/main"> <img id="header_ci2" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png"></a>
+		</c:if>
+		<div>
+		
+		<!-- 로그인 하지 않은 상태 -->
+        <c:if test = "${member == null }">
+			<a href="${contextPath}/login">로그인</a> <a href="${contextPath}/join">회원가입</a>
+			<a href="${contextPath}/reserve">바로예매</a>
+		</c:if>
+			
+		<!-- 로그인한 상태 -->
+        <c:if test="${ member != null }">
+            <div class="login_success_area">
+            	<span>안녕하세요. ${member.memName} 회원님!</span>
+            	<a href="${contextPath}/main.do">로그아웃</a>
+            	<a href="${contextPath}/reserve">바로예매</a>
+            </div>
+        </c:if>
+   
+		</div>
+	</header>
+	<nav>
+		<ul>
+			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
+			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
+			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
+			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
+			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
+		</ul>
+	</nav>
 
 	<section>
 		<!-- container -->
@@ -338,8 +385,10 @@
 									</p>
 								</div>
 							</div>
-	
-							<div class="rate">
+							
+							<!-- DB에 없어서 우선 비활성화 -->
+							
+							<!-- <div class="rate">				
 								<p class="title">예매율</p>
 								<p class="cont">
 									<em>2</em>위 (14.1&#37;)
@@ -351,7 +400,7 @@
 								<p class="cont">
 									<em>664,320</em> 명
 								</p>
-							</div>
+							</div> -->
 						</div>
 						<!--// info -->
 						
@@ -413,13 +462,14 @@
 													<tr>
 														<td>
 															<input type="text" id="contxt" class="form-control" maxlength="40" placeholder="한줄평을 적어주세요 (40자 이내)" autocomplete="off"/>
+															
 															<select id="example-fontawesome" class="com-star" name="rating">
 																<option value="1">1</option>
 																<option value="2">2</option>
 																<option value="3">3</option>
 																<option value="4">4</option>
 																<option value="5">5</option>
-															</select>
+															</select>															
 														</td>
 													</tr>											
 												</table>
@@ -450,6 +500,14 @@
 		<!-- // container -->
 	</section>
 
-	<%@include file="/WEB-INF/view/footer.jsp"%>
+	<footer>
+		<div id="content">
+			<img id="footer_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png">
+			<div id="textarea">
+				<p>COPYRIGHT © BoxMovie, Inc. All rights reserved</p>
+				<p>대구광역시 서구 서대구로 7길2 (내당동 245-4번지 2층) ARS 053-555-1333</p>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>

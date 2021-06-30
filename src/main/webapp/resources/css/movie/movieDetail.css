@@ -320,7 +320,7 @@ h3.title {
 	position: absolute;
 	left: 0;
 	bottom: -10px;
-	padding: 0;
+	padding: 0 0 55px 0;
 }
 
 .movie-detail-cont .info:after, .movie-detail-cont .info:before{
@@ -379,7 +379,7 @@ h3.title {
 .movie-detail-cont .info .rate .cont {
 	display: inline-block;
 	min-height: 35px;
-	padding: 0 0 60px 30px;
+	padding: 0 0 0 30px;
 	vertical-align: middle;
 	line-height: 1.1;
 }
