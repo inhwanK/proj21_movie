@@ -57,7 +57,7 @@
 					</tr>
 					<tr>
 						<td class="info">관람일시</td>
-						<td class="result">2021년06월30일</td>
+						<td class="result">2021년06월30일 10:00:00</td>
 					</tr>
 					<tr>
 						<td class="info">관람인원</td>
@@ -66,6 +66,10 @@
 					<tr>
 						<td class="info">선택좌석</td>
 						<td class="result">A1 A2</td>
+					</tr>
+					<tr>
+						<td class="info">결제금액</td>
+						<td class="result">20000 원</td>
 					</tr>
 					<tr>
 						<td class="info">예매일</td>

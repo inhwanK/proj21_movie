@@ -15,4 +15,7 @@ public interface SeatMapper {
 	
 	int insertSeat(Seat seat);
 	int deleteSeat(int no);
+	
+	// 예매번호로 좌석 받아오기
+	List<Seat> selectSeatByResNo(int no);
 }

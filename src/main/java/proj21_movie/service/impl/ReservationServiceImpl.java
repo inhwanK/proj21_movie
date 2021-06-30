@@ -5,12 +5,14 @@ import java.util.List;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import proj21_movie.dto.Member;
 import proj21_movie.dto.Reservation;
 import proj21_movie.mapper.ReservationMapper;
 import proj21_movie.service.ReservationService;
 
+@Service
 public class ReservationServiceImpl implements ReservationService {
 	static final Log log= LogFactory.getLog(ReservationServiceImpl.class);
 	
@@ -41,6 +43,12 @@ public class ReservationServiceImpl implements ReservationService {
 	public int removeReservation(Reservation reservation) {
 		log.debug("service - removeReservation() > " + reservation);
 		return mapper.deleteReservation(reservation);
+	}
+
+	@Override
+	public Reservation getReservationInfoByNo(int no) {
+		log.debug("service - getReservationInfoByNo() > " + no);
+		return mapper.selectReservationByNo(no);
 	}
 
 }

@@ -13,4 +13,6 @@ public interface SeatService {
 	int registSeat(Seat seat);
 	int removeSeat(int no);
 	
+	List<Seat> getListByResNo(int no);
+	
 }

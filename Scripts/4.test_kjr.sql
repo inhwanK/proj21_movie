@@ -165,18 +165,22 @@ select shw_no, shw_date, shw_starttime, shw_endtime, tht_no, tht_name, cin_no, c
 select * from reserving;
 select * from reservation;
 select * from seat;
+select * from showinfo;
 
 select * from seat where shw_no = 22;
 select * from reserving where shw_no = 22;
 delete from reserving where ing_no = 8;
 
 
-select r.res_no, shw_no, mem_no, res_price, res_date, res_adult, res_teen, res_pref 
+select r.res_no, r.mem_no, r.res_price, r.res_date, r.res_adult, r.res_teen, r.res_pref, 
+		r.shw_no, s.shw_date, s.shw_starttime, s.shw_endtime, 
+		s.tht_no, t.tht_name,
+		s.mov_no, m.mov_title, 
+		c.cin_no, c.cin_type 
 from reservation r join showinfo s on r.shw_no = s.shw_no 
 	join theater t on s.tht_no = t.tht_no 
+	join movie m on s.mov_no = m.mov_no
+	join cinema c on s.cin_no = c.cin_no 
 where r.res_no = 28;
 
-select s.res_no, s.shw_no, s.seat_rowno, s.seat_colno, 
-		r.res_price, r.res_date, r.res_adult, r.res_teen, r.res_pref 
-from seat s left join reservation r on s.res_no = r.res_no 
-where s.res_no = 28;
+select * from seat where res_no = 28;

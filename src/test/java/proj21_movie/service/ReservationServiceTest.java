@@ -77,7 +77,7 @@ public class ReservationServiceTest {
 	}
 
 	@Test
-	public void test04RemoveReservation() {
+	public void test05RemoveReservation() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		Reservation reservation = new Reservation();
@@ -88,4 +88,12 @@ public class ReservationServiceTest {
 		log.debug("res no >> " + res);
 	}
 
+	@Test
+	public void test04GetReservationInfoByNo() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Reservation reservation = mapper.selectReservationByNo(no);
+		Assert.assertNotNull(reservation);
+		log.debug(reservation.toString());
+	}
 }
