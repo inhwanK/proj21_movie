@@ -14,11 +14,7 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
-<style type="text/css">
-.form {
-	margin: 50px auto;
-}
-</style>
+<link rel="stylesheet" href="${contextPath}/resources/css/manager/additional.css">
 <script type="text/javascript">
 	$(function() {
 
@@ -28,39 +24,39 @@
 		console.log(notNo);
 		$("#no").attr('value', notNo);
 
-		$
-				.ajax({
-					url : contextPath + "/api/notice?notNo=" + notNo,
-					type : "get",
-					contentType : "application/json; charset=utf-8",
-					dataType : "json",
-					success : function(json) {
-						var divFile = "";
+		$.ajax({
+				url : contextPath + "/api/notice?notNo=" + notNo,
+				type : "get",
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				success : function(json) {
+					var divFile = "";
 
-						// 파일 존재 판단 후, 그에 따른 처리.
-						if (json.notFile == null) {
-							divFile += "<div class=\"form-group\">";
-							divFile += "<label>파일 첨부</label>";
-							divFile += "<input type=\"file\" id=\"uploadFile\" name=\"uploadFile\" class=\"form-control\">";
-							divFile += "</div>";
-						} else {
-							divFile += "<div class=\"form-group\">";
-							divFile += "<a href=\"/proj21_movie/resources/attachments/notice/"+json.notFile +"\" class=\"form-control\">"
-									+ json.notFile + "</a>";
-							divFile += "</div>";
-						}
-
-						$("#no").attr('value', json.notNo);
-						$("#regdate").attr('value', json.notDate);
-						$("#title").attr('value', json.notTitle);
-						$("#content").empty();
-						$("#content").append(json.notDetail);
-						$(".form form").append(divFile);
-					},
-					error : function() {
-						alert("뭔가 잘못되긴 했어용");
+					// 파일 존재 판단 후, 그에 따른 처리.
+					if (json.notFile == null) {
+						divFile += "<div class=\"form-group\">";
+						divFile += "<label>파일 첨부</label>";
+						divFile += "<input type=\"file\" id=\"uploadFile\" name=\"uploadFile\" class=\"form-control\">";
+						divFile += "</div>";
+					} else {
+						divFile += "<div class=\"form-group\">";
+						divFile += "<a href=\"/proj21_movie/resources/attachments/notice/"+json.notFile +"\" class=\"form-control\">"
+								+ json.notFile + "</a>";
+						divFile += "</div>";
 					}
-				});
+					
+					$("#no").attr('value', json.notNo);
+					$("#regdate").attr('value', json.notDate);
+					$("#title").attr('value', json.notTitle);
+					$("#content").empty();
+					$("#content").append(json.notDetail);
+					$(".form form").append(divFile);
+					
+					},
+				error : function() {
+					alert("뭔가 잘못되긴 했어용");
+				}
+			});
 
 		// 수정 버튼
 		$("#modify").on('click', function() {
@@ -103,7 +99,6 @@
 					notDetail : $("#content").val(),
 					// date 이슈 발생.
 					notFile : fileName
-				// 파일 업로드 구현해야함....
 				}
 
 				$.ajax({
@@ -139,8 +134,8 @@
 	<div id="page-wrapper">
 		<!-- 본문 -->
 		<div class="main">
-			<h1>영화관리</h1>
-			<div class="col-md-6 col-sm-12">
+			<h1 class="text-center">공지사항</h1>
+			<div class="col-md-6 col-sm-12" id="contents">
 				<div class="form">
 					<form:form>
 						<div class="form-group">
@@ -158,15 +153,13 @@
 						<div class="form-group">
 							<label>내용</label>
 							<textarea rows="10" cols="500" id="content" class="form-control">
-                     </textarea>
+                     		</textarea>
 						</div>
-
-
-
-
 					</form:form>
-					<button id="modify" class="btn btn-primary">수정</button>
-					<button id="cancel" class="btn btn-primary">취소</button>
+					<div id="btn">
+						<button id="modify" class="btn btn-primary">수정</button>
+						<button id="cancel" class="btn btn-primary">취소</button>
+					</div>
 				</div>
 			</div>
 		</div>

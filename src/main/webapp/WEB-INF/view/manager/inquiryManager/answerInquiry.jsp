@@ -11,6 +11,7 @@
 <title>영화 수정</title>
 <link rel="stylesheet"
 	href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/manager/additional.css">
 <style type="text/css">
 .form {
 	margin: 50px auto;
@@ -33,14 +34,20 @@
 					contentType : "application/json; charset=utf-8",
 					dataType : "json",
 					success : function(json) {
-						var divFile = "";
-
+						
+						console.log(json.inqFile);
 						// 파일 존재 판단 후, 그에 따른 처리.
-						divFile += "<div class=\"form-group\">";
-						divFile += "<label>파일</label>";
-						divFile += "<a href=\"/proj21_movie/resources/attachments/inquiry/"+json.inqFile +"\" class=\"form-control\">"
-								+ json.inqFile + "</a>";
-						divFile += "</div>";
+						if(json.inqFile !=null){
+							var divFile = "";
+							
+							divFile += "<div class=\"form-group\">";
+							divFile += "<label>파일</label>";
+							divFile += "<a href=\"/proj21_movie/resources/attachments/inquiry/"+json.inqFile +"\" class=\"form-control\">"
+									+ json.inqFile + "</a>";
+							divFile += "</div>";
+							
+							$("#content").after(divFile);
+						}
 
 						$("#no").attr('value', json.inqNo);
 						$("#regdate").attr('value', json.inqDate);
@@ -49,7 +56,7 @@
 						$("#content").empty();
 						$("#content").append(json.inqDetail);
 
-						$("#content").after(divFile);
+						
 
 						$("#answerCont").empty();
 						$("#answerCont").append(json.inqAnswer);
@@ -103,8 +110,8 @@
 	<div id="page-wrapper">
 		<!-- 본문 -->
 		<div class="main">
-			<h1>영화관리</h1>
-			<div class="col-md-6 col-sm-12">
+			<h1 class="text-center">문의</h1>
+			<div class="col-md-6 col-sm-12" id="contents">
 				<div class="form">
 					<form:form>
 						<div class="form-group">
@@ -139,8 +146,10 @@
 
 
 					</form:form>
-					<button id="answer" class="btn btn-primary">답변</button>
-					<button id="cancel" class="btn btn-primary">취소</button>
+					<div id="btn">
+						<button id="answer" class="btn btn-primary">답변</button>
+						<button id="cancel" class="btn btn-primary">취소</button>
+					</div>
 				</div>
 			</div>
 		</div>
