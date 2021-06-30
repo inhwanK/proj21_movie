@@ -49,31 +49,31 @@
 				<table id="result-table">
 					<tr>
 						<td class="info">영화명</td>
-						<td class="result">크루엘라</td>
+						<td class="result" id="mov-title"></td>
 					</tr>
 					<tr>
 						<td class="info">영화관</td>
-						<td class="result">대구이시아</td>
+						<td class="result" id="theater-name"></td>
 					</tr>
 					<tr>
 						<td class="info">관람일시</td>
-						<td class="result">2021년06월30일 10:00:00</td>
+						<td class="result" id="show-date"></td>
 					</tr>
 					<tr>
 						<td class="info">관람인원</td>
-						<td class="result">성인1명, 청소년1명</td>
+						<td class="result" id="people"></td>
 					</tr>
 					<tr>
 						<td class="info">선택좌석</td>
-						<td class="result">A1 A2</td>
+						<td class="result" id="seat"></td>
 					</tr>
 					<tr>
 						<td class="info">결제금액</td>
-						<td class="result">20000 원</td>
+						<td class="result" id="pay"></td>
 					</tr>
 					<tr>
 						<td class="info">예매일</td>
-						<td class="result">2021년06월30일 14:00:00</td>
+						<td class="result" id="res-date"></td>
 					</tr>
 				</table>
 			</div>
@@ -89,5 +89,74 @@
 			</div>
 		</div>
 	</footer>
+	
+	<script type="text/javascript">
+		$(function(){
+			var contextPath = "${contextPath}";
+			var no = ${param.resNo};
+			
+			$.ajax({
+				type:"GET",
+				url: contextPath + "/api/reservation/" + no,
+				contentType: "application/json; charset=utf-8",
+				async: false,
+				success: function(json){
+					$("#mov-title").text(json.shwNo.movNo.movTitle);			
+					$("#theater-name").text(json.shwNo.thtNo.thtName);
+
+					var showDate = json.shwNo.shwDate;
+					var arrShowDate = showDate.split("-");
+					var strShowDate = arrShowDate[0] + "년 " + arrShowDate[1] + "월 " + arrShowDate[2] + "일";
+					var startTime = json.shwNo.shwStarttime;
+					var arrStartTime = startTime.split(":");
+					var strStartTime = arrStartTime[0] + "시 " + arrStartTime[1] + "분";
+					$("#show-date").text(strShowDate + " - " + strStartTime);
+					
+					var cntPeople = "";
+					if (json.resAdult > 0) {
+						cntPeople += "성인" + json.resAdult + "명 "
+					}
+					if (json.resTeen > 0) {
+						cntPeople += "청소년" + json.resTeen + "명 "
+					}
+					if (json.resPref > 0) {
+						cntPeople += "우대" + json.resPref + "명 "
+					}
+					$("#people").text(cntPeople);			
+					
+					$("#pay").text(json.resPrice + " 원");
+					
+					var resDate = json.resDate;
+					var arrResDate = resDate.split(" ");
+					var resDay = arrResDate[0];
+					var resTime = arrResDate[1];
+					var arrResDay = resDay.split("-");
+					var arrResTime = resTime.split(":");
+					var strResDay = arrResDay[0] + "년 " + arrResDay[1] + "월 " + arrResDay[2] + "일";
+					var strResTime = arrResTime[0] + "시 " + arrResTime[1] + "분";
+					$("#res-date").text(strResDay + " - " + strResTime);
+				}
+			});
+			
+			$.ajax({
+				type:"GET",
+				url: contextPath + "/api/seatbyresno/" + no,
+				contentType: "application/json; charset=utf-8",
+				async: false,
+				success: function(json){
+					var dataLength = json.length;
+					var seat = "";
+					if (dataLength >= 1) {
+						for (i = 0; i < dataLength; i++) {
+							var row = String.fromCharCode(json[i].seatRowNo + 64);
+							var col = json[i].seatColNo;
+							seat += row + col + " ";
+						}
+						$("#seat").text(seat);
+					}
+				}
+			});
+		});
+	</script>
 </body>
 </html>

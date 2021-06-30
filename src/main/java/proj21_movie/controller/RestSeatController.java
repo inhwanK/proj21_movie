@@ -20,5 +20,10 @@ public class RestSeatController {
 	public ResponseEntity<Object> seatList(@PathVariable int no){
 		return ResponseEntity.ok(service.getListByShowInfoNo(no));
 	}
+	
+	@GetMapping("/seatbyresno/{no}")
+	public ResponseEntity<Object> seatListByResNo(@PathVariable int no){
+		return ResponseEntity.ok(service.getListByResNo(no));
+	}
 
 }
