@@ -1,7 +1,6 @@
 <%@ page import="java.time.LocalDate"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="tf" tagdir="/WEB-INF/tags" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -40,11 +39,11 @@
 		<!-- 회원가입 -->
 		$('#new').on("click", function(e){
 			var contextPath = "<%= request.getContextPath()%>";
-	        var newMember = {  memEmail: $('#memEmail').val(), 
-	        				   memPasswd: $('#memPasswd').val(), 
+	        var newMember = {  memEmail    : $('#memEmail').val(), 
+	        				   memPasswd   : $('#memPasswd').val(), 
 	       					   memBirthdate: $('#memBirthdate').val(),
-	        				   memName: $('#memName').val(),
-	        				   memPhone: $('#memPhone').val()
+	        				   memName	   : $('#memName').val(),
+	        				   memPhone	   : $('#memPhone').val()
 	        				   };
 	        $.ajax({
 	            url         : contextPath + "/api/joinform/",
@@ -65,8 +64,8 @@
 		<!-- 아이디 중복 확인 -->
 		$('#memEmail').on("propertychange change keyup paste input", function(){
 			var contextPath = "<%= request.getContextPath()%>";
-			var memberId = $('#memEmail').val();			// .id_input에 입력되는 값
-			var data = {memEmail : memberId};				// '컨트롤에 넘길 데이터 이름' : '데이터(.id_input에 입력되는 값)'
+			var memberId = $('#memEmail').val();		
+			var data = {memEmail : memberId};	
 			
 			$.ajax({
 				type 	: "post",
@@ -80,10 +79,25 @@
 						$('.id_input_re_2').css("display","inline-block");
 						$('.id_input_re_1').css("display", "none");				
 					}					
-				}// success 종료
-			}); // ajax 종료	
-
+				}
+			});	
 		});
+		
+		<!-- 휴대폰번호 서식 지정 -->
+		$('#memPhone').keydown(function(event) {
+		    var key = event.charCode || event.keyCode || 0;
+		    $text = $(this);
+		    if (key !== 8 && key !== 9) {
+		        if ($text.val().length === 3) {
+		            $text.val($text.val() + '-');
+		        }
+		        if ($text.val().length === 8) {
+		            $text.val($text.val() + '-');
+		        }
+		    }
+		    return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));          
+		});
+		
 	});
 </script>
 </head>
@@ -108,8 +122,8 @@
 					</li>
 					<li class="li">
 						<span>패스워드 확인 </span> 
-    					<span id="alert-success" style="display: none; color: #00498c; font-weight: bold;">비밀번호가 일치합니다.</span>
-    					<span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
+    					<span id="alert-success">비밀번호가 일치합니다.</span>
+    					<span id="alert-danger">비밀번호가 일치하지 않습니다.</span>
 						<br> 
 						<input type="password" placeholder="패스워드를 한번 더 입력하세요" class="box2" id="confmemPasswd" required />
 					</li>
@@ -126,7 +140,7 @@
 					<li class="li">
 						<span>휴대폰번호 </span> 
 						<br> 
-						<input type="number" placeholder="하이픈('-')없이 숫자만 입력하세요" id="memPhone" class="box3" required />
+						<input type="text" placeholder="하이픈('-')없이 숫자만 입력하세요" name="memPhone" id="memPhone" class="box3" maxlength="13" required />
 					</li>
 					<li class="li">
 						<button id="new">가입하기</button>

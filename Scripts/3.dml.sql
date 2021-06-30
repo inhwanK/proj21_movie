@@ -6,9 +6,9 @@ insert into admin values (null, 'admin', password(1234));
 
 -- 회원
 select mem_no, mem_email, mem_passwd, mem_birthdate, mem_name, mem_phone from member;
-insert into member values (null, 'test1@test.com', password(1234), '1990-06-01', '테스트1', '01012341234');
-insert into member values (null, 'test2@test.com', password(1234), '2005-06-01', '테스트2', '01043214321');
-insert into member values (null, 'test3@test.com', password(1234), '1999-06-01', '테스트3', '01013424312');
+insert into member values (null, 'test1@test.com', password(1234), '1990-06-01', '테스트1', '010-1234-1234');
+insert into member values (null, 'test2@test.com', password(1234), '2005-06-01', '테스트2', '010-4321-4321');
+insert into member values (null, 'test3@test.com', password(1234), '1999-06-01', '테스트3', '010-1342-4312');
 
 -- 공지
 select not_no, not_title, not_detail, not_date, not_file from notice;
