@@ -17,62 +17,78 @@
 <script type="text/javascript">
 	$(function(json) {
 		var contextPath = "${contextPath}";
-		$("button#regdate").on("click", function() { 
+		$("button#regist").on("click",function() {
+			var conf = confirm("등록하시겠습니까?");
+			if (conf) {
+				var fileName = null;
 
-			var location = $("input[name='inqFile']").val().split('\\');
-
-			var inquiry = {
-				inqUser : $("input[name=inqUser]").val(),
-				inqTitle : $("input[name=inqTitle]").val(),
-				inqDetail : $("textarea[name=inqDetail]").val(),
-				inqFile : location[location.length - 1]
-			};
-			
-			// 필수항목 기입하지 않았을 때, 처리
-			if (inquiry.inqUser == "") {
-				alert("이름을 입력하세요.");
-			} else if(inquiry.inqTitle == ""){
-				alert("제목을 입력하세요.")
-			} else if(inquiry.inqDetail == ""){
-				alert("문의 내용을 입력하세요.")
-			} else {				
-				$.ajax({
-					url : contextPath + "/api/inquiry",
-					type : "post",
-					contentType : "application/json; charset=utf-8",
-					dataType : "json",
-					data : JSON.stringify(inquiry),
-					success : function(res) {
-						console.log(res);
-						window.location.href = contextPath + "/inquirySuccess";
-					},
-					error : function() {
-						alert("뭔가 잘못된게 분명합니다.");
-						alert("error" + JSON.stringify(data))
-					}
-				});
-			}
-			
-			var formData = new FormData();
-			var inputFile = $("input[name='inqFile']");
-			var files = inputFile[0].files;
-			console.log(files);
-			
-			for(var i=0; i<files.length; i++){
-				formData.append("uploadFile", files[i]);
-			}
-
-			$.ajax({
-				url:contextPath+"/api/inquiryFileUpload",
-				processData:false,
-				contentType:false,
-				data:formData,
-				type:"POST",
-				success:function(result){
-					console.log("Uploaded");
+				// 파일 이름 넣기.
+				if ($("input[name='inqFile']").val() != "") {
+					var location = $("input[name='inqFile']").val().split('\\');
+					fileName = location[location.length - 1];
+					console.log(file);
 				}
-			});
-		});
+
+				console.log(fileName);
+
+				var inquiry = {
+					inqUser : $("input[name=inqUser]").val(),
+					inqTitle : $("input[name=inqTitle]").val(),
+					inqDetail : $("textarea[name=inqDetail]").val(),
+					inqFile : fileName	
+				};
+
+				// 필수항목 기입하지 않았을 때, 처리
+				if (inquiry.inqUser == "") {
+					alert("이름을 입력하세요.");
+				} else if (inquiry.inqTitle == "") {
+					alert("제목을 입력하세요.")
+				} else if (inquiry.inqDetail == "") {
+					alert("문의 내용을 입력하세요.")
+				} else {
+					$.ajax({
+						url : contextPath + "/api/inquiry",
+						type : "post",
+						contentType : "application/json; charset=utf-8",
+						dataType : "json",
+						data : JSON.stringify(inquiry),
+						success : function(res) {
+							console.log(res);
+							window.location.href = contextPath + "/inquirySuccess";
+						},
+						error : function() {
+							alert("뭔가 잘못된게 분명합니다.");
+							alert("error > "+ JSON.stringify(data))
+						}
+					});
+				} //end of else
+	
+				if (file != null) {
+					var formData = new FormData();
+					var inputFile = $("input[name='inqFile']");
+					var files = inputFile[0].files;
+
+					console.log(files);
+
+					for (var i = 0; i < files.length; i++) {
+						formData.append("uploadFile", files[i]);
+					}
+
+					$.ajax({
+						url : contextPath + "/api/inquiryFileUpload",
+						processData : false,
+						contentType : false,
+						data : formData,
+						type : "POST",
+						success : function(result) {
+						console.log("Uploaded");
+						}	
+					}); // end of ajax
+				} //end of if
+
+			} //end of if(conf)
+		}); // end of event
+
 	});
 </script>
 </head>
@@ -176,8 +192,8 @@
 								<div class="upload-image-box">
 
 									<div class="info-txt">
-											<input type="file" id="uploadFile" class="btn-image-add"
-												name="inqFile">
+										<input type="file" id="uploadFile" class="btn-image-add"
+											name="inqFile">
 										<p id="file">* 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
 									</div>
 
@@ -193,7 +209,7 @@
 
 
 			<div class="btn-group pt40">
-				<button type="submit" class="button purple large" id="regdate">등록</button>
+				<button type="submit" class="button purple large" id="regist">등록</button>
 			</div>
 
 		</div>

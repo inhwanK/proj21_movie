@@ -11,8 +11,9 @@ public interface InquiryService {
 
 	List<Inquiry> getLists();
 	List<Inquiry> getInquiryByUser(String user);
+	Inquiry getInquiryByNo(int inqNo);
 	
 	int registInquiry(Inquiry inquiry);
-	int modifyInquiry(Inquiry inquiry);
+	int answerInquiry(Inquiry inquiry);
 	int removeInquiry(int inqNo);
 }

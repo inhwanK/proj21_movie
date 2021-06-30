@@ -102,4 +102,4 @@ from notice
 where  not_title like concat('%','이상','%')
 order by not_no desc;
 
-select * from admin;
+select * from inquiry;
