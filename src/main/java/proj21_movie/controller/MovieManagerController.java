@@ -14,6 +14,7 @@ public class MovieManagerController {
 	@RequestMapping("/registMovie")
 	public String registMovie() {
 		return "manager/movieManager/registMovie";
+		// ssdf
 	}
 	
 	@RequestMapping("/updateMovie")
