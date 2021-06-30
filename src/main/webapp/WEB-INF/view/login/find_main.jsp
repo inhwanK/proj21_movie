@@ -18,7 +18,9 @@
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <script type="text/javascript">
 $(function(){
-
+	var contextPath = "<%=request.getContextPath()%>";
+	$(".findid").load(contextPath + "/find_ID");  
+	$(".findpw").load(contextPath + "/find_PW.jsp");  
 });
 </script>
 </head>
@@ -26,12 +28,8 @@ $(function(){
 	<%@include file="../login/header.jsp"%>
 	<section>
 		<div class="findmain">
-			<div class="findid">
-				
-			</div>			
-			<div class="findpw">
-				
-			</div>			
+			<div class="findid"></div>			
+			<div class="findpw"></div>			
 		</div>
 	</section>
 	<%@include file="../login/footer.jsp"%>
