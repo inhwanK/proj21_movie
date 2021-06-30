@@ -100,6 +100,19 @@ button {
 	margin-bottom: 2%;
 	margin-right: 65%;
 }
+/* 비번 일치하는 경우 */
+#alert-success {
+	display: none;
+	color: #00498c;
+	font-weight: bold;
+}
+
+/* 비번 일치하지 않는 경우 */
+#alert-danger {
+	display: none;
+	color: #d92742;
+	font-weight: bold;
+}
 
 /* 중복아이디 존재하지 않는경우 */
 .id_input_re_1 {
@@ -112,4 +125,11 @@ button {
 	color: #d92742;
 	display: none;
 	font-weight: bolder;
+}
+
+/* 전화번호 화살표 스크롤 없애기 */
+input::-webkit-outer-spin-button, 
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
 }
