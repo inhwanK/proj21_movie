@@ -11,9 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,6 +36,12 @@ public class RestInquiryController {
 		return ResponseEntity.status(HttpStatus.OK).body(listInquiry); 
 	}
 	
+	@GetMapping("/inquiry")
+	public ResponseEntity<Object> getInquiry(int inqNo){
+		Inquiry inquiry = service.getInquiryByNo(inqNo);
+		return ResponseEntity.status(HttpStatus.OK).body(inquiry);
+	}
+	
 	@PostMapping("/inquiry")
 	public ResponseEntity<Object> newInquiry(@RequestBody Inquiry inquiry){
 		System.out.println("newInquiry > " + inquiry);
@@ -47,6 +55,12 @@ public class RestInquiryController {
 		}
 	}
 	
+	@PatchMapping("/inquiry")
+	public ResponseEntity<Object> answerInquiry(@RequestBody Inquiry inquiry){
+		System.out.println(inquiry);
+		return ResponseEntity.ok(service.answerInquiry(inquiry));
+	}
+	
 	@DeleteMapping("/inquiry")
 	public ResponseEntity<Object> deleteInauiry(int inqNo){
 		return ResponseEntity.ok(service.removeInquiry(inqNo));
@@ -55,7 +69,7 @@ public class RestInquiryController {
 	@PostMapping("/inquiryFileUpload") 
 	public void uploadInquiryFile(MultipartFile uploadFile, HttpServletRequest request) {
 		String upload = request.getSession().getServletContext().getRealPath("resources");
-		String uploadFolder = upload + File.separator + "attachments" + File.separator + "inquiry" + File.separator + "question" ;
+		String uploadFolder = upload + File.separator + "attachments" + File.separator + "inquiry";
 		System.out.println(uploadFolder);
 		
 		

@@ -14,11 +14,12 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/manager/sidebar.css">
 <script type="text/javascript">
 	$(function(){
-		function getFormatDate(date) { // date 폼 관리.
+		
+		function getFormatDate(date) { // date 폼 처리 메서드.
 			var subDateArray = date.substr(0, 10).split('-');
 			return subDateArray[0] + "." + subDateArray[1] + "."
 					+ subDateArray[2];
-		} // js 파일로 관리할 필요 있음.
+		} // js 파일로 관리할 필요 있음. 
 		
 		var contextPath = "${contextPath}";
 		
@@ -36,11 +37,7 @@
 						list += "<td>"+json[i].inqTitle+"</td>";
 						list += "<td>"+json[i].inqUser+"</td>";
 		      			list += "<td>"+getFormatDate(json[i].inqDate)+"</td>";
-		      			if(json[i].inqAnswer ==null){
-		      				list += "<td>N</td>";
-		      			}else{
-		      				list += "<td>Y</td>";
-		      			}
+		      			list += "<td>"+(json[i].inqStatus ==1 ? 'Y' : 'N') +"</td>";
 		      			list += "<td><button id=\"answer\" class=\"btn btn-primary\">답변</button></td>";
 		      			list += "<td><button id=\"delete\" class=\"btn btn-primary\">삭제</button></td>";
 		      			list += "</tr>";
@@ -51,12 +48,25 @@
 			
 		});
 		
+		
+		
 		$(document).ready(function(){
+			
+			var td;
+			var inqNo;
+			
+			//답변
+			$(this).on('click','[id=answer]',function(){
+				td = $(this).parent().prevUntil();
+				inqNo = td.last().text(); 
+				
+				window.location.href = contextPath + "/answerInquiry?inqNo="+inqNo;
+			});
 			
 			// 삭제
 			$(this).on('click','[id=delete]',function(){
-				var td = $(this).parent().prevUntil();
-				var inqNo = td.last().text(); 
+				td = $(this).parent().prevUntil();
+				inqNo = td.last().text(); 
 				
 				$.ajax({
 					url:contextPath + "/api/inquiry?inqNo="+inqNo,
@@ -128,4 +138,5 @@
   </div>
 </div>
 </body>
+
 </html>

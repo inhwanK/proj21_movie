@@ -33,14 +33,21 @@ public class InquiryServiceImpl implements InquiryService {
 	}
 
 	@Override
+	public Inquiry getInquiryByNo(int inqNo) {
+		log.debug("service - getInquiryByNo() > " + inqNo);
+		Inquiry inquiry = mapper.selectInquiryByNo(inqNo);
+		return inquiry;
+	}
+	
+	@Override
 	public int registInquiry(Inquiry inquiry) {
 		log.debug("service - registInquiry() > " + inquiry);
 		return mapper.insertInquiry(inquiry);
 	}
 
 	@Override
-	public int modifyInquiry(Inquiry inquiry) {
-		log.debug("service - modifyInquiry() > " + inquiry);
+	public int answerInquiry(Inquiry inquiry) {
+		log.debug("service - answerInquiry() > " + inquiry);
 		return mapper.updateInquiry(inquiry);
 	}
 
@@ -49,5 +56,7 @@ public class InquiryServiceImpl implements InquiryService {
 		log.debug("service - removeInquiry() > " + inqNo);
 		return mapper.deleteInquiry(inqNo);
 	}
+
+	
 
 }

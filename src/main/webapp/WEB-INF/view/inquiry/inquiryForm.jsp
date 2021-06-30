@@ -48,7 +48,7 @@
 					},
 					error : function() {
 						alert("뭔가 잘못된게 분명합니다.");
-						alert("error" + JSON.stringify(data))
+						alert("error > " + JSON.stringify(data))
 					}
 				});
 			}
