@@ -16,8 +16,8 @@ body {
 	padding: 0;
 	text-align: center;
 }
-
-/* header */
+/* 
+header
 header {
 	margin: auto;
 	width: 1273px;
@@ -48,7 +48,7 @@ header div a {
 	color: RGB(136, 136, 136);
 }
 
-/* <nav> */
+<nav>
 nav {
 	margin: auto;
 	position: relative;
@@ -96,7 +96,7 @@ nav ul {
 	text-decoration: none;
 	color: RGB(3, 22, 52);
 	display: inline-block;
-}
+} */
 
 /* section */
 section {
@@ -295,8 +295,8 @@ section h3 {
 	width: 90px;
 	margin-top: 15px;
 }
-
-/* footer */
+/* 
+footer
 footer {
 	margin: auto;
 	width: 1273px;
@@ -322,4 +322,4 @@ footer {
 	width: 100px;
 	margin: 0px;
 	float: left;
-}
+} */

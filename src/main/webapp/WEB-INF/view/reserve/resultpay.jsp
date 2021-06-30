@@ -13,7 +13,9 @@
 </head>
 <body>
 	<header>
+		<a href="main" title="박스무비 메인으로 가기">
 		<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png">
+		</a>
 		<div>
 			<a href="#">로그인</a>
 			<a href="#">회원가입</a>

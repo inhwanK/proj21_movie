@@ -184,3 +184,5 @@ from reservation r join showinfo s on r.shw_no = s.shw_no
 where r.res_no = 28;
 
 select * from seat where res_no = 28;
+
+select * from movie;
