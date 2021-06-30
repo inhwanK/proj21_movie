@@ -69,4 +69,11 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.idCheck(memEmail);
 	}
 
+	// 아이디찾기
+	@Override
+	public Member findId(Member member) {
+		log.debug("service - findId() > " + member);
+		return mapper.findId(member);
+	}
+
 }

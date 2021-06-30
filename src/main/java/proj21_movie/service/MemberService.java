@@ -24,4 +24,6 @@ public interface MemberService {
 	public Member memberLogin(Member member) throws Exception;
 	// 아이디 중복 검사
 	public int idCheck(String memEmail) throws Exception;
+	// 아이디 찾기
+	public Member findId(Member member);
 }

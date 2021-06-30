@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.findmain {
+	float: left;
+	margin-right: 10%;
+}
+
+.findid {
+	
+}
+
+.findpw {
+	float: right;
+	margin-right: 100%;
+}

@@ -61,7 +61,7 @@ $(function(){
 						<input class="btn" type="submit" value="로그인" id="selButton" /> 
 						<br><br>
 					<div class="text_h">
-						<a href="#">ID/PW 찾기</a> | <a href="${contextPath}/join">회원가입</a>
+						<a href="${contextPath}/find_main">ID/PW 찾기</a> | <a href="${contextPath}/join">회원가입</a>
 					</div>
 				</div>
 			</fieldset>

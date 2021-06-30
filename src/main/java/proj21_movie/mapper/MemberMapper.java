@@ -24,4 +24,6 @@ public interface MemberMapper {
 	public Member memberLogin(Member member);
 	// 아이디 중복 검사
 	public int idCheck(String memEmail);
+	// 아이디 찾기
+	public Member findId(Member member);
 }
