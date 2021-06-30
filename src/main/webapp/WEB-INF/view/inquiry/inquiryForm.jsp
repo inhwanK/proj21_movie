@@ -162,7 +162,7 @@
 							<th scope="row"><label for="qnaCustInqTitle">제목</label> <em
 								class="font-orange">*</em></th>
 							<td colspan="3"><input type="text" name="inqTitle"
-								id="qnaCustInqTitle" class="input-text" maxlength="100">
+								id="qnaCustInqTitle" class="input-text" maxlength="30">
 							</td>
 						</tr>
 

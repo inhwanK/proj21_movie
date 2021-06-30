@@ -2,10 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="proj21_movie.mapper.InquiryMapper">
 
-	<select id="selectInquiryAll" resultType="Inquiry">
+	<resultMap type="Inquiry" id="inquiryList">
+      <id column="inq_no" property="inqNo" />
+      <result column="inq_title" property="inqTitle" />
+      <result column="inq_user" property="inqUser" />
+      <result column="inq_date" property="inqDate" />
+      <result column="inq_status" property="inqStatus" />
+   </resultMap>
+
+
+	<!-- 동적으로 생성시키는 것 이용해서 코드 간결하게 만들기. -->
+
+	<select id="selectInquiryAll" resultMap="inquiryList">
 		select inq_no, inq_title, inq_user, inq_date, inq_status 
 		from inquiry
 		order by inq_no desc;
+	</select>
+	
+	<select id="selectInquiryByAnsStatus" resultMap="inquiryList">
+		select inq_no, inq_title, inq_user, inq_date, inq_status 
+		from inquiry
+		where inq_status = 0;
 	</select>
 	
 	<select id="selectInquiryByNo" resultType="Inquiry">
@@ -13,7 +30,7 @@
 		from inquiry
 		where inq_no = #{inqNo};		
 	</select>
-	<select id="selectInquiryByUser" resultType="Inquiry">
+	<select id="selectInquiryByUser" resultMap="inquiryList">
 		select inq_no, inq_title, inq_user, inq_detail, inq_date, inq_file, inq_answer, inq_ansdate, inq_status 
 		from inquiry
 		where inq_user = #{inqUser}

@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${contextPath}/resources/css/manager/additional.css">
 <script type="text/javascript">
 	$(function(){
 		$("textarea").empty(); // 왠지 모르겠지만 페이지 띄울 때 textarea가 띄어쓰기가 되어있음.
@@ -91,8 +92,8 @@
 <div id="page-wrapper">
   <!-- 본문 -->
   <div class="main">
-  	<h1>영화관리</h1>
-         <div class="col-md-6 col-sm-12">
+  	<h1 class="text-center">영화관리</h1>
+         <div class="col-md-6 col-sm-12" id="contents">
             <div class="form">
                <form:form>
                	  
@@ -111,8 +112,10 @@
 				  </div>
                  
                </form:form>
+               <div id="btn">
                   <button id="regist" class="btn btn-primary">등록</button>
                   <button id="cancel" class="btn btn-primary">취소</button>
+               </div>
             </div>
          </div>
       </div>

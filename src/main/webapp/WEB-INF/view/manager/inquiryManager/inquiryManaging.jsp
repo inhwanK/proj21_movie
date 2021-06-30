@@ -118,7 +118,13 @@
   <div id="page-content-wrapper">
     <div class="container-fluid">
       <h1 class="text-center">문의</h1>
-      <table class="table table-hover table-striped text-center" style="border: 1px solid;">
+      <!-- css 정리 너무 안됨. -->
+      <div style="margin:0 0 50px 0;">
+	      <button class="btn btn-primary" style="float:right;">답변없는 글 보기</button>
+	      <button class="btn btn-primary" style="float:right; margin:0 5px 0 0;">답변없는 글 보기</button>
+      </div>
+      
+      <table class="table table-hover table-striped text-center" style="border: 1px solid; margin: 10px 0;">
       	<thead>
       		<tr>
       			<th>번호</th>
