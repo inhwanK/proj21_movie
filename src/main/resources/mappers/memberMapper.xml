@@ -63,24 +63,13 @@
   		  from member 
   		 where mem_email = #{memEmail}
   	</select>
-
-	<!-- 아이디 중복검사
-  	<select id="idOverlap" resultType="int">
-  		select count(mem_email)
-  		  from member 
-  		 where mem_email = #{memEmail}
-  	</select> -->
   	
-<!--   	    아이디 중복검사
-    <insert id="insertUsedMemEmail" parameterType="Member">
-    	insert into member(mem_email)
-    	     values (#{memEmail})
-    </insert>
-  	
-  	<select id="selectIdCheck" parameterType="String" resultType="Member">
-  		select memEmail as memEmail
-  		  from member
-  		 where mem_email = #{memEmail}
-  	</select> -->
+  	<!-- 아이디 중복검사 -->
+  	<select id="findId" resultType="Member"> 
+  	select mem_email
+  	  from member 
+  	 where mem_name = #{memName} 
+  	   and mem_phone = #{memPhone}
+  	</select>
  
 </mapper>
