@@ -12,21 +12,36 @@
 </head>
 <body>
 	<header>
-		<a href="${contextPath}/main"><img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci_bw.png"></a>
+		<c:if test = "${member == null }">
+		<a href="${contextPath}/main"> <img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci_bw.png"></a>
+		</c:if>
+		<c:if test = "${member != null }">
+		<a href="${contextPath}/main"> <img id="header_ci2" alt="브랜드 로고" src="${contextPath}/resources/images/ci_bw.png"></a>
+		</c:if>
 		<div>
-			<a href="${contextPath}/login">로그인</a>
-			<a href="${contextPath}/join">회원가입</a>
-			<a href="#">바로예매</a>
+		
+		<!-- 로그인 하지 않은 상태 -->
+        <c:if test = "${member == null }">
+			<a href="${contextPath}/login">로그인</a> <a href="${contextPath}/join">회원가입</a>
+			<a href="${contextPath}/reserve">바로예매</a>
+		</c:if>
+			
+		<!-- 로그인한 상태 -->
+        <c:if test="${ member != null }">
+            <div class="login_success_area">
+            	<span>안녕하세요. ${member.memName} 회원님!</span>
+            	<a href="${contextPath}/main.do">로그아웃</a>
+            	<a href="${contextPath}/reserve">바로예매</a>
+            </div>
+        </c:if>
+   
 		</div>
-
 	</header>
-	
 	<nav>
 		<ul>
 			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
 			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
 			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
-			<li class="nav"><a href="${contextPath}/inquiry">이벤트</a></li>
 			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
 			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
 		</ul>
@@ -76,8 +91,8 @@
 						<input type="text" placeholder="영화제목" style="color:white">
 					</li>
 					<li><i class="far fa-calendar-alt"></i><a href="#"><h2>상영시간표</h2></a></li>
-					<li><i class="fas fa-film"></i><a href="#"><h2>박스오피스</h2></a></li>
-					<li><i class="fas fa-ticket-alt"></i><a href="#"><h2>바로예매</h2></a></li>
+					<li><i class="fas fa-film"></i><a href="${contextPath}/movielist"><h2>박스오피스</h2></a></li>
+					<li><i class="fas fa-ticket-alt"></i><a href="${contextPath}/reserve"><h2>바로예매</h2></a></li>
 				</ul>
 			</div>
 		</div>

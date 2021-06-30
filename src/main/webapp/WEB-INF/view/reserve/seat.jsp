@@ -12,7 +12,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 </head>
 <body>
-	<header>
+	<%-- <header>
 		<a href="main" title="박스무비 메인으로 가기">
 			<img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png">
 		</a>
@@ -33,7 +33,8 @@
 			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
 			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
 		</ul>
-	</nav>
+	</nav> --%>
+	<%@include file="/WEB-INF/view/header.jsp"%>
 	
 	<section>
 			<h2 id="menu-title">바로예매</h2>
@@ -109,7 +110,7 @@
 
 	</section>
 	
-	<footer>
+	<%-- <footer>
 		<div id="content">
 			<img id="footer_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png">
 			<div id="textarea">
@@ -117,7 +118,9 @@
 				<p>대구광역시 서구 서대구로 7길2 (내당동 245-4번지 2층) ARS 053-555-1333</p>
 			</div>
 		</div>
-	</footer>
+	</footer> --%>
+	
+	<%@include file="/WEB-INF/view/footer.jsp"%>	
 	
 	<script type="text/javascript">
 		$(function(){
@@ -125,6 +128,12 @@
 			var no = ${param.no};
 			var row = 0;
 			var col = 0;
+			var memNo = 0;
+			
+			if (${member != null}) {
+				memNo = ${member.memNo};
+				console.log("회원번호" + memNo);	
+			}
 			
 			$.ajax({
 				type:"GET",
@@ -316,7 +325,7 @@
 						+ "\ningPref >> " + $("#countPref").text());
 				
 				var newReserving = {
-						memNo: 1,
+						memNo: memNo,
 						shwNo: no,
 						ingPrice: Number($("#price").text()),
 						ingSeat: $("#seat-no").text(),

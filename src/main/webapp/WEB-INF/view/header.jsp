@@ -29,7 +29,7 @@
 		<!-- 로그인 하지 않은 상태 -->
         <c:if test = "${member == null }">
 			<a href="${contextPath}/login">로그인</a> <a href="${contextPath}/join">회원가입</a>
-			<a href="#">바로예매</a>
+			<a href="${contextPath}/reserve">바로예매</a>
 		</c:if>
 			
 		<!-- 로그인한 상태 -->
@@ -48,7 +48,6 @@
 			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
 			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
 			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
-			<li class="nav"><a href="${contextPath}/inquiry">이벤트</a></li>
 			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
 			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
 		</ul>
