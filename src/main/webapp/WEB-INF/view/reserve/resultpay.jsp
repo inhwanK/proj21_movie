@@ -75,6 +75,9 @@
 						<td class="info">예매일</td>
 						<td class="result" id="res-date"></td>
 					</tr>
+					<tr>
+						<td colspan="2" class="main-link"><a id="to-main" class="to-main" href="${contextPath }/main">[메인화면으로]</a></td>
+					</tr>
 				</table>
 			</div>
 		</div>
