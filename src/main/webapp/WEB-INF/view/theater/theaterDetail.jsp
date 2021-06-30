@@ -135,7 +135,7 @@
 			});
 			
 			/* 날짜 클릭시 날짜계산하여 상영시간 출력 */
-			/* $(".date-list button").click(function(e){		
+			$(".date-list button").click(function(e){		
 				$(function(){
 					var no = "${thtNo}";
 					var shwDate = date(dateIdx);
@@ -153,85 +153,74 @@
 							    }) == idx1;
 							});
 							
-							console.table(result);
+							//console.log(result);
+							
+							// 그룹화 console은 나오나 적용하는게 문제..
+							const byMovie = json.reduce((acc, movie) => {
+							  const movieName = movie.movNo.movTitle;
+							  const match = acc.get(movieName);
+							  if (match) {
+							    match.json.push({...movie});
+							  } else {
+							    acc.set(movieName, {json: [{...movie}] });
+							  }
+							  return acc;
+							}, new Map);
+						
+							var groupByMovie = Object.fromEntries(byMovie);
+							
+							console.log(groupByMovie);
+							
+							var first_key = Object.keys(groupByMovie);
+							var first_value = groupByMovie[Object.keys(groupByMovie)[0]]["json"][0]["shwStarttime"];
+							
+							var groupLength = Object.keys(groupByMovie).length;
+							console.log(groupLength);
+							
+							console.log(first_key);
+							console.log(first_value);
+							
+							
+							/* if (groupLength >= 1) {
+								var sGroup1 = "";
+								var sGroup2 = "";
+								var sGroup3 = "";
+
+									sGroup1 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[0]]["json"][0]["movNo"]["movGrade"] + "</p>";
+									sGroup1 += "<p class='test'>" +  Object.keys(groupByMovie)[0] + "</p>";
+									sGroup1 += "<p class='test2'>상영시간 " +  groupByMovie[Object.keys(groupByMovie)[0]]["json"][0]["movNo"]["movRuntime"] + "분</p><br>";
+									sGroup1 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[0]]["json"][0]["cinNo"]["cinType"] + "(자막)</p>";
+									sGroup1 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[0]]["json"][0]["shwStarttime"] + "</p>";						
+									sGroup1 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[0]]["json"][1]["cinNo"]["cinType"] + "(자막)</p>";
+									sGroup1 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[0]]["json"][1]["shwStarttime"] + "</p>";
+									sGroup1 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[0]]["json"][2]["cinNo"]["cinType"] + "(자막)</p>";
+									sGroup1 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[0]]["json"][2]["shwStarttime"] + "</p><hr>";
+									
+									sGroup2 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[1]]["json"][0]["movNo"]["movGrade"] + "</p>";
+									sGroup2 += "<p class='test'>" +  Object.keys(groupByMovie)[1] + "</p>";
+									sGroup2 += "<p class='test2'>상영시간 " +  groupByMovie[Object.keys(groupByMovie)[1]]["json"][0]["movNo"]["movRuntime"] + "분</p><br>";
+									sGroup2 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[1]]["json"][0]["cinNo"]["cinType"] + "(자막)</p>";
+									sGroup2 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[1]]["json"][0]["shwStarttime"] + "</p><hr>";
+									
+									sGroup3 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[2]]["json"][0]["movNo"]["movGrade"] + "</p>";
+									sGroup3 += "<p class='test'>" +  Object.keys(groupByMovie)[2] + "</p>";
+									sGroup3 += "<p class='test2'>상영시간 " +  groupByMovie[Object.keys(groupByMovie)[2]]["json"][0]["movNo"]["movRuntime"] + "분</p><br>";
+									sGroup3 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[2]]["json"][0]["cinNo"]["cinType"] + "(자막)</p>";
+									sGroup3 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[2]]["json"][0]["shwStarttime"] + "</p>";
+								$(".theater-list-box").append(sGroup1);
+								$(".theater-list-box").append(sGroup2);
+								$(".theater-list-box").append(sGroup3);
+							} */
+								
 							
 							var dataLength = json.length;
 							var resultLength = result.length;
 							if (dataLength >= 1) {
 								var sCont = "";
-								var sCont2 = "";
-								
-								for (i = 0; i < resultLength; i++) {
+
+								for (i = 0; i < dataLength; i++) {
+									
 									sCont += "<div class='theater-list'>";
-									
-									// theater-title
-									sCont += "<div class='theater-title'>";
-									sCont += "<p class='movie-grade age-" + result[i].movNo.movGrade + "'>";
-									sCont += "<a href='${contextPath}/movie?movNo=" + result[i].movNo.movNo + "' title='" 
-											+ result[i].movNo.movTitle + " 상세보기'>" + result[i].movNo.movTitle + "</a></p>";
-									sCont += "<input id=hidden-movNo type='hidden' value='" + result[i].movNo.movNo + "'/>";
-									sCont += "<p class='information'>";
-									sCont += "<span>상영중</span>/상영시간" + result[i].movNo.movRuntime + "분</p>";
-									sCont += "</div>";					
-									sCont += "</div>";
-								}
-								for (i = 0; i < dataLength; i++) {
-									
-									// theater-type-box
-									sCont2 += "<div class='theater-type-box'>";
-									sCont2 += "<div class='theater-type'>";
-									sCont2 += "<p class='theater-name'>" + json[i].cinNo.cinNo + "관</p>";
-									sCont2 += "<p class='chair'>총 " + json[i].cinNo.cinSeat + "석</p>";
-									sCont2 += "</div>";
-									sCont2 += "<div class='theater-time'>";
-									sCont2 += "<div class='theater-type-area'>" + json[i].cinNo.cinType + "(자막)</div>";
-									sCont2 += "<div class='theater-time-box'>";
-									sCont2 += "<a href='#' title='영화 예매하기'>";
-									sCont2 += "<span class='time'>" + json[i].shwStarttime;
-									sCont2 += "<span class='chair'>" + json[i].cinNo.cinSeat + "석 </span></span></a>";
-									sCont2 += "</div></div></div>";
-								}
-								$(".theater-list-box").empty();		
-								$(".theater-list-box").append(sCont);	
-								$(".theater-list").append(sCont2);					
-							}else {
-								var sEmp = "";
-									sEmp = "<p class='no-showInfo-list'>선택하신 날짜의 상영중인 영화가 없습니다. 다른 날짜를 선택해주세요.</p>"
-								$(".theater-list-box").empty();
-								$(".theater-list-box").append(sEmp);
-							}
-						},
-						error : function(request, status, error){
-							var sEmp = "";
-								sEmp = "<p class='no-showInfo-list'>선택하신 날짜의 상영중인 영화가 없습니다. 다른 날짜를 선택해주세요.</p>"
-							$(".theater-list-box").empty();
-							$(".theater-list-box").append(sEmp);
-							console.log("error > ");
-						}
-					});
-				});
-			}); */
-			
-
-			$(".date-list button").click(function(e){
-				$(function(){
-					var thtNo = "${thtNo}";
-					var shwDate = date(dateIdx);
-
-					$.ajax({
-						type:"GET",
-						url: contextPath + "/api/showInfoListByTheater/" + thtNo + "/" + shwDate,
-						contentType: "application/json; charset=utf-8",
-						success: function(json){
-							
-							console.table(json);
-							
-							var dataLength = json.length;
-							if (dataLength >= 1) {
-								var sCont = "";
-								
-								for (i = 0; i < dataLength; i++) {
-									
 									// theater-title
 									sCont += "<div class='theater-title'>";
 									sCont += "<p class='movie-grade age-" + json[i].movNo.movGrade + "'>";
@@ -256,23 +245,23 @@
 									sCont += "<span class='time'>" + json[i].shwStarttime;
 									sCont += "<span class='chair'>" + json[i].cinNo.cinSeat + "석 </span></span></a>";
 									sCont += "</div></div></div>";
-								}	
+								}
 								$(".theater-list-box").empty();		
-								$(".theater-list-box").append(sCont);										
+								$(".theater-list-box").append(sCont);									
 							}else {
 								var sEmp = "";
+									sEmp = "<p class='no-showInfo-list'>선택하신 날짜의 상영중인 영화가 없습니다. 다른 날짜를 선택해주세요.</p>"
+								$(".theater-list-box").empty();
+								$(".theater-list-box").append(sEmp);
+							}
+						},
+						error : function(request, status, error){
+							var sEmp = "";
 								sEmp = "<p class='no-showInfo-list'>선택하신 날짜의 상영중인 영화가 없습니다. 다른 날짜를 선택해주세요.</p>"
 							$(".theater-list-box").empty();
 							$(".theater-list-box").append(sEmp);
+							console.log("error > ");
 						}
-					},
-					error : function(request, status, error){
-						var sEmp = "";
-							sEmp = "<p class='no-showInfo-list'>선택하신 날짜의 상영중인 영화가 없습니다. 다른 날짜를 선택해주세요.</p>"
-						$(".theater-list-box").empty();
-						$(".theater-list-box").append(sEmp);
-						console.log("error > ");
-					}
 					});
 				});
 			});

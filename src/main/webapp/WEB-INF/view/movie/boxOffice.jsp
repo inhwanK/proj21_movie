@@ -55,7 +55,8 @@
 						list += "<li>";
 						/* movie-list-info */
 						list += "<div class='movie-list-info'>";
-						list += "<p id='rank'>" + json[i].movNo +  "</p>";	
+						list += "<input id=hidden-movNo type='hidden' value='" + json[i].movNo + "'/>";
+						list += "<p id='rank'>" + (i+1) + "</p>";		// 검색된 순번대로
 						list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
 						list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
 							+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
@@ -104,7 +105,8 @@
 						list += "<li>";
 						/* movie-list-info */
 						list += "<div class='movie-list-info'>";
-						list += "<div id='rank' style ='display:none'>" + json[i].movNo + "</div>"
+						list += "<input id=hidden-movNo type='hidden' value='" + json[i].movNo + "'/>";
+						list += "<p id='rank' style ='display:none'>" + (i+1) + "</p>";	
 						list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
 						list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
 							+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
@@ -135,6 +137,11 @@
 					}
 					$(".commingsoon-list .movie-count b").append(count);
 					$(".commingsoon-list ul").append(list);
+				}else {
+					$(".commingsoon-list ul").empty();
+					$(".commingsoon-list ul").append(list);
+					$(".commingsoon-list .movie-count b").append(dataLength + "개");
+					$('.commingsoon-list #noDataDiv').show();
 				}
 			});	
 			
@@ -162,7 +169,8 @@
 								list += "<li>";
 								/* movie-list-info */
 								list += "<div class='movie-list-info'>";
-								list += "<p id='rank'>" + json[i].movNo +  "</p>";	
+								list += "<input id=hidden-movNo type='hidden' value='" + json[i].movNo + "'/>";
+								list += "<p id='rank'>" + (i+1) + "</p>";	// 검색된 순번대로
 								list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
 								list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
 									+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
@@ -195,7 +203,7 @@
 							$(".box-office-list ul").append(list);
 							$(".box-office-list .movie-count b").empty();
 							$(".box-office-list .movie-count b").append(count);		
-							$('#noDataDiv').hide();
+							$('.box-office-list #noDataDiv').hide();
 						}
 					} else if (movTitle == '') {		// 검색 단어를 입력안하고 검색 버튼을 클릭시
 						//alert('검색할 영화명을 입력해주세요');
@@ -216,8 +224,8 @@
 					if (xhr.responseJSON == ''){		// 검색 했을때 검색된 영화가 없을 경우
 						$(".box-office-list ul").empty();
 						$(".box-office-list .movie-count b").empty();
-						$(".box-office-list .movie-count b").append('0개');
-						$('#noDataDiv').show();
+						$(".box-office-list .movie-count b").append(xhr.responseJSON.length + "개");
+						$('.box-office-list #noDataDiv').show();
 					}
 					console.log(xhr.responseJSON);
 				}
@@ -238,7 +246,6 @@
 	</script>	
 </head>
 <body>	
-	
 	<%@include file="/WEB-INF/view/header.jsp"%>
 	
 	<section>
@@ -316,6 +323,12 @@
 						<!-- 상영예정작 리스트 -->
 						<div class="commingsoon-list">
 						<div class="movie-count"><b></b>의 영화가 검색되었습니다.</div>
+						
+						<!-- 검색결과 없을 때 -->
+						<div class="movie-list-no-result" id="noDataDiv" style="display: none;">
+							<p>현재 상영예정인 영화가 없습니다.</p>
+						</div>
+						
 							<ul>
 								<%-- <li>
 									<div class="movie-list-info">	
