@@ -17,29 +17,6 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	$(function(){	
-		<!-- 이메일 중복체크() -->
-<%-- 		function fn_idOverlap() {
-			var contextPath = "<%= request.getContextPath()%>";
-			$.ajax({
-				url : contextPath + "/idOverlap",
-				type : "post",
-				dataType : "json",
-				data : { "memEmail" : $("#memEmail").val()},
-				success : function(data) {
-					if(data == 1) {
-						alert("중복된 아이디 입니다.");
-						$("#new").attr("disabled", "disabled");
-					} else if(data == 0) {
-						alert("사용가능한 아이디 입니다.");
-						$("#new").removeAttr("disabled");
-						}
-					}
-				});
-			} --%>
-			
-		<!-- 아이디 중복검사!!! -->
-
-			
 		<!-- 비밀번호 일치 확인 -->
 		$('.box2').focusout(function () {
 	        var pwd1 = $("#memPasswd").val();
@@ -61,8 +38,8 @@
 		});
 		
 		<!-- 회원가입 -->
-		var contextPath = "<%= request.getContextPath()%>";
 		$('#new').on("click", function(e){
+			var contextPath = "<%= request.getContextPath()%>";
 	        var newMember = {  memEmail: $('#memEmail').val(), 
 	        				   memPasswd: $('#memPasswd').val(), 
 	       					   memBirthdate: $('#memBirthdate').val(),
@@ -84,6 +61,29 @@
 	            }
 	        }); 
 	    });
+		
+		<!-- 아이디 중복 확인 -->
+		$('#memEmail').on("propertychange change keyup paste input", function(){
+			var contextPath = "<%= request.getContextPath()%>";
+			var memberId = $('#memEmail').val();			// .id_input에 입력되는 값
+			var data = {memEmail : memberId};				// '컨트롤에 넘길 데이터 이름' : '데이터(.id_input에 입력되는 값)'
+			
+			$.ajax({
+				type 	: "post",
+				url 	:  contextPath + "/api/memberIdChk",
+				data 	: data,
+				success : function(result){
+					if(result != 'fail'){
+						$('.id_input_re_1').css("display","inline-block");
+						$('.id_input_re_2').css("display", "none");				
+					} else {
+						$('.id_input_re_2').css("display","inline-block");
+						$('.id_input_re_1').css("display", "none");				
+					}					
+				}// success 종료
+			}); // ajax 종료	
+
+		});
 	});
 </script>
 </head>
@@ -95,9 +95,11 @@
 			<div class="join_main">
 				<ul class="ul">
 					<li class="li">
-						<span>아이디 </span><a href="${contextPath}/memberIdCheck"><button type="button" id="memberIdCheck">중복확인</button></a>
+						<span>아이디 </span>
+						<span class="id_input_re_1">사용 가능한 아이디입니다.</span>
+						<span class="id_input_re_2">아이디가 이미 존재합니다.</span>
 						<br> 
-						<input type="email" placeholder="메일주소를 입력하세요" class="box1" id="memEmail" name="memEmail" value="${memEmail }" required />
+						<input type="email" placeholder="메일주소를 입력하세요" class="box1" id="memEmail" name="memEmail" required />
 					</li>
 					<li class="li">
 						<span>패스워드 </span> 
@@ -127,7 +129,7 @@
 						<input type="number" placeholder="하이픈('-')없이 숫자만 입력하세요" id="memPhone" class="box3" required />
 					</li>
 					<li class="li">
-						<button id="new" disabled="disabled">가입하기</button>
+						<button id="new">가입하기</button>
 					</li>
 				</ul>
 			</div>

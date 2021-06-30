@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,81 +88,23 @@ public class RestJoinController {
 		System.out.println("deleteMember > " + memEmail);
 		return ResponseEntity.ok(service.removeMember(memEmail));
 	}
+	
+	// 아이디...중복...
+	@RequestMapping(value = "/memberIdChk", method = RequestMethod.POST)
+	@ResponseBody
+	public String memberIdChk(String memEmail) throws Exception {
 
-	// 아이디 중복검사
-	@GetMapping("/memberIdCheck")
-	public String memberIdCheck() {
-		System.out.println("[MemberController GET memberIdCheck]");
-		return "/memberIdCheck";
-	}
-	
-	@PostMapping("/memberIdCheck")
-	public String memberIdCheck2(Model model,
-			@RequestParam(value = "memEmail", required = true) String memEmail) {
-		System.out.println("[MemberController POST memEmail]");
-		System.out.println("[MemberController POST memEmail] memEmail" + memEmail);
-		
-		boolean idCheck = service.memberIdCheck(memEmail);
-		System.out.println("[MemberController POST memberIdCheck] boolean idCheck" + idCheck);
-		String alert = null;
-		String path = "redirect:/joinform?memEmail=" + memEmail;
-		
-		if (idCheck == true) {
-			System.out.println("사용가능한 메일입니다.");
+		logger.info("memberIdChk() 진입");
+		int result = service.idCheck(memEmail);
+		logger.info("결과값 = " + result);
+
+		if (result != 0) {
+			return "fail"; // 중복 아이디가 존재
+
 		} else {
-			System.out.println("이미 사용중인 메일입니다.");
-			alert = "이미 사용중인 메일입니다.";
-			path = "/memberIdCheck";
+			return "success"; // 중복 아이디 x
 		}
-		model.addAttribute("alert", alert);
-			return path;
-	}
-	
-	// 중복검사 후 바로 아이디 받아오기
-	@GetMapping("/joinsuccess")
-	public String addMail(Model model,
-			@RequestParam(value = "memEmail", required = true) String memEmail) {
-		System.out.println("[MemberController GET addMail]");
-		model.addAttribute("memEmail", memEmail);
-		return "/joinsuccess";
-	}
-	
-	@PostMapping("/joinsuccess")
-	public String addMail2(Member member) {
-		System.out.println("[MemberController POST addMail]");
-		service.addMail(member);
-		return "redirect:/main";
-		
-	}
-	
-	
-	
-	
-	
-	///////////////////////////////////////////////////////
-//	@ResponseBody
-//	@RequestMapping(value = "idOverlap", method = RequestMethod.POST)
-//	public int idOverlap(Member member) throws Exception {
-//		int result = service.idOverlap(member);
-//		return result;
-//	}
-//
-//	@RequestMapping(value = "joinform", method = RequestMethod.POST)
-//	public String registerPOST(Member member, RedirectAttributes ra) throws Exception {
-//		logger.info("registerPOST");
-//
-//		int result = service.idOverlap(member);
-//
-//		System.out.println("중복은 1 아니면 0 = " + result);
-//		if (result == 1) {
-//			ra.addFlashAttribute("result", "registerFalse");
-//			return "join/joinform";
-//			
-//		} else if (result == 0) {
-//			service.registerMember(member);
-//			ra.addFlashAttribute("result", "registerOK");
-//		}
-//
-//		return "redirect:/";
-//	}
+
+	} // memberIdChkPOST() 종료
+
 }
