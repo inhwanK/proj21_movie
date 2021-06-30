@@ -67,6 +67,10 @@
 						<td class="info">선택좌석</td>
 						<td class="result">A1 A2</td>
 					</tr>
+					<tr>
+						<td class="info">예매일</td>
+						<td class="result">2021년06월30일 14:00:00</td>
+					</tr>
 				</table>
 			</div>
 		</div>
