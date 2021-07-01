@@ -43,7 +43,7 @@ insert into movie values (
 		난 이제 크루엘라야!', 
 		'2021-05-26', 
 		'2021-07-26', 
-		4.5, 
+		0, 
 		'Cruella.jpg'
 );
 insert into movie values (
@@ -65,7 +65,7 @@ insert into movie values (
 		6월, 그의 분노가 폭발한다!', 
 		'2021-06-09', 
 		'2021-08-09', 
-		4.4, 
+		0, 
 		'Wrath-of-Man.jpg'
 );
 insert into movie values (
@@ -84,7 +84,7 @@ insert into movie values (
 		진실 혹은 거짓? 살인사건의 범인, 인간인가 악마인가…', 
 		'2021-06-03', 
 		'2021-08-03', 
-		4.1, 
+		0, 
 		'The-Conjuring3.jpg'
 );
 insert into movie values (
@@ -104,7 +104,7 @@ insert into movie values (
 		지상도, 상공도, 국경도 경계가 없는 불가능한 대결이 시작되는데…', 
 		'2021-05-19', 
 		'2021-07-19', 
-		4.4, 
+		0, 
 		'Fast-&-Furious.jpg'
 );
 insert into movie values (
@@ -122,7 +122,7 @@ insert into movie values (
 		스스로 사회 부적응자, 즉 ‘미스피츠’라 이름 지은 그들은 세상 나쁜 놈들에게 사이다 한 방을 날리기 위해 아부다비로 향하는데…', 
 		'2021-06-03', 
 		'2021-08-03', 
-		3.9, 
+		0, 
 		'The-misfits.jpg'
 );
 insert into movie values (
@@ -144,7 +144,7 @@ insert into movie values (
 		예측불가능한 능력을 가진 혈귀와 목숨을 건 혈전을 시작하는데…', 
 		'2021-01-27', 
 		'2021-07-27', 
-		4.5, 
+		0, 
 		'Demon-Slayer.jpg'
 );
 insert into movie values (
@@ -162,7 +162,7 @@ insert into movie values (
 		이것은 그녀들의 결성부터 FUTURE WORLD FES에 도전하기까지의 ‘약속’을 그린 이야기.', 
 		'2021-06-03', 
 		'2021-08-03', 
-		4.1, 
+		0, 
 		'BanG-Dream!.jpg'
 );
 insert into movie values (
@@ -183,7 +183,7 @@ insert into movie values (
 		하지만 윌리엄이 정신병원에 구금된 미치광이라는 사실이 밝혀지게 되는데...', 
 		'2021-06-02', 
 		'2021-08-02', 
-		3.4, 
+		0, 
 		'The-Professor-and-the-Madman.jpg'
 );
 insert into movie values (
@@ -205,7 +205,7 @@ insert into movie values (
 		결국 ‘광호’는 친구에게 위험한 제안을 하는데….', 
 		'2021-06-03', 
 		'2021-08-03', 
-		3.4, 
+		0, 
 		'NOT-OUT.jpg'
 );
 insert into movie values (
@@ -225,7 +225,7 @@ insert into movie values (
 		당시의 책임자 중 한 사람이었던 ‘박기준’(박근형)에게 접근하는데…', 
 		'2021-05-12', 
 		'2021-07-17', 
-		3.1, 
+		0, 
 		'In-the-Name-of-the-Son.jpg'
 );
 insert into movie values (
@@ -249,7 +249,7 @@ insert into movie values (
 		그들의 막장 팀플레이가 시작된다!', 
 		'2021-05-26', 
 		'2021-07-26', 
-		4.5, 
+		0, 
 		'Pipeline.jpg'
 );
 insert into movie values (
@@ -273,7 +273,7 @@ insert into movie values (
 		과연 이들은 ‘인류 이주 프로젝트’를 완수할 수 있을까?!', 
 		'2021-05-26', 
 		'2021-07-26', 
-		3.4, 
+		0, 
 		'Voyagers.jpg'
 );
 
@@ -298,7 +298,7 @@ insert into movie values (
 		기억 속에 감춰진 충격적인 진실이 밝혀진다!', 
 		'2021-06-17', 
 		'2021-08-17', 
-		3.4, 
+		0, 
 		'Whispering-Corridors6.jpg'
 );
 insert into movie values (
@@ -322,7 +322,7 @@ insert into movie values (
 		경찰의 추격 속 의문의 발신자와의 전화마저 끊을 수 없는 상황에 놓이게 되는데…!', 
 		'2021-06-23', 
 		'2021-08-23', 
-		3.4, 
+		0, 
 		'Hard-Hit.jpg'
 );
 insert into movie values (
@@ -348,7 +348,7 @@ insert into movie values (
 		', 
 		'2021-06-29', 
 		'2021-08-29', 
-		3.7, 
+		0, 
 		'Silk-Road.jpg'
 );
 insert into movie values (
@@ -369,7 +369,7 @@ insert into movie values (
 		세상 끝에 선 사진작가, 잔혹한 현실을 마주한다!', 
 		'2021-06-10', 
 		'2021-08-10', 
-		2.0, 
+		0, 
 		'White-on-White.jpg'
 );
 insert into movie values (
@@ -389,7 +389,7 @@ insert into movie values (
 		17년간의 질긴 인연, 지아장커가 선사하는 현실 로맨스!', 
 		'2021-06-10', 
 		'2021-08-10', 
-		0.0, 
+		0, 
 		'Ash-Is-Purest-White.jpg'
 );
 insert into movie values (
@@ -413,7 +413,7 @@ insert into movie values (
 		악몽 같은 과거와 감옥 같은 미래의 경계에 갇힌 프레드릭은 자신의 현실을 결정할 최후의 선택을 한다.', 
 		'2021-06-10', 
 		'2021-08-10', 
-		3.3, 
+		0, 
 		'Flashback.jpg'
 );
 insert into movie values (
@@ -432,7 +432,7 @@ insert into movie values (
 		텅 빈 고요함으로 가득한 바깥은 더 큰 위험이 도사리고 있는데...', 
 		'2021-06-16', 
 		'2021-08-16', 
-		4.5, 
+		0, 
 		'A-Quiet-Place-Part-II.jpg'
 );
 insert into movie values (
@@ -450,7 +450,7 @@ insert into movie values (
 		복수하고 싶은 마음으로 그에게 의도적으로 접근하게 되는데…', 
 		'2021-06-17', 
 		'2021-08-17', 
-		3.5, 
+		0, 
 		'Summer-is-the-coldest-season.jpg'
 );
 

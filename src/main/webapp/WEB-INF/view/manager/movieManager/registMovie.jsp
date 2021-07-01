@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
 	$(function(){
 		var contextPath = "${contextPath}";
@@ -65,11 +66,11 @@
                   </div>
                   <div class="form-group">
                      <label>개봉일</label>
-                     <input type="text" id="opendate" class="form-control" placeholder="2021-06-02">
+                     <input type="date" id="datePicker" class="form-control">
                   </div>
                   <div class="form-group">
                      <label>종료일</label>
-                     <input type="text" id="enddate" class="form-control" placeholder="2021-06-02">
+                     <input type="date" id="datePicker2" class="form-control">
                   </div>
                    <div class="form-group">
                      <label>파일 첨부</label>

@@ -67,7 +67,7 @@
                   <div class="form-group">
                      <label>극장</label>
                      <select id="theater" class="form-control">
-                    	<option selected>극장</option>
+                    	<option selected disabled hidden="">극장 선택</option>
                      	<c:forEach items="${getTheaterList }" var="tht">
                      		<option value="${tht.thtNo }"><c:out value="${tht.thtName }"/></option>
                      	</c:forEach>
@@ -76,7 +76,7 @@
                   <div class="form-group">
                      <label>상영관</label>
                      <select id="cinema" class="form-control">
-                     	<option selected>상영관</option>
+                     	<option selected disabled hidden="">상영관 선택</option>
                      	<c:forEach items="${getCinemaList }" var="cin">
                      		<option value="${cin.cinNo }"><c:out value="${cin.cinType }"/></option>
                      	</c:forEach>
@@ -85,7 +85,7 @@
                   <div class="form-group">
                      <label>영화제목</label>
                      <select id="movie" class="form-control">
-                     	<option selected>영화</option>
+                     	<option selected disabled hidden="">영화 선택</option>
                      	<c:forEach items="${getMovieList }" var="movie">
                      		<option value="${movie.movNo }" data-time="${movie.movRuntime }"><c:out value="${movie.movTitle }"/></option>
                      	</c:forEach>
