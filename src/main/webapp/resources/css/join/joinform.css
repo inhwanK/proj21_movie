@@ -19,6 +19,8 @@ body {
 	margin: 0;
 	padding: 0;
 	text-align: center;
+	margin-right: 17px; /* nav 길이조절 */
+	overflow: hidden; /* 스크롤 x */
 }
 
 a:link {
@@ -37,9 +39,16 @@ ol, ul {
 
 /* section */
 section {
-	margin: auto;
+	margin: 20px auto;
 	width: 1273px;
+	height: 300px;
+	text-align: center;
+	float: none;
+	margin-left: 39%;
+	margin-bottom: 20%;
+	display: block;
 }
+
 
 /* section 본문 */
 section #joinFormArea {
@@ -128,8 +137,7 @@ button {
 }
 
 /* 전화번호 화살표 스크롤 없애기 */
-input::-webkit-outer-spin-button, 
-input::-webkit-inner-spin-button {
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
 }

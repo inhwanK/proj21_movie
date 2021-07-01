@@ -29,9 +29,9 @@ $(function(){
 </script>
 </head>
 <body>
-	<%@include file="../login/header.jsp"%>
+	<%@include file="/WEB-INF/view/header.jsp"%>
 	<section id="loginFormArea">
-		<form id="login_form" method="POST">
+		<form id="login_form" method="POST" name="form1">
 			<fieldset>
 				<div class="fm_box">
 				<c:if test = "${result == 0 }">
@@ -67,6 +67,6 @@ $(function(){
 			</fieldset>
 		</form>
 	</section>
-	<%@include file="../login/footer.jsp"%>
+	<%@include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>

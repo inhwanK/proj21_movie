@@ -39,10 +39,11 @@ ol, ul {
 
 /* section */
 section {
-	margin: auto;
+	margin: 10px auto;
 	width: 1273px;
+	height: 450px;
 	text-align: center;
-	margin-left: 38%;
+	margin-left:38%;
 	margin-right: auto;
 }
 

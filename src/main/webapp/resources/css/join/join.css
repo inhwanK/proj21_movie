@@ -39,8 +39,12 @@ ol, ul {
 
 /* section */
 section {
-	margin: auto;
+	margin: 20px auto;
 	width: 1273px;
+	height: 300px;
+	text-align: center;
+	padding-left: 38%;
+	padding-bottom: 12%;
 }
 
 /* section 본문 */
