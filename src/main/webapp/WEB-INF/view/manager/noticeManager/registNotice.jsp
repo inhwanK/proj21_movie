@@ -24,57 +24,55 @@
 		
 		// 등록 버튼
 		$("#regist").on('click', function(){
-			
-			if($("#uploadFile").val()!=null){
-				var filePath = $("#uploadFile").val().split('\\');
-				fileName = filePath[filePath.length - 1];
-			}
-			
-			var data ={
-				notTitle: $("#title").val(),
-				notDetail: $("#content").val(),
-				notFile: fileName 
-			}
-			
-			
-			console.log();
-			$.ajax({
-				url:contextPath+"/api/notice",
-				type:"post",
-				dataType:"json",
-				data:JSON.stringify(data),
-				contentType:"application/json; charset=utf-8",
-				success: function(json){
-					var conf = confirm("등록하시겠습니까?");
-					if(conf){
-						alert("등록이 완료되었습니다.");
-						//window.location.href = contextPath + "/noticeManager";
+			var conf = confirm("등록하시겠습니까?");
+				if(conf){
+				if($("#uploadFile").val()!=null){
+					var filePath = $("#uploadFile").val().split('\\');
+					fileName = filePath[filePath.length - 1];
+				}
+				
+				var data ={
+					notTitle: $("#title").val(),
+					notDetail: $("#content").val(),
+					notFile: fileName 
+				}
+				
+				console.log();
+				$.ajax({
+					url:contextPath+"/api/notice",
+					type:"post",
+					dataType:"json",
+					data:JSON.stringify(data),
+					contentType:"application/json; charset=utf-8",
+					success: function(json){
+							alert("등록이 완료되었습니다.");
+							window.location.href = contextPath + "/noticeManager";
+					},
+					error: function(){
+						alert("뭔가 잘못된 것이 분명합니다.");	
 					}
-				},
-				error: function(){
-					alert("뭔가 잘못된 것이 분명합니다.");	
+				});
+				
+				var formData = new FormData();
+				var inputFile = $("input#uploadFile");
+				var files = inputFile[0].files;
+				console.log(files);
+				
+				for(var i=0; i<files.length; i++){
+					formData.append("uploadFile", files[i]);
 				}
-			});
-			
-			var formData = new FormData();
-			var inputFile = $("input#uploadFile");
-			var files = inputFile[0].files;
-			console.log(files);
-			
-			for(var i=0; i<files.length; i++){
-				formData.append("uploadFile", files[i]);
+	
+				$.ajax({
+					url:contextPath+"/api/noticeFileUpload",
+					processData:false,
+					contentType:false,
+					data:formData,
+					type:"POST",
+					success:function(result){
+						console.log("Uploaded");
+					}
+				});
 			}
-
-			$.ajax({
-				url:contextPath+"/api/noticeFileUpload",
-				processData:false,
-				contentType:false,
-				data:formData,
-				type:"POST",
-				success:function(result){
-					console.log("Uploaded");
-				}
-			});
 		});
 		
 		// 취소 버튼

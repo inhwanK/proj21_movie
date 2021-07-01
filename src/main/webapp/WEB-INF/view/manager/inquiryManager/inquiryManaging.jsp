@@ -12,17 +12,60 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${contextPath}/resources/css/manager/sidebar.css">
+
+</head>
+<body>
+<header>
+	<jsp:include page="/WEB-INF/view/manager/sidebar.jsp"></jsp:include>
+</header>
+<div id="page-wrapper">
+
+
+  <!-- 본문 -->
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <h1 class="text-center">문의</h1>
+      
+      <!-- css 정리 너무 안됨. -->
+      <div style="margin:0 20px;">
+      	<select name="inqStatus" onchange="changeSearchCond()" id="statusComb" style="float:right; margin: 0 0 10px 0;">
+      		<option value="all"selected>전체</option>
+      		<option value="1">답변 완료</option>      		
+      		<option value="0">답변 미완료</option>      				
+      	</select>
+	  </div>
+	  
+      <table class="table table-hover table-striped text-center" style="border: 1px solid; margin: 10px 0;">
+      	<thead>
+      		<tr>
+      			<th>번호</th>
+      			<th>제목</th>
+      			<th>작성자</th>
+      			<th>문의일</th>
+      			<th>답변상태(Y/N)</th>
+      			<th></th>
+      			<th></th>
+      		</tr>
+      	</thead>
+      	<tbody>
+      		
+      	</tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
 <script type="text/javascript">
+	function getFormatDate(date) { // date 폼 처리 메서드.
+		var subDateArray = date.substr(0, 10).split('-');
+		return subDateArray[0] + "." + subDateArray[1] + "."
+				+ subDateArray[2];
+	} // js 파일로 관리할 필요 있음. 
+
 	$(function(){
-		
-		function getFormatDate(date) { // date 폼 처리 메서드.
-			var subDateArray = date.substr(0, 10).split('-');
-			return subDateArray[0] + "." + subDateArray[1] + "."
-					+ subDateArray[2];
-		} // js 파일로 관리할 필요 있음. 
-		
+
 		var contextPath = "${contextPath}";
-		
+		// 리스트 가져오기
 		$.ajax({
 			url: contextPath+"/api/inquirylist",
 			type:"get",
@@ -51,6 +94,7 @@
 		
 		
 		$(document).ready(function(){
+			
 			
 			var td;
 			var inqNo;
@@ -91,45 +135,40 @@
 		});
 		
 	});
-
+	
+	function changeSearchCond(){
+		
+		var inqStatus = $("#statusComb option:selected").val();
+		
+		if(inqStatus=="all"){
+			location.reload();
+		}
+		
+		$.ajax({
+			url: contextPath+"/api/inquiryStatus?inqStatus="+inqStatus,
+			type:"get",
+			contentType:"application/json; charset=utf-8",
+			dataType:"json",
+			success:function(json){
+				var list="";
+				
+				if(json.length >= 1){
+					for(i=0;i<json.length;i++){
+						list += "<tr>";
+						list += "<td>"+json[i].inqNo+"</td>";
+						list += "<td>"+json[i].inqTitle+"</td>";
+						list += "<td>"+json[i].inqUser+"</td>";
+		      			list += "<td>"+getFormatDate(json[i].inqDate)+"</td>";
+		      			list += "<td>"+(json[i].inqStatus ==1 ? 'Y' : 'N') +"</td>";
+		      			list += "<td><button id=\"answer\" class=\"btn btn-primary\">답변</button></td>";
+		      			list += "<td><button id=\"delete\" class=\"btn btn-primary\">삭제</button></td>";
+		      			list += "</tr>";
+					} // end of for
+					$("tbody").empty();
+					$("tbody").append(list);
+				} // end of if
+			}
+		});
+	}
 </script>
-</head>
-<body>
-<header>
-	<jsp:include page="/WEB-INF/view/manager/sidebar.jsp"></jsp:include>
-</header>
-<div id="page-wrapper">
-
-
-  <!-- 본문 -->
-  <div id="page-content-wrapper">
-    <div class="container-fluid">
-      <h1 class="text-center">문의</h1>
-      <!-- css 정리 너무 안됨. -->
-      <div style="margin:0 0 50px 0;">
-	      <button class="btn btn-primary" style="float:right;">답변없는 글 보기</button>
-	      <button class="btn btn-primary" style="float:right; margin:0 5px 0 0;">답변없는 글 보기</button>
-      </div>
-      
-      <table class="table table-hover table-striped text-center" style="border: 1px solid; margin: 10px 0;">
-      	<thead>
-      		<tr>
-      			<th>번호</th>
-      			<th>제목</th>
-      			<th>작성자</th>
-      			<th>문의일</th>
-      			<th>답변상태(Y/N)</th>
-      			<th></th>
-      			<th></th>
-      		</tr>
-      	</thead>
-      	<tbody>
-      		
-      	</tbody>
-      </table>
-    </div>
-  </div>
-</div>
-</body>
-
 </html>

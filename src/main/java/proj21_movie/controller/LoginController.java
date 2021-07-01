@@ -66,7 +66,7 @@ public class LoginController {
 
 		HttpSession session = request.getSession();
 		Member mem = memService.memberLogin(member);
-		
+
 		if (mem == null) { // 일치하지 않는 아이디, 비밀번호를 입력한 경우
 
 			int result = 0;

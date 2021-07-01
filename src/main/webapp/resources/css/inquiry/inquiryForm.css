@@ -87,6 +87,16 @@ textarea#textarea{
 p#file{
 	font-size: 15px;
 }
+input.input-text{
+	height:24px;
+	font-size:16px;
+}
+input[name=inqTitle]{
+	width:495px;
+}
+input[name=inqUser]{
+	background-color:#eee;
+}
 
 .btn-image-add{
 	font-size:18px;

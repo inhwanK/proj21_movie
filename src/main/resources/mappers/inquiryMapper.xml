@@ -22,7 +22,7 @@
 	<select id="selectInquiryByAnsStatus" resultMap="inquiryList">
 		select inq_no, inq_title, inq_user, inq_date, inq_status 
 		from inquiry
-		where inq_status = 0;
+		where inq_status = #{inqStatus};
 	</select>
 	
 	<select id="selectInquiryByNo" resultType="Inquiry">

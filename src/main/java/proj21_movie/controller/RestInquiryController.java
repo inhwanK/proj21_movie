@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,6 +34,13 @@ public class RestInquiryController {
 		List<Inquiry> listInquiry = service.getLists();
 		return ResponseEntity.status(HttpStatus.OK).body(listInquiry); 
 	}
+	
+	@GetMapping("/inquiryStatus")
+	public ResponseEntity<Object> getInquiryListByAnsStatus(int inqStatus){
+		List<Inquiry> listInquiry = service.getInquiryByAnsStatus(inqStatus);
+		return ResponseEntity.status(HttpStatus.OK).body(listInquiry);
+	}
+	
 	
 	@GetMapping("/inquiry")
 	public ResponseEntity<Object> getInquiry(int inqNo){

@@ -11,7 +11,7 @@ public interface InquiryMapper {
 
 	List<Inquiry> selectInquiryAll();
 	List<Inquiry> selectInquiryByUser(String user);
-	List<Inquiry> selectInquiryByAnsStatus();
+	List<Inquiry> selectInquiryByAnsStatus(int inqStatus);
 	Inquiry selectInquiryByNo(int inqNo);
 	
 	

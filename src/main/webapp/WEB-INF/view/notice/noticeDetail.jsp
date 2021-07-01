@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항</title>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
