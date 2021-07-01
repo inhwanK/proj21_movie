@@ -46,7 +46,13 @@
                   </div>
                   <div class="form-group">
                      <label>심의등급</label>
-                     <input type="text" id="grade" class="form-control">
+                      <select id="grade" class="form-control">
+                     	<option selected disabled hidden="">등급 선택</option>
+                     	<option value="0">전체 관람가</option>
+                     	<option value="12">12세 관람가</option>
+                     	<option value="15">15세 관람가</option>
+                     	<option value="19">청소년 관람불가</option>
+                     </select>
                   </div>
                   <div class="form-group">
                      <label>런타임</label>
@@ -66,11 +72,11 @@
                   </div>
                   <div class="form-group">
                      <label>개봉일</label>
-                     <input type="date" id="datePicker" class="form-control">
+                     <input type="date" id="opendate" class="form-control">
                   </div>
                   <div class="form-group">
                      <label>종료일</label>
-                     <input type="date" id="datePicker2" class="form-control">
+                     <input type="date" id="enddate" class="form-control">
                   </div>
                    <div class="form-group">
                      <label>파일 첨부</label>
@@ -118,13 +124,17 @@ $(document).ready(function(){
 		
 		var name = document.getElementById("uploadFile").files;
 		
+		// textarea의 엔터를 <br>로 치환
+		var detail = $("#detail").val();
+		var reDetail = detail.replace(/\n/g, '<br/>');
+		
 		var newMovie = { movTitle: $('#title').val(),
 				movGenre: $('#genre').val(),
 				movGrade: $('#grade').val(),
 				movRuntime: $('#runtime').val(),
 				movDirector: $('#director').val(),
 				movActor: $('#actor').val(),
-				movDetail: $('#detail').val(),
+				movDetail: reDetail,
 				movOpendate: $('#opendate').val(),
 				movEnddate: $('#enddate').val(),
 				movPoster: document.getElementById("uploadFile").files[0].name 

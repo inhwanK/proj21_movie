@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
 	$(function(){
 		var contextPath = "${contextPath}";
@@ -87,18 +88,20 @@
                      <select id="movie" class="form-control">
                      	<option selected disabled hidden="">영화 선택</option>
                      	<c:forEach items="${getMovieList }" var="movie">
-                     		<option value="${movie.movNo }" data-time="${movie.movRuntime }"><c:out value="${movie.movTitle }"/></option>
+                     		<option value="${movie.movNo }" data-time="${movie.movRuntime }" data-start="${movie.movOpendate }" data-end="${movie.movEnddate }">
+                     			<c:out value="${movie.movTitle }"/>
+                     		</option>
                      	</c:forEach>
                      </select>
                   </div>
                   <div class="form-group">
                      <label>상영일</label>
-                     <input type="text" id="date" class="form-control" placeholder="2021-06-02">
+                     <input type="date" id="date" class="form-control">
                   </div>
                   <div class="form-group">
                      <label>시작시간</label>
                      <select id="start" class="form-control">
-                     	<option selected>시작시간</option>
+                     	<option selected disabled hidden="">시작시간</option>
                      	<option>10:00</option>
                      	<option>14:00</option>
                      	<option>20:00</option>
@@ -108,6 +111,7 @@
                      <label>종료시간</label>
                      <input type="text" id="end" class="form-control" readonly="readonly">
                   </div>
+                  
                   <button id="new" class="btn btn-primary">등록</button>
                   <button id="cancel" class="btn btn-primary">취소</button>
                </form>
@@ -174,6 +178,36 @@
 			var changeTime = HHmmss((runtime + starttime_to_min) * 60);
 			
 			$('#end').val(changeTime);
+			
+			var openDate = $("#movie option:selected").data("start");
+			var endDate = $("#movie option:selected").data("end");
+			var today = new Date();
+			var year = today.getFullYear();
+			var month = today.getMonth() + 1;
+			var day = today.getDate();
+			
+			if(month < 10) {
+				month = "0" + month.toString();
+			}
+			if(day < 10) {
+				day = "0" + day.toString();
+			}
+			var strDate = year + "-" + month + "-" + day;
+			
+			console.log("개봉일 >> " + openDate + ", 종료일 >> " + endDate);
+			
+			// 오늘날짜와 개봉일 비교하여 date의 최소값으로 넣음
+			var date1 = new Date(strDate);	// 오늘날짜
+			var date2 = new Date(openDate);	// 영화개봉일
+			
+			if (date2 > date1) {
+				$('#date').attr('min', openDate);
+				$('#date').val(openDate);
+			} else {
+				$('#date').attr('min', strDate);
+				$('#date').val(strDate);
+			}
+			$('#date').attr('max', endDate);
 		});
 	});
 </script>
