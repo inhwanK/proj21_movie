@@ -14,6 +14,12 @@ public class MovieController {
 		return mav;
 	}
 	
+	@GetMapping("/searchMovieList")
+	public ModelAndView searchMovieList(@RequestParam(defaultValue = "") String movTitle) {
+		ModelAndView mav = new ModelAndView("movie/searchMovie", "movTitle", movTitle);
+		return mav;
+	}
+	
 	@GetMapping("/movie")
 	public ModelAndView movie(@RequestParam(value = "movNo") int movNo) {
 		ModelAndView mav = new ModelAndView("movie/movieDetail", "movNo", movNo);

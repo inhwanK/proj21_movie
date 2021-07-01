@@ -18,7 +18,7 @@
 			var movTitle = $("#search-box input[type=text]").val();
 				  
 			if (movTitle != '') {	// 검색 텍스트가 있으면 영화 페이지로 가서 검색 됨
-				window.location.href = contextPath + "/movielist?movTitle=" + movTitle;
+				window.location.href = contextPath + "/searchMovieList?movTitle=" + movTitle;
 			}else if (movTitle == '') {		// 검색 텍스트가 없을시 경고 창 띄움(Alert창 디자인 sweetalert2)
 				Swal.fire({						
 				    icon: 'warning',
