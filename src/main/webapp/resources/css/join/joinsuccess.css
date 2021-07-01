@@ -39,12 +39,19 @@ ol, ul {
 
 /* section */
 section {
-	padding-bottom: 5%;
-	padding-top: 5%;
+	/* padding-bottom: 5%;
+	padding-top: 5%; */
+	margin: 50px auto;
+	width: 1273px;
+	height: 300px;
+	text-align: center;
+	padding-top: 50px;
+	padding-bottom: 50px;
 }
 
 /* 이 이후에 section 부분 작성해주시면 돼요 */
 .con_main {
+	margin: 0 auto;
 	border: 0.5px solid RGB(3, 22, 52);
 	width: 600px;
 	height: 310px;

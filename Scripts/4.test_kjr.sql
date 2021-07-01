@@ -186,3 +186,4 @@ where r.res_no = 28;
 select * from seat where res_no = 28;
 
 select * from movie;
+select * from member;
