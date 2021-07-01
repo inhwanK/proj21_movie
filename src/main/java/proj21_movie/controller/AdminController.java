@@ -49,6 +49,6 @@ public class AdminController {
         //로그인 성공
 		session.setAttribute("admin", adm); // 일치하는 아이디, 비밀번호를 입력한 경우 (로그인 성공)
 		
-		return "redirect:/movieManager";
+		return "redirect:/main";
 	}
 }
