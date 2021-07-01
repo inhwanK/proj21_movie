@@ -79,4 +79,11 @@ public class MovieServiceImpl implements MovieService {
 		log.debug("service - modifyMovieAvgStarMovie() > " + movie);
 		return mapper.updateMovieAvgStar(movie);
 	}
+	
+	@Override
+	public List<Movie> getMovieListFromToday() {
+		List<Movie> list = mapper.selectMovieFromToday();
+		log.debug("service - getMovieListFromToday() > " + list.size());
+		return list;
+	}
 }

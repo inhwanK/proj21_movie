@@ -30,7 +30,8 @@
 			$('#runtime').val(json.movRuntime);
 			$('#director').val(json.movDirector);
 			$('#actor').val(json.movActor);
-			$('#detail').val(json.movDetail);
+			var str = json.movDetail;
+			$('#detail').val(str.replace(/<br\s*\/?>/mg,"\n"));
 			$('#opendate').val(json.movOpendate);
 			$('#enddate').val(json.movEnddate);
 			$('#uploadFile').val(json.movPoster);
@@ -127,7 +128,13 @@
                   </div>
                   <div class="form-group">
                      <label>심의등급</label>
-                     <input type="text" id="grade" class="form-control">
+                     <select id="grade" class="form-control">
+                     	<option selected disabled hidden="">등급 선택</option>
+                     	<option value="0">전체 관람가</option>
+                     	<option value="12">12세 관람가</option>
+                     	<option value="15">15세 관람가</option>
+                     	<option value="19">청소년 관람불가</option>
+                     </select>
                   </div>
                   <div class="form-group">
                      <label>런타임</label>
@@ -147,11 +154,11 @@
                   </div>
                   <div class="form-group">
                      <label>개봉일</label>
-                     <input type="text" id="opendate" class="form-control" placeholder="2021-06-02">
+                     <input type="date" id="opendate" class="form-control">
                   </div>
                   <div class="form-group">
                      <label>종료일</label>
-                     <input type="text" id="enddate" class="form-control" placeholder="2021-06-02">
+                     <input type="date" id="enddate" class="form-control">
                   </div>
                    <div class="form-group">
                      <label>파일 첨부</label>

@@ -186,4 +186,5 @@ where r.res_no = 28;
 select * from seat where res_no = 28;
 
 select * from movie;
-select * from member;
+select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster from movie
+where mov_enddate > date_add(now(), interval -1 day); 

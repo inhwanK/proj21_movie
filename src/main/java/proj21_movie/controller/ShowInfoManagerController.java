@@ -28,7 +28,7 @@ public class ShowInfoManagerController {
 	
 	@RequestMapping("/registShowInfo")
 	public String registShowInfo(Model model) {
-		model.addAttribute("getMovieList", movService.getMovieBoxOfficeLists());
+		model.addAttribute("getMovieList", movService.getMovieListFromToday());
 		model.addAttribute("getTheaterList", thtService.getLists());
 		model.addAttribute("getCinemaList", cinService.getLists());
 		return "manager/showInfoManager/registShowInfo";
