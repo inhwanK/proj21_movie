@@ -231,9 +231,9 @@
 					var dataLength = json.length;
 					if (dataLength >= 1) {
 						var sCont = "";
-						var cinemaNo = 1;
-						sCont += "<label class='type'>2D</label>";
-						sCont += "<br><br>";
+						var cinemaNo = 0;
+						/* sCont += "<label class='type'>2D</label>";
+						sCont += "<br><br>"; */
 						for (i = 0; i < dataLength; i++) {
 							if (json[i].cinNo.cinNo != cinemaNo) {
 								sCont += "<br><br><br>";
@@ -247,7 +247,8 @@
 							sCont += "<input type='hidden' value='" + json[i].shwNo + "'/>";
 						}
 						sCont += "<br><br><br><button id='btn-seat' class='btn-seat'>좌석 선택</button>";
-						$("#time-select:last-child").append(sCont);
+						var brDelete = sCont.substring(12);
+						$("#time-select:last-child").append(brDelete);
 					}
 				}
 			});

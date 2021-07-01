@@ -525,25 +525,38 @@ insert into theater_cinema values (3, 3);
 -- delete from showinfo where shw_no = 1;
 -- alter table showinfo auto_increment = 1;
 select shw_no, tht_no, cin_no, mov_no, shw_date, shw_starttime, shw_endtime from showinfo;
-insert into showinfo values (null, 1, 1, 1, '2021-06-01', '14:00:00', 
+insert into showinfo values (null, 1, 1, 1, '2021-07-02', '10:00:00', 
+addtime('10:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));
+insert into showinfo values (null, 1, 1, 1, '2021-07-02', '14:00:00', 
 addtime('14:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));
-insert into showinfo values (null, 2, 2, 2, '2021-06-02', '14:00:00', 
+insert into showinfo values (null, 1, 1, 1, '2021-07-02', '20:00:00', 
+addtime('20:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));
+
+insert into showinfo values (null, 1, 2, 1, '2021-07-02', '10:00:00', 
+addtime('10:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));
+insert into showinfo values (null, 1, 2, 1, '2021-07-02', '14:00:00', 
+addtime('14:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));
+insert into showinfo values (null, 1, 2, 1, '2021-07-02', '20:00:00', 
+addtime('20:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));
+
+insert into showinfo values (null, 2, 2, 2, '2021-07-02', '14:00:00', 
 addtime('14:00:00', sec_to_time((select mov_runtime from movie where mov_no = 2) * 60)));
-insert into showinfo values (null, 3, 3, 3, '2021-06-03', '14:00:00', 
-addtime('14:00:00', sec_to_time((select mov_runtime from movie where mov_no = 3) * 60)));
-insert into showinfo values (null, 1, 2, 4, '2021-06-04', '14:00:00', 
-addtime('14:00:00', sec_to_time((select mov_runtime from movie where mov_no = 4) * 60)));
+insert into showinfo values (null, 2, 2, 2, '2021-07-02', '20:00:00', 
+addtime('20:00:00', sec_to_time((select mov_runtime from movie where mov_no = 2) * 60)));
 
 -- 예매
 select res_no, shw_no, mem_no, res_price, res_date, res_adult, res_teen, res_pref from reservation;
-insert into reservation values (null, 1, 1, 10000, now(), 1, 0, 0);
-insert into reservation values (null, 1, 2, 18000, now(), 1, 1, 0);
+insert into reservation values (null, 3, 1, 50000, now(), 5, 0, 0);
+
 
 -- 좌석
 select seat_no, res_no, shw_no, seat_rowno, seat_colno from seat;
-insert into seat values (null, 1, 1, 5, 5);
-insert into seat values (null, 2, 1, 1, 1);
-insert into seat values (null, 2, 1, 1, 2);
+insert into seat values (null, 1, 3, 3, 4);
+insert into seat values (null, 1, 3, 4, 4);
+insert into seat values (null, 1, 3, 6, 6);
+insert into seat values (null, 1, 3, 8, 10);
+insert into seat values (null, 1, 3, 1, 8);
+
 
 -- 문의
 select inq_no, inq_title, inq_user, inq_detail, inq_date, inq_file, inq_answer, inq_ansdate, inq_status from inquiry;
