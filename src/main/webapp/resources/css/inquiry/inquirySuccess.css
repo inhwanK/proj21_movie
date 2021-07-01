@@ -1,7 +1,10 @@
 @charset "UTF-8";
 
 /* 축하이미지 */
-
+section{
+	margin-bottom: 10px;
+	
+}
 .con_main {
 	border: 0.5px solid RGB(3, 22, 52); 
 	/* border: 2px solid purple; */

@@ -94,7 +94,7 @@
 </head>
 <body>
 
-	<header>
+	<%-- <header>
 		<a href="${contextPath}/main"><img id="header_ci" alt="브랜드 로고"
 			src="${contextPath}/resources/images/ci.png"></a>
 		<div>
@@ -114,7 +114,9 @@
 			<li id="mypagebtn"><a href="${contextPath}/mypage"><i
 					class="far fa-user"></i></a></li>
 		</ul>
-	</nav>
+	</nav> --%>
+
+	<%@include file="/WEB-INF/view/header.jsp"%>
 
 	<section>
 		<div id="title-wrap">
@@ -214,8 +216,8 @@
 
 		</div>
 	</section>
-
-	<footer>
+	<%@include file="/WEB-INF/view/footer.jsp"%>
+	<%-- <footer>
 		<div id="content">
 			<img id="footer_ci" alt="브랜드 로고"
 				src="${contextPath}/resources/images/ci.png">
@@ -224,6 +226,6 @@
 				<p>대구광역시 서구 서대구로 7길2 (내당동 245-4번지 2층) ARS 053-555-1333</p>
 			</div>
 		</div>
-	</footer>
+	</footer> --%>
 </body>
 </html>
