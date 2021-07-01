@@ -31,6 +31,12 @@
 	
 				$(".tab-cont-wrap > div").removeClass("active");
 				$(".tab-cont-wrap > div").eq($(this).index()).addClass("active");
+				
+				// 로그인했을때 한줄평에서 회원이메일이 같으면 클래스 추가(배경색 바뀜-구별을 위해)
+				if (${member != null}) {
+					var pUser = $('.prof:contains("${member.memEmail}")').parent();
+					pUser.addClass('com-me');
+				}
 			});
 			
 		   /* 취소 버튼 누를시  */
@@ -61,7 +67,6 @@
 		        	return false;	// 검색 버튼을 눌렀을 경우에 해당 버튼이 활성화 (다른 의도하지 않은 동작 방지)
 		        }
 		    });
-		   
 		});
 	</script>
 	<script type="text/javascript">
@@ -139,8 +144,8 @@
 						sCont += "<p class='p-type'></p>";		
 						sCont += "<div class='line'>";						
 						sCont += "<p>감독&nbsp;: " + json.movDirector + "</p>";						
-						sCont += "<p>장르&nbsp;: " + json.movGenre + "/" + json.movRuntime + "분</p>";						
-						sCont += "<p>등급&nbsp;: " + json.movGrade + "세이상관람가</p>";						
+						sCont += "<p>장르&nbsp;: " + json.movGenre + " / 런타임 : " + json.movRuntime + " 분</p>";						
+						sCont += "<p id='movie-grade'>등급&nbsp;: <i>" + json.movGrade + "세이상</i>관람가</p>";						
 						sCont += "<p>개봉일&nbsp;: " + getFormatDate(json.movOpendate) + "</p>";											
 						sCont += "</div>";
 						sCont += "<p>출연진&nbsp;: " + json.movActor + "</p>";
@@ -151,6 +156,7 @@
 					$(".movie-detail-cont").append(title);
 					$(".poster .wrap").append(poster);
 					$(".movie-info-list").append(sCont);
+					$('#movie-grade i:contains("0세이상")').text("전체");
 				},
 				error : function(request, status, error){
 					window.location.href = contextPath + "/movielist";	// 데이터에 없는 영화번호를 검색시 전체영화 페이지로 이동
@@ -185,10 +191,11 @@
 							// prof
 							sCont += "<div class='prof'>";						
 							sCont += "<img src='${contextPath}/resources/images/movie/movie-detail/bg-profile.png'>";
-							sCont += "<p class='user-id'>" + json[i].comUser + "</p>";
+							sCont += "<p id='none-user' style='display:none'>" + json[i].comUser + "</p>";
+							sCont += "<p class='user-id'>" + json[i].comUser.substring(0, 4) + "</p>";
 							sCont += "<div class='divNo' style ='display:none'>" + json[i].comNo + "</div>"
 							sCont += "</div>";
-							// // prof
+							// prof
 							
 							// textarea
 							sCont += "<div class='textarea'>";
@@ -199,9 +206,8 @@
 							// // textarea
 							
 							// btn-util
-							sCont += "<div class='btn-util'>";
-							sCont += "<button id='modify'>수정</button>";
-							sCont += "<button id='remove'>삭제</button>";					
+							sCont += "<div class='btn-util'>";				
+							sCont += "<button id='alert'></button>";					
 							sCont += "</div>";
 							// // btn-util
 							
@@ -212,8 +218,10 @@
 						}
 						$("#comment-count .font-gblue").append(size);
 						$(".movie-comment ul").append(sCont);
-					}
-								
+					}else {
+						$("#comment-count .font-gblue").append(dataLength);
+						$('#noDataDiv').show();
+					}							
 				});
 			
 			/* ajax */
@@ -236,7 +244,7 @@
 						cache 		: false,
 						data 		: JSON.stringify(newComment),
 						beforeSend  : function(xhr) {			// success로 넘어가기 전에 조건 만족시 success로 넘어가지 않고 beforeSend에서 멈춤
-					        if (user == "") {			// 한줄평 유저 (user)에 값이 없을시 success로 넘어가지 않고 로그인으로 이동
+							if (${member == null} || user == "") {	// 한줄평 유저 (user)에 값이 없을시 success로 넘어가지 않고 로그인으로 이동
 					            xhr.abort();
 					        	alert("권한이 없습니다. 로그인 해주세요.");
 					            window.location.href = contextPath + "/login";
@@ -266,26 +274,27 @@
 				$(this).on('click', '[id=modify]', function(){
 					var pa = $(this).parent().parent();
 					var ch = pa.children().children();
-					var comNo = ch.eq(2).text();
-					// alert(comNo);	
+					var comNo = ch.eq(3).text();
 				    
 					/* 팝업 중앙에 띄우기 */
-				    function PopupCenter(url, title, w, h) {  
-				        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;  
-				        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;  
-				                  
-				        width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;  
-				        height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;  
-				                  
-				        var left = ((width / 2) - (w / 2)) + dualScreenLeft;  
-				        var top = ((height / 2) - (h / 2)) + dualScreenTop;  
-				        var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);  
-				      
-				        if (window.focus) {  
-				            newWindow.focus();  
-				        }  
-				    } 				    
-				    PopupCenter(contextPath + "/updateComment?comNo=" + comNo,'popup','550','400'); 
+					if (confirm("수정하시겠습니까?")){
+					    function PopupCenter(url, title, w, h) {  
+					        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;  
+					        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;  
+					                  
+					        width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;  
+					        height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;  
+					                  
+					        var left = ((width / 2) - (w / 2)) + dualScreenLeft;  
+					        var top = ((height / 2) - (h / 2)) + dualScreenTop;  
+					        var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);  
+					      
+					        if (window.focus) {  
+					            newWindow.focus();  
+					        }  
+					    } 				    
+					    PopupCenter(contextPath + "/updateComment?comNo=" + comNo,'popup','550','400'); 
+					}
 				});
 			});
 			
@@ -293,7 +302,7 @@
 			$(document).on('click', '[id=remove]', function(){
 				var pa = $(this).parent().parent();
 				var ch = pa.children().children();
-				var comNo = ch.eq(2).text();
+				var comNo = ch.eq(3).text();
 				
 				if (confirm("삭제하시겠습니까?")){
 					$.ajax({
@@ -320,6 +329,32 @@
 				
 				window.location.href = contextPath + "/reserve?no=" + movNo;
 			});
+			
+			// 한줄평 버튼 눌렸을때
+			$(document).on('click', '[id=alert]', function(e){
+				var pa = $(this).parent().parent();
+				var ch = pa.children().children();
+				var comUser = ch.eq(1).text();
+				var btnPa = $(this).parent();
+				
+				//console.log(comUser);
+				
+				if (${member != null}) {		// 로그인 했을때
+					if('${member.memEmail}' == comUser){	// 로그인 아이디와 한줄평 유저가 일치할때
+						var comBtn = "";
+							comBtn += "<button id='modify'>수정</button>";
+							comBtn += "<button id='remove'>삭제</button>";
+							
+						btnPa.empty();
+						btnPa.append(comBtn);
+					}else {		// 다른 유저가 썼을때
+						alert("권한이 없습니다.");
+					}
+				}else {			// 로그인 안했을때
+					alert("권한이 없습니다. 로그인 해주세요.");			
+		            window.location.href = contextPath + "/login";
+				}
+			});
 		});
 	</script>
 </head>
@@ -332,22 +367,31 @@
 		<a href="${contextPath}/main"> <img id="header_ci2" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png"></a>
 		</c:if>
 		<div>
-		
-		<!-- 로그인 하지 않은 상태 -->
-        <c:if test = "${member == null }">
-			<a href="${contextPath}/login">로그인</a> <a href="${contextPath}/join">회원가입</a>
-			<a href="${contextPath}/reserve">바로예매</a>
-		</c:if>
+		<!-- 관리자가 로그인하지 않은 상태 -->
+		<c:if test = "${admin == null }">
+			<!-- 로그인 하지 않은 상태 -->
+        	<c:if test = "${member == null }">
+				<a href="${contextPath}/login">로그인</a> <a href="${contextPath}/join">회원가입</a>
+				<a href="${contextPath}/reserve">바로예매</a>
+			</c:if>
 			
-		<!-- 로그인한 상태 -->
-        <c:if test="${ member != null }">
-            <div class="login_success_area">
-            	<span>안녕하세요. ${member.memName} 회원님!</span>
+			<!-- 로그인한 상태 -->
+        	<c:if test="${ member != null }">
+            	<div class="login_success_area">
+            		<span>안녕하세요. ${member.memName} 회원님!</span>
+            		<a href="${contextPath}/main.do">로그아웃</a>
+            		<a href="${contextPath}/reserve">바로예매</a>
+            	</div>
+        	</c:if>
+   		</c:if>
+   		<!-- 관리자가 로그인하지 않은 상태 -->
+		<c:if test = "${admin != null }">
+			<div class="admin_success_area">
+            	<span>안녕하세요. ${admin.admId} 회원님!</span>
             	<a href="${contextPath}/main.do">로그아웃</a>
-            	<a href="${contextPath}/reserve">바로예매</a>
+            	<a href="${contextPath}/movieManager">관리페이지</a>
             </div>
-        </c:if>
-   
+		</c:if>
 		</div>
 	</header>
 	<nav>
@@ -455,7 +499,9 @@
 												<table>
 													<tr>
 														<td>
-															<input type="text" id="user" value="테스트 이메일" readonly/>
+															<c:if test="${ member != null }">
+																<input type="hidden" id="user" value="${member.memEmail}" readonly/>
+													        </c:if>
 															<div class="title"><h4>한줄평</h4></div>
 														</td>
 													</tr>
@@ -481,6 +527,12 @@
 								</div>
 								
 								<div class="movie-comment">
+								
+									<!-- 한줄평 데이터가 없을 때 -->
+									<div class="comment-list-no-result" id="noDataDiv" style="display: none;">
+										<p>첫번째 <span class="font-gblue">한줄평</span>의 주인공이 되어보세요!</p>
+									</div>
+									
 									<ul>
 									</ul>
 								</div>

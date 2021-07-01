@@ -33,6 +33,14 @@ ol, ul {
 	padding: 0
 }
 
+i {
+	font-style: normal;
+}
+
+.login_success_area span i{
+	font-style: normal;
+}
+
 /* header */
 header {
 	margin: auto;
@@ -276,7 +284,7 @@ h3.title {
 
 #contentData {
 	margin: auto;
-	width: 1237px;
+	width: 1273px;
 }
 
 .movie-detail-cont {
@@ -706,8 +714,6 @@ h3.title {
 	/* box-shadow: 0px 0px 5px 5px rgba(0,0,255,1); */
 }
 
-
-
 #writeBtn {
 	margin-right: 20px;
 }
@@ -736,6 +742,16 @@ h3.title {
 	color: #01738b !important
 }
 
+/* comment-list-no-result */
+
+.comment-list-no-result {
+	width: 1273px;
+	margin: 0;
+	padding: 20px 0;
+	font-size: 1.3333em;
+	border-width: 1px 0 1px 0
+}
+
 .comment-list {
 	display: flex;
 	text-align: left;
@@ -750,8 +766,16 @@ h3.title {
 	overflow: hidden;
 }
 
+.com-me {
+	background: #e8ffe8;
+}
+
 .user-id {
-	margin: 0 10px 10px 10px;
+	margin: 0 10px 10px 30px;
+}
+
+.user-id:after {
+	content: "***";
 }
 
 .movie-comment ul li h5 {
@@ -780,6 +804,17 @@ h3.title {
 	position: absolute;
 	margin-left: 910px;
 	margin-top: 15px;
+}
+
+button#alert {
+	cursor: pointer;
+	background:
+		url(../../images/movie/movie-detail/btn-alert.png)
+		no-repeat center;
+	height: 50px;
+	border: none;
+	margin-left: 85px;
+
 }
 
 #modify, #remove {
