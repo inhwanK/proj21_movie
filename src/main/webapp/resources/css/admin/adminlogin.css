@@ -73,7 +73,7 @@ section #loginFormArea {
 .title {
 	width: 451px; /* 고정 너비 */
 	height: 50px; /* 높이 */
-	background: #3e2789; /* 배경색 */
+	background: #376295; /* 배경색 */
 	margin-bottom: 30px;
 	padding: 0;
 	text-align: center;
@@ -98,7 +98,7 @@ section #loginFormArea {
 	margin-left: 1%;
 	font-size: 15px;
 	margin-top: 10px;
-	background-color: #3e2789;
+	background-color: #376295;
 	color: #fff;
 	font-weight: 500 bolder;
 }

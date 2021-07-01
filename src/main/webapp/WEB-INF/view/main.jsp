@@ -18,23 +18,33 @@
 		<c:if test = "${member != null }">
 		<a href="${contextPath}/main"> <img id="header_ci2" alt="브랜드 로고" src="${contextPath}/resources/images/ci_bw.png"></a>
 		</c:if>
-		<div>
 		
-		<!-- 로그인 하지 않은 상태 -->
-        <c:if test = "${member == null }">
-			<a href="${contextPath}/login">로그인</a> <a href="${contextPath}/join">회원가입</a>
-			<a href="${contextPath}/reserve">바로예매</a>
-		</c:if>
+		<div>
+		<!-- 관리자가 로그인하지 않은 상태 -->
+		<c:if test = "${admin == null }">
+			<!-- 로그인 하지 않은 상태 -->
+        	<c:if test = "${member == null }">
+				<a href="${contextPath}/login">로그인</a> <a href="${contextPath}/join">회원가입</a>
+				<a href="${contextPath}/reserve">바로예매</a>
+			</c:if>
 			
-		<!-- 로그인한 상태 -->
-        <c:if test="${ member != null }">
-            <div class="login_success_area">
-            	<span>안녕하세요. ${member.memName} 회원님!</span>
+			<!-- 로그인한 상태 -->
+        	<c:if test="${ member != null }">
+            	<div class="login_success_area">
+            		<span>안녕하세요. ${member.memName} 회원님!</span>
+            		<a href="${contextPath}/main.do">로그아웃</a>
+            		<a href="${contextPath}/reserve">바로예매</a>
+            	</div>
+        	</c:if>
+   		</c:if>
+   		<!-- 관리자가 로그인하지 않은 상태 -->
+		<c:if test = "${admin != null }">
+			<div class="admin_success_area">
+            	<span>안녕하세요. ${admin.admId} 회원님!</span>
             	<a href="${contextPath}/main.do">로그아웃</a>
-            	<a href="${contextPath}/reserve">바로예매</a>
+            	<a href="${contextPath}/movieManager">관리페이지</a>
             </div>
-        </c:if>
-   
+		</c:if>
 		</div>
 	</header>
 	<nav>

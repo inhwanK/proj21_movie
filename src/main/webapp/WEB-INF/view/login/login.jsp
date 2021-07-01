@@ -110,7 +110,6 @@ $(function(){
 							</td>
 						</tr>
 					</table>
-						
 						<label class="chbox"> 
 						<input type="checkbox" name="chek_box" value="id_check" id="coki">아이디 저장</label> 
 						<br> 

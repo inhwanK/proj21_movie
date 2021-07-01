@@ -70,6 +70,14 @@ header div a {
 	color: RGB(136, 136, 136);
 }
 
+.admin_success_area {
+	color: RGB(232, 221, 203);
+}
+
+.admin_success_area a {
+	color: RGB(136, 136, 136);
+}
+
 /* <nav> */
 nav {
 	margin: auto;

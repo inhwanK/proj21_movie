@@ -96,7 +96,7 @@ $(function(){
 					<table>
 						<tr>
 							<td>
-								<div class="title"><h1>로그인</h1></div>
+								<div class="title"><h1>관리자 로그인</h1></div>
 							</td>
 						</tr>
 						<tr>
@@ -116,9 +116,6 @@ $(function(){
 						<br> 
 						<input class="btn" type="submit" value="로그인" id="selButton" /> 
 						<br><br>
-					<div class="text_h">
-						<a href="${contextPath}/find_main">ID/PW 찾기</a> | <a href="${contextPath}/join">회원가입</a>
-					</div>
 				</div>
 			</fieldset>
 		</form>
