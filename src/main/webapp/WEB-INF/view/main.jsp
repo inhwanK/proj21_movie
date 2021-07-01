@@ -9,6 +9,27 @@
 	<title>메인화면</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/main.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script>
+		/* 검색 엔터키 입력시 영화페이지 검색으로 들어감 */
+		function searchMovie() {
+			var contextPath = "${contextPath}";
+			var movTitle = $("#search-box input[type=text]").val();
+				  
+			if (movTitle != '') {	// 검색 텍스트가 있으면 영화 페이지로 가서 검색 됨
+				window.location.href = contextPath + "/movielist?movTitle=" + movTitle;
+			}else if (movTitle == '') {		// 검색 텍스트가 없을시 경고 창 띄움(Alert창 디자인 sweetalert2)
+				Swal.fire({						
+				    icon: 'warning',
+				    title: '검색할 영화명을 입력해주세요.'
+			    }).then((result) => { 
+					if (result.isConfirmed) { 
+					} 
+				});
+			}
+		}
+	</script>
 </head>
 <body>
 	<header>
@@ -98,7 +119,7 @@
 			<div class="search">
 				<ul>
 					<li id="search-box">
-						<input type="text" placeholder="영화제목" style="color:white">
+						<input type="text" placeholder="영화제목" style="color:white" onkeyup="if(window.event.keyCode==13){searchMovie()}"/>
 					</li>
 					<li><i class="far fa-calendar-alt"></i><a href="#"><h2>상영시간표</h2></a></li>
 					<li><i class="fas fa-film"></i><a href="${contextPath}/movielist"><h2>박스오피스</h2></a></li>

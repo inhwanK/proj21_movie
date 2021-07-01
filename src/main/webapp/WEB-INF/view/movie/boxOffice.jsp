@@ -85,8 +85,10 @@
 												
 						list += "</li>";	
 					}
-					$(".box-office-list .movie-count b").append(count);
-					$(".box-office-list ul").append(list);				
+					$(".box-office-list ul").empty();
+					$(".box-office-list ul").append(list);
+					$(".box-office-list .movie-count b").empty();
+					$(".box-office-list .movie-count b").append(count);					
 				}
 			});			
 		/* // box-office-list (박스오피스 리스트) */
@@ -155,8 +157,6 @@
 				dataType	: "json",
 				data 		: movTitle,
 				success 	: function(json){
-					console.log(json);
-					console.log(json.length);
 					
 					if (movTitle != '') {  		// 검색시 영화데이터가 있을시			
 						var dataLength = json.length;
@@ -212,7 +212,7 @@
 		                    title: '검색할 영화명을 입력해주세요.'
 		                }).then((result) => { 
 							if (result.isConfirmed) { 
-								location.reload(); 
+								window.location.href = contextPath + "/movielist";
 							} 
 						});
 					}
@@ -230,6 +230,79 @@
 					console.log(xhr.responseJSON);
 				}
 			});
+		});
+		
+		// 메인에서 검색으로 영화 받아올때
+		var movTitle = "${movTitle}"; // 검색어, 제목.
+			console.log(movTitle);
+		
+		$.ajax({
+			url			: contextPath + "/api/moviesearch?movTitle=" + movTitle,
+			type		:"get",
+			contentType : "application/json; charset=utf-8",
+			dataType	: "json",
+			data 		: movTitle,
+			success 	: function(json){
+				var dataLength = json.length;
+				
+				if (dataLength != '') {  		// 검색시 영화데이터가 있을시			
+					if (dataLength >= 1) {
+						var list = "";
+						var count = "";
+							count += dataLength + "개";
+							
+						for (i = 0; i < dataLength; i++) {
+							list += "<li>";
+							/* movie-list-info */
+							list += "<div class='movie-list-info'>";
+							list += "<input id=hidden-movNo type='hidden' value='" + json[i].movNo + "'/>";
+							list += "<p id='rank'>" + (i+1) + "</p>";	// 검색된 순번대로
+							list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
+							list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
+								+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
+							list += "</div>";
+							/* // movie-list-info */
+							
+							/* title-area */
+							list += "<div class='title-area'>";
+							list += "<p class='movie-grade age-" + json[i].movGrade + "'</p>";	
+							list += "<p class='title' title='" + json[i].movTitle + "'>" + json[i].movTitle + "</p>";	
+							list += "</div>";
+							/* // title-area */
+							
+							/* rate-date */
+							list += "<div class='rate-date'>";
+							list += "<span class='rate'>평균 별점 : " + json[i].movAvgstar + "</span>";
+							list += "<span class='date'>개봉일 " + getFormatDate(json[i].movOpendate) + "</span>";																		
+							list += "</div>";
+							/* // rate-date */
+							
+							/* btn-util */
+							list += "<div class='btn-util'>";					
+							/* movie-reserve */
+							list +=	"<button id='reserve' title='영화 예매하기'>예매</button>"
+							/* // btn-util */
+													
+							list += "</li>";	
+						}
+						$(".box-office-list ul").empty();
+						$(".box-office-list ul").append(list);
+						$(".box-office-list .movie-count b").empty();
+						$(".box-office-list .movie-count b").append(count);			
+					}
+				}
+			},
+			error : function(){
+				console.log("error > ");
+			},
+			complete : function(xhr) {			
+				if (xhr.responseJSON == ''){		// 검색 했을때 검색된 영화가 없을 경우
+					$(".box-office-list ul").empty();
+					$(".box-office-list .movie-count b").empty();
+					$(".box-office-list .movie-count b").append(xhr.responseJSON.length + "개");
+					$('.box-office-list #noDataDiv').show();
+				}
+			}
 		});
 		
 		// 예매버튼 클릭시 영화 번호를 reserve 페이지에 전달
@@ -253,8 +326,8 @@
 	    	<div class="page-util">	
 				<div class="location">
 	    			<span></span>
-	    			<a href="" title="영화 페이지로 이동">영화</a>
-	    			<a href="" title="전체영화 페이지로 이동">전체영화</a>
+	    			<a href="${contextPath}/movielist" title="영화 페이지로 이동">영화</a>
+	    			<a href="${contextPath}/movielist" title="전체영화 페이지로 이동">전체영화</a>
 	    		</div>
 	    	</div>
 	    	
