@@ -20,13 +20,13 @@
 function openPop(){
 	var contextPath = "<%=request.getContextPath()%>";
     var popup = window.open(contextPath + "/find_ID", 
-    		'이메일찾기', 'width=500px,height=500px,scrollbars=no,menubar=no,resizable=no');
+    		'이메일찾기', 'width=264px,height=373px,scrollbars=no,menubar=no,resizable=no');
 }
 
 function openPop2(){
 	var contextPath = "<%=request.getContextPath()%>";
     var popup = window.open(contextPath + "/find_PW", 
-    		'패스워드찾기', 'width=500px,height=500px,scrollbars=no,menubar=no,resizable=no');
+    		'패스워드찾기', 'width=264px,height=333px,scrollbars=no,menubar=no,resizable=no');
 }
 </script>
 </head>
