@@ -42,18 +42,12 @@ section {
 	margin: auto;
 	width: 1273px;
 	text-align: center;
-	margin-left: 25%;
 	margin-right: auto;
-	margin-top: 10%;
-	margin-bottom: 5%;
 }
 
 /* section 이메일찾기*/
 .findmain {
-	margin-top: 15%;
-	margin-left: 20%;
-	margin-right: 20%;
-	margin-bottom: 20%;
+
 }
 
 .findpw {
