@@ -190,3 +190,5 @@ select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_a
 where mov_enddate > date_add(now(), interval -1 day); 
 
 select * from movie;
+
+select * from showinfo;
