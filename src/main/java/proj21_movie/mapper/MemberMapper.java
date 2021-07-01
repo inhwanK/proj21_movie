@@ -26,4 +26,6 @@ public interface MemberMapper {
 	public int idCheck(String memEmail);
 	// 아이디 찾기
 	public Member findId(Member member);
+	// 비밀번호 찾기
+//	public int update_pw(Member member) throws Exception;
 }

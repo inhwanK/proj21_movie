@@ -1,6 +1,10 @@
 package proj21_movie.service.impl;
 
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Service;
 
 import org.apache.ibatis.logging.Log;
