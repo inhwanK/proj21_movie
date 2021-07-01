@@ -62,11 +62,46 @@
 	
 	<update id="updateMovie">
 		update movie 
-		set mov_title = #{movTitle}, mov_grade = #{movGrade}, mov_genre = #{movGenre} 
+		<trim prefix="set" prefixOverrides="," suffixOverrides=",">
+			<if test= "movTitle != null">
+				, mov_title = #{movTitle}
+			</if>
+			<if test= "movGrade != null">
+				, mov_grade = #{movGrade}
+			</if>
+			<if test= "movGenre != null">
+				, mov_genre = #{movGenre} 
+			</if>
+			<if test= "movRuntime != null">
+				, mov_runtime = #{movRuntime}
+			</if>
+			<if test= "movDirector != null">
+				, mov_director = #{movDirector}
+			</if>
+			<if test= "movActor != null">
+				, mov_actor = #{movActor}
+			</if>
+			<if test= "movDetail != null">
+				, mov_detail = #{movDetail}
+			</if>
+			<if test= "movOpendate != null">
+				, mov_opendate = #{movOpendate}
+			</if>
+			<if test= "movEnddate != null">
+				, mov_enddate = #{movEnddate}
+			</if>
+			<if test= "movAvgstar != null">
+				, mov_avgstar = #{movAvgstar}
+			</if>
+			<if test= "movPoster != null">
+				, mov_poster = #{movPoster},
+			</if>
+		</trim>
+		<!-- set mov_title = #{movTitle}, mov_grade = #{movGrade}, mov_genre = #{movGenre} 
 						, mov_runtime = #{movRuntime}, mov_director = #{movDirector} 
 						, mov_actor = #{movActor}, mov_detail = #{movDetail} 
 						, mov_opendate = #{movOpendate}, mov_enddate = #{movEnddate} 
-						, mov_avgstar = #{movAvgstar}, mov_poster = #{movPoster} 
+						, mov_avgstar = #{movAvgstar}, mov_poster = #{movPoster}  -->
 		where mov_no = #{movNo}
 	</update>
 	

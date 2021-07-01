@@ -24,8 +24,12 @@
 						sCont += "<td id='no'>" + json[i].movNo + "</td>";
 						sCont += "<td>" + json[i].movTitle + "</td>";
 						sCont += "<td>" + json[i].movGenre + "</td>";
-						sCont += "<td>" + json[i].movGrade + "</td>";
-						sCont += "<td>" + json[i].movRuntime + "</td>";
+						if (json[i].movGrade == 0) {
+							sCont += "<td>전체 관람가</td>";
+						} else {
+							sCont += "<td>" + json[i].movGrade + "</td>";
+						}
+						sCont += "<td>" + json[i].movRuntime + " 분</td>";
 						sCont += "<td>" + json[i].movOpendate + "</td>";
 						sCont += "<td>" + json[i].movEnddate + "</td>";
 						sCont += "<td><button id='modify' class='btn btn-primary'>수정</button></td>";

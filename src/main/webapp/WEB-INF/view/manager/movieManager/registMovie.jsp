@@ -47,7 +47,7 @@
                   <div class="form-group">
                      <label>심의등급</label>
                       <select id="grade" class="form-control">
-                     	<option selected disabled hidden="">등급 선택</option>
+                     	<option selected disabled hidden="" value="">등급 선택</option>
                      	<option value="0">전체 관람가</option>
                      	<option value="12">12세 관람가</option>
                      	<option value="15">15세 관람가</option>
@@ -95,6 +95,16 @@ $(document).ready(function(){
 	var contextPath = "${contextPath}";
 	
 	$("#uploadBtn").on("click", function(e){
+		
+		if ($('#title').val() == "" || $('#genre').val() == "" 
+				|| $('#grade').val() == null || $('#runtime').val() == ""
+				|| $('#director').val() == "" || $('#actor').val() == ""
+				|| $("#detail").val() == "" || $('#opendate').val() == ""
+				|| $('#enddate').val() == "" || document.getElementById("uploadFile").files[0] == null){
+			alert("모두 입력해 주세요.");
+			return;
+		}
+		
 		var formData = new FormData();
 		var inputFile = $("input[name='uploadFile']");
 		var files = inputFile[0].files;

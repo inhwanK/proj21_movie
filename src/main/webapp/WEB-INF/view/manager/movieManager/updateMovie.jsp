@@ -39,6 +39,14 @@
 		
 		$('#modify').on("click", function(e){
 			e.preventDefault();
+			
+			var uploadFileName = document.getElementById("uploadFile").files[0];
+			if (uploadFileName == null) {
+				uploadFileName = null;
+			} else {
+				uploadFileName = document.getElementById("uploadFile").files[0].name;
+			}
+			
 			var data = { 
 					movNo: $('#no').val(),
 					movTitle: $('#title').val(),
@@ -50,7 +58,7 @@
 					movDetail: $('#detail').val(),
 					movOpendate: $('#opendate').val(),
 					movEnddate: $('#enddate').val(),
-					movPoster: document.getElementById("uploadFile").files[0].name 
+					movPoster: uploadFileName 
 					};
 			alert("data > " + data.movTitle);
 			
