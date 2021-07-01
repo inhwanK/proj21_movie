@@ -9,8 +9,15 @@ import org.springframework.web.servlet.ModelAndView;
 public class MovieController {
 	
 	@GetMapping("/movielist")
-	public String movieList() {
-		return "movie/boxOffice";
+	public ModelAndView movieList(@RequestParam(defaultValue = "") String movTitle) {
+		ModelAndView mav = new ModelAndView("movie/boxOffice", "movTitle", movTitle);
+		return mav;
+	}
+	
+	@GetMapping("/searchMovieList")
+	public ModelAndView searchMovieList(@RequestParam(defaultValue = "") String movTitle) {
+		ModelAndView mav = new ModelAndView("movie/searchMovie", "movTitle", movTitle);
+		return mav;
 	}
 	
 	@GetMapping("/movie")

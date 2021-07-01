@@ -41,58 +41,6 @@
 			return newDateForm; 
 		}
 		
-		/* box-office-list (박스오피스 리스트) */
-		var contextPath = "${contextPath}";
-		$.get(contextPath + "/api/movies/boxOffice",
-			function(json) {
-				var dataLength = json.length;
-				if (dataLength >= 1) {
-					var list = "";
-					var count = "";
-						count += dataLength + "개";
-					
-					for (i = 0; i < dataLength; i++) {		// 오늘 날짜 or 이전 (상영중)
-						list += "<li>";
-						/* movie-list-info */
-						list += "<div class='movie-list-info'>";
-						list += "<input id=hidden-movNo type='hidden' value='" + json[i].movNo + "'/>";
-						list += "<p id='rank'>" + (i+1) + "</p>";		// 검색된 순번대로
-						list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
-						list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
-							+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
-						list += "</div>";
-						/* // movie-list-info */
-						
-						/* title-area */
-						list += "<div class='title-area'>";
-						list += "<p class='movie-grade age-" + json[i].movGrade + "'</p>";	
-						list += "<p class='title' title='" + json[i].movTitle + "'>" + json[i].movTitle + "</p>";	
-						list += "</div>";
-						/* // title-area */
-						
-						/* rate-date */
-						list += "<div class='rate-date'>";
-						list += "<span class='rate'>평균 별점 : " + json[i].movAvgstar + "</span>";
-						list += "<span class='date'>개봉일 " + getFormatDate(json[i].movOpendate) + "</span>";																		
-						list += "</div>";
-						/* // rate-date */
-						
-						/* btn-util */
-						list += "<div class='btn-util'>";					
-						/* movie-reserve */
-						list +=	"<button id='reserve' title='영화 예매하기'>예매</button>"
-						/* // btn-util */
-												
-						list += "</li>";	
-					}
-					$(".box-office-list ul").empty();
-					$(".box-office-list ul").append(list);
-					$(".box-office-list .movie-count b").empty();
-					$(".box-office-list .movie-count b").append(count);					
-				}
-			});			
-		/* // box-office-list (박스오피스 리스트) */
-		
 		/* commingsoon-list (상영예정작 리스트) */
 		var contextPath = "${contextPath}";
 		$.get(contextPath + "/api/movies/commingSoon",

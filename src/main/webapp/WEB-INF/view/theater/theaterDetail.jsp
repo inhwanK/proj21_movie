@@ -217,7 +217,7 @@
 							var resultLength = result.length;
 							if (dataLength >= 1) {
 								var sCont = "";
-
+								var sCont2 = "";
 								for (i = 0; i < dataLength; i++) {
 									
 									sCont += "<div class='theater-list'>";
