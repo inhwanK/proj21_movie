@@ -12,7 +12,7 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-	<%@include file ="../login/header.jsp" %>
+	<%@include file="/WEB-INF/view/header.jsp"%>
 	<section>
 		<div class="con_main">
 			<img id="con_img2" alt="축하이미지" src="${contextPath}/resources/images/join/icon-movie.png">
@@ -23,6 +23,6 @@
 			</div>
 		</div>
 	</section>
-	<%@include file ="../login/footer.jsp" %>
+	<%@include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>

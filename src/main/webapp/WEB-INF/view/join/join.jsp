@@ -14,7 +14,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<%@include file ="../join/header.jsp" %>
+	<%@include file="/WEB-INF/view/header.jsp"%>
 	<section id="joinFormArea">
 		<br>
 		<h1 class="join_title">회원가입</h1>
@@ -58,6 +58,6 @@
 		</ul>
 		<br>
 	</section>
-	<%@include file ="../join/footer.jsp" %>
+	<%@include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>
