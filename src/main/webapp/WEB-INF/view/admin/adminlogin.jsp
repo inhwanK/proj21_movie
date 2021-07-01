@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-<link rel="stylesheet" href="${contextPath}/resources/css/login/login.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/admin/adminlogin.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 <script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -21,7 +21,7 @@ $(function(){
 	<!-- 회원 로그인 -->
     $(".btn").click(function(){
     	var contextPath = "<%=request.getContextPath()%>";
-        $("#login_form").attr("action", contextPath + "/login");
+        $("#login_form").attr("action", contextPath + "/adminlogin");
         $("#login_form").submit();
     });
     
@@ -29,27 +29,27 @@ $(function(){
     <!-- 아이디 저장 -->
     $(document).ready(function(){
         // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
-        var userInputId = getCookie("memEmail");
-        $("input[name='memEmail']").val(userInputId); 
+        var userInputId = getCookie("admId");
+        $("input[name='admId']").val(userInputId); 
          
-        if($("input[name='memEmail']").val() != ""){ // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
+        if($("input[name='admId']").val() != ""){ // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
             $("#coki").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
         }
          
         $("#coki").change(function(){ // 체크박스에 변화가 있다면,
             if($("#coki").is(":checked")){ // ID 저장하기 체크했을 때,
-                var userInputId = $("input[name='memEmail']").val();
-                setCookie("memEmail", userInputId, 7); // 7일 동안 쿠키 보관
+                var userInputId = $("input[name='admId']").val();
+                setCookie("admId", userInputId, 7); // 7일 동안 쿠키 보관
             }else{ // ID 저장하기 체크 해제 시,
-                deleteCookie("memEmail");
+                deleteCookie("admId");
             }
         });
          
         // ID 저장하기를 체크한 상태에서 ID를 입력하는 경우, 이럴 때도 쿠키 저장.
-        $("input[name='memEmail']").keyup(function(){ // ID 입력 칸에 ID를 입력할 때,
+        $("input[name='admId']").keyup(function(){ // ID 입력 칸에 ID를 입력할 때,
             if($("#coki").is(":checked")){ // ID 저장하기를 체크한 상태라면,
-                var userInputId = $("input[name='memEmail']").val();
-                setCookie("memEmail", userInputId, 7); // 7일 동안 쿠키 보관
+                var userInputId = $("input[name='admId']").val();
+                setCookie("admId", userInputId, 7); // 7일 동안 쿠키 보관
             }
         });
     });
@@ -101,12 +101,12 @@ $(function(){
 						</tr>
 						<tr>
 							<td>
-								<input class="id_input" type="text" name="memEmail" placeholder="아이디" />
+								<input class="id_input" type="text" name="admId" placeholder="아이디" />
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<input class="pw_iput" type="password" name="memPasswd" placeholder="비밀번호" />
+								<input class="pw_iput" type="password" name="admPasswd" placeholder="비밀번호" />
 							</td>
 						</tr>
 					</table>
@@ -117,7 +117,7 @@ $(function(){
 						<input class="btn" type="submit" value="로그인" id="selButton" /> 
 						<br><br>
 					<div class="text_h">
-						<a href="${contextPath}/find_main">ID/PW 찾기</a> | <a href="${contextPath}/join">회원가입</a> | <a href="${contextPath}/adminlogin">관리자 로그인</a>
+						<a href="${contextPath}/find_main">ID/PW 찾기</a> | <a href="${contextPath}/join">회원가입</a>
 					</div>
 				</div>
 			</fieldset>
