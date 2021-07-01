@@ -31,12 +31,20 @@ public class InquiryServiceImpl implements InquiryService {
 		log.debug("service - getInquiryByUser() > " + user);
 		return list;
 	}
+	
 
 	@Override
 	public Inquiry getInquiryByNo(int inqNo) {
 		log.debug("service - getInquiryByNo() > " + inqNo);
 		Inquiry inquiry = mapper.selectInquiryByNo(inqNo);
 		return inquiry;
+	}
+	
+	@Override
+	public List<Inquiry> getInquiryByAnsStatus(int inqStatus) {
+		log.debug("service - getInquiryByAnsStatus() > " + inqStatus);
+		List<Inquiry> listInquiry = mapper.selectInquiryByAnsStatus(inqStatus);
+		return listInquiry;
 	}
 	
 	@Override
@@ -56,6 +64,8 @@ public class InquiryServiceImpl implements InquiryService {
 		log.debug("service - removeInquiry() > " + inqNo);
 		return mapper.deleteInquiry(inqNo);
 	}
+
+	
 
 	
 

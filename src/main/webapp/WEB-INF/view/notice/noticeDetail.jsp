@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항</title>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
@@ -28,9 +28,9 @@
 		}).done(function(json) {
 			var dateForm = getFormatDate(json.notDate);
 
-			$("p.tit[title = '제목']").append(json.notTitle);
-			$("span.txt[title = '등록일']").append(dateForm);
-			$("div.cont[title = '내용']").append(json.notDetail);
+			$("p#title").append(json.notTitle);
+			$("span#regdate").append(dateForm);
+			$("div#content").append(json.notDetail);
 		});
 
 	});
@@ -61,16 +61,19 @@
 				<div class="table-wrap">
 					<div class="board-view">
 						<div class="tit-area">
-							<p class="tit" title="제목"></p>
+							<p class="tit" id="title"></p>
 						</div>
 
 						<div class="info">
 							<p>
-								<span class="tit">등록일</span> <span class="txt" title="등록일"></span>
+								<span class="tit">등록일</span> <span class="txt" id="regdate"></span>
+								<span class="txt" style="float:right;" id="attachments">첨부 파일  : </span>
 							</p>
+							
+							
 						</div>
 
-						<div class="cont" title="내용"></div>
+						<div class="cont" id="content"></div>
 					</div>
 				</div>
 

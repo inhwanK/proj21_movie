@@ -46,10 +46,8 @@
 		});
 		
 		$(document).ready(function(){
+			
 			$(this).on('click', '[id=modify]', function(){
-				//var tr = $(this).parent().parent();
-				//var td = tr.children();
-				//var notNo = td.eq(0).text();
 				
 				var td = $(this).parent().prevUntil();
 				var notNo = td.last().text(); 
@@ -105,9 +103,11 @@
   <div id="page-content-wrapper">
     <div class="container-fluid">
       <h1 class="text-center">공지사항</h1>
-      <div style="margin:0 30px 50px 0;">
-      	<button class="btn btn-primary" id="regist" style="float:right;">등록</button>
+      
+      <div style="margin:0 20px;">
+      	<button class="btn btn-primary" id="regist" class="topBtn" style="float:right; margin:0 0 10px 0;">등록</button>
       </div>
+      
       <table class="table table-hover table-striped text-center" style="border: 1px solid;">
       	<thead>
       		<tr>

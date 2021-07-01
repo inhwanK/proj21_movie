@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>1:1문의</title>
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/notice/newlayout.css">
 <link rel="stylesheet"
@@ -40,7 +40,7 @@
 
 				// 필수항목 기입하지 않았을 때, 처리
 				if (inquiry.inqUser == "") {
-					alert("이름을 입력하세요.");
+					alert("아이디을 입력하세요.");
 				} else if (inquiry.inqTitle == "") {
 					alert("제목을 입력하세요.")
 				} else if (inquiry.inqDetail == "") {
@@ -94,30 +94,8 @@
 </head>
 <body>
 
-	<%-- <header>
-		<a href="${contextPath}/main"><img id="header_ci" alt="브랜드 로고"
-			src="${contextPath}/resources/images/ci.png"></a>
-		<div>
-			<a href="${contextPath}/login">로그인</a> <a href="#">회원가입</a> <a
-				href="#">바로예매</a>
-		</div>
-
-	</header>
-
-	<nav>
-		<ul>
-			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
-			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
-			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
-			<li class="nav"><a href="${contextPath}/inquiry">이벤트</a></li>
-			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
-			<li id="mypagebtn"><a href="${contextPath}/mypage"><i
-					class="far fa-user"></i></a></li>
-		</ul>
-	</nav> --%>
 
 	<%@include file="/WEB-INF/view/header.jsp"%>
-
 	<section>
 		<div id="title-wrap">
 			<div class="title">
@@ -131,12 +109,6 @@
 
 		<div id="contents" class="">
 
-			<!-- <div class="mypage-infomation mb30">
-
-					<div class="btn-group right">
-						<a href="#" class="button purple" id="myQnaBtn" title="나의 문의내역 페이지로 이동">나의 문의내역</a>btn-layer-open
-					</div>
-				</div>  -->
 
 			<p id="essential">* 필수</p>
 
@@ -152,10 +124,13 @@
 					<tbody>
 
 						<tr>
-							<th scope="row"><label for="name">이름</label> <em
-								class="font-orange">*</em></th>
-							<td><input type="text" id="name" name="inqUser"
-								class="input-text w150px" value="" maxlength="15"></td>
+							<th scope="row">
+								<label for="name">ID</label>
+								<em	class="font-orange">*</em>
+							</th>
+							<td>
+								<input type="text" id="name" name="inqUser"	class="input-text w150px" value="${member.memEmail}"readonly="readonly">
+							</td>
 						</tr>
 
 
@@ -217,15 +192,6 @@
 		</div>
 	</section>
 	<%@include file="/WEB-INF/view/footer.jsp"%>
-	<%-- <footer>
-		<div id="content">
-			<img id="footer_ci" alt="브랜드 로고"
-				src="${contextPath}/resources/images/ci.png">
-			<div id="textarea">
-				<p>COPYRIGHT © BoxMovie, Inc. All rights reserved</p>
-				<p>대구광역시 서구 서대구로 7길2 (내당동 245-4번지 2층) ARS 053-555-1333</p>
-			</div>
-		</div>
-	</footer> --%>
+
 </body>
 </html>

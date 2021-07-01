@@ -1,14 +1,11 @@
 select user(), database();
 
-
-
-
 SELECT * 
 FROM notice
 order by not_no desc limit 10;
 
 insert into notice(not_title,not_detail,not_date) values('테스트 공지','테스트 공지 내용',now());
-insert into notice(not_title,not_detail,not_date) values ('공지테스트 10개이상', '공지테스트 10 개 이상 내용', now());
+insert into notice(not_title,not_detail,not_date) values ('물의를 일으켜 죄송합니다.', '고개숙여 사과 드리지 않겠습니다.', now());
 
 update notice 
 set not_title = 'insertnotice 공지 수정' , not_detail = 'inserttest 글 세부내용 수정' , not_file = 'inserttest 글 파일 경로'
@@ -103,3 +100,9 @@ where  not_title like concat('%','이상','%')
 order by not_no desc;
 
 select * from inquiry;
+show tables;
+
+select * from `member`;
+
+select * from inquiry;
+insert into

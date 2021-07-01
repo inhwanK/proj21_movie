@@ -29,71 +29,72 @@
 		console.log(inqNo);
 
 		$.ajax({
-					url : contextPath + "/api/inquiry?inqNo=" + inqNo,
-					type : "get",
-					contentType : "application/json; charset=utf-8",
-					dataType : "json",
-					success : function(json) {
+			url : contextPath + "/api/inquiry?inqNo=" + inqNo,
+			type : "get",
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			success : function(json) {
 						
-						console.log(json.inqFile);
-						// 파일 존재 판단 후, 그에 따른 처리.
-						if(json.inqFile !=null){
-							var divFile = "";
+				console.log(json.inqFile);
+				// 파일 존재 판단 후, 그에 따른 처리.
+				if(json.inqFile !=null){
+					var divFile = "";
 							
-							divFile += "<div class=\"form-group\">";
-							divFile += "<label>파일</label>";
-							divFile += "<a href=\"/proj21_movie/resources/attachments/inquiry/"+json.inqFile +"\" class=\"form-control\">"
-									+ json.inqFile + "</a>";
-							divFile += "</div>";
+					divFile += "<div class=\"form-group\">";
+					divFile += "<label>파일</label>";
+					divFile += "<a href=\"/proj21_movie/resources/attachments/inquiry/"+json.inqFile +"\" class=\"form-control\">"
+							+ json.inqFile + "</a>";
+					divFile += "</div>";
 							
-							$("#content").after(divFile);
-						}
+					$("#content").after(divFile);
+				}
 
-						$("#no").attr('value', json.inqNo);
-						$("#regdate").attr('value', json.inqDate);
-						$("#title").attr('value', json.inqTitle);
-						$("#user").attr('value', json.inqUser);
-						$("#content").empty();
-						$("#content").append(json.inqDetail);
+				$("#no").attr('value', json.inqNo);
+				$("#regdate").attr('value', json.inqDate);
+				$("#title").attr('value', json.inqTitle);
+				$("#user").attr('value', json.inqUser);
+				$("#content").empty();
+				$("#content").append(json.inqDetail);
 
-						
+				$("#answerCont").empty();
+				$("#answerCont").append(json.inqAnswer);
 
-						$("#answerCont").empty();
-						$("#answerCont").append(json.inqAnswer);
-
-					},
-					error : function() {
-						alert("뭔가 잘못되긴 했어용");
-					}
-				});
+			},
+			error : function() {
+				alert("뭔가 잘못되긴 했어용");
+			}
+		});
 
 		// 답변 버튼
 		$("#answer").on('click',function() {
+			if($("#answerCont").val() == ""){
+				alert("답변을 입력하세요.");
+				return;
+			}
 			
-				var conf = confirm("답변을 등록하시겠습니까?");
-				if (conf) {
-					var data = {
-						inqNo : $("#no").val(),
-						inqAnswer : $("#answerCont").val()
-					}
-					$.ajax({
-						url : contextPath + "/api/inquiry",
-						type : "patch",
-						dataType : "json",
-						data : JSON.stringify(data),
-						contentType : "application/json; charset=utf-8",
-						success : function(json) {
-							alert("답변이 등록되었습니다.");
-							window.location.href = contextPath + "/inquiryManager";
-						},
-						error : function() {
-							alert("뭔가 잘못된 것이 분명합니다.");
-						}
-					});
-
+			
+			var conf = confirm("답변을 등록하시겠습니까?");
+			if (conf) {
+				var data = {
+					inqNo : $("#no").val(),
+					inqAnswer : $("#answerCont").val()
 				}
-
-			}); //end of answer
+				$.ajax({
+					url : contextPath + "/api/inquiry",
+					type : "patch",
+					dataType : "json",
+					data : JSON.stringify(data),
+					contentType : "application/json; charset=utf-8",
+					success : function(json) {
+						alert("답변이 등록되었습니다.");
+						window.location.href = contextPath + "/inquiryManager";
+					},
+					error : function() {
+						alert("뭔가 잘못된 것이 분명합니다.");
+					}
+				});
+			}
+		}); //end of answer
 
 		// 취소 버튼
 		$("#cancel").on('click', function() {
