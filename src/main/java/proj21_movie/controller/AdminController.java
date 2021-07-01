@@ -21,7 +21,7 @@ public class AdminController {
 	// 관리자 페이지는 MovieManagerController 로 연결되어있으니 로그인시 페이지 넘어가는것만 구현
 	
     //view에서 login_check.do를 맵핑하면 이 메소드가 호출된다. 
-    @RequestMapping("login")
+//    @RequestMapping("login")
     public ModelAndView login_check(Admin admin, HttpSession session, ModelAndView mav) {
     	
 		System.out.println("login 메서드 진입");
