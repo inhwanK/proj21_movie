@@ -1,8 +1,5 @@
 select user(), database();
 
-
-
-
 SELECT * 
 FROM notice
 order by not_no desc limit 10;
@@ -106,3 +103,6 @@ select * from inquiry;
 show tables;
 
 select * from `member`;
+
+select * from inquiry;
+insert into

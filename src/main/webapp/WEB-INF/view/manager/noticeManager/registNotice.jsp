@@ -24,8 +24,18 @@
 		
 		// 등록 버튼
 		$("#regist").on('click', function(){
+			
+			if($("#title").val() == ""){
+				alert("제목을 입력하세요.");
+				return;
+			}else if($("#content").val() == ""){
+				alert("내용을 입력하세요.");
+				return;
+			}
+			
 			var conf = confirm("등록하시겠습니까?");
-				if(conf){
+			if(conf){
+					
 				if($("#uploadFile").val()!=null){
 					var filePath = $("#uploadFile").val().split('\\');
 					fileName = filePath[filePath.length - 1];
@@ -37,7 +47,6 @@
 					notFile: fileName 
 				}
 				
-				console.log();
 				$.ajax({
 					url:contextPath+"/api/notice",
 					type:"post",
@@ -45,8 +54,8 @@
 					data:JSON.stringify(data),
 					contentType:"application/json; charset=utf-8",
 					success: function(json){
-							alert("등록이 완료되었습니다.");
-							window.location.href = contextPath + "/noticeManager";
+						alert("등록이 완료되었습니다.");
+						window.location.href = contextPath + "/noticeManager";
 					},
 					error: function(){
 						alert("뭔가 잘못된 것이 분명합니다.");	
@@ -90,10 +99,9 @@
 <div id="page-wrapper">
   <!-- 본문 -->
   <div class="main">
-  	<h1 class="text-center">영화관리</h1>
+  	<h1 class="text-center">공지사항</h1>
          <div class="col-md-6 col-sm-12" id="contents">
             <div class="form">
-               <form:form>
                	  
                   <div class="form-group">
                      <label>제목</label>
@@ -108,8 +116,8 @@
 					<label>파일 첨부</label>
 					<input type="file" id="uploadFile" name="uploadFile" class="form-control">
 				  </div>
-                 
-               </form:form>
+				  
+				  
                <div id="btn">
                   <button id="regist" class="btn btn-primary">등록</button>
                   <button id="cancel" class="btn btn-primary">취소</button>
