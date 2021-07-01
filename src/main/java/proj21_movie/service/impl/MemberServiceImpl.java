@@ -2,6 +2,7 @@ package proj21_movie.service.impl;
 
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -78,6 +79,12 @@ public class MemberServiceImpl implements MemberService {
 	public Member findId(Member member) {
 		log.debug("service - findId() > " + member);
 		return mapper.findId(member);
+	}
+
+	// 비번찾기(비로그인)
+	@Override
+	public void pass_change(Map<String, Object> map, Member member) throws Exception {
+		mapper.pass_change(map, member);
 	}
 
 }

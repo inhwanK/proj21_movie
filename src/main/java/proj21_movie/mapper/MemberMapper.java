@@ -1,6 +1,8 @@
 package proj21_movie.mapper;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Component;
 import proj21_movie.dto.Member;
 
@@ -26,6 +28,7 @@ public interface MemberMapper {
 	public int idCheck(String memEmail);
 	// 아이디 찾기
 	public Member findId(Member member);
-	// 비밀번호 찾기
-//	public int update_pw(Member member) throws Exception;
+	// 비밀번호 찾기(비로그인)
+	public void pass_change(Map<String, Object> map, Member member)throws Exception;
+	
 }

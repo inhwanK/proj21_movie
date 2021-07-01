@@ -1,6 +1,7 @@
 package proj21_movie.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,6 +30,6 @@ public interface MemberService {
 	public int idCheck(String memEmail) throws Exception;
 	// 아이디 찾기
 	public Member findId(Member member);
-	// 비밀번호 찾기
-//	public void find_pw(HttpServletResponse response, Member member) throws Exception;
+	// 비밀번호 찾기(비로그인)
+	public void pass_change(Map<String, Object> map, Member member) throws Exception;
 }

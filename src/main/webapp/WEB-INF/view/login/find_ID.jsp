@@ -25,14 +25,17 @@
 								</tr>
 								<tr>
 									<td>
-										<h2>이메일 찾기</h2> <!-- 이름과 전화번호가 일치하지 않을 때--> <c:if
-											test="${check == 1}">
+										<h2>이메일 찾기</h2> 
+										<!-- 이름과 전화번호가 일치하지 않을 때--> 
+										<c:if test="${check == 1}">
 											<script>
 												opener.document.find_ID.memName.value = "";
 												opener.document.find_ID.memPhone.value = "";
 											</script>
 											<h4>일치하는 정보가 존재하지 않습니다.</h4>
-										</c:if> <!-- 이름과 전화번호가 일치할 때 --> <c:if test="${check == 0 }">
+										</c:if> 
+										<!-- 이름과 전화번호가 일치할 때 --> 
+										<c:if test="${check == 0 }">
 											<h4>이메일은 ${memEmail}입니다.</h4>
 										</c:if>
 									</td>

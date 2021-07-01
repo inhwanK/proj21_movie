@@ -72,6 +72,14 @@
   	   and mem_phone = #{memPhone}
   	</select>
   	
+  	<!-- 비밀번호 찾기(비로그인) -->
+  	<update id = "pass_change" parameterType="hashMap">
+    	update member 
+    	   set mem_passwd = password(#{memPasswd})
+    	 where mem_email = #{memEmail}
+    </update>
+  	
+  	
 <!--    비밀번호 찾기 
  	<update id="update_pw" parameterType="Member">
 		update member 
