@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+/* Fontawesome 4.7 */
+@import
+	url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@900&display=swap')
+	;
+
+@font-face {
+	font-family: 'IBMPlexSansKR-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-family: 'IBMPlexSansKR-Regular', sans-serif;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	margin-right: 17px; /* nav 길이조절 */
+	overflow: hidden; /* 스크롤 x */
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:active, a:focus, a:hover {
+	text-decoration: underline;
+}
+
+ol, ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* section */
+section {
+	margin: 10px auto;
+	width: 1273px;
+	height: 450px;
+	text-align: center;
+	margin-left:38%;
+	margin-right: auto;
+}
+
+/* section 로그인 */
+section #loginFormArea {
+	text-align: center;
+	column-width: 15em;
+	background: #ffffff;
+	padding: 2em 12em;
+	column-width: 15em;
+}
+
+.id_input {
+	height: 30px;
+	width: 250px;
+	text-align: center;
+	font-size: 15px;
+}
+
+.pw_iput {
+	height: 30px;
+	width: 250px;
+	text-align: center;
+	font-size: 15px;
+}
+
+.title {
+	width: 451px; /* 고정 너비 */
+	height: 50px; /* 높이 */
+	background: #3e2789; /* 배경색 */
+	margin-bottom: 30px;
+	padding: 0;
+	text-align: center;
+	line-height: 50px;
+	color: #fff;
+	margin-left: -3px;
+}
+
+.fm_box {
+	border: 1px solid RGB(3, 22, 52);
+	height: 330px;
+	width: 450px;
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 100px;
+}
+
+.btn {
+	height: 35px;
+	width: 258px;
+	text-align: center;
+	margin-left: 1%;
+	font-size: 15px;
+	margin-top: 10px;
+	background-color: #3e2789;
+	color: #fff;
+	font-weight: 500 bolder;
+}
+
+/* 로그인 실패시 경고글 */
+.login_warn {
+	margin-top: 30px;
+	text-align: center;
+	color: red;
+}
+
+a {
+	text-decoration: none;
+	color: #4b4b4b;
+}
+
+.text_h:link, .text_h:visited, .text_h:active, .text_h:hover {
+	text-decoration: none;
+	color: #000;
+}
+
+.chbox {
+	float: left;
+	margin-left: 22%;
+	color: #4b4b4b;
+}
+
+fieldset {
+	border: 2px solid #ffffff;
+	margin: 0;
+}
+
+/* 로그인 실패시 경고글 */
+.login_warn {
+	margin-top: 30px;
+	text-align: center;
+	color: #d92742;
+	font-weight: bolder;
+}

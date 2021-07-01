@@ -45,17 +45,6 @@ public class LoginController {
 		return "login/loginfail";
 	}
 
-	// 로그인(성공), 쿠키(시도중)
-    @GetMapping
-    public String form(LoginCommand loginCommand, @CookieValue(value="REMEMBER", required = false) Cookie rCookie) {
-    	if (rCookie != null) {
-            loginCommand.setMemEmail(rCookie.getValue());
-            loginCommand.setRememEmail(true);
-        }
-
-        return "/login/login";
-    }
-    
 	// 로그인(성공)
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String loginPOST(LoginCommand loginCommand, HttpServletRequest request, Member member, 
@@ -73,20 +62,8 @@ public class LoginController {
 			rttr.addFlashAttribute("result", result);
 			return "redirect:/login";
 		}   
-        
         //로그인 성공
 		session.setAttribute("member", mem); // 일치하는 아이디, 비밀번호를 입력한 경우 (로그인 성공)
-		
-		//쿠키(제발좀)
-        Cookie rememberCookie = new Cookie("REMEMBER", loginCommand.getMemEmail());
-        rememberCookie.setPath("/");
-        if (loginCommand.isRememEmail()) {
-            rememberCookie.setMaxAge(60 * 60 * 24 * 7);
-        }else {
-            rememberCookie.setMaxAge(0);
-        }
-        response.addCookie(rememberCookie);
-		
 		
 		return "redirect:/loginsuccess";
 	}
