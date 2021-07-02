@@ -36,13 +36,13 @@
 	
 	<section>
 		<div class="container">
-	    	<div class="page-util">	
+	    	<!-- <div class="page-util">	
 				<div class="location">
 	    			<span></span>
 	    			<a href="" title="극장 페이지로 이동">극장</a>
 	    			<a href="" title="전체극장 페이지로 이동">전체극장</a>
 	    		</div>
-	    	</div>
+	    	</div> -->
 	    	
 	    	<div class="contents">
 	    		<div class="inner-wrap">

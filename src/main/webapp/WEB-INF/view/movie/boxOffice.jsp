@@ -72,7 +72,7 @@
 						/* movie-list-info */
 						list += "<div class='movie-list-info'>";
 						list += "<input id=hidden-movNo type='hidden' value='" + json[i].movNo + "'/>";
-						list += "<p id='rank'>" + (i+1) + "</p>";		// 검색된 순번대로
+						list += "<p id='rank' style ='display:none'>" + (i+1) + "</p>";		// 검색된 순번대로
 						list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
 						list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
 							+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
@@ -186,7 +186,7 @@
 								/* movie-list-info */
 								list += "<div class='movie-list-info'>";
 								list += "<input id=hidden-movNo type='hidden' value='" + json[i].movNo + "'/>";
-								list += "<p id='rank'>" + (i+1) + "</p>";	// 검색된 순번대로
+								list += "<p id='rank' style ='display:none'>" + (i+1) + "</p>";	// 검색된 순번대로
 								list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
 								list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
 									+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
@@ -271,13 +271,13 @@
 	
 	<section>
 		<div class="container">
-	    	<div class="page-util">	
+	    	<%-- <div class="page-util">	
 				<div class="location">
 	    			<span></span>
 	    			<a href="${contextPath}/movielist" title="영화 페이지로 이동">영화</a>
 	    			<a href="${contextPath}/movielist" title="전체영화 페이지로 이동">전체영화</a>
 	    		</div>
-	    	</div>
+	    	</div> --%>
 	    	
 	    	<div class="contents">
 	    		<div class="inner-wrap">

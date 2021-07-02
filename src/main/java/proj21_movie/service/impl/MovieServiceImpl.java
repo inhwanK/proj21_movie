@@ -86,4 +86,11 @@ public class MovieServiceImpl implements MovieService {
 		log.debug("service - getMovieListFromToday() > " + list.size());
 		return list;
 	}
+
+	@Override
+	public List<Movie> getMovieLimit() {
+		List<Movie> list = mapper.selectMovieLimit();
+		log.debug("service - getMovieLimit() > " + list.size());
+		return list;
+	}
 }

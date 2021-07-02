@@ -70,6 +70,12 @@ public class RestMovieManagerController {
 		return ResponseEntity.status(HttpStatus.OK).body(movieSearch);
 	}
 	
+	// 상위 영화 3개
+	@GetMapping("/movielimit")
+	public ResponseEntity<Object> movieLimit() {
+		return ResponseEntity.ok(service.getMovieLimit());
+	}
+	
 	@PostMapping("/movies")
 	public ResponseEntity<Object> newMovie(@RequestBody Movie movie) {
 		System.out.println("newMovie > " + movie);

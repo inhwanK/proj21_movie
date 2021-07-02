@@ -127,6 +127,11 @@
 					 	}
 					});
 			});
+			
+			/* 해당요일이 토요일/일요일일시 class 추가 */
+			var comStar = $('.com-star').val()
+		    var spanSat = $('.date-list button span:nth-child(2):contains("토요일")').parent();
+		    spanSat.addClass('sat');
 		});
 	</script>
 	</head>
