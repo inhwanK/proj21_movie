@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import proj21_movie.dto.Cinema;
 import proj21_movie.dto.Movie;
 import proj21_movie.dto.ShowInfo;
 import proj21_movie.dto.Theater;
@@ -91,5 +92,20 @@ public class RestShowInfoManagerController {
 		showInfo.setShwDate(shwLocalDate);
 		
 		return ResponseEntity.ok(service.getShowInfoListByTheater(showInfo));
+	}
+	
+	// 극장, 상영관, 날짜로 상영정보에 등록되어 있는 시간 조회
+	@GetMapping("/timelistbycondition/{thtNo}/{cinNo}/{shwDate}")
+	public ResponseEntity<Object> timeListByCondition(@PathVariable int thtNo, @PathVariable int cinNo, @PathVariable String shwDate){
+		System.out.println("timeListByCondition()");
+		
+		ShowInfo showInfo = new ShowInfo();
+		showInfo.setThtNo(new Theater(thtNo));
+		showInfo.setCinNo(new Cinema(cinNo));
+		
+		LocalDate shwLocalDate = LocalDate.parse(shwDate, DateTimeFormatter.ISO_DATE);
+		showInfo.setShwDate(shwLocalDate);
+		
+		return ResponseEntity.ok(service.getTimeListByCondition(showInfo));
 	}
 }

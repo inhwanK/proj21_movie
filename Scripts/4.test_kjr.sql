@@ -192,3 +192,18 @@ where mov_enddate > date_add(now(), interval -1 day);
 select * from movie;
 
 select * from showinfo;
+
+select distinct shw_starttime
+from vw_full_showinfo
+where tht_no = 1 and cin_no = 1 and shw_date = '2021-07-02'
+order by shw_starttime;
+
+select distinct shw_starttime
+from vw_full_showinfo
+where tht_no = 1 and cin_no = 1 and shw_date = '2021-07-02'
+order by shw_starttime;
+
+select '2021-07-02' < now();
+select now();
+
+

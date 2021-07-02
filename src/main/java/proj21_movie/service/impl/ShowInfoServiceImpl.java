@@ -63,4 +63,11 @@ public class ShowInfoServiceImpl implements ShowInfoService {
 		return list;
 	}
 
+	@Override
+	public List<ShowInfo> getTimeListByCondition(ShowInfo showInfo) {
+		List<ShowInfo> list = mapper.selectTimeListByCondition(showInfo);
+		log.debug("service - getTimeListByCondition() > " + showInfo);
+		return list;
+	}
+
 }

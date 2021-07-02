@@ -102,4 +102,20 @@
 		order by mov_no, shw_starttime;
 	</select>
 	
+	<select id="selectTimeListByCondition" resultMap="resShowInfo">
+		select distinct shw_starttime
+		from vw_full_showinfo
+		<where>
+			<if test="shwDate != null">
+				and shw_date = #{shwDate}
+			</if>
+			<if test="cinNo != null">
+				and cin_no = #{cinNo.cinNo}
+			</if>
+			<if test="thtNo != null">
+				and tht_no = #{thtNo.thtNo}
+			</if>
+		</where>
+		order by shw_starttime
+	</select>
 </mapper>
