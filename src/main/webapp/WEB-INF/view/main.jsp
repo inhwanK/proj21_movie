@@ -30,7 +30,7 @@
 				});
 			}
 		}
-		
+
 		/* ajax - 상영중인 평점이 높은 상위 영화 3개 */
 		$(function(){
 			var contextPath = "${contextPath}";
@@ -49,11 +49,19 @@
 						}
 						$(".main-movie-list ul").append(list);
 					}
-				});		
+				});	
+      
+      $('#to-mypage').on('click', function(e){
+				if(${member == null}) {
+					e.preventDefault();
+					alert("회원 로그인이 필요합니다.");
+					window.location.href = contextPath + "/login";
+				}
+			});
+      
 		});	
-		
 		/* ajax */
-		
+
 	</script>
 </head>
 <body>
@@ -99,7 +107,7 @@
 			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
 			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
 			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
-			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
+			<li id="mypagebtn"><a href="${contextPath}/mypage" id="to-mypage"><i class="far fa-user"></i></a></li>
 		</ul>
 	</nav>
 	
