@@ -42,11 +42,11 @@
 							
 					divFile += "<div class=\"form-group\">";
 					divFile += "<label>파일</label>";
-					divFile += "<a href=\"/proj21_movie/resources/attachments/inquiry/"+json.inqFile +"\" class=\"form-control\">"
+					divFile += "<a class=\"form-control\" href=\"/proj21_movie/resources/attachments/inquiry/"+json.inqFile +"\">"
 							+ json.inqFile + "</a>";
 					divFile += "</div>";
 							
-					$("#content").after(divFile);
+					$("#content").parent().after(divFile);
 				}
 
 				$("#no").attr('value', json.inqNo);
@@ -135,7 +135,7 @@
 							<label>내용</label>
 							<textarea rows="10" cols="500" id="content" class="form-control"
 								readonly="readonly">
-                     </textarea>
+                     		</textarea>
 						</div>
 						<div class="form-group">
 							<label>답변</label>

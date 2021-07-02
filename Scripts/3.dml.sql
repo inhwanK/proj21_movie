@@ -11,6 +11,7 @@ insert into member values (null, 'test2@test.com', password(1234), '2005-06-01',
 insert into member values (null, 'test3@test.com', password(1234), '1999-06-01', '테스트3', '010-1342-4312');
 
 -- 공지
+-- 파일관련 테스트는 관리자 페이지에서 직접 파일 업로드 해야합니다. 
 select not_no, not_title, not_detail, not_date, not_file from notice;
 insert into notice values (null, '공지테스트1', '공지테스트1내용', now(), null);
 insert into notice values (null, '공지테스트2', '공지테스트2내용', now(), null);
