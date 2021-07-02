@@ -770,6 +770,10 @@ h3.title {
 	background: #e8ffe8;
 }
 
+.com-admin {
+	background: #eaeaff;
+}
+
 .user-id {
 	margin: 0 10px 10px 30px;
 }
@@ -833,6 +837,21 @@ button#alert {
 	font-weight: 600px;
 	font-size: 15px;
 	cursor: pointer;
+}
+
+/* top버튼 */
+#top_btn {
+	cursor: pointer;
+	position: fixed;
+	right: 20%; 
+	bottom: 50px; 
+	display: none; 
+	z-index: 999;
+}
+
+#top_btn img{
+	width: 50px;
+	height: 50px;	
 }
 
 /* footer */
