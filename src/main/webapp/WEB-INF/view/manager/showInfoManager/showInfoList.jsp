@@ -28,7 +28,7 @@
 						sCont += "<td>" + json[i].shwDate + "</td>";
 						sCont += "<td>" + json[i].shwStarttime + "</td>";
 						sCont += "<td>" + json[i].shwEndtime + "</td>";
-						sCont += "<td><button id='modify' class='btn btn-primary'>수정</button></td>";
+						/* sCont += "<td><button id='modify' class='btn btn-primary'>수정</button></td>"; */
 						sCont += "<td><button id='remove' name='remove' class='btn btn-primary'>삭제</button></td>";
 						sCont += "</tr>";
 					}
@@ -85,7 +85,7 @@
       			<th>상영일</th>
       			<th>시작시간</th>
       			<th>종료시간</th>
-      			<th></th>
+      			<!-- <th></th> -->
       			<th></th>
       		</tr>
       	</thead>

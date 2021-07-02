@@ -16,4 +16,6 @@ public interface ShowInfoService {
 	
 	List<ShowInfo> getListsByCondition(ShowInfo showInfo);
 	List<ShowInfo> getShowInfoListByTheater(ShowInfo showInfo);
+	
+	List<ShowInfo> getTimeListByCondition(ShowInfo showInfo);
 }
