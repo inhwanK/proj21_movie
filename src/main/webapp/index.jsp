@@ -13,6 +13,7 @@
 	$(function(){
 		var now = new Date();
 		var yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+		var selDate = "2021-07-02";
 		
 		console.log("오늘 >> " + now);
 		console.log("어제 >> " + yesterday);
