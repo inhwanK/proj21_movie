@@ -60,15 +60,11 @@ public class RestNoticeController {
 	
 	@PatchMapping("/notice")
 	public ResponseEntity<Object> patchNotice(@RequestBody Notice notice){
-		// 줄바꿈 작업.
-		notice.setNotDetail(notice.getNotDetail().replace("\n", "<br>"));
 		return ResponseEntity.ok(service.modifyNotice(notice));
 	}
 	
 	@PostMapping("/notice")
 	public ResponseEntity<Object> registNotice(@RequestBody Notice notice){
-		// 줄바꿈 작업.
-		notice.setNotDetail(notice.getNotDetail().replace("\n", "<br>"));
 		return ResponseEntity.ok(service.registNotice(notice));
 	}
 	

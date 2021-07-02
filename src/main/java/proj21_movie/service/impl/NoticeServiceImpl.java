@@ -43,11 +43,15 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public int modifyNotice(Notice notice) {
+		// 줄바꿈 작업.
+		notice.setNotDetail(notice.getNotDetail().replace("\n", "<br>"));
 		return mapper.updateNotice(notice);
 	}
 
 	@Override
 	public int registNotice(Notice notice) {
+		// 줄바꿈 작업.
+		notice.setNotDetail(notice.getNotDetail().replace("\n", "<br>"));
 		return mapper.insertNotice(notice);
 	}
 
