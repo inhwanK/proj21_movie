@@ -47,7 +47,7 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public int registerNotice(Notice notice) {
+	public int registNotice(Notice notice) {
 		return mapper.insertNotice(notice);
 	}
 

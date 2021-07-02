@@ -64,6 +64,7 @@
 					});
 				}
 				
+				// textarea에서는 줄바꿈이 \r\n 이다.
 				var data ={
 					notTitle: $("#title").val(),
 					notDetail: $("#content").val(),

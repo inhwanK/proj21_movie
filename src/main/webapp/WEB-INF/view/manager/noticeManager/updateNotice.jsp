@@ -52,7 +52,7 @@
 					$("#regdate").attr('value', json.notDate);
 					$("#title").attr('value', json.notTitle);
 					$("#content").empty();
-					$("#content").append(json.notDetail);
+					$("#content").append(json.notDetail.replace(/<br>/g,'\n'));
 					$("div.form-group").eq(3).after(divFile);
 					
 					},
