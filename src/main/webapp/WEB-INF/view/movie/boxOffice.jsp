@@ -31,6 +31,22 @@
 	        	return false;	// 검색 버튼을 눌렀을 경우에 해당 버튼이 활성화 (다른 의도하지 않은 동작 방지)
 	        }
 	    });
+		
+		/* 탑버튼 눌렸을때 올라가는 스크립트 */
+		$(document).ready(function() {
+	        $(window).scroll(function() {
+	            if ($(this).scrollTop() > 500) {	// 아래로 스크롤시 (500) 보여줌
+	                $('#top_btn').fadeIn();
+	            } else {
+	                $('#top_btn').fadeOut();
+	            }
+	        });
+	        
+	        $("#top_btn").click(function() {		// 클릭시 상단으로 올려줌
+	            $('html, body').animate({scrollTop : 0}, 400);
+	            return false;
+	        });
+	    });
 	});
 	</script>
 	<script>
@@ -247,6 +263,11 @@
 </head>
 <body>	
 	<%@include file="/WEB-INF/view/header.jsp"%>
+	
+	<!-- 탑위로 올라가는 버튼 -->
+	<div id="top_btn">
+		<img src="${contextPath}/resources/images/movie/icon/top_btn.png">
+	</div>
 	
 	<section>
 		<div class="container">

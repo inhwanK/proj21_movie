@@ -444,6 +444,21 @@ h2.title {
 		no-repeat center
 }
 
+/* top버튼 */
+#top_btn {
+	cursor: pointer;
+	position: fixed;
+	right: 13%; 
+	bottom: 50px; 
+	display: none; 
+	z-index: 999;
+}
+
+#top_btn img{
+	width: 50px;
+	height: 50px;	
+}
+
 /* footer */
 footer {
 	margin: auto;

@@ -38,6 +38,12 @@
 					var pUser = $('.prof:contains("${member.memEmail}")').parent();
 					pUser.addClass('com-me');
 				}
+				
+				// 관리자 로그인시 클래스 추가 (파란색 배경으로 바뀜)
+				if (${admin != null}) {
+					var pUser = $('.prof').parent();
+					pUser.addClass('com-admin');
+				}
 			});
 			
 		   /* 취소 버튼 누를시  */
@@ -67,6 +73,22 @@
 		        	$('#writeBtn').click();
 		        	return false;	// 검색 버튼을 눌렀을 경우에 해당 버튼이 활성화 (다른 의도하지 않은 동작 방지)
 		        }
+		    });
+		   
+		    /* 탑버튼 눌렸을때 올라가는 스크립트 */
+			$(document).ready(function() {
+		        $(window).scroll(function() {
+		            if ($(this).scrollTop() > 500) {	// 아래로 스크롤시 (500) 보여줌
+		                $('#top_btn').fadeIn();
+		            } else {
+		                $('#top_btn').fadeOut();
+		            }
+		        });
+		        
+		        $("#top_btn").click(function() {		// 클릭시 상단으로 올려줌
+		            $('html, body').animate({scrollTop : 0}, 400);
+		            return false;
+		        });
 		    });
 		});
 	</script>
@@ -105,6 +127,7 @@
 			var contextPath = "${contextPath}";
 			var movNo = "${movNo}";
 			
+			/* ajax - 영화 상세 페이지 데이터 받아올때 */
 			$.ajax({
 				type:"GET",
 				url: contextPath + "/api/movies/" + movNo,
@@ -158,6 +181,7 @@
 					$(".poster .wrap").append(poster);
 					$(".movie-info-list").append(sCont);
 					$('#movie-grade i:contains("0세이상")').text("전체");
+					$('#movie-grade i:contains("19세이상")').parent().text("청소년관람불가");
 				},
 				error : function(request, status, error){
 					window.location.href = contextPath + "/movielist";	// 데이터에 없는 영화번호를 검색시 전체영화 페이지로 이동
@@ -254,20 +278,43 @@
 								cache 		: false,
 								data 		: JSON.stringify(newComment),
 								beforeSend  : function(xhr) {			// success로 넘어가기 전에 조건 만족시 success로 넘어가지 않고 beforeSend에서 멈춤
-									if (${member == null} || user == "") {	// 한줄평 유저 (user)에 값이 없을시 success로 넘어가지 않고 로그인으로 이동
-							            xhr.abort();
-							            //alert("권한이 없습니다. 로그인 해주세요.");
-							            //window.location.href = contextPath + "/login";
-							            
-							            Swal.fire({				// Alert창 디자인 sweetalert2			
-						                    icon : 'error',
-						                    title: '권한이 없습니다. 로그인 해주세요.'
-						                }).then((result) => { 
-											if (result.isConfirmed) { 
-												window.location.href = contextPath + "/login";
-											} 
-										});	
-							        }else if (content == "") {	// 한줄평 내용이 없을때
+									if (${admin != null}) {				// 관리자가 로그인 했을때 
+										if (content == "") {			// 한줄평 내용이 없을때
+								        	xhr.abort();					    
+								        	//alert("내용을 입력해주세요!");
+								        	Swal.fire({				// Alert창 디자인 sweetalert2			
+							                    icon : 'warning',
+							                    title: '내용을 입력해주세요!'
+							                }).then((result) => { 
+												if (result.isConfirmed) { 
+													return false;
+												}
+											});					        	
+								        }else {						// 관리자는 글을 쓸수 없으므로 취소 후 경고 창 표시
+								        	xhr.abort();
+								        	Swal.fire({				// Alert창 디자인 sweetalert2			
+							                    icon : 'error',
+							                    title: '관리자는 한줄평을 달 수 없습니다.'
+							                }).then((result) => { 
+												if (result.isConfirmed) { 
+													return false;
+												}
+											});	
+								        }
+									}else if (${member == null} || user == "") {	// 한줄평 유저 (user)에 값이 없을시 success로 넘어가지 않고 로그인으로 이동
+								            xhr.abort();
+								            //alert("권한이 없습니다. 로그인 해주세요.");
+								            //window.location.href = contextPath + "/login";
+								            
+								            Swal.fire({				// Alert창 디자인 sweetalert2			
+							                    icon : 'error',
+							                    title: '권한이 없습니다. 로그인 해주세요.'
+							                }).then((result) => { 
+												if (result.isConfirmed) { 
+													window.location.href = contextPath + "/login";
+												} 
+											});	
+									} else if (content == "") {	// 한줄평 내용이 없을때
 							        	xhr.abort();					    
 							        	//alert("내용을 입력해주세요!");
 							        	Swal.fire({				// Alert창 디자인 sweetalert2			
@@ -278,7 +325,7 @@
 												return false;
 											}
 										});					        	
-							        }
+							    	}
 							    },
 								success 	: function(res) {
 									if(user != ""){			// 유저가 있으면 등록후 새로고침
@@ -394,7 +441,6 @@
 			// 예매버튼 클릭시 영화 번호를 reserve 페이지에 전달
 			$(document).on('click', '[id=reserve]', function(e){
 				var movNo = ${movNo};
-				
 				window.location.href = contextPath + "/reserve?no=" + movNo;
 			});
 			
@@ -407,36 +453,45 @@
 				
 				//console.log(comUser);
 				
-				if (${member != null}) {		// 로그인 했을때
-					if('${member.memEmail}' == comUser){	// 로그인 아이디와 한줄평 유저가 일치할때
-						var comBtn = "";
-							comBtn += "<button id='modify'>수정</button>";
-							comBtn += "<button id='remove'>삭제</button>";
-							
-						btnPa.empty();
-						btnPa.append(comBtn);
-					}else {		// 다른 유저가 썼을때
-						//alert("권한이 없습니다.");
+				if (${admin != null}) {		// 관리자가 로그인 했을때
+					var comBtn = "";
+						comBtn += "<button id='modify'>수정</button>";
+						comBtn += "<button id='remove'>삭제</button>";
+						
+					btnPa.empty();
+					btnPa.append(comBtn);
+				}else {
+					if (${member != null}) {		// 로그인 했을때
+						if('${member.memEmail}' == comUser){	// 로그인 아이디와 한줄평 유저가 일치할때
+							var comBtn = "";
+								comBtn += "<button id='modify'>수정</button>";
+								comBtn += "<button id='remove'>삭제</button>";
+								
+							btnPa.empty();
+							btnPa.append(comBtn);
+						}else {		// 다른 유저가 썼을때
+							//alert("권한이 없습니다.");
+							Swal.fire({				// Alert창 디자인 sweetalert2
+			                    icon : 'error',
+			                    title: '권한이 없습니다.'
+			                }).then((result) => {
+								if (result.isConfirmed) { 
+									return false;
+								} 
+							});
+						}
+					}else {			// 로그인 안했을때
+						//alert("권한이 없습니다. 로그인 해주세요.");	
 						Swal.fire({				// Alert창 디자인 sweetalert2
 		                    icon : 'error',
-		                    title: '권한이 없습니다.'
+		                    title: '권한이 없습니다. 로그인 해주세요.'
 		                }).then((result) => {
 							if (result.isConfirmed) { 
-								return false;
+			            		window.location.href = contextPath + "/login";
 							} 
 						});
 					}
-				}else {			// 로그인 안했을때
-					//alert("권한이 없습니다. 로그인 해주세요.");	
-					Swal.fire({				// Alert창 디자인 sweetalert2
-	                    icon : 'error',
-	                    title: '권한이 없습니다. 로그인 해주세요.'
-	                }).then((result) => {
-						if (result.isConfirmed) { 
-		            		window.location.href = contextPath + "/login";
-						} 
-					});
-				}
+				}	
 			});
 		});
 	</script>
@@ -488,6 +543,12 @@
 	</nav>
 
 	<section>
+	
+		<!-- 탑위로 올라가는 버튼 -->
+		<div id="top_btn">
+			<img src="${contextPath}/resources/images/movie/icon/top_btn.png">
+		</div>
+		
 		<!-- container -->
 		<div class="container">
 			<!-- contents -->
@@ -547,6 +608,8 @@
 				<div id="contentData">
 					<!-- inner-wrap -->
 					<div class="inner-wrap">
+					
+						
 	    				<div class="tab-list">
 		    				<ul class="btn">
 		    					<li class="active">
