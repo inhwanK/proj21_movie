@@ -96,19 +96,25 @@
 			<div class="main-movie-list">
 				<ul>
 					<li>
-						<img src="https://img.megabox.co.kr/SharedImg/2021/05/12/J7vthd2FWEXswHD67dL2rQrMW4uhJQUF_420.jpg">
+						<a href="${contextPath}/movie?movNo=1">
+							<img src="https://img.megabox.co.kr/SharedImg/2021/05/12/J7vthd2FWEXswHD67dL2rQrMW4uhJQUF_420.jpg">
+						</a>
 						<div class="reserve-boxoffice">
 								<a href="#">예매</a>
 						</div>
 					</li>
 					<li>
-						<img src="https://img.megabox.co.kr/SharedImg/2021/04/20/Pg9xMYRfMNouXwkqG2PeOGGqyUaQ9skl_420.jpg">
+						<a href="${contextPath}/movie?movNo=2">
+							<img src="https://img.megabox.co.kr/SharedImg/2021/04/20/Pg9xMYRfMNouXwkqG2PeOGGqyUaQ9skl_420.jpg">
+						</a>
 						<div class="reserve-boxoffice">
 								<a href="#">예매</a>
 						</div>
 					</li>
 					<li>
-						<img src="https://img.megabox.co.kr/SharedImg/2021/05/24/OPZRLPUEwlEliCfy6Li4gfhUFCJ52AE1_420.jpg">
+						<a href="${contextPath}/movie?movNo=5">
+							<img src="https://img.megabox.co.kr/SharedImg/2021/05/24/OPZRLPUEwlEliCfy6Li4gfhUFCJ52AE1_420.jpg">
+						</a>
 						<div class="reserve-boxoffice">
 								<a href="#">예매</a>
 						</div>
