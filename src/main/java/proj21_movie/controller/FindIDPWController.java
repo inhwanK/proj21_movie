@@ -48,6 +48,7 @@ public class FindIDPWController {
 		return "login/find_ID";
 	}
 
+	
 	// 비밀번호 찾기 실행(비로그인) 작성중
 //	// 비밀번호 찾기 처리 (1) 이메일 발송
 //	@RequestMapping(value = "find_pass.do", method = RequestMethod.POST)
