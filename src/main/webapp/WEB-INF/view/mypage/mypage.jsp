@@ -29,13 +29,14 @@
 			</div>
 			
 			<div id="mypage-wrap">
-			
 				<div id="user-info">
 					<div id="profile">
 						<img alt="프로필사진" src="${contextPath}/resources/images/profile-photo.png">
 						<div id="textbox">
-							<p id="user">user님,</p>
-							<p id="welcome">환영합니다.</p>
+							<c:if test = "${member != null }">
+								<p id="user">${member.memName } 님,</p>
+								<p id="welcome">환영합니다.</p>
+							</c:if>
 						</div>
 					</div>
 					

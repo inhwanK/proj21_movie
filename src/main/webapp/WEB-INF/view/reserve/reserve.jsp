@@ -31,7 +31,11 @@
 
 				var dayOfWeek = week[(day + i) % 7]; 
 				
-				$("#calendar").append("<span><a href='' class='date'>"+ month2 + "월" + date2 + "일("+ dayOfWeek + ")</a></span>");
+				if (i == 0) {
+					$("#calendar").append("<span><a href='' class='date active'>"+ month2 + "월" + date2 + "일("+ dayOfWeek + ")</a></span>");
+				} else {
+					$("#calendar").append("<span><a href='' class='date'>"+ month2 + "월" + date2 + "일("+ dayOfWeek + ")</a></span>");
+				}
 			}
 		});
 	
