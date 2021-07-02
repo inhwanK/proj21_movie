@@ -203,7 +203,3 @@ from vw_full_showinfo
 where tht_no = 1 and cin_no = 1 and shw_date = '2021-07-02'
 order by shw_starttime;
 
-select '2021-07-02' < now();
-select now();
-
-

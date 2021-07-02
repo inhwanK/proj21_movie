@@ -310,10 +310,10 @@
 					return;
 				}
 				
-				alert("shwNo >> " + no + "\ningPrice >> " + $("#price").text() + "\ningSeat >> " + $("#seat-no").text() 
+				/* alert("shwNo >> " + no + "\ningPrice >> " + $("#price").text() + "\ningSeat >> " + $("#seat-no").text() 
 						+ "\ningAdult >> " + $("#countAdult").text() 
 						+ "\ningTeen >> " + $("#countTeen").text() 
-						+ "\ningPref >> " + $("#countPref").text());
+						+ "\ningPref >> " + $("#countPref").text()); */
 				
 				var newReserving = {
 						memNo: memNo,

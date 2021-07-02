@@ -29,6 +29,17 @@
 				});
 			}
 		}
+		
+		$(function(){
+			var contextPath = "${contextPath}";
+			$('#to-mypage').on('click', function(e){
+				if(${member == null}) {
+					e.preventDefault();
+					alert("회원 로그인이 필요합니다.");
+					window.location.href = contextPath + "/login";
+				}
+			});
+		});
 	</script>
 </head>
 <body>
@@ -74,7 +85,7 @@
 			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
 			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
 			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
-			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
+			<li id="mypagebtn"><a href="${contextPath}/mypage" id="to-mypage"><i class="far fa-user"></i></a></li>
 		</ul>
 	</nav>
 	

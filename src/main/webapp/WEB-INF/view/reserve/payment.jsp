@@ -216,7 +216,7 @@
 						cache: false,
 						data: JSON.stringify(resCommand),
 						success: function(res) {
-							alert("결제완료" + res);
+							alert("결제가 완료되었습니다.");
 							checkUnload = false;
 							window.location.href = contextPath + "/resultpay?resNo=" + res +"#menu-title";
 						}, 
