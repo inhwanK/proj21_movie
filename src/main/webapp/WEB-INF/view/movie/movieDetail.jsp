@@ -21,6 +21,7 @@
     	window.jQuery || document.write('<script src="${contextPath}/resources/js/star/vendor/jquery-1.11.2.min.js"><\/script>')
     </script>	
     <script src="${contextPath}/resources/js/star/jquery.barrating.min.js"></script>	
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script>
 		$(function() {
 			/* 주요정보 등 탭 클릭시 */
@@ -235,38 +236,75 @@
 									comStar : $('.com-star').val()
 								};
 				
-				if (confirm("등록 하시겠습니까?")){
-		 			$.ajax({
-						url 		: contextPath + "/api/comments/",
-						type 		: "POST",
-						contentType : "application/json; charset=utf-8",
-						datatype 	: "json",
-						cache 		: false,
-						data 		: JSON.stringify(newComment),
-						beforeSend  : function(xhr) {			// success로 넘어가기 전에 조건 만족시 success로 넘어가지 않고 beforeSend에서 멈춤
-							if (${member == null} || user == "") {	// 한줄평 유저 (user)에 값이 없을시 success로 넘어가지 않고 로그인으로 이동
-					            xhr.abort();
-					        	alert("권한이 없습니다. 로그인 해주세요.");
-					            window.location.href = contextPath + "/login";
-					        }else if (content == "") {	// 한줄평 내용이 없을때
-					        	xhr.abort();
-					        	alert("내용을 입력해주세요!");
-					        }
-					    },
-						success 	: function(res) {
-							if(user != ""){			// 유저가 있으면 등록후 새로고침
-								alert(newComment.comUser + "님의 한줄평이 등록되었습니다.");
-								location.reload();
-							}
-						},
-						error : function(request, status, error){
-							alert("code:" + request.status+"\n" + "message:" + request.responseText+"\n" + "error:" + error);
-							location.reload();
-						}
-					}); 
-				} else {
-					return false;
-				}
+				Swal.fire({ 		// Alert창 디자인 sweetalert2
+					title			  : '등록하시겠습니까?', 
+					icon			  : 'question', 
+					showCancelButton  : true, 
+					confirmButtonColor: '#3085d6', 
+					cancelButtonColor : '#d33', 
+					confirmButtonText : '등록', 
+					cancelButtonText  : '취소' 
+					}).then((result) => {
+						if (result.isConfirmed) {
+				 			$.ajax({
+								url 		: contextPath + "/api/comments/",
+								type 		: "POST",
+								contentType : "application/json; charset=utf-8",
+								datatype 	: "json",
+								cache 		: false,
+								data 		: JSON.stringify(newComment),
+								beforeSend  : function(xhr) {			// success로 넘어가기 전에 조건 만족시 success로 넘어가지 않고 beforeSend에서 멈춤
+									if (${member == null} || user == "") {	// 한줄평 유저 (user)에 값이 없을시 success로 넘어가지 않고 로그인으로 이동
+							            xhr.abort();
+							            //alert("권한이 없습니다. 로그인 해주세요.");
+							            //window.location.href = contextPath + "/login";
+							            
+							            Swal.fire({				// Alert창 디자인 sweetalert2			
+						                    icon : 'error',
+						                    title: '권한이 없습니다. 로그인 해주세요.'
+						                }).then((result) => { 
+											if (result.isConfirmed) { 
+												window.location.href = contextPath + "/login";
+											} 
+										});	
+							        }else if (content == "") {	// 한줄평 내용이 없을때
+							        	xhr.abort();					    
+							        	//alert("내용을 입력해주세요!");
+							        	Swal.fire({				// Alert창 디자인 sweetalert2			
+						                    icon : 'warning',
+						                    title: '내용을 입력해주세요!'
+						                }).then((result) => { 
+											if (result.isConfirmed) { 
+												return false;
+											}
+										});					        	
+							        }
+							    },
+								success 	: function(res) {
+									if(user != ""){			// 유저가 있으면 등록후 새로고침
+										//alert(newComment.comUser + "님의 한줄평이 등록되었습니다.");
+										//location.reload();
+										Swal.fire({				// Alert창 디자인 sweetalert2
+						                    icon : 'success',
+						                    title: '한줄평이 등록되었습니다.',
+						                    text : '소중한 한줄평 감사합니다.'
+						                }).then((result) => {
+											if (result.isConfirmed) { 
+												location.reload();
+											} 
+										});
+									}
+								},
+								error : function(request, status, error){
+									alert("code:" + request.status+"\n" + "message:" + request.responseText+"\n" + "error:" + error);
+									location.reload();
+								}
+							});
+					} else{    
+						return false;
+				 	}
+				});
+				
 			});
 			
 			/* 수정 버튼 누를시 팝업 */
@@ -276,25 +314,37 @@
 					var ch = pa.children().children();
 					var comNo = ch.eq(3).text();
 				    
-					/* 팝업 중앙에 띄우기 */
-					if (confirm("수정하시겠습니까?")){
-					    function PopupCenter(url, title, w, h) {  
-					        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;  
-					        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;  
-					                  
-					        width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;  
-					        height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;  
-					                  
-					        var left = ((width / 2) - (w / 2)) + dualScreenLeft;  
-					        var top = ((height / 2) - (h / 2)) + dualScreenTop;  
-					        var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);  
-					      
-					        if (window.focus) {  
-					            newWindow.focus();  
-					        }  
-					    } 				    
-					    PopupCenter(contextPath + "/updateComment?comNo=" + comNo,'popup','550','400'); 
-					}
+				Swal.fire({ 		// Alert창 디자인 sweetalert2
+					title			  : '수정하시겠습니까?', 
+					icon			  : 'question', 
+					showCancelButton  : true, 
+					confirmButtonColor: '#3085d6', 
+					cancelButtonColor : '#d33', 
+					confirmButtonText : '수정', 
+					cancelButtonText  : '취소' 
+					}).then((result) => { 
+						if (result.isConfirmed) {
+							/* 팝업 중앙에 띄우기 */
+						    function PopupCenter(url, title, w, h) { 
+						        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;  
+						        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;  
+						                  
+						        width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;  
+						        height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;  
+						                  
+						        var left = ((width / 2) - (w / 2)) + dualScreenLeft;  
+						        var top = ((height / 2) - (h / 2)) + dualScreenTop;  
+						        var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);  
+						      
+						        if (window.focus) {  
+						            newWindow.focus();  
+						        }  
+						    } 				    
+						    PopupCenter(contextPath + "/updateComment?comNo=" + comNo,'popup','700','450'); 
+						} else{
+							return false;
+					 	}
+					});
 				});
 			});
 			
@@ -304,22 +354,40 @@
 				var ch = pa.children().children();
 				var comNo = ch.eq(3).text();
 				
-				if (confirm("삭제하시겠습니까?")){
-					$.ajax({
-						url: contextPath + "/api/comments/" + comNo,
-						type: 'DELETE',
-						success: function(res) {
-							alert(comNo + "번 한줄평 삭제 완료");
-							location.reload();
-						},
-						error: function(request, status, error) {
-							alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-							location.reload();
-						}
-					});
-				} else {
-					return false;
-				}			
+				Swal.fire({ 		// Alert창 디자인 sweetalert2
+					title			  : '삭제하시겠습니까?', 
+					icon			  : 'warning', 
+					showCancelButton  : true, 
+					confirmButtonColor: '#3085d6', 
+					cancelButtonColor : '#d33', 
+					confirmButtonText : '삭제', 
+					cancelButtonText  : '취소' 
+					}).then((result) => {
+						if (result.isConfirmed) {
+							$.ajax({
+								url: contextPath + "/api/comments/" + comNo,
+								type: 'DELETE',
+								success: function(res) {
+									//alert(comNo + "번 한줄평 삭제 완료");
+									//location.reload();	
+									Swal.fire({				// Alert창 디자인 sweetalert2
+					                    icon : 'success',
+					                    title: '한줄평 삭제가 완료되었습니다.',
+					                }).then((result) => {
+										if (result.isConfirmed) { 
+											location.reload();
+										} 
+									});	
+								},
+								error: function(request, status, error) {
+									alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+									location.reload();
+								}
+							});
+						} else{    
+							return false;
+					 	}
+					});		
 			});
 			/* // 실관람평 탭 */
 			
@@ -348,11 +416,26 @@
 						btnPa.empty();
 						btnPa.append(comBtn);
 					}else {		// 다른 유저가 썼을때
-						alert("권한이 없습니다.");
+						//alert("권한이 없습니다.");
+						Swal.fire({				// Alert창 디자인 sweetalert2
+		                    icon : 'error',
+		                    title: '권한이 없습니다.'
+		                }).then((result) => {
+							if (result.isConfirmed) { 
+								return false;
+							} 
+						});
 					}
 				}else {			// 로그인 안했을때
-					alert("권한이 없습니다. 로그인 해주세요.");			
-		            window.location.href = contextPath + "/login";
+					//alert("권한이 없습니다. 로그인 해주세요.");	
+					Swal.fire({				// Alert창 디자인 sweetalert2
+	                    icon : 'error',
+	                    title: '권한이 없습니다. 로그인 해주세요.'
+	                }).then((result) => {
+						if (result.isConfirmed) { 
+		            		window.location.href = contextPath + "/login";
+						} 
+					});
 				}
 			});
 		});

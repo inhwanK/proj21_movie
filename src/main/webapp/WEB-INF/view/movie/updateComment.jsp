@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 	<!-- 이 js가 다른 js보다 낮으면 에러 뜸 -->
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<link rel="stylesheet" href="${contextPath}/resources/css/movie/updateComment.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/movie/star/fontawesome-stars.css">	
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
@@ -70,33 +71,61 @@
 							comContent: $('#comContent').val(),
 							comStar: $('.com-star').val(),
 						};
-				if (confirm("수정 하시겠습니까?")){
-					$.ajax({
-						url			: contextPath + "/api/comments/" + comNo,
-						type		: 'PATCH',
-						contentType : "application/json; charset=utf-8",
-						dataType	: 'json',
-						cache		: false,
-						data		: JSON.stringify(data),
-						beforeSend  : function(xhr) {	// success로 넘어가기 전에 조건 만족시 success로 넘어가지 않고 beforeSend에서 멈춤
-					        if (content == "") {		// 한줄평 내용이 없을때
-					        	xhr.abort();
-					        	alert("내용을 입력해주세요!");
-					        }
-					    },
-						success		: function(data) {
-							alert(comNo + "번 댓글 수정 완료");
-							window.opener.location.reload();
-					        window.close();
-						},
-						error: function(data, status, error){
-							alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-							window.close();
-						}
+				
+				Swal.fire({ 		// Alert창 디자인 sweetalert2
+					title			  : '수정 하시겠습니까?', 
+					icon			  : 'question', 
+					showCancelButton  : true, 
+					confirmButtonColor: '#3085d6', 
+					cancelButtonColor : '#d33', 
+					confirmButtonText : '수정', 
+					cancelButtonText  : '취소' 
+					}).then((result) => {
+						if (result.isConfirmed) {
+							$.ajax({
+								url			: contextPath + "/api/comments/" + comNo,
+								type		: 'PATCH',
+								contentType : "application/json; charset=utf-8",
+								dataType	: 'json',
+								cache		: false,
+								data		: JSON.stringify(data),
+								beforeSend  : function(xhr) {	// success로 넘어가기 전에 조건 만족시 success로 넘어가지 않고 beforeSend에서 멈춤
+							        if (content == "") {		// 한줄평 내용이 없을때
+							        	xhr.abort();
+							        	//alert("내용을 입력해주세요!");							        	
+							        	Swal.fire({				// Alert창 디자인 sweetalert2
+						                    icon : 'warning',
+						                    title: '내용을 입력해주세요!',
+						                }).then((result) => {
+											if (result.isConfirmed) { 
+												return false;
+											} 
+										});	
+							        }
+							    },
+								success		: function(data) {
+									//alert(comNo + "번 댓글 수정 완료");
+									//window.opener.location.reload();
+							        //window.close();			
+									Swal.fire({				// Alert창 디자인 sweetalert2
+					                    icon : 'success',
+					                    title: '한줄평 수정이 완료되었습니다.',
+					                }).then((result) => {
+										if (result.isConfirmed) { 
+											window.opener.location.reload();
+									        window.close();
+										} 
+									});		
+								},
+								error: function(data, status, error){
+									alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+									window.close();
+								}
+							});
+						} else{   
+							return false;
+					 	}
 					});
-				} else {
-					return false;
-				}	
 			});
 		});
 	</script>
