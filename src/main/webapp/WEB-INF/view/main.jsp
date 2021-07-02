@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">	<!-- 파비콘 오류 메세지 해결 -->
 	<meta charset="UTF-8">
 	<title>메인화면</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/main.css">
@@ -29,17 +30,38 @@
 				});
 			}
 		}
-		
+
+		/* ajax - 상영중인 평점이 높은 상위 영화 3개 */
 		$(function(){
 			var contextPath = "${contextPath}";
-			$('#to-mypage').on('click', function(e){
+			$.get(contextPath + "/api/movielimit",
+				function(json) {
+					var dataLength = json.length;
+					if (dataLength >= 1) {
+						var list = "";
+						for (i = 0; i < dataLength; i++) {
+							list += "<li>";
+							list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>";
+							list += "<img src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>"
+							list += "<div class='reserve-boxoffice'>";
+							list += "<a href='#'>예매</a></div>";
+							list += "</li>";						
+						}
+						$(".main-movie-list ul").append(list);
+					}
+				});	
+      
+      $('#to-mypage').on('click', function(e){
 				if(${member == null}) {
 					e.preventDefault();
 					alert("회원 로그인이 필요합니다.");
 					window.location.href = contextPath + "/login";
 				}
 			});
-		});
+      
+		});	
+		/* ajax */
+
 	</script>
 </head>
 <body>
@@ -106,30 +128,6 @@
 			
 			<div class="main-movie-list">
 				<ul>
-					<li>
-						<a href="${contextPath}/movie?movNo=1">
-							<img src="https://img.megabox.co.kr/SharedImg/2021/05/12/J7vthd2FWEXswHD67dL2rQrMW4uhJQUF_420.jpg">
-						</a>
-						<div class="reserve-boxoffice">
-								<a href="#">예매</a>
-						</div>
-					</li>
-					<li>
-						<a href="${contextPath}/movie?movNo=2">
-							<img src="https://img.megabox.co.kr/SharedImg/2021/04/20/Pg9xMYRfMNouXwkqG2PeOGGqyUaQ9skl_420.jpg">
-						</a>
-						<div class="reserve-boxoffice">
-								<a href="#">예매</a>
-						</div>
-					</li>
-					<li>
-						<a href="${contextPath}/movie?movNo=5">
-							<img src="https://img.megabox.co.kr/SharedImg/2021/05/24/OPZRLPUEwlEliCfy6Li4gfhUFCJ52AE1_420.jpg">
-						</a>
-						<div class="reserve-boxoffice">
-								<a href="#">예매</a>
-						</div>
-					</li>
 				</ul>
 			</div>
 			

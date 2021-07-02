@@ -167,7 +167,7 @@
 							  return acc;
 							}, new Map);
 						
-							var groupByMovie = Object.fromEntries(byMovie);
+							/* var groupByMovie = Object.fromEntries(byMovie);
 							
 							console.log(groupByMovie);
 							
@@ -178,7 +178,7 @@
 							console.log(groupLength);
 							
 							console.log(first_key);
-							console.log(first_value);
+							console.log(first_value); */
 							
 							
 							/* if (groupLength >= 1) {
@@ -296,14 +296,14 @@
 	
 	<section>
 		<div class="container">
-	    	<div class="page-util">	
+	    	<%-- <div class="page-util">	
 				<div class="location">
 	    			<span></span>
 	    			<a href="${contextPath}/theaterlist" title="극장 페이지로 이동">극장</a>
 	    			<a href="${contextPath}/theaterlist" title="전체극장 페이지로 이동">전체극장</a>
 	    			<a href="" title="극장정보 페이지로 이동">극장정보</a>
 	    		</div>
-	    	</div>
+	    	</div> --%>
 	    	
 	    	<div class="contents">
 	    		<div class="thtName"></div>	    												 		
@@ -458,7 +458,7 @@
 									<p class="no-showInfo-list">날짜를 선택해주세요</p>
 									
 									<!-- 컨저링3: 악마가 시켰다 theater-list -->
-									<div class="theater-list">
+									<%-- <div class="theater-list">
 										<!-- theater-title -->
 										<div class="theater-title">
 											<p class="movie-grade age-15">
@@ -515,7 +515,7 @@
 													</a>
  												</div>
  											</div>
-										</div>
+										</div> --%>
 										<!-- // theater-type-box -->
 									</div>
 									<!-- // 컨저링3: 악마가 시켰다 theater-list -->																		
@@ -553,7 +553,6 @@
     			</div>
   			
     		</div>
-    	</div>
 	</section>
 	
 	<%@include file="/WEB-INF/view/footer.jsp"%>

@@ -28,6 +28,7 @@
 			from comment c right join movie m on c.mov_no = m.mov_no
 		 where m.mov_opendate &lt;= now() and m.mov_enddate &gt; date_add(now(), interval -1 day)
 		group by m.mov_no
+		order by m.mov_avgstar desc, m.mov_no desc
 	</select>
 	
 	<select id="selectMovieCommingSoonAll" resultType="Movie">
@@ -45,11 +46,21 @@
 		 where m.mov_opendate &lt;= now() and m.mov_enddate &gt; date_add(now(), interval -1 day)
 		 		and mov_title like concat('%', #{movTitle}, '%')
 		group by m.mov_no
+		order by m.mov_avgstar desc, m.mov_no desc
 	</select>
 	
 	<select id="selectMovieFromToday" resultType="Movie">
 		select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster from movie
 		where mov_enddate > date_add(now(), interval -1 day)
+	</select>
+	
+	<select id="selectMovieLimit" resultType="Movie">
+		select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, 		
+				mov_opendate, mov_enddate, mov_avgstar, mov_poster
+			from movie
+		 where mov_opendate &lt;= now() and mov_enddate &gt; date_add(now(), interval -1 day)
+		order by mov_avgstar desc, mov_no desc
+		limit 3
 	</select>
 	
 	<insert id="insertMovie">

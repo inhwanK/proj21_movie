@@ -62,8 +62,16 @@
 					$('#comNo').val(json.comNo);
 					$('#comContent').val(json.comContent);
 					$('.com-star').val(json.comStar);
+					
+					var comStar = json.comStar;
+					console.log(comStar);
+					
+					/* $(".br-widget a:nth-child(2)").addClass("br-selected br-current");
+					$(".br-widget a:nth-child(3)").addClass("br-selected br-current");
+					$(".br-widget a:nth-child(4)").addClass("br-selected br-current");
+					$(".br-widget a:nth-child(5)").addClass("br-selected br-current"); */
 			});
-			
+
 			/* ajax */
 			$('#modify').on("click", function(e){
 				var content = $('#comContent').val();
@@ -127,6 +135,11 @@
 					 	}
 					});
 			});
+			
+			/* 해당요일이 토요일/일요일일시 class 추가 */
+			var comStar = $('.com-star').val()
+		    var spanSat = $('.date-list button span:nth-child(2):contains("토요일")').parent();
+		    spanSat.addClass('sat');
 		});
 	</script>
 	</head>

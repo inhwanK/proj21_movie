@@ -24,9 +24,11 @@ public interface MovieMapper {
 	int updateMovie(Movie movie);
 	int deleteMovie(Movie movie);
 	
-	// 영화 실시간 평점 업뎃 구상중
+	// 영화 실시간 평점 업뎃
 	int updateMovieAvgStar(Movie movie);
 	
 	// 상영종료일이 오늘이후인 영화 목록
 	List<Movie> selectMovieFromToday();
+	// 상영중인 최신 영화 중 평점 상위 영화 3개 리스트
+	List<Movie> selectMovieLimit();
 }

@@ -231,6 +231,11 @@ section {
 	width: 424px;
 }
 
+.main-movie-list ul li img{
+	width: 290px;
+	height: 420px;
+}
+
 
 .reserve-boxoffice {
 	background-color: RGB(86,127,127);
