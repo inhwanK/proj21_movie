@@ -64,6 +64,7 @@
 	
 	<script type="text/javascript">
 		$(function(){
+			var contextPath = "${contextPath}";
 			$('#to-mypage').on('click', function(e){
 				if(${member == null}) {
 					e.preventDefault();

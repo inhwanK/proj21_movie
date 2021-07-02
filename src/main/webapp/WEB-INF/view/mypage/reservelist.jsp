@@ -16,12 +16,12 @@
 			<div id="mypage-menubar">
 			
 				<ul>
-					<li><a href="#"><h2>My Page</h2></a></li>
-					<li><a href="#">예매내역</a></li>
-					<li><a href="#">한줄평 내역</a></li>
-					<li><a href="#">1대1 문의 내역</a></li>
-					<li><a href="#">개인정보 수정</a></li>
-					<li><a href="#">회원탈퇴</a></li>
+					<li><a href="${contextPath}/mypage"><h2>My Page</h2></a></li>
+					<li><a href="${contextPath}/reserveInfo">예매내역</a></li>
+					<li><a href="${contextPath}/commentInfo">한줄평 내역</a></li>
+					<li><a href="${contextPath}/inquiryInfo">1대1 문의 내역</a></li>
+					<li><a href="${contextPath}/chkPassword">개인정보 수정</a></li>
+					<li><a href="${contextPath}/withdrawal">회원탈퇴</a></li>
 				</ul>
 			</div>
 			
