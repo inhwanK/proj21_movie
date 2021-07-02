@@ -109,7 +109,7 @@
 			<if test="shwDate != null">
 				and shw_date = #{shwDate}
 			</if>
-			<if test="movNo != null">
+			<if test="cinNo != null">
 				and cin_no = #{cinNo.cinNo}
 			</if>
 			<if test="thtNo != null">

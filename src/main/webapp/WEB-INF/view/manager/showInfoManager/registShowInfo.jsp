@@ -110,9 +110,9 @@
                      <button id="chkTime" class="btn btn-primary">시간확인</button>
                      <select id="start" class="form-control">
                      	<option selected disabled hidden="">시작시간</option>
-                     	<option id="time1" disabled>10:00</option>
-                     	<option id="time2" disabled>14:00</option>
-                     	<option id="time3" disabled>20:00</option>
+                     	<option id="time1" hidden="">10:00</option>
+                     	<option id="time2" hidden="">14:00</option>
+                     	<option id="time3" hidden="">20:00</option>
                      </select>
                       
                   </div>
@@ -160,18 +160,14 @@
 					var dataLength = json.length;
 					if (dataLength >= 1) {
 						for (i = 0; i < dataLength; i++){
-							console.log(json[i].shwStarttime);
 							if (json[i].shwStarttime == '10:00'){
-								console.log("10시 >> " + json[i].shwStarttime);
-								$('#time1').attr("disabled", true);
+								$('#time1').attr("hidden", true);
 							}
 							if (json[i].shwStarttime == '14:00'){
-								console.log("14시 >> " + json[i].shwStarttime);
-								$('#time2').attr("disabled", true);
+								$('#time2').attr("hidden", true);
 							}
 							if (json[i].shwStarttime == '20:00'){
-								console.log("20시 >> " + json[i].shwStarttime);
-								$('#time3').attr("disabled", true);
+								$('#time3').attr("hidden", true);
 							}
 						}
 					}
@@ -182,34 +178,41 @@
 		$('#theater').change(function(){
 			thtNo = $('#theater').val();
 			$("#start").val("시작시간");
-			$('#time1').attr("disabled", true);
-			$('#time2').attr("disabled", true);
-			$('#time3').attr("disabled", true);
+			$('#time1').attr("hidden", true);
+			$('#time2').attr("hidden", true);
+			$('#time3').attr("hidden", true);
 		});
 		
 		$('#cinema').change(function(){
 			cinNo = $('#cinema').val();
 			$("#start").val("시작시간");
-			$('#time1').attr("disabled", true);
-			$('#time2').attr("disabled", true);
-			$('#time3').attr("disabled", true);
+			$('#time1').attr("hidden", true);
+			$('#time2').attr("hidden", true);
+			$('#time3').attr("hidden", true);
 		});
 		
 		$('#date').change(function(){
 			shwDate = $('#date').val();
 			$("#start").val("시작시간");
-			$('#time1').attr("disabled", true);
-			$('#time2').attr("disabled", true);
-			$('#time3').attr("disabled", true);
+			$('#time1').attr("hidden", true);
+			$('#time2').attr("hidden", true);
+			$('#time3').attr("hidden", true);
 		});
 		
 		$('#chkTime').on('click', function(e){
 			e.preventDefault();
-			alert("극장번호 >> " + thtNo + "\n상영관번호 >> " + cinNo + "\n날짜 >> " + shwDate);
+			/* alert("극장번호 >> " + thtNo + "\n상영관번호 >> " + cinNo + "\n날짜 >> " + shwDate); */
+			
+			if ($('#theater').val() == null || $('#cinema').val() == null || $('#date').val() == ""	){
+				alert("극장, 상영관, 날짜를 확인해 주세요.");
+				return;
+			}
+			
 			$("#start").val("");
-			$('#time1').attr("disabled", false);
-			$('#time2').attr("disabled", false);
-			$('#time3').attr("disabled", false);
+			$('#end').val("");
+			$('#time1').attr("hidden", false);
+			$('#time2').attr("hidden", false);
+			$('#time3').attr("hidden", false);
 			timeList(thtNo, cinNo, shwDate);
 		});
 		
