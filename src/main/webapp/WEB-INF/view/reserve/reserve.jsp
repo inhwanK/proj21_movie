@@ -32,6 +32,10 @@
 				var dayOfWeek = week[(day + i) % 7]; 
 				
 				$("#calendar").append("<span><a href='' class='date'>"+ month2 + "월" + date2 + "일("+ dayOfWeek + ")</a></span>");
+				
+				/* 페이지 로드시 첫번째 날짜 선택됨 */
+				var test = $('.calendar span a:first');
+				test.addClass('active');
 			}
 		});
 	
