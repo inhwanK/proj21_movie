@@ -26,12 +26,44 @@
 			</div>
 			
 			<div id="reserve-wrap">
-				<div id="reserve-history">
+				<!-- <div id="reserve-history">
 					<h2>예매내역</h2>
 					<ul id="reserve-list">
 						<li>예매 내역이 없습니다.</li>
 					</ul>
-				</div>
+				</div> -->
+				<h2>예매 내역</h2>
+					<div id="reserve-count">
+						<strong>총 1건</strong>
+					</div>
+					<ul>
+						<li>
+							<div class="reserve-list">
+								<img alt="포스터사진" src="<%=request.getContextPath()%>/resources/images/stillcut1.jpg">
+								<div class="textarea">
+									<h3>영화제목</h3>
+									<p>영화관</p>
+									<p>상영일/상영시간</p>
+									<p>인원</p>
+									<p>결제금액</p>
+									<p>예매일</p>
+								</div>
+							</div>
+						</li> 
+						<li>
+							<div class="reserve-list">
+								<img alt="포스터사진" src="<%=request.getContextPath()%>/resources/images/stillcut1.jpg">
+								<div class="textarea">
+									<h3>영화제목</h3>
+									<p>영화관</p>
+									<p>상영일/상영시간</p>
+									<p>인원</p>
+									<p>결제금액</p>
+									<p>예매일</p>
+								</div>
+							</div>
+						</li> 
+					</ul>
 				
 				<div id="desc">
 					<h3>예매 유의사항</h3>
