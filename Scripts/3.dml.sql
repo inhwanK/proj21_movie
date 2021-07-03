@@ -11,10 +11,24 @@ insert into member values (null, 'test2@test.com', password(1234), '2005-06-01',
 insert into member values (null, 'test3@test.com', password(1234), '1999-06-01', '테스트3', '010-1342-4312');
 
 -- 공지
+-- 파일관련 테스트는 관리자 페이지에서 직접 파일 업로드 해야합니다. 
 select not_no, not_title, not_detail, not_date, not_file from notice;
 insert into notice values (null, '공지테스트1', '공지테스트1내용', now(), null);
 insert into notice values (null, '공지테스트2', '공지테스트2내용', now(), null);
 insert into notice values (null, '공지테스트3', '공지테스트3내용', now(), 'test.txt');
+insert into notice(not_title,not_detail,not_date) values('테스트 공지','테스트 공지 내용',now());
+insert into notice(not_title,not_detail,not_date) values('테스트 공지','테스트 공지 내용',now());
+insert into notice(not_title,not_detail,not_date) values('테스트 공지','테스트 공지 내용',now());
+insert into notice(not_title,not_detail,not_date) values('테스트 공지','테스트 공지 내용',now());
+insert into notice(not_title,not_detail,not_date) values('테스트 공지','테스트 공지 내용',now());
+insert into notice(not_title,not_detail,not_date) values('테스트 공지','테스트 공지 내용',now());
+insert into notice(not_title,not_detail,not_date) values('테스트 공지','테스트 공지 내용',now());
+insert into notice(not_title,not_detail,not_date) values('테스트 공지','테스트 공지 내용',now());
+insert into notice(not_title,not_detail,not_date) values('테스트 공지','테스트 공지 내용',now());
+insert into notice(not_title,not_detail,not_date) values('테스트 공지','테스트 공지 내용',now());
+insert into notice(not_title,not_detail,not_date) values('테스트 공지','테스트 공지 내용',now());
+insert into notice(not_title,not_detail,not_date) values('테스트 공지','테스트 공지 내용',now());
+insert into notice(not_title,not_detail,not_date) values('테스트 공지','테스트 공지 내용',now());
 
 -- 영화
 select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster from movie;

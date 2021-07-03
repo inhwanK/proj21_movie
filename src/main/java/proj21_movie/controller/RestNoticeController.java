@@ -60,14 +60,12 @@ public class RestNoticeController {
 	
 	@PatchMapping("/notice")
 	public ResponseEntity<Object> patchNotice(@RequestBody Notice notice){
-		System.out.println(notice);
-		
 		return ResponseEntity.ok(service.modifyNotice(notice));
 	}
 	
 	@PostMapping("/notice")
 	public ResponseEntity<Object> registNotice(@RequestBody Notice notice){
-		return ResponseEntity.ok(service.registerNotice(notice));
+		return ResponseEntity.ok(service.registNotice(notice));
 	}
 	
 	@PostMapping("/noticeFileUpload") 

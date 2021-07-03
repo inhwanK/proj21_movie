@@ -56,6 +56,8 @@
 </div>
 </body>
 <script type="text/javascript">
+	var contextPath = "${contextPath}";
+
 	function getFormatDate(date) { // date 폼 처리 메서드.
 		var subDateArray = date.substr(0, 10).split('-');
 		return subDateArray[0] + "." + subDateArray[1] + "."
@@ -64,7 +66,7 @@
 
 	$(function(){
 
-		var contextPath = "${contextPath}";
+		//var contextPath = "${contextPath}";
 		// 리스트 가져오기
 		$.ajax({
 			url: contextPath+"/api/inquirylist",

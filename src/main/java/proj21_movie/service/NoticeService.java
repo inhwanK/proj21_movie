@@ -19,6 +19,6 @@ public interface NoticeService {
 	
 	int removeNotice(int notNo);
 	int modifyNotice(Notice notice);
-	int registerNotice(Notice notice);
+	int registNotice(Notice notice);
 	
 }

@@ -35,18 +35,43 @@
 			
 			var conf = confirm("등록하시겠습니까?");
 			if(conf){
-					
-				if($("#uploadFile").val()!=null){
+				
+				// 파일 이름 뽑기.
+				if($("#uploadFile").val() != ""){
 					var filePath = $("#uploadFile").val().split('\\');
 					fileName = filePath[filePath.length - 1];
+				
+				
+					// 파일 업로드 
+					var formData = new FormData();
+					var inputFile = $("input#uploadFile");
+					var files = inputFile[0].files;
+					console.log(files);
+					
+					for(var i=0; i<files.length; i++){
+						formData.append("uploadFile", files[i]);
+					}
+		
+					$.ajax({
+						url:contextPath+"/api/noticeFileUpload",
+						processData:false,
+						contentType:false,
+						data:formData,
+						type:"POST",
+						success:function(result){
+							console.log("Uploaded");
+						}
+					});
 				}
 				
+
 				var data ={
 					notTitle: $("#title").val(),
 					notDetail: $("#content").val(),
-					notFile: fileName 
+					notFile: fileName // 파일이름 저장.
 				}
-				
+					
+				// 공지사항 등록.
 				$.ajax({
 					url:contextPath+"/api/notice",
 					type:"post",
@@ -59,26 +84,6 @@
 					},
 					error: function(){
 						alert("뭔가 잘못된 것이 분명합니다.");	
-					}
-				});
-				
-				var formData = new FormData();
-				var inputFile = $("input#uploadFile");
-				var files = inputFile[0].files;
-				console.log(files);
-				
-				for(var i=0; i<files.length; i++){
-					formData.append("uploadFile", files[i]);
-				}
-	
-				$.ajax({
-					url:contextPath+"/api/noticeFileUpload",
-					processData:false,
-					contentType:false,
-					data:formData,
-					type:"POST",
-					success:function(result){
-						console.log("Uploaded");
 					}
 				});
 			}

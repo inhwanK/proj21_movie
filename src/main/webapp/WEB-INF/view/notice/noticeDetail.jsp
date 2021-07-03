@@ -31,6 +31,15 @@
 			$("p#title").append(json.notTitle);
 			$("span#regdate").append(dateForm);
 			$("div#content").append(json.notDetail);
+			
+			if(json.notFile != null){
+				var file = "";
+				file += "<a href=\"/proj21_movie/resources/attachments/notice/"+json.notFile +"\">"
+					 + json.notFile + "</a>";
+				$("span#attachments").append(file);
+			}else{
+				$("span#attachments").append("없음");
+			}
 		});
 
 	});
@@ -67,7 +76,8 @@
 						<div class="info">
 							<p>
 								<span class="tit">등록일</span> <span class="txt" id="regdate"></span>
-								<span class="txt" style="float:right;" id="attachments">첨부 파일  : </span>
+								<span class="txt" style="float:right;" id="attachments">첨부 파일  : 
+								</span>
 							</p>
 							
 							
