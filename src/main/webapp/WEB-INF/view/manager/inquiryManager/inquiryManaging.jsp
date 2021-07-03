@@ -29,7 +29,7 @@
       <!-- css 정리 너무 안됨. -->
       <div style="margin:0 20px;">
       	<select name="inqStatus" onchange="changeSearchCond()" id="statusComb" style="float:right; margin: 0 0 10px 0;">
-      		<option value="all"selected>전체</option>
+      		<option value="all" selected>전체</option>
       		<option value="1">답변 완료</option>      		
       		<option value="0">답변 미완료</option>      				
       	</select>
