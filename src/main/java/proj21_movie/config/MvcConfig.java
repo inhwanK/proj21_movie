@@ -112,5 +112,6 @@ public class MvcConfig implements WebMvcConfigurer {
         props.put("mail.debug", "true");
 		
 		return mailSender;
+		
 	}
 }

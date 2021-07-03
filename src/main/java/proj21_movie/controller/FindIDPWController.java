@@ -145,6 +145,7 @@ public class FindIDPWController {
 			}
 	}
 	
+	
 	// 비밀번호 업데이트
 	@RequestMapping(value = "find_PW_change.do", method = RequestMethod.POST)
 	public String find_PW_change(Member member, HttpSession session) throws IOException{

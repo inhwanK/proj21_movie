@@ -20,6 +20,7 @@
 				<div class="error"></div>
 			</div>
 			<br>
+			
 			<br> <input type="submit" id="check" value="확인">
 		</div>
 	</form>

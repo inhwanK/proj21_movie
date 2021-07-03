@@ -51,4 +51,5 @@ public class MailDTO {
 		return String.format("MailDTO [subject=%s, text=%s, from=%s, to=%s]", subject, text, from, to);
 	}
 
+	
 }

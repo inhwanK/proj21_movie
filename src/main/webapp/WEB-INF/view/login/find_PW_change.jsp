@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<form action="find_PW_change.do" method="POST" class="content">
 		<div class="textbox">
 			<input id="pw" name="pw" type="password"><label>새비밀번호</label>
