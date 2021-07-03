@@ -11,6 +11,27 @@
 <title>이메일 찾기</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/login/find_ID.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+	$(function(){	
+		<!-- 휴대폰번호 서식 지정 -->
+		$('#memPhone').keydown(function(event) {
+		    var key = event.charCode || event.keyCode || 0;
+		    $text = $(this);
+		    if (key !== 8 && key !== 9) {
+		        if ($text.val().length === 3) {
+		            $text.val($text.val() + '-');
+		        }
+		        if ($text.val().length === 8) {
+		            $text.val($text.val() + '-');
+		        }
+		    }
+		    return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));          
+		});
+		
+	});
+</script>
 </head>
 <body>
 	<section>

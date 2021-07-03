@@ -1,11 +1,6 @@
 package proj21_movie.service.impl;
 
-import java.io.PrintWriter;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Service;
 
 import org.apache.ibatis.logging.Log;
@@ -81,10 +76,17 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.findId(member);
 	}
 
-	// 비번찾기(비로그인)
+	// 비밀번호 찾기
 	@Override
-	public void pass_change(Map<String, Object> map, Member member) throws Exception {
-		mapper.pass_change(map, member);
+	public String selectMember(Member member) {
+		log.debug("service - selectMember() > " + member);
+		return mapper.selectMember(member);
+	}
+
+	@Override
+	public Member updatePW(Member member) {
+		log.debug("service - updatePW() > " + member);
+		return mapper.updatePW(member);
 	}
 
 }

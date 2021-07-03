@@ -3,6 +3,7 @@ package proj21_movie.config;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Properties;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +12,8 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -84,5 +87,30 @@ public class MvcConfig implements WebMvcConfigurer {
 	public MultipartResolver multipartResolver() {
 		StandardServletMultipartResolver resolver = new StandardServletMultipartResolver();
 		return resolver;
+	}
+	
+	// 비번찾기용 인증메일 설정
+	@Bean
+	public static JavaMailSender mailSender() {
+		
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		
+		// 보내는 메일 종류와 포트번호 인코딩
+		mailSender.setHost("smtp.gmail.com");
+		mailSender.setPort(587);
+		mailSender.setDefaultEncoding("UTF-8");
+		
+		// 보내는 계정의 아이디와 패스워드
+		mailSender.setUsername("passtest950@gmail.com");   
+		mailSender.setPassword("testaccountemailtest");   
+
+		// 메일 설정
+		Properties props = mailSender.getJavaMailProperties();
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.debug", "true");
+		
+		return mailSender;
 	}
 }
