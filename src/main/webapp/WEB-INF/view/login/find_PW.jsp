@@ -15,29 +15,24 @@
 <body>
 	<div class="findmain">
 		<div class="findpw">
-			<form method="post" class="form-signin" action="find_PW"
-				name="findform">
-				<fieldset>
-					<div>
-						<table>
-							<tr>
-								<td><img id="pw_img" alt="패스워드이미지" src="${contextPath}/resources/images/login/pw.png"></td>
-							</tr>
-							<tr>
-								<td><h2>패스워드 찾기</h2></td>
-							</tr>
-							<tr>
-								<td><input type="email" placeholder="이메일을 입력하세요" id="memName" name="memName" required /></td>
-							</tr>
-							<tr>
-								<td><input type="text" placeholder="전화번호를 입력하세요" id="memPhone" name="memPhone" maxlength="13" required /></td>
-							</tr>
-							<tr>
-								<td><button id="pw_submit">검색</button></td>
-							</tr>
-						</table>
-					</div>
-				</fieldset>
+			<form method="post" class="form-signin" action="find_PW" name="findform">
+				<table>
+					<tr>
+						<td><img id="pw_img" alt="패스워드이미지" src="${contextPath}/resources/images/login/pw.png"></td>
+					</tr>
+					<tr>
+						<td><h2>패스워드 찾기</h2></td>
+					</tr>
+					<tr>
+						<td><input type="email" placeholder="이메일을 입력하세요" id="memName" name="memName" required /></td>
+					</tr>
+					<tr>
+						<td><input type="text" placeholder="전화번호를 입력하세요" id="memPhone" name="memPhone" maxlength="13" required /></td>
+					</tr>
+					<tr>
+						<td><button id="pw_submit">검색</button></td>
+					</tr>
+				</table>	
 			</form>
 		</div>
 	</div>
