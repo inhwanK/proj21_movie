@@ -79,9 +79,12 @@
 			      			list += "<td><button id=\"delete\" class=\"btn btn-primary\">삭제</button></td>";
 			      			list += "</tr>";
 						} // end of for
+						
 						$("tbody").empty();
-						$("tbody").append(list);	
+						$("tbody").append(list);
+						
 					}else{
+						
 						$("tbody").empty();
 						$("tbody").append("<tr><td>등록된 공지사항이 없습니다.</td></tr>")
 						alert("해당 날짜에 등록된 공지사항이 없습니다.");
