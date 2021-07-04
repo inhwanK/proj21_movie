@@ -29,6 +29,7 @@ public interface MemberService {
 	// 비밀번호 찾기(비로그인)
 	// 회원조회
 	public String selectMember(Member member);
+	
 	// 패스워드 변경
 	Member updatePW(Member member);
 }

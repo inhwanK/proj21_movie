@@ -94,11 +94,13 @@ public class MvcConfig implements WebMvcConfigurer {
 	public static JavaMailSender mailSender() {
 		
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		Properties properties = new Properties(); 
 		
 		// 보내는 메일 종류와 포트번호 인코딩
 		mailSender.setHost("smtp.gmail.com");
 		mailSender.setPort(587);
 		mailSender.setDefaultEncoding("UTF-8");
+		mailSender.setJavaMailProperties(properties);
 		
 		// 보내는 계정의 아이디와 패스워드
 		mailSender.setUsername("passtest950@gmail.com");   
@@ -109,8 +111,10 @@ public class MvcConfig implements WebMvcConfigurer {
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.starttls.required", true);
         props.put("mail.debug", "true");
 		
 		return mailSender;
+		
 	}
 }
