@@ -40,7 +40,7 @@
 <body>
 	<div class="findmain">
 		<div class="findpw">
-			<form action="find_PW_success.do" method="POST" class="content">
+			<form action="pw_set.me" method="POST" class="content">
 				<table>
 					<tr>
 						<td>
@@ -55,7 +55,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td><input type="email" placeholder="아이디(이메일)을 입력해주세요" class="box1" id="memEmail" name="memEmail" required /></td>
+						<td><input type="email" placeholder="이메일을 입력해주세요" class="box1" id="memEmail" name="memEmail" required /></td>
 					</tr>
 					<tr>
 						<td><input type="password" placeholder="새로운 비밀번호를 입력해주세요" class="box1" id="memPasswd" name="memPasswd" required /></td>

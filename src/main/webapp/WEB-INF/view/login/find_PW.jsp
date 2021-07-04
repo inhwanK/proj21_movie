@@ -11,6 +11,10 @@
 <title>패스워드 찾기</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/login/find_PW.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+</script>
 </head>
 <body> 
 	<div class="findmain">
@@ -27,7 +31,7 @@
 						<td><input type="text" placeholder="이름을 입력하세요" id="memName" name="memName" required /></td>
 					</tr>
 					<tr>
-						<td><input type="email" placeholder="이메일을 입력하세요" id="memEmail" name="memEmail" required /></td>
+						<td><input type="email" placeholder="이메일을 입력하세요" id="memEmail" name="memEmail"required /></td>
 					</tr>
 					<tr>
 						<td><button id="pw_submit">찾기</button></td>

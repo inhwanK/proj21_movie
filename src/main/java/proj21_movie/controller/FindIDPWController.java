@@ -8,13 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -156,17 +154,18 @@ public class FindIDPWController {
 	}
 
 	// 비밀번호 업데이트(일단성공)
-	@RequestMapping(value = "find_PW_success.do", method = RequestMethod.POST)
-	public String pw_new(Member member, HttpSession session) throws IOException{
-		session.setAttribute("memEmail", member.getMemEmail());	
-		
-		int result = service.pwUpdate_M(member);
+	@RequestMapping(value = "/pw_set.me", method = RequestMethod.POST)
+	public String pw_new(@RequestParam("memEmail") String memEmail, Member member, HttpSession session) throws IOException{
+		session.setAttribute("memEmail", member.getMemEmail());			
 		System.out.println("변경한 비밀번호 >> " + member);
 
-		if(result == 1) {
-			return "login/find_PW_change";
+		int result = service.pwUpdate_M(member);
+
+		if(result != 0) {
+			return "login/find_PW_success";
+			
 		} else {
-			System.out.println("pwUpdate_M"+ result);
+			System.out.println("변경결과 >> "+ result);
 			return "login/find_PW_success";
 		}
 	}
