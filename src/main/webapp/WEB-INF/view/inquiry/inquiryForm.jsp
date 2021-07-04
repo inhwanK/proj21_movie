@@ -46,6 +46,30 @@
 				} else if (inquiry.inqDetail == "") {
 					alert("문의 내용을 입력하세요.")
 				} else {
+					
+					if (fileName != "") {
+						var formData = new FormData();
+						var inputFile = $("input[name='inqFile']");
+						var files = inputFile[0].files;
+
+						console.log(files);
+
+						for (var i = 0; i < files.length; i++) {
+							formData.append("uploadFile", files[i]);
+						}
+
+						$.ajax({
+							url : contextPath + "/api/inquiryFileUpload",
+							processData : false,
+							contentType : false,
+							data : formData,
+							type : "POST",
+							success : function(result) {
+							console.log("Uploaded");
+							}	
+						}); // end of ajax
+					} //end of if
+					
 					$.ajax({
 						url : contextPath + "/api/inquiry",
 						type : "post",
@@ -63,28 +87,7 @@
 					});
 				} //end of else
 	
-				if (file != null) {
-					var formData = new FormData();
-					var inputFile = $("input[name='inqFile']");
-					var files = inputFile[0].files;
-
-					console.log(files);
-
-					for (var i = 0; i < files.length; i++) {
-						formData.append("uploadFile", files[i]);
-					}
-
-					$.ajax({
-						url : contextPath + "/api/inquiryFileUpload",
-						processData : false,
-						contentType : false,
-						data : formData,
-						type : "POST",
-						success : function(result) {
-						console.log("Uploaded");
-						}	
-					}); // end of ajax
-				} //end of if
+				
 
 			} //end of if(conf)
 		}); // end of event

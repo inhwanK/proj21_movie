@@ -104,10 +104,12 @@
     <div class="container-fluid">
       <h1 class="text-center">공지사항</h1>
       
-      <div style="margin:0 20px;">
-      	<button class="btn btn-primary" id="regist" class="topBtn" style="float:right; margin:0 0 10px 0;">등록</button>
-      </div>
-      
+      <!-- <div> -->
+      	<button class="btn btn-primary topBtn" id="regist"  style="float:left; margin:0 0 10px 20px  ;">등록</button>
+      <!-- </div>
+      <div style="margin:0 20px;"> -->
+      	<input type="date" id="date" style="float:right; padding:0; margin:0 20px 0 0;">
+      <!-- </div> -->
       <table class="table table-hover table-striped text-center" style="border: 1px solid;">
       	<thead>
       		<tr>
