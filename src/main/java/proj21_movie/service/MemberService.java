@@ -1,13 +1,8 @@
 package proj21_movie.service;
 
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Service;
 import proj21_movie.dto.Member;
-import proj21_movie.mapper.MemberMapper;
 
 @Service
 public interface MemberService {
@@ -30,6 +25,10 @@ public interface MemberService {
 	public int idCheck(String memEmail) throws Exception;
 	// 아이디 찾기
 	public Member findId(Member member);
+
 	// 비밀번호 찾기(비로그인)
-	public void pass_change(Map<String, Object> map, Member member) throws Exception;
+	// 회원조회
+	public String selectMember(Member member);
+	// 패스워드 변경
+	Member updatePW(Member member);
 }

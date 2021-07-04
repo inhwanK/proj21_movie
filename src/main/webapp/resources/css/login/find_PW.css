@@ -45,21 +45,19 @@ section {
 	margin-right: auto;
 }
 
-/* section 이메일찾기*/
-.findmain {
-
-}
-
+/* section 패스워드 찾기*/
 .findpw {
 	width: 150px;
 	height: 220px;
+	margin-left: 8%;
 }
 
 #findform {
-	border: 2px solid #ffffff;
+	border: 0 solid #fff;
 	text-align: center;
 	padding: 10%;
 	width: 120px;
+	height: 280px;
 }
 
 #pw_img {
@@ -79,10 +77,10 @@ input {
 	height: 35px;
 	width: 258px;
 	text-align: center;
-	margin-left: 1%;
 	font-size: 15px;
 	margin-top: 10px;
 	background-color: #3e2789;
 	color: #fff;
 	font-weight: 500 bolder;
+	border: 0 solid #fff;
 }

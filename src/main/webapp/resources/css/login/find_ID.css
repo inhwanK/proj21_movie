@@ -21,20 +21,24 @@ body {
 	text-align: center;
 	margin-right: 17px; /* nav 길이조절 */
 	overflow: hidden; /* 스크롤 x */
+	border: 0 solid #fff;
 }
 
 a:link {
 	text-decoration: none;
+	border: 0 solid #fff;
 }
 
 a:active, a:focus, a:hover {
 	text-decoration: underline;
+	border: 0 solid #fff;
 }
 
 ol, ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
+	border: 0 solid #fff;
 }
 
 /* section */
@@ -48,14 +52,16 @@ section {
 /* section 이메일찾기*/
 .findid {
 	width: 150px;
-	height: 220px;
+	height: 300px;
+	margin-left: 2%;
 }
 
 #findform {
-	border: 2px solid #ffffff;
+	border: 0 solid #fff;
 	text-align: center;
 	padding: 10%;
 	width: 120px;
+	height: 280px;
 }
 
 #id_img {
@@ -75,10 +81,10 @@ input {
 	height: 35px;
 	width: 258px;
 	text-align: center;
-	margin-left: 1%;
 	font-size: 15px;
 	margin-top: 10px;
 	background-color: #3e2789;
 	color: #fff;
 	font-weight: 500 bolder;
+	border: 0 solid #fff;
 }
