@@ -80,10 +80,12 @@
 		 where mem_email = #{memEmail}
 	</select>
 	
-	<update id="updatePW" parameterType="Member">
-		update member
+	<!-- 패스워드변경 -->
+	<update id="pwUpdate_M" parameterType="Member">
+		update member 
 		   set mem_passwd = password(#{memPasswd})
 		 where mem_email = #{memEmail}
-	</update> 
+	</update>
+
 
 </mapper>

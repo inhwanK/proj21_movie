@@ -83,5 +83,54 @@ input {
 	color: #fff;
 	font-weight: 500 bolder;
 	border: 0 solid #fff;
-	
+}
+
+#code_submit {
+	height: 35px;
+	width: 258px;
+	text-align: center;
+	font-size: 15px;
+	margin-top: 10px;
+	background-color: #3e2789;
+	color: #fff;
+	font-weight: 500 bolder;
+	border: 0 solid #fff;
+}
+
+#change_submit {
+	height: 35px;
+	width: 258px;
+	text-align: center;
+	font-size: 15px;
+	margin-top: 10px;
+	background-color: #3e2789;
+	color: #fff;
+	font-weight: 500 bolder;
+	border: 0 solid #fff;
+}
+
+/* 비번 일치하는 경우 */
+#alert-success {
+	display: none;
+	color: #00498c;
+	font-weight: bold;
+}
+
+/* 비번 일치하지 않는 경우 */
+#alert-danger {
+	display: none;
+	color: #d92742;
+	font-weight: bold;
+}
+
+#success_submit {
+	height: 35px;
+	width: 258px;
+	text-align: center;
+	font-size: 15px;
+	margin-top: 10px;
+	background-color: #3e2789;
+	color: #fff;
+	font-weight: 500 bolder;
+	border: 0 solid #fff;
 }

@@ -8,17 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import proj21_movie.dto.Member;
+import proj21_movie.mapper.MemberMapper;
 import proj21_movie.service.MemberService;
 
 @Controller
@@ -26,9 +29,12 @@ public class FindIDPWController {
 
 	@Autowired
 	private MemberService service;
-	
+
 	@Autowired
 	private JavaMailSender mailSender;
+
+	@Autowired
+	private MemberMapper mapper;
 
 	// 찾기 메인
 	@RequestMapping("/find_main")
@@ -47,20 +53,24 @@ public class FindIDPWController {
 	public String findpw() {
 		return "login/find_PW";
 	}
-	
+
 	// 패스워드 찾기 코드(성공)
 	@RequestMapping("/find_PW_code")
 	public String findpw_code() {
 		return "login/find_PW_code";
 	}
-	
+
 	// 패스워드 찾기 비번바꾸기(성공)
 	@RequestMapping("/find_PW_change")
 	public String findpw_change() {
 		return "login/find_PW_change";
 	}
-	
-		
+
+	// 패스워드 찾기 비번교체 성공(성공)
+	@RequestMapping("/find_PW_success")
+	public String findpw_success() {
+		return "login/find_PW_success";
+	}
 
 	// 아이디 찾기 실행
 	@RequestMapping(value = "find_id", method = RequestMethod.POST)
@@ -76,8 +86,8 @@ public class FindIDPWController {
 		return "login/find_ID";
 	}
 
-	// 비밀번호 찾기 실행(비로그인) 작성중
-	// 인증번호 생성
+	// 비밀번호 찾기 실행
+	// 인증번호 생성(성공)
 	@RequestMapping(value = "/find_PW_code.do")
 	public ModelAndView find_PW_code(HttpSession session, HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
@@ -100,7 +110,7 @@ public class FindIDPWController {
 						+ "MOVIE BOX 비밀번호 변경용 인증번호는 " + num + " 입니다." + System.getProperty("line.separator"); //
 
 				try {
-					
+
 					MimeMessage message = mailSender.createMimeMessage();
 					MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "utf-8");
 
@@ -131,32 +141,33 @@ public class FindIDPWController {
 			return mv;
 		}
 	}
-	
-	// 인증번호 확인
-	@RequestMapping(value = "pw_set.me", method = RequestMethod.POST)
-	public String pw_set(@RequestParam(value="email_injeung") String email_injeung,
-				@RequestParam(value = "num") String num) throws IOException{
-			
-			if(email_injeung.equals(num)) {
-				return "login/find_PW_change";
-			}
-			else {
-				return "login/find_PW";
-			}
+
+	// 인증번호 확인(성공)
+	@RequestMapping(value = "pw_code.do", method = RequestMethod.POST)
+	public String pw_set(@RequestParam(value = "memEmail_code") String memEmail_code, 
+			@RequestParam(value = "num") String num, HttpSession session) throws IOException {
+
+		if (memEmail_code.equals(num)) {
+			return "login/find_PW_change";
+
+		} else {
+			return "login/find_PW";
+		}
 	}
-	
-	
-	// 비밀번호 업데이트
-	@RequestMapping(value = "find_PW_change.do", method = RequestMethod.POST)
-	public String find_PW_change(Member member, HttpSession session) throws IOException{
-		int result = service.modifyMember(member);
+
+	// 비밀번호 업데이트(일단성공)
+	@RequestMapping(value = "find_PW_success.do", method = RequestMethod.POST)
+	public String pw_new(Member member, HttpSession session) throws IOException{
+		session.setAttribute("memEmail", member.getMemEmail());	
+		
+		int result = service.pwUpdate_M(member);
+		System.out.println("변경한 비밀번호 >> " + member);
 
 		if(result == 1) {
-			return "login/login";
-		}
-		else {
-			System.out.println("pw_update"+ result);
 			return "login/find_PW_change";
+		} else {
+			System.out.println("pwUpdate_M"+ result);
+			return "login/find_PW_success";
 		}
-}
+	}
 }

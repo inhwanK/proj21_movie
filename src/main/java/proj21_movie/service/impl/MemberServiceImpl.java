@@ -83,11 +83,12 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.selectMember(member);
 	}
 
+	// 비밀번호 변경
 	@Override
-	public Member updatePW(Member member) {
-		log.debug("service - updatePW() > " + member);
-		return mapper.updatePW(member);
+	public int pwUpdate_M(Member member) {
+		log.debug("service - pwUpdate_M() > " + member);
+		return mapper.pwUpdate_M(member);
+		
 	}
 
-	
 }

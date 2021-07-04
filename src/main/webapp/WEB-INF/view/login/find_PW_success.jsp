@@ -8,31 +8,34 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>패스워드 찾기</title>
+<title>패스워드 찾기 - 성공!</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/login/find_PW.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 </head>
-<body> 
+<body>
 	<div class="findmain">
 		<div class="findpw">
-			<form method="post" class="form-signin" action="find_PW_code.do" name="findform">
+			<form action="find_PW_success" method="POST" class="content">
 				<table>
 					<tr>
-						<td><img id="pw_img" alt="패스워드이미지" src="${contextPath}/resources/images/login/pw.png"></td>
+						<td><img id="pw_img" alt="변경성공이미지" src="${contextPath}/resources/images/login/community.png"></td>
 					</tr>
 					<tr>
-						<td><h2>패스워드 찾기</h2></td>
+						<td>
+							<h2>변경에 성공하셨습니다!</h2>
+						</td>
 					</tr>
 					<tr>
-						<td><input type="text" placeholder="이름을 입력하세요" id="memName" name="memName" required /></td>
+						<td>
+							<h4>새로운 비밀번호로 로그인 해 주세요.</h4>
+						</td>
 					</tr>
 					<tr>
-						<td><input type="email" placeholder="이메일을 입력하세요" id="memEmail" name="memEmail" required /></td>
+						<td>
+							<button id="success_submit" onclick="top.window.close()">닫기</button>
+						</td>
 					</tr>
-					<tr>
-						<td><button id="pw_submit">찾기</button></td>
-					</tr>
-				</table>	
+				</table>		
 			</form>
 		</div>
 	</div>

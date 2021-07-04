@@ -1,8 +1,6 @@
 package proj21_movie.mapper;
 
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.stereotype.Component;
 import proj21_movie.dto.Member;
 
@@ -34,6 +32,7 @@ public interface MemberMapper {
 	public String selectMember(Member member);
 	
 	// 패스워드 변경
-	Member updatePW(Member member);
+	public int pwUpdate_M(Member member);
 	
+
 }

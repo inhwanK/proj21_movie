@@ -31,5 +31,6 @@ public interface MemberService {
 	public String selectMember(Member member);
 	
 	// 패스워드 변경
-	Member updatePW(Member member);
+	public int pwUpdate_M(Member member);
+	
 }
