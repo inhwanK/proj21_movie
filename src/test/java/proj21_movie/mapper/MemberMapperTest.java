@@ -107,6 +107,8 @@ public class MemberMapperTest {
 	
 	@Test
 	public void test07memberIdChk() throws Exception{
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
 		String id = "test1@test.com";	// 존재하는 아이디
 		String id2 = "test123";	// 존재하지 않는 아이디
 		mapper.idCheck(id);

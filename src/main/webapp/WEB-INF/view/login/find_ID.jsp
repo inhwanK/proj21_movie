@@ -43,8 +43,7 @@
 							<td><img id="id_img" alt="아이디이미지" src="${contextPath}/resources/images/login/id.png"></td>
 						</tr>
 						<tr>
-							<td>
-							
+							<td>	
 								<h2>이메일 찾기</h2>
 								<!-- 이름과 전화번호가 일치하지 않을 때--> 
 								<c:if test="${check == 1}">
@@ -67,7 +66,7 @@
 							<td><input type="text" placeholder="전화번호를 입력하세요" id="memPhone" name="memPhone" maxlength="13" required /></td>
 						</tr>
 						<tr>
-							<td><button id="id_submit">검색</button></td>
+							<td><button id="id_submit">찾기</button></td>
 						</tr>
 					</table>
 				</form>

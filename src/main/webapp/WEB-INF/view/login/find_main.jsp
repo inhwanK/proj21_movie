@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아이디 또는 패스워드 찾기</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/login/find_main.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 <script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
@@ -25,7 +25,7 @@ $(function(){
 	
 	$(".btn_pw").click(function(){
 		var contextPath = "<%=request.getContextPath()%>";
-		window.open(contextPath + "/find_PW","popup","width=313, height=400, left=650, top=200")
+		window.open(contextPath + "/find_PW","popup","width=313, height=420, left=650, top=200")
 	});
 });
 </script>
