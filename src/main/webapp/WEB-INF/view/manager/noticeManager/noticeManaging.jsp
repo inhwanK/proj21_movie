@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${contextPath}/resources/css/manager/sidebar.css">
 <script type="text/javascript">
 	$(function(){
 		
@@ -22,8 +23,20 @@
 		
 		var contextPath = "${contextPath}";
 		
+		
+		// 날짜 검색값 초기화.
+		/* var date;
+		var today;
+		if(today == null){
+			date = new Date();
+			today = date.toISOString() // ISO Standard 형식으로 변환.
+			today = today.substr(0,10); // 문자열 자르기	
+		}
+		
+		$("#date").attr('value',today); */
+		
 		$.ajax({
-			url: contextPath+"/api/noticelist",
+			url: contextPath+"/api/noticerecent",
 			type:"get",
 			contentType:"application/json; charset=utf-8",
 			dataType:"json",
@@ -45,8 +58,73 @@
 			
 		});
 		
-		$(document).ready(function(){
+		$(document).on('change','#date', function selectByDate() {
 			
+			var notDate = $("#date").val();
+			
+			$.ajax({
+				url: contextPath+"/api/noticeListByDate?notDate="+notDate,
+				type:"get",
+				contentType:"application/json; charset=utf-8",
+				dataType:"json",
+				success:function(json){
+					list="";
+					if(json.length >= 1){
+						for(i=0;i<json.length;i++){
+							list += "<tr>";
+							list += "<td>"+json[i].notNo+"</td>";
+							list += "<td>"+json[i].notTitle+"</td>";
+			      			list += "<td>"+getFormatDate(json[i].notDate)+"</td>";
+			      			list += "<td><button id=\"modify\" class=\"btn btn-primary\">수정</button></td>";
+			      			list += "<td><button id=\"delete\" class=\"btn btn-primary\">삭제</button></td>";
+			      			list += "</tr>";
+						} // end of for
+						
+						$("tbody").empty();
+						$("tbody").append(list);
+						
+					}else{
+						
+						$("tbody").empty();
+						$("tbody").append("<tr><td>등록된 공지사항이 없습니다.</td></tr>")
+						alert("해당 날짜에 등록된 공지사항이 없습니다.");
+					} // end of if
+				} // end of success
+				
+			});
+		});
+		
+		$("#recent-search").on('click',function(){
+			$.ajax({
+				url: contextPath+"/api/noticerecent",
+				type:"get",
+				contentType:"application/json; charset=utf-8",
+				dataType:"json",
+				success:function(json){
+					list="";
+					if(json.length >= 1){
+						for(i=0;i<json.length;i++){
+							list += "<tr>";
+							list += "<td>"+json[i].notNo+"</td>";
+							list += "<td>"+json[i].notTitle+"</td>";
+			      			list += "<td>"+getFormatDate(json[i].notDate)+"</td>";
+			      			list += "<td><button id=\"modify\" class=\"btn btn-primary\">수정</button></td>";
+			      			list += "<td><button id=\"delete\" class=\"btn btn-primary\">삭제</button></td>";
+			      			list += "</tr>";
+						} // end of for
+						$("tbody").empty();
+						$("tbody").append(list);
+					} // end of if
+				} // end of success
+				
+			});
+		});
+		
+		
+		$(document).ready(function(){
+			 
+			// 다른 방법도 있는지 생각해보기.
+			// 수정 버튼
 			$(this).on('click', '[id=modify]', function(){
 				
 				var td = $(this).parent().prevUntil();
@@ -56,10 +134,12 @@
 				window.location.href = contextPath + "/updateNotice?notNo=" + notNo;
 			});
 			
+			// 등록 버튼
 			$(this).on('click','[id=regist]',function(){
 				window.location.href = contextPath+"/registNotice";
 			});
 			
+			// 삭제 버튼
 			$(this).on('click','[id=delete]',function(){
 				var td = $(this).parent().prevUntil();
 				var notNo = td.last().text(); 
@@ -88,7 +168,6 @@
 	});
 
 </script>
-<link rel="stylesheet" href="${contextPath}/resources/css/manager/sidebar.css">
 </head>
 <body>
 
@@ -100,32 +179,33 @@
   <!-- /사이드바 -->
 
   <!-- 본문 -->
-  <div id="page-content-wrapper">
-    <div class="container-fluid">
-      <h1 class="text-center">공지사항</h1>
+	<div id="page-content-wrapper">
+    	<div class="container-fluid">
+      		<h1 class="text-center">공지사항</h1>
       
-      <!-- <div> -->
-      	<button class="btn btn-primary topBtn" id="regist"  style="float:left; margin:0 0 10px 20px  ;">등록</button>
-      <!-- </div>
-      <div style="margin:0 20px;"> -->
-      	<input type="date" id="date" style="float:right; padding:0; margin:0 20px 0 0;">
-      <!-- </div> -->
-      <table class="table table-hover table-striped text-center" style="border: 1px solid;">
-      	<thead>
-      		<tr>
-      			<th>번호</th>
-      			<th>제목</th>
-      			<th>등록일</th>
-      			<th></th>
-      			<th></th>
-      		</tr>
-      	</thead>
-      	<tbody>
+	  			<button class="btn btn-primary topBtn" id="regist" style="float:left; margin:0 0 10px 5px;">등록</button>
+	      		<button class="btn btn-primary topBtn" id="recent-search"style="float:left; margin:0 0 10px 5px;">최근 공지 10개 보기</button>
+	      	<div id="search" style="width:290px; height:45px; float:right;">
+				<input type="date" class="btn btn-primary" id="date" style="float:right; padding:6px 0px; margin:0 20px 0 0;">
+      		</div>
       		
-      	</tbody>
-      </table>
-    </div>
-  </div>
+			<table class="table table-hover table-striped text-center" style="border: 1px solid;">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>등록일</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+			    <tbody>
+			      		
+			    </tbody>
+		    </table>
+		</div>
+	</div>
 </div>
 </body>
+
 </html>

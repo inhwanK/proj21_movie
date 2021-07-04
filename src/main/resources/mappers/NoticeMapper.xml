@@ -13,7 +13,21 @@
       from notice
       order by not_no desc;
 	</select>
-
+	
+	<select id="selectNoticeRecent" resultMap="noticeList">
+		select not_no ,not_title ,not_date
+		from notice
+		order by not_date desc
+		limit 10;
+	</select>
+	
+ 	<select id="selectNoticeByDate" resultMap="noticeList">
+		select not_no ,not_title ,not_date
+		from notice
+		where not_date like concat(#{notDate},'%')
+		order by not_no desc;
+	</select>
+	
 	<select id="selectNoticeByTitle" resultMap="noticeList">
    		select not_no ,not_title ,not_date ,rownum 
 		from (select not_no, not_title, not_date, @rownum:=@rownum+1 as rownum

@@ -15,6 +15,8 @@ public interface NoticeMapper {
 	
 	// 공지 다 검색
 	List<Notice> selectNoticeAll(); 
+	List<Notice> selectNoticeRecent();
+	List<Notice> selectNoticeByDate(String notDate);
 	
 	/*
 	 * 페이지마다 10개씩 검색. Mybatis는 기본적으로 파라미터를 하나만 받게 되어있음. 

@@ -105,4 +105,14 @@ show tables;
 select * from `member`;
 
 select * from inquiry;
-insert into
+
+-- 특정 날짜 공지 모두 가지고 오기.
+select not_no ,not_title ,not_date
+from notice
+where not_date like concat('2021-07-02%');
+
+-- 최근 공지 20개만 가지고 오기.
+select not_no ,not_title ,not_date
+from notice
+order by not_date desc
+limit 5;
