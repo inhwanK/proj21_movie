@@ -88,4 +88,10 @@ public class NoticeMapperTest {
 		Assert.assertNotNull(listNotice);
 	}
 
+	@Test
+	public void test08SelectNoticeRecent() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		List<Notice> listNotice = mapper.selectNoticeRecent();
+		Assert.assertNotNull(listNotice);
+	}
 }

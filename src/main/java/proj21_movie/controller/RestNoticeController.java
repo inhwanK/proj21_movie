@@ -11,15 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.mysql.fabric.Response;
 
 import proj21_movie.dto.Notice;
 import proj21_movie.service.NoticeService;
@@ -35,6 +32,18 @@ public class RestNoticeController {
 	public ResponseEntity<Object> getNoticeList() {
 		List<Notice> listNotice = service.showNoticeList();
 		return ResponseEntity.status(HttpStatus.OK).body(listNotice);
+	}
+	
+	@GetMapping("/noticeListByDate") // 날짜별 공지 가져오기.
+	public ResponseEntity<Object> getNoticeByDate(String notDate) {
+		List<Notice> listNotice = service.showNoticeByDate(notDate);
+		return ResponseEntity.status(HttpStatus.OK).body(listNotice);
+	}
+	
+	@GetMapping("/noticerecent")
+	public ResponseEntity<Object> getNoticeRecent(){
+		List<Notice> recentNoticeList = service.showNoticeRecent();
+		return ResponseEntity.ok(recentNoticeList);
 	}
 	
 	

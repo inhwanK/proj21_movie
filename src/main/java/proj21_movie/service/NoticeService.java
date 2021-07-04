@@ -10,8 +10,10 @@ import proj21_movie.dto.Notice;
 public interface NoticeService {
 	
 	List<Notice> showNoticeList();
-	List<Notice> showNoticeListByPage(String notTitle, int selectPage); // 파라미터가 더 필요할 듯.
-	List<Notice> showNoticeByTitle(String notTitle, int selectPage); // 제목 검색. 아직 구현안함.
+	List<Notice> showNoticeListByPage(String notTitle, int selectPage); 
+	List<Notice> showNoticeByTitle(String notTitle, int selectPage); 
+	List<Notice> showNoticeRecent();
+	List<Notice> showNoticeByDate(String notDate);
 	
 	Notice showNoticeDetail(int notNo);
 	

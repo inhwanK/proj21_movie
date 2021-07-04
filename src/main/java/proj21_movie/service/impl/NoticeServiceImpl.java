@@ -37,6 +37,16 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
+	public List<Notice> showNoticeRecent() {
+		return mapper.selectNoticeRecent();
+	}
+	
+	@Override
+	public List<Notice> showNoticeByDate(String notDate) {
+		return mapper.selectNoticeByDate(notDate);
+	}
+	
+	@Override
 	public int removeNotice(int notNo) {
 		return mapper.deleteNotice(notNo);
 	}
@@ -60,6 +70,4 @@ public class NoticeServiceImpl implements NoticeService{
 		return mapper.countNotice(notTitle);
 	}
 
-	
-	
 }
