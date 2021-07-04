@@ -80,7 +80,6 @@ $(function(){
         }
         return unescape(cookieValue);
     }
-
 });
 </script>
 </head>

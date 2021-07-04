@@ -38,7 +38,6 @@ $(function(){
 				<h3>이메일 또는 패스워드 찾기를 선택해 주세요</h3>
 				<input class="btn_id" id="button" type="submit" value="이메일 찾기"/></a>
 				<input class="btn_pw" id="button" type="submit" value="패스워드 찾기"/></a>
-				
 			</div>
 		</section>
 	<%@include file="/WEB-INF/view/footer.jsp"%>

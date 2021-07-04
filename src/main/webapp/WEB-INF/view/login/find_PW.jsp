@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/login/find_PW.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 </head>
-<body>
+<body> 
 	<div class="findmain">
 		<div class="findpw">
 			<form method="post" class="form-signin" action="find_PW_code.do" name="findform">

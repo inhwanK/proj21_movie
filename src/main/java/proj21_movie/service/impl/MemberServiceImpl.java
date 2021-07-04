@@ -88,6 +88,7 @@ public class MemberServiceImpl implements MemberService {
 	public int pwUpdate_M(Member member) {
 		log.debug("service - pwUpdate_M() > " + member);
 		return mapper.pwUpdate_M(member);
+		
 	}
 
 }

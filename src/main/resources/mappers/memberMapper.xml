@@ -87,4 +87,5 @@
 		 where mem_email = #{memEmail}
 	</update>
 
+
 </mapper>
