@@ -18,7 +18,7 @@
 			<form action="find_PW_success" method="POST" class="content">
 				<table>
 					<tr>
-						<td><img id="pw_img" alt="변경성공이미지" src="${contextPath}/resources/images/login/commu.png"></td>
+						<td><img id="pw_img" alt="변경성공이미지" src="${contextPath}/resources/images/login/community.png"></td>
 					</tr>
 					<tr>
 						<td>

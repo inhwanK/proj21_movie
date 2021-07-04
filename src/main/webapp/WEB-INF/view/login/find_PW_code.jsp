@@ -16,7 +16,7 @@
 <div class="findmain">
 	<div class="findpw">
 		<form action="pw_code.do" method="post">
-			<table>
+			<table> 
 				<tr>
 					<td>
 						<img id="pw_img" alt="패스워드이미지" src="${contextPath}/resources/images/login/pw.png">

@@ -40,7 +40,7 @@
 <body>
 	<div class="findmain">
 		<div class="findpw">
-			<form action="pw_new.me" method="POST" class="content">
+			<form action="find_PW_success.do" method="POST" class="content">
 				<table>
 					<tr>
 						<td>

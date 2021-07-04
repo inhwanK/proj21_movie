@@ -155,12 +155,10 @@ public class FindIDPWController {
 		}
 	}
 
-	// 비밀번호 업데이트(실패)
-	// 비밀번호 찾기 실행
-	@RequestMapping(value = "pw_new.me", method = RequestMethod.POST)
+	// 비밀번호 업데이트(일단성공)
+	@RequestMapping(value = "find_PW_success.do", method = RequestMethod.POST)
 	public String pw_new(Member member, HttpSession session) throws IOException{
-//		session.getAttribute(member.getMemEmail());
-//		session.setAttribute("memEmail", member.getMemEmail());	
+		session.setAttribute("memEmail", member.getMemEmail());	
 		
 		int result = service.pwUpdate_M(member);
 		System.out.println("변경한 비밀번호 >> " + member);
