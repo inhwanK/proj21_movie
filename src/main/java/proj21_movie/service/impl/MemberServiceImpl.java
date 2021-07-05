@@ -89,4 +89,12 @@ public class MemberServiceImpl implements MemberService {
 		log.debug("service - pwUpdate_M() > " + member);
 		return mapper.pwUpdate_M(member);
 	}
+
+	// 회원정보 수정시 패스워드 체크
+	@Override
+	public int passChk(Member member) throws Exception {
+		log.debug("service - passChk() > " + member);
+		int result = mapper.passChk(member);
+		return result;
+	}
 }

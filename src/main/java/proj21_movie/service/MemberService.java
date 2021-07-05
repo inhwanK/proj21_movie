@@ -32,4 +32,6 @@ public interface MemberService {
 	// 패스워드 변경
 	public int pwUpdate_M(Member member);
 	
+	// 회원정보 수정시 패스워드 체크
+	public int passChk(Member member) throws Exception;
 }
