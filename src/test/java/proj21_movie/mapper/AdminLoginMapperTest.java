@@ -1,7 +1,5 @@
 package proj21_movie.mapper;
 
-import static org.junit.Assert.*;
-
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,5 +36,4 @@ public class AdminLoginMapperTest {
         admapper.getAdmin(admin);
         System.out.println("결과 값 : " + admapper.getAdmin(admin));    
 	}
-
 }

@@ -26,7 +26,5 @@ public class AuthServiceImpl implements AuthService {
 			throw new WrongIdPasswordException();
 		}
 		return new AuthInfo(member.getMemEmail(), member.getMemName());
-	}
-
-	
+	}	
 }

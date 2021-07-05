@@ -21,6 +21,4 @@ public class AdminServiceImpl implements AdminService {
 		log.debug("service - getAdmin() > " + admin);
 		return admapper.getAdmin(admin);
 	}
-
-
 }

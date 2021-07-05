@@ -8,13 +8,10 @@ import proj21_movie.dto.Member;
 public interface MemberService {
 
 	Member getMember(String memEmail);
-
 	List<Member> getLists();
 
 	int registerMember(Member member);
-
 	int modifyMember(Member member);
-
 	int removeMember(String memEmail);
 
 	Member selectMemberBymemEmail(String memEmail);
@@ -26,10 +23,9 @@ public interface MemberService {
 	// 아이디 찾기
 	public Member findId(Member member);
 
-	// 비밀번호 찾기(비로그인)
+	/* 비밀번호 찾기(비로그인) */
 	// 회원조회
 	public String selectMember(Member member);
-	
 	// 패스워드 변경
 	public int pwUpdate_M(Member member);
 	

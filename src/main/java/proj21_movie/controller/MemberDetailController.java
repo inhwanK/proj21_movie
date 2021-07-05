@@ -14,6 +14,7 @@ import proj21_movie.service.MemberDetailService;
 
 @Controller
 public class MemberDetailController {
+	
 	@Autowired
 	private MemberDetailService memberService;
 
@@ -23,6 +24,7 @@ public class MemberDetailController {
 		if (member == null) {
 			throw new MemberNotFoundException();
 		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("member", member);
 		mav.setViewName("member/memberDetail");

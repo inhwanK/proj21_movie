@@ -1,19 +1,15 @@
-<%@ page import="java.time.LocalDate"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="tf" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <c:set var="contextPath" value="<%=request.getContextPath()%>" />
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>회원가입</title>
-<link rel="stylesheet" href="${contextPath}/resources/css/join/joinform.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<meta charset="UTF-8">
+	<title>회원가입</title>
+	<link rel="stylesheet" href="${contextPath}/resources/css/join/joinform.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	$(function(){	
 		<!-- 비밀번호 일치 확인 -->
@@ -102,7 +98,10 @@
 </script>
 </head>
 <body>
+	<!-- header -->
 	<%@include file="/WEB-INF/view/header.jsp"%>
+	
+	<!-- section -->
 	<section>
 		<h1 class="join_title">회원가입</h1>
 		<form action="joinsuccess" method="post">
@@ -149,6 +148,8 @@
 			</div>
 		</form>
 	</section>
+	
+	<!-- footer -->
 	<%@include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>

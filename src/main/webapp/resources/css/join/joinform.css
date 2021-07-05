@@ -1,14 +1,11 @@
 @charset "UTF-8";
 
 /* Fontawesome 4.7 */
-@import
-	url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@900&display=swap')
-	;
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@900&display=swap');
 
 @font-face {
 	font-family: 'IBMPlexSansKR-Regular';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
 		format('woff');
 	font-weight: normal;
 	font-style: normal;
@@ -48,7 +45,6 @@ section {
 	margin-bottom: 20%;
 	display: block;
 }
-
 
 /* section 본문 */
 section #joinFormArea {
@@ -109,6 +105,7 @@ button {
 	margin-bottom: 2%;
 	margin-right: 65%;
 }
+
 /* 비번 일치하는 경우 */
 #alert-success {
 	display: none;
@@ -129,6 +126,7 @@ button {
 	display: none;
 	font-weight: bolder;
 }
+
 /* 중복아이디 존재하는 경우 */
 .id_input_re_2 {
 	color: #d92742;

@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import proj21_movie.dto.Member;
-import proj21_movie.mapper.MemberMapper;
 import proj21_movie.service.MemberService;
 
 @Controller
@@ -30,9 +29,6 @@ public class FindIDPWController {
 
 	@Autowired
 	private JavaMailSender mailSender;
-
-	@Autowired
-	private MemberMapper mapper;
 
 	// 찾기 메인
 	@RequestMapping("/find_main")

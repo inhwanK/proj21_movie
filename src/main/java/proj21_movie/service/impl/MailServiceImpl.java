@@ -3,7 +3,6 @@ package proj21_movie.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import proj21_movie.service.MailService;
@@ -42,5 +41,4 @@ public class MailServiceImpl implements MailService {
         }
         return false;
     }
-    
 }

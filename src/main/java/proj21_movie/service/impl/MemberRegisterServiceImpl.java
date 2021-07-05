@@ -11,6 +11,7 @@ import proj21_movie.service.MemberRegisterService;
 
 @Service
 public class MemberRegisterServiceImpl implements MemberRegisterService {
+	
 	@Autowired
 	private MemberMapper memberMapper;
 
@@ -20,6 +21,7 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 		if (member != null) {
 			throw new DuplicateMemberException("dup email" + req.getMemEmail());
 		}
+		
 		Member newMember = new Member(req.getMemEmail(), req.getMemPasswd(), req.getMemBirthdate(), req.getMemName(), req.getMemPhone());
 		memberMapper.insertMember(newMember);
 		

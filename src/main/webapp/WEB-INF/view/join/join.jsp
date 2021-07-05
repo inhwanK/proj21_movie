@@ -1,8 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="contextPath" value="<%=request.getContextPath() %>" />
 <!DOCTYPE html>
 <html>
@@ -11,10 +8,12 @@
 	<title>약관동의</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/join/join.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+	<!-- header -->
 	<%@include file="/WEB-INF/view/header.jsp"%>
+	
+	<!-- section -->
 	<section id="joinFormArea">
 		<br>
 		<h1 class="join_title">회원가입</h1>
@@ -52,12 +51,16 @@
 				<form action="joinform" method="post">
 				<input type="checkbox" name="agree" value="true" class="chbox1"><label class="chbox2">이용약관에 동의합니다.</label>
 				<br><br>
-				<a href="${contextPath}/joinform"><input class="btn_joinform" id="button" type="submit" value="회원가입 화면으로"/></a>
+				<a href="${contextPath}/joinform">
+					<input class="btn_joinform" id="button" type="submit" value="회원가입 화면으로"/>
+				</a>
 				</form>
 			</li>
 		</ul>
 		<br>
 	</section>
+	
+	<!-- footer -->
 	<%@include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>

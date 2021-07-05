@@ -17,5 +17,4 @@ public class MemberDetailServiceImpl implements MemberDetailService {
 	public Member showMemberByMemEmail(String memEmail) {
 		return membMapper.selectMemberByEmail(memEmail);
 	}
-
 }

@@ -1,28 +1,21 @@
 package proj21_movie.controller;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import proj21_movie.dto.LoginCommand;
 import proj21_movie.dto.Member;
-import proj21_movie.service.AuthService;
 import proj21_movie.service.MemberService;
 
 @Controller
 public class LoginController {
-	
-	@Autowired
-	private AuthService authService;
 
 	@Autowired
 	private MemberService memService;
@@ -33,7 +26,7 @@ public class LoginController {
 		return "login/login";
 	}
 
-	// 로그인성공 화면 연결(갑자기안됨)
+	// 로그인성공 화면 연결(성공)
 	@RequestMapping("/loginsuccess")
 	public String loginSuccess() {
 		return "login/loginsuccess";
@@ -62,10 +55,10 @@ public class LoginController {
 			rttr.addFlashAttribute("result", result);
 			return "redirect:/login";
 		}   
+		
         //로그인 성공
 		session.setAttribute("member", mem); // 일치하는 아이디, 비밀번호를 입력한 경우 (로그인 성공)
 		
 		return "redirect:/loginsuccess";
 	}
-
 }
