@@ -102,7 +102,7 @@ nav ul {
 section {
 	margin: 50px auto;
 	width: 1300px;
-	height: 900px;
+	/* height: 900px; */
 	text-align: center;
 /* 	border: 1px solid green; */
 }
@@ -184,6 +184,26 @@ section {
 	margin-left: 20px;
 	margin-bottom: 10px;
 	border-radius: 3px;
+}
+
+.cancelRes {
+	background-color: RGB(3, 22, 52);
+	border: 1px solid black;
+	border-radius: 3px;
+	text-decoration: none;
+	color: white;
+	padding: 3px;
+	font-size: 1.2em;
+}
+
+.cancelFail {
+	background-color: gray;
+	border: 1px solid black;
+	border-radius: 3px;
+	text-decoration: none;
+	color: RGB(3, 22, 52);
+	padding: 3px;
+	font-size: 1.2em;
 }
 
 .textarea{

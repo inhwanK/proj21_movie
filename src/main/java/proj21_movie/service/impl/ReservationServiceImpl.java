@@ -51,4 +51,11 @@ public class ReservationServiceImpl implements ReservationService {
 		return mapper.selectReservationByNo(no);
 	}
 
+	@Override
+	public List<Reservation> getReservationListByMemNo(int no) {
+		List<Reservation> list = mapper.selectReservationByMemNo(no);
+		log.debug("service - getReservationListByMemNo() > " + list.size());
+		return list;
+	}
+
 }
