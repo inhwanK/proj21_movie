@@ -101,7 +101,7 @@ nav ul {
 section {
 	margin: 50px auto;
 	width: 1300px;
-	height: 900px;
+	/* height: 900px; */
 	text-align: center;
 /* 	border: 1px solid green; */
 }
@@ -170,8 +170,9 @@ section {
 	display: flex;
 	text-align: left;
 	background-color: RGB(247,247,247);
-	height: 150px;
+	height: 170px;
 	border-radius: 5px;
+	margin-bottom: 30px;
 }
 
 .comment-list img{
@@ -179,10 +180,31 @@ section {
 	width: 90px;
 	margin-top: 10px;
 	margin-left: 20px;
+	border-radius: 3px;
+}
+
+.delComment {
+	background-color: RGB(3, 22, 52);
+	border: 1px solid black;
+	border-radius: 3px;
+	text-decoration: none;
+	color: white;
+	padding: 3px;
+	font-size: 1.2em;
 }
 
 .textarea{
 	margin-left: 20px;
+}
+
+.textarea h3{
+	margin-top: 0px;
+	margin-bottom: 5px;	
+}
+
+.textarea p {
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 

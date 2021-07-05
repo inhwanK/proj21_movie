@@ -36,11 +36,9 @@ public class RestCommentController {
 		return ResponseEntity.ok(service.getLists());
 	}
 	
-	@GetMapping("/comments/user")
-	public ResponseEntity<Object> commentUser (@RequestParam(defaultValue = "") String comUser) {
-		List<Comment> comment = service.getCommentByUser(comUser);
-		return ResponseEntity.status(HttpStatus.OK).body(comment);
-	}
+	@GetMapping("/comments/user")	// json으로 받기는 아직 못 함..
+	public ResponseEntity<Object> commentUser (@RequestParam(value = "comUser") String comUser) {
+		return ResponseEntity.ok(service.getCommentByUser(comUser));
 	
 	// 영화번호로 검색(영화 마다 댓글 리스트)
 	@GetMapping("/comments/movie/{movNo}")
