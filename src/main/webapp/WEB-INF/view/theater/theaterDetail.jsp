@@ -218,33 +218,38 @@
 							if (dataLength >= 1) {
 								var sCont = "";
 								var sCont2 = "";
+								var showNo = 0;
+								var movieNo = 0;
+								var cinemaNo = 0;
 								for (i = 0; i < dataLength; i++) {
-									
-									sCont += "<div class='theater-list'>";
-									// theater-title
-									sCont += "<div class='theater-title'>";
-									sCont += "<p class='movie-grade age-" + json[i].movNo.movGrade + "'>";
-									sCont += "<a href='${contextPath}/movie?movNo=" + json[i].movNo.movNo + "' title='" 
-											+ json[i].movNo.movTitle + " 상세보기'>" + json[i].movNo.movTitle + "</a></p>";
-									sCont += "<input id=hidden-movNo type='hidden' value='" + json[i].movNo.movNo + "'/>";
-									sCont += "<p class='information'>";
-									sCont += "<span>상영중</span>/상영시간" + json[i].movNo.movRuntime + "분</p>";
-									sCont += "</div>";					
-									sCont += "</div>";
-									
-									// theater-type-box
-									sCont += "<div class='theater-type-box'>";
-									sCont += "<div class='theater-type'>";
-									sCont += "<p class='theater-name'>" + json[i].cinNo.cinNo + "관</p>";
-									sCont += "<p class='chair'>총 " + json[i].cinNo.cinSeat + "석</p>";
-									sCont += "</div>";
-									sCont += "<div class='theater-time'>";
-									sCont += "<div class='theater-type-area'>" + json[i].cinNo.cinType + "(자막)</div>";
-									sCont += "<div class='theater-time-box'>";
-									sCont += "<a href='#' title='영화 예매하기'>";
-									sCont += "<span class='time'>" + json[i].shwStarttime;
-									sCont += "<span class='chair'>" + json[i].cinNo.cinSeat + "석 </span></span></a>";
-									sCont += "</div></div></div>";
+									if (json[i].movNo.movNo != movieNo || json[i].shwNo != json[i].shwNo) {
+										sCont += "<div class='theater-list'>";
+										// theater-title
+										sCont += "<div class='theater-title'>";
+										sCont += "<p class='movie-grade age-" + json[i].movNo.movGrade + "'>";
+										sCont += "<a href='${contextPath}/movie?movNo=" + json[i].movNo.movNo + "' title='" 
+												+ json[i].movNo.movTitle + " 상세보기'>" + json[i].movNo.movTitle + "</a></p>";
+										sCont += "<input id=hidden-movNo type='hidden' value='" + json[i].movNo.movNo + "'/>";
+										sCont += "<p class='information'>";
+										sCont += "<span>상영중</span>/상영시간" + json[i].movNo.movRuntime + "분</p>";
+										sCont += "</div>";					
+										sCont += "</div>";
+													
+										movieNo = json[i].movNo.movNo;
+									}
+										// theater-type-box
+										sCont += "<div class='theater-type-box'>";
+										sCont += "<div class='theater-type'>";
+										sCont += "<p class='theater-name'>" + json[i].cinNo.cinNo + "관</p>";
+										sCont += "<p class='chair'>총 " + json[i].cinNo.cinSeat + "석</p>";
+										sCont += "</div>";
+										sCont += "<div class='theater-time'>";
+										sCont += "<div class='theater-type-area'>" + json[i].cinNo.cinType + "(자막)</div>";
+										sCont += "<div class='theater-time-box'>";
+										sCont += "<a href='#' title='영화 예매하기'>";
+										sCont += "<span class='time'>" + json[i].shwStarttime;
+										sCont += "<span class='chair'>" + json[i].cinNo.cinSeat + "석 </span></span></a>";
+										sCont += "</div></div></div>";
 								}
 								$(".theater-list-box").empty();		
 								$(".theater-list-box").append(sCont);									
@@ -522,34 +527,33 @@
 								</div>
 								<!-- // theater-list-box -->								
 							</div>
-						</div>
-						<!-- // 상영시간표 리스트 -->
+							<!-- // 상영시간표 리스트 -->
 						
-						<!-- 관람료 리스트 -->
-						<div id="tab03" class="tab-cont">
-							<h2 class="title">영화관람료</h2>
-							<!-- price-table-box -->
-							<div class="price-table-box">
-								<p class="price-table-title">요금 정보</p>
-								<table class="data-table">
-									<thead> 
-										<tr> 
-											<th>상영 타입</th>
-											<th>일반</th>
-											<th>청소년</th>
-											<th>우대</th>
-										</tr>
-									</thead>
-									<tbody>												
-									</tbody>
-								</table>
+							<!-- 관람료 리스트 -->
+							<div id="tab03" class="tab-cont">
+								<h2 class="title">영화관람료</h2>
+								<!-- price-table-box -->
+								<div class="price-table-box">
+									<p class="price-table-title">요금 정보</p>
+									<table class="data-table">
+										<thead> 
+											<tr> 
+												<th>상영 타입</th>
+												<th>일반</th>
+												<th>청소년</th>
+												<th>우대</th>
+											</tr>
+										</thead>
+										<tbody>												
+										</tbody>
+									</table>
+								</div>
+								<!-- price-table-box -->
 							</div>
-							<!-- price-table-box -->
-						</div>
-						<!-- // 관람료 리스트 -->
-																		
+							<!-- // 관람료 리스트 -->
+						</div>								
+	    				<!-- // tab-cont-wrap -->	    			    			
 	    			</div>
-	    			<!-- // tab-cont-wrap -->	    			    			
     			</div>
   			
     		</div>

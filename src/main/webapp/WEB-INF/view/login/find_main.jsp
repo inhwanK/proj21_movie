@@ -16,13 +16,47 @@ $(function(){
 	<!-- 아이디 찾기 -->
 	$(".btn_id").click(function(){
 		var contextPath = "<%=request.getContextPath()%>";
-		window.open(contextPath + "/find_ID","popup","width=313, height=400, left=650, top=200")
+		//window.open(contextPath + "/find_ID","popup","width=313, height=400, left=650, top=200")
+		
+		function PopupCenter(url, title, w, h) { 
+	        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;  
+	        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;  
+	                  
+	        width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;  
+	        height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;  
+	                  
+	        var left = ((width / 2) - (w / 2)) + dualScreenLeft;  
+	        var top = ((height / 2) - (h / 2)) + dualScreenTop;  
+	        var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);  
+	      
+	        if (window.focus) {  
+	            newWindow.focus();  
+	        }  
+	    } 				    
+	    PopupCenter(contextPath + "/find_ID",'popup','313','400');
 	});
 	
 	<!-- 비밀번호 찾기 -->
 	$(".btn_pw").click(function(){
 		var contextPath = "<%=request.getContextPath()%>";
-		window.open(contextPath + "/find_PW","popup","width=313, height=420, left=650, top=200")
+		//window.open(contextPath + "/find_PW","popup","width=313, height=420, left=650, top=200")
+		
+		function PopupCenter(url, title, w, h) { 
+	        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;  
+	        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;  
+	                  
+	        width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;  
+	        height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;  
+	                  
+	        var left = ((width / 2) - (w / 2)) + dualScreenLeft;  
+	        var top = ((height / 2) - (h / 2)) + dualScreenTop;  
+	        var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);  
+	      
+	        if (window.focus) {  
+	            newWindow.focus();  
+	        }  
+	    } 				    
+	    PopupCenter(contextPath + "/find_PW",'popup','313','420');
 	});
 });
 </script>

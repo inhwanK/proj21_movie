@@ -31,19 +31,7 @@
 				$(this).siblings().removeClass("active");
 	
 				$(".tab-cont-wrap > div").removeClass("active");
-				$(".tab-cont-wrap > div").eq($(this).index()).addClass("active");
-				
-				// 로그인했을때 한줄평에서 회원이메일이 같으면 클래스 추가(배경색 바뀜-구별을 위해)
-				if (${member != null}) {
-					var pUser = $('.prof:contains("${member.memEmail}")').parent();
-					pUser.addClass('com-me');
-				}
-				
-				// 관리자 로그인시 클래스 추가 (파란색 배경으로 바뀜)
-				if (${admin != null}) {
-					var pUser = $('.prof').parent();
-					pUser.addClass('com-admin');
-				}
+				$(".tab-cont-wrap > div").eq($(this).index()).addClass("active");	
 			});
 			
 		   /* 취소 버튼 누를시  */
@@ -66,14 +54,6 @@
 		   $('#example-fontawesome').barrating({ 
    				theme: 'fontawesome-stars' 
   			});
-		   
-		   /* 엔터 쳤을때 버튼 누른것과 동일한 이벤트 */
-			$("#contxt").on("keyup", function(key) {
-		        if (key.keyCode == 13) {
-		        	$('#writeBtn').click();
-		        	return false;	// 검색 버튼을 눌렀을 경우에 해당 버튼이 활성화 (다른 의도하지 않은 동작 방지)
-		        }
-		    });
 		   
 		    /* 탑버튼 눌렸을때 올라가는 스크립트 */
 			$(document).ready(function() {
@@ -124,69 +104,76 @@
 				return newDateForm = subDateArray[0] + "." + subDateArray[1] + "." + subDateArray[2];
 			}
 			
+			reloadComment();		// 실관람평 데이터 받아옴
+			reloadMovie();	// 영화 상세 데이터 받아옴
+			
 			var contextPath = "${contextPath}";
 			var movNo = "${movNo}";
 			
 			/* ajax - 영화 상세 페이지 데이터 받아올때 */
-			$.ajax({
-				type:"GET",
-				url: contextPath + "/api/movies/" + movNo,
-				contentType: "application/json; charset=utf-8",
-				success: function(json){
-	
-					var bg = "";
-					var title = "";
-					var avgStar = "";
-					var poster = "";
-					var sCont = "";
-					
-						/* 영화 뒷 배경 */
-						bg += "<div class='bg-img' style='background-image:url("
-								+ "${contextPath}/resources/images/movie/movie-detail/bg-" + json.movPoster + ");'>";
-						bg += "</div>"; 
+			function reloadMovie(){
+				var contextPath = "${contextPath}";
+				var movNo = "${movNo}";
+				$.ajax({
+					type:"GET",
+					url: contextPath + "/api/movies/" + movNo,
+					contentType: "application/json; charset=utf-8",
+					success: function(json){
+		
+						var bg = "";
+						var title = "";
+						var avgStar = "";
+						var poster = "";
+						var sCont = "";
 						
-						/* 실시간 평점 (영화 평균 평점) <-- 트랜젝션 사용 */ 
-						avgStar += json.movAvgstar;
-						
-						/* 영화 제목 */			
-						title += "<p class='title'>" + json.movTitle + "</p>";
-						// title += "<p class='title-eng'>" + 'Cruella' + "</p>";		// 영어 제목 컬럼 미지정
-						
-						/* 영화 포스터 */
-						poster += "<p class='movie-grade age-" + json.movGrade + "'></p>";	
-						poster += "<img alt='" + json.movTitle + "'src="
-							+ "'${contextPath}/resources/images/movie/box-office/" + json.movPoster + "'/>";			
-						
-						// 주요정보 탭					
-						/* 영화 줄거리 */
-						sCont += "<div class='movie-summary'>";
-						sCont += "<div class='txt'>" + json.movDetail + "</div>";
-						sCont += "</div><br><hr>";
-						
-						/* 영화 정보 */
-						sCont += "<div class='movie-info'>";
-						sCont += "<p class='p-type'></p>";		
-						sCont += "<div class='line'>";						
-						sCont += "<p>감독&nbsp;: " + json.movDirector + "</p>";						
-						sCont += "<p>장르&nbsp;: " + json.movGenre + " / 런타임 : " + json.movRuntime + " 분</p>";						
-						sCont += "<p id='movie-grade'>등급&nbsp;: <i>" + json.movGrade + "세이상</i>관람가</p>";						
-						sCont += "<p>개봉일&nbsp;: " + getFormatDate(json.movOpendate) + "</p>";											
-						sCont += "</div>";
-						sCont += "<p>출연진&nbsp;: " + json.movActor + "</p>";
-						sCont += "</div>";
-						
-					$(".movie-detail-page .movie-bg").append(bg);
-					$(".number em").append(avgStar);
-					$(".movie-detail-cont").append(title);
-					$(".poster .wrap").append(poster);
-					$(".movie-info-list").append(sCont);
-					$('#movie-grade i:contains("0세이상")').text("전체");
-					$('#movie-grade i:contains("19세이상")').parent().text("청소년관람불가");
-				},
-				error : function(request, status, error){
-					window.location.href = contextPath + "/movielist";	// 데이터에 없는 영화번호를 검색시 전체영화 페이지로 이동
-				}
-			});
+							/* 영화 뒷 배경 */
+							bg += "<div class='bg-img' style='background-image:url("
+									+ "${contextPath}/resources/images/movie/movie-detail/bg-" + json.movPoster + ");'>";
+							bg += "</div>"; 
+							
+							/* 실시간 평점 (영화 평균 평점) <-- 트랜젝션 사용 */ 
+							avgStar += json.movAvgstar;
+							
+							/* 영화 제목 */			
+							title += "<p class='title'>" + json.movTitle + "</p>";
+							// title += "<p class='title-eng'>" + 'Cruella' + "</p>";		// 영어 제목 컬럼 미지정
+							
+							/* 영화 포스터 */
+							poster += "<p class='movie-grade age-" + json.movGrade + "'></p>";	
+							poster += "<img alt='" + json.movTitle + "'src="
+								+ "'${contextPath}/resources/images/movie/box-office/" + json.movPoster + "'/>";			
+							
+							// 주요정보 탭					
+							/* 영화 줄거리 */
+							sCont += "<div class='movie-summary'>";
+							sCont += "<div class='txt'>" + json.movDetail + "</div>";
+							sCont += "</div><br><hr>";
+							
+							/* 영화 정보 */
+							sCont += "<div class='movie-info'>";
+							sCont += "<p class='p-type'></p>";		
+							sCont += "<div class='line'>";						
+							sCont += "<p>감독&nbsp;: " + json.movDirector + "</p>";						
+							sCont += "<p>장르&nbsp;: " + json.movGenre + " / 런타임 : " + json.movRuntime + " 분</p>";						
+							sCont += "<p id='movie-grade'>등급&nbsp;: <i>" + json.movGrade + "세이상</i>관람가</p>";						
+							sCont += "<p>개봉일&nbsp;: " + getFormatDate(json.movOpendate) + "</p>";											
+							sCont += "</div>";
+							sCont += "<p>출연진&nbsp;: " + json.movActor + "</p>";
+							sCont += "</div>";
+							
+						$(".movie-detail-page .movie-bg").append(bg);
+						$(".number em").append(avgStar);
+						$(".movie-detail-cont").append(title);
+						$(".poster .wrap").append(poster);
+						$(".movie-info-list").append(sCont);
+						$('#movie-grade i:contains("0세이상")').text("전체");
+						$('#movie-grade i:contains("19세이상")').parent().text("청소년관람불가");
+					},
+					error : function(request, status, error){
+						window.location.href = contextPath + "/movielist";	// 데이터에 없는 영화번호를 검색시 전체영화 페이지로 이동
+					}
+				});
+			}
 			
 			/* 상영타입 (전부 2d로 넣어놓음) */
 			var cinNo = "1";
@@ -199,55 +186,76 @@
 		
 			/* // 주요정보 탭 */
 			
-			/* 실관람평  탭 */
-			var movNo = "${movNo}";
-			$.get(contextPath+"/api/comments/movie/" + movNo,
-				function(json) {
-					var dataLength = json.length;
-					if (dataLength >= 1) {
-						var sCont = "";				
-						var size = "";	
-							size += dataLength
+			/* 실관람평  탭 */		
+			function reloadComment(){
+				var contextPath = "${contextPath}";
+				var movNo = "${movNo}";
+				
+				$.ajax({
+					type:"GET",
+					url: contextPath + "/api/comments/movie/" + movNo,
+					contentType: "application/json; charset=utf-8",
+					async: false,
+					success: function(json){
+						var dataLength = json.length;
+						if (dataLength >= 1) {
+							var sCont = "";				
+							var size = "";	
+								size += dataLength
+								
+							for (i = 0; i < dataLength; i++) {							
+								sCont += "<li>";
+								// comment-list
+								sCont += "<div class='comment-list'>";
+								// prof
+								sCont += "<div class='prof'>";						
+								sCont += "<img src='${contextPath}/resources/images/movie/movie-detail/bg-profile.png'>";
+								sCont += "<p id='none-user' style='display:none'>" + json[i].comUser + "</p>";
+								sCont += "<p class='user-id'>" + json[i].comUser.substring(0, 4) + "</p>";
+								sCont += "<div class='divNo' style ='display:none'>" + json[i].comNo + "</div>"
+								sCont += "</div>";
+								// prof
+								
+								// textarea
+								sCont += "<div class='textarea'>";
+								sCont += "<h3>한줄평</h3>";
+								sCont += "<h3>" + json[i].comStar + "</h3>";
+								sCont += "<p>" + json[i].comContent + "</p>";							
+								sCont += "</div>";
+								// // textarea
+								
+								// btn-util
+								sCont += "<div class='btn-util'>";				
+								sCont += "<button id='alert'></button>";					
+								sCont += "</div>";
+								// // btn-util
+								
+								sCont += "</div>";
+								// // comment-list
+								sCont += "<h5>" + json[i].comDate + "</h5>";
+								sCont += "</li>";
+							}
+							$("#comment-count .font-gblue").append(size);
+							$(".movie-comment ul").append(sCont);
 							
-						for (i = 0; i < dataLength; i++) {							
-							sCont += "<li>";
-							// comment-list
-							sCont += "<div class='comment-list'>";
-							// prof
-							sCont += "<div class='prof'>";						
-							sCont += "<img src='${contextPath}/resources/images/movie/movie-detail/bg-profile.png'>";
-							sCont += "<p id='none-user' style='display:none'>" + json[i].comUser + "</p>";
-							sCont += "<p class='user-id'>" + json[i].comUser.substring(0, 4) + "</p>";
-							sCont += "<div class='divNo' style ='display:none'>" + json[i].comNo + "</div>"
-							sCont += "</div>";
-							// prof
+							// 로그인했을때 한줄평에서 회원이메일이 같으면 클래스 추가(배경색 바뀜-구별을 위해)
+							if (${member != null}) {
+								var pUser = $('.prof:contains("${member.memEmail}")').parent();
+								pUser.addClass('com-me');
+							}
 							
-							// textarea
-							sCont += "<div class='textarea'>";
-							sCont += "<h3>한줄평</h3>";
-							sCont += "<h3>" + json[i].comStar + "</h3>";
-							sCont += "<p>" + json[i].comContent + "</p>";							
-							sCont += "</div>";
-							// // textarea
-							
-							// btn-util
-							sCont += "<div class='btn-util'>";				
-							sCont += "<button id='alert'></button>";					
-							sCont += "</div>";
-							// // btn-util
-							
-							sCont += "</div>";
-							// // comment-list
-							sCont += "<h5>" + json[i].comDate + "</h5>";
-							sCont += "</li>";
-						}
-						$("#comment-count .font-gblue").append(size);
-						$(".movie-comment ul").append(sCont);
-					}else {
-						$("#comment-count .font-gblue").append(dataLength);
-						$('#noDataDiv').show();
-					}							
+							// 관리자 로그인시 클래스 추가 (파란색 배경으로 바뀜)
+							if (${admin != null}) {
+								var pUser = $('.prof').parent();
+								pUser.addClass('com-admin');
+							}
+						}else {
+							$("#comment-count .font-gblue").append(dataLength);
+							$('#noDataDiv').show();
+						}							
+					}
 				});
+			}
 			
 			/* ajax */
 			$('#writeBtn').on("click", function(e){
@@ -336,15 +344,30 @@
 						                    title: '한줄평이 등록되었습니다.',
 						                    text : '소중한 한줄평 감사합니다.'
 						                }).then((result) => {
-											if (result.isConfirmed) { 
-												location.reload();
+											if (result.isConfirmed) { 																		
+												$(".number em").empty();
+												$(".movie-detail-cont > .title").remove();
+												$(".poster .wrap").empty();
+												$(".movie-info-list").empty();
+												reloadMovie();
+												
+												$("#comment-count .font-gblue").empty();
+												$(".movie-comment ul").empty();
+												reloadComment();
+												
+												$(".write-content").slideToggle().toggleClass("active");  
+												
+												$("#contxt").val('');	        
+										        $(".br-widget a").removeClass();	               
+										        $(".br-widget a:first-child").addClass("br-selected br-current");	               
+										        $(".br-current-rating").text("1");	         
+										        $(".br-widget").unbind('mouseleave');
 											} 
 										});
 									}
 								},
 								error : function(request, status, error){
 									alert("code:" + request.status+"\n" + "message:" + request.responseText+"\n" + "error:" + error);
-									location.reload();
 								}
 							});
 					} else{    
@@ -414,6 +437,7 @@
 							$.ajax({
 								url: contextPath + "/api/comments/" + comNo,
 								type: 'DELETE',
+								dataType: "html",
 								success: function(res) {
 									//alert(comNo + "번 한줄평 삭제 완료");
 									//location.reload();	
@@ -421,14 +445,21 @@
 					                    icon : 'success',
 					                    title: '한줄평 삭제가 완료되었습니다.',
 					                }).then((result) => {
-										if (result.isConfirmed) { 
-											location.reload();
+										if (result.isConfirmed) { 													
+											$(".number em").empty();
+											$(".movie-detail-cont > .title").remove();
+											$(".poster .wrap").empty();
+											$(".movie-info-list").empty();
+											reloadMovie();
+											
+											$("#comment-count .font-gblue").empty();
+											$(".movie-comment ul").empty();
+											reloadComment();
 										} 
 									});	
 								},
 								error: function(request, status, error) {
 									alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-									location.reload();
 								}
 							});
 						} else{    
@@ -538,9 +569,22 @@
 			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
 			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
 			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
-			<li id="mypagebtn"><a href="${contextPath}/mypage"><i class="far fa-user"></i></a></li>
+			<li id="mypagebtn"><a href="${contextPath}/mypage" id="to-mypage"><i class="far fa-user"></i></a></li>
 		</ul>
 	</nav>
+	
+	<script type="text/javascript">
+		$(function(){
+			var contextPath = "${contextPath}";
+			$('#to-mypage').on('click', function(e){
+				if(${member == null}) {
+					e.preventDefault();
+					alert("회원 로그인이 필요합니다.");
+					window.location.href = contextPath + "/login";
+				}
+			});
+		});
+	</script>
 
 	<section>
 	
