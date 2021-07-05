@@ -9,8 +9,11 @@ public interface MemberMapper {
 	Member selectMemberByNo(int memNo);
 	List<Member> selectMemberByAll();
 
+	// 회원가입
 	int insertMember(Member member);
+	// 회원정보 수정 
 	int updateMember(Member member);
+	// 회원탈퇴
 	int deleteMember(String memEmail);
 	int countMember();
 
@@ -28,6 +31,4 @@ public interface MemberMapper {
 	public String selectMember(Member member);
 	// 패스워드 변경
 	public int pwUpdate_M(Member member);
-	
-
 }
