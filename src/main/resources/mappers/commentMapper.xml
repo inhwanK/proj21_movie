@@ -20,9 +20,10 @@
 	</select>
 	
 	<select id="selectCommentByUser" resultMap="resComment">
-		select c.com_no, m.mov_no, m.mov_title, c.com_user, c.com_content, c.com_star, c.com_date 
+		select c.com_no, m.mov_no, m.mov_title, m.mov_poster, c.com_user, c.com_content, c.com_star, c.com_date 
 		from comment c join movie m on c.mov_no = m.mov_no 
 		where c.com_user = #{comUser}
+		order by c.com_no desc
 	</select>
 	
 	<!-- 영화 상세 페이지에 평점 관련 select 추가 -->

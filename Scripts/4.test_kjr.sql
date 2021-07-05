@@ -218,3 +218,15 @@ select r.res_no, r.mem_no, r.res_price, r.res_date, r.res_adult, r.res_teen, r.r
 			join cinema c on s.cin_no = c.cin_no 
 		where r.mem_no = 1
 		order by r.res_no desc;
+
+	
+-- comment 유저명으로 찾기
+select c.com_no, m.mov_no, m.mov_title, m.mov_poster, c.com_user, c.com_content, c.com_star, c.com_date 
+from comment c join movie m on c.mov_no = m.mov_no 
+where com_user = 'test1@test.com'
+order by c.com_no desc;
+
+select * from comment;
+
+select * from movie;
+

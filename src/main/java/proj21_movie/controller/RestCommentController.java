@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import proj21_movie.dto.Comment;
 import proj21_movie.dto.Movie;
@@ -36,13 +37,9 @@ public class RestCommentController {
 		return ResponseEntity.ok(service.getLists());
 	}
 	
-	@GetMapping("/comments/user/{comUser}")	// json으로 받기는 아직 못 함..
-	public ResponseEntity<Object> commentUser (@PathVariable String comUser, HttpServletResponse response) throws IOException {
-		List<Comment> comment = service.getCommentByUser(comUser);
-		if (comment == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(comment);
+	@GetMapping("/comments/user")	// json으로 받기는 아직 못 함..
+	public ResponseEntity<Object> commentUser (@RequestParam(value = "comUser") String comUser) {
+		return ResponseEntity.ok(service.getCommentByUser(comUser));
 	}
 	
 	// 영화번호로 검색(영화 마다 댓글 리스트)

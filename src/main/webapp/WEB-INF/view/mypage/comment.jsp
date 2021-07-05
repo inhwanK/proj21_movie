@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="<%=request.getContextPath() %>" />
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>한줄평 내역</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/mypage/comment.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/mypage/comment.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -28,19 +30,10 @@
 			<div id="comment-wrap">
 					<h2>한줄평 내역</h2>
 					<div id="comment-count">
-						<strong>총 1건</strong>
+						<strong id="strCnt">총 0건</strong>
 					</div>
-					<ul>
-						<li>
-							<div class="comment-list">
-								<img alt="포스터사진" src="<%=request.getContextPath()%>/resources/images/stillcut1.jpg">
-								<div class="textarea">
-									<h3>크루엘라</h3>
-									<p>2021-06-08</p>
-									<p>재밌다...재밌다....재밌다....재ㅣㅅ다...</p>
-								</div>
-							</div>
-						</li> 
+					<ul id="comments">
+					
 					</ul>
 			</div>
 		</div>
@@ -48,6 +41,72 @@
 	</section>
 
 	<%@include file="/WEB-INF/view/footer.jsp"%>
+	
+	<script type="text/javascript">
+		$(function(){
+			var contextPath = "${contextPath}";
+			var user = "${member.memEmail}";
+			
+			console.log("user >> " + user);
+			
+			reload();
+			
+			$("#comments").on('click', '[class=delComment]', function(e){
+				e.preventDefault();
+				var comNo = Number($(this).prev().val());
+				
+				if (confirm("한줄평을 삭제하시겠습니까?")) {
+					$.ajax({
+						url: contextPath + "/api/comments/" + comNo,
+						type: 'DELETE',
+						success: function(res) {
+							$("#comments").empty();
+							reload();
+						},
+						error: function(request, status, error) {
+							alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+						}
+					});
+				}
+				
+			});
+			
+			function reload(){
+				$.ajax({
+					type:"GET",
+					url: contextPath + "/api/comments/user?comUser=" + user,
+					contentType: "application/json; charset=utf-8",
+					async: false,
+					success: function(json){
+						var dataLength = json.length;
+						if (dataLength >= 1) {
+							var sCont = "";
+							$("#strCnt").text("총 " + dataLength + " 건");
+							for (i = 0; i < dataLength; i++) {
+								sCont += "<li>";
+								sCont += "<div class='comment-list'>";
+								sCont += "<a href='${contextPath}/movie?movNo=" + json[i].movNo.movNo + "'>";
+								sCont += "<img alt='포스터사진' src='${contextPath}/resources/images/movie/box-office/" + json[i].movNo.movPoster + "'>";
+								sCont += "</a>";
+								sCont += "<div class='textarea'>";
+								sCont += "<h3>" + json[i].movNo.movTitle + "</h3>";
+								sCont += "<p>작성내용 : " + json[i].comContent + "</p>";
+								sCont += "<p>평점 : " + json[i].comStar + " 점</p>";
+								sCont += "<p>작성일 : " + json[i].comDate + "</p>";
+								sCont += "<input type='hidden' value=" + json[i].comNo + ">";
+								sCont += "<a class='delComment' href=''>한줄평 삭제</a>";
+								sCont += "</div>";
+								sCont += "</div>";
+								sCont += "</li>";
+							}
+							$("#comments").append(sCont);
+						}
+					}
+				});
+			}
+		});
+		
+	</script>
 	
 </body>
 </html>
