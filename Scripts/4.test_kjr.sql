@@ -200,3 +200,21 @@ order by shw_starttime;
 
 select * from reservation;
 
+select * from showinfo;
+
+insert into reservation values (null, 1, 1, 18000, now(), 1, 1, 0);
+insert into reservation values (null, 1, 1, 23000, now(), 1, 1, 1);
+insert into reservation values (null, 22, 1, 23000, now(), 1, 1, 1);
+
+
+select r.res_no, r.mem_no, r.res_price, r.res_date, r.res_adult, r.res_teen, r.res_pref, 
+				r.shw_no, s.shw_date, s.shw_starttime, s.shw_endtime, 
+				s.tht_no, t.tht_name,
+				s.mov_no, m.mov_title, m.mov_poster, 
+				c.cin_no, c.cin_type 
+		from reservation r join showinfo s on r.shw_no = s.shw_no 
+			join theater t on s.tht_no = t.tht_no 
+			join movie m on s.mov_no = m.mov_no
+			join cinema c on s.cin_no = c.cin_no 
+		where r.mem_no = 1
+		order by r.res_no desc;

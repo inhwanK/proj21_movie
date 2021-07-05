@@ -17,4 +17,6 @@ public interface ReservationService {
 	int removeReservation(Reservation reservation);
 	
 	Reservation getReservationInfoByNo(int no);
+	
+	List<Reservation> getReservationListByMemNo(int no);
 }

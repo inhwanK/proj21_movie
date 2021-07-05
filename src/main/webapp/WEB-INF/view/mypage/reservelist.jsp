@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="<%=request.getContextPath() %>" />
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>예매내역</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/mypage/reservelist.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/mypage/reservelist.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 </head>
 <body>
 	<%@include file="/WEB-INF/view/header.jsp"%>
@@ -34,12 +37,25 @@
 				</div> -->
 				<h2>예매 내역</h2>
 					<div id="reserve-count">
-						<strong>총 1건</strong>
+						<strong id="strCnt">총 1건</strong>
 					</div>
-					<ul>
+					<ul id="reservation">
+						<%-- <li>
+							<div class="reserve-list">
+								<img alt="포스터사진" src="${contextPath}/resources/images/stillcut1.jpg">
+								<div class="textarea">
+									<h3 id="mov-title">영화제목</h3>
+									<p id="theater-name">영화관</p>
+									<p id="show-date">상영일/상영시간</p>
+									<p id="people">인원</p>
+									<p id="pay">결제금액</p>
+									<p id="res-date">예매일</p>
+								</div>
+							</div>
+						</li> 
 						<li>
 							<div class="reserve-list">
-								<img alt="포스터사진" src="<%=request.getContextPath()%>/resources/images/stillcut1.jpg">
+								<img alt="포스터사진" src="${contextPath}/resources/images/stillcut1.jpg">
 								<div class="textarea">
 									<h3>영화제목</h3>
 									<p>영화관</p>
@@ -49,20 +65,7 @@
 									<p>예매일</p>
 								</div>
 							</div>
-						</li> 
-						<li>
-							<div class="reserve-list">
-								<img alt="포스터사진" src="<%=request.getContextPath()%>/resources/images/stillcut1.jpg">
-								<div class="textarea">
-									<h3>영화제목</h3>
-									<p>영화관</p>
-									<p>상영일/상영시간</p>
-									<p>인원</p>
-									<p>결제금액</p>
-									<p>예매일</p>
-								</div>
-							</div>
-						</li> 
+						</li>  --%>
 					</ul>
 				
 				<div id="desc">
@@ -76,5 +79,120 @@
 	
 	<%@include file="/WEB-INF/view/footer.jsp"%>
 
+	<script type="text/javascript">
+		$(function(){
+			// 예매내역 불러옴
+			reload();
+			
+			// 예매취소 클릭하면 에매 데이터 삭제
+			$("#reservation").on('click', '[class=cancelRes]', function(e){
+				e.preventDefault();
+				var contextPath = "${contextPath}";
+				var resNo = Number($(this).prev().val());
+				
+				if (confirm("예매를 취소하시겠습니까?")) {
+					$.ajax({
+						url: contextPath + "/api/reservation/" + resNo,
+						type: 'DELETE',
+						success: function(res) {
+							$("#reservation").empty();
+							reload();
+						},
+						error: function(request, status, error) {
+							alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+						}
+					});
+				}				
+				
+			});
+			
+			$("#reservation").on('click', '[class=cancelFail]', function(e){
+				e.preventDefault();
+				alert("상영시간이 지났으므로 예매 취소 불가");
+			});
+			
+			// 회원번호로 예매내역 불러오는 함수
+			function reload(){
+				var contextPath = "${contextPath}";
+				var memNo = ${member.memNo};
+				
+				$.ajax({
+					type:"GET",
+					url: contextPath + "/api/reservationByMember/" + memNo,
+					contentType: "application/json; charset=utf-8",
+					async: false,
+					success: function(json){
+						var dataLength = json.length;
+						if (dataLength >= 1) {
+							var sCont = "";
+							$("#strCnt").text("총 " + dataLength + " 건");
+							for (i = 0; i < dataLength; i++) {
+								sCont += "<li>";
+								sCont += "<div class='reserve-list'>";
+								sCont += "<a href='${contextPath}/movie?movNo=" + json[i].shwNo.movNo.movNo + "'>";
+								sCont += "<img alt='포스터사진' src='${contextPath}/resources/images/movie/box-office/" + json[i].shwNo.movNo.movPoster + "'>";
+								sCont += "</a>";
+								sCont += "<div class='textarea'>";
+								sCont += "<h3>" + json[i].shwNo.movNo.movTitle + "</h3>";
+								sCont += "<p>상영관 : " + json[i].shwNo.thtNo.thtName + "</p>";
+								
+								var showDate = json[i].shwNo.shwDate;
+								var arrShowDate = showDate.split("-");
+								var strShowDate = arrShowDate[0] + "년 " + arrShowDate[1] + "월 " + arrShowDate[2] + "일";
+								var startTime = json[i].shwNo.shwStarttime;
+								var arrStartTime = startTime.split(":");
+								var strStartTime = arrStartTime[0] + "시 " + arrStartTime[1] + "분";
+								
+								sCont += "<p>상영일시 : " + strShowDate + " - " + strStartTime + "</p>";
+								
+								var cntPeople = "";
+								if (json[i].resAdult > 0) {
+									cntPeople += "성인" + json[i].resAdult + "명 "
+								}
+								if (json[i].resTeen > 0) {
+									cntPeople += "청소년" + json[i].resTeen + "명 "
+								}
+								if (json[i].resPref > 0) {
+									cntPeople += "우대" + json[i].resPref + "명 "
+								}
+								
+								sCont += "<p>인원 : " + cntPeople + "</p>";
+								
+								sCont += "<p>결제금액 : " + json[i].resPrice + " 원</p>";
+								
+								var resDate = json[i].resDate;
+								var arrResDate = resDate.split(" ");
+								var resDay = arrResDate[0];
+								var resTime = arrResDate[1];
+								var arrResDay = resDay.split("-");
+								var arrResTime = resTime.split(":");
+								var strResDay = arrResDay[0] + "년 " + arrResDay[1] + "월 " + arrResDay[2] + "일";
+								var strResTime = arrResTime[0] + "시 " + arrResTime[1] + "분";
+								
+								sCont += "<p>예매일 : " + strResDay + " - " + strResTime + "</p>";
+								
+								sCont += "<input type='hidden' value=" + json[i].resNo + ">";
+								
+								var today = new Date();
+								var selDate = new Date(arrShowDate[0], arrShowDate[1] - 1, arrShowDate[2], arrStartTime[0]);
+								
+								if (today <= selDate){
+									sCont += "<a class='cancelRes' href=''>예매 취소</a>";
+								} else {
+									sCont += "<a class='cancelFail' href=''>취소 불가</a>";
+								}
+								
+								sCont += "</div>";
+								sCont += "</div>";
+								sCont += "</li>";
+							}
+							$("#reservation").append(sCont);
+						}
+					}
+				});
+			}
+			
+		});
+	</script>
 </body>
 </html>

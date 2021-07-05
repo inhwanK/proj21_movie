@@ -18,4 +18,7 @@ public interface ReservationMapper {
 	
 	// 예매번호로 정보 가져오기
 	Reservation selectReservationByNo(int no);
+	
+	// 회원번호로 예매내역 가져오기
+	List<Reservation> selectReservationByMemNo(int no);
 }
