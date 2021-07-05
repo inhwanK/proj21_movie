@@ -10,8 +10,11 @@ public interface MemberService {
 	Member getMember(String memEmail);
 	List<Member> getLists();
 
+	// 회원가입
 	int registerMember(Member member);
+	// 회원정보 수정
 	int modifyMember(Member member);
+	// 회원탈퇴
 	int removeMember(String memEmail);
 
 	Member selectMemberBymemEmail(String memEmail);

@@ -44,7 +44,7 @@
 							list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>";
 							list += "<img src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>"
 							list += "<div class='reserve-boxoffice'>";
-							list += "<a href='#'>예매</a></div>";
+							list += "<a href='${contextPath}/reserve?no=" + json[i].movNo + "'>예매</a></div>";
 							list += "</li>";						
 						}
 						$(".main-movie-list ul").append(list);

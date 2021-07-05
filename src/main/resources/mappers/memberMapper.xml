@@ -24,6 +24,7 @@
 		 where mem_email = #{memEmail} 
 	</select>
 	
+	<!-- 회원가입 -->
 	<insert id="insertMember" parameterType="Member">
 		insert into member 
 		values 
@@ -33,6 +34,7 @@
 		</selectKey>
 	</insert>
 	
+	<!-- 회원정보 수정 -->
 	<update id="updateMember">
 		update member
 		   set mem_no = #{memNo},
@@ -43,6 +45,7 @@
 		 where mem_email = #{memEmail}
 	</update>
 	
+	<!-- 회원탈퇴, 삭제  -->
 	<delete id="deleteMember">
 		delete
 		  from member
