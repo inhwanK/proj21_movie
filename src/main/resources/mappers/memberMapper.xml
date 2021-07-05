@@ -72,7 +72,6 @@
   	   and mem_phone = #{memPhone}
   	</select>
   	
-  	
   	<!-- 비밀번호 찾기(비로그인) -->
 	<select id="selectMember" parameterType="String" resultType="Member">
 		select mem_no, mem_email, password(mem_passwd), mem_birthdate, mem_name, mem_phone
@@ -86,6 +85,5 @@
 		   set mem_passwd = password(#{memPasswd})
 		 where mem_email = #{memEmail}
 	</update>
-
 
 </mapper>

@@ -1,15 +1,12 @@
 @charset "UTF-8";
 
 /* Fontawesome 4.7 */
-@import
-	url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@900&display=swap')
-	;
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@900&display=swap');
 
 @font-face {
 	font-family: 'IBMPlexSansKR-Regular';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
-		format('woff');
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
+		 format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -101,13 +98,6 @@ section #loginFormArea {
 	background-color: #3e2789;
 	color: #fff;
 	font-weight: 500 bolder;
-}
-
-/* 로그인 실패시 경고글 */
-.login_warn {
-	margin-top: 30px;
-	text-align: center;
-	color: red;
 }
 
 a {

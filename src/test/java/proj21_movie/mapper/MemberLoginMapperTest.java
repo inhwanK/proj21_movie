@@ -19,15 +19,12 @@ import proj21_movie.dto.Member;
 public class MemberLoginMapperTest {
 	
 	@Autowired
-	private LoginMapper mapper;
-	
-	@Autowired
 	private MemberMapper memMapper;
 
 	@Test
     public void memberLogin() throws Exception{
         
-        Member member = new Member();    // Member 변수 선언 및 초기화
+        Member member = new Member(); 
         
         // 올바른 아이디 비번 입력경우
         member.setMemEmail("test1@test.com");
@@ -40,7 +37,4 @@ public class MemberLoginMapperTest {
         memMapper.memberLogin(member);
         System.out.println("결과 값 : " + memMapper.memberLogin(member));    
     }
- 
-
-
 }

@@ -10,6 +10,7 @@ import proj21_movie.mapper.MemberMapper;
 
 @Service
 public class ChangePasswordService {
+	
 	@Autowired
 	private MemberMapper membermapper;
 

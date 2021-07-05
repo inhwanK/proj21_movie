@@ -1,21 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="tf" tagdir="/WEB-INF/tags"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <c:set var="contextPath" value="<%=request.getContextPath()%>" />
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>로그인</title>
-<link rel="stylesheet" href="${contextPath}/resources/css/login/login.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
-<script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+	<meta charset="UTF-8">
+	<title>로그인</title>
+	<link rel="stylesheet" href="${contextPath}/resources/css/login/login.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+	<script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	<!-- 회원 로그인 -->
@@ -84,7 +80,10 @@ $(function(){
 </script>
 </head>
 <body>
+	<!-- header -->
 	<%@include file="/WEB-INF/view/header.jsp"%>
+	
+	<!-- section -->
 	<section id="loginFormArea">
 		<form id="login_form" method="POST" name="form1">
 			<fieldset>
@@ -94,9 +93,7 @@ $(function(){
             	</c:if>
 					<table>
 						<tr>
-							<td>
-								<div class="title"><h1>로그인</h1></div>
-							</td>
+							<td><div class="title"><h1>로그인</h1></div></td>
 						</tr>
 						<tr>
 							<td>
@@ -109,8 +106,7 @@ $(function(){
 							</td>
 						</tr>
 					</table>
-						<label class="chbox"> 
-						<input type="checkbox" name="chek_box" value="id_check" id="coki">아이디 저장</label> 
+						<label class="chbox"><input type="checkbox" name="chek_box" value="id_check" id="coki">아이디 저장</label> 
 						<br> 
 						<input class="btn" type="submit" value="로그인" id="selButton" /> 
 						<br><br>
@@ -121,6 +117,8 @@ $(function(){
 			</fieldset>
 		</form>
 	</section>
+	
+	<!-- footer -->	
 	<%@include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>

@@ -114,5 +114,4 @@ public class MemberMapperTest {
 		mapper.idCheck(id);
 		mapper.idCheck(id2);
 	}
-
 }

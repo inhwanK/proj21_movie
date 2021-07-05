@@ -8,7 +8,7 @@ import proj21_movie.dto.RegisterRequest;
 public interface LoginMapper {
 	//로그인
     public Member LoginCommand(Member member);
-    /////
+    
     RegisterRequest logincheck(String memEmail, String memPasswd);
 	public void logincheck(Member member);
 }

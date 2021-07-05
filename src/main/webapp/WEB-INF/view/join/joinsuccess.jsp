@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="contextPath" value="<%=request.getContextPath() %>" />
 <!DOCTYPE html>
 <html>
@@ -12,7 +10,10 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+	<!-- header -->
 	<%@include file="/WEB-INF/view/header.jsp"%>
+	
+	<!-- section -->
 	<section>
 		<div class="con_main">
 			<img id="con_img2" alt="축하이미지" src="${contextPath}/resources/images/join/icon-movie.png">
@@ -24,6 +25,8 @@
 			</div>
 		</div>
 	</section>
+	
+	<!-- footer -->	
 	<%@include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>
