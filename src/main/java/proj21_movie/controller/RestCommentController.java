@@ -1,6 +1,5 @@
 package proj21_movie.controller;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import proj21_movie.dto.Comment;
 import proj21_movie.dto.Movie;
@@ -36,12 +36,9 @@ public class RestCommentController {
 		return ResponseEntity.ok(service.getLists());
 	}
 	
-	@GetMapping("/comments/user/{comUser}")	// json으로 받기는 아직 못 함..
-	public ResponseEntity<Object> commentUser (@PathVariable String comUser, HttpServletResponse response) throws IOException {
+	@GetMapping("/comments/user")	// json으로 받기는 아직 못 함..
+	public ResponseEntity<Object> commentUser (@RequestParam(defaultValue = "") String comUser) {
 		List<Comment> comment = service.getCommentByUser(comUser);
-		if (comment == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
 		return ResponseEntity.status(HttpStatus.OK).body(comment);
 	}
 	

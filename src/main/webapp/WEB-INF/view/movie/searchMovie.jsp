@@ -273,8 +273,8 @@
 		$(document).ready(function(){
 			$(document).on('click', '[id=reserve]', function(e){
 				var pa = $(this).parent().parent();
-				var ch = pa.children();
-				var movNo = ch.eq(0).text();
+				var ch = pa.children().children();
+				var movNo = ch.val();
 				
 				window.location.href = contextPath + "/reserve?no=" + movNo;
 			});

@@ -40,39 +40,6 @@
 		});
 	
 	</script>
-<!-- 	<script type="text/javascript">
-		$(function(){
-			var contextPath = "${contextPath}";
-			var no = ${param.no};
-			
-			$.ajax({
-				type:"GET",
-				url: contextPath + "/api/movies/boxOffice/" + no,
-				contentType: "application/json; charset=utf-8",
-				async: false,
-				success: function(json){
-					var poster = "";
-						poster += "<input id='hidden-title' type='hidden' value='" + json.movTitle + "'/>";
-						poster += "<img alt='' src='${contextPath}/resources/images/movie/box-office/" + json.movPoster + "'>";
-					$("#movie-poster").append(poster);
-					
-					/* var pa = $("#movie-list-ul").parent();
-					var ch = pa.children();
-					var mTitle = ch.eq(0).text();
-					
-					var pTitle = $("#hidden-title").val();
-					
-					console.log(mTitle);
-					console.log(pTitle); */
-				},
-				error : function(){
-					alert("해당 영화는 없습니다.");
-					window.location.href = contextPath + "/reserve";
-					console.log("error > ");
-				}	
-			});
-		});
-	</script> -->
 </head>
 <body>
 
@@ -139,10 +106,16 @@
 	<script type="text/javascript">
 		var contextPath = "${contextPath}";
 		var dateIdx = 0;
-		var movieNo = 0;
+		var movieNo = "${param.no}";
 		var theaterNo = 0;
 		var time = "";
 		var showInfoNo = 0;
+		
+		// 영화에서 에매 클릭시 영화 선택 됨
+		var movNo = $(".movie input[value='${param.no}']").parent();
+		if (movNo != ''){
+			movNo.addClass("active");
+		}
 		
 		// 날짜 선택했을 시 효과 & 선택된 날짜 인덱스 리턴
 		$("#calendar").on('click', 'a', function(e){
