@@ -36,7 +36,7 @@ public class RestCommentController {
 		return ResponseEntity.ok(service.getLists());
 	}
 	
-	@GetMapping("/comments/user")	// json으로 받기는 아직 못 함..
+	@GetMapping("/comments/user")
 	public ResponseEntity<Object> commentUser (@RequestParam(defaultValue = "") String comUser) {
 		List<Comment> comment = service.getCommentByUser(comUser);
 		return ResponseEntity.status(HttpStatus.OK).body(comment);
