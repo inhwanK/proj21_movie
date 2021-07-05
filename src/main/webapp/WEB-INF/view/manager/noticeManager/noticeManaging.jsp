@@ -58,6 +58,8 @@
 			
 		});
 		
+		
+		//날짜 선택해서 검색.
 		$(document).on('change','#date', function selectByDate() {
 			
 			var notDate = $("#date").val();
@@ -86,7 +88,7 @@
 					}else{
 						
 						$("tbody").empty();
-						$("tbody").append("<tr><td>등록된 공지사항이 없습니다.</td></tr>")
+						//$("tbody").append("<tr><td>등록된 공지사항이 없습니다.</td></tr>");
 						alert("해당 날짜에 등록된 공지사항이 없습니다.");
 					} // end of if
 				} // end of success
