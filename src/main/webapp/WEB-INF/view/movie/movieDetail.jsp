@@ -346,7 +346,7 @@
 						                }).then((result) => {
 											if (result.isConfirmed) { 																		
 												$(".number em").empty();
-												$(".movie-detail-cont > p").empty();
+												$(".movie-detail-cont > .title").remove();
 												$(".poster .wrap").empty();
 												$(".movie-info-list").empty();
 												reloadMovie();
@@ -447,7 +447,7 @@
 					                }).then((result) => {
 										if (result.isConfirmed) { 													
 											$(".number em").empty();
-											$(".movie-detail-cont > p").empty();
+											$(".movie-detail-cont > .title").remove();
 											$(".poster .wrap").empty();
 											$(".movie-info-list").empty();
 											reloadMovie();
