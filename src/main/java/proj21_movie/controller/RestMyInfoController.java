@@ -29,6 +29,7 @@ public class RestMyInfoController {
 		memService.modifyMember(member);
 		session.invalidate();
 		
+		
 		return "redirect:/login";
 	}
 }
