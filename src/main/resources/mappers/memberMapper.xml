@@ -78,7 +78,7 @@
   	<!-- 비밀번호 찾기(비로그인) -->
 	<select id="selectMember" parameterType="String" resultType="Member">
 		select mem_no, mem_email, password(mem_passwd), mem_birthdate, mem_name, mem_phone
-		  form member
+		  from member
 		 where mem_email = #{memEmail}
 	</select>
 	
@@ -88,5 +88,13 @@
 		   set mem_passwd = password(#{memPasswd})
 		 where mem_email = #{memEmail}
 	</update>
+	
+	<!-- 회원정보 수정시 비밀번호 체크 -->
+	<select id="passChk" resultType="int">
+		select count(*) 
+		  from member 
+		 where mem_email = #{memEmail}
+	  	   and mem_passwd = password(#{memPasswd})
+	</select>
 
 </mapper>

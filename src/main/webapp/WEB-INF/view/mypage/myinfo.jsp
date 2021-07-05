@@ -15,7 +15,6 @@
 		<div id="container">
 			<!-- 메뉴바 -->
 			<div id="mypage-menubar">
-			
 				<ul>
 					<li><a href="${contextPath}/mypage"><h2>My Page</h2></a></li>
 					<li><a href="${contextPath}/reserveInfo">예매내역</a></li>

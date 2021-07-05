@@ -14,88 +14,6 @@ body {
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	/* 	background-color: RGB(3, 22, 52); */
-}
-
-/* header */
-header {
-	margin: auto;
-	width: 1273px;
-	position: relative;
-}
-
-#header_ci {
-	width: 150px;
-	margin: 0px auto;
-	align-items: center;
-	position: relative;
-	left: 120px;
-	box-sizing: border-box;
-}
-
-header div {
-	display: inline;
-	float: right;
-	text-align: right;
-	padding-bottom: 10px;
-}
-
-header div a {
-	text-decoration: none;
-	padding-left: 15px;
-	padding-right: 15px;
-	font-size: 0.8em;
-	color: RGB(136, 136, 136);
-}
-
-/* <nav> */
-nav {
-	margin: auto;
-	position: relative;
-	padding: 0px;
-}
-
-nav ul {
-	width: 1273px;
-	padding-left: 0;
-	list-style: none;
-	border-bottom: 0.5px solid RGB(3, 22, 52);
-	padding-bottom: 5px;
-	margin: 10px auto;
-	position: relative;
-}
-
-.nav {
-	display: inline-block;
-	padding: 0 90px;
-	font-weight: bold;
-	font-size: 1.3em;
-}
-
-#mypagebtn{
-	display: inline-block;
-	padding: 0 0 0 70px;
-	font-weight: bold;
-	font-size: 1.3em;
-}
-
-.nav a{
-	text-decoration: none;
-	color: RGB(3, 22, 52);
-	padding-bottom: 5px;
-}
-
-.nav a:hover {
-	text-decoration: none;
-	color: RGB(3, 22, 52);
-	padding-bottom: 4px;
-	border-bottom: 5px solid RGB(3, 22, 52);
-}
-
-.fa-user{
-	text-decoration: none;
-	color: RGB(3, 22, 52);
-	display: inline-block;
 }
 
 /* section */
@@ -104,7 +22,6 @@ section {
 	width: 1300px;
 	height: 900px;
 	text-align: center;
-/* 	border: 1px solid green; */
 }
 
 #container{
@@ -116,7 +33,6 @@ section {
 	display: inline-block;
 	width: 250px;
 	height: 900px;
-/* 	float: left; */
 }
 
 #mypage-menubar ul{
@@ -147,7 +63,6 @@ section {
 }
 
 #myinfo-wrap{
-/* 	border: 1px solid yellow; */
 	width: 1045px;
 	height: 100%;
 }
@@ -164,7 +79,6 @@ section {
 }
 
 #myinfo-table{
-/* 	margin: auto; */
 	margin-left: 40px;
 	text-align: center;
 	width: 900px;
@@ -177,7 +91,6 @@ section {
 #myinfo-table th{
 	padding: 10px 20px;
 	background-color: RGB(247,247,247);
-/* 	border-bottom: 1px solid #ccc; */
 	border-top: 1px solid #ccc;
 }
 
@@ -246,33 +159,4 @@ section {
 
 #confirm a{
 	color: white;
-}
-
-
-/* footer */
-footer {
-	margin: auto;
-	width: 1273px;
-}
-
-#content {
-	border-top: 0.5px solid RGB(3, 22, 52);
-	text-align: left;
-	margin-top: 0;
-}
-
-#textarea{
-	margin-top: 22.5px;
-}
-
-#textarea p {
-	color: black;
-	font-size: 0.8em;
-	margin: 0;
-}
-
-#footer_ci {
-	width: 100px;
-	margin: 0px;
-	float: left;
 }
