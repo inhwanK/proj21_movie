@@ -17,6 +17,7 @@
 		} // js 파일로 관리할 필요 있음.
 
 		var contextPath = "${contextPath}"; // 절대 경로
+		
 		var totalNotice = "${totalNotice}"; // 검색된 공지 전체 개수
 		var page = Math.ceil(totalNotice / 10); // 페이징 계산
 		var selectPage = "${selectPage}"; // 선택한 페이지

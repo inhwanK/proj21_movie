@@ -116,3 +116,24 @@ select not_no ,not_title ,not_date
 from notice
 order by not_date desc
 limit 5;
+
+select *
+from reservation;
+
+select *
+from member;
+
+select *
+from showinfo;
+
+insert into reservation values(null, 3, 1, 50000,20210702,5,0,0);
+
+-- 실시간 매출.
+select sum(res_price)
+from reservation;
+
+-- 매출 현황.
+
+
+
+		
