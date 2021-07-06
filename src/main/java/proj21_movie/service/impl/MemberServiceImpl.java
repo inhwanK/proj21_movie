@@ -1,6 +1,7 @@
 package proj21_movie.service.impl;
 
 import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import org.apache.ibatis.logging.Log;
@@ -97,4 +98,7 @@ public class MemberServiceImpl implements MemberService {
 		int result = mapper.passChk(member);
 		return result;
 	}
+
+	// 회원탈퇴
+
 }

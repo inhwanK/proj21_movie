@@ -1,6 +1,7 @@
 package proj21_movie.mapper;
 
 import java.util.List;
+
 import org.springframework.stereotype.Component;
 import proj21_movie.dto.Member;
 
@@ -9,11 +10,8 @@ public interface MemberMapper {
 	Member selectMemberByNo(int memNo);
 	List<Member> selectMemberByAll();
 
-	// 회원가입
 	int insertMember(Member member);
-	// 회원정보 수정 
 	int updateMember(Member member);
-	// 회원탈퇴
 	int deleteMember(String memEmail);
 	int countMember();
 
