@@ -44,11 +44,10 @@
 		   });
 		   
 		   /* 한줄평쓰기 버튼 누를시 */
-		   $(document).ready( function() {
-			   $(".comment-write > span").click(function(){
-					$(".write-content").slideToggle().toggleClass("active");  
-			     });
-		   });
+		   $(".comment-write > span").click(function(){
+				$(".write-content").slideToggle().toggleClass("active");  
+				$("#contxt").focus();
+		     });
 		   
 		   /* 별점 테마 */
 		   $('#example-fontawesome').barrating({ 
@@ -69,6 +68,13 @@
 		            $('html, body').animate({scrollTop : 0}, 400);
 		            return false;
 		        });
+		    });
+		    
+			$("#contxt").on("keyup", function(key) {
+		        if (key.keyCode == 13) {
+		        	$('#writeBtn').click();
+		        	return false;	// 검색 버튼을 눌렀을 경우에 해당 버튼이 활성화 (다른 의도하지 않은 동작 방지)
+		        }
 		    });
 		});
 	</script>
@@ -344,7 +350,8 @@
 						                    title: '한줄평이 등록되었습니다.',
 						                    text : '소중한 한줄평 감사합니다.'
 						                }).then((result) => {
-											if (result.isConfirmed) { 																		
+											if (result.isConfirmed) { 		
+												$(".movie-detail-page .movie-bg").empty();
 												$(".number em").empty();
 												$(".movie-detail-cont > .title").remove();
 												$(".poster .wrap").empty();
@@ -445,7 +452,8 @@
 					                    icon : 'success',
 					                    title: '한줄평 삭제가 완료되었습니다.',
 					                }).then((result) => {
-										if (result.isConfirmed) { 													
+										if (result.isConfirmed) { 	
+											$(".movie-detail-page .movie-bg").empty();
 											$(".number em").empty();
 											$(".movie-detail-cont > .title").remove();
 											$(".poster .wrap").empty();
@@ -698,7 +706,7 @@
 													<tr>
 														<td>
 															<input type="text" id="contxt" class="form-control" maxlength="40" placeholder="한줄평을 적어주세요 (40자 이내)" autocomplete="off"/>
-															
+															<input hidden="hidden">	<!-- 엔터키 오류 방지 -->
 															<select id="example-fontawesome" class="com-star" name="rating">
 																<option value="1">1</option>
 																<option value="2">2</option>
