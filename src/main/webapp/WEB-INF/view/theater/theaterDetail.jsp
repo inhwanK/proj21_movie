@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/theater/theaterDetail.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script type="text/javascript">
 		$(function(){
 			/* 날짜 불러오기 */
@@ -34,9 +35,6 @@
 				$(".date-list").append("<button type='button'><span>" + month2 + "월 " + date2 + "일</span><span>"+ dayOfWeek + "요일</span></button>");
 			}
 			
-			/* 기본 active 클래스 활성화 */
-			//$(".date-list button:first").addClass("active");
-			
 			/* 해당요일이 토요일/일요일일시 class 추가 */
 		    var spanSat = $('.date-list button span:nth-child(2):contains("토요일")').parent();
 		    var spanHoli = $('.date-list button span:nth-child(2):contains("일요일")').parent();
@@ -55,6 +53,27 @@
 							
 				$(".tab-cont-wrap > div").removeClass("active");
 				$(".tab-cont-wrap > div").eq($(this).index()).addClass("active");
+			});
+			
+			// 시간 선택시(영화 예매하기)
+			$(document).on('click', '[class=time]', function(e){
+				e.preventDefault();
+				var contextPath = "${contextPath}";
+				var showInfoNo = $(this).next().val();
+				//console.log(showInfo);
+				if (${member == null}) {
+					Swal.fire({				// Alert창 디자인 sweetalert2
+	                    icon : 'error',
+	                    title: '로그인이 필요한 서비스입니다.'
+	                }).then((result) => {
+						if (result.isConfirmed) { 
+							window.location.href = contextPath + "/login";
+							return;
+						} 
+					});
+				}else {					
+					window.location.href = contextPath + "/seat?no=" + showInfoNo + "#menu-title";
+				}	
 			});
 		});
 	</script>
@@ -233,11 +252,11 @@
 										sCont += "<p class='information'>";
 										sCont += "<span>상영중</span>/상영시간" + json[i].movNo.movRuntime + "분</p>";
 										sCont += "</div>";					
-										sCont += "</div>";
-													
+										sCont += "</div>";			
 										movieNo = json[i].movNo.movNo;
 									}
-										// theater-type-box
+									// theater-type-box
+									if (json[i].cinNo.cinNo == json[i].cinNo.cinNo) {
 										sCont += "<div class='theater-type-box'>";
 										sCont += "<div class='theater-type'>";
 										sCont += "<p class='theater-name'>" + json[i].cinNo.cinNo + "관</p>";
@@ -248,11 +267,14 @@
 										sCont += "<div class='theater-time-box'>";
 										sCont += "<a href='#' title='영화 예매하기'>";
 										sCont += "<span class='time'>" + json[i].shwStarttime;
-										sCont += "<span class='chair'>" + json[i].cinNo.cinSeat + "석 </span></span></a>";
-										sCont += "</div></div></div>";
+										sCont += "<span class='chair'>" + json[i].cinNo.cinSeat + "석 </span></span>";
+										sCont += "<input type='hidden' value='" + json[i].shwNo + "'/></a>";
+										sCont += "</div></div></div>";	
+										cinemaNo = json[i].cinNo.cinNo;
+									}
 								}
 								$(".theater-list-box").empty();		
-								$(".theater-list-box").append(sCont);									
+								$(".theater-list-box").append(sCont);																
 							}else {
 								var sEmp = "";
 									sEmp = "<p class='no-showInfo-list'>선택하신 날짜의 상영중인 영화가 없습니다. 다른 날짜를 선택해주세요.</p>"
