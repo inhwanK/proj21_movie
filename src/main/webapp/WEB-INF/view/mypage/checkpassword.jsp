@@ -72,12 +72,15 @@ $(function(){
 				</ul>
 			</div>
 			
+			<!-- 본문 -->
 			<div id="myinfo-wrap">
 				<form action="myinfo" method="post">
 				<div id="textarea">
 					<h2>개인정보 수정</h2>
-					<span>개인정보 수정을 위해서는 비밀번호가 필요합니다.<br>
-						  ${member.memName } 회원님의 개인정보 보호를 위해 비밀번호를 한 번 더 입력해주세요.</span>
+					<span>
+						     개인정보 수정을 위해서는 비밀번호가 필요합니다.<br>
+						  ${member.memName } 회원님의 개인정보 보호를 위해 비밀번호를 한 번 더 입력해주세요.
+					</span>
 				</div>
 				
 				<div id="input">

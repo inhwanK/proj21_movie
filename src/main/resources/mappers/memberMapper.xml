@@ -44,8 +44,7 @@
 		       mem_phone = #{memPhone}
 		 where mem_email = #{memEmail}
 	</update>
-	
-	<!-- 회원탈퇴, 삭제  -->
+
 	<delete id="deleteMember">
 		delete
 		  from member
@@ -96,5 +95,13 @@
 		 where mem_email = #{memEmail}
 	  	   and mem_passwd = password(#{memPasswd})
 	</select>
-
+	
+	<!-- 회원탈퇴, 삭제  -->
+	<delete id="secession">
+		delete
+		  from member
+		 where mem_email = #{memEmail}
+		   and mem_passwd = password(#{memPasswd}) 
+	</delete>
+	
 </mapper>

@@ -57,4 +57,6 @@ public class RestMyInfoController {
 		
 		return "redirect:/login";
 	}
+	
+
 }
