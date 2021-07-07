@@ -54,23 +54,22 @@
         	dataType:'json',
         	success: function(json){
         		var i = json;
-        		data.addColumn('string', '값..?');
-        		data.addColumn('number', '값..?');
+        		data.addColumn('string', '날짜');
+        		data.addColumn('number', '매출');
         		
         		console.log(i);
         		data.addRows([
-        			['매출',json]
+        			['yyyy-MM-dd',json]
         		]);
         		
         		var options = {
         	        	'legend':'right',
         	        	'title':'예매율 테스트',
         	            'width':1000,
-        	            'height':500,
-        	            'is3D':true
+        	            'height':500
         		};
         		
-        		var chart = new google.visualization.PieChart(document.getElementById('piechart_div'));
+        		var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_div'));
                 chart.draw(data, options);
                 
                 var chart = new google.visualization.BarChart(document.getElementById('barchart_div'));
@@ -102,7 +101,7 @@
 		<jsp:include page="/WEB-INF/view/manager/sidebar.jsp"></jsp:include>
 	</header>
 	<div id="page-wrapper">
-		<div id="piechart_div"></div>
+		<div id="columnchart_div"></div>
 		<div id="barchart_div"></div>
 	</div>
 </body>
