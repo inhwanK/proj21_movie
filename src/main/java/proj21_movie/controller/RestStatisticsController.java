@@ -22,4 +22,5 @@ public class RestStatisticsController {
 		int sales = service.showTotalSales();
 		return ResponseEntity.status(HttpStatus.OK).body(sales);
 	}
+
 }

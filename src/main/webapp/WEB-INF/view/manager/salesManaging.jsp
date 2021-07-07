@@ -35,17 +35,17 @@
         
         // 컬럼 설정.
         // data.addColumn('데이터 타입', '컬럼 이름');
-        data.addColumn('string', '영화 제목');
-        data.addColumn('number', '예매');
+        /* data.addColumn('string', '영화 제목');
+        data.addColumn('number', '예매'); */
         
         // 데이터 넣기.
-       	data.addRows([
+       	/* data.addRows([
         	['킬러의 보디가드2', 3],
         	['분노의 질주:더 얼티메이트', 1],
         	['랑종', 1],
         	['블랙위도우', 2],
         	['크루엘라', 2]
-        ]);
+        ]); */
 
         $.ajax({
         	url:contextPath+"/api/totalSales",
@@ -54,23 +54,22 @@
         	dataType:'json',
         	success: function(json){
         		var i = json;
-        		data.addColumn('string', '값..?');
-        		data.addColumn('string', '값..?');
+        		data.addColumn('string', '날짜');
+        		data.addColumn('number', '매출');
         		
         		console.log(i);
-        		data.addRows(
-        			[['총매출',i]]
-        		);
+        		data.addRows([
+        			['yyyy-MM-dd',json]
+        		]);
         		
         		var options = {
         	        	'legend':'right',
         	        	'title':'예매율 테스트',
         	            'width':1000,
-        	            'height':500,
-        	            'is3D':true
+        	            'height':500
         		};
         		
-        		var chart = new google.visualization.PieChart(document.getElementById('piechart_div'));
+        		var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_div'));
                 chart.draw(data, options);
                 
                 var chart = new google.visualization.BarChart(document.getElementById('barchart_div'));
@@ -102,7 +101,7 @@
 		<jsp:include page="/WEB-INF/view/manager/sidebar.jsp"></jsp:include>
 	</header>
 	<div id="page-wrapper">
-		<div id="piechart_div"></div>
+		<div id="columnchart_div"></div>
 		<div id="barchart_div"></div>
 	</div>
 </body>

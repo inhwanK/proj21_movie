@@ -128,12 +128,45 @@ from showinfo;
 
 insert into reservation values(null, 3, 1, 50000,20210702,5,0,0);
 
--- 실시간 매출.
+-- 실시간 총 매출.
 select sum(res_price)
 from reservation;
 
 -- 매출 현황.
 
+-- 최근 일주일 간 
+select sum(res_price), res_date , curdate() 
+from reservation
+where res_date between DATE_ADD(curdate(),interval -1 WEEK ) AND curdate()
+group by res_date; 
+
+set @fromdate = curdate()-7;
+set @todate = curdate();
+
+ 
 
 
-		
+select curdate() - INTERVAL (a.a) DAY as Date
+    from (select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6) as a;
+
+select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6;
+
+
+(select a.date
+from (select curdate() - interval (last_week.week_interval) day as date
+from (select 0 as week_interval
+		union all select 1 
+		union all select 2 
+		union all select 3 
+		union all select 4 
+		union all select 5 
+		union all select 6) as last_week) as a left join select res_price, res_date from reservation;
+
+select *
+from (select 0 as week_interval
+		union all select 1 
+		union all select 2 
+		union all select 3 
+		union all select 4 
+		union all select 5 
+		union all select 6) last_week;
