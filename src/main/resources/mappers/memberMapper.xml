@@ -34,7 +34,6 @@
 		</selectKey>
 	</insert>
 	
-	<!-- 회원정보 수정 -->
 	<update id="updateMember">
 		update member
 		   set mem_no = #{memNo},
@@ -88,20 +87,19 @@
 		 where mem_email = #{memEmail}
 	</update>
 	
-	<!-- 회원정보 수정시 비밀번호 체크 -->
-	<select id="passChk" resultType="int">
+	<!-- 회원정보 비밀번호 체크 -->
+	<select id="passCheck" resultType="int">
 		select count(*) 
 		  from member 
 		 where mem_email = #{memEmail}
 	  	   and mem_passwd = password(#{memPasswd})
 	</select>
-	
-	<!-- 회원탈퇴, 삭제  -->
+
+	<!-- 회원탈퇴 -->
 	<delete id="secession">
 		delete
 		  from member
-		 where mem_email = #{memEmail}
-		   and mem_passwd = password(#{memPasswd}) 
+		 where mem_email = #{memEmail} 
+		   and mem_passwd = password(#{memPasswd})
 	</delete>
-	
 </mapper>

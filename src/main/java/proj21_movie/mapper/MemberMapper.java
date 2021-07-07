@@ -2,6 +2,8 @@ package proj21_movie.mapper;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Component;
 import proj21_movie.dto.Member;
 
@@ -30,6 +32,8 @@ public interface MemberMapper {
 	// 패스워드 변경
 	public int pwUpdate_M(Member member);
 	
-	// 회원정보 수정시 패스워드 체크
-	public int passChk(Member member) throws Exception;
+	// 패스워드 체크
+	public int passCheck(Member member);
+	// 회원탈퇴
+	public void secession(Member member, HttpSession session);
 }

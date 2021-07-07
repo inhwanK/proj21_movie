@@ -2,6 +2,8 @@ package proj21_movie.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 
 import org.apache.ibatis.logging.Log;
@@ -91,14 +93,17 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.pwUpdate_M(member);
 	}
 
-	// 회원정보 수정시 패스워드 체크
+	//패스워드 체크
 	@Override
-	public int passChk(Member member) throws Exception {
-		log.debug("service - passChk() > " + member);
-		int result = mapper.passChk(member);
+	public int passCheck(Member member) {
+		log.debug("service - passCheck() > " + member);
+		int result = mapper.passCheck(member);
 		return result;
 	}
 
-	// 회원탈퇴
-
+	//회원 탈퇴
+	@Override
+	public void secession(Member member, HttpSession session) {
+		mapper.secession(member, session);
+	}
 }
