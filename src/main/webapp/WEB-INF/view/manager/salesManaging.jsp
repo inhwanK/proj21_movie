@@ -35,17 +35,17 @@
         
         // 컬럼 설정.
         // data.addColumn('데이터 타입', '컬럼 이름');
-        data.addColumn('string', '영화 제목');
-        data.addColumn('number', '예매');
+        /* data.addColumn('string', '영화 제목');
+        data.addColumn('number', '예매'); */
         
         // 데이터 넣기.
-       	data.addRows([
+       	/* data.addRows([
         	['킬러의 보디가드2', 3],
         	['분노의 질주:더 얼티메이트', 1],
         	['랑종', 1],
         	['블랙위도우', 2],
         	['크루엘라', 2]
-        ]);
+        ]); */
 
         $.ajax({
         	url:contextPath+"/api/totalSales",
@@ -55,12 +55,12 @@
         	success: function(json){
         		var i = json;
         		data.addColumn('string', '값..?');
-        		data.addColumn('string', '값..?');
+        		data.addColumn('number', '값..?');
         		
         		console.log(i);
-        		data.addRows(
-        			[['총매출',i]]
-        		);
+        		data.addRows([
+        			['매출',json]
+        		]);
         		
         		var options = {
         	        	'legend':'right',
