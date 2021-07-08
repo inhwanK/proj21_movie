@@ -174,13 +174,13 @@ section {
 	text-align: center;
 	width: 900px;
 	border-collapse: collapse;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 2px solid #ccc;
 }
 
 #inquiry-table th{
 	padding: 10px 20px;
 	background-color: RGB(247,247,247);
-	border-bottom: 1px solid #ccc;
+	border-bottom: 2px solid #ccc;
 	border-top: 2px solid RGB(3, 22, 52);
 }
 
@@ -219,6 +219,10 @@ section {
 	border: 1px solid #ccc;
 	margin-bottom: 30px;
 }
+
+.detail {
+	text-align: left;
+} 
 
 /* footer */
 footer {

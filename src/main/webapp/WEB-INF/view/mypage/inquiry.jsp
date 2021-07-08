@@ -50,6 +50,12 @@
 					</div>
 					<div id="inquiry-list">
 						<table id="inquiry-table" class="inquiry-table">
+							<colgroup>
+								<col width="10%">
+								<col width="55%">
+								<col width="20%">
+								<col width="15%">
+							</colgroup>
 							<tr>
 								<th>번호</th>
 								<th>제목</th>
@@ -97,20 +103,20 @@
 						sCont += "<table class='detail-table'>";
 						sCont += "<tr>";
 						sCont += "<td width='200px'>문의내용</td>";
-						sCont += "<td width='550px'>" + json[i].inqDetail + "</td>";
+						sCont += "<td class='detail' width='550px'>" + json[i].inqDetail + "</td>";
 						sCont += "</tr>";
 						sCont += "<tr>";
 						sCont += "<td>답변</td>";
 						if (json[i].inqAnswer == null) {
-							sCont += "<td>답변 예정입니다.</td>";
+							sCont += "<td class='notyet'>답변 예정입니다.</td>";
 						} else {
-							sCont += "<td>" + json[i].inqAnswer + "</td>";
+							sCont += "<td class='detail'>" + json[i].inqAnswer + "</td>";
 						}
 						sCont += "</tr>";
 						sCont += "<tr>";
 						sCont += "<td>답변일</td>";
 						if (json[i].inqAnsDate == null) {
-							sCont += "<td>답변 예정입니다.</td>";
+							sCont += "<td class='notyet'>답변 예정입니다.</td>";
 						} else {
 							sCont += "<td>" + json[i].inqAnsDate + "</td>";
 						}
