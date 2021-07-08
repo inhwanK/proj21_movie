@@ -10,7 +10,6 @@
 	<title>회원탈퇴</title>
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/mypage/withdrawal.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -42,15 +41,15 @@ $(function(){
 			}
         	
             <!-- 회원탈퇴 -->
-	    	var contextPath = "<%=request.getContextPath()%>";
+<%-- 	    	var contextPath = "<%=request.getContextPath()%>";
             var form = $('#delFrm').val();
             $.ajax({
-	            url         : contextPath + "/api/passCheck.do",
+	            url         : "${pageContext.request.contextPath}/passCheck.do",
 	            type        : "POST",
-	            contentType : "application/json; charset=utf-8",
+	            contentType : "application/text; charset=utf8",
 	            datatype    : "json",
 	            cache       : false,
-	            data        : JSON.stringify(form),
+	            data        : $('#delFrm').serializeArray(),
 	            success     : function(data) {
     				if(data == 0){
     					alert("패스워드가 틀렸습니다.");
@@ -65,7 +64,7 @@ $(function(){
     			error: function(){
     				alert("서버 에러.");
     			}
-        	});
+        	}); --%>
    		});
 	});
 });
@@ -92,7 +91,7 @@ $(function(){
 			</div>
 			
 			<!-- 본문 -->
-			<form action="login.do" name="delFrm" id="delFrm" method="post">
+			<form action="withdrawal" name="delFrm" id="delFrm" method="post">
 			<div id="mypage-wrap">
 					<h2>회원탈퇴</h2>
 					<div id="textarea">
@@ -107,7 +106,7 @@ $(function(){
 	 			 		</span>			
  			 		</div>
  			 		<div id="passwordarea">
- 			 			<input type="hidden" name="memEmail" value="${member.memEmail}">
+ 			 			<input type="hidden" name="memEmail" value="${member.memEmail}" readonly>
  			 			<label>비밀번호</label>
  			 			<input type="password" id="memPasswd" name="memPasswd" placeholder="비밀번호를 입력해주세요.">
  			 			<br>
@@ -115,7 +114,7 @@ $(function(){
  			 			<input type="password" id="confmemPasswd" name="confmemPasswd" placeholder="비밀번호를 한번 더 입력해주세요.">
  			 		</div>
  			 		<div id="button-group">
- 			 			<input class="btn1" type="button" value="취소" id="cancel" /> 
+ 			 			<input class="btn1" type="button" value="취소" id="cancel"  onclick="location.href='secession'" /> 
 						<input class="btn2" type="submit" value="탈퇴" id="delete" />	
  			 		</div>
 				</div>

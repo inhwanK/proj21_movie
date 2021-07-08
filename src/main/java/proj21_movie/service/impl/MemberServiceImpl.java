@@ -93,17 +93,27 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.pwUpdate_M(member);
 	}
 
-	//패스워드 체크
+	// 패스워드 체크
 	@Override
-	public int passCheck(Member member) {
-		log.debug("service - passCheck() > " + member);
-		int result = mapper.passCheck(member);
-		return result;
+	public Member readMemberWithIDPW(String memEmail, String memPasswd) throws Exception {
+		System.out.println("S : 컨트롤러에서 호출받으면 필요한 정보를 받아서 DAO로 전달");
+		Member member = null;
+		try {
+			member = mapper.readMemberWithIDPW(member.getMemEmail(), member.getMemPasswd());
+		} catch (Exception e) {
+			e.printStackTrace();
+			member = null; // 실행하다 문제가 생겼을때 해당 데이터를 보내지않겠다는 의미 = 예외처리
+		}
+		return member; // null이 반환되면 앞의 코드가 문제가 있다는 것을 바로 알수있다.
 	}
 
-	//회원 탈퇴
+	// 회원 탈퇴
 	@Override
-	public void secession(Member member, HttpSession session) {
-		mapper.secession(member, session);
+	public void withdrawal(Member member) throws Exception {
+		try {
+			mapper.withdrawal(member);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
