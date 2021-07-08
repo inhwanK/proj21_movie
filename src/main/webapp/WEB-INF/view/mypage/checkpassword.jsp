@@ -14,41 +14,17 @@
 <script type="text/javascript">
 $(function(){
 	<!-- 취소버튼 -->
-	$('#cancel').on('click', function(e){
-		window.history.back();
+	$('#cancel').click(function(){
+    	var contextPath = "<%=request.getContextPath()%>";
+		location.href = contextPath + "/mypage";
 	});
 			
 	<!-- 확인버튼 -->
-	<!-- 비밀번호 입력 확인 -->
-	$("#confirm").on("click", function(){
-		if($("#memPasswd").val()==""){
-			swal("패스워드를 입력해주세요.");
-			$("#memPasswd").focus();
-			return false;
-		}
-		
-		<!-- 비밀번호 인증 -->
-		var contextPath = "<%=request.getContextPath()%>";
-		var pw = $('#confirm').val();		
-		var data = {confirm : pw};
-		
-		$.ajax({
-			url 	 	: contextPath + "/api/passChk",
-			type 	 	: "POST",
-            contentType : "application/json; charset=utf-8",
-			dataType 	: "json",
-            cache       : false,
-			data 	 	: JSON.stringify(data),
-			success	 	: function(result){
-				if(data==0){
-					swal("패스워드가 틀렸습니다.");
-					return;
-				}else{
-					swal("인증되셨습니다.");
-				}
-			}
-		})	
-	});	
+    $("#confirm").click(function(){
+    	var contextPath = "<%=request.getContextPath()%>";
+        $("#myinfo").attr("action", contextPath + "/myinfo");
+        $("#myinfo").submit();
+    });
 });
 </script>
 </head>
@@ -74,7 +50,7 @@ $(function(){
 			
 			<!-- 본문 -->
 			<div id="myinfo-wrap">
-				<form action="myinfo" method="post">
+				<form id="myinfo" method="post">
 				<div id="textarea">
 					<h2>개인정보 수정</h2>
 					<span>
@@ -84,11 +60,11 @@ $(function(){
 				</div>
 				
 				<div id="input">
-					<input type="password" name="memPasswd" placeholder="박스무비 로그인 시 사용하시는 비밀번호를 입력해주세요." required>
+					<input type="text" name="memPasswd" placeholder="박스무비 로그인 시 사용하시는 비밀번호를 입력해주세요." required>
 				</div>
 				
 				<div id="button-group">
-					<input class="btn" type="submit" value="취소" id="cancel" /> 
+					<input class="btn" type="button" value="취소" id="cancel" /> 
 					<input class="btn" type="submit" value="확인" id="confirm" /> 
 				</div>
 				</form>
