@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -93,6 +94,11 @@ public class RestInquiryController {
 			System.out.println("에러");
 		}
 		
+	}
+	
+	@GetMapping("/inquiryByUser")
+	public ResponseEntity<Object> inquiryByUser (@RequestParam(value = "inqUser") String inqUser) {
+		return ResponseEntity.ok(service.getInquiryByUser(inqUser));
 	}
 	
 	

@@ -16,24 +16,25 @@
 	<select id="selectInquiryAll" resultMap="inquiryList">
 		select inq_no, inq_title, inq_user, inq_date, inq_status 
 		from inquiry
-		order by inq_no desc;
+		order by inq_no desc
 	</select>
 	
 	<select id="selectInquiryByAnsStatus" resultMap="inquiryList">
 		select inq_no, inq_title, inq_user, inq_date, inq_status 
 		from inquiry
-		where inq_status = #{inqStatus};
+		where inq_status = #{inqStatus}
 	</select>
 	
 	<select id="selectInquiryByNo" resultType="Inquiry">
 		select inq_no, inq_title, inq_user, inq_detail, inq_date, inq_file, inq_answer, inq_ansdate, inq_status 
 		from inquiry
-		where inq_no = #{inqNo};		
+		where inq_no = #{inqNo};	
 	</select>
 	<select id="selectInquiryByUser" resultMap="inquiryList">
 		select inq_no, inq_title, inq_user, inq_detail, inq_date, inq_file, inq_answer, inq_ansdate, inq_status 
 		from inquiry
 		where inq_user = #{inqUser}
+		order by inq_no desc
 	</select>
 	
 	<insert id="insertInquiry">
