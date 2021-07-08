@@ -94,6 +94,17 @@
       <h1 class="text-center">영화관리</h1>
       <button class="btn btn-primary" id="new">영화 추가</button>
       <table class="table table-hover table-striped text-center" style="border: 1px solid;">
+      	<colgroup>
+			<col width="7%">
+			<col width="25%">
+			<col width="15%">
+			<col width="7%">
+			<col width="10%">
+			<col width="10%">
+			<col width="10%">
+			<col width="8%">
+			<col width="8%">
+		</colgroup>
       	<thead>
       		<tr>
       			<th>번호</th>

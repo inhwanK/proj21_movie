@@ -33,7 +33,7 @@
 				$(this).siblings(".desc").stop().slideUp();
 				$(this).next().stop().slideDown();
 				
-			})
+			});
 			
 			$(".desc").on('click', '.paytype', function(e){
 				e.preventDefault();

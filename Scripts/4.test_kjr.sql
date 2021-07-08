@@ -230,3 +230,10 @@ select * from comment;
 
 select * from movie;
 
+
+
+-- 유저명으로 문의조회
+select * 
+from inquiry 
+where inq_user = 'test1@test.com'
+order by inq_no desc;
