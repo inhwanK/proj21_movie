@@ -46,7 +46,7 @@
 				<h2>1대1 문의 내역</h2>
 				<div id="inquiry-content">
 					<div id="inquiry-count">
-						<strong id="strCnt">전체(2건)</strong>
+						<strong id="strCnt">전체(0 건)</strong>
 					</div>
 					<div id="inquiry-list">
 						<table id="inquiry-table" class="inquiry-table">
