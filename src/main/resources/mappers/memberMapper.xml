@@ -88,15 +88,15 @@
 	</update>
 	
 	<!-- 회원정보 비밀번호 체크 -->
-	<select id="passCheck" resultType="int">
-		select count(*) 
+	<select id="readMemberWithIDPW" parameterType="Member">
+		select mem_no, mem_email, password(mem_passwd), mem_birthdate, mem_name, mem_phone
 		  from member 
 		 where mem_email = #{memEmail}
 	  	   and mem_passwd = password(#{memPasswd})
 	</select>
 
 	<!-- 회원탈퇴 -->
-	<delete id="secession">
+	<delete id="withdrawal">
 		delete
 		  from member
 		 where mem_email = #{memEmail} 

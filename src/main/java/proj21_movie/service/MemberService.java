@@ -34,7 +34,7 @@ public interface MemberService {
 	public int pwUpdate_M(Member member);
 	
 	//패스워드 체크
-	public int passCheck(Member member);
+	public Member readMemberWithIDPW(String memEmail, String memPasswd) throws Exception;
 	//회원 탈퇴
-	public void secession(Member member, HttpSession session);
+	public void withdrawal(Member member) throws Exception;
 }

@@ -19,22 +19,29 @@ public class RestWithdrawalController {
 	@Autowired
 	private MemberService service;
 
-	// 회원탈퇴(로그인성공으로 넘어가고있음...)
-	@RequestMapping(value = "login.do")
-	public String secessionProc(Member member, HttpSession session) {
-		service.secession(member, session);
-		session.invalidate();
-		
-		return "redirect:/login";
+	@RequestMapping(value = "/withdrawal", method = RequestMethod.GET)
+	public String deleteGET(HttpSession session) throws Exception {
+		System.out.println("C: 회원정보 삭제 GET");
+		// 세션제어
+		String memEmail = (String) session.getAttribute("memEmail");
+		if (memEmail == null) {
+			return "redirect:/main";
+		}
+		return "mypage/withdrawal";
 	}
 
-	// 패스워드 체크
-	@ResponseBody
-	@RequestMapping(value = "passCheck.do", method = RequestMethod.POST)
-	public String passCheck(Member member) {
-
-		int result = service.passCheck(member);
-		return Integer.toString(result);
+	@RequestMapping(value = "/withdrawal", method = RequestMethod.POST)
+	public String deletePOST(Member member, HttpSession session) throws Exception {
+		System.out.println("C: 회원정보 삭제 POST");
+		// 1. 파라미터값 저장
+		System.out.println("C: deleteForm전달정보 " + member);
+		// 2. 전달받은 정보를 가지고 삭제 동작 처리이동
+		// 3. service 객체 - 동작
+		service.withdrawal(member);
+		// 4. 세션초기화
+		session.invalidate();
+		// 5. 페이지 이동
+		return "redirect:/main";
 	}
 
 }
