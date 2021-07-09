@@ -99,7 +99,7 @@
 				and s.shw_starttime = #{shwStarttime}
 			</if>
 		</where>
-		order by mov_no, shw_starttime;
+		order by mov_no, cin_no, shw_starttime;
 	</select>
 	
 	<select id="selectTimeListByCondition" resultMap="resShowInfo">

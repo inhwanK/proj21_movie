@@ -581,13 +581,18 @@ h3.title {
 
 /* movie-summary */
 .movie-summary {
+	overflow: hidden;
 	margin: 20px 0 0 0;
+	height: 140px;
+}
+
+.movie-summary.active {
+	height: 100%;
 }
 
 .movie-summary .txt {
 	overflow: hidden;
 	text-align: left;
-	
 }
 
 .movie-summary.active .txt {
@@ -598,6 +603,53 @@ h3.title {
 	color: #222;
 	font-size: 1.9em;
 	font-weight: 600;
+}
+
+/* 더보기 버튼 */
+.btn-more {
+	padding: 0;
+	width: 100%;
+	margin: 0;
+	height: 40px;
+	border: 0;
+	border-bottom: 1px solid #bfbfbf;
+	background-color: transparent;
+	color: #666;
+	cursor: pointer;
+    font-family: inherit;
+    font-size: 1em;
+    line-height: 1.15;
+}
+
+.btn-more i {
+	margin-left: 6px;
+}
+
+.btn-more:hover {
+	border-color: #666;
+}
+
+.iconset {
+	overflow: hidden;
+	display: inline-block;
+	margin: -1px 0 0 0;
+	padding: 0;
+	font-size: 0;
+	line-height: 0;
+	vertical-align: middle;
+	background-position: 0 0;
+	background-repeat: no-repeat
+}
+
+.ico-btn-more {
+	width: 12px;
+	height: 7px;
+	background-image:
+		url(../../images/movie/icon/ico-btn-more.png);
+}
+
+.ico-btn-more.active {
+	transform: rotate(180deg)
 }
 
 /* movie-info */

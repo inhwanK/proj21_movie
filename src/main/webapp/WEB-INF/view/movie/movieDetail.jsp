@@ -70,12 +70,14 @@
 		        });
 		    });
 		    
+		    /* 엔터키를 입력시 쓰기버튼과 동일 기능 */
 			$("#contxt").on("keyup", function(key) {
 		        if (key.keyCode == 13) {
 		        	$('#writeBtn').click();
-		        	return false;	// 검색 버튼을 눌렀을 경우에 해당 버튼이 활성화 (다른 의도하지 않은 동작 방지)
+		        	return false;	
 		        }
 		    });
+
 		});
 	</script>
 	<script type="text/javascript">
@@ -153,7 +155,11 @@
 							/* 영화 줄거리 */
 							sCont += "<div class='movie-summary'>";
 							sCont += "<div class='txt'>" + json.movDetail + "</div>";
-							sCont += "</div><br><hr>";
+							sCont += "</div><br>";
+							sCont += "<button type='button' class='btn-more'>";
+							sCont += "<span>더보기</span>";
+							sCont += "<i class='iconset ico-btn-more'></i>";
+							sCont += "</button>";
 							
 							/* 영화 정보 */
 							sCont += "<div class='movie-info'>";
@@ -174,13 +180,21 @@
 						$(".movie-info-list").append(sCont);
 						$('#movie-grade i:contains("0세이상")').text("전체");
 						$('#movie-grade i:contains("19세이상")').parent().text("청소년관람불가");
+						
+						$('.btn-more').on("click", function(){
+							$(this).toggleClass("active");
+							
+							$(".movie-summary, .ico-btn-more, .btn-more span").toggleClass("active");
+							$(".btn-more span").text("더보기");
+							$(".btn-more span.active").text("닫기");
+						});
+						
 					},
 					error : function(request, status, error){
 						window.location.href = contextPath + "/movielist";	// 데이터에 없는 영화번호를 검색시 전체영화 페이지로 이동
 					}
 				});
-			}
-			
+				
 			/* 상영타입 (전부 2d로 넣어놓음) */
 			var cinNo = "1";
 			$.get(contextPath + "/api/cinemas/" + cinNo,
@@ -189,7 +203,7 @@
 						cinType += "상영타입 : " + json.cinType + "(자막)";
 					$(".movie-info .p-type").append(cinType);
 				});
-		
+			}
 			/* // 주요정보 탭 */
 			
 			/* 실관람평  탭 */		
