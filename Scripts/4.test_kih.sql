@@ -152,7 +152,7 @@ select curdate() - INTERVAL (a.a) DAY as Date
 select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6;
 
 
-(select a.date
+select a.date, res.res_price 
 from (select curdate() - interval (last_week.week_interval) day as date
 from (select 0 as week_interval
 		union all select 1 
@@ -160,7 +160,9 @@ from (select 0 as week_interval
 		union all select 3 
 		union all select 4 
 		union all select 5 
-		union all select 6) as last_week) as a left join select res_price, res_date from reservation;
+		union all select 6) as last_week) as a left join (select res_price, res_date from reservation) res on res.res_date like a.date;
+	
+	select res_price, res_date from reservation;
 
 select *
 from (select 0 as week_interval
@@ -170,3 +172,6 @@ from (select 0 as week_interval
 		union all select 4 
 		union all select 5 
 		union all select 6) last_week;
+		
+
+
