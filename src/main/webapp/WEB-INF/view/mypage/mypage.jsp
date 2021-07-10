@@ -8,6 +8,7 @@
 	<meta charset="UTF-8">
 	<title>마이페이지</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/mypage/mypage.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>

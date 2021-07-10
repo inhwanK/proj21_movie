@@ -56,7 +56,7 @@
                   </div>
                   <div class="form-group">
                      <label>런타임</label>
-                     <input type="text" id="runtime" class="form-control">
+                     <input type="number" id="runtime" class="form-control">
                   </div>
                   <div class="form-group">
                      <label>감독</label>
@@ -68,7 +68,7 @@
                   </div>
                   <div class="form-group">
                      <label>주요정보</label>
-                     <textarea id="detail" class="form-control"></textarea>
+                     <textarea id="detail" style="height: 200px;" class="form-control"></textarea>
                   </div>
                   <div class="form-group">
                      <label>개봉일</label>
