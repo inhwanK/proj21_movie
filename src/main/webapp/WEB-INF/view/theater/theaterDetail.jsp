@@ -44,6 +44,8 @@
 		    /* 텍스트 변경(토/일 클래스 추가 후) */
 			$('.date-list button:first span:nth-child(2)').text("오늘");
 			$('.date-list button:nth-child(2) span:nth-child(2)').text("내일");
+			
+			
 		    
 			/* 극장정보 등 탭 클릭 */
 			$(".btn li").click(function(e){
@@ -165,75 +167,7 @@
 						contentType: "application/json; charset=utf-8",
 						success: function(json){
 							
-							// 영화번호가 같으면 중복 제거 (좌석도 같이 제거 됨 - 후에 처리할 예정)
-							var result = json.filter((item1, idx1)=>{
-							    return json.findIndex((item2, idx2)=>{
-							        return item1.movNo.movNo == item2.movNo.movNo;
-							    }) == idx1;
-							});
-							
-							//console.log(result);
-							
-							// 그룹화 console은 나오나 적용하는게 문제..
-							const byMovie = json.reduce((acc, movie) => {
-							  const movieName = movie.movNo.movTitle;
-							  const match = acc.get(movieName);
-							  if (match) {
-							    match.json.push({...movie});
-							  } else {
-							    acc.set(movieName, {json: [{...movie}] });
-							  }
-							  return acc;
-							}, new Map);
-						
-							/* var groupByMovie = Object.fromEntries(byMovie);
-							
-							console.log(groupByMovie);
-							
-							var first_key = Object.keys(groupByMovie);
-							var first_value = groupByMovie[Object.keys(groupByMovie)[0]]["json"][0]["shwStarttime"];
-							
-							var groupLength = Object.keys(groupByMovie).length;
-							console.log(groupLength);
-							
-							console.log(first_key);
-							console.log(first_value); */
-							
-							
-							/* if (groupLength >= 1) {
-								var sGroup1 = "";
-								var sGroup2 = "";
-								var sGroup3 = "";
-
-									sGroup1 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[0]]["json"][0]["movNo"]["movGrade"] + "</p>";
-									sGroup1 += "<p class='test'>" +  Object.keys(groupByMovie)[0] + "</p>";
-									sGroup1 += "<p class='test2'>상영시간 " +  groupByMovie[Object.keys(groupByMovie)[0]]["json"][0]["movNo"]["movRuntime"] + "분</p><br>";
-									sGroup1 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[0]]["json"][0]["cinNo"]["cinType"] + "(자막)</p>";
-									sGroup1 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[0]]["json"][0]["shwStarttime"] + "</p>";						
-									sGroup1 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[0]]["json"][1]["cinNo"]["cinType"] + "(자막)</p>";
-									sGroup1 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[0]]["json"][1]["shwStarttime"] + "</p>";
-									sGroup1 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[0]]["json"][2]["cinNo"]["cinType"] + "(자막)</p>";
-									sGroup1 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[0]]["json"][2]["shwStarttime"] + "</p><hr>";
-									
-									sGroup2 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[1]]["json"][0]["movNo"]["movGrade"] + "</p>";
-									sGroup2 += "<p class='test'>" +  Object.keys(groupByMovie)[1] + "</p>";
-									sGroup2 += "<p class='test2'>상영시간 " +  groupByMovie[Object.keys(groupByMovie)[1]]["json"][0]["movNo"]["movRuntime"] + "분</p><br>";
-									sGroup2 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[1]]["json"][0]["cinNo"]["cinType"] + "(자막)</p>";
-									sGroup2 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[1]]["json"][0]["shwStarttime"] + "</p><hr>";
-									
-									sGroup3 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[2]]["json"][0]["movNo"]["movGrade"] + "</p>";
-									sGroup3 += "<p class='test'>" +  Object.keys(groupByMovie)[2] + "</p>";
-									sGroup3 += "<p class='test2'>상영시간 " +  groupByMovie[Object.keys(groupByMovie)[2]]["json"][0]["movNo"]["movRuntime"] + "분</p><br>";
-									sGroup3 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[2]]["json"][0]["cinNo"]["cinType"] + "(자막)</p>";
-									sGroup3 += "<p class='test2'>" +  groupByMovie[Object.keys(groupByMovie)[2]]["json"][0]["shwStarttime"] + "</p>";
-								$(".theater-list-box").append(sGroup1);
-								$(".theater-list-box").append(sGroup2);
-								$(".theater-list-box").append(sGroup3);
-							} */
-								
-							
 							var dataLength = json.length;
-							var resultLength = result.length;
 							if (dataLength >= 1) {
 								var sCont = "";
 								var sCont2 = "";
