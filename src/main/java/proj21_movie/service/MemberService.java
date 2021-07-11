@@ -2,11 +2,9 @@ package proj21_movie.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Service;
 import proj21_movie.dto.Member;
+import proj21_movie.dto.Withdrawal;
 
 @Service
 public interface MemberService {
@@ -15,6 +13,7 @@ public interface MemberService {
 	List<Member> getLists();
 
 	int registerMember(Member member);
+	// 회원수정
 	int modifyMember(Member member);
 	int removeMember(String memEmail);
 
@@ -34,7 +33,10 @@ public interface MemberService {
 	public int pwUpdate_M(Member member);
 	
 	//패스워드 체크
-	public Member readMemberWithIDPW(String memEmail, String memPasswd) throws Exception;
+	public Member checkIDPW(Member member) throws Exception;
 	//회원 탈퇴
 	public void withdrawal(Member member) throws Exception;
+	
+	//회원정보 수정
+	public void update(Member member);
 }

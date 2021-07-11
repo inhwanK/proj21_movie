@@ -37,7 +37,7 @@
 					<li><a href="${contextPath}/reserveInfo">예매내역</a></li>
 					<li><a href="${contextPath}/commentInfo">한줄평 내역</a></li>
 					<li><a href="${contextPath}/inquiryInfo">1대1 문의 내역</a></li>
-					<li><a href="${contextPath}/chkPassword">개인정보 수정</a></li>
+					<li><a href="${contextPath}/myinfo">개인정보 수정</a></li>
 					<li><a href="${contextPath}/withdrawal">회원탈퇴</a></li>
 				</ul>
 			</div>

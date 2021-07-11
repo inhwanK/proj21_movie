@@ -12,6 +12,7 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$(document).ready(function(){
@@ -24,7 +25,7 @@ $(function(){
         <!-- 비밀번호 입력확인 -->	
         $("#delete").on("click", function(){
         	if($("#memPasswd").val()==""){
-               alert("비밀번호를 입력해주세요.");
+               alert("패스워드를 입력해주세요.");
                $("#memPasswd").focus();
                return;
 			}else if($('#confmemPasswd').val() == ''){
@@ -39,13 +40,12 @@ $(function(){
 				$('#confmemPasswd').focus();
 				return;
 			}
-        	
-            <!-- 회원탈퇴 -->
-<%-- 	    	var contextPath = "<%=request.getContextPath()%>";
-            var form = $('#delFrm').val();
+        	        	
+<%--             <!-- 회원탈퇴 -->
+	    	var contextPath = "<%=request.getContextPath()%>";
             $.ajax({
-	            url         : "${pageContext.request.contextPath}/passCheck.do",
-	            type        : "POST",
+	            url         : contextPath + "/withdrawal",
+	            type        : "post",
 	            contentType : "application/text; charset=utf8",
 	            datatype    : "json",
 	            cache       : false,
@@ -65,7 +65,9 @@ $(function(){
     				alert("서버 에러.");
     			}
         	}); --%>
-   		});
+            
+            
+   		}); 
 	});
 });
 </script>
@@ -85,13 +87,13 @@ $(function(){
 					<li><a href="${contextPath}/reserveInfo">예매내역</a></li>
 					<li><a href="${contextPath}/commentInfo">한줄평 내역</a></li>
 					<li><a href="${contextPath}/inquiryInfo">1대1 문의 내역</a></li>
-					<li><a href="${contextPath}/chkPassword">개인정보 수정</a></li>
+					<li><a href="${contextPath}/myinfo">개인정보 수정</a></li>
 					<li><a href="${contextPath}/withdrawal">회원탈퇴</a></li>
 				</ul>
 			</div>
 			
 			<!-- 본문 -->
-			<form action="withdrawal" name="delFrm" id="delFrm" method="post">
+			<form action="withdrawal" id="delFrm" method="post">
 			<div id="mypage-wrap">
 					<h2>회원탈퇴</h2>
 					<div id="textarea">
@@ -106,7 +108,7 @@ $(function(){
 	 			 		</span>			
  			 		</div>
  			 		<div id="passwordarea">
- 			 			<input type="hidden" name="memEmail" value="${member.memEmail}" readonly>
+ 			 			<input type="text" name="memEmail" value="${member.memEmail}">
  			 			<label>비밀번호</label>
  			 			<input type="password" id="memPasswd" name="memPasswd" placeholder="비밀번호를 입력해주세요.">
  			 			<br>
@@ -114,7 +116,7 @@ $(function(){
  			 			<input type="password" id="confmemPasswd" name="confmemPasswd" placeholder="비밀번호를 한번 더 입력해주세요.">
  			 		</div>
  			 		<div id="button-group">
- 			 			<input class="btn1" type="button" value="취소" id="cancel"  onclick="location.href='secession'" /> 
+ 			 			<input class="btn1" type="button" value="취소" id="cancel" /> 
 						<input class="btn2" type="submit" value="탈퇴" id="delete" />	
  			 		</div>
 				</div>

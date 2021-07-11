@@ -15,14 +15,19 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 	@Autowired
 	private MemberMapper memberMapper;
 
+	public Member select(String memEmail) {
+		Member member = memberMapper.selectMemberByEmail(memEmail);
+		return member;
+	}
+
 	@Override
-	public String regist(RegisterRequest req) {
+	public String regist(String memEmail, RegisterRequest req) {
 		Member member = memberMapper.selectMemberByEmail(req.getMemEmail());
 		if (member != null) {
 			throw new DuplicateMemberException("dup email" + req.getMemEmail());
 		}
 		
-		Member newMember = new Member(req.getMemEmail(), req.getMemPasswd(), req.getMemBirthdate(), req.getMemName(), req.getMemPhone());
+		Member newMember = new Member(req.getMemEmail(), req.getMemPasswd(), req.getMemBirthdate(), req.getMemName(), req.getMemPhone(), false);
 		memberMapper.insertMember(newMember);
 		
 		return newMember.getMemEmail();

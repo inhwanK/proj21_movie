@@ -25,6 +25,6 @@ public class AuthServiceImpl implements AuthService {
 		if (!member.matchPassword(memPasswd)) {
 			throw new WrongIdPasswordException();
 		}
-		return new AuthInfo(member.getMemEmail(), member.getMemName());
+		return new AuthInfo(member.getMemEmail(), member.getMemName(), member.getMemPasswd(), member.getMemBirthdate(), member.getMemPhone());
 	}	
 }

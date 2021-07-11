@@ -1,15 +1,24 @@
 package proj21_movie.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import proj21_movie.dto.AuthInfo;
 import proj21_movie.dto.Member;
+import proj21_movie.dto.Withdrawal;
+import proj21_movie.exception.WrongIdPasswordException;
 import proj21_movie.service.MemberService;
 
 @RestController
@@ -19,29 +28,23 @@ public class RestWithdrawalController {
 	@Autowired
 	private MemberService service;
 
-	@RequestMapping(value = "/withdrawal", method = RequestMethod.GET)
-	public String deleteGET(HttpSession session) throws Exception {
-		System.out.println("C: 회원정보 삭제 GET");
-		// 세션제어
-		String memEmail = (String) session.getAttribute("memEmail");
-		if (memEmail == null) {
-			return "redirect:/main";
-		}
-		return "mypage/withdrawal";
-	}
+//	@GetMapping
+//	public String delete(@ModelAttribute("Withdrawal") Withdrawal wit) {
+//		return "mypage/withdrawal";
+//	}
 
-	@RequestMapping(value = "/withdrawal", method = RequestMethod.POST)
-	public String deletePOST(Member member, HttpSession session) throws Exception {
-		System.out.println("C: 회원정보 삭제 POST");
-		// 1. 파라미터값 저장
-		System.out.println("C: deleteForm전달정보 " + member);
-		// 2. 전달받은 정보를 가지고 삭제 동작 처리이동
-		// 3. service 객체 - 동작
-		service.withdrawal(member);
-		// 4. 세션초기화
-		session.invalidate();
-		// 5. 페이지 이동
-		return "redirect:/main";
-	}
-
+//	@PostMapping
+//	public String Delete(@ModelAttribute("Withdrawal") Withdrawal wit, Errors errors, HttpSession session,
+//			HttpServletResponse response, RedirectAttributes redirectAttributes) throws Exception {
+//
+//		AuthInfo authInfo = (AuthInfo) session.getAttribute("authInfo");
+//		Member member = new Member();
+//		member.setMemEmail(authInfo.getMemEmail());
+//		member.setMemPasswd(wit.getMemPasswd());
+//		Member newmember = service.checkIDPW(member, wit);
+//
+//		service.withdrawal(newmember);
+		
+//		return "redirect:/main";
+//	}
 }
