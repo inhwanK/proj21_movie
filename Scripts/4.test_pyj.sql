@@ -1,10 +1,10 @@
 select user(), database();
 
-select mem_no, mem_email, mem_passwd, mem_birthdate, mem_name, mem_phone
+select mem_no, mem_email, mem_passwd, mem_birthdate, mem_name, mem_phone, mem_Outcheck
   from member; 
 
 insert into member values
-(4, 'test4@test.com', password(1234), '2000-03-15', '테스트4', '01033430343');
+(4, 'test4@test.com', password(1234), '2000-03-15', '테스트4', '01033430343', 0);
 
 update `member` 
    set mem_email = 'test4_2@test.com', 
@@ -20,4 +20,14 @@ select mem_email, mem_passwd, count(*)
   from member
  where mem_email and mem_passwd;
 
+-- 회원 탈퇴
+select mem_email, mem_passwd
+  from `member`
+ where mem_email = 'test4@test.com'
+   and mem_passwd = password(1234);
+  
+select * from member;
 					
+delete 
+  from member
+ where mem_email = 'test4@test.com';

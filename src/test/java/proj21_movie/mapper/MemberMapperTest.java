@@ -67,7 +67,7 @@ public class MemberMapperTest {
 	@Test
 	public void test04insertMember() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		Member newMember = new Member("test4@test.com", "1234", LocalDate.of(2020, 7, 4), "테스트4", "01033430343");
+		Member newMember = new Member("test4@test.com", "1234", LocalDate.of(2020, 7, 4), "테스트4", "010-3343-0343", false);
 
 		int res = mapper.insertMember(newMember);
 		Assert.assertEquals(1, res);
@@ -79,7 +79,7 @@ public class MemberMapperTest {
 	@Test
 	public void test05updateMember() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		Member newMember = new Member("test4_2@test.com", "1234", LocalDate.of(2020, 6, 22), "테스트4_2", "01022313232");
+		Member newMember = new Member("test4_2@test.com", "1234", LocalDate.of(2020, 6, 22), "테스트4_2", "010-2231-3232", false);
 		mapper.insertMember(newMember);
 
 		newMember.setMemEmail("test4_2@test.com");
@@ -97,7 +97,7 @@ public class MemberMapperTest {
 	public void test06deleteMember() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
-		Member newMember = new Member("test4_2@test.com", "1122", LocalDate.of(2020, 6, 22), "테스트4_2", "01022313232");
+		Member newMember = new Member("test4_2@test.com", "1122", LocalDate.of(2020, 6, 22), "테스트4_2", "010-2231-3232", false);
 		mapper.insertMember(newMember);
 
 		newMember.setMemEmail("test4_2@test.com");
@@ -114,4 +114,5 @@ public class MemberMapperTest {
 		mapper.idCheck(id);
 		mapper.idCheck(id2);
 	}
+
 }

@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 @font-face {
 	font-family: 'IBMPlexSansKR-Regular';
 	src:
@@ -24,61 +25,63 @@ section {
 	text-align: center;
 }
 
-#container{
+#container {
 	display: flex;
 	flex-wrap: wrap;
 }
-#mypage-menubar{
+
+#mypage-menubar {
 	border-right: 1px solid #ccc;
 	display: inline-block;
 	width: 250px;
 	height: 900px;
 }
 
-#mypage-menubar ul{
+#mypage-menubar ul {
 	padding: 0px;
 	list-style: none;
 	text-align: left;
 }
 
-#mypage-menubar ul li{
+#mypage-menubar ul li {
 	margin: 50px 0;
 }
 
-#mypage-menubar ul li a{
+#mypage-menubar ul li a {
 	color: RGB(3, 22, 52);
 	font-size: 1.2em;
 	text-decoration: none;
 }
 
-#mypage-menubar ul li a:hover{
+#mypage-menubar ul li a:hover {
 	color: red;
 	font-size: 1.2em;
 	text-decoration: none;
 }
 
-#mypage-menubar h2{
+#mypage-menubar h2 {
 	background-color: RGB(3, 22, 52);
 	color: white;
 }
 
-#myinfo-wrap{
+#myinfo-wrap {
 	width: 1045px;
 	height: 100%;
 }
 
-#myinfo-wrap h2{
+#myinfo-wrap h2 {
 	text-align: left;
 	margin-left: 40px;
 	margin-bottom: 40px;
 }
-#myinfo-wrap h3{
+
+#myinfo-wrap h3 {
 	text-align: left;
 	margin-left: 40px;
 	margin-bottom: 20px;
 }
 
-#myinfo-table{
+#myinfo-table {
 	margin-left: 40px;
 	text-align: center;
 	width: 900px;
@@ -88,75 +91,68 @@ section {
 	text-align: left;
 }
 
-#myinfo-table th{
+#myinfo-table th {
 	padding: 10px 20px;
-	background-color: RGB(247,247,247);
+	background-color: RGB(247, 247, 247);
 	border-top: 1px solid #ccc;
 }
 
-#myinfo-table td{
+#myinfo-table td {
 	padding: 10px;
 	width: 650px;
 	height: 35px;
 	border-top: 1px solid #ccc;
 }
 
-#myinfo-table span{
-	display: inline-block;
-	margin: auto;
-	border: 1px solid RGB(3, 22, 52);
-	border-radius: 5px;
-	color: RGB(3, 22, 52);
-	padding: 0 10px;
-	height: 30px;
-}
-
-#myinfo-table span:hover{
-	display: inline-block;
-	margin: auto;
-	border: 1px solid RGB(3, 22, 52);
-	border-radius: 5px;
-	background-color: RGB(247,247,247);
-	padding: 0 10px; 
-	height: 30px;
-	cursor: pointer;
-}
-
-#myinfo-table input{
-	height: 30px;
-	width: 630px;
+#myinfo-table input {
+	height: 27px;
+	width: 300px;
 	padding: 0 10px;
 }
 
-#button-group{
-	padding: 20px;
-	margin-top: 50px;
+#button-group {
+	height: 90px;
 }
 
-#button-group span{
-	display: inline-flex;
+#myinfo-table .pwchange {
+	height: 31px;
+	width: 140px;
+	text-align: center;
+	background-color: #fff;
+	color: #000;
+	font-weight: 500 bolder;
 	border: 1px solid RGB(3, 22, 52);
-	border-radius: 10px;
-	margin: 0 30px;
-	width: 100px;
-	height: 50px;
+	font-weight: bold;
 }
 
-#button-group span a{
-	font-size: 1.5em;
-	margin: auto;
-}
-
-#button-group span a:hover{
-	font-size: 1.5em;
-	margin: auto;
-	cursor: pointer;
-}
-
-#confirm{
+#button-group #cancel {
+	height: 45px;
+	width: 180px;
+	text-align: center;
+	font-size: 18px;
+	margin-top: 10px;
 	background-color: RGB(3, 22, 52);
+	color: #fff;
+	font-weight: 500 bolder;
+	border: 0 solid #fff;
+	border-radius: 7px;
+	font-weight: bold;
 }
 
-#confirm a{
-	color: white;
+#button-group #confirm {
+	height: 45px;
+	width: 180px;
+	text-align: center;
+	font-size: 18px;
+	margin-top: 10px;
+	background-color: #fff;
+	color: #000;
+	font-weight: 500 bolder;
+	border: 1px solid RGB(3, 22, 52);
+	border-radius: 7px;
+	font-weight: bold;
+}
+
+input[readonly="readonly"] {
+    background-color: #ebecef;
 }

@@ -2,8 +2,6 @@ package proj21_movie.service.impl;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Service;
 
 import org.apache.ibatis.logging.Log;
@@ -11,6 +9,7 @@ import org.apache.ibatis.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import proj21_movie.dto.Member;
+import proj21_movie.dto.Withdrawal;
 import proj21_movie.mapper.MemberMapper;
 import proj21_movie.service.MemberService;
 
@@ -40,6 +39,7 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.insertMember(member);
 	}
 
+	// 회원수정
 	@Override
 	public int modifyMember(Member member) {
 		log.debug("service - modifyMember() > " + member);
@@ -95,25 +95,24 @@ public class MemberServiceImpl implements MemberService {
 
 	// 패스워드 체크
 	@Override
-	public Member readMemberWithIDPW(String memEmail, String memPasswd) throws Exception {
-		System.out.println("S : 컨트롤러에서 호출받으면 필요한 정보를 받아서 DAO로 전달");
-		Member member = null;
-		try {
-			member = mapper.readMemberWithIDPW(member.getMemEmail(), member.getMemPasswd());
-		} catch (Exception e) {
-			e.printStackTrace();
-			member = null; // 실행하다 문제가 생겼을때 해당 데이터를 보내지않겠다는 의미 = 예외처리
-		}
-		return member; // null이 반환되면 앞의 코드가 문제가 있다는 것을 바로 알수있다.
+	public Member checkIDPW(Member member) throws Exception {
+		log.debug("service - checkIDPW() > " + member);
+		member.matchPassword(member.getMemPasswd());
+		return mapper.checkIDPW(member);
 	}
 
 	// 회원 탈퇴
 	@Override
 	public void withdrawal(Member member) throws Exception {
-		try {
-			mapper.withdrawal(member);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		log.debug("service - pwUpdate_M() > " + member);
+		mapper.withdrawal(member);
 	}
+
+	// 회원수정
+	@Override
+	public void update(Member member) {
+		log.debug("service - update() > " + member);
+		mapper.update(member);	
+	}
+
 }

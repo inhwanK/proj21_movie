@@ -18,13 +18,31 @@ $(function(){
     	var contextPath = "<%=request.getContextPath()%>";
 		location.href = contextPath + "/mypage";
 	});
-			
-	<!-- 확인버튼 -->
-    $("#confirm").click(function(){
-    	var contextPath = "<%=request.getContextPath()%>";
-        $("#myinfo").attr("action", contextPath + "/myinfo");
-        $("#myinfo").submit();
-    });
+	
+<%-- 	<!-- 비밀번호 체크 -->
+	$('#confirm').click(function(){
+		var contextPath = "<%= request.getContextPath()%>";
+		var memberpass = $('#memPasswd').val();		
+		var data = {memPasswd : memberpass};	
+		
+		$.ajax({
+			url 		:  contextPath + "/api/passCheck",
+			type 		: "post",
+            contentType : "application/json; charset=utf-8",
+            datatype    : "json",
+            cache       : false,
+            data        : JSON.stringify(data),
+			success : function(result){
+				if(result != 'fail'){
+					return "mypage/myinfo";	
+								
+				} else {
+					alert("비밀번호를 다시 확인해 주세요.");
+					return "mypage/chkPassword";
+				}					
+			}
+		});	
+	}); --%>
 });
 </script>
 </head>
@@ -43,14 +61,14 @@ $(function(){
 					<li><a href="${contextPath}/reserveInfo">예매내역</a></li>
 					<li><a href="${contextPath}/commentInfo">한줄평 내역</a></li>
 					<li><a href="${contextPath}/inquiryInfo">1대1 문의 내역</a></li>
-					<li><a href="${contextPath}/chkPassword">개인정보 수정</a></li>
+					<li><a href="${contextPath}/myinfo">개인정보 수정</a></li>
 					<li><a href="${contextPath}/withdrawal">회원탈퇴</a></li>
 				</ul>
 			</div>
 			
 			<!-- 본문 -->
 			<div id="myinfo-wrap">
-				<form id="myinfo" method="post">
+				<form action="myinfo" method="post">
 				<div id="textarea">
 					<h2>개인정보 수정</h2>
 					<span>
@@ -60,7 +78,8 @@ $(function(){
 				</div>
 				
 				<div id="input">
-					<input type="text" name="memPasswd" placeholder="박스무비 로그인 시 사용하시는 비밀번호를 입력해주세요." required>
+					<input type="hidden" name="memEmail" value="${member.memEmail}"><br>
+					<input type="password" name="conmemPasswd" placeholder="박스무비 로그인 시 사용하시는 비밀번호를 입력해주세요." required>
 				</div>
 				
 				<div id="button-group">
