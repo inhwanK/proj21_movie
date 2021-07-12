@@ -56,8 +56,7 @@ CREATE TABLE proj21_movie.member (
 	mem_passwd    CHAR(41)     NOT NULL COMMENT '비밀번호', -- 비밀번호
 	mem_birthdate DATE         NOT NULL COMMENT '생년월일', -- 생년월일
 	mem_name      VARCHAR(100) NOT NULL COMMENT '이름', -- 이름
-	mem_phone     VARCHAR(13)  NOT NULL COMMENT '연락처', -- 연락처
-	mem_Outcheck  BOOLEAN      default 0 NOT NULL COMMENT '가입여부' -- 가입여부
+	mem_phone     VARCHAR(13)  NOT NULL COMMENT '연락처' -- 연락처
 )
 COMMENT '회원';
 

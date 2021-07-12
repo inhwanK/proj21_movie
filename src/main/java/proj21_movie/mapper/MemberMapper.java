@@ -1,12 +1,8 @@
 package proj21_movie.mapper;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.stereotype.Component;
 import proj21_movie.dto.Member;
-import proj21_movie.dto.Withdrawal;
 
 @Component
 public interface MemberMapper {
@@ -39,6 +35,5 @@ public interface MemberMapper {
 	public void withdrawal(Member member) throws Exception;
 	
 	// 회원수정
-	public void update(Member member);
-
+	public void update(Member member) throws Exception;
 }

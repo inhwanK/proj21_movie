@@ -108,7 +108,7 @@ $(function(){
 	 			 		</span>			
  			 		</div>
  			 		<div id="passwordarea">
- 			 			<input type="text" name="memEmail" value="${member.memEmail}">
+ 			 			<input type="hidden" name="memEmail" value="${member.memEmail}">
  			 			<label>비밀번호</label>
  			 			<input type="password" id="memPasswd" name="memPasswd" placeholder="비밀번호를 입력해주세요.">
  			 			<br>

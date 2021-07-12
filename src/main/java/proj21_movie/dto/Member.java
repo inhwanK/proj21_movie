@@ -11,7 +11,6 @@ public class Member {
 	private LocalDate memBirthdate; // 생년월일
 	private String memName; // 이름
 	private String memPhone; // 연락처
-	private boolean memOutcheck; // 가입여부
 
 	// 비밀번호 변경
 	public void changePassword(String oldmemPasswd, String newmemPasswd) {
@@ -32,25 +31,21 @@ public class Member {
 		this.memNo = memNo;
 	}
 
-	public Member(String memEmail, String memPasswd, LocalDate memBirthdate, String memName, String memPhone,
-			boolean memOutcheck) {
+	public Member(String memEmail, String memPasswd, LocalDate memBirthdate, String memName, String memPhone) {
 		this.memEmail = memEmail;
 		this.memPasswd = memPasswd;
 		this.memBirthdate = memBirthdate;
 		this.memName = memName;
 		this.memPhone = memPhone;
-		this.memOutcheck = memOutcheck;
 	}
 
-	public Member(int memNo, String memEmail, String memPasswd, LocalDate memBirthdate, String memName, String memPhone,
-			boolean memOutcheck) {
+	public Member(int memNo, String memEmail, String memPasswd, LocalDate memBirthdate, String memName, String memPhone) {
 		this.memNo = memNo;
 		this.memEmail = memEmail;
 		this.memPasswd = memPasswd;
 		this.memBirthdate = memBirthdate;
 		this.memName = memName;
 		this.memPhone = memPhone;
-		this.memOutcheck = memOutcheck;
 	}
 
 	public int getMemNo() {
@@ -101,18 +96,10 @@ public class Member {
 		this.memPhone = memPhone;
 	}
 
-	public boolean isMemOutcheck() {
-		return memOutcheck;
-	}
-
-	public void setMemOutcheck(boolean memOutcheck) {
-		this.memOutcheck = memOutcheck;
-	}
-
 	@Override
 	public String toString() {
-		return String.format("Member [memNo=%s, memEmail=%s, memPasswd=%s, memBirthdate=%s, memName=%s, memPhone=%s, memOutcheck=%s]",
-				memNo, memEmail, memPasswd, memBirthdate, memName, memPhone, memOutcheck);
+		return String.format("Member [memNo=%s, memEmail=%s, memPasswd=%s, memBirthdate=%s, memName=%s, memPhone=%s]",
+				memNo, memEmail, memPasswd, memBirthdate, memName, memPhone);
 	}
 
 }
