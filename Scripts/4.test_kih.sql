@@ -160,7 +160,7 @@ from (select 0 as week_interval
 		union all select 3 
 		union all select 4 
 		union all select 5 
-		union all select 6) as last_week) as a left join (select res_price, res_date from reservation) res on res.res_date like a.date;
+		union all select 6) as last_week) as a left join (select res_price, res_date from reservation) res on res.res_date like concat(a.date,'%');
 	
 	select res_price, res_date from reservation;
 
