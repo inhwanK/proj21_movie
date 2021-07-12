@@ -40,7 +40,7 @@
 						</div>
 					</div>
 					
-					<a href="${contextPath}/chkPassword">개인정보 수정</a>
+					<a href="${contextPath}/myinfo">개인정보 수정</a>
 				</div>
 				
 				<div id="reserve-history">

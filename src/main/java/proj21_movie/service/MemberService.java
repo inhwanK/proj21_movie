@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import proj21_movie.dto.Member;
-import proj21_movie.dto.Withdrawal;
 
 @Service
 public interface MemberService {
@@ -38,5 +37,5 @@ public interface MemberService {
 	public void withdrawal(Member member) throws Exception;
 	
 	//회원정보 수정
-	public void update(Member member);
+	public void update(Member member) throws Exception;
 }

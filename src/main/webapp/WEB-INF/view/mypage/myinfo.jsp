@@ -31,16 +31,7 @@ $(function(){
     	var contextPath = "<%=request.getContextPath()%>";
 		location.href = contextPath + "/mypage";
 	});
-	
-	<!-- 수정버튼 -->
-    $(document).ready(function(){
-        $("#confirm").click(function(){
-        	var contextPath = "<%=request.getContextPath()%>";
-            document.form1.action = contextPath + "/myinfo";
-            document.form1.submit();
-        });
-    });
-		
+			
 	<!-- 비밀번호 찾기 -->
 	$(".pwchange").click(function(){
 		var contextPath = "<%=request.getContextPath()%>";
@@ -60,7 +51,7 @@ $(function(){
 	            newWindow.focus();  
 	        }  
 	    } 				    
-	    PopupCenter(contextPath + "/find_PW",'popup','313','420');
+	    PopupCenter(contextPath + "/find_PW_change",'popup','313','420');
 	});
 });
 </script>
@@ -85,7 +76,7 @@ $(function(){
 			</div>
 			
 			<!-- 수정페이지 -->
-			<form action="myinfo" name="form1" method="POST">
+			<form action="/myinfo/info.set" method="POST" class="content" id="form1">
 				<div id="myinfo-wrap">
 					<h2>개인정보 수정</h2>
 				

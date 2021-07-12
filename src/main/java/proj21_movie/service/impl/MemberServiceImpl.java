@@ -39,7 +39,6 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.insertMember(member);
 	}
 
-	// 회원수정
 	@Override
 	public int modifyMember(Member member) {
 		log.debug("service - modifyMember() > " + member);
@@ -110,9 +109,9 @@ public class MemberServiceImpl implements MemberService {
 
 	// 회원수정
 	@Override
-	public void update(Member member) {
+	public void update(Member member) throws Exception {
 		log.debug("service - update() > " + member);
-		mapper.update(member);	
+		mapper.update(member);
 	}
 
 }
