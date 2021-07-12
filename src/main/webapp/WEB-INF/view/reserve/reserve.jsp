@@ -209,8 +209,6 @@
 					if (dataLength >= 1) {
 						var sCont = "";
 						var cinemaNo = 0;
-						/* sCont += "<label class='type'>2D</label>";
-						sCont += "<br><br>"; */
 						for (i = 0; i < dataLength; i++) {
 							if (json[i].cinNo.cinNo != cinemaNo) {
 								sCont += "<br><br><br>";
@@ -246,10 +244,6 @@
 		// 좌석 선택 버튼 기능
 		$(document).on('click', '[class=btn-seat]', function(e){
 			var shwDate = date(dateIdx);
-			/* alert("shwDate >> " + shwDate + 
-					"\nmovieNo >> " + movieNo + 
-					"\ntheaterNo >> " + theaterNo +
-					"\ntime >> " + time); */
 					
 			if (${member == null}) {
 				alert("로그인이 필요한 서비스입니다.");
@@ -257,7 +251,12 @@
 				return;
 			}
 			
-			window.location.href = contextPath + "/seat?no=" + showInfoNo + "#menu-title";
+			if ($("#time-select").children().hasClass("active")){
+				window.location.href = contextPath + "/seat?no=" + showInfoNo + "#menu-title";
+			} else {
+				alert("상영시간을 선택해 주세요.");
+			}
+					
 		});
 		
 		// 인덱스를 넣으면 해당 인덱스만큼 +된 날짜를 계산하여 "yyyy-MM-dd" 형식으로 리턴해주는 함수 
