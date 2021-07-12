@@ -290,6 +290,16 @@ section h3 {
 	height: 100px;
 }
 
+#btn-seat {
+	background-color: RGB(3, 22, 52);
+	color: white;
+	border: none;
+	width: 100px;
+	height: 50px;
+	cursor: pointer;
+	font-size: 1.2em;
+}
+
 /* 영화 포스터 */
 #movie-poster img {
 	width: 90px;
