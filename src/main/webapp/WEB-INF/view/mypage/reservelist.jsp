@@ -5,11 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">	<!-- 파비콘 오류 메세지 해결 -->
 	<meta charset="UTF-8">
 	<title>예매내역</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/mypage/reservelist.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <body>
 	<%@include file="/WEB-INF/view/header.jsp"%>
@@ -65,25 +67,44 @@
 				var contextPath = "${contextPath}";
 				var resNo = Number($(this).prev().val());
 				
-				if (confirm("예매를 취소하시겠습니까?")) {
-					$.ajax({
-						url: contextPath + "/api/reservation/" + resNo,
-						type: 'DELETE',
-						success: function(res) {
-							$("#reservation").empty();
-							reload();
-						},
-						error: function(request, status, error) {
-							alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				// if (confirm("예매를 취소하시겠습니까?")) {
+				Swal.fire({ 		// Alert창 디자인 sweetalert2
+					title			  : '예매를 취소하시겠습니까?', 
+					icon			  : 'question',
+					showCancelButton  : true, 
+					confirmButtonColor: '#3085d6', 
+					cancelButtonColor : '#d33', 
+					confirmButtonText : '확인', 
+					cancelButtonText  : '취소' 
+					}).then((result) => {
+						if (result.isConfirmed) {
+							$.ajax({
+								url: contextPath + "/api/reservation/" + resNo,
+								type: 'DELETE',
+								success: function(res) {
+									$("#reservation").empty();
+									reload();
+								},
+								error: function(request, status, error) {
+									alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+								}
+							});
+						} else {
+							return false;
 						}
 					});
-				}				
-				
 			});
 			
 			$("#reservation").on('click', '[class=cancelFail]', function(e){
 				e.preventDefault();
-				alert("상영시간이 지났으므로 예매 취소 불가");
+				// alert("상영시간이 지났으므로 예매 취소 불가");
+				Swal.fire({				// Alert창 디자인 sweetalert2
+	                icon : 'error',
+	                title: '상영시간이 지나서 예매 취소 불가'
+	            }).then((result) => {
+					if (result.isConfirmed) {
+					}
+	            });
 			});
 			
 			// 회원번호로 예매내역 불러오는 함수
