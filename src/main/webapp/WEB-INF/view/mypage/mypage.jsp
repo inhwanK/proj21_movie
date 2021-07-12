@@ -43,7 +43,7 @@
 					<a href="${contextPath}/myinfo">개인정보 수정</a>
 				</div>
 				
-				<div id="reserve-history">
+				<!-- <div id="reserve-history">
 					<h2>예매내역</h2>
 					<ul id="reserve-list">
 						<li>예매 내역이 없습니다.</li>
@@ -55,7 +55,7 @@
 					<ul id="qna-list">
 						<li>예매 내역이 없습니다.</li>
 					</ul>
-				</div>
+				</div> -->
 			</div>
 		</div>
 		
