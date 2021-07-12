@@ -237,3 +237,25 @@ select *
 from inquiry 
 where inq_user = 'test1@test.com'
 order by inq_no desc;
+
+
+-- --------------------------------------------------------------------------------
+select * from member;
+select * from movie;
+select * from reservation;
+select * from showinfo;
+
+-- 7월 7일. 크루엘라. 1번 극장
+select shw_no, tht_no, cin_no, mov_no, shw_date, shw_starttime, shw_endtime from showinfo;
+insert into showinfo values (null, 1, 1, 1, '2021-07-07', '10:00:00', 
+addtime('10:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));
+
+-- 7월 7일. 크루엘라. 2번 극장
+select shw_no, tht_no, cin_no, mov_no, shw_date, shw_starttime, shw_endtime from showinfo;
+insert into showinfo values (null, 2, 1, 1, '2021-07-07', '10:00:00', 
+addtime('10:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));
+
+-- 7월 7일. 크루엘라. 3번 극장
+select shw_no, tht_no, cin_no, mov_no, shw_date, shw_starttime, shw_endtime from showinfo;
+insert into showinfo values (null, 3, 1, 1, '2021-07-07', '10:00:00', 
+addtime('10:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));

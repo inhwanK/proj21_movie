@@ -209,8 +209,6 @@
 					if (dataLength >= 1) {
 						var sCont = "";
 						var cinemaNo = 0;
-						/* sCont += "<label class='type'>2D</label>";
-						sCont += "<br><br>"; */
 						for (i = 0; i < dataLength; i++) {
 							if (json[i].cinNo.cinNo != cinemaNo) {
 								sCont += "<br><br><br>";
