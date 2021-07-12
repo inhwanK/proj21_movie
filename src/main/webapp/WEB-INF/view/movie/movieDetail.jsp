@@ -75,8 +75,16 @@
 			$('#to-mypage').on('click', function(e){
 				if(${member == null}) {
 					e.preventDefault();
-					alert("회원 로그인이 필요합니다.");
-					window.location.href = contextPath + "/login";
+					// alert("회원 로그인이 필요합니다.");
+					// window.location.href = contextPath + "/login";
+					Swal.fire({				// Alert창 디자인 sweetalert2
+		                icon : 'error',
+		                title: '회원 로그인이 필요합니다.'
+		            }).then((result) => {
+						if (result.isConfirmed) {
+							window.location.href = contextPath + "/login";
+						}
+		            });
 				}
 			});
 		});
