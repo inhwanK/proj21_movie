@@ -5,11 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">	<!-- 파비콘 오류 메세지 해결 -->
 	<meta charset="UTF-8">
 	<title>좌석 선택</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/reserve/seat.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <!-- URL 직접 입력해서 접속하는것을 차단 -->
 <%
 	String strReferer = request.getHeader("referer");
@@ -253,7 +255,14 @@
 				
 				if (cnt > 0) {
 					if (cntTotal <= activeLength){
-						alert("좌석이 선택되어 있습니다.");
+						// alert("좌석이 선택되어 있습니다.");
+						Swal.fire({				// Alert창 디자인 sweetalert2
+			                icon : 'warning',
+			                title: '좌석이 선택되어 있습니다.'
+			            }).then((result) => {
+							if (result.isConfirmed) {
+							}
+			            });
 						return;
 					}
 					$(this).next().text(cnt-1);
@@ -280,7 +289,14 @@
 						$(this).removeClass("active");
 						$("#seat-no span").remove('#' + selectSeat);
 					} else {
-						alert("관람인원을 확인하세요.");
+						// alert("관람인원을 확인하세요.");
+						Swal.fire({				// Alert창 디자인 sweetalert2
+			                icon : 'warning',
+			                title: '관람인원을 확인하세요.'
+			            }).then((result) => {
+							if (result.isConfirmed) {
+							}
+			            });
 					}
 				} else {
 					if ($(this).hasClass("active")){
@@ -296,7 +312,14 @@
 			$("#button-group").on('click', '[id=next]', function(e){
 				var activeLength = $(".select-seat.active").length; // 선택된 좌석 개수
 				if (activeLength <= 0) {
-					alert("좌석을 선택해 주세요.");
+					// alert("좌석을 선택해 주세요.");
+					Swal.fire({				// Alert창 디자인 sweetalert2
+		                icon : 'error',
+		                title: '좌석을 선택해 주세요.'
+		            }).then((result) => {
+						if (result.isConfirmed) {
+						}
+		            });
 					return;
 				}
 				
@@ -306,7 +329,14 @@
 				var cntTotal = cntAdult + cntTeen + cntPref; // 선택한 인원 총합
 				
 				if (activeLength != cntTotal) {
-					alert("인원과 좌석수를 확인하세요.");
+					// alert("인원과 좌석수를 확인하세요.");
+					Swal.fire({				// Alert창 디자인 sweetalert2
+		                icon : 'error',
+		                title: '인원과 좌석수를 확인하세요.'
+		            }).then((result) => {
+						if (result.isConfirmed) {
+						}
+		            });
 					return;
 				}
 				
@@ -343,9 +373,25 @@
 			});
 			
 			$("#button-group").on('click', '[id=before]', function(e){
-				if (confirm("이전 화면으로 돌아가시겠습니까?")){
+				/* if (confirm("이전 화면으로 돌아가시겠습니까?")){
 					window.location.href = contextPath + "/reserve#menu-title";
-				}
+				} */
+				
+				Swal.fire({ 		// Alert창 디자인 sweetalert2
+					title			  : '이전 화면으로 돌아가시겠습니까?', 
+					icon			  : 'question',
+					showCancelButton  : true, 
+					confirmButtonColor: '#3085d6', 
+					cancelButtonColor : '#d33', 
+					confirmButtonText : '돌아가기', 
+					cancelButtonText  : '취소' 
+					}).then((result) => {
+						if (result.isConfirmed) {
+							window.location.href = contextPath + "/reserve#menu-title";
+						} else{    
+							return false;
+					 	}
+					});
 			});
 		});
 	</script>

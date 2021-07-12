@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/reserve/reserve.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script type="text/javascript">
 		$(function(){
 			var week = ['일', '월', '화', '수', '목', '금', '토'];
@@ -246,15 +247,28 @@
 			var shwDate = date(dateIdx);
 					
 			if (${member == null}) {
-				alert("로그인이 필요한 서비스입니다.");
+				/* alert("로그인이 필요한 서비스입니다.");
 				window.location.href = contextPath + "/login";
-				return;
-			}
-			
-			if ($("#time-select").children().hasClass("active")){
+				return; */
+				Swal.fire({				// Alert창 디자인 sweetalert2
+	                icon : 'error',
+	                title: '로그인이 필요한 서비스입니다.'
+	            }).then((result) => {
+					if (result.isConfirmed) { 
+						window.location.href = contextPath + "/login";
+					}
+	            });
+			}else if ($("#time-select").children().hasClass("active")){
 				window.location.href = contextPath + "/seat?no=" + showInfoNo + "#menu-title";
 			} else {
-				alert("상영시간을 선택해 주세요.");
+				// alert("상영시간을 선택해 주세요.");
+				Swal.fire({				// Alert창 디자인 sweetalert2
+	                icon : 'warning',
+	                title: '상영시간을 선택해 주세요.'
+	            }).then((result) => {
+					if (result.isConfirmed) {
+					}
+	            });
 			}
 					
 		});
