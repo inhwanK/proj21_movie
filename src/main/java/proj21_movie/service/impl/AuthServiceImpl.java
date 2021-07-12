@@ -17,8 +17,13 @@ public class AuthServiceImpl implements AuthService {
 	
 	@Override
 	public AuthInfo authenicate(String memEmail, String memPasswd) {
-		Member member = memMapper.selectMemberByEmail(memEmail);
-		if (member == null) {
+		Member member = new Member();
+		member.setMemEmail(memEmail);
+		member.setMemPasswd(memPasswd);
+		
+		Member mem = memMapper.selectMemberByEmail(memEmail);
+		
+		if (mem == null) {
 			throw new WrongIdPasswordException();
 		}
 		

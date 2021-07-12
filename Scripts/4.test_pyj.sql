@@ -31,3 +31,13 @@ select * from member;
 delete 
   from member
  where mem_email = 'test4@test.com';
+
+select mem_no, mem_email, password(mem_passwd), mem_birthdate, mem_name, mem_phone
+  from member
+ where mem_email = 'test4@test.com'
+   and mem_passwd;
+
+select mem_no, mem_email, password(mem_passwd), mem_birthdate, mem_name, mem_phone
+  from member
+ where mem_email = 'test4@test.com';  
+ 

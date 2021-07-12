@@ -45,6 +45,7 @@
 		 where mem_email = #{memEmail}
 	</update>
 
+	<!-- 회원탈퇴 -->
 	<delete id="deleteMember">
 		delete
 		  from member
@@ -100,17 +101,11 @@
 	</update>
 	
 	<!-- 회원정보 비밀번호 체크 -->
-	<select id="checkIDPW" parameterType="Member">
-		select mem_email, password(mem_passwd)
-		  from member
-		 where mem_email = #{memEmail}
-	</select>
-
-	<!-- 회원탈퇴 -->
-	<delete id="withdrawal">
-		delete
+	<select id="checkPw" parameterType="Member">
+		select mem_no, mem_email, password(mem_passwd), mem_birthdate, mem_name, mem_phone
 		  from member
 		 where mem_email = #{memEmail} 
-	</delete>
+		   and mem_passwd = #{memPasswd}
+    </select>
 	
 </mapper>
