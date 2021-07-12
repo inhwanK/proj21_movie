@@ -291,13 +291,18 @@ section h3 {
 }
 
 #btn-seat {
-	background-color: RGB(3, 22, 52);
-	color: white;
-	border: none;
+	background-color: white;
+	color: RGB(3, 22, 52);
+	border: 1px solid RGB(3, 22, 52);
 	width: 100px;
 	height: 50px;
 	cursor: pointer;
 	font-size: 1.2em;
+}
+
+#btn-seat:hover {
+	background-color: RGB(3, 22, 52);
+	color: white;
 }
 
 /* 영화 포스터 */
