@@ -16,6 +16,24 @@
 <!-- https://developers.google.com/chart/interactive/docs/basic_preparing_data 플러그인 가이드-->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- 구글 차트  -->
 <script type="text/javascript">
+
+	// Date 를 빼고 더해서 다시 Date형태로 반환 먼저
+	// 이 Date 계산을 자동화, 데이터로 넣기
+	// 그에 따른 쿼리수행?
+
+	// let 변수로 한번 선언하면 타입이 변하지않음. var 보다는 좀 더 정적임. 
+	// 예를들어, Date 타입에 날짜를 빼는 등 숫자 연산을 해버리면 var 변수는 Date 타입을 정수타입으로 바꿔버림.
+	// let은 그렇지가 않음.
+	// 또한, 함수에 한번 진입했다가 다시 나오면 함수에서 연산된 값이 적용되지 않고,
+	// 본래 선언할 때 값을 그대로 유지한다는 특성도 있음.(검증 필요.)
+	
+	let date = new Date();
+
+	console.log(date);
+	console.log(date.getDate());
+	console.log(date.getDate()-1);
+	date.setDate(date.getDate()-1);
+	console.log(date)
 	
 	var contextPath = "${contextPath}";
 	
@@ -46,7 +64,7 @@
         	['블랙위도우', 2],
         	['크루엘라', 2]
         ]); */
-
+        
         $.ajax({
         	url:contextPath+"/api/totalSales",
         	type:'get',
@@ -71,9 +89,6 @@
         		
         		var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_div'));
                 chart.draw(data, options);
-                
-                var chart = new google.visualization.BarChart(document.getElementById('barchart_div'));
-                chart.draw(data, options);
         	}
         	
         });
@@ -94,6 +109,43 @@
         var chart = new google.visualization.BarChart(document.getElementById('barchart_div'));
         chart.draw(data, options); */
     }
+      google.charts.load('current', {'packages':['annotationchart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Kepler-22b mission');
+        data.addColumn('string', 'Kepler title');
+        data.addColumn('string', 'Kepler text');
+        data.addColumn('number', 'Gliese 163 mission');
+        data.addColumn('string', 'Gliese title');
+        data.addColumn('string', 'Gliese text');
+
+        
+        data.addRows([
+          [date, 12400, undefined, undefined,
+                                  10645, undefined, undefined],
+          [date.setDate(date.getDate()+1), 24045, 'Lalibertines', 'First encounter',
+                                  12374, undefined, undefined],
+          [date.setDate(date.getDate()+1), 35022, 'Lalibertines', 'They are very tall',
+                                  15766, 'Gallantors', 'First Encounter'],
+          [date.setDate(date.getDate()+1), 12284, 'Lalibertines', 'Attack on our crew!',
+                                  34334, 'Gallantors', 'Statement of shared principles'],
+          [date.setDate(date.getDate()+1), 8476, 'Lalibertines', 'Heavy casualties',
+                                  66467, 'Gallantors', 'Mysteries revealed'],
+          [date.setDate(date.getDate()+1), 0, 'Lalibertines', 'All crew lost',
+                                  79463, 'Gallantors', 'Omniscience achieved']
+        ]);
+
+        var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));
+
+        var options = {
+          displayAnnotations: true
+        };
+
+        chart.draw(data, options);
+      }
     </script>
 </head>
 <body>
@@ -102,7 +154,7 @@
 	</header>
 	<div id="page-wrapper">
 		<div id="columnchart_div"></div>
-		<div id="barchart_div"></div>
+		<div id="chart_div"></div>
 	</div>
 </body>
 </html>
