@@ -11,5 +11,5 @@ public interface StatisticsService {
 	int showTotalSales();
 	
 	List<Statistics> showSalesByLatestDate();
-	List<Statistics> showAudienceByLatestDate();
+	List<Statistics> showSalesByMonth();
 }

@@ -32,9 +32,9 @@ public class RestStatisticsController {
 		return ResponseEntity.status(HttpStatus.OK).body(sales);
 	}
 	
-	@GetMapping("/audienceLatestDate")
+	@GetMapping("/salesMonth")
 	public ResponseEntity<Object> getAudienceByLatestDate(){
-		List<Statistics> sales = service.showAudienceByLatestDate();
+		List<Statistics> sales = service.showSalesByMonth();
 		return ResponseEntity.status(HttpStatus.OK).body(sales);
 	}
 }

@@ -28,5 +28,10 @@
 		order by 날짜 asc;
 	</select>
 
-
+	<select id="selectSalesByMonth" resultMap="StatisticsList">
+		select res_date as 날짜, sum(res_price) as 매출, sum(res_adult + res_teen + res_pref) as 관람인원
+			from reservation
+			group by month(res_date)
+		order by res_date asc;
+	</select>
 </mapper>

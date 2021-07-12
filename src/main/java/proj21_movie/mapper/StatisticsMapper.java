@@ -16,6 +16,6 @@ public interface StatisticsMapper {
 	int selectTotalSales();
 	
 	List<Statistics> selectSalesByLatestDate();
-	List<Statistics> selectAudienceByLatestDate();
 	
+	List<Statistics> selectSalesByMonth();
 }

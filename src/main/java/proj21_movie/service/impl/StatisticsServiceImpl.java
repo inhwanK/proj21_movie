@@ -26,9 +26,8 @@ public class StatisticsServiceImpl implements StatisticsService {
 	}
 
 	@Override
-	public List<Statistics> showAudienceByLatestDate() {
-		
-		return mapper.selectAudienceByLatestDate();
+	public List<Statistics> showSalesByMonth() {
+		return mapper.selectSalesByMonth();
 	}
 
 }

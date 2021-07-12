@@ -49,15 +49,16 @@
 			contentType:"application/json; charset=utf-8",
 			dataType:"json",
 			success:function(json){
-				salesData.addColumn('string', '날짜');
-				salesData.addColumn('number', '매출');
 				
 				var sum = 0;
 				var avg = 0;
 				
+				salesData.addColumn('string', '날짜');
+				salesData.addColumn('number', '매출');
+				
 				for(i=0;i<json.length;i++){
 					salesData.addRows([
-						[json[i].date.substr(5,9),json[i].data]
+						[json[i].date.substr(8,9),json[i].data]
 					]);
 					sum += json[i].data;
 				} // end of for
@@ -79,15 +80,17 @@
 				salesChart.draw(salesData, salesOptions);
 				// 매출 차트 끝.
 				
-				audienceData.addColumn('string', '날짜');
-				audienceData.addColumn('number', '관람인원');
+				
 				
 				var sum = 0;
 				var avg = 0;
 				
+				audienceData.addColumn('string', '날짜');
+				audienceData.addColumn('number', '관람인원');
+				
 				for(i=0;i<json.length;i++){
 					audienceData.addRows([
-						[json[i].date.substr(5,9), json[i].audience ]
+						[json[i].date.substr(8,9), json[i].audience ]
 					]);
 					sum += json[i].audience;
 				} // end of for
@@ -110,6 +113,76 @@
 			} // end of success
 		});
 		
+		var salesMonth = new google.visualization.DataTable();
+		var audienceMonth = new google.visualization.DataTable();
+		
+		$.ajax({
+			url:contextPath+"/api/salesMonth",
+			type:"get",
+			contentType:"application/json; charset=utf-8",
+			dataType:"json",
+			success:function(json){
+				
+				var sum = 0;
+				var avg = 0;
+				
+				salesMonth.addColumn('string', '날짜');
+				salesMonth.addColumn('number', '관람인원');
+				
+				for(i=0;i<json.length;i++){
+					salesMonth.addRows([
+						[json[i].date.substr(0,7),json[i].data]
+					]);
+					sum += json[i].data;
+				} // end of for
+				avg = sum/(i+1);
+
+				var salesOptions = {
+					title:'월별 매출',
+					width:800,
+					height:400, 
+					hAxis:{
+					},
+					vAxis:{
+						scaleType:'linear'
+					},
+							
+				};
+				
+				var salesChart = new google.visualization.ColumnChart(document.getElementById('sales_monthchart_div'));
+				salesChart.draw(salesMonth, salesOptions);
+				// 매출 차트 끝.
+				
+				var sum = 0;
+				var avg = 0;
+				
+				audienceMonth.addColumn('string', '날짜');
+				audienceMonth.addColumn('number', '관람인원');
+				
+				for(i=0;i<json.length;i++){
+					audienceMonth.addRows([
+						[json[i].date.substr(0,7), json[i].audience ]
+					]);
+					sum += json[i].audience;
+				} // end of for
+				avg = sum/(i+1);
+
+				var audienceOptions = {
+					title:'월별 관람객 수',
+					width:800,
+					height:400, 
+					hAxis:{
+					},
+					vAxis:{
+						scaleType:'linear'
+					},
+							
+				};
+				
+				var audienceChart = new google.visualization.ColumnChart(document.getElementById('audience_monthchart_div'));
+				audienceChart.draw(audienceMonth, audienceOptions);
+			} // end of success
+		});
 	}
 </script>
 <style type="text/css">
@@ -134,6 +207,10 @@
 				<tr>
 					<td style="width:50%"><div id="sales_chart_div"></div></td>
 					<td style="width:50%"><div id="audience_chart_div"></div></td>
+				</tr>
+				<tr>
+					<td style="width:50%"><div id="sales_monthchart_div"></div></td>
+					<td style="width:50%"><div id="audience_monthchart_div"></div></td>
 				</tr>
 			</table>
 		</div>
