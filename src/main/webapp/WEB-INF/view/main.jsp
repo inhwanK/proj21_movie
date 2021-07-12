@@ -136,7 +136,7 @@
 					<li id="search-box">
 						<input type="text" placeholder="영화제목" style="color:white" onkeyup="if(window.event.keyCode==13){searchMovie()}"/>
 					</li>
-					<li><i class="far fa-calendar-alt"></i><a href="#"><h2>상영시간표</h2></a></li>
+					<li><i class="far fa-calendar-alt"></i><a href="${contextPath}/timetable"><h2>상영시간표</h2></a></li>
 					<li><i class="fas fa-film"></i><a href="${contextPath}/movielist"><h2>박스오피스</h2></a></li>
 					<li><i class="fas fa-ticket-alt"></i><a href="${contextPath}/reserve"><h2>바로예매</h2></a></li>
 				</ul>

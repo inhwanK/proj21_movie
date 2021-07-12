@@ -6,25 +6,64 @@
 <head>
 	<link rel="icon" href="data:;base64,iVBORw0KGgo=">	<!-- 파비콘 오류 메세지 해결 -->
 	<meta charset="UTF-8">
-	<title>극장 상세정보</title>
+	<title>극장별 상영시간표</title>
 	<c:set var="contextPath" value="<%=request.getContextPath() %>" />
-	<link rel="stylesheet" href="${contextPath}/resources/css/theater/theaterDetail.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/theater/timetable.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script src="${contextPath}/resources/js/theater/theaterDetail.js"></script>
 	<script>
-		$(function(){		
-			/* 상영시간표 탭 */
+		$(function(){
+			/* ajax - 극장 리스트 */
 			var contextPath = "${contextPath}";
+			$.get(contextPath + "/api/theaters",
+				function(json) {
+					var dataLength = json.length;
+					if (dataLength >= 1) {
+						var list = "";
+						for (i = 0; i < dataLength; i++) {
+							list += "<li class='list-li'>";
+							list += "<input type='hidden' value='" + json[i].thtNo  + "'>";			
+							list += "<button type='button' class='btn'>" + json[i].thtName + "</button>";
+							list += "</li>";						
+						}
+						$(".list-section ul").append(list);
+						
+						$(".list li .btn:first").addClass("active");
+					}
+				});
+			
+			/* 극장 클릭 */
+			$(document).on('click', '[class=list-li]', function(e){
+				e.preventDefault();
+							
+				$(".btn").removeClass("active");
+				$(".btn").eq($(this).index()).addClass("active");
+				
+				var dateActive = $(".date-list button.active").length;
+				var theaterActive = $(".btn.active").length;
+				var activeLength = dateActive + theaterActive; // 날짜, 극장 active 클래스의 수
+				
+				if (activeLength == 2){
+					selList();
+				} else {
+					var sEmp = "";
+						sEmp = "<p class='no-showInfo-list'>선택하신 날짜의 상영중인 영화가 없습니다. 다른 날짜를 선택해주세요.</p>"
+					$(".theater-list-box").empty();
+					$(".theater-list-box").append(sEmp);
+				}
+			});
+			
+			/* 상영시간표 */
 			var dateIdx = 0;
 			var movieNo = 0;
 			var theaterNo = 0;
 			var time = "";
 			var showInfoNo = 0;
-			
-			// 날짜 선택했을 시 효과 & 선택된 날짜 인덱스 리턴
-			$(".date-list button").click(function(e){ 
+
+			/* 날짜 클릭시 날짜계산하여 상영시간 출력 */
+			$(".date-list button").click(function(e){	
 				e.preventDefault();
 				
 				$(this).addClass("active");
@@ -33,19 +72,33 @@
 				// alert($(this).text());
 				
 				var idx = $(".date-list button").index(this);
-				// alert("날짜 인덱스 >> " + idx);
+				//alert("날짜 인덱스 >> " + idx);
 				
 				dateIdx = idx;
+				
+				var dateActive = $(".date-list button.active").length;
+				var theaterActive = $(".btn.active").length;
+				var activeLength = dateActive + theaterActive; // 날짜, 극장 active 클래스의 수
+				
+				if (activeLength == 2){
+					selList();
+				} else {
+					var sEmp = "";
+						sEmp = "<p class='no-showInfo-list'>선택하신 날짜의 상영중인 영화가 없습니다. 다른 날짜를 선택해주세요.</p>"
+					$(".theater-list-box").empty();
+					$(".theater-list-box").append(sEmp);
+				}
 			});
 			
-			/* 날짜 클릭시 날짜계산하여 상영시간 출력 */
-			$(".date-list button").click(function(e){		
-				var no = "${thtNo}";
+			function selList(){
+				$(".theater-list-box").empty();	
+			
+				var thtNo = $(".btn.active").prev().val();
 				var shwDate = date(dateIdx);
 				
 				$.ajax({
 					type:"GET",
-					url: contextPath + "/api/showInfoListByTheater/" + no + "/" + shwDate,
+					url: contextPath + "/api/showInfoListByTheater/" + thtNo + "/" + shwDate,
 					contentType: "application/json; charset=utf-8",
 					success: function(json){
 						
@@ -106,7 +159,7 @@
 						console.log("error > ");
 					}
 				});
-			});
+			}
 			
 			// 시간 선택시(영화 예매하기)
 			$(document).on('click', '[class=time]', function(e){
@@ -150,7 +203,7 @@
 			
 			return year2 + "-" + month2 + "-" + date2;
 		}
-		/* // 상영시간표 탭 */
+		/* // 상영시간표 */
 	</script>
 </head>
 <body>
@@ -173,140 +226,53 @@
 	    		</div>
 	    	</div> --%>
 	    	
-	    	<div class="contents">
-	    		<div class="thtName"></div>	    												 		
+	    	<div class="contents"> 												 		
     			<div class="inner-wrap">
-    				<div class="tab-list">
-	    				<ul class="btn">
-	    					<li class="active">
-	    						<a href="#" title="극장정보 탭으로 이동">극장정보</a>
-	    					</li>
-	    					<li>
-	    						<a href="#" title="상영시간표 탭으로 이동">상영시간표</a>
-	    					</li>
-	    					<li>
-	    						<a href="#" title="관람료 탭으로 이동">관람료</a>
-	    					</li>
-	    				</ul>
-	    			</div>
+					
+					<h2 class="title">극장선택</h2>
+					<!-- choice-area -->
+    				<div class="choice-area">
+    					<!-- left-area -->
+    					<div class="left-area">
+    						<ul>
+    							<li class="active">
+    								<a href="#" title="극장별 선택">
+	    								<i class="iconset ico-tab-theater"></i>
+	    								극장별
+    								</a>
+    							</li>
+    						</ul>
+    					</div>
+    					<!-- // left-area -->
+    					
+    					<!-- theater-choice -->
+    					<div class="theater-choice">
+    						<div class="tab-list-choice">
+    							<ul>
+    								<li>
+    									<a href="#" title="대구지점 선택" class="active">
+    										대구(3)
+    									</a>
+    								</li>
+    							</ul>
+    						</div>
+    						
+    						<div class="list-section">
+    							<ul class="list">
+    							</ul>
+    						</div>
+    					</div>
+    					<!-- // theater-choice -->
+    				</div>
+    				<!-- // choice-area -->
+
+	    			
 	    			
 	    			<!-- tab-cont-wrap -->
 	    			<div class="tab-cont-wrap">
-	    				<!-- 극장정보 리스트 -->
-	    				<div id="tab01" class="tab-cont active">
-	    					<!-- theater-info -->
-	    					<div class="theater-info">
-	    					</div>
-	    					<!-- // theater-info -->
-	    					
-	    					<!-- 시설 안내 -->
-	    					<h2 class="title">시설안내</h2>
-	    					<h3 class="title">보유시설</h3>
-	    					<div class="theater-facility">
-	    						<p>
-	    							<i class="iconset facility-theater"></i>
-	    							일반상영관
-	    						</p>
-	    						<p>
-	    							<i class="iconset facility-disabled"></i>
-	    							장애인석
-	    						</p>
-	    					</div>	    					
-	    					<h3 class="title">층별 안내</h3>
-	    					<ul class="dot-list">
-	    						<li>
-	    							<span class="font-gblue">8층 : </span>
-	    							매표소, 스넥바(팝콘 박스), 화장실(남,여), 장애인 화장실(남,여), 상영관 퇴장로(MX관, 2~6관)
-	    						</li>
-	    						<li>
-	    							<span class="font-gblue">9층 : </span>
-	    							상영관 입장로(MX관, 2~6관), 화장실(남,여)
-	    						</li>
-	    					</ul>
-	    					<!-- // 시설 안내 -->
-	    					
-	    					<!-- 교통안내 -->
-	    					<h2 class="title">교통안내</h2>
-	    					<h3 class="title">약도</h3>
-	    					<ul class="dot-list address">
-	    					</ul>
-	    					<div class="location-map-btn">
-	    						<div class="btn-group">
-	    						</div>
-	    					</div>
-	    					
-	    					<h3 class="title">주차</h3>
-	    					<!-- parking-info -->
-	    					<div class="parking-info">
-	    						<!-- parking-section -->
-	    						<!-- 주차안내 정보 -->
-	    						<div class="parking-section">
-	    							<div class="icon-box">
-	    								<i class="iconset ico-parking" title="주차안내"></i>
-	    							</div>
-	    							<div class="info">
-	    								<p class="title">주차안내</p>
-		    							<ul class="dot-list">
-				    						<li>
-				    							영화관 건물 지하 이용
-				    						</li>
-				    						<li>
-				    							주차공간 협소 하오니 대중교통 이용 바랍니다.
-				    						</li>		    						
-				    					</ul>	    								
-	    							</div>
-	    						</div>
-	    						
-	    						<!-- 주차확인 정보 -->
-	    						<div class="parking-section">
-	    							 <div class="icon-box">
-	    								<i class="iconset ico-confirm" title="주차확인"></i>
-	    							</div>
-	    							<div class="info">
-	    								<p class="title">주차확인</p>
-		    							<ul class="dot-list">
-				    						<li>
-				    							차량 번호 인증시 3시간 무료주차 적용.
-				    						</li>
-				    						<li>
-				    							주차시간 초과 시, 별도 요금 부과 됩니다. 이후 30분 추가시 1,000원 징수
-				    						</li>					    						
-				    						<li>
-				    							차량 인증은 현장 매표소 및 입장시 직원에게 문의 바랍니다. (주차권을 반드시 지참하세요)
-				    						</li>				    									    						
-				    					</ul>	    								
-	    							</div>
-	    						</div>
-	    						
-	    						<!-- 주차요금 정보 -->
-	    						<div class="parking-section">
-	    							<div class="icon-box">
-	    								<i class="iconset ico-cash" title="주차요금"></i>
-	    							</div>
-	    							<div class="info">
-	    								<p class="title">주차요금</p>
-		    							<ul class="dot-list">
-				    						<li>
-				    							주차 요금은 입차시간을 기준으로 합니다.
-				    						</li>				    						
-				    						<li>
-				    							차량 1대당 최초 30분 무료 30분 추가당 1,000원 징수
-				    						</li>				    									    						
-				    						<li>
-				    							주말 및 공휴일에는 주차장이 혼잡할 수 있으니, 대중교통을 이용 바랍니다.
-				    						</li>				    						
-				    					</ul>	    								
-	    							</div>
-	    						</div>
-	    						<!-- // parking-section -->	    							    					
-	    					</div>
-	    					<!-- // parking-info -->	    						    				
-	    										    					
-						</div>
-						<!-- // 극장정보 리스트 -->
 						
 						<!-- 상영시간표 리스트 -->
-						<div id="tab02" class="tab-cont">
+						<div id="tab02" class="tab-cont active">
 							<h2 class="title">상영시간표</h2>
 							<div class="time-schedule">
 								
@@ -391,29 +357,7 @@
 								<!-- // theater-list-box -->								
 							</div>
 							<!-- // 상영시간표 리스트 -->
-						
-							<!-- 관람료 리스트 -->
-							<div id="tab03" class="tab-cont">
-								<h2 class="title">영화관람료</h2>
-								<!-- price-table-box -->
-								<div class="price-table-box">
-									<p class="price-table-title">요금 정보</p>
-									<table class="data-table">
-										<thead> 
-											<tr> 
-												<th>상영 타입</th>
-												<th>일반</th>
-												<th>청소년</th>
-												<th>우대</th>
-											</tr>
-										</thead>
-										<tbody>												
-										</tbody>
-									</table>
-								</div>
-								<!-- price-table-box -->
-							</div>
-							<!-- // 관람료 리스트 -->
+
 						</div>								
 	    				<!-- // tab-cont-wrap -->	    			    			
 	    			</div>
@@ -423,56 +367,5 @@
 	</section>
 	
 	<%@include file="/WEB-INF/view/footer.jsp"%>
-	
-	<script>
-		$(function(){		
-			var contextPath = "${contextPath}";
-			
-			/* 극장정보 탭 */
-			var thtNo = "${thtNo}";
-			$.get(contextPath+"/api/theaters/" + thtNo,
-				function(json) {
-					var name = "";
-					var detail = "";
-					var address = "";
-					var map = "";
-						/* 극장 이름 */
-						name += "<p class='theater-name'>" + json.thtName + "</p>";
-						/* 극장 설명 */
-						detail += "<h2 class='big-title'>" + json.thtDetail + "</h2>"
-						detail += "<p> 최고 수준의 영화 관람 환경을 제공하는 메가박스 대구에서 안락한 문화생활을 즐겨보세요. </p>"
-						/* 극장 주소 */
-						address += "<li> <span class='font-gblue'> 도로명주소 : </span>" + json.thtAddress + "</li>";
-						/* 실시간 길찾기 */
-						map += "<a href='https://m.map.naver.com/map.naver?lng=" + json.thtLong + "&lat=" + json.thtLat 
-								+ "&level=2'" + "class='button purple' target='_blank' title='새창열림'>실시간 길찾기 </a>";
-													 
-					$(".contents .thtName").append(name);
-					$(".theater-info").append(detail);
-					$(".address").append(address);
-					$(".btn-group").append(map);
-			});
-			/* // 극장정보 탭 */
-			
-			/* price-table-box(관람료 탭) */
-			$.get(contextPath+"/api/cinemas",
-				function(json) {
-					var dataLength = json.length;
-					if (dataLength >= 1) {
-						var list = "";
-						for (i = 0; i < dataLength; i++) {
-							list += "<tr>";
-							list += "<td>" + json[i].cinType + "</td>";
-							list += "<td>" + json[i].cinAdultPrice + "원</td>";
-							list += "<td>" + json[i].cinTeenPrice + "원</td>";
-							list += "<td>" + json[i].cinPrefPrice + "원</td>";
-							list += "</tr>";
-						}
-						$(".data-table tbody").append(list);
-					}
-				});
-			/* // price-table-box(관람료 탭) */
-		});
-	</script>
 </body>
 </html>

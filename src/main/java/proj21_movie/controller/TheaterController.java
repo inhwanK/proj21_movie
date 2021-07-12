@@ -13,6 +13,11 @@ public class TheaterController {
 		return "theater/theaterList";
 	}
 	
+	@GetMapping("/timetable")
+	public String timetable() {
+		return "theater/timetable";
+	}
+	
 	@GetMapping("/theater")
 	public ModelAndView theater(@RequestParam(value = "thtNo") int thtNo) {
 		ModelAndView mav = new ModelAndView("theater/theaterDetail", "thtNo", thtNo);

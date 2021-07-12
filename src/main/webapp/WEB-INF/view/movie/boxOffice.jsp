@@ -12,254 +12,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">	
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-	<script>
-	$(function(){
-		/* 박스오피스/상영예정작 탭 이벤트 */
-		$(".btn li").click(function(e){
-			e.preventDefault();
-			$(this).addClass("active");
-			$(this).siblings().removeClass("active"); 
-					
-			$(".movie-list > div").removeClass("active");
-			$(".movie-list > div").eq($(this).index()).addClass("active");
-		});
-		
-		/* 엔터 쳤을때 버튼 누른것과 동일한 이벤트 */
-		$("#searchMovieName").on("keyup", function(key) {
-	        if (key.keyCode == 13) {
-	        	$('#btnMovieSearch').click();
-	        	return false;	// 검색 버튼을 눌렀을 경우에 해당 버튼이 활성화 (다른 의도하지 않은 동작 방지)
-	        }
-	    });
-		
-		/* 탑버튼 눌렸을때 올라가는 스크립트 */
-		$(document).ready(function() {
-	        $(window).scroll(function() {
-	            if ($(this).scrollTop() > 500) {	// 아래로 스크롤시 (500) 보여줌
-	                $('#top_btn').fadeIn();
-	            } else {
-	                $('#top_btn').fadeOut();
-	            }
-	        });
-	        
-	        $("#top_btn").click(function() {		// 클릭시 상단으로 올려줌
-	            $('html, body').animate({scrollTop : 0}, 400);
-	            return false;
-	        });
-	    });
-	});
-	</script>
-	<script>
-	$(function(){
-		function getFormatDate(date){
-			var subDateArray = date.substr(0,10).split('-');
-			var newDateForm = subDateArray[0] + "." + subDateArray[1] + "." + subDateArray[2];
-			return newDateForm; 
-		}
-		
-		/* box-office-list (박스오피스 리스트) */
-		var contextPath = "${contextPath}";
-		$.get(contextPath + "/api/movies/boxOffice",
-			function(json) {
-				var dataLength = json.length;
-				if (dataLength >= 1) {
-					var list = "";
-					var count = "";
-						count += dataLength + "개";
-					
-					for (i = 0; i < dataLength; i++) {		// 오늘 날짜 or 이전 (상영중)
-						list += "<li>";
-						/* movie-list-info */
-						list += "<div class='movie-list-info'>";
-						list += "<input id=hidden-movNo type='hidden' value='" + json[i].movNo + "'/>";
-						list += "<p id='rank' style ='display:none'>" + (i+1) + "</p>";		// 검색된 순번대로
-						list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
-						list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
-							+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
-						list += "</div>";
-						/* // movie-list-info */
-						
-						/* title-area */
-						list += "<div class='title-area'>";
-						list += "<p class='movie-grade age-" + json[i].movGrade + "'</p>";	
-						list += "<p class='title' title='" + json[i].movTitle + "'>" + json[i].movTitle + "</p>";	
-						list += "</div>";
-						/* // title-area */
-						
-						/* rate-date */
-						list += "<div class='rate-date'>";
-						list += "<span class='rate'>평균 별점 : " + json[i].movAvgstar + "</span>";
-						list += "<span class='date'>개봉일 " + getFormatDate(json[i].movOpendate) + "</span>";																		
-						list += "</div>";
-						/* // rate-date */
-						
-						/* btn-util */
-						list += "<div class='btn-util'>";					
-						/* movie-reserve */
-						list +=	"<button id='reserve' title='영화 예매하기'>예매</button>"
-						/* // btn-util */
-												
-						list += "</li>";	
-					}
-					$(".box-office-list ul").empty();
-					$(".box-office-list ul").append(list);
-					$(".box-office-list .movie-count b").empty();
-					$(".box-office-list .movie-count b").append(count);					
-				}
-			});			
-		/* // box-office-list (박스오피스 리스트) */
-		
-		/* commingsoon-list (상영예정작 리스트) */
-		var contextPath = "${contextPath}";
-		$.get(contextPath + "/api/movies/commingSoon",
-			function(json) {
-				var dataLength = json.length;
-				if (dataLength >= 1) {
-					var list = "";
-					var count = "";
-						count += dataLength + "개";
-						
-					for (i = 0; i < dataLength; i++) {		// 오늘 날짜 이후 (상영예정)
-						list += "<li>";
-						/* movie-list-info */
-						list += "<div class='movie-list-info'>";
-						list += "<input id=hidden-movNo type='hidden' value='" + json[i].movNo + "'/>";
-						list += "<p id='rank' style ='display:none'>" + (i+1) + "</p>";	
-						list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
-						list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
-							+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
-						list += "</div>";
-						/* // movie-list-info */
-						
-						/* title-area */
-						list += "<div class='title-area'>";
-						list += "<p class='movie-grade age-" + json[i].movGrade + "'</p>";	
-						list += "<p class='title' title='" + json[i].movTitle + "'>" + json[i].movTitle + "</p>";	
-						list += "</div>";
-						/* // title-area */
-						
-						/* rate-date */
-						list += "<div class='rate-date'>";
-						list += "<span class='rate'>평균 별점 : " + json[i].movAvgstar + "</span>";
-						list += "<span class='date'>개봉일 " + getFormatDate(json[i].movOpendate) + "</span>";						
-						list += "</div>";
-						/* // rate-date */
-						
-						/* btn-util */
-						list += "<div class='btn-util'>";					
-						/* movie-reserve */
-						list +=	"<button id='commingSoon'>상영예정</button>"
-						/* // btn-util */
-												
-						list += "</li>";	
-					}
-					$(".commingsoon-list .movie-count b").append(count);
-					$(".commingsoon-list ul").append(list);
-				}else {
-					$(".commingsoon-list ul").empty();
-					$(".commingsoon-list ul").append(list);
-					$(".commingsoon-list .movie-count b").append(dataLength + "개");
-					$('.commingsoon-list #noDataDiv').show();
-				}
-			});	
-			
-		/* ajax */
-		$("#btnMovieSearch").on("click", function(){	// 박스 오피스에 들어있는 영화만 검색되도록 함 (상영예정작 탭은 안 바뀌고 검색 안됨)
-			var movTitle = $("#searchMovieName").val();
-			$.ajax({
-				url			: contextPath + "/api/moviesearch?movTitle="+movTitle,
-				type		:"get",
-				contentType : "application/json; charset=utf-8",
-				dataType	: "json",
-				data 		: movTitle,
-				success 	: function(json){
-					
-					if (movTitle != '') {  		// 검색시 영화데이터가 있을시			
-						var dataLength = json.length;
-						if (dataLength >= 1) {
-							var list = "";
-							var count = "";
-								count += dataLength + "개";
-								
-							for (i = 0; i < dataLength; i++) {
-								list += "<li>";
-								/* movie-list-info */
-								list += "<div class='movie-list-info'>";
-								list += "<input id=hidden-movNo type='hidden' value='" + json[i].movNo + "'/>";
-								list += "<p id='rank' style ='display:none'>" + (i+1) + "</p>";	// 검색된 순번대로
-								list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
-								list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
-									+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
-								list += "</div>";
-								/* // movie-list-info */
-								
-								/* title-area */
-								list += "<div class='title-area'>";
-								list += "<p class='movie-grade age-" + json[i].movGrade + "'</p>";	
-								list += "<p class='title' title='" + json[i].movTitle + "'>" + json[i].movTitle + "</p>";	
-								list += "</div>";
-								/* // title-area */
-								
-								/* rate-date */
-								list += "<div class='rate-date'>";
-								list += "<span class='rate'>평균 별점 : " + json[i].movAvgstar + "</span>";
-								list += "<span class='date'>개봉일 " + getFormatDate(json[i].movOpendate) + "</span>";																		
-								list += "</div>";
-								/* // rate-date */
-								
-								/* btn-util */
-								list += "<div class='btn-util'>";					
-								/* movie-reserve */
-								list +=	"<button id='reserve' title='영화 예매하기'>예매</button>"
-								/* // btn-util */
-														
-								list += "</li>";	
-							}
-							$(".box-office-list ul").empty();
-							$(".box-office-list ul").append(list);
-							$(".box-office-list .movie-count b").empty();
-							$(".box-office-list .movie-count b").append(count);		
-							$('.box-office-list #noDataDiv').hide();
-						}
-					} else if (movTitle == '') {		// 검색 단어를 입력안하고 검색 버튼을 클릭시
-						//alert('검색할 영화명을 입력해주세요');
-						Swal.fire({						// Alert창 디자인 sweetalert2 Test <-- get을 제외한 다른 방식은 나중에..
-		                    icon: 'warning',
-		                    title: '검색할 영화명을 입력해주세요.'
-		                }).then((result) => { 
-							if (result.isConfirmed) { 
-								window.location.href = contextPath + "/movielist";
-							} 
-						});
-					}
-				},
-				error : function(){
-					console.log("error > ");
-				},
-				complete : function(xhr) {			
-					if (xhr.responseJSON == ''){		// 검색 했을때 검색된 영화가 없을 경우
-						$(".box-office-list ul").empty();
-						$(".box-office-list .movie-count b").empty();
-						$(".box-office-list .movie-count b").append(xhr.responseJSON.length + "개");
-						$('.box-office-list #noDataDiv').show();
-					}
-					console.log(xhr.responseJSON);
-				}
-			});
-		});
-		
-		// 예매버튼 클릭시 영화 번호를 reserve 페이지에 전달
-		$(document).ready(function(){
-			$(document).on('click', '[id=reserve]', function(e){
-				var pa = $(this).parent().parent();
-				var ch = pa.children().children();
-				var movNo = ch.val();
-				
-				window.location.href = contextPath + "/reserve?no=" + movNo;
-			});
-		});
-	});	
-	</script>	
+	<script src="${contextPath}/resources/js/movie/boxOffice.js"></script>
 </head>
 <body>	
 	<%@include file="/WEB-INF/view/header.jsp"%>
@@ -298,8 +51,6 @@
 	    					</li>
 	    				</ul>
 	    			</div>
-	    				
-	    			
 	    				
     				<div class="movie-list">
     					<!-- 박스오피스 리스트 -->
@@ -386,5 +137,206 @@
 	</section>
 	
 	<%@include file="/WEB-INF/view/footer.jsp"%>
+	
+	<script>
+		$(function(){
+			var contextPath = "${contextPath}";
+			
+			function getFormatDate(date){
+				var subDateArray = date.substr(0,10).split('-');
+				var newDateForm = subDateArray[0] + "." + subDateArray[1] + "." + subDateArray[2];
+				return newDateForm;
+			}
+			
+			/* box-office-list (박스오피스 리스트) */
+			$.get(contextPath + "/api/movies/boxOffice",
+				function(json) {
+					var dataLength = json.length;
+					if (dataLength >= 1) {
+						var list = "";
+						var count = "";
+							count += dataLength + "개";
+						
+						for (i = 0; i < dataLength; i++) {		// 오늘 날짜 or 이전 (상영중)
+							list += "<li>";
+							/* movie-list-info */
+							list += "<div class='movie-list-info'>";
+							list += "<input id=hidden-movNo type='hidden' value='" + json[i].movNo + "'/>";
+							list += "<p id='rank' style ='display:none'>" + (i+1) + "</p>";		// 검색된 순번대로
+							list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
+							list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
+								+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
+							list += "</div>";
+							/* // movie-list-info */
+							
+							/* title-area */
+							list += "<div class='title-area'>";
+							list += "<p class='movie-grade age-" + json[i].movGrade + "'</p>";	
+							list += "<p class='title' title='" + json[i].movTitle + "'>" + json[i].movTitle + "</p>";	
+							list += "</div>";
+							/* // title-area */
+							
+							/* rate-date */
+							list += "<div class='rate-date'>";
+							list += "<span class='rate'>평균 별점 : " + json[i].movAvgstar + "</span>";
+							list += "<span class='date'>개봉일 " + getFormatDate(json[i].movOpendate) + "</span>";																		
+							list += "</div>";
+							/* // rate-date */
+							
+							/* btn-util */
+							list += "<div class='btn-util'>";					
+							/* movie-reserve */
+							list +=	"<button id='reserve' title='영화 예매하기'>예매</button>"
+							/* // btn-util */
+													
+							list += "</li>";	
+						}
+						$(".box-office-list ul").empty();
+						$(".box-office-list ul").append(list);
+						$(".box-office-list .movie-count b").empty();
+						$(".box-office-list .movie-count b").append(count);					
+					}
+				});			
+			/* // box-office-list (박스오피스 리스트) */
+			
+			/* commingsoon-list (상영예정작 리스트) */
+			$.get(contextPath + "/api/movies/commingSoon",
+				function(json) {
+					var dataLength = json.length;
+					if (dataLength >= 1) {
+						var list = "";
+						var count = "";
+							count += dataLength + "개";
+							
+						for (i = 0; i < dataLength; i++) {		// 오늘 날짜 이후 (상영예정)
+							list += "<li>";
+							/* movie-list-info */
+							list += "<div class='movie-list-info'>";
+							list += "<input id=hidden-movNo type='hidden' value='" + json[i].movNo + "'/>";
+							list += "<p id='rank' style ='display:none'>" + (i+1) + "</p>";	
+							list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
+							list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
+								+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
+							list += "</div>";
+							/* // movie-list-info */
+							
+							/* title-area */
+							list += "<div class='title-area'>";
+							list += "<p class='movie-grade age-" + json[i].movGrade + "'</p>";	
+							list += "<p class='title' title='" + json[i].movTitle + "'>" + json[i].movTitle + "</p>";	
+							list += "</div>";
+							/* // title-area */
+							
+							/* rate-date */
+							list += "<div class='rate-date'>";
+							list += "<span class='rate'>평균 별점 : " + json[i].movAvgstar + "</span>";
+							list += "<span class='date'>개봉일 " + getFormatDate(json[i].movOpendate) + "</span>";						
+							list += "</div>";
+							/* // rate-date */
+							
+							/* btn-util */
+							list += "<div class='btn-util'>";					
+							/* movie-reserve */
+							list +=	"<button id='commingSoon'>상영예정</button>"
+							/* // btn-util */
+													
+							list += "</li>";	
+						}
+						$(".commingsoon-list .movie-count b").append(count);
+						$(".commingsoon-list ul").append(list);
+					}else {
+						$(".commingsoon-list ul").empty();
+						$(".commingsoon-list ul").append(list);
+						$(".commingsoon-list .movie-count b").append(dataLength + "개");
+						$('.commingsoon-list #noDataDiv').show();
+					}
+				});	
+				
+			/* 영화 검색했을때 */
+			$("#btnMovieSearch").on("click", function(){	// 박스 오피스에 들어있는 영화만 검색되도록 함 (상영예정작 탭은 안 바뀌고 검색 안됨)
+				var movTitle = $("#searchMovieName").val();
+				$.ajax({
+					url			: contextPath + "/api/moviesearch?movTitle="+movTitle,
+					type		:"get",
+					contentType : "application/json; charset=utf-8",
+					dataType	: "json",
+					data 		: movTitle,
+					success 	: function(json){
+						
+						if (movTitle != '') {  		// 검색시 영화데이터가 있을시			
+							var dataLength = json.length;
+							if (dataLength >= 1) {
+								var list = "";
+								var count = "";
+									count += dataLength + "개";
+									
+								for (i = 0; i < dataLength; i++) {
+									list += "<li>";
+									/* movie-list-info */
+									list += "<div class='movie-list-info'>";
+									list += "<input id=hidden-movNo type='hidden' value='" + json[i].movNo + "'/>";
+									list += "<p id='rank' style ='display:none'>" + (i+1) + "</p>";	// 검색된 순번대로
+									list += "<a href='${contextPath}/movie?movNo=" + json[i].movNo + "'>"
+									list += "<img alt='" + json[i].movTitle + "' title='" + json[i].movTitle 
+										+ " 상세보기' src='${contextPath}/resources/images/movie/box-office/" + json[i].movPoster + "'></a>" 
+									list += "</div>";
+									/* // movie-list-info */
+									
+									/* title-area */
+									list += "<div class='title-area'>";
+									list += "<p class='movie-grade age-" + json[i].movGrade + "'</p>";	
+									list += "<p class='title' title='" + json[i].movTitle + "'>" + json[i].movTitle + "</p>";	
+									list += "</div>";
+									/* // title-area */
+									
+									/* rate-date */
+									list += "<div class='rate-date'>";
+									list += "<span class='rate'>평균 별점 : " + json[i].movAvgstar + "</span>";
+									list += "<span class='date'>개봉일 " + getFormatDate(json[i].movOpendate) + "</span>";																		
+									list += "</div>";
+									/* // rate-date */
+									
+									/* btn-util */
+									list += "<div class='btn-util'>";					
+									/* movie-reserve */
+									list +=	"<button id='reserve' title='영화 예매하기'>예매</button>"
+									/* // btn-util */
+															
+									list += "</li>";	
+								}
+								$(".box-office-list ul").empty();
+								$(".box-office-list ul").append(list);
+								$(".box-office-list .movie-count b").empty();
+								$(".box-office-list .movie-count b").append(count);		
+								$('.box-office-list #noDataDiv').hide();
+							}
+						} else if (movTitle == '') {		// 검색 단어를 입력안하고 검색 버튼을 클릭시
+							//alert('검색할 영화명을 입력해주세요');
+							Swal.fire({						// Alert창 디자인 sweetalert2 Test <-- get을 제외한 다른 방식은 나중에..
+			                    icon: 'warning',
+			                    title: '검색할 영화명을 입력해주세요.'
+			                }).then((result) => { 
+								if (result.isConfirmed) { 
+									window.location.href = contextPath + "/movielist";
+								} 
+							});
+						}
+					},
+					error : function(){
+						console.log("error > ");
+					},
+					complete : function(xhr) {			
+						if (xhr.responseJSON == ''){		// 검색 했을때 검색된 영화가 없을 경우
+							$(".box-office-list ul").empty();
+							$(".box-office-list .movie-count b").empty();
+							$(".box-office-list .movie-count b").append(xhr.responseJSON.length + "개");
+							$('.box-office-list #noDataDiv').show();
+						}
+						console.log(xhr.responseJSON);
+					}
+				});
+			});
+		});	
+	</script>	
 </body>
 </html>
