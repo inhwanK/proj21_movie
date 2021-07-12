@@ -94,17 +94,9 @@ public class MemberServiceImpl implements MemberService {
 
 	// 패스워드 체크
 	@Override
-	public Member checkIDPW(Member member) throws Exception {
-		log.debug("service - checkIDPW() > " + member);
-		member.matchPassword(member.getMemPasswd());
-		return mapper.checkIDPW(member);
-	}
-
-	// 회원 탈퇴
-	@Override
-	public void withdrawal(Member member) throws Exception {
-		log.debug("service - pwUpdate_M() > " + member);
-		mapper.withdrawal(member);
+	public Member checkPw(Member member) throws Exception {
+		log.debug("service - checkPw() > " + member);
+		return mapper.checkPw(member);
 	}
 
 	// 회원수정
@@ -113,5 +105,6 @@ public class MemberServiceImpl implements MemberService {
 		log.debug("service - update() > " + member);
 		mapper.update(member);
 	}
+
 
 }

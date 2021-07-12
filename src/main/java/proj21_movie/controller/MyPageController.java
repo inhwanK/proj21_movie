@@ -36,8 +36,8 @@ public class MyPageController {
 		return "mypage/withdrawal";
 	}
 	
-	@RequestMapping("/chkPassword")
+	@RequestMapping("/withdrawalsuccess")
 	public String chkPassword() {
-		return "mypage/checkpassword";
+		return "mypage/withdrawalsuccess";
 	}
 }
