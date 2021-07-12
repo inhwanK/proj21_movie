@@ -13,7 +13,6 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/movie/star/fontawesome-stars.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/header.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/footer.css">
-	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 	<!-- 이 js가 다른 js보다 낮으면 에러 뜸 -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
@@ -22,532 +21,7 @@
     </script>	
     <script src="${contextPath}/resources/js/star/jquery.barrating.min.js"></script>	
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-	<script>
-		$(function() {
-			/* 주요정보 등 탭 클릭시 */
-			$(".btn li").click(function(e) {
-				e.preventDefault();
-				$(this).addClass("active");
-				$(this).siblings().removeClass("active");
-	
-				$(".tab-cont-wrap > div").removeClass("active");
-				$(".tab-cont-wrap > div").eq($(this).index()).addClass("active");	
-			});
-			
-		   /* 취소 버튼 누를시  */
-		   $("#cancel").click(function () {
-		        $("#contxt").val('');	        
-		        $(".br-widget a").removeClass();	               
-		        $(".br-widget a:first-child").addClass("br-selected br-current");	               
-		        $(".br-current-rating").text("1");	         
-		        $(".br-widget").unbind('mouseleave');
-		   });
-		   
-		   /* 한줄평쓰기 버튼 누를시 */
-		   $(".comment-write > span").click(function(){
-				$(".write-content").slideToggle().toggleClass("active");  
-				$("#contxt").focus();
-		     });
-		   
-		   /* 별점 테마 */
-		   $('#example-fontawesome').barrating({ 
-   				theme: 'fontawesome-stars' 
-  			});
-		   
-		    /* 탑버튼 눌렸을때 올라가는 스크립트 */
-			$(document).ready(function() {
-		        $(window).scroll(function() {
-		            if ($(this).scrollTop() > 500) {	// 아래로 스크롤시 (500) 보여줌
-		                $('#top_btn').fadeIn();
-		            } else {
-		                $('#top_btn').fadeOut();
-		            }
-		        });
-		        
-		        $("#top_btn").click(function() {		// 클릭시 상단으로 올려줌
-		            $('html, body').animate({scrollTop : 0}, 400);
-		            return false;
-		        });
-		    });
-		    
-		    /* 엔터키를 입력시 쓰기버튼과 동일 기능 */
-			$("#contxt").on("keyup", function(key) {
-		        if (key.keyCode == 13) {
-		        	$('#writeBtn').click();
-		        	return false;	
-		        }
-		    });
-
-		});
-	</script>
-	<script type="text/javascript">
-		$(function(){
-			/* ajax - 박스오피스 데이터만 예매버튼 활성화 */
-			var contextPath = "${contextPath}";
-			var no = "${movNo}";
-			
-			$.ajax({
-				type:"GET",
-				url: contextPath + "/api/movies/boxOffice/" + no,
-				contentType: "application/json; charset=utf-8",
-				success: function(json){
-					if (json != '') {
-						var btn = "";
-							btn += "<button type='button' id='reserve' class='btn reserve' title='영화 예매하기'>예매</button>";
-						$(".screen-type").append(btn);
-					}else if (json == ''){
-						$('#comming').show();
-					}
-				},
-				error : function(request, status, error){
-					console.log("error > ");
-				}	
-			});
-		});
-	</script>
-	<script>
-		$(function(){
-			function getFormatDate(date){
-				var subDateArray = date.substr(0,10).split('-');
-				return newDateForm = subDateArray[0] + "." + subDateArray[1] + "." + subDateArray[2];
-			}
-			
-			reloadComment();		// 실관람평 데이터 받아옴
-			reloadMovie();	// 영화 상세 데이터 받아옴
-			
-			var contextPath = "${contextPath}";
-			var movNo = "${movNo}";
-			
-			/* ajax - 영화 상세 페이지 데이터 받아올때 */
-			function reloadMovie(){
-				var contextPath = "${contextPath}";
-				var movNo = "${movNo}";
-				$.ajax({
-					type:"GET",
-					url: contextPath + "/api/movies/" + movNo,
-					contentType: "application/json; charset=utf-8",
-					success: function(json){
-		
-						var bg = "";
-						var title = "";
-						var avgStar = "";
-						var poster = "";
-						var sCont = "";
-						
-							/* 영화 뒷 배경 */
-							bg += "<div class='bg-img' style='background-image:url("
-									+ "${contextPath}/resources/images/movie/movie-detail/bg-" + json.movPoster + ");'>";
-							bg += "</div>"; 
-							
-							/* 실시간 평점 (영화 평균 평점) <-- 트랜젝션 사용 */ 
-							avgStar += json.movAvgstar;
-							
-							/* 영화 제목 */			
-							title += "<p class='title'>" + json.movTitle + "</p>";
-							// title += "<p class='title-eng'>" + 'Cruella' + "</p>";		// 영어 제목 컬럼 미지정
-							
-							/* 영화 포스터 */
-							poster += "<p class='movie-grade age-" + json.movGrade + "'></p>";	
-							poster += "<img alt='" + json.movTitle + "'src="
-								+ "'${contextPath}/resources/images/movie/box-office/" + json.movPoster + "'/>";			
-							
-							// 주요정보 탭					
-							/* 영화 줄거리 */
-							sCont += "<div class='movie-summary'>";
-							sCont += "<div class='txt'>" + json.movDetail + "</div>";
-							sCont += "</div><br>";
-							sCont += "<button type='button' class='btn-more'>";
-							sCont += "<span>더보기</span>";
-							sCont += "<i class='iconset ico-btn-more'></i>";
-							sCont += "</button>";
-							
-							/* 영화 정보 */
-							sCont += "<div class='movie-info'>";
-							sCont += "<p class='p-type'></p>";		
-							sCont += "<div class='line'>";						
-							sCont += "<p>감독&nbsp;: " + json.movDirector + "</p>";						
-							sCont += "<p>장르&nbsp;: " + json.movGenre + " / 런타임 : " + json.movRuntime + " 분</p>";						
-							sCont += "<p id='movie-grade'>등급&nbsp;: <i>" + json.movGrade + "세이상</i>관람가</p>";						
-							sCont += "<p>개봉일&nbsp;: " + getFormatDate(json.movOpendate) + "</p>";											
-							sCont += "</div>";
-							sCont += "<p>출연진&nbsp;: " + json.movActor + "</p>";
-							sCont += "</div>";
-							
-						$(".movie-detail-page .movie-bg").append(bg);
-						$(".number em").append(avgStar);
-						$(".movie-detail-cont").append(title);
-						$(".poster .wrap").append(poster);
-						$(".movie-info-list").append(sCont);
-						$('#movie-grade i:contains("0세이상")').text("전체");
-						$('#movie-grade i:contains("19세이상")').parent().text("청소년관람불가");
-						
-						$('.btn-more').on("click", function(){
-							$(this).toggleClass("active");
-							
-							$(".movie-summary, .ico-btn-more, .btn-more span").toggleClass("active");
-							$(".btn-more span").text("더보기");
-							$(".btn-more span.active").text("닫기");
-						});
-						
-					},
-					error : function(request, status, error){
-						window.location.href = contextPath + "/movielist";	// 데이터에 없는 영화번호를 검색시 전체영화 페이지로 이동
-					}
-				});
-				
-			/* 상영타입 (전부 2d로 넣어놓음) */
-			var cinNo = "1";
-			$.get(contextPath + "/api/cinemas/" + cinNo,
-				function(json){
-					var cinType = "";
-						cinType += "상영타입 : " + json.cinType + "(자막)";
-					$(".movie-info .p-type").append(cinType);
-				});
-			}
-			/* // 주요정보 탭 */
-			
-			/* 실관람평  탭 */		
-			function reloadComment(){
-				var contextPath = "${contextPath}";
-				var movNo = "${movNo}";
-				
-				$.ajax({
-					type:"GET",
-					url: contextPath + "/api/comments/movie/" + movNo,
-					contentType: "application/json; charset=utf-8",
-					async: false,
-					success: function(json){
-						var dataLength = json.length;
-						if (dataLength >= 1) {
-							var sCont = "";				
-							var size = "";	
-								size += dataLength
-								
-							for (i = 0; i < dataLength; i++) {							
-								sCont += "<li>";
-								// comment-list
-								sCont += "<div class='comment-list'>";
-								// prof
-								sCont += "<div class='prof'>";						
-								sCont += "<img src='${contextPath}/resources/images/movie/movie-detail/bg-profile.png'>";
-								sCont += "<p id='none-user' style='display:none'>" + json[i].comUser + "</p>";
-								sCont += "<p class='user-id'>" + json[i].comUser.substring(0, 4) + "</p>";
-								sCont += "<div class='divNo' style ='display:none'>" + json[i].comNo + "</div>"
-								sCont += "</div>";
-								// prof
-								
-								// textarea
-								sCont += "<div class='textarea'>";
-								sCont += "<h3>한줄평</h3>";
-								sCont += "<h3>" + json[i].comStar + "</h3>";
-								sCont += "<p>" + json[i].comContent + "</p>";							
-								sCont += "</div>";
-								// // textarea
-								
-								// btn-util
-								sCont += "<div class='btn-util'>";				
-								sCont += "<button id='alert'></button>";					
-								sCont += "</div>";
-								// // btn-util
-								
-								sCont += "</div>";
-								// // comment-list
-								sCont += "<h5>" + json[i].comDate + "</h5>";
-								sCont += "</li>";
-							}
-							$("#comment-count .font-gblue").append(size);
-							$(".movie-comment ul").append(sCont);
-							
-							// 로그인했을때 한줄평에서 회원이메일이 같으면 클래스 추가(배경색 바뀜-구별을 위해)
-							if (${member != null}) {
-								var pUser = $('.prof:contains("${member.memEmail}")').parent();
-								pUser.addClass('com-me');
-							}
-							
-							// 관리자 로그인시 클래스 추가 (파란색 배경으로 바뀜)
-							if (${admin != null}) {
-								var pUser = $('.prof').parent();
-								pUser.addClass('com-admin');
-							}
-						}else {
-							$("#comment-count .font-gblue").append(dataLength);
-							$('#noDataDiv').show();
-						}							
-					}
-				});
-			}
-			
-			/* ajax */
-			$('#writeBtn').on("click", function(e){
-				var movNo = "${movNo}";
-				var user = $('#user').val();
-				var content = $('#contxt').val();
-				var newComment = { movNo: movNo, 
-									comUser : $('#user').val(), 
-									comContent: $('#contxt').val(),
-									comStar : $('.com-star').val()
-								};
-				
-				Swal.fire({ 		// Alert창 디자인 sweetalert2
-					title			  : '등록하시겠습니까?', 
-					icon			  : 'question', 
-					showCancelButton  : true, 
-					confirmButtonColor: '#3085d6', 
-					cancelButtonColor : '#d33', 
-					confirmButtonText : '등록', 
-					cancelButtonText  : '취소' 
-					}).then((result) => {
-						if (result.isConfirmed) {
-				 			$.ajax({
-								url 		: contextPath + "/api/comments/",
-								type 		: "POST",
-								contentType : "application/json; charset=utf-8",
-								datatype 	: "json",
-								cache 		: false,
-								data 		: JSON.stringify(newComment),
-								beforeSend  : function(xhr) {			// success로 넘어가기 전에 조건 만족시 success로 넘어가지 않고 beforeSend에서 멈춤
-									if (${admin != null}) {				// 관리자가 로그인 했을때 
-										if (content == "") {			// 한줄평 내용이 없을때
-								        	xhr.abort();					    
-								        	//alert("내용을 입력해주세요!");
-								        	Swal.fire({				// Alert창 디자인 sweetalert2			
-							                    icon : 'warning',
-							                    title: '내용을 입력해주세요!'
-							                }).then((result) => { 
-												if (result.isConfirmed) { 
-													return false;
-												}
-											});					        	
-								        }else {						// 관리자는 글을 쓸수 없으므로 취소 후 경고 창 표시
-								        	xhr.abort();
-								        	Swal.fire({				// Alert창 디자인 sweetalert2			
-							                    icon : 'error',
-							                    title: '관리자는 한줄평을 달 수 없습니다.'
-							                }).then((result) => { 
-												if (result.isConfirmed) { 
-													return false;
-												}
-											});	
-								        }
-									}else if (${member == null} || user == "") {	// 한줄평 유저 (user)에 값이 없을시 success로 넘어가지 않고 로그인으로 이동
-								            xhr.abort();
-								            //alert("권한이 없습니다. 로그인 해주세요.");
-								            //window.location.href = contextPath + "/login";
-								            
-								            Swal.fire({				// Alert창 디자인 sweetalert2			
-							                    icon : 'error',
-							                    title: '권한이 없습니다. 로그인 해주세요.'
-							                }).then((result) => { 
-												if (result.isConfirmed) { 
-													window.location.href = contextPath + "/login";
-												} 
-											});	
-									} else if (content == "") {	// 한줄평 내용이 없을때
-							        	xhr.abort();					    
-							        	//alert("내용을 입력해주세요!");
-							        	Swal.fire({				// Alert창 디자인 sweetalert2			
-						                    icon : 'warning',
-						                    title: '내용을 입력해주세요!'
-						                }).then((result) => { 
-											if (result.isConfirmed) { 
-												return false;
-											}
-										});					        	
-							    	}
-							    },
-								success 	: function(res) {
-									if(user != ""){			// 유저가 있으면 등록후 새로고침
-										//alert(newComment.comUser + "님의 한줄평이 등록되었습니다.");
-										//location.reload();
-										Swal.fire({				// Alert창 디자인 sweetalert2
-						                    icon : 'success',
-						                    title: '한줄평이 등록되었습니다.',
-						                    text : '소중한 한줄평 감사합니다.'
-						                }).then((result) => {
-											if (result.isConfirmed) { 		
-												$(".movie-detail-page .movie-bg").empty();
-												$(".number em").empty();
-												$(".movie-detail-cont > .title").remove();
-												$(".poster .wrap").empty();
-												$(".movie-info-list").empty();
-												reloadMovie();
-												
-												$("#comment-count .font-gblue").empty();
-												$(".movie-comment ul").empty();
-												reloadComment();
-												
-												$(".write-content").slideToggle().toggleClass("active");  
-												
-												$("#contxt").val('');	        
-										        $(".br-widget a").removeClass();	               
-										        $(".br-widget a:first-child").addClass("br-selected br-current");	               
-										        $(".br-current-rating").text("1");	         
-										        $(".br-widget").unbind('mouseleave');
-											} 
-										});
-									}
-								},
-								error : function(request, status, error){
-									alert("code:" + request.status+"\n" + "message:" + request.responseText+"\n" + "error:" + error);
-								}
-							});
-					} else{    
-						return false;
-				 	}
-				});
-				
-			});
-			
-			/* 수정 버튼 누를시 팝업 */
-			$(document).ready(function(){
-				$(this).on('click', '[id=modify]', function(){
-					var pa = $(this).parent().parent();
-					var ch = pa.children().children();
-					var comNo = ch.eq(3).text();
-				    
-				Swal.fire({ 		// Alert창 디자인 sweetalert2
-					title			  : '수정하시겠습니까?', 
-					icon			  : 'question', 
-					showCancelButton  : true, 
-					confirmButtonColor: '#3085d6', 
-					cancelButtonColor : '#d33', 
-					confirmButtonText : '수정', 
-					cancelButtonText  : '취소' 
-					}).then((result) => { 
-						if (result.isConfirmed) {
-							/* 팝업 중앙에 띄우기 */
-						    function PopupCenter(url, title, w, h) { 
-						        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;  
-						        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;  
-						                  
-						        width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;  
-						        height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;  
-						                  
-						        var left = ((width / 2) - (w / 2)) + dualScreenLeft;  
-						        var top = ((height / 2) - (h / 2)) + dualScreenTop;  
-						        var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);  
-						      
-						        if (window.focus) {  
-						            newWindow.focus();  
-						        }  
-						    } 				    
-						    PopupCenter(contextPath + "/updateComment?comNo=" + comNo,'popup','700','450'); 
-						} else{
-							return false;
-					 	}
-					});
-				});
-			});
-			
-			/* 한줄평 삭제 */
-			$(document).on('click', '[id=remove]', function(){
-				var pa = $(this).parent().parent();
-				var ch = pa.children().children();
-				var comNo = ch.eq(3).text();
-				
-				Swal.fire({ 		// Alert창 디자인 sweetalert2
-					title			  : '삭제하시겠습니까?', 
-					icon			  : 'warning', 
-					showCancelButton  : true, 
-					confirmButtonColor: '#3085d6', 
-					cancelButtonColor : '#d33', 
-					confirmButtonText : '삭제', 
-					cancelButtonText  : '취소' 
-					}).then((result) => {
-						if (result.isConfirmed) {
-							$.ajax({
-								url: contextPath + "/api/comments/" + comNo,
-								type: 'DELETE',
-								dataType: "html",
-								success: function(res) {
-									//alert(comNo + "번 한줄평 삭제 완료");
-									//location.reload();	
-									Swal.fire({				// Alert창 디자인 sweetalert2
-					                    icon : 'success',
-					                    title: '한줄평 삭제가 완료되었습니다.',
-					                }).then((result) => {
-										if (result.isConfirmed) { 	
-											$(".movie-detail-page .movie-bg").empty();
-											$(".number em").empty();
-											$(".movie-detail-cont > .title").remove();
-											$(".poster .wrap").empty();
-											$(".movie-info-list").empty();
-											reloadMovie();
-											
-											$("#comment-count .font-gblue").empty();
-											$(".movie-comment ul").empty();
-											reloadComment();
-										} 
-									});	
-								},
-								error: function(request, status, error) {
-									alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-								}
-							});
-						} else{    
-							return false;
-					 	}
-					});		
-			});
-			/* // 실관람평 탭 */
-			
-			// 예매버튼 클릭시 영화 번호를 reserve 페이지에 전달
-			$(document).on('click', '[id=reserve]', function(e){
-				var movNo = ${movNo};
-				window.location.href = contextPath + "/reserve?no=" + movNo;
-			});
-			
-			// 한줄평 버튼 눌렸을때
-			$(document).on('click', '[id=alert]', function(e){
-				var pa = $(this).parent().parent();
-				var ch = pa.children().children();
-				var comUser = ch.eq(1).text();
-				var btnPa = $(this).parent();
-				
-				//console.log(comUser);
-				
-				if (${admin != null}) {		// 관리자가 로그인 했을때
-					var comBtn = "";
-						comBtn += "<button id='modify'>수정</button>";
-						comBtn += "<button id='remove'>삭제</button>";
-						
-					btnPa.empty();
-					btnPa.append(comBtn);
-				}else {
-					if (${member != null}) {		// 로그인 했을때
-						if('${member.memEmail}' == comUser){	// 로그인 아이디와 한줄평 유저가 일치할때
-							var comBtn = "";
-								comBtn += "<button id='modify'>수정</button>";
-								comBtn += "<button id='remove'>삭제</button>";
-								
-							btnPa.empty();
-							btnPa.append(comBtn);
-						}else {		// 다른 유저가 썼을때
-							//alert("권한이 없습니다.");
-							Swal.fire({				// Alert창 디자인 sweetalert2
-			                    icon : 'error',
-			                    title: '권한이 없습니다.'
-			                }).then((result) => {
-								if (result.isConfirmed) { 
-									return false;
-								} 
-							});
-						}
-					}else {			// 로그인 안했을때
-						//alert("권한이 없습니다. 로그인 해주세요.");	
-						Swal.fire({				// Alert창 디자인 sweetalert2
-		                    icon : 'error',
-		                    title: '권한이 없습니다. 로그인 해주세요.'
-		                }).then((result) => {
-							if (result.isConfirmed) { 
-			            		window.location.href = contextPath + "/login";
-							} 
-						});
-					}
-				}	
-			});
-		});
-	</script>
+    <script src="${contextPath}/resources/js/movie/movieDetail.js"></script>
 </head>
 <body>
 	<header>
@@ -773,5 +247,430 @@
 			</div>
 		</div>
 	</footer>
+
+	<script>
+		$(function(){
+			function getFormatDate(date){
+				var subDateArray = date.substr(0,10).split('-');
+				return newDateForm = subDateArray[0] + "." + subDateArray[1] + "." + subDateArray[2];
+			}
+			
+			reloadComment();		// 실관람평 데이터 받아옴
+			reloadMovie();	// 영화 상세 데이터 받아옴
+			
+			var contextPath = "${contextPath}";
+			var movNo = "${movNo}";
+			
+			/* ajax - 영화 상세 페이지 데이터 받아올때 */
+			function reloadMovie(){
+				var contextPath = "${contextPath}";
+				var movNo = "${movNo}";
+				$.ajax({
+					type:"GET",
+					url: contextPath + "/api/movies/" + movNo,
+					contentType: "application/json; charset=utf-8",
+					success: function(json){
+		
+						var bg = "";
+						var title = "";
+						var avgStar = "";
+						var poster = "";
+						var sCont = "";
+						
+							/* 영화 뒷 배경 */
+							bg += "<div class='bg-img' style='background-image:url("
+									+ "${contextPath}/resources/images/movie/movie-detail/bg-" + json.movPoster + ");'>";
+							bg += "</div>"; 
+							
+							/* 실시간 평점 (영화 평균 평점) <-- 트랜젝션 사용 */ 
+							avgStar += json.movAvgstar;
+							
+							/* 영화 제목 */			
+							title += "<p class='title'>" + json.movTitle + "</p>";
+							// title += "<p class='title-eng'>" + 'Cruella' + "</p>";		// 영어 제목 컬럼 미지정
+							
+							/* 영화 포스터 */
+							poster += "<p class='movie-grade age-" + json.movGrade + "'></p>";	
+							poster += "<img alt='" + json.movTitle + "'src="
+								+ "'${contextPath}/resources/images/movie/box-office/" + json.movPoster + "'/>";			
+							
+							// 주요정보 탭					
+							/* 영화 줄거리 */
+							sCont += "<div class='movie-summary'>";
+							sCont += "<div class='txt'>" + json.movDetail + "</div>";
+							sCont += "</div><br>";
+							sCont += "<button type='button' class='btn-more'>";
+							sCont += "<span>더보기</span>";
+							sCont += "<i class='iconset ico-btn-more'></i>";
+							sCont += "</button>";
+							
+							/* 영화 정보 */
+							sCont += "<div class='movie-info'>";
+							sCont += "<p class='p-type'></p>";		
+							sCont += "<div class='line'>";						
+							sCont += "<p>감독&nbsp;: " + json.movDirector + "</p>";						
+							sCont += "<p>장르&nbsp;: " + json.movGenre + " / 런타임 : " + json.movRuntime + " 분</p>";						
+							sCont += "<p id='movie-grade'>등급&nbsp;: <i>" + json.movGrade + "세이상</i>관람가</p>";						
+							sCont += "<p>개봉일&nbsp;: " + getFormatDate(json.movOpendate) + "</p>";											
+							sCont += "</div>";
+							sCont += "<p>출연진&nbsp;: " + json.movActor + "</p>";
+							sCont += "</div>";
+							
+						$(".movie-detail-page .movie-bg").append(bg);
+						$(".number em").append(avgStar);
+						$(".movie-detail-cont").append(title);
+						$(".poster .wrap").append(poster);
+						$(".movie-info-list").append(sCont);
+						$('#movie-grade i:contains("0세이상")').text("전체");
+						$('#movie-grade i:contains("19세이상")').parent().text("청소년관람불가");
+						
+						$('.btn-more').on("click", function(){
+							$(this).toggleClass("active");
+							
+							$(".movie-summary, .ico-btn-more, .btn-more span").toggleClass("active");
+							$(".btn-more span").text("더보기");
+							$(".btn-more span.active").text("닫기");
+						});
+						
+					},
+					error : function(request, status, error){
+						window.location.href = contextPath + "/movielist";	// 데이터에 없는 영화번호를 검색시 전체영화 페이지로 이동
+					}
+				});
+				
+			/* 상영타입 (전부 2d로 넣어놓음) */
+			var cinNo = "1";
+			$.get(contextPath + "/api/cinemas/" + cinNo,
+				function(json){
+					var cinType = "";
+						cinType += "상영타입 : " + json.cinType + "(자막)";
+					$(".movie-info .p-type").append(cinType);
+				});
+			}
+			
+			/* ajax - 박스오피스 데이터만 예매버튼 활성화 */
+			var contextPath = "${contextPath}";
+			var no = "${movNo}";
+			
+			$.ajax({
+				type:"GET",
+				url: contextPath + "/api/movies/boxOffice/" + no,
+				contentType: "application/json; charset=utf-8",
+				success: function(json){
+					if (json != '') {
+						var btn = "";
+							btn += "<button type='button' id='reserve' class='btn reserve' title='영화 예매하기'>예매</button>";
+						$(".screen-type").append(btn);
+					}else if (json == ''){
+						$('#comming').show();
+					}
+				},
+				error : function(request, status, error){
+					console.log("error > ");
+				}	
+			});
+			/* // 주요정보 탭 */
+			
+			/* 실관람평  탭 */		
+			function reloadComment(){
+				var contextPath = "${contextPath}";
+				var movNo = "${movNo}";
+				
+				$.ajax({
+					type:"GET",
+					url: contextPath + "/api/comments/movie/" + movNo,
+					contentType: "application/json; charset=utf-8",
+					async: false,
+					success: function(json){
+						var dataLength = json.length;
+						if (dataLength >= 1) {
+							var sCont = "";				
+							var size = "";	
+								size += dataLength
+								
+							for (i = 0; i < dataLength; i++) {							
+								sCont += "<li>";
+								// comment-list
+								sCont += "<div class='comment-list'>";
+								// prof
+								sCont += "<div class='prof'>";						
+								sCont += "<img src='${contextPath}/resources/images/movie/movie-detail/bg-profile.png'>";
+								sCont += "<p id='none-user' style='display:none'>" + json[i].comUser + "</p>";
+								sCont += "<p class='user-id'>" + json[i].comUser.substring(0, 4) + "</p>";
+								sCont += "<div class='divNo' style ='display:none'>" + json[i].comNo + "</div>"
+								sCont += "</div>";
+								// prof
+								
+								// textarea
+								sCont += "<div class='textarea'>";
+								sCont += "<h3>한줄평</h3>";
+								sCont += "<h3>" + json[i].comStar + "</h3>";
+								sCont += "<p>" + json[i].comContent + "</p>";							
+								sCont += "</div>";
+								// // textarea
+								
+								// btn-util
+								sCont += "<div class='btn-util'>";				
+								sCont += "<button id='alert'></button>";					
+								sCont += "</div>";
+								// // btn-util
+								
+								sCont += "</div>";
+								// // comment-list
+								sCont += "<h5>" + json[i].comDate + "</h5>";
+								sCont += "</li>";
+							}
+							$('#noDataDiv').hide();
+							$("#comment-count .font-gblue").append(size);
+							$(".movie-comment ul").append(sCont);
+							
+							// 로그인했을때 한줄평에서 회원이메일이 같으면 클래스 추가(배경색 바뀜-구별을 위해)
+							if (${member != null}) {
+								var pUser = $('.prof:contains("${member.memEmail}")').parent();
+								pUser.addClass('com-me');
+							}
+							
+							// 관리자 로그인시 클래스 추가 (파란색 배경으로 바뀜)
+							if (${admin != null}) {
+								var pUser = $('.prof').parent();
+								pUser.addClass('com-admin');
+							}
+						}else {
+							$("#comment-count .font-gblue").append(dataLength);
+							$('#noDataDiv').show();
+						}							
+					}
+				});
+			}
+			
+			/* ajax */
+			$('#writeBtn').on("click", function(e){
+				var movNo = "${movNo}";
+				var user = $('#user').val();
+				var content = $('#contxt').val();
+				var newComment = { movNo: movNo, 
+									comUser : $('#user').val(), 
+									comContent: $('#contxt').val(),
+									comStar : $('.com-star').val()
+								};
+				
+				Swal.fire({ 		// Alert창 디자인 sweetalert2
+					title			  : '등록하시겠습니까?', 
+					icon			  : 'question', 
+					showCancelButton  : true, 
+					confirmButtonColor: '#3085d6', 
+					cancelButtonColor : '#d33', 
+					confirmButtonText : '등록', 
+					cancelButtonText  : '취소' 
+					}).then((result) => {
+						if (result.isConfirmed) {
+				 			$.ajax({
+								url 		: contextPath + "/api/comments/",
+								type 		: "POST",
+								contentType : "application/json; charset=utf-8",
+								datatype 	: "json",
+								cache 		: false,
+								data 		: JSON.stringify(newComment),
+								beforeSend  : function(xhr) {			// success로 넘어가기 전에 조건 만족시 success로 넘어가지 않고 beforeSend에서 멈춤
+									if (${admin != null}) {				// 관리자가 로그인 했을때 
+										if (content == "") {			// 한줄평 내용이 없을때
+								        	xhr.abort();					    
+								        	//alert("내용을 입력해주세요!");
+								        	Swal.fire({				// Alert창 디자인 sweetalert2			
+							                    icon : 'warning',
+							                    title: '내용을 입력해주세요!'
+							                }).then((result) => { 
+												if (result.isConfirmed) { 
+													return false;
+												}
+											});					        	
+								        }else {						// 관리자는 글을 쓸수 없으므로 취소 후 경고 창 표시
+								        	xhr.abort();
+								        	Swal.fire({				// Alert창 디자인 sweetalert2			
+							                    icon : 'error',
+							                    title: '관리자는 한줄평을 달 수 없습니다.'
+							                }).then((result) => { 
+												if (result.isConfirmed) { 
+													return false;
+												}
+											});	
+								        }
+									}else if (${member == null} || user == "") {	// 한줄평 유저 (user)에 값이 없을시 success로 넘어가지 않고 로그인으로 이동
+								            xhr.abort();
+								            //alert("권한이 없습니다. 로그인 해주세요.");
+								            //window.location.href = contextPath + "/login";
+								            
+								            Swal.fire({				// Alert창 디자인 sweetalert2			
+							                    icon : 'error',
+							                    title: '권한이 없습니다. 로그인 해주세요.'
+							                }).then((result) => { 
+												if (result.isConfirmed) { 
+													window.location.href = contextPath + "/login";
+												} 
+											});	
+									} else if (content == "") {	// 한줄평 내용이 없을때
+							        	xhr.abort();					    
+							        	//alert("내용을 입력해주세요!");
+							        	Swal.fire({				// Alert창 디자인 sweetalert2			
+						                    icon : 'warning',
+						                    title: '내용을 입력해주세요!'
+						                }).then((result) => { 
+											if (result.isConfirmed) { 
+												return false;
+											}
+										});					        	
+							    	}
+							    },
+								success 	: function(res) {
+									if(user != ""){			// 유저가 있으면 등록후 새로고침
+										//alert(newComment.comUser + "님의 한줄평이 등록되었습니다.");
+										//location.reload();
+										Swal.fire({				// Alert창 디자인 sweetalert2
+						                    icon : 'success',
+						                    title: '한줄평이 등록되었습니다.',
+						                    text : '소중한 한줄평 감사합니다.'
+						                }).then((result) => {
+											if (result.isConfirmed) { 		
+												$(".movie-detail-page .movie-bg").empty();
+												$(".number em").empty();
+												$(".movie-detail-cont > .title").remove();
+												$(".poster .wrap").empty();
+												$(".movie-info-list").empty();
+												reloadMovie();
+												
+												$("#comment-count .font-gblue").empty();
+												$(".movie-comment ul").empty();
+												reloadComment();
+												
+												$(".write-content").slideToggle().toggleClass("active");  
+												
+												$("#contxt").val('');	        
+										        $(".br-widget a").removeClass();	               
+										        $(".br-widget a:first-child").addClass("br-selected br-current");	               
+										        $(".br-current-rating").text("1");	         
+										        $(".br-widget").unbind('mouseleave');
+											} 
+										});
+									}
+								},
+								error : function(request, status, error){
+									alert("code:" + request.status+"\n" + "message:" + request.responseText+"\n" + "error:" + error);
+								}
+							});
+					} else{    
+						return false;
+				 	}
+				});
+			});
+			
+			/* 한줄평 삭제 */
+			$(document).on('click', '[id=remove]', function(){
+				var pa = $(this).parent().parent();
+				var ch = pa.children().children();
+				var comNo = ch.eq(3).text();
+				
+				Swal.fire({ 		// Alert창 디자인 sweetalert2
+					title			  : '삭제하시겠습니까?', 
+					icon			  : 'warning', 
+					showCancelButton  : true, 
+					confirmButtonColor: '#3085d6', 
+					cancelButtonColor : '#d33', 
+					confirmButtonText : '삭제', 
+					cancelButtonText  : '취소' 
+					}).then((result) => {
+						if (result.isConfirmed) {
+							$.ajax({
+								url: contextPath + "/api/comments/" + comNo,
+								type: 'DELETE',
+								dataType: "html",
+								success: function(res) {
+									//alert(comNo + "번 한줄평 삭제 완료");
+									//location.reload();	
+									Swal.fire({				// Alert창 디자인 sweetalert2
+					                    icon : 'success',
+					                    title: '한줄평 삭제가 완료되었습니다.',
+					                }).then((result) => {
+										if (result.isConfirmed) { 	
+											$(".movie-detail-page .movie-bg").empty();
+											$(".number em").empty();
+											$(".movie-detail-cont > .title").remove();
+											$(".poster .wrap").empty();
+											$(".movie-info-list").empty();
+											reloadMovie();
+											
+											$("#comment-count .font-gblue").empty();
+											$(".movie-comment ul").empty();
+											reloadComment();
+										} 
+									});	
+								},
+								error: function(request, status, error) {
+									alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+								}
+							});
+						} else{    
+							return false;
+					 	}
+					});		
+			});
+			/* // 실관람평 탭 */
+			
+			// 예매버튼 클릭시 영화 번호를 reserve 페이지에 전달
+			$(document).on('click', '[id=reserve]', function(e){
+				var movNo = "${movNo}";
+				window.location.href = contextPath + "/reserve?no=" + movNo;
+			});
+			
+			// 한줄평 버튼 눌렸을때
+			$(document).on('click', '[id=alert]', function(e){
+				var pa = $(this).parent().parent();
+				var ch = pa.children().children();
+				var comUser = ch.eq(1).text();
+				var btnPa = $(this).parent();
+				
+				//console.log(comUser);
+				
+				if (${admin != null}) {		// 관리자가 로그인 했을때
+					var comBtn = "";
+						comBtn += "<button id='modify'>수정</button>";
+						comBtn += "<button id='remove'>삭제</button>";
+						
+					btnPa.empty();
+					btnPa.append(comBtn);
+				}else {
+					if (${member != null}) {		// 로그인 했을때
+						if('${member.memEmail}' == comUser){	// 로그인 아이디와 한줄평 유저가 일치할때
+							var comBtn = "";
+								comBtn += "<button id='modify'>수정</button>";
+								comBtn += "<button id='remove'>삭제</button>";
+								
+							btnPa.empty();
+							btnPa.append(comBtn);
+						}else {		// 다른 유저가 썼을때
+							//alert("권한이 없습니다.");
+							Swal.fire({				// Alert창 디자인 sweetalert2
+			                    icon : 'error',
+			                    title: '권한이 없습니다.'
+			                }).then((result) => {
+								if (result.isConfirmed) { 
+									return false;
+								} 
+							});
+						}
+					}else {			// 로그인 안했을때
+						//alert("권한이 없습니다. 로그인 해주세요.");	
+						Swal.fire({				// Alert창 디자인 sweetalert2
+		                    icon : 'error',
+		                    title: '권한이 없습니다. 로그인 해주세요.'
+		                }).then((result) => {
+							if (result.isConfirmed) { 
+			            		window.location.href = contextPath + "/login";
+							} 
+						});
+					}
+				}	
+			});
+		});
+	</script>
 </body>
 </html>

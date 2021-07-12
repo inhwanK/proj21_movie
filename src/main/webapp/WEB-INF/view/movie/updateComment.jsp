@@ -22,40 +22,46 @@
     	window.jQuery || document.write('<script src="${contextPath}/resources/js/star/vendor/jquery-1.11.2.min.js"><\/script>')
     </script>	
     <script src="${contextPath}/resources/js/star/jquery.barrating.min.js"></script>
-    
+    <script src="${contextPath}/resources/js/movie/updateComment.js"></script>
+</head>
+<body>
+
+  <!-- 본문 -->
+  <div class="main">
+         <div class="col-md-6 col-sm-12">
+            <div class="form">
+               <form:form>
+               	  <div class="form-group">
+                     <label>번호</label>
+                     <input type="text" id="comNo" class="form-control" readonly="readonly">
+                  </div>
+                  <div class="form-group">
+                     <label>내용</label>
+                     <input type="text" id="comContent" class="form-control" maxlength="40" placeholder="수정하고자 할 한줄평을 적어주세요 (40자 이내)">
+                  </div>
+                  <div class="form-group">
+                     <label>별점</label>
+	          		 <select id="example-fontawesome" class="com-star" name="rating">
+						 <option value="1">1</option>
+						 <option value="2">2</option>
+						 <option value="3">3</option>
+						 <option value="4">4</option>
+						 <option value="5">5</option>
+					 </select>
+                  </div>
+               </form:form>
+                  <button id="modify" class="btn btn-primary">수정</button>
+                  <button id="cancel" class="btn btn-primary">내용지우기</button>
+                  <button id="exit" class="btn btn-primary">나가기</button>
+            </div>
+         </div>
+      </div>
+
 	<script>
 		$(function(){
 			var contextPath = "${contextPath}";
 			var comNo = ${param.comNo};
-			
-			/* 별점 테마 */
-		    $('#example-fontawesome').barrating({ 
-   				theme: 'fontawesome-stars' 
-  			});
-			
-		    /* 취소 버튼 누를시  */
-			$('#cancel').on("click", function(e){
-				$('#comContent').val('');
-				$(".br-widget a").removeClass();	               
-		        $(".br-widget a:first-child").addClass("br-selected br-current");	               	   
-		        $('.com-star').val("1");
-		        $(".br-current-rating").text("1");
-		        $(".br-widget").unbind('mouseleave');
-			});
-			
-		    /* 나가기 버튼 누를시 */
-			$('#exit').on("click", function(e){
-		        window.close();
-			});
-		    
-			/* 엔터 쳤을때 버튼 누른것과 동일한 이벤트 */
-			$("#comContent").on("keyup", function(key) {
-		        if (key.keyCode == 13) {
-		        	$('#modify').click();
-		        	return false;
-		        }
-		    });
-			
+
 			/* 값 받아올때 */
 			$.get(contextPath + "/api/comments/" + comNo,
 				function(json){
@@ -64,7 +70,7 @@
 					$('.com-star').val('1');
 			});
 			
-			/* ajax */
+			/* ajax - 수정 버튼 눌렸을때 */
 			$('#modify').on("click", function(e){
 				var content = $('#comContent').val();
 				var data = {comNo: $('#comNo').val(),
@@ -127,46 +133,8 @@
 					 	}
 					});
 			});
-			
-			/* 해당요일이 토요일/일요일일시 class 추가 */
-			var comStar = $('.com-star').val()
-		    var spanSat = $('.date-list button span:nth-child(2):contains("토요일")').parent();
-		    spanSat.addClass('sat');
+
 		});
 	</script>
-	</head>
-<body>
-
-  <!-- 본문 -->
-  <div class="main">
-         <div class="col-md-6 col-sm-12">
-            <div class="form">
-               <form:form>
-               	  <div class="form-group">
-                     <label>번호</label>
-                     <input type="text" id="comNo" class="form-control" readonly="readonly">
-                  </div>
-                  <div class="form-group">
-                     <label>내용</label>
-                     <input type="text" id="comContent" class="form-control" maxlength="40" placeholder="수정하고자 할 한줄평을 적어주세요 (40자 이내)">
-                  </div>
-                  <div class="form-group">
-                     <label>별점</label>
-	          		 <select id="example-fontawesome" class="com-star" name="rating">
-						 <option value="1">1</option>
-						 <option value="2">2</option>
-						 <option value="3">3</option>
-						 <option value="4">4</option>
-						 <option value="5">5</option>
-					 </select>
-                  </div>
-               </form:form>
-                  <button id="modify" class="btn btn-primary">수정</button>
-                  <button id="cancel" class="btn btn-primary">내용지우기</button>
-                  <button id="exit" class="btn btn-primary">나가기</button>
-            </div>
-         </div>
-      </div>
-
 </body>
 </html>
