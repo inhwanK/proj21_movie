@@ -167,7 +167,7 @@
 		    						<a href="#" title="실관람평 탭으로 이동">실관람평</a>
 		    					</li>
 		    					<li>
-		    						<a href="#" title="예고편/스틸컷 탭으로 이동">예고편/스틸컷</a>
+		    						<a href="#" title="예고편 탭으로 이동">예고편</a>
 		    					</li>
 		    				</ul>
 		    			</div>
@@ -234,6 +234,15 @@
 			    			 </div>
 			    			 <!-- // movie-comment-list -->
 			    			 
+			    			 <!-- movie-stil-list -->
+			    			 <div class="movie-stil-list">
+	    			 			<h2 class="title">메인예고편</h2>
+	    			 			<!-- 유투브 영상 퍼올시 공유 -> 퍼가기버튼을 눌려서 src안에 있는 링크를 복사하여야 함 -->
+	    			 			<div class="slide-video">
+	    			 			</div>
+			    			 </div>
+			    			 <!-- // movie-stil-list -->
+			    			 
 		    			 </div>
 		    			 <!-- // tab-cont-wrap -->
 		    		</div>
@@ -283,6 +292,7 @@
 						var title = "";
 						var avgStar = "";
 						var poster = "";
+						var video = "";
 						var sCont = "";
 						
 							/* 영화 뒷 배경 */
@@ -324,11 +334,16 @@
 							sCont += "<p>출연진&nbsp;: " + json.movActor + "</p>";
 							sCont += "</div>";
 							
+							/* 영화 예고편 */
+							video += "<iframe width='800' height='450' src='" + json.movVideo + "'>";
+							video += "</iframe>";
+							
 						$(".movie-detail-page .movie-bg").append(bg);
 						$(".number em").append(avgStar);
 						$(".movie-detail-cont").append(title);
 						$(".poster .wrap").append(poster);
 						$(".movie-info-list").append(sCont);
+						$(".slide-video").append(video);
 						$('#movie-grade i:contains("0세이상")').text("전체");
 						$('#movie-grade i:contains("19세이상")').parent().text("청소년관람불가");
 						
@@ -353,7 +368,7 @@
 					var cinType = "";
 						cinType += "상영타입 : " + json.cinType + "(자막)";
 					$(".movie-info .p-type").append(cinType);
-				});
+				});			
 			}
 			
 			/* ajax - 박스오피스 데이터만 예매버튼 활성화 */
@@ -544,6 +559,7 @@
 												$(".movie-detail-cont > .title").remove();
 												$(".poster .wrap").empty();
 												$(".movie-info-list").empty();
+												$(".slide-video").empty();
 												reloadMovie();
 												
 												$("#comment-count .font-gblue").empty();
@@ -604,6 +620,7 @@
 											$(".movie-detail-cont > .title").remove();
 											$(".poster .wrap").empty();
 											$(".movie-info-list").empty();
+											$(".slide-video").empty();
 											reloadMovie();
 											
 											$("#comment-count .font-gblue").empty();
