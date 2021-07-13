@@ -16,36 +16,6 @@
 <script type="text/javascript">
 $(function(){
 	$(document).ready(function(){
-		var contextPath = "<%=request.getContextPath()%>";
-		var form = {
-				memEmail    : $('#memEmail').val(),
-				memPasswd   : $('#memPasswd').val()
-				};
-		$('#delete').click(function(){
-			$.ajax({
-	            url         : contextPath + "/withdrawal.do",
-	            type        : "POST",
-	            contentType : "application/json; charset=utf-8",
-	            datatype    : "json",
-	            cache       : false,
-	            data        : JSON.stringify(form),
-				success	: function(data){
-					if(data==0){
-						alert("패스워드가 틀렸습니다.");
-						return;
-					}else{
-						var result = confirm('정말 탈퇴 하시겠습니까?');
-						if(result){
-							$('#delFrm').submit();
-						}
-					}
-				},
-				error: function(){
-					alert("서버 에러.");
-				}
-			});
-		});
-		
 		<!-- 취소 -->
 		$('#cancel').click(function(){
 	    	var contextPath = "<%=request.getContextPath()%>";
@@ -72,7 +42,13 @@ $(function(){
 			}        	
         }); 
 	});
-});
+	<!-- 탈퇴 전 경고문 -->
+    if($("#delform").submit(function(){
+    	if(!confirm("탈퇴하시겠습니까?")) {
+    		return false;
+    	}
+    })); 
+}); 
 </script>
 </head>
 <body>
@@ -91,12 +67,12 @@ $(function(){
 					<li><a href="${contextPath}/commentInfo">한줄평 내역</a></li>
 					<li><a href="${contextPath}/inquiryInfo">1대1 문의 내역</a></li>
 					<li><a href="${contextPath}/myinfo">개인정보 수정</a></li>
-					<li class="active-menu"><a href="${contextPath}/withdrawal">회원탈퇴</a></li>
+					<li><a href="${contextPath}/withdrawal">회원탈퇴</a></li>
 				</ul>
 			</div>
 			
 			<!-- 본문 -->
-			<form action="withdrawalsuccess.do" name="delFrm" id="delFrm" method="post">
+			<form action="withdrawal.do" name="delform" method="post">
 			<div id="mypage-wrap">
 					<h2>회원탈퇴</h2>
 					<div id="textarea">
@@ -111,9 +87,7 @@ $(function(){
 	 			 		</span>			
  			 		</div>
  			 		<div id="passwordarea">
- 			 		 	<label>이메일</label>
- 			 			<input type="email" name="memEmail" value="${member.memEmail}" readonly>
- 			 			<br>
+ 			 			<input type="hidden" name="memEmail" value="${member.memEmail}"><br>
  			 			<label>비밀번호</label>
  			 			<input type="password" id="memPasswd" name="memPasswd" placeholder="비밀번호를 입력해주세요.">
  			 			<br>

@@ -1,8 +1,9 @@
 package proj21_movie.service.impl;
 
+import java.io.PrintWriter;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 
@@ -94,24 +95,26 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.pwUpdate_M(member);
 	}
 
-	// 회원수정
+	// 회원탈퇴
 	@Override
-	public void update(Member member) throws Exception {
-		log.debug("service - update() > " + member);
-		mapper.update(member);
+	public boolean checkPw(String memEmail, String memPasswd) {
+		log.debug("service - checkPw() > " + memEmail);
+		return mapper.checkPw(memEmail, memPasswd);
 	}
 
-	// 패스워드 체크
 	@Override
-	public int passCheck(Member vo) {
-		log.debug("service - passCheck() > " + vo);
-		int result = mapper.passCheck(vo);
-		return result;
-	}
-	
-	// 탈퇴
-	@Override
-	public void remove(Member member) throws Exception {
-		mapper.remove(member);		
+	public boolean withdrawal(Member member, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if (mapper.withdrawal(member) != 1) {
+			out.println("<script>");
+			out.println("alert('회원탈퇴 실패');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return false;
+		} else {
+			return true;
+		}
 	}
 }
