@@ -31,7 +31,7 @@ public class RestMyInfoController {
 	@RequestMapping(value = "/myinfo/info.set", method = RequestMethod.POST)
 	public String Update(Member member, HttpSession session) throws Exception {
 
-		service.update(member);
+//		service.update(member);
 		session.invalidate();
 
 		return "redirect:/";
