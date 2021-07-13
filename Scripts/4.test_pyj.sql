@@ -32,6 +32,11 @@ delete
   from member
  where mem_email = 'test4@test.com';
 
+delete 
+  from member
+ where mem_email = 'test4@test.com'
+   and mem_passwd = password(1234);
+
 select mem_no, mem_email, password(mem_passwd), mem_birthdate, mem_name, mem_phone
   from member
  where mem_email = 'test4@test.com'
