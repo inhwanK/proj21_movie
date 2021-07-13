@@ -98,7 +98,7 @@ CREATE TABLE proj21_movie.movie (
 	mov_opendate DATE          NULL     COMMENT '개봉일', -- 개봉일
 	mov_enddate  DATE          NULL     COMMENT '종료일', -- 종료일
 	mov_avgstar  DOUBLE        NULL     COMMENT '평균 별점', -- 평균 별점
-	mov_poster   VARCHAR(100)  NULL     COMMENT '포스터' -- 포스터
+	mov_poster   VARCHAR(100)  NULL     COMMENT '포스터', -- 포스터
 	mov_video    VARCHAR(100)  NULL     COMMENT '동영상' -- 동영상
 )
 COMMENT '영화';
@@ -328,17 +328,6 @@ ALTER TABLE proj21_movie.reserving
 
 ALTER TABLE proj21_movie.reserving
 	MODIFY COLUMN ing_no INT NOT NULL AUTO_INCREMENT COMMENT '예매진행번호';
-
--- 영화사진
-ALTER TABLE proj21_movie.movie_pic
-	ADD CONSTRAINT FK_movie_TO_movie_pic -- 영화 -> 영화사진
-		FOREIGN KEY (
-			mov_no -- 영화번호
-		)
-		REFERENCES proj21_movie.movie ( -- 영화
-			mov_no -- 영화번호
-		)
-		ON DELETE CASCADE;
 
 -- 한줄평
 ALTER TABLE proj21_movie.comment
