@@ -49,7 +49,7 @@
 				cache: false,
 				data: JSON.stringify(newShow),
 				success: function(res) {
-					alert(res);
+					alert("등록 완료");
 					window.location.href = contextPath + "/showInfoManager";
 				}, 
 				error: function(request, status, error){

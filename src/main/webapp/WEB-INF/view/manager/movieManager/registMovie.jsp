@@ -133,7 +133,7 @@ $(document).ready(function(){
 			data: formData,
 			type: 'POST',
 			success: function(result){
-				alert("Uploaded");
+				/* alert("Uploaded"); */
 			}
 		});
 		
@@ -164,7 +164,7 @@ $(document).ready(function(){
 			cache: false,
 			data: JSON.stringify(newMovie),
 			success: function(res){
-				alert(res);
+				alert("등록 완료");
 				window.location.href = contextPath + "/movieManager";
 			},
 			error: function(request, status, error){
