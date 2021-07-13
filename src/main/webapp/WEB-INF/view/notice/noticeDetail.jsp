@@ -89,16 +89,15 @@
 
 				<div class="prev-next">
 					<div class="line prev" title="이전">
-						<p class="tit" title="이전">이전</p>
+					<!-- 	<p class="tit" title="이전">이전</p>
 						<p class="link" title="이전">이전글 제목</p>
-						<!-- 글 존재하면 a태그 존재하지 않으면 p 태그  -->
+						글 존재하면 a태그 존재하지 않으면 p 태그  -->
 					</div>
 					<div class="line next" title="다음">
-						<p class="tit" title="다음">다음</p>
-						<!-- <p class="link" title="다음">다음글 제목</p> -->
+						<!-- <p class="tit" title="다음">다음</p>
+						<p class="link" title="다음">다음글 제목</p>
 						<a href="#" class="link moveBtn" data-no="10348" title="다음">
-							다음글 제목 </a>
-
+							다음글 제목 </a> -->
 					</div>
 				</div>
 				<div class="btn-group pt40">
