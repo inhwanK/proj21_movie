@@ -263,3 +263,11 @@ addtime('10:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1)
 select * from movie;
 
 delete from movie where mov_no > 0;
+
+select shw_no, tht_no, cin_no, mov_no, shw_date, shw_starttime, shw_endtime from showinfo;
+insert into showinfo values (null, 1, 1, 1, '2021-07-16', '10:00:00', 
+addtime('10:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));
+insert into showinfo values (null, 1, 1, 1, '2021-07-16', '14:00:00', 
+addtime('10:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));
+insert into showinfo values (null, 1, 1, 1, '2021-07-16', '20:00:00', 
+addtime('10:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));
