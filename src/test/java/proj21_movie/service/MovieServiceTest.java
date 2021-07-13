@@ -101,7 +101,7 @@ public class MovieServiceTest {
 		
 		LocalDate start = LocalDate.of(2021, 06, 07);
 		LocalDate end = LocalDate.of(2021, 06, 10);
-		Movie newMovie = new Movie("test movie", 12, "액션", 120, "감독", "배우들", "상세설명", start, end, 3.5, "poster.jpg");
+		Movie newMovie = new Movie("test movie", 12, "액션", 120, "감독", "배우들", "상세설명", start, end, 3.5, "poster.jpg", "null");
 		
 		int res = mapper.insertMovie(newMovie);
 		Assert.assertEquals(1, res);
@@ -117,7 +117,7 @@ public class MovieServiceTest {
 		LocalDate start = LocalDate.of(2021, 06, 17);
 		LocalDate end = LocalDate.of(2021, 06, 20);
 		
-		Movie newMovie = new Movie("test movie", 12, "액션", 120, "감독", "배우들", "상세설명", start, end, 3.5, "poster.jpg");
+		Movie newMovie = new Movie("test movie", 12, "액션", 120, "감독", "배우들", "상세설명", start, end, 3.5, "poster.jpg", "null");
 		mapper.insertMovie(newMovie);
 		
 		newMovie.setMovTitle("test movie2");
@@ -145,7 +145,7 @@ public class MovieServiceTest {
 		LocalDate start = LocalDate.of(2021, 06, 17);
 		LocalDate end = LocalDate.of(2021, 06, 20);
 		
-		Movie newMovie = new Movie("test movie", 12, "액션", 120, "감독", "배우들", "상세설명", start, end, 3.5, "poster.jpg");
+		Movie newMovie = new Movie("test movie", 12, "액션", 120, "감독", "배우들", "상세설명", start, end, 3.5, "poster.jpg", "null");
 		mapper.insertMovie(newMovie);
 		int res = mapper.deleteMovie(newMovie);
 		Assert.assertEquals(1, res);

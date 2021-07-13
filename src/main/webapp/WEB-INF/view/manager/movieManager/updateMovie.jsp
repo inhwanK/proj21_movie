@@ -34,6 +34,7 @@
 			$('#detail').val(str.replace(/<br\s*\/?>/mg,"\n"));
 			$('#opendate').val(json.movOpendate);
 			$('#enddate').val(json.movEnddate);
+			$('#video').val(json.movVideo);
 			$('#uploadFile').val(json.movPoster);
 		});
 		
@@ -58,6 +59,7 @@
 					movDetail: $('#detail').val(),
 					movOpendate: $('#opendate').val(),
 					movEnddate: $('#enddate').val(),
+					movVideo: $('#video').val(),
 					movPoster: uploadFileName 
 					};
 			alert("data > " + data.movTitle);
@@ -168,7 +170,11 @@
                      <label>종료일</label>
                      <input type="date" id="enddate" class="form-control">
                   </div>
-                   <div class="form-group">
+                  <div class="form-group">
+                     <label>예고편 URL</label>
+                     <input type="text" id="video" class="form-control">
+                  </div>
+                  <div class="form-group">
                      <label>파일 첨부</label>
                      <input type="file" id="uploadFile" name="uploadFile" class="form-control">
                   </div>
