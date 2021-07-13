@@ -10,9 +10,6 @@ DROP TABLE IF EXISTS proj21_movie.admin RESTRICT;
 -- 영화
 DROP TABLE IF EXISTS proj21_movie.movie RESTRICT;
 
--- 영화사진
-DROP TABLE IF EXISTS proj21_movie.movie_pic RESTRICT;
-
 -- 한줄평
 DROP TABLE IF EXISTS proj21_movie.comment RESTRICT;
 
@@ -102,6 +99,7 @@ CREATE TABLE proj21_movie.movie (
 	mov_enddate  DATE          NULL     COMMENT '종료일', -- 종료일
 	mov_avgstar  DOUBLE        NULL     COMMENT '평균 별점', -- 평균 별점
 	mov_poster   VARCHAR(100)  NULL     COMMENT '포스터' -- 포스터
+	mov_video    VARCHAR(100)  NULL     COMMENT '동영상' -- 동영상
 )
 COMMENT '영화';
 
@@ -115,23 +113,6 @@ ALTER TABLE proj21_movie.movie
 ALTER TABLE proj21_movie.movie
 	MODIFY COLUMN mov_no INT NOT NULL AUTO_INCREMENT COMMENT '영화번호';
 
--- 영화사진
-CREATE TABLE proj21_movie.movie_pic (
-	mp_no  INT          NOT NULL COMMENT '번호', -- 번호
-	mov_no INT          NOT NULL COMMENT '영화번호', -- 영화번호
-	mp_pic VARCHAR(100) NOT NULL COMMENT '사진' -- 사진
-)
-COMMENT '영화사진';
-
--- 영화사진
-ALTER TABLE proj21_movie.movie_pic
-	ADD CONSTRAINT PK_movie_pic -- 영화사진 기본키
-		PRIMARY KEY (
-			mp_no -- 번호
-		);
-
-ALTER TABLE proj21_movie.movie_pic
-	MODIFY COLUMN mp_no INT NOT NULL AUTO_INCREMENT COMMENT '번호';
 
 -- 한줄평
 CREATE TABLE proj21_movie.comment (
