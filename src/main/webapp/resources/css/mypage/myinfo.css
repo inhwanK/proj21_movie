@@ -64,6 +64,11 @@ section {
 	color: white;
 }
 
+.active-menu {
+	font-weight: 900;
+	border-bottom: 2px solid RGB(3, 22, 52);
+}
+
 #myinfo-wrap {
 	width: 1045px;
 	height: 100%;

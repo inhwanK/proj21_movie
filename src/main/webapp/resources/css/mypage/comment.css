@@ -145,6 +145,11 @@ section {
 	color: white;
 }
 
+.active-menu {
+	font-weight: 900;
+	border-bottom: 2px solid RGB(3, 22, 52);
+}
+
 #comment-wrap{
 /* 	border: 1px solid yellow; */
 	width: 1045px;

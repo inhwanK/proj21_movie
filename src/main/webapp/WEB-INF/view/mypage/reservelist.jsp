@@ -22,7 +22,7 @@
 			
 				<ul>
 					<li><a href="${contextPath}/mypage"><h2>My Page</h2></a></li>
-					<li><a href="${contextPath}/reserveInfo">예매내역</a></li>
+					<li class="active-menu"><a href="${contextPath}/reserveInfo">예매내역</a></li>
 					<li><a href="${contextPath}/commentInfo">한줄평 내역</a></li>
 					<li><a href="${contextPath}/inquiryInfo">1대1 문의 내역</a></li>
 					<li><a href="${contextPath}/myinfo">개인정보 수정</a></li>
