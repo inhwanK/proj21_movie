@@ -66,10 +66,19 @@
 							+ "\">" + i + "</a>"; // 더 좋은 방법이 있을 거야....
 				}
 				$("nav.pagination").append(pageBtn);
+				$(".pagination a[title="+selectPage+"페이지보기]").attr('style','font-weight:1000; color:#000; border-color:#000;')
 			}
 		});
 		
-		// 검색 기능.
+		// 검색 엔터 기능.
+		$("#searchTxt").on("keyup", function(key) {
+	        if (key.keyCode == 13) {
+	        	$('#searchBtn').click();
+	        	return false;	// 검색 버튼을 눌렀을 경우에 해당 버튼이 활성화 (다른 의도하지 않은 동작 방지)
+	        }
+	    });
+		
+		// 검색 클릭 기능.
 		$("#searchBtn").on("click", function(){
 			
 			var notTitle = $("#searchTxt").val();
