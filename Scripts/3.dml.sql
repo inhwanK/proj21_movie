@@ -60,7 +60,7 @@ insert into movie values (
 		'2021-07-26', 
 		0, 
 		'Cruella.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/04/27/8bf4643df3ebe6a1ef843806cc6e37d8_W.mp4'
+		'https://www.youtube.com/embed/yfSMTFzw-Kw'
 );
 insert into movie values (
 		null, 
@@ -83,7 +83,7 @@ insert into movie values (
 		'2021-08-09', 
 		0, 
 		'Wrath-of-Man.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/05/10/95d0f2f4b5852ac3e6627142a2fc5fe0_W.mp4'
+		'https://www.youtube.com/embed/SYiEc5GO0-8'
 );
 insert into movie values (
 		null, 
@@ -103,7 +103,7 @@ insert into movie values (
 		'2021-08-03', 
 		0, 
 		'The-Conjuring3.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/05/21/264da82681259ae4575172560245a011_W.mp4'
+		'https://www.youtube.com/embed/MRY26k7sUkY'
 );
 insert into movie values (
 		null, 
@@ -124,7 +124,7 @@ insert into movie values (
 		'2021-07-19', 
 		0, 
 		'Fast-&-Furious.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/04/21/8c0bef76f1008c7fbd8fadfff00988db_W.mp4'
+		'https://www.youtube.com/embed/L9Y-hn2COm0'
 );
 insert into movie values (
 		null, 
@@ -143,7 +143,7 @@ insert into movie values (
 		'2021-08-03', 
 		0, 
 		'The-misfits.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/05/26/3961b4c295eb3e5e21ba3b87adb474b4_W.mp4'
+		'https://www.youtube.com/embed/wR6ywHua5jw'
 );
 insert into movie values (
 		null, 
@@ -166,7 +166,7 @@ insert into movie values (
 		'2021-07-27', 
 		0, 
 		'Demon-Slayer.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/01/11/d05333f7d4609f76712a3e59ce07ab1e_W.mp4'
+		'https://www.youtube.com/embed/pAPwjvIMxcg'
 );
 insert into movie values (
 		null, 
@@ -185,7 +185,7 @@ insert into movie values (
 		'2021-08-03', 
 		0, 
 		'BanG-Dream!.jpg',
-		'http://s3550.smartucckr/encodeFile/3550/2021/04/19/faca6e05ed96bd9d4895738071fdb440_W.mp4'
+		'https://www.youtube.com/embed/wgP9a-JPGxs'
 );
 insert into movie values (
 		null, 
@@ -207,7 +207,7 @@ insert into movie values (
 		'2021-08-02', 
 		0, 
 		'The-Professor-and-the-Madman.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/06/07/3dfc309fa8ea61834be4a284e651270b_W.mp4'
+		'https://www.youtube.com/embed/fXkLVS1eypc'
 );
 insert into movie values (
 		null, 
@@ -230,7 +230,7 @@ insert into movie values (
 		'2021-08-03', 
 		0, 
 		'NOT-OUT.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/05/24/891ff560b51a09af11345b2a972aaa7f_W.mp4'
+		'https://www.youtube.com/embed/kymRai9G4rY'
 );
 insert into movie values (
 		null, 
@@ -251,7 +251,7 @@ insert into movie values (
 		'2021-07-17', 
 		0, 
 		'In-the-Name-of-the-Son.jpg',
-		'https://www.youtube.com/watch?v=5-lnu7mbGFY'
+		'https://www.youtube.com/embed/5-lnu7mbGFY'
 );
 insert into movie values (
 		null, 
@@ -276,7 +276,7 @@ insert into movie values (
 		'2021-07-26', 
 		0, 
 		'Pipeline.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/05/26/56abfab0d0625f38a3995419c0515eab_W.mp4'
+		'https://www.youtube.com/embed/KgsMl1KHmxA'
 );
 insert into movie values (
 		null, 
@@ -301,7 +301,7 @@ insert into movie values (
 		'2021-07-26', 
 		0, 
 		'Voyagers.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/05/14/3692e9065174c29bedb86b739d33ae4f_W.mp4'
+		'https://www.youtube.com/embed/4gxMoIF1f8c'
 );
 
 insert into movie values (
@@ -326,7 +326,7 @@ insert into movie values (
 		'2021-08-17', 
 		0, 
 		'Whispering-Corridors6.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/06/10/70266b64000d4714495ef3ded699625e_W.mp4'
+		'https://www.youtube.com/embed/pUzBmQLSeqQ'
 );
 insert into movie values (
 		null, 
@@ -351,7 +351,7 @@ insert into movie values (
 		'2021-08-23', 
 		0, 
 		'Hard-Hit.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/05/24/4c8be848009ca26b17fe09ebb71d0760_W.mp4'
+		'https://www.youtube.com/embed/WSmgHodVqDk'
 );
 insert into movie values (
 		null, 
@@ -378,7 +378,7 @@ insert into movie values (
 		'2021-08-29', 
 		0, 
 		'Silk-Road.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/05/17/88677aa77a2b933ca1cd0b071afd17ce_W.mp4'
+		'https://www.youtube.com/embed/hGoyCt60dNI'
 );
 insert into movie values (
 		null, 
@@ -400,7 +400,7 @@ insert into movie values (
 		'2021-08-10', 
 		0, 
 		'White-on-White.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/05/17/5fb779e5703730a58d0cce52cb5aadb9_W.mp4'
+		'https://www.youtube.com/embed/tpmDLQVuLqM'
 );
 insert into movie values (
 		null, 
@@ -421,7 +421,7 @@ insert into movie values (
 		'2021-08-10', 
 		0, 
 		'Ash-Is-Purest-White.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/05/17/26e5e351a7f601dfd2a5e96e656d61ce_W.mp4'
+		'https://www.youtube.com/embed/yGtHna19s-0'
 );
 insert into movie values (
 		null, 
@@ -446,7 +446,7 @@ insert into movie values (
 		'2021-08-10', 
 		0, 
 		'Flashback.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/05/21/2ec4fdb851c7d23e220152888a21c545_W.mp4'
+		'https://www.youtube.com/embed/zinc2c1_Nus'
 );
 insert into movie values (
 		null, 
@@ -466,7 +466,7 @@ insert into movie values (
 		'2021-08-16', 
 		0, 
 		'A-Quiet-Place-Part-II.jpg',
-		'https://s3550.smartucc.kr/encodeFile/3550/2020/01/10/d5066ea415413f32dda9081ab10ad11b_W.mp4'
+		'https://www.youtube.com/embed/clWcJd9ZIbY'
 );
 insert into movie values (
 		null, 
@@ -485,7 +485,7 @@ insert into movie values (
 		'2021-08-17', 
 		0, 
 		'Summer-is-the-coldest-season.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/05/28/ac95e6e636a119442fc0362c7c0b05ef_W.mp4'
+		'https://www.youtube.com/embed/33pNshzcZgo'
 );
 
 -- 상영 예정작 데이터 (오늘 날짜 이후)-------------------------------
@@ -510,7 +510,7 @@ insert into movie values (
 		'2021-09-07', 
 		0, 
 		'Black-Widow.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/05/21/fb084895bf065cd56c465d81c765f46a_W.mp4'
+		'https://www.youtube.com/embed/7oNrTvNX7WA'
 );
 
 insert into movie values (
@@ -536,7 +536,7 @@ insert into movie values (
 		'2021-09-08', 
 		0, 
 		'Ruben-Brandt,Collector.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/06/25/934b95db48c1544e5703dea42faecad7_W.mp4'
+		'https://www.youtube.com/embed/swkLIwKp1Yk'
 );
 
 insert into movie values (
@@ -563,7 +563,7 @@ insert into movie values (
 		'2021-09-14', 
 		0, 
 		'The-Medium.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/06/24/b9621629124e7f2f172f3c246a45c510_W.mp4'
+		'https://www.youtube.com/embed/Xj7jMVlW2vk'
 );
 
 insert into movie values (
@@ -586,7 +586,7 @@ insert into movie values (
 		'2021-09-14', 
 		0,
 		'I-Fell-in-Love-Like-A-Flower-Bouquet.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/06/14/e4551f9d5dc2fbefb8f05c181fa32eb2_W.mp4'
+		'https://www.youtube.com/embed/dpC79PWrHqM'
 );
 
 insert into movie values (
@@ -611,7 +611,7 @@ insert into movie values (
 		'2021-09-14', 
 		0, 
 		'The-Forever-Purge.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/06/16/907b882d305444aab54d754810710750_W.mp4'
+		'https://www.youtube.com/embed/7wIC0gF01-Y'
 );
 
 insert into movie values (
@@ -632,7 +632,7 @@ insert into movie values (
 		'2021-09-14', 
 		0, 
 		'Ophelia.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/06/18/48254ae0394fcf0faeb48d0e365d7454_W.mp4'
+		'https://www.youtube.com/embed/qbpKLwTBV3A'
 );
 
 insert into movie values (
@@ -653,7 +653,7 @@ insert into movie values (
 		'2021-09-21', 
 		0, 
 		'The-Boss-Baby2.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/06/23/fe9790f3eeb30215b3b8ee7daf90dc76_W.mp4'
+		'https://www.youtube.com/embed/lxE2JI6MgEE'
 );
 
 insert into movie values (
@@ -674,7 +674,7 @@ insert into movie values (
 		'2021-09-21', 
 		0, 
 		'The-Oxford-Murders.jpg',
-		'http://s3550.smartucc.kr/encodeFile/3550/2021/06/18/c956c3c0c43f544bf0574212a9662f49_W.mp4'
+		'https://www.youtube.com/embed/kiNSTul-cPM'
 );
 
 select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, 
