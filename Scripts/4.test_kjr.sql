@@ -262,3 +262,4 @@ addtime('10:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1)
 
 select * from movie;
 
+delete from movie where mov_no > 0;

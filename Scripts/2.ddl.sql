@@ -10,6 +10,9 @@ DROP TABLE IF EXISTS proj21_movie.admin RESTRICT;
 -- 영화
 DROP TABLE IF EXISTS proj21_movie.movie RESTRICT;
 
+-- 영화사진
+DROP TABLE IF EXISTS proj21_movie.movie_pic RESTRICT;
+
 -- 한줄평
 DROP TABLE IF EXISTS proj21_movie.comment RESTRICT;
 
@@ -113,6 +116,23 @@ ALTER TABLE proj21_movie.movie
 ALTER TABLE proj21_movie.movie
 	MODIFY COLUMN mov_no INT NOT NULL AUTO_INCREMENT COMMENT '영화번호';
 
+-- 영화사진
+CREATE TABLE proj21_movie.movie_pic (
+	mp_no  INT          NOT NULL COMMENT '번호', -- 번호
+	mov_no INT          NOT NULL COMMENT '영화번호', -- 영화번호
+	mp_pic VARCHAR(100) NOT NULL COMMENT '사진' -- 사진
+)
+COMMENT '영화사진';
+
+-- 영화사진
+ALTER TABLE proj21_movie.movie_pic
+	ADD CONSTRAINT PK_movie_pic -- 영화사진 기본키
+		PRIMARY KEY (
+			mp_no -- 번호
+		);
+
+ALTER TABLE proj21_movie.movie_pic
+	MODIFY COLUMN mp_no INT NOT NULL AUTO_INCREMENT COMMENT '번호';
 
 -- 한줄평
 CREATE TABLE proj21_movie.comment (
@@ -329,6 +349,17 @@ ALTER TABLE proj21_movie.reserving
 ALTER TABLE proj21_movie.reserving
 	MODIFY COLUMN ing_no INT NOT NULL AUTO_INCREMENT COMMENT '예매진행번호';
 
+-- 영화사진
+ALTER TABLE proj21_movie.movie_pic
+	ADD CONSTRAINT FK_movie_TO_movie_pic -- 영화 -> 영화사진
+		FOREIGN KEY (
+			mov_no -- 영화번호
+		)
+		REFERENCES proj21_movie.movie ( -- 영화
+			mov_no -- 영화번호
+		)
+		ON DELETE CASCADE;
+
 -- 한줄평
 ALTER TABLE proj21_movie.comment
 	ADD CONSTRAINT FK_movie_TO_comment -- 영화 -> 한줄평
@@ -348,7 +379,8 @@ ALTER TABLE proj21_movie.showinfo
 		)
 		REFERENCES proj21_movie.movie ( -- 영화
 			mov_no -- 영화번호
-		);
+		)
+		ON DELETE CASCADE;
 
 -- 상영정보
 ALTER TABLE proj21_movie.showinfo
@@ -401,7 +433,8 @@ ALTER TABLE proj21_movie.reservation
 		)
 		REFERENCES proj21_movie.member ( -- 회원
 			mem_no -- 회원번호
-		);
+		)
+		ON DELETE CASCADE;
 
 -- 좌석
 ALTER TABLE proj21_movie.seat
