@@ -72,7 +72,7 @@
 				cache: false,
 				data: JSON.stringify(data),
 				success: function(data) {
-					alert(data);
+					alert("수정 완료");
 					window.location.href = contextPath + "/movieManager";
 				},
 				error: function(data, status, error){
