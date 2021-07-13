@@ -2,9 +2,10 @@ package proj21_movie.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 import proj21_movie.dto.Member;
-import proj21_movie.dto.Withdrawal;
 
 @Service
 public interface MemberService {
@@ -33,7 +34,9 @@ public interface MemberService {
 	public int pwUpdate_M(Member member);
 	
 	// 패스워드 체크
-	public Member checkPw(Member member) throws Exception;
+	public int passCheck(Member vo);
+	// 탈퇴
+	public void remove(Member member) throws Exception;
 	
 	//회원정보 수정
 	public void update(Member member) throws Exception;
