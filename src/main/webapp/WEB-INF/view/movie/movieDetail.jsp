@@ -310,7 +310,7 @@
 							/* 영화 포스터 */
 							poster += "<p class='movie-grade age-" + json.movGrade + "'></p>";	
 							poster += "<img alt='" + json.movTitle + "'src="
-								+ "'${contextPath}/resources/images/movie/box-office/" + json.movPoster + "'/>";			
+								+ "'${contextPath}/resources/images/movie/box-office/" + json.movPoster + "' allowfullscreen/>";			
 							
 							// 주요정보 탭					
 							/* 영화 줄거리 */
