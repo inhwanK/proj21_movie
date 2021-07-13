@@ -55,7 +55,7 @@
 					url: contextPath + "/api/movies/" + no,
 					type: 'DELETE',
 					success: function(res) {
-						alert(res);
+						alert("삭제되었습니다");
 						window.location.href = contextPath + "/movieManager";
 					},
 					error: function(request, status, error) {
