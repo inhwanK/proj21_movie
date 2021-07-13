@@ -127,7 +127,7 @@
 				var avg = 0;
 				
 				salesMonth.addColumn('string', '날짜');
-				salesMonth.addColumn('number', '관람인원');
+				salesMonth.addColumn('number', '매출');
 				
 				for(i=0;i<json.length;i++){
 					salesMonth.addRows([
