@@ -8,6 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-탈퇴 성공 ${member.memEmail}
+탈퇴 성공
+${member.memEmail}
+${member.memPasswd}
+${member.memName}
+${member.memPhone}
 </body>
 </html>
