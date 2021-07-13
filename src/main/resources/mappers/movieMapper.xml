@@ -3,20 +3,20 @@
 <mapper namespace="proj21_movie.mapper.MovieMapper">
 	
 	<select id="selectMovieAll" resultType="Movie">
-		select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster 
+		select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster, mov_video 
 		from movie
 		order by mov_no desc
 	</select>
 	
 	<select id="selectMovieByNo" resultType="Movie">
-		select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster 
+		select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster, mov_video 
 		from movie
 		where mov_no = #{movNo}
 	</select>
 	
 	<!-- 박스오피스의 상세보기만 나오도록 -->
 	<select id="selectMovieByBoxofficeNo" resultType="Movie">
-		select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster 
+		select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster, mov_video 
 		from movie
 		where mov_opendate &lt;= now() and mov_enddate &gt; date_add(now(), interval -1 day) and mov_no = #{movNo}
 	</select>
@@ -24,7 +24,7 @@
 	<!-- 영화 평균 평점은 한줄평의 영화별 평균 별점으로 쿼리 바꿈 -->
 	<select id="selectMovieBoxOfficeAll" resultType="Movie">
 		select m.mov_no, m.mov_title, m.mov_grade, m.mov_genre, m.mov_runtime, m.mov_director, m.mov_actor, m.mov_detail, 		
-				m.mov_opendate, m.mov_enddate, mov_avgstar, m.mov_poster
+				m.mov_opendate, m.mov_enddate, mov_avgstar, m.mov_poster, m.mov_video
 			from comment c right join movie m on c.mov_no = m.mov_no
 		 where m.mov_opendate &lt;= now() and m.mov_enddate &gt; date_add(now(), interval -1 day)
 		group by m.mov_no
@@ -33,7 +33,7 @@
 	
 	<select id="selectMovieCommingSoonAll" resultType="Movie">
 		select m.mov_no, m.mov_title, m.mov_grade, m.mov_genre, m.mov_runtime, m.mov_director, m.mov_actor, m.mov_detail, 		
-				m.mov_opendate, m.mov_enddate, mov_avgstar, m.mov_poster
+				m.mov_opendate, m.mov_enddate, mov_avgstar, m.mov_poster, m.mov_video
 			from comment c right join movie m on c.mov_no = m.mov_no
 		 where m.mov_opendate &gt; now()
 		group by m.mov_no
@@ -41,7 +41,7 @@
 	
 	<select id="selectMovieByTitle" resultType="Movie">
 		select m.mov_no, m.mov_title, m.mov_grade, m.mov_genre, m.mov_runtime, m.mov_director, m.mov_actor, m.mov_detail, 		
-				m.mov_opendate, m.mov_enddate, mov_avgstar, m.mov_poster
+				m.mov_opendate, m.mov_enddate, mov_avgstar, m.mov_poster, m.mov_video
 			from comment c right join movie m on c.mov_no = m.mov_no
 		 where m.mov_opendate &lt;= now() and m.mov_enddate &gt; date_add(now(), interval -1 day)
 		 		and mov_title like concat('%', #{movTitle}, '%')
@@ -50,13 +50,14 @@
 	</select>
 	
 	<select id="selectMovieFromToday" resultType="Movie">
-		select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster from movie
+		select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster, mov_video
+			from movie
 		where mov_enddate > date_add(now(), interval -1 day)
 	</select>
 	
 	<select id="selectMovieLimit" resultType="Movie">
 		select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, 		
-				mov_opendate, mov_enddate, mov_avgstar, mov_poster
+				mov_opendate, mov_enddate, mov_avgstar, mov_poster, mov_video
 			from movie
 		 where mov_opendate &lt;= now() and mov_enddate &gt; date_add(now(), interval -1 day)
 		order by mov_avgstar desc, mov_no desc
@@ -65,7 +66,7 @@
 	
 	<insert id="insertMovie">
 		insert into movie values 
-		(null, #{movTitle}, #{movGrade}, #{movGenre}, #{movRuntime}, #{movDirector}, #{movActor}, #{movDetail}, #{movOpendate}, #{movEnddate}, #{movAvgstar}, #{movPoster})
+		(null, #{movTitle}, #{movGrade}, #{movGenre}, #{movRuntime}, #{movDirector}, #{movActor}, #{movDetail}, #{movOpendate}, #{movEnddate}, #{movAvgstar}, #{movPoster}, #{movVideo})
 		<selectKey keyProperty="movNo" resultType="int">
 			SELECT LAST_INSERT_ID()		
 		</selectKey>
@@ -104,15 +105,13 @@
 			<if test= "movAvgstar != null">
 				, mov_avgstar = #{movAvgstar}
 			</if>
+			<if test= "movVideo!= null">
+				, mov_video = #{movVideo}
+			</if>
 			<if test= "movPoster != null">
 				, mov_poster = #{movPoster},
 			</if>
 		</trim>
-		<!-- set mov_title = #{movTitle}, mov_grade = #{movGrade}, mov_genre = #{movGenre} 
-						, mov_runtime = #{movRuntime}, mov_director = #{movDirector} 
-						, mov_actor = #{movActor}, mov_detail = #{movDetail} 
-						, mov_opendate = #{movOpendate}, mov_enddate = #{movEnddate} 
-						, mov_avgstar = #{movAvgstar}, mov_poster = #{movPoster}  -->
 		where mov_no = #{movNo}
 	</update>
 	
