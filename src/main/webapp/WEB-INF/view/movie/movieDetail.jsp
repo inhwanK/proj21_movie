@@ -335,7 +335,7 @@
 							sCont += "</div>";
 							
 							/* 영화 예고편 */
-							video += "<iframe width='800' height='450' src='" + json.movVideo + "'>";
+							video += "<iframe width='800' height='450' src='" + json.movVideo + "' allowfullscreen>";
 							video += "</iframe>";
 							
 						$(".movie-detail-page .movie-bg").append(bg);
