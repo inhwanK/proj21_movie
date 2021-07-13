@@ -98,14 +98,13 @@
     </delete>
 	
 	<!-- 회원정보 수정 -->
-	<update id="updatemyinfo">
+	<update id="updatemyinfo" parameterType="member">
 		update member
-		   set mem_no = #{memNo},
-		   	   mem_passwd = password(#{memPasswd}),
-		       mem_birthdate = #{memBirthdate},
+		   set mem_birthdate = #{memBirthdate},
 		       mem_name = #{memName},
 		       mem_phone = #{memPhone}
 		 where mem_email = #{memEmail}
+		   and mem_passwd = password(#{memPasswd})
 	</update>
 
 </mapper>

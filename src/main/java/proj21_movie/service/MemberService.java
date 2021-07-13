@@ -1,7 +1,6 @@
 package proj21_movie.service;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
@@ -44,6 +43,5 @@ public interface MemberService {
 	public boolean withdrawal(Member member, HttpServletResponse response) throws Exception;
 	
 	// 회원정보 수정
-	public void updatemyinfo(Member member)throws Exception;
-
+	public int updatemyinfo(Member member) throws Exception;
 }

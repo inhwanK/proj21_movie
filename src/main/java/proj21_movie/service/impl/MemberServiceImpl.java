@@ -2,7 +2,6 @@ package proj21_movie.service.impl;
 
 import java.io.PrintWriter;
 import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
@@ -12,7 +11,6 @@ import org.apache.ibatis.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import proj21_movie.dto.Member;
-import proj21_movie.dto.Withdrawal;
 import proj21_movie.mapper.MemberMapper;
 import proj21_movie.service.MemberService;
 
@@ -114,8 +112,8 @@ public class MemberServiceImpl implements MemberService {
 
 	// 회원정보 수정
 	@Override
-	public void updatemyinfo(Member member) throws Exception {
+	public int updatemyinfo(Member member) throws Exception {
 		log.debug("service - updatemyinfo() > " + member);
-		mapper.updatemyinfo(member);
+		return mapper.updatemyinfo(member);
 	}
 }
