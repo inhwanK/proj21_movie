@@ -50,7 +50,7 @@
 					url: contextPath + "/api/showinfo/" + no,
 					type: 'DELETE',
 					success: function(res) {
-						alert(res);
+						alert("삭제 완료");
 						window.location.href = contextPath + "/showInfoManager";
 					},
 					error: function(request, status, error) {

@@ -1,11 +1,14 @@
 package proj21_movie.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import proj21_movie.dto.Member;
@@ -18,23 +21,20 @@ public class RestMyInfoController {
 	@Autowired
 	private MemberService service;
 
-	// 회원정보 수정 뷰
+	// 비밀번호 업데이트(일단성공)
 	@RequestMapping(value = "/myinfo", method = RequestMethod.GET)
-	public String registerUpdateView() throws Exception {
+	public String UpdateView() throws Exception {
 
 		return "mypage/myinfo";
-
 	}
 
-	// 회원정보 수정 (수정 처리)
-	@RequestMapping(value = "/myinfo", method = RequestMethod.POST)
-	public String registerUpdate(Member member, HttpSession session) throws Exception {
+	@RequestMapping(value = "/myinfo/info.set", method = RequestMethod.POST)
+	public String Update(Member member, HttpSession session) throws Exception {
 
-		service.modifyMember(member);
+		service.update(member);
 		session.invalidate();
 
 		return "redirect:/";
-
 	}
 
 }

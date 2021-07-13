@@ -1,6 +1,6 @@
 package proj21_movie.mapper;
 
-import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,12 +33,11 @@ public interface MemberMapper {
 	// 패스워드 변경
 	public int pwUpdate_M(Member member);
 	
+	
+	//////////////////////
 	// 패스워드 체크
-	public Member checkIDPW(Member member) throws Exception;
-	// 회원탈퇴
-	public void withdrawal(Member member) throws Exception;
+	public Member checkPw(Member member) throws Exception;
 	
 	// 회원수정
-	public void update(Member member);
-
+	public void update(Member member) throws Exception;
 }

@@ -55,7 +55,7 @@
                      </select>
                   </div>
                   <div class="form-group">
-                     <label>런타임</label>
+                     <label>런타임(분)</label>
                      <input type="number" id="runtime" class="form-control">
                   </div>
                   <div class="form-group">
@@ -78,8 +78,12 @@
                      <label>종료일</label>
                      <input type="date" id="enddate" class="form-control">
                   </div>
+                  <div class="form-group">
+                     <label>예고편 URL</label>
+                     <input type="text" id="video" class="form-control">
+                  </div>
                    <div class="form-group">
-                     <label>파일 첨부</label>
+                     <label>포스터 첨부</label>
                      <input type="file" id="uploadFile" name="uploadFile" class="form-control">
                   </div>
                </form:form>
@@ -100,7 +104,8 @@ $(document).ready(function(){
 				|| $('#grade').val() == null || $('#runtime').val() == ""
 				|| $('#director').val() == "" || $('#actor').val() == ""
 				|| $("#detail").val() == "" || $('#opendate').val() == ""
-				|| $('#enddate').val() == "" || document.getElementById("uploadFile").files[0] == null){
+				|| $('#enddate').val() == "" || $('#video').val() == ""
+				|| document.getElementById("uploadFile").files[0] == null){
 			alert("모두 입력해 주세요.");
 			return;
 		}
@@ -128,7 +133,7 @@ $(document).ready(function(){
 			data: formData,
 			type: 'POST',
 			success: function(result){
-				alert("Uploaded");
+				/* alert("Uploaded"); */
 			}
 		});
 		
@@ -147,6 +152,7 @@ $(document).ready(function(){
 				movDetail: reDetail,
 				movOpendate: $('#opendate').val(),
 				movEnddate: $('#enddate').val(),
+				movVideo: $('#video').val(),
 				movPoster: document.getElementById("uploadFile").files[0].name 
 			};
 		
@@ -158,7 +164,7 @@ $(document).ready(function(){
 			cache: false,
 			data: JSON.stringify(newMovie),
 			success: function(res){
-				alert(res);
+				alert("등록 완료");
 				window.location.href = contextPath + "/movieManager";
 			},
 			error: function(request, status, error){

@@ -32,11 +32,9 @@ public interface MemberService {
 	// 패스워드 변경
 	public int pwUpdate_M(Member member);
 	
-	//패스워드 체크
-	public Member checkIDPW(Member member) throws Exception;
-	//회원 탈퇴
-	public void withdrawal(Member member) throws Exception;
+	// 패스워드 체크
+	public Member checkPw(Member member) throws Exception;
 	
 	//회원정보 수정
-	public void update(Member member);
+	public void update(Member member) throws Exception;
 }

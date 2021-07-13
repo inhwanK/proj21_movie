@@ -6,10 +6,10 @@ insert into admin values (null, 'admin', password(1234));
 
 -- 회원
 select mem_no, mem_email, mem_passwd, mem_birthdate, mem_name, mem_phone from member;
-insert into member values (null, 'test1@test.com', password(1234), '1990-06-01', '테스트1', '010-1234-1234', 0);
-insert into member values (null, 'test2@test.com', password(1234), '2005-06-01', '테스트2', '010-4321-4321', 0);
-insert into member values (null, 'test3@test.com', password(1234), '1999-06-01', '테스트3', '010-1342-4312', 0);
-insert into member values (null, 'passtest950@gmail.com', password(1234), '2021-07-01', '패스워드변경테스트', '010-1111-1111', 0);
+insert into member values (null, 'test1@test.com', password(1234), '1990-06-01', '테스트1', '010-1234-1234');
+insert into member values (null, 'test2@test.com', password(1234), '2005-06-01', '테스트2', '010-4321-4321');
+insert into member values (null, 'test3@test.com', password(1234), '1999-06-01', '테스트3', '010-1342-4312');
+insert into member values (null, 'passtest950@gmail.com', password(1234), '2021-07-01', '패스워드변경테스트', '010-1111-1111');
 
 -- 공지
 -- 파일관련 테스트는 관리자 페이지에서 직접 파일 업로드 해야합니다. 
@@ -32,7 +32,7 @@ insert into notice(not_title,not_detail,not_date) values('테스트 공지','테
 insert into notice(not_title,not_detail,not_date) values('테스트 공지','테스트 공지 내용',now());
 
 -- 영화
-select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster from movie;
+select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster, mov_video from movie;
 
 insert into movie values (
 		null, 
@@ -59,7 +59,8 @@ insert into movie values (
 		'2021-05-26', 
 		'2021-07-26', 
 		0, 
-		'Cruella.jpg'
+		'Cruella.jpg',
+		'https://www.youtube.com/embed/yfSMTFzw-Kw'
 );
 insert into movie values (
 		null, 
@@ -81,7 +82,8 @@ insert into movie values (
 		'2021-06-09', 
 		'2021-08-09', 
 		0, 
-		'Wrath-of-Man.jpg'
+		'Wrath-of-Man.jpg',
+		'https://www.youtube.com/embed/SYiEc5GO0-8'
 );
 insert into movie values (
 		null, 
@@ -100,7 +102,8 @@ insert into movie values (
 		'2021-06-03', 
 		'2021-08-03', 
 		0, 
-		'The-Conjuring3.jpg'
+		'The-Conjuring3.jpg',
+		'https://www.youtube.com/embed/MRY26k7sUkY'
 );
 insert into movie values (
 		null, 
@@ -120,7 +123,8 @@ insert into movie values (
 		'2021-05-19', 
 		'2021-07-19', 
 		0, 
-		'Fast-&-Furious.jpg'
+		'Fast-&-Furious.jpg',
+		'https://www.youtube.com/embed/L9Y-hn2COm0'
 );
 insert into movie values (
 		null, 
@@ -138,7 +142,8 @@ insert into movie values (
 		'2021-06-03', 
 		'2021-08-03', 
 		0, 
-		'The-misfits.jpg'
+		'The-misfits.jpg',
+		'https://www.youtube.com/embed/wR6ywHua5jw'
 );
 insert into movie values (
 		null, 
@@ -160,7 +165,8 @@ insert into movie values (
 		'2021-01-27', 
 		'2021-07-27', 
 		0, 
-		'Demon-Slayer.jpg'
+		'Demon-Slayer.jpg',
+		'https://www.youtube.com/embed/pAPwjvIMxcg'
 );
 insert into movie values (
 		null, 
@@ -178,7 +184,8 @@ insert into movie values (
 		'2021-06-03', 
 		'2021-08-03', 
 		0, 
-		'BanG-Dream!.jpg'
+		'BanG-Dream!.jpg',
+		'https://www.youtube.com/embed/wgP9a-JPGxs'
 );
 insert into movie values (
 		null, 
@@ -199,7 +206,8 @@ insert into movie values (
 		'2021-06-02', 
 		'2021-08-02', 
 		0, 
-		'The-Professor-and-the-Madman.jpg'
+		'The-Professor-and-the-Madman.jpg',
+		'https://www.youtube.com/embed/fXkLVS1eypc'
 );
 insert into movie values (
 		null, 
@@ -221,7 +229,8 @@ insert into movie values (
 		'2021-06-03', 
 		'2021-08-03', 
 		0, 
-		'NOT-OUT.jpg'
+		'NOT-OUT.jpg',
+		'https://www.youtube.com/embed/kymRai9G4rY'
 );
 insert into movie values (
 		null, 
@@ -241,7 +250,8 @@ insert into movie values (
 		'2021-05-12', 
 		'2021-07-17', 
 		0, 
-		'In-the-Name-of-the-Son.jpg'
+		'In-the-Name-of-the-Son.jpg',
+		'https://www.youtube.com/embed/5-lnu7mbGFY'
 );
 insert into movie values (
 		null, 
@@ -265,7 +275,8 @@ insert into movie values (
 		'2021-05-26', 
 		'2021-07-26', 
 		0, 
-		'Pipeline.jpg'
+		'Pipeline.jpg',
+		'https://www.youtube.com/embed/KgsMl1KHmxA'
 );
 insert into movie values (
 		null, 
@@ -289,7 +300,8 @@ insert into movie values (
 		'2021-05-26', 
 		'2021-07-26', 
 		0, 
-		'Voyagers.jpg'
+		'Voyagers.jpg',
+		'https://www.youtube.com/embed/4gxMoIF1f8c'
 );
 
 insert into movie values (
@@ -313,7 +325,8 @@ insert into movie values (
 		'2021-06-17', 
 		'2021-08-17', 
 		0, 
-		'Whispering-Corridors6.jpg'
+		'Whispering-Corridors6.jpg',
+		'https://www.youtube.com/embed/pUzBmQLSeqQ'
 );
 insert into movie values (
 		null, 
@@ -337,7 +350,8 @@ insert into movie values (
 		'2021-06-23', 
 		'2021-08-23', 
 		0, 
-		'Hard-Hit.jpg'
+		'Hard-Hit.jpg',
+		'https://www.youtube.com/embed/WSmgHodVqDk'
 );
 insert into movie values (
 		null, 
@@ -363,7 +377,8 @@ insert into movie values (
 		'2021-06-29', 
 		'2021-08-29', 
 		0, 
-		'Silk-Road.jpg'
+		'Silk-Road.jpg',
+		'https://www.youtube.com/embed/hGoyCt60dNI'
 );
 insert into movie values (
 		null, 
@@ -384,7 +399,8 @@ insert into movie values (
 		'2021-06-10', 
 		'2021-08-10', 
 		0, 
-		'White-on-White.jpg'
+		'White-on-White.jpg',
+		'https://www.youtube.com/embed/tpmDLQVuLqM'
 );
 insert into movie values (
 		null, 
@@ -404,7 +420,8 @@ insert into movie values (
 		'2021-06-10', 
 		'2021-08-10', 
 		0, 
-		'Ash-Is-Purest-White.jpg'
+		'Ash-Is-Purest-White.jpg',
+		'https://www.youtube.com/embed/yGtHna19s-0'
 );
 insert into movie values (
 		null, 
@@ -428,7 +445,8 @@ insert into movie values (
 		'2021-06-10', 
 		'2021-08-10', 
 		0, 
-		'Flashback.jpg'
+		'Flashback.jpg',
+		'https://www.youtube.com/embed/zinc2c1_Nus'
 );
 insert into movie values (
 		null, 
@@ -447,7 +465,8 @@ insert into movie values (
 		'2021-06-16', 
 		'2021-08-16', 
 		0, 
-		'A-Quiet-Place-Part-II.jpg'
+		'A-Quiet-Place-Part-II.jpg',
+		'https://www.youtube.com/embed/clWcJd9ZIbY'
 );
 insert into movie values (
 		null, 
@@ -465,7 +484,8 @@ insert into movie values (
 		'2021-06-17', 
 		'2021-08-17', 
 		0, 
-		'Summer-is-the-coldest-season.jpg'
+		'Summer-is-the-coldest-season.jpg',
+		'https://www.youtube.com/embed/33pNshzcZgo'
 );
 
 -- 상영 예정작 데이터 (오늘 날짜 이후)-------------------------------
@@ -489,7 +509,8 @@ insert into movie values (
 		'2021-07-07', 
 		'2021-09-07', 
 		0, 
-		'Black-Widow.jpg'
+		'Black-Widow.jpg',
+		'https://www.youtube.com/embed/7oNrTvNX7WA'
 );
 
 insert into movie values (
@@ -514,7 +535,8 @@ insert into movie values (
 		'2021-07-08', 
 		'2021-09-08', 
 		0, 
-		'Ruben-Brandt,Collector.jpg'
+		'Ruben-Brandt,Collector.jpg',
+		'https://www.youtube.com/embed/swkLIwKp1Yk'
 );
 
 insert into movie values (
@@ -540,7 +562,8 @@ insert into movie values (
 		'2021-07-14', 
 		'2021-09-14', 
 		0, 
-		'The-Medium.jpg'
+		'The-Medium.jpg',
+		'https://www.youtube.com/embed/Xj7jMVlW2vk'
 );
 
 insert into movie values (
@@ -562,7 +585,8 @@ insert into movie values (
 		'2021-07-14', 
 		'2021-09-14', 
 		0,
-		'I-Fell-in-Love-Like-A-Flower-Bouquet.jpg'
+		'I-Fell-in-Love-Like-A-Flower-Bouquet.jpg',
+		'https://www.youtube.com/embed/dpC79PWrHqM'
 );
 
 insert into movie values (
@@ -586,7 +610,8 @@ insert into movie values (
 		'2021-07-14', 
 		'2021-09-14', 
 		0, 
-		'The-Forever-Purge.jpg'
+		'The-Forever-Purge.jpg',
+		'https://www.youtube.com/embed/7wIC0gF01-Y'
 );
 
 insert into movie values (
@@ -606,7 +631,8 @@ insert into movie values (
 		'2021-07-14', 
 		'2021-09-14', 
 		0, 
-		'Ophelia.jpg'
+		'Ophelia.jpg',
+		'https://www.youtube.com/embed/qbpKLwTBV3A'
 );
 
 insert into movie values (
@@ -626,7 +652,8 @@ insert into movie values (
 		'2021-07-21', 
 		'2021-09-21', 
 		0, 
-		'The-Boss-Baby2.jpg'
+		'The-Boss-Baby2.jpg',
+		'https://www.youtube.com/embed/lxE2JI6MgEE'
 );
 
 insert into movie values (
@@ -646,20 +673,13 @@ insert into movie values (
 		'2021-07-21', 
 		'2021-09-21', 
 		0, 
-		'The-Oxford-Murders.jpg'
+		'The-Oxford-Murders.jpg',
+		'https://www.youtube.com/embed/kiNSTul-cPM'
 );
 
 select mov_no, mov_title, mov_grade, mov_genre, mov_runtime, mov_director, mov_actor, 
 		mov_detail, mov_opendate, mov_enddate, mov_avgstar, mov_poster 
 from movie;
-
--- 영화 사진
-select mp_no, mov_no, mp_pic from movie_pic;
-insert into movie_pic values (null, 1, 'test_pic1');
-insert into movie_pic values (null, 1, 'test_pic2');
-insert into movie_pic values (null, 2, 'test_pic3');
-insert into movie_pic values (null, 3, 'test_pic4');
-insert into movie_pic values (null, 4, 'test_pic5');
 
 -- 한줄평
 select com_no, mov_no, com_user, com_content, com_star, com_date from comment;

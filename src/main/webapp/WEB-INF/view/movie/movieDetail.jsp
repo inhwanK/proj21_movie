@@ -13,7 +13,6 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/movie/star/fontawesome-stars.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/header.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/footer.css">
-	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 	<!-- 이 js가 다른 js보다 낮으면 에러 뜸 -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
@@ -22,89 +21,250 @@
     </script>	
     <script src="${contextPath}/resources/js/star/jquery.barrating.min.js"></script>	
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-	<script>
-		$(function() {
-			/* 주요정보 등 탭 클릭시 */
-			$(".btn li").click(function(e) {
-				e.preventDefault();
-				$(this).addClass("active");
-				$(this).siblings().removeClass("active");
-	
-				$(".tab-cont-wrap > div").removeClass("active");
-				$(".tab-cont-wrap > div").eq($(this).index()).addClass("active");	
-			});
+    <script src="${contextPath}/resources/js/movie/movieDetail.js"></script>
+</head>
+<body>
+	<header>
+		<c:if test = "${member == null }">
+		<a href="${contextPath}/main"> <img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png"></a>
+		</c:if>
+		<c:if test = "${member != null }">
+		<a href="${contextPath}/main"> <img id="header_ci2" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png"></a>
+		</c:if>
+		<div>
+		<!-- 관리자가 로그인하지 않은 상태 -->
+		<c:if test = "${admin == null }">
+			<!-- 로그인 하지 않은 상태 -->
+        	<c:if test = "${member == null }">
+				<a href="${contextPath}/login">로그인</a> <a href="${contextPath}/join">회원가입</a>
+				<a href="${contextPath}/reserve">바로예매</a>
+			</c:if>
 			
-		   /* 취소 버튼 누를시  */
-		   $("#cancel").click(function () {
-		        $("#contxt").val('');	        
-		        $(".br-widget a").removeClass();	               
-		        $(".br-widget a:first-child").addClass("br-selected br-current");	               
-		        $(".br-current-rating").text("1");	         
-		        $(".br-widget").unbind('mouseleave');
-		   });
-		   
-		   /* 한줄평쓰기 버튼 누를시 */
-		   $(".comment-write > span").click(function(){
-				$(".write-content").slideToggle().toggleClass("active");  
-				$("#contxt").focus();
-		     });
-		   
-		   /* 별점 테마 */
-		   $('#example-fontawesome').barrating({ 
-   				theme: 'fontawesome-stars' 
-  			});
-		   
-		    /* 탑버튼 눌렸을때 올라가는 스크립트 */
-			$(document).ready(function() {
-		        $(window).scroll(function() {
-		            if ($(this).scrollTop() > 500) {	// 아래로 스크롤시 (500) 보여줌
-		                $('#top_btn').fadeIn();
-		            } else {
-		                $('#top_btn').fadeOut();
-		            }
-		        });
-		        
-		        $("#top_btn").click(function() {		// 클릭시 상단으로 올려줌
-		            $('html, body').animate({scrollTop : 0}, 400);
-		            return false;
-		        });
-		    });
-		    
-		    /* 엔터키를 입력시 쓰기버튼과 동일 기능 */
-			$("#contxt").on("keyup", function(key) {
-		        if (key.keyCode == 13) {
-		        	$('#writeBtn').click();
-		        	return false;	
-		        }
-		    });
-
-		});
-	</script>
+			<!-- 로그인한 상태 -->
+        	<c:if test="${ member != null }">
+            	<div class="login_success_area">
+            		<span>안녕하세요. ${member.memName} 회원님!</span>
+            		<a href="${contextPath}/main.do">로그아웃</a>
+            		<a href="${contextPath}/reserve">바로예매</a>
+            	</div>
+        	</c:if>
+   		</c:if>
+   		<!-- 관리자가 로그인하지 않은 상태 -->
+		<c:if test = "${admin != null }">
+			<div class="admin_success_area">
+            	<span>안녕하세요. ${admin.admId} 회원님!</span>
+            	<a href="${contextPath}/main.do">로그아웃</a>
+            	<a href="${contextPath}/movieManager">관리페이지</a>
+            </div>
+		</c:if>
+		</div>
+	</header>
+	<nav>
+		<ul>
+			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
+			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
+			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
+			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
+			<li id="mypagebtn"><a href="${contextPath}/mypage" id="to-mypage"><i class="far fa-user"></i></a></li>
+		</ul>
+	</nav>
+	
 	<script type="text/javascript">
 		$(function(){
-			/* ajax - 박스오피스 데이터만 예매버튼 활성화 */
 			var contextPath = "${contextPath}";
-			var no = "${movNo}";
-			
-			$.ajax({
-				type:"GET",
-				url: contextPath + "/api/movies/boxOffice/" + no,
-				contentType: "application/json; charset=utf-8",
-				success: function(json){
-					if (json != '') {
-						var btn = "";
-							btn += "<button type='button' id='reserve' class='btn reserve' title='영화 예매하기'>예매</button>";
-						$(".screen-type").append(btn);
-					}else if (json == ''){
-						$('#comming').show();
-					}
-				},
-				error : function(request, status, error){
-					console.log("error > ");
-				}	
+			$('#to-mypage').on('click', function(e){
+				if(${member == null}) {
+					e.preventDefault();
+					// alert("회원 로그인이 필요합니다.");
+					// window.location.href = contextPath + "/login";
+					Swal.fire({				// Alert창 디자인 sweetalert2
+		                icon : 'error',
+		                title: '회원 로그인이 필요합니다.'
+		            }).then((result) => {
+						if (result.isConfirmed) {
+							window.location.href = contextPath + "/login";
+						}
+		            });
+				}
 			});
 		});
 	</script>
+
+	<section>
+	
+		<!-- 탑위로 올라가는 버튼 -->
+		<div id="top_btn">
+			<img src="${contextPath}/resources/images/movie/icon/top_btn.png">
+		</div>
+		
+		<!-- container -->
+		<div class="container">
+			<!-- contents -->
+			<div class="contents">
+
+				<!-- movie-detail-page -->
+				<div class="movie-detail-page">
+				<div class="movie-bg"></div>
+					<%-- <div class="bg-img" style="background-image: url('${contextPath}/resources/images/movie/movie-detail/bg-Cruella.jpg');"></div> --%>
+					<div class="bg-mask"></div>
+					<!-- movie-detail-cont -->
+					<div class="movie-detail-cont">
+						
+						<!-- info -->
+						<div class="info">
+							<div class="score">
+								<p class="title">평균 별점</p>
+								<div class="number">
+									<p title="평균 별점 " class="before">
+										<em></em>
+										<span>점</span>
+									</p>
+								</div>
+							</div>
+							
+							<!-- DB에 없어서 우선 비활성화 -->
+							
+							<!-- <div class="rate">				
+								<p class="title">예매율</p>
+								<p class="cont">
+									<em>2</em>위 (14.1&#37;)
+								</p>
+							</div>
+	
+							<div class="audience">
+								<p class="title">누적관객수</p>
+								<p class="cont">
+									<em>664,320</em> 명
+								</p>
+							</div> -->
+						</div>
+						<!--// info -->
+						
+						<div class="poster">
+							<div class="wrap">
+							</div>
+						</div>
+						<div class="screen-type">
+							<button type='button' id='comming' class='btn comming' style="display: none;">상영예정</button>
+						</div>
+					</div>
+				<!--// movie-detail-cont -->
+				</div>
+				<!-- movie-detail-page -->
+				
+				<!-- contentData -->
+				<div id="contentData">
+					<!-- inner-wrap -->
+					<div class="inner-wrap">
+					
+						
+	    				<div class="tab-list">
+		    				<ul class="btn">
+		    					<li class="active">
+		    						<a href="#" title="주요정보 탭으로 이동">주요정보</a>
+		    					</li>
+		    					<li>
+		    						<a href="#" title="실관람평 탭으로 이동">실관람평</a>
+		    					</li>
+		    					<li>
+		    						<a href="#" title="예고편 탭으로 이동">예고편</a>
+		    					</li>
+		    				</ul>
+		    			</div>
+		    			
+		    			<!-- tab-cont-wrap -->
+		    			<div class="tab-cont-wrap">
+			    			<!-- movie-info-list -->
+			    			<div class="movie-info-list active">    			
+			    			 </div>
+			    			 <!-- //movie-info-list -->
+			    			 
+			    			 <!-- movie-comment-list -->
+			    			 <div class="movie-comment-list">
+								<h2>영화 한줄평 내역</h2>
+								<div id="comment-count">
+									<b>전체 <span class="font-gblue"></span> 건</b>						
+								</div>
+								<div class="comment-write">
+									<span title="한줄평쓰기">한줄평쓰기</span>
+									<div class="write-content">
+										<form:form>
+											<div class="form-txt">									
+												<table>
+													<tr>
+														<td>
+															<c:if test="${ member != null }">
+																<input type="hidden" id="user" value="${member.memEmail}" readonly/>
+													        </c:if>
+															<div class="title"><h4>한줄평</h4></div>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<input type="text" id="contxt" class="form-control" maxlength="40" placeholder="한줄평을 적어주세요 (40자 이내)" autocomplete="off"/>
+															<input hidden="hidden">	<!-- 엔터키 오류 방지 -->
+															<select id="example-fontawesome" class="com-star" name="rating">
+																<option value="1">1</option>
+																<option value="2">2</option>
+																<option value="3">3</option>
+																<option value="4">4</option>
+																<option value="5">5</option>
+															</select>															
+														</td>
+													</tr>											
+												</table>
+											</div>
+											<input id="writeBtn" type="button" value="쓰기"/> 
+											<input id="cancel" type="button" class="cancelBtn" value="취소"/> 
+										</form:form>
+									</div>
+								</div>
+								
+								<div class="movie-comment">
+								
+									<!-- 한줄평 데이터가 없을 때 -->
+									<div class="comment-list-no-result" id="noDataDiv" style="display: none;">
+										<p>첫번째 <span class="font-gblue">한줄평</span>의 주인공이 되어보세요!</p>
+									</div>
+									
+									<ul>
+									</ul>
+								</div>
+								
+			    			 </div>
+			    			 <!-- // movie-comment-list -->
+			    			 
+			    			 <!-- movie-stil-list -->
+			    			 <div class="movie-stil-list">
+	    			 			<h2 class="title">메인예고편</h2>
+	    			 			<!-- 유투브 영상 퍼올시 공유 -> 퍼가기버튼을 눌려서 src안에 있는 링크를 복사하여야 함 -->
+	    			 			<div class="slide-video">
+	    			 			</div>
+			    			 </div>
+			    			 <!-- // movie-stil-list -->
+			    			 
+		    			 </div>
+		    			 <!-- // tab-cont-wrap -->
+		    		</div>
+		    		<!-- // inner-wrap -->					
+				</div>
+				<!-- // contentData -->
+			</div>
+			<!-- // contents -->
+		</div>
+		<!-- // container -->
+	</section>
+
+	<footer>
+		<div id="content">
+			<img id="footer_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png">
+			<div id="textarea">
+				<p>COPYRIGHT © BoxMovie, Inc. All rights reserved</p>
+				<p>대구광역시 서구 서대구로 7길2 (내당동 245-4번지 2층) ARS 053-555-1333</p>
+			</div>
+		</div>
+	</footer>
+
 	<script>
 		$(function(){
 			function getFormatDate(date){
@@ -132,6 +292,7 @@
 						var title = "";
 						var avgStar = "";
 						var poster = "";
+						var video = "";
 						var sCont = "";
 						
 							/* 영화 뒷 배경 */
@@ -173,11 +334,16 @@
 							sCont += "<p>출연진&nbsp;: " + json.movActor + "</p>";
 							sCont += "</div>";
 							
+							/* 영화 예고편 */
+							video += "<iframe width='800' height='450' src='" + json.movVideo + "' allowfullscreen>";
+							video += "</iframe>";
+							
 						$(".movie-detail-page .movie-bg").append(bg);
 						$(".number em").append(avgStar);
 						$(".movie-detail-cont").append(title);
 						$(".poster .wrap").append(poster);
 						$(".movie-info-list").append(sCont);
+						$(".slide-video").append(video);
 						$('#movie-grade i:contains("0세이상")').text("전체");
 						$('#movie-grade i:contains("19세이상")').parent().text("청소년관람불가");
 						
@@ -202,8 +368,30 @@
 					var cinType = "";
 						cinType += "상영타입 : " + json.cinType + "(자막)";
 					$(".movie-info .p-type").append(cinType);
-				});
+				});			
 			}
+			
+			/* ajax - 박스오피스 데이터만 예매버튼 활성화 */
+			var contextPath = "${contextPath}";
+			var no = "${movNo}";
+			
+			$.ajax({
+				type:"GET",
+				url: contextPath + "/api/movies/boxOffice/" + no,
+				contentType: "application/json; charset=utf-8",
+				success: function(json){
+					if (json != '') {
+						var btn = "";
+							btn += "<button type='button' id='reserve' class='btn reserve' title='영화 예매하기'>예매</button>";
+						$(".screen-type").append(btn);
+					}else if (json == ''){
+						$('#comming').show();
+					}
+				},
+				error : function(request, status, error){
+					console.log("error > ");
+				}	
+			});
 			/* // 주요정보 탭 */
 			
 			/* 실관람평  탭 */		
@@ -255,6 +443,7 @@
 								sCont += "<h5>" + json[i].comDate + "</h5>";
 								sCont += "</li>";
 							}
+							$('#noDataDiv').hide();
 							$("#comment-count .font-gblue").append(size);
 							$(".movie-comment ul").append(sCont);
 							
@@ -370,6 +559,7 @@
 												$(".movie-detail-cont > .title").remove();
 												$(".poster .wrap").empty();
 												$(".movie-info-list").empty();
+												$(".slide-video").empty();
 												reloadMovie();
 												
 												$("#comment-count .font-gblue").empty();
@@ -394,48 +584,6 @@
 					} else{    
 						return false;
 				 	}
-				});
-				
-			});
-			
-			/* 수정 버튼 누를시 팝업 */
-			$(document).ready(function(){
-				$(this).on('click', '[id=modify]', function(){
-					var pa = $(this).parent().parent();
-					var ch = pa.children().children();
-					var comNo = ch.eq(3).text();
-				    
-				Swal.fire({ 		// Alert창 디자인 sweetalert2
-					title			  : '수정하시겠습니까?', 
-					icon			  : 'question', 
-					showCancelButton  : true, 
-					confirmButtonColor: '#3085d6', 
-					cancelButtonColor : '#d33', 
-					confirmButtonText : '수정', 
-					cancelButtonText  : '취소' 
-					}).then((result) => { 
-						if (result.isConfirmed) {
-							/* 팝업 중앙에 띄우기 */
-						    function PopupCenter(url, title, w, h) { 
-						        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;  
-						        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;  
-						                  
-						        width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;  
-						        height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;  
-						                  
-						        var left = ((width / 2) - (w / 2)) + dualScreenLeft;  
-						        var top = ((height / 2) - (h / 2)) + dualScreenTop;  
-						        var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);  
-						      
-						        if (window.focus) {  
-						            newWindow.focus();  
-						        }  
-						    } 				    
-						    PopupCenter(contextPath + "/updateComment?comNo=" + comNo,'popup','700','450'); 
-						} else{
-							return false;
-					 	}
-					});
 				});
 			});
 			
@@ -472,6 +620,7 @@
 											$(".movie-detail-cont > .title").remove();
 											$(".poster .wrap").empty();
 											$(".movie-info-list").empty();
+											$(".slide-video").empty();
 											reloadMovie();
 											
 											$("#comment-count .font-gblue").empty();
@@ -493,7 +642,7 @@
 			
 			// 예매버튼 클릭시 영화 번호를 reserve 페이지에 전달
 			$(document).on('click', '[id=reserve]', function(e){
-				var movNo = ${movNo};
+				var movNo = "${movNo}";
 				window.location.href = contextPath + "/reserve?no=" + movNo;
 			});
 			
@@ -548,230 +697,5 @@
 			});
 		});
 	</script>
-</head>
-<body>
-	<header>
-		<c:if test = "${member == null }">
-		<a href="${contextPath}/main"> <img id="header_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png"></a>
-		</c:if>
-		<c:if test = "${member != null }">
-		<a href="${contextPath}/main"> <img id="header_ci2" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png"></a>
-		</c:if>
-		<div>
-		<!-- 관리자가 로그인하지 않은 상태 -->
-		<c:if test = "${admin == null }">
-			<!-- 로그인 하지 않은 상태 -->
-        	<c:if test = "${member == null }">
-				<a href="${contextPath}/login">로그인</a> <a href="${contextPath}/join">회원가입</a>
-				<a href="${contextPath}/reserve">바로예매</a>
-			</c:if>
-			
-			<!-- 로그인한 상태 -->
-        	<c:if test="${ member != null }">
-            	<div class="login_success_area">
-            		<span>안녕하세요. ${member.memName} 회원님!</span>
-            		<a href="${contextPath}/main.do">로그아웃</a>
-            		<a href="${contextPath}/reserve">바로예매</a>
-            	</div>
-        	</c:if>
-   		</c:if>
-   		<!-- 관리자가 로그인하지 않은 상태 -->
-		<c:if test = "${admin != null }">
-			<div class="admin_success_area">
-            	<span>안녕하세요. ${admin.admId} 회원님!</span>
-            	<a href="${contextPath}/main.do">로그아웃</a>
-            	<a href="${contextPath}/movieManager">관리페이지</a>
-            </div>
-		</c:if>
-		</div>
-	</header>
-	<nav>
-		<ul>
-			<li class="nav"><a href="${contextPath}/movielist">영화</a></li>
-			<li class="nav"><a href="${contextPath}/reserve">예매</a></li>
-			<li class="nav"><a href="${contextPath}/theaterlist">극장</a></li>
-			<li class="nav"><a href="${contextPath}/noticelist">고객센터</a></li>
-			<li id="mypagebtn"><a href="${contextPath}/mypage" id="to-mypage"><i class="far fa-user"></i></a></li>
-		</ul>
-	</nav>
-	
-	<script type="text/javascript">
-		$(function(){
-			var contextPath = "${contextPath}";
-			$('#to-mypage').on('click', function(e){
-				if(${member == null}) {
-					e.preventDefault();
-					alert("회원 로그인이 필요합니다.");
-					window.location.href = contextPath + "/login";
-				}
-			});
-		});
-	</script>
-
-	<section>
-	
-		<!-- 탑위로 올라가는 버튼 -->
-		<div id="top_btn">
-			<img src="${contextPath}/resources/images/movie/icon/top_btn.png">
-		</div>
-		
-		<!-- container -->
-		<div class="container">
-			<!-- contents -->
-			<div class="contents">
-
-				<!-- movie-detail-page -->
-				<div class="movie-detail-page">
-				<div class="movie-bg"></div>
-					<%-- <div class="bg-img" style="background-image: url('${contextPath}/resources/images/movie/movie-detail/bg-Cruella.jpg');"></div> --%>
-					<div class="bg-mask"></div>
-					<!-- movie-detail-cont -->
-					<div class="movie-detail-cont">
-						
-						<!-- info -->
-						<div class="info">
-							<div class="score">
-								<p class="title">평균 별점</p>
-								<div class="number">
-									<p title="평균 별점 " class="before">
-										<em></em>
-										<span>점</span>
-									</p>
-								</div>
-							</div>
-							
-							<!-- DB에 없어서 우선 비활성화 -->
-							
-							<!-- <div class="rate">				
-								<p class="title">예매율</p>
-								<p class="cont">
-									<em>2</em>위 (14.1&#37;)
-								</p>
-							</div>
-	
-							<div class="audience">
-								<p class="title">누적관객수</p>
-								<p class="cont">
-									<em>664,320</em> 명
-								</p>
-							</div> -->
-						</div>
-						<!--// info -->
-						
-						<div class="poster">
-							<div class="wrap">
-							</div>
-						</div>
-						<div class="screen-type">
-							<button type='button' id='comming' class='btn comming' style="display: none;">상영예정</button>
-						</div>
-					</div>
-				<!--// movie-detail-cont -->
-				</div>
-				<!-- movie-detail-page -->
-				
-				<!-- contentData -->
-				<div id="contentData">
-					<!-- inner-wrap -->
-					<div class="inner-wrap">
-					
-						
-	    				<div class="tab-list">
-		    				<ul class="btn">
-		    					<li class="active">
-		    						<a href="#" title="주요정보 탭으로 이동">주요정보</a>
-		    					</li>
-		    					<li>
-		    						<a href="#" title="실관람평 탭으로 이동">실관람평</a>
-		    					</li>
-		    					<li>
-		    						<a href="#" title="예고편/스틸컷 탭으로 이동">예고편/스틸컷</a>
-		    					</li>
-		    				</ul>
-		    			</div>
-		    			
-		    			<!-- tab-cont-wrap -->
-		    			<div class="tab-cont-wrap">
-			    			<!-- movie-info-list -->
-			    			<div class="movie-info-list active">    			
-			    			 </div>
-			    			 <!-- //movie-info-list -->
-			    			 
-			    			 <!-- movie-comment-list -->
-			    			 <div class="movie-comment-list">
-								<h2>영화 한줄평 내역</h2>
-								<div id="comment-count">
-									<b>전체 <span class="font-gblue"></span> 건</b>						
-								</div>
-								<div class="comment-write">
-									<span title="한줄평쓰기">한줄평쓰기</span>
-									<div class="write-content">
-										<form:form>
-											<div class="form-txt">									
-												<table>
-													<tr>
-														<td>
-															<c:if test="${ member != null }">
-																<input type="hidden" id="user" value="${member.memEmail}" readonly/>
-													        </c:if>
-															<div class="title"><h4>한줄평</h4></div>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<input type="text" id="contxt" class="form-control" maxlength="40" placeholder="한줄평을 적어주세요 (40자 이내)" autocomplete="off"/>
-															<input hidden="hidden">	<!-- 엔터키 오류 방지 -->
-															<select id="example-fontawesome" class="com-star" name="rating">
-																<option value="1">1</option>
-																<option value="2">2</option>
-																<option value="3">3</option>
-																<option value="4">4</option>
-																<option value="5">5</option>
-															</select>															
-														</td>
-													</tr>											
-												</table>
-											</div>
-											<input id="writeBtn" type="button" value="쓰기"/> 
-											<input id="cancel" type="button" class="cancelBtn" value="취소"/> 
-										</form:form>
-									</div>
-								</div>
-								
-								<div class="movie-comment">
-								
-									<!-- 한줄평 데이터가 없을 때 -->
-									<div class="comment-list-no-result" id="noDataDiv" style="display: none;">
-										<p>첫번째 <span class="font-gblue">한줄평</span>의 주인공이 되어보세요!</p>
-									</div>
-									
-									<ul>
-									</ul>
-								</div>
-								
-			    			 </div>
-			    			 <!-- // movie-comment-list -->
-			    			 
-		    			 </div>
-		    			 <!-- // tab-cont-wrap -->
-		    		</div>
-		    		<!-- // inner-wrap -->					
-				</div>
-				<!-- // contentData -->
-			</div>
-			<!-- // contents -->
-		</div>
-		<!-- // container -->
-	</section>
-
-	<footer>
-		<div id="content">
-			<img id="footer_ci" alt="브랜드 로고" src="${contextPath}/resources/images/ci.png">
-			<div id="textarea">
-				<p>COPYRIGHT © BoxMovie, Inc. All rights reserved</p>
-				<p>대구광역시 서구 서대구로 7길2 (내당동 245-4번지 2층) ARS 053-555-1333</p>
-			</div>
-		</div>
-	</footer>
 </body>
 </html>

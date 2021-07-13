@@ -56,8 +56,7 @@ CREATE TABLE proj21_movie.member (
 	mem_passwd    CHAR(41)     NOT NULL COMMENT '비밀번호', -- 비밀번호
 	mem_birthdate DATE         NOT NULL COMMENT '생년월일', -- 생년월일
 	mem_name      VARCHAR(100) NOT NULL COMMENT '이름', -- 이름
-	mem_phone     VARCHAR(13)  NOT NULL COMMENT '연락처', -- 연락처
-	mem_Outcheck  BOOLEAN      default 0 NOT NULL COMMENT '가입여부' -- 가입여부
+	mem_phone     VARCHAR(13)  NOT NULL COMMENT '연락처' -- 연락처
 )
 COMMENT '회원';
 
@@ -102,7 +101,8 @@ CREATE TABLE proj21_movie.movie (
 	mov_opendate DATE          NULL     COMMENT '개봉일', -- 개봉일
 	mov_enddate  DATE          NULL     COMMENT '종료일', -- 종료일
 	mov_avgstar  DOUBLE        NULL     COMMENT '평균 별점', -- 평균 별점
-	mov_poster   VARCHAR(100)  NULL     COMMENT '포스터' -- 포스터
+	mov_poster   VARCHAR(100)  NULL     COMMENT '포스터', -- 포스터
+	mov_video    VARCHAR(100)  NULL     COMMENT '동영상' -- 동영상
 )
 COMMENT '영화';
 
@@ -379,7 +379,8 @@ ALTER TABLE proj21_movie.showinfo
 		)
 		REFERENCES proj21_movie.movie ( -- 영화
 			mov_no -- 영화번호
-		);
+		)
+		ON DELETE CASCADE;
 
 -- 상영정보
 ALTER TABLE proj21_movie.showinfo
@@ -432,7 +433,8 @@ ALTER TABLE proj21_movie.reservation
 		)
 		REFERENCES proj21_movie.member ( -- 회원
 			mem_no -- 회원번호
-		);
+		)
+		ON DELETE CASCADE;
 
 -- 좌석
 ALTER TABLE proj21_movie.seat

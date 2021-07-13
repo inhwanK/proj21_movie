@@ -355,169 +355,6 @@ a.button.purple:active, a.button.purple:focus, a.button.purple:hover{
 	background-position: 0 0;
 	background-repeat: no-repeat
 }
-
-/* theater-detail-page */
-.theater-detail-page {
-	position: relative;
-	z-index: 1;
-	margin: 0 auto;
-}
-
-.thtName .theater-name {
-	overflow: hidden;
-	margin: 40px 0;
-	font-size: 3.0666em;
-	text-shadow: 2px 2px 10px rgba(0, 0, 0, .7)
-}
-
-.theater-detail-page .theater-all .btn-util .btn {
-	display: inline-block;
-	min-width: 100px;
-	height: 36px;
-	line-height: 34px;
-	margin: 0 6px 0 0;
-	padding: 0 10px;
-	font-size: .9333em;
-	color: #fff;
-	text-decoration: none;
-	text-align: center;
-	border: 1px solid #706f72;
-	border-radius: 4px;
-}
-
-.theater-detail-page .theater-all .btn-util .btn:hover {
-	color: #222;
-	background-color: #fff
-}
-
-.theater-info {
-	text-align: left;
-	padding: 0;
-	border-bottom: 1px solid #ebebeb;
-}
-
-.theater-info p {
-	margin: 0;
-	padding: 0;
-}
-
-.theater-info .big-title {
-	padding: 0 0 20px 0;
-	font-size: 1.8666em;
-}
-
-.theater-facility {
-	overflow: hidden;
-	padding: 2px 0 0 0;
-}
-
-.theater-facility p {
-	float: left;
-	width: 111px;
-	margin: 0 30px 30px 0;
-	padding: 0;
-	text-align: center
-}
-
-.theater-facility p .iconset {
-	margin-bottom: 10px
-}
-
-.facility-theater {
-	width: 111px;
-	height: 111px;
-	background-image:
-		url(../../images/theater/icon/facility-theater.png)
-}
-
-.facility-disabled {
-	width: 111px;
-	height: 111px;
-	background-image:
-		url(../../images/theater/icon/facility-disabled.png)
-}
-
-.parking-info {
-	padding: 0 0 30px 0;
-	border: 1px solid #d8d9db;
-	border-radius: 10px;
-	margin-top:20px;
-	margin-bottom: 20px;
-}
-
-.parking-info p {
-	padding: 0;
-	margin: 0
-}
-
-.parking-section {
-	min-height: 85px;
-	padding: 30px 0 0 0;
-	position: relative
-}
-
-.parking-info .parking-section .icon-box {
-	position: absolute;
-	top: 30px;
-	left: 0;
-	width: 150px;
-	text-align: center
-}
-
-.ico-parking {
-	width: 67px;
-	height: 57px;
-	background-image:
-		url(../../images/theater/icon/ico-parking.png)
-}
-
-.ico-confirm {
-	width: 70px;
-	height: 60px;
-	background-image:
-		url(../../images/theater/icon/ico-confirm.png)
-}
-
-.ico-cash {
-	width: 70px;
-	height: 68px;
-	background-image:
-		url(../../images/theater/icon/ico-cash.png)
-}
-
-.parking-info .parking-section .info {
-	padding-left: 150px
-}
-
-.parking-info .parking-section .info .title {
-	margin: 0;
-	padding: 0 0 10px 0;
-	text-align: left;
-	
-}
-
-.icon-box {
-	position: absolute;
-	top: 30px;
-	left: 0;
-	width: 150px;
-	text-align: center
-}
-
-.ico-bus {
-	width: 67px;
-	height: 70px;
-	background-image:
-		url(../../images/theater/icon/ico-bus.png);
-}
-
-.ico-metro {
-	width: 58px;
-	height: 70px;
-	background-image:
-		url(../../images/theater/icon/ico-metro.png)
-}
-
 /* // 극장 정보 CSS */
 
 
@@ -603,6 +440,128 @@ a.button.purple:active, a.button.purple:focus, a.button.purple:hover{
 }
 /* // time-schedule */
 
+/* 극장별 선택 */
+
+/* choice-area */
+.choice-area {
+	overflow: hidden;
+	position: relative;
+	width: 60%;
+	height: 150px;
+	margin: 0 0 60px 170px;
+	border: 3px solid #686571;
+	border-radius: 10px;
+	padding: 0
+}
+
+/* left-area */
+.left-area {
+	float: left;
+	width: 145px;
+	height: 100%;
+	margin: 0 40px 0 0;
+}
+
+.left-area ul li {
+	text-align: center;
+	width: 100%;
+	height: 150px;
+	line-height: 98px;
+	border-right: 2px solid #efefef;
+	background-color: #f2f4f5;
+}
+
+.left-area ul li a {
+	display: block;
+	color: #444;
+	padding: 20px;
+	font-size: 1.2em;
+	font-weight: 400;
+	text-decoration: none
+}
+
+.left-area ul li.active a {
+	color: #351f66
+}
+
+.left-area ul li.active a .ico-tab-theater{
+	width: 35px;
+	height: 30px;
+	background-image:
+		url(https://img.megabox.co.kr/static/pc/images/common/ico/ico-tab-theater-on.png)
+}
+
+/* theater-choice */
+.theater-choice {
+    width: 100%;
+    height: 100%;
+    padding: 0 40px;
+}
+
+/* tab-list-choice */
+.tab-list-choice {
+	width: 80%;
+	margin: 0 0 0 145px;
+	height: 55px;
+	border-bottom: 1px solid #d8d9db
+}
+
+.tab-list-choice>ul {
+	padding-top: 23px
+}
+
+.tab-list-choice>ul>li {
+	float: left;
+}
+
+.tab-list-choice>ul>li>a {
+	font-size: .9333em;
+	margin-right: 15px;
+	text-decoration: none;
+	color: #555;
+	border-bottom: 2px solid #fff;
+	padding-bottom: 8px;
+	letter-spacing: -1px
+}
+
+.tab-list-choice>ul>li>a.active, .tab-list-choice>ul>li>a:hover{
+	color: #555;
+	border-bottom: 2px solid #555;
+	font-weight: 600;
+}
+
+/* list-section */
+.list-section {
+	padding: 20px 0;
+}
+
+.list li {
+	float: left;
+	width: 25%;
+}
+
+.list li .btn {
+	width: 100%;
+	height: 27px;
+	font-size: 0.9em;
+	padding: 0 28px 0 10px;
+	color: #444;
+	border: 0;
+	text-align: left;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.list li .btn:hover{
+	font-weight: 400;
+	text-decoration: underline
+}
+
+.list li .btn.active{
+	color: #fff;
+	font-weight: 400;
+	background-color: #555
+}
 
 /* movie-grade */
 .movie-grade {
@@ -793,75 +752,6 @@ a.button.purple:active, a.button.purple:focus, a.button.purple:hover{
 /* // 상영시간표 CSS */
 
 
-/* 관람료 CSS */
-
-/* price-table-box */
-.price-table-box {
-	width: 100%;
-	overflow: hidden;
-}
-
-.price-table-box .price-table-title {
-	position: relative;
-	text-align: left;
-	margin: 0;
-	padding: 0 0 10px 8px;
-	line-height: 1.1
-}
-
-.price-table-box .price-table-title:before {
-	content: '';
-	display: block;
-	position: absolute;
-	top: 5px;
-	left: 0;
-	background-color: #503396;
-	width: 3px;
-	height: 3px
-}
-
-/* data-table */
-.data-table {
-	border-top: 1px solid #555;
-	border-bottom: 1px solid #555;
-}
-
-.data-table td, .data-table th, .data-table tr {
-	padding: 10px 20px
-}
-
-.data-table thead th {
-	border-right: 2px solid #eaeaea;
-	border-bottom: 2px solid #eaeaea;
-	background-color: #f7f8f9
-}
-
-.data-table thead th:last-child {
-	border-right: 0
-}
-
-.data-table tbody th {
-	padding: 0;
-	text-align: center;
-	vertical-align: middle;
-	border-right: 2px solid #eaeaea;
-	border-bottom: 2px solid #eaeaea
-}
-
-.data-table tbody td {
-	border-right: 2px solid #eaeaea;
-	border-bottom: 2px solid #eaeaea
-}
-
-.data-table tbody td:last-child {
-	border-right: 0
-}
-
-.data-table.bg tbody th {
-	padding: 0 15px;
-	background-color: #f7f8f9
-}
-/* 관람료 CSS */
 
 /* top버튼 */
 #top_btn {

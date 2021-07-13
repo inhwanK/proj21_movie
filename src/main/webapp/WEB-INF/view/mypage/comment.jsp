@@ -5,10 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">	<!-- 파비콘 오류 메세지 해결 -->
 	<meta charset="UTF-8">
 	<title>한줄평 내역</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/mypage/comment.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <body>
 	<%@include file="/WEB-INF/view/header.jsp"%>
@@ -55,19 +57,32 @@
 				e.preventDefault();
 				var comNo = Number($(this).prev().val());
 				
-				if (confirm("한줄평을 삭제하시겠습니까?")) {
-					$.ajax({
-						url: contextPath + "/api/comments/" + comNo,
-						type: 'DELETE',
-						success: function(res) {
-							$("#comments").empty();
-							reload();
-						},
-						error: function(request, status, error) {
-							alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				// if (confirm("한줄평을 삭제하시겠습니까?")) {					
+				Swal.fire({ 		// Alert창 디자인 sweetalert2
+					title			  : '한줄평을 삭제하시겠습니까?', 
+					icon			  : 'warning',
+					showCancelButton  : true, 
+					confirmButtonColor: '#3085d6', 
+					cancelButtonColor : '#d33', 
+					confirmButtonText : '삭제', 
+					cancelButtonText  : '취소' 
+					}).then((result) => {
+						if (result.isConfirmed) {
+							$.ajax({
+								url: contextPath + "/api/comments/" + comNo,
+								type: 'DELETE',
+								success: function(res) {
+									$("#comments").empty();
+									reload();
+								},
+								error: function(request, status, error) {
+									alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+								}
+							});
+						} else {
+							return false;
 						}
 					});
-				}
 				
 			});
 			

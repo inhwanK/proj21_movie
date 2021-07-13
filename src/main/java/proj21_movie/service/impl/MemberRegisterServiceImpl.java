@@ -27,7 +27,7 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 			throw new DuplicateMemberException("dup email" + req.getMemEmail());
 		}
 		
-		Member newMember = new Member(req.getMemEmail(), req.getMemPasswd(), req.getMemBirthdate(), req.getMemName(), req.getMemPhone(), false);
+		Member newMember = new Member(req.getMemEmail(), req.getMemPasswd(), req.getMemBirthdate(), req.getMemName(), req.getMemPhone());
 		memberMapper.insertMember(newMember);
 		
 		return newMember.getMemEmail();

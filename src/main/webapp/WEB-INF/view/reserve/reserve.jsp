@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/reserve/reserve.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script type="text/javascript">
 		$(function(){
 			var week = ['일', '월', '화', '수', '목', '금', '토'];
@@ -209,8 +210,6 @@
 					if (dataLength >= 1) {
 						var sCont = "";
 						var cinemaNo = 0;
-						/* sCont += "<label class='type'>2D</label>";
-						sCont += "<br><br>"; */
 						for (i = 0; i < dataLength; i++) {
 							if (json[i].cinNo.cinNo != cinemaNo) {
 								sCont += "<br><br><br>";
@@ -246,18 +245,32 @@
 		// 좌석 선택 버튼 기능
 		$(document).on('click', '[class=btn-seat]', function(e){
 			var shwDate = date(dateIdx);
-			/* alert("shwDate >> " + shwDate + 
-					"\nmovieNo >> " + movieNo + 
-					"\ntheaterNo >> " + theaterNo +
-					"\ntime >> " + time); */
 					
 			if (${member == null}) {
-				alert("로그인이 필요한 서비스입니다.");
+				/* alert("로그인이 필요한 서비스입니다.");
 				window.location.href = contextPath + "/login";
-				return;
+				return; */
+				Swal.fire({				// Alert창 디자인 sweetalert2
+	                icon : 'error',
+	                title: '로그인이 필요한 서비스입니다.'
+	            }).then((result) => {
+					if (result.isConfirmed) { 
+						window.location.href = contextPath + "/login";
+					}
+	            });
+			}else if ($("#time-select").children().hasClass("active")){
+				window.location.href = contextPath + "/seat?no=" + showInfoNo + "#menu-title";
+			} else {
+				// alert("상영시간을 선택해 주세요.");
+				Swal.fire({				// Alert창 디자인 sweetalert2
+	                icon : 'warning',
+	                title: '상영시간을 선택해 주세요.'
+	            }).then((result) => {
+					if (result.isConfirmed) {
+					}
+	            });
 			}
-			
-			window.location.href = contextPath + "/seat?no=" + showInfoNo + "#menu-title";
+					
 		});
 		
 		// 인덱스를 넣으면 해당 인덱스만큼 +된 날짜를 계산하여 "yyyy-MM-dd" 형식으로 리턴해주는 함수 

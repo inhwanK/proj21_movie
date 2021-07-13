@@ -39,35 +39,8 @@ $(function(){
 				alert("패스워드가 일치하지 않습니다.");
 				$('#confmemPasswd').focus();
 				return;
-			}
-        	        	
-<%--             <!-- 회원탈퇴 -->
-	    	var contextPath = "<%=request.getContextPath()%>";
-            $.ajax({
-	            url         : contextPath + "/withdrawal",
-	            type        : "post",
-	            contentType : "application/text; charset=utf8",
-	            datatype    : "json",
-	            cache       : false,
-	            data        : $('#delFrm').serializeArray(),
-	            success     : function(data) {
-    				if(data == 0){
-    					alert("패스워드가 틀렸습니다.");
-    					return;
-    				}else{
-    					var result = confirm('정말 탈퇴 하시겠습니까?');
-    					if(result){
-    						$('#delFrm').submit();
-    					}
-    				}
-    			},
-    			error: function(){
-    				alert("서버 에러.");
-    			}
-        	}); --%>
-            
-            
-   		}); 
+			}        	
+        }); 
 	});
 });
 </script>
@@ -93,7 +66,7 @@ $(function(){
 			</div>
 			
 			<!-- 본문 -->
-			<form action="withdrawal" id="delFrm" method="post">
+			<form action="withdrawalsuccess.set" method="post">
 			<div id="mypage-wrap">
 					<h2>회원탈퇴</h2>
 					<div id="textarea">
@@ -108,7 +81,7 @@ $(function(){
 	 			 		</span>			
  			 		</div>
  			 		<div id="passwordarea">
- 			 			<input type="text" name="memEmail" value="${member.memEmail}">
+ 			 			<input type="hidden" name="memEmail" value="${member.memEmail}"><br>
  			 			<label>비밀번호</label>
  			 			<input type="password" id="memPasswd" name="memPasswd" placeholder="비밀번호를 입력해주세요.">
  			 			<br>
