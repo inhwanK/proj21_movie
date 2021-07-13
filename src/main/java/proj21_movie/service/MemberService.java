@@ -42,6 +42,8 @@ public interface MemberService {
 
 	// 회원탈퇴
 	public boolean withdrawal(Member member, HttpServletResponse response) throws Exception;
-	public boolean checkPw(String memEmail, String memPasswd);
+	
+	// 회원정보 수정
+	public void updatemyinfo(Member member)throws Exception;
 
 }

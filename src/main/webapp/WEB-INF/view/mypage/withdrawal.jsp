@@ -42,12 +42,13 @@ $(function(){
 			}        	
         }); 
 	});
+	
 	<!-- 탈퇴 전 경고문 -->
-    if($("#delform").submit(function(){
-    	if(!confirm("탈퇴하시겠습니까?")) {
+	$('#delete').click(function(){
+    	if(!confirm("정말로 탈퇴하시겠습니까?")) {
     		return false;
     	}
-    })); 
+	});
 }); 
 </script>
 </head>

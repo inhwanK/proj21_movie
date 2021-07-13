@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>패스워드 찾기 - 비밀번호 변경</title>
+	<title>비밀번호 변경</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/login/find_PW.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

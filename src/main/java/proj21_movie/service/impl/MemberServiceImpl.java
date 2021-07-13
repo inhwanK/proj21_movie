@@ -97,12 +97,6 @@ public class MemberServiceImpl implements MemberService {
 
 	// 회원탈퇴
 	@Override
-	public boolean checkPw(String memEmail, String memPasswd) {
-		log.debug("service - checkPw() > " + memEmail);
-		return mapper.checkPw(memEmail, memPasswd);
-	}
-
-	@Override
 	public boolean withdrawal(Member member, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -116,5 +110,12 @@ public class MemberServiceImpl implements MemberService {
 		} else {
 			return true;
 		}
+	}
+
+	// 회원정보 수정
+	@Override
+	public void updatemyinfo(Member member) throws Exception {
+		log.debug("service - updatemyinfo() > " + member);
+		mapper.updatemyinfo(member);
 	}
 }
