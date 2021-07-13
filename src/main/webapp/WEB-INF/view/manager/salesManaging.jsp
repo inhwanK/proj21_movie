@@ -17,92 +17,203 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- 구글 차트  -->
 <script type="text/javascript">
 	
+	// Date 를 빼고 더해서 다시 Date형태로 반환 먼저
+	// 이 Date 계산을 자동화, 데이터로 넣기
+	// 그에 따른 쿼리수행?
+
+	// let 변수로 한번 선언하면 타입이 변하지않음. var 보다는 좀 더 정적임. 
+	// 예를들어, Date 타입에 날짜를 빼는 등 숫자 연산을 해버리면 var 변수는 Date 타입을 정수타입으로 바꿔버림.
+	// let은 그렇지가 않음.
+	// 또한, 함수에 한번 진입했다가 다시 나오면 함수에서 연산된 값이 적용되지 않고,
+	// 본래 선언할 때 타입을 그대로 유지는 것 같음.
+	
+	// date 처리...
+	/* var oneDay = (24 * 60 * 60 * 1000);
+	var currentEndDate = new Date();
+	var currentStartDate = new Date(currentEndDate.getTime() - (oneDay * 365.25));*/
+	
+	
+	
+	google.charts.load('current', {'packages' : [ 'corechart' ]});
+	google.charts.setOnLoadCallback(drawChart);
+
 	var contextPath = "${contextPath}";
 	
-
-    // Visualization API 최신버전으로 corechart package에서 받아오기 ?
-    // 최신 버전으로 뽑아오기 'current' 
-    google.charts.load('current', {'packages':['corechart']});
-
-    // 데이터, 옵션값, div 매칭등의 역할을 하는 콜백함수 설정.
-    google.charts.setOnLoadCallback(drawChart);
-
-    //콜백함수 정의
 	function drawChart() {
+		var salesData = new google.visualization.DataTable();
+		var audienceData = new google.visualization.DataTable();
+		
+		$.ajax({
+			url:contextPath+"/api/salesLatestDate",
+			type:"get",
+			contentType:"application/json; charset=utf-8",
+			dataType:"json",
+			success:function(json){
+				
+				var sum = 0;
+				var avg = 0;
+				
+				salesData.addColumn('string', '날짜');
+				salesData.addColumn('number', '매출');
+				
+				for(i=0;i<json.length;i++){
+					salesData.addRows([
+						[json[i].date.substr(8,9),json[i].data]
+					]);
+					sum += json[i].data;
+				} // end of for
+				avg = sum/(i+1);
 
-    	// Create the data table.
-    	var data = new google.visualization.DataTable();
-        
-        // 컬럼 설정.
-        // data.addColumn('데이터 타입', '컬럼 이름');
-        /* data.addColumn('string', '영화 제목');
-        data.addColumn('number', '예매'); */
-        
-        // 데이터 넣기.
-       	/* data.addRows([
-        	['킬러의 보디가드2', 3],
-        	['분노의 질주:더 얼티메이트', 1],
-        	['랑종', 1],
-        	['블랙위도우', 2],
-        	['크루엘라', 2]
-        ]); */
+				var salesOptions = {
+					title:'지난 7일간 매출',
+					width:800,
+					height:400, 
+					hAxis:{
+					},
+					vAxis:{
+						scaleType:'linear'
+					},
+							
+				};
+				
+				var salesChart = new google.visualization.ColumnChart(document.getElementById('sales_chart_div'));
+				salesChart.draw(salesData, salesOptions);
+				// 매출 차트 끝.
+				
+				
+				
+				var sum = 0;
+				var avg = 0;
+				
+				audienceData.addColumn('string', '날짜');
+				audienceData.addColumn('number', '관람인원');
+				
+				for(i=0;i<json.length;i++){
+					audienceData.addRows([
+						[json[i].date.substr(8,9), json[i].audience ]
+					]);
+					sum += json[i].audience;
+				} // end of for
+				avg = sum/(i+1);
 
-        $.ajax({
-        	url:contextPath+"/api/totalSales",
-        	type:'get',
-        	contentType:"application/json; charset=utf-8",
-        	dataType:'json',
-        	success: function(json){
-        		var i = json;
-        		data.addColumn('string', '날짜');
-        		data.addColumn('number', '매출');
-        		
-        		console.log(i);
-        		data.addRows([
-        			['yyyy-MM-dd',json]
-        		]);
-        		
-        		var options = {
-        	        	'legend':'right',
-        	        	'title':'예매율 테스트',
-        	            'width':1000,
-        	            'height':500
-        		};
-        		
-        		var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_div'));
-                chart.draw(data, options);
-                
-                var chart = new google.visualization.BarChart(document.getElementById('barchart_div'));
-                chart.draw(data, options);
-        	}
-        	
-        });
-        
-        // 옵션 설정. title, title 위치, 그래프 크기 등.
-        /* var options = {
-        	'legend':'right',
-        	'title':'예매율 테스트',
-            'width':1000,
-            'height':500,
-            'is3D':true
-		}; */
+				var audienceOptions = {
+					title:'지난 7일간 관람객 수',
+					width:800,
+					height:400, 
+					hAxis:{
+					},
+					vAxis:{
+						scaleType:'linear'
+					},
+							
+				};
+				
+				var audienceChart = new google.visualization.ColumnChart(document.getElementById('audience_chart_div'));
+				audienceChart.draw(audienceData, audienceOptions);
+			} // end of success
+		});
+		
+		var salesMonth = new google.visualization.DataTable();
+		var audienceMonth = new google.visualization.DataTable();
+		
+		$.ajax({
+			url:contextPath+"/api/salesMonth",
+			type:"get",
+			contentType:"application/json; charset=utf-8",
+			dataType:"json",
+			success:function(json){
+				
+				var sum = 0;
+				var avg = 0;
+				
+				salesMonth.addColumn('string', '날짜');
+				salesMonth.addColumn('number', '관람인원');
+				
+				for(i=0;i<json.length;i++){
+					salesMonth.addRows([
+						[json[i].date.substr(0,7),json[i].data]
+					]);
+					sum += json[i].data;
+				} // end of for
+				avg = sum/(i+1);
 
-        // 차트 그리기. 
-       /*  var chart = new google.visualization.PieChart(document.getElementById('piechart_div'));
-        chart.draw(data, options);
-        
-        var chart = new google.visualization.BarChart(document.getElementById('barchart_div'));
-        chart.draw(data, options); */
-    }
-    </script>
+				var salesOptions = {
+					title:'월별 매출',
+					width:800,
+					height:400, 
+					hAxis:{
+					},
+					vAxis:{
+						scaleType:'linear'
+					},
+							
+				};
+				
+				var salesChart = new google.visualization.ColumnChart(document.getElementById('sales_monthchart_div'));
+				salesChart.draw(salesMonth, salesOptions);
+				// 매출 차트 끝.
+				
+				var sum = 0;
+				var avg = 0;
+				
+				audienceMonth.addColumn('string', '날짜');
+				audienceMonth.addColumn('number', '관람인원');
+				
+				for(i=0;i<json.length;i++){
+					audienceMonth.addRows([
+						[json[i].date.substr(0,7), json[i].audience ]
+					]);
+					sum += json[i].audience;
+				} // end of for
+				avg = sum/(i+1);
+
+				var audienceOptions = {
+					title:'월별 관람객 수',
+					width:800,
+					height:400, 
+					hAxis:{
+					},
+					vAxis:{
+						scaleType:'linear'
+					},
+							
+				};
+				
+				var audienceChart = new google.visualization.ColumnChart(document.getElementById('audience_monthchart_div'));
+				audienceChart.draw(audienceMonth, audienceOptions);
+			} // end of success
+		});
+	}
+</script>
+<style type="text/css">
+#chart_div{
+	display:inline;
+}
+
+#columnchart_div{
+	display:inline;
+}
+
+</style>
 </head>
 <body>
 	<header>
 		<jsp:include page="/WEB-INF/view/manager/sidebar.jsp"></jsp:include>
 	</header>
-	<div id="page-wrapper">
-		<div id="columnchart_div"></div>
-		<div id="barchart_div"></div>
+	<div id="page-content-wrapper">
+		<div id="page-wrapper">
+			<h1 class="text-center">매출 조회</h1>
+			<table>
+				<tr>
+					<td style="width:50%"><div id="sales_chart_div"></div></td>
+					<td style="width:50%"><div id="audience_chart_div"></div></td>
+				</tr>
+				<tr>
+					<td style="width:50%"><div id="sales_monthchart_div"></div></td>
+					<td style="width:50%"><div id="audience_monthchart_div"></div></td>
+				</tr>
+			</table>
+		</div>
 	</div>
 </body>
 </html>

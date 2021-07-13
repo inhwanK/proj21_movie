@@ -2,9 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="proj21_movie.mapper.StatisticsMapper">
 	
+	<resultMap type="Statistics" id="StatisticsList">
+		<result column="날짜" property="date"></result>
+		<result column="매출" property="data"></result>
+		<result column="관람인원" property="audience"></result>
+	</resultMap>
+		
 	<select id="selectTotalSales" resultType="int">
 		select sum(res_price)
 		from reservation;
 	</select>
+	
+	
+	<select id="selectSalesByLatestDate" resultMap="StatisticsList">
+		select Date.date as 날짜, 매출, 관람인원
+		from (select curdate() - interval (last_week.week_interval) day as date
+			from (select 0 as week_interval
+				union all select 1 
+				union all select 2 
+				union all select 3 
+				union all select 4 
+				union all select 5 
+				union all select 6) as last_week) as Date left join (select sum(res_price) as 매출,res_adult + res_teen + res_pref as 관람인원,  res_date from reservation group by res_date) as res 
+			on res.res_date like concat(Date.date,'%')
+		order by 날짜 asc;
+	</select>
 
+	<select id="selectSalesByMonth" resultMap="StatisticsList">
+		select res_date as 날짜, sum(res_price) as 매출, sum(res_adult + res_teen + res_pref) as 관람인원
+			from reservation
+			group by month(res_date)
+		order by res_date asc;
+	</select>
 </mapper>
