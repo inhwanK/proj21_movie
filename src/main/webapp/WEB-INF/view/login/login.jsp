@@ -21,7 +21,6 @@ $(function(){
         $("#login_form").submit();
     });
     
-    
     <!-- 아이디 저장 -->
     $(document).ready(function(){
         // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.

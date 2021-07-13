@@ -20,24 +20,18 @@ public class MyinfoController {
 
 	// 페이지 연결
 	@RequestMapping("/myinfo")
-	public String myInfo() {
+	public String myinfo() {
 		return "mypage/myinfo";
 	}
 
 	// 회원정보 수정 구현
-	@RequestMapping(value = "myinfo", method = RequestMethod.GET)
-	public String registerUpdateView() throws Exception {
-
-		return "mypage/myinfo";
-	}
-
-	@RequestMapping(value = "myinfo.do", method = RequestMethod.POST)
-	public String registerUpdate(Member member, HttpSession session) throws Exception {
-
+	@RequestMapping(value = "/myinfo", method = RequestMethod.POST)
+	public String updatemyinfo(Member member, HttpSession session, RedirectAttributes rttr) throws Exception{
+	
+		session.setAttribute("member", member);
 		service.updatemyinfo(member);
-		session.invalidate();
-
-		return "mypage/myinfo.do";
+		
+		return "mypage/myinfo";
 	}
 
 }

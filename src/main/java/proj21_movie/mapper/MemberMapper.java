@@ -33,5 +33,5 @@ public interface MemberMapper {
 	public int withdrawal(Member member) throws Exception;
 	
 	// 회원정보 수정
-	public void updatemyinfo(Member member)throws Exception;
+	public int updatemyinfo(Member member) throws Exception;
 }
