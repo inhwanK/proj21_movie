@@ -14,82 +14,129 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script type="text/javascript">
 	$(function(json) {
 		var contextPath = "${contextPath}";
-		$("button#regist").on("click",function() {
-			var conf = confirm("등록하시겠습니까?");
-			if (conf) {
-				var fileName = null;
-
-				// 파일 이름 넣기.
-				if ($("input[name='inqFile']").val() != "") {
-					var location = $("input[name='inqFile']").val().split('\\');
-					fileName = location[location.length - 1];
-					console.log(file);
+		var member = "${member.memEmail}";
+		console.log(member);
+		if(member == ""){
+			console.log("안됨")
+			//if(confirm("로그인이 필요한 서비스입니다.\n로그인창으로 이동하시겠습니까?")){
+			Swal.fire({ 		// Alert창 디자인 sweetalert2
+				title			  : '로그인이 필요한 서비스입니다.\n로그인창으로 이동하시겠습니까?', 
+				icon			  : 'question',
+				showCancelButton  : true, 
+				confirmButtonColor: '#3085d6', 
+				cancelButtonColor : '#d33', 
+				confirmButtonText : '예', 
+				cancelButtonText  : '아니오' 
+				}).then((result) => {
+				if (result.isConfirmed) {
+					window.location.href = contextPath + "/login";				
+				}else{
+					window.location.href = contextPath + "/noticelist";
 				}
-
-				console.log(fileName);
-
-				var inquiry = {
-					inqUser : $("input[name=inqUser]").val(),
-					inqTitle : $("input[name=inqTitle]").val(),
-					inqDetail : $("textarea[name=inqDetail]").val(),
-					inqFile : fileName	
-				};
-
-				// 필수항목 기입하지 않았을 때, 처리
-				if (inquiry.inqUser == "") {
-					alert("아이디을 입력하세요.");
-				} else if (inquiry.inqTitle == "") {
-					alert("제목을 입력하세요.")
-				} else if (inquiry.inqDetail == "") {
-					alert("문의 내용을 입력하세요.")
-				} else {
+			});
+		}
+		
+		$("button#regist").on("click",function() {
+			//var conf = confirm("등록하시겠습니까?");
+			//if (conf) {
+			Swal.fire({ 		// Alert창 디자인 sweetalert2
+				title			  : '등록하시겠습니까?', 
+				icon			  : 'question',
+				showCancelButton  : true, 
+				confirmButtonColor: '#3085d6', 
+				cancelButtonColor : '#d33', 
+				confirmButtonText : '예', 
+				cancelButtonText  : '아니오' 
+				}).then((result) => {
+				if (result.isConfirmed) {
 					
-					if (fileName != "") {
-						var formData = new FormData();
-						var inputFile = $("input[name='inqFile']");
-						var files = inputFile[0].files;
-
-						console.log(files);
-
-						for (var i = 0; i < files.length; i++) {
-							formData.append("uploadFile", files[i]);
-						}
-
-						$.ajax({
-							url : contextPath + "/api/inquiryFileUpload",
-							processData : false,
-							contentType : false,
-							data : formData,
-							type : "POST",
-							success : function(result) {
-							console.log("Uploaded");
-							}	
-						}); // end of ajax
-					} //end of if
-					
-					$.ajax({
-						url : contextPath + "/api/inquiry",
-						type : "post",
-						contentType : "application/json; charset=utf-8",
-						dataType : "json",
-						data : JSON.stringify(inquiry),
-						success : function(res) {
-							console.log(res);
-							window.location.href = contextPath + "/inquirySuccess";
-						},
-						error : function() {
-							alert("뭔가 잘못된게 분명합니다.");
-							alert("error > "+ JSON.stringify(data))
-						}
-					});
-				} //end of else
+					var fileName = null;
 	
-				
+					// 파일 이름 넣기.
+					if ($("input[name='inqFile']").val() != "") {
+						var location = $("input[name='inqFile']").val().split('\\');
+						fileName = location[location.length - 1];
+						console.log(file);
+					}
+	
+					console.log(fileName);
+	
+					var inquiry = {
+						inqUser : $("input[name=inqUser]").val(),
+						inqTitle : $("input[name=inqTitle]").val(),
+						inqDetail : $("textarea[name=inqDetail]").val(),
+						inqFile : fileName	
+					};
+	
+					// 필수항목 기입하지 않았을 때, 처리
+					if (inquiry.inqUser == "") {
+						// alert("아이디을 입력하세요.");
+						Swal.fire({				// Alert창 디자인 sweetalert2
+			                icon : 'error',
+			                title: '아이디을 입력하세요.'
+			            });
+					} else if (inquiry.inqTitle == "") {
+						// alert("제목을 입력하세요.")
+						Swal.fire({				// Alert창 디자인 sweetalert2
+			                icon : 'warning',
+			                title: '제목을 입력하세요.'
+			            });
+					} else if (inquiry.inqDetail == "") {
+						//alert("문의 내용을 입력하세요.")
+						Swal.fire({				// Alert창 디자인 sweetalert2
+			                icon : 'warning',
+			                title: '문의 내용을 입력하세요.'
+			            });
+					} else {
+						
+						if (fileName != "") {
+							var formData = new FormData();
+							var inputFile = $("input[name='inqFile']");
+							var files = inputFile[0].files;
+	
+							console.log(files);
+	
+							for (var i = 0; i < files.length; i++) {
+								formData.append("uploadFile", files[i]);
+							}
+	
+							$.ajax({
+								url : contextPath + "/api/inquiryFileUpload",
+								processData : false,
+								contentType : false,
+								data : formData,
+								type : "POST",
+								success : function(result) {
+								console.log("Uploaded");
+								}	
+							}); // end of ajax
+						} //end of if
+						
+						$.ajax({
+							url : contextPath + "/api/inquiry",
+							type : "post",
+							contentType : "application/json; charset=utf-8",
+							dataType : "json",
+							data : JSON.stringify(inquiry),
+							success : function(res) {
+								console.log(res);
+								window.location.href = contextPath + "/inquirySuccess";
+							},
+							error : function() {
+								alert("뭔가 잘못된게 분명합니다.");
+								alert("error > "+ JSON.stringify(data))
+							}
+						});
+					} //end of else
 
-			} //end of if(conf)
+				} else{
+					return false;
+				}
+			});
 		}); // end of event
 
 	});
@@ -132,7 +179,9 @@
 								<em	class="font-orange">*</em>
 							</th>
 							<td>
-								<input type="text" id="name" name="inqUser"	class="input-text w150px" value="${member.memEmail}"readonly="readonly">
+
+					            	<input type="text" id="name" name="inqUser"	class="input-text w150px" value="${member.memEmail}"readonly="readonly">	
+
 							</td>
 						</tr>
 
