@@ -310,7 +310,7 @@
 							/* 영화 포스터 */
 							poster += "<p class='movie-grade age-" + json.movGrade + "'></p>";	
 							poster += "<img alt='" + json.movTitle + "'src="
-								+ "'${contextPath}/resources/images/movie/box-office/" + json.movPoster + "' allowfullscreen/>";			
+								+ "'${contextPath}/resources/images/movie/box-office/" + json.movPoster + "'/>";			
 							
 							// 주요정보 탭					
 							/* 영화 줄거리 */
@@ -335,7 +335,7 @@
 							sCont += "</div>";
 							
 							/* 영화 예고편 */
-							video += "<iframe width='800' height='450' src='" + json.movVideo + "'>";
+							video += "<iframe width='800' height='450' src='" + json.movVideo + "' allowfullscreen>";
 							video += "</iframe>";
 							
 						$(".movie-detail-page .movie-bg").append(bg);
