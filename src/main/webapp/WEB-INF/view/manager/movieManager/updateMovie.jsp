@@ -147,7 +147,7 @@
                      </select>
                   </div>
                   <div class="form-group">
-                     <label>런타임</label>
+                     <label>런타임(분)</label>
                      <input type="number" id="runtime" class="form-control">
                   </div>
                   <div class="form-group">
