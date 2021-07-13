@@ -31,5 +31,7 @@ public interface MemberMapper {
 	
 	// 회원탈퇴
 	public int withdrawal(Member member) throws Exception;
-	public boolean checkPw(String memEmail, String memPasswd);
+	
+	// 회원정보 수정
+	public void updatemyinfo(Member member)throws Exception;
 }

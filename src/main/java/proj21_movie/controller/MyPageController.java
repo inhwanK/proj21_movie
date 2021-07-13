@@ -26,9 +26,4 @@ public class MyPageController {
 		return "mypage/inquiry";
 	}
 	
-	@RequestMapping("/myinfo")
-	public String myInfo() {
-		return "mypage/myinfo";
-	}
-	
 }

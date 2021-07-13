@@ -78,7 +78,7 @@ $(function(){
 			</div>
 			
 			<!-- 수정페이지 -->
-			<form action="/myinfo/info.set" method="POST" class="content" id="form1">
+			<form action="myinfo.do" method="POST" class="content" id="form1">
 				<div id="myinfo-wrap">
 					<h2>개인정보 수정</h2>
 				
@@ -113,7 +113,7 @@ $(function(){
 							<tr>
 								<th>비밀번호</th>
 								<td>
-									<input type="password" id="memPasswd" required>
+									<input type="password" id="memPasswd" value="${member.memPasswd}" required>
 									<input class="pwchange" type="button" value="비밀번호 변경" /> 
 									<br>※ 개인정보 수정 후 반드시 비밀번호를 다시 입력해 주시기 바랍니다.
 								</td>
