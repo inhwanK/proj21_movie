@@ -271,3 +271,5 @@ insert into showinfo values (null, 1, 3, 1, '2021-07-16', '14:00:00',
 addtime('14:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));
 insert into showinfo values (null, 1, 3, 1, '2021-07-16', '20:00:00', 
 addtime('20:00:00', sec_to_time((select mov_runtime from movie where mov_no = 1) * 60)));
+
+select * from inquiry;
