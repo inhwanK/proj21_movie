@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import proj21_movie.dto.Statistics;
+import proj21_movie.dto.StatisticsCommand;
 
 @Service
 public interface StatisticsService {
@@ -12,4 +13,6 @@ public interface StatisticsService {
 	
 	List<Statistics> showSalesByLatestDate();
 	List<Statistics> showSalesByMonth();
+	
+	List<StatisticsCommand> showAudienceByMovie();
 }

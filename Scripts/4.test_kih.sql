@@ -129,6 +129,8 @@ from showinfo;
 insert into reservation values(null, 3, 1, 60000,20210111,5,0,0);
 insert into reservation values(null, 3, 1, 100000,20210709,5,0,0);
 
+insert into reservation values(null, 7, 2, 50000,now(),3,0,0);
+
 -- 실시간 총 매출.
 select sum(res_price)
 from reservation;
@@ -212,4 +214,53 @@ from (select month(curdate()) - interval (last_month.month_interval) + 1 day as 
 		on res.res_date like concat(Date.date,'%')
 order by 날짜 asc;
 
-select
+show tables;
+select * from movie;
+select * from showinfo;
+select * from reservation;
+
+select * from reservation;
+
+select mov_no
+from showinfo s join (select shw_no from reservation) r on s.shw_no = r.shw_no;
+select *
+  from movie;
+
+select * from showinfo;
+
+sum(res_adult+res_teen+res_pref);
+-- 예매율
+select 
+from movie m join (select mov_no from showinfo s join (select shw_no from reservation) r on s.shw_no = r.shw_no) mn on m.mov_no = s.mov_no;
+
+select * from showinfo;
+select shw_no from reservation;
+
+select shw_no, res_adult
+from (select * from showinfo s join reservation r on s.shw_no = r.shw_no);
+select mov_title
+from movie m join (select * from showinfo s join reservation r on s.shw_no = r.shw_no) res on res.mov_no = m.mov_no;
+
+select m.mov_no, m.mov_title as 영화제목, sum(r.res_adult + r.res_teen + r.res_pref) as 관객수
+from showinfo s join reservation r on s.shw_no = r.shw_no 
+join movie m on s.mov_no = m.mov_no
+group by m.mov_no;
+
+
+select *
+  from movie;
+
+select *,Date.date as 날짜, sum(매출) as 매출, sum(관람인원) as 관람인원
+		from (select curdate() - interval (last_week.week_interval) day as date
+			from (select 0 as week_interval
+				union all select 1 
+				union all select 2 
+				union all select 3 
+				union all select 4 
+				union all select 5 
+				union all select 6) as last_week) as Date left join (select sum(res_price) as 매출,sum(res_adult + res_teen + res_pref) as 관람인원,  res_date from reservation group by res_date) as res 
+			on res.res_date like concat(Date.date,'%')
+			group by 날짜
+			order by 날짜 asc;
+
+

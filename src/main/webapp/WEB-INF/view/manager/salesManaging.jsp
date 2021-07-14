@@ -183,6 +183,16 @@
 				audienceChart.draw(audienceMonth, audienceOptions);
 			} // end of success
 		});
+		
+		$.ajax({
+			url:contextPath+"/api/movieAudience",
+			type:"get",
+			contentType:"application/json; charset=utf-8",
+			dataType:"json",
+			success: function(json){
+				alert("됨.")
+			}
+		})
 	}
 </script>
 <style type="text/css">

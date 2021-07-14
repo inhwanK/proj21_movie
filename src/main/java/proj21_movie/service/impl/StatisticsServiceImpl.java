@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import proj21_movie.dto.Statistics;
+import proj21_movie.dto.StatisticsCommand;
 import proj21_movie.mapper.StatisticsMapper;
 import proj21_movie.service.StatisticsService;
 
@@ -28,6 +29,12 @@ public class StatisticsServiceImpl implements StatisticsService {
 	@Override
 	public List<Statistics> showSalesByMonth() {
 		return mapper.selectSalesByMonth();
+	}
+
+	@Override
+	public List<StatisticsCommand> showAudienceByMovie() {
+		
+		return mapper.selectAudienceByMovie();
 	}
 
 }
