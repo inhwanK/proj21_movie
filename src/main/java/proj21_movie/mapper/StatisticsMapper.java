@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import proj21_movie.dto.Statistics;
+import proj21_movie.dto.StatisticsCommand;
 
 
 
@@ -18,4 +19,6 @@ public interface StatisticsMapper {
 	List<Statistics> selectSalesByLatestDate();
 	
 	List<Statistics> selectSalesByMonth();
+	
+	List<StatisticsCommand> selectAudienceByMovie();
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import proj21_movie.dto.Statistics;
+import proj21_movie.dto.StatisticsCommand;
 import proj21_movie.service.StatisticsService;
 
 @RestController
@@ -36,5 +37,11 @@ public class RestStatisticsController {
 	public ResponseEntity<Object> getAudienceByLatestDate(){
 		List<Statistics> sales = service.showSalesByMonth();
 		return ResponseEntity.status(HttpStatus.OK).body(sales);
+	}
+	
+	@GetMapping("/movieAudience")
+	public ResponseEntity<Object> getAudienceByMovie(){
+		List<StatisticsCommand> audience = service.showAudienceByMovie();
+		return ResponseEntity.status(HttpStatus.OK).body(audience);
 	}
 }
