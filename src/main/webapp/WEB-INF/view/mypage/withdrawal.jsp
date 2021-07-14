@@ -13,44 +13,55 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
-$(function(){
-	$(document).ready(function(){
-		<!-- 취소 -->
-		$('#cancel').click(function(){
-	    	var contextPath = "<%=request.getContextPath()%>";
-			location.href = contextPath + "/mypage";
-		});
-            	
-        <!-- 비밀번호 입력확인 -->	
-        $("#delete").on("click", function(){
-        	if($("#memPasswd").val()==""){
-               alert("패스워드를 입력해주세요.");
-               $("#memPasswd").focus();
-               return;
-			}else if($('#confmemPasswd').val() == ''){
-				alert("패스워드를 입력해 주세요.");
-				$('#confmemPasswd').focus();
-				return;
-			}
-        	
-        	<!-- 패스워드 일치 확인 -->
-        	if($('#confmemPasswd').val() != $('#memPasswd').val()){
-				alert("패스워드가 일치하지 않습니다.");
-				$('#confmemPasswd').focus();
-				return;
-			}        	
-        }); 
-	});
-	
-	<!-- 탈퇴 전 경고문 -->
-	$('#delete').click(function(){
-    	if(!confirm("정말로 탈퇴하시겠습니까?")) {
-    		return false;
-    	}
-	});
-}); 
-</script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script>
+		$(function(){
+			$(document).ready(function(){
+				<!-- 취소 -->
+				$('#cancel').click(function(){
+			    	var contextPath = "<%=request.getContextPath()%>";
+					location.href = contextPath + "/mypage";
+				});
+		          
+		        $("#delete").on("click", function(){
+		        	<!-- 탈퇴 전 경고문 -->
+		        	if(confirm("정말로 탈퇴하시겠습니까?")) {	// confirm 알림창은 action때문에 로직이 이상하게 돌아가서 변경 못함
+		       			<!-- 비밀번호 입력확인 -->	
+			        	if($("#memPasswd").val()==""){
+			            	// alert("패스워드를 입력해주세요.");
+							$("#memPasswd").focus();	// 순서 중요! focus()가 위에 있어야 함
+							Swal.fire({					// Alert창 디자인 sweetalert2
+				                icon : 'warning',
+				                title: '패스워드를 입력해주세요.'
+				            });
+			                return false;				// 순서 중요! return false가 맨 뒤에 있어야 action으로 넘어가지 않음
+						}else if($('#confmemPasswd').val() == ''){
+							// alert("패스워드를 한번 더 입력해주세요.");
+							$('#confmemPasswd').focus();	// 순서 중요! focus()가 위에 있어야 함
+							Swal.fire({						// Alert창 디자인 sweetalert2
+				                icon : 'warning',
+				                title: '패스워드를 한번 더 입력해주세요.'
+				            });
+			                return false;					// 순서 중요! return false가 맨 뒤에 있어야 action으로 넘어가지 않음
+						}
+			        	
+			        	<!-- 패스워드 일치 확인 -->
+			        	if($('#confmemPasswd').val() != $('#memPasswd').val()){
+							// alert("패스워드가 일치하지 않습니다.");
+							$('#confmemPasswd').focus();	// 순서 중요! focus()가 위에 있어야 함
+							Swal.fire({						// Alert창 디자인 sweetalert2
+				                icon : 'error',
+				                title: '패스워드가 일치하지 않습니다.'
+				            });
+			                return false;					// 순서 중요! return false가 맨 뒤에 있어야 action으로 넘어가지 않음
+						}    
+		        	} else {
+		        		return false;
+		        	}
+		        }); 
+			});
+		}); 
+	</script>
 </head>
 <body>
 	<!-- header -->
