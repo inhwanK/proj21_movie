@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import proj21_movie.dto.Member;
@@ -49,6 +50,13 @@ public class MyinfoController {
 		member.setMemName(name);
 		member.setMemBirthdate(parseDate);
 		member.setMemPhone(phone);
+		
+//		Member selectMember = service.memberLogin(member);
+//		
+//		if (selectMember == null) {
+//			System.out.println("일치하지 않음");
+//			return "redirect:/myinfo";
+//		} 
 		
 		service.updatemyinfo(member);
 		session.setAttribute("member", member);
