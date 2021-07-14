@@ -56,13 +56,6 @@ $(function(){
 	    PopupCenter(contextPath + "/find_PW_change",'popup','313','420');
 	});
 	
-	<!-- 회원정보 수정 -->
-   <%--  $("#confirm").click(function(){
-    	var contextPath = "<%=request.getContextPath()%>";
-        $("#info_form").attr("action", contextPath + "/myinfo");
-        $("#info_form").submit();
-    }); --%>
-	
 });
 </script>
 </head>
@@ -96,7 +89,7 @@ $(function(){
 							<tr>
 								<th>아이디</th>
 								<td>
-									<input type="email" name="memEmail" value="${member.memEmail}" readonly="readonly">
+									<input type="email" id="memEmail" name="memEmail" value="${member.memEmail}" readonly="readonly">
 								</td>
 							</tr>
 							<tr>
@@ -121,7 +114,7 @@ $(function(){
 							<tr>
 								<th>비밀번호</th>
 								<td>
-									<input type="password" name="memPasswd" required>
+									<input type="password" id="memPasswd" name="memPasswd" required>
 									<input class="pwchange" type="button" value="비밀번호 변경" /> 
 									<br>※ 개인정보 수정 후 반드시 비밀번호를 다시 입력해 주시기 바랍니다.
 								</td>
@@ -140,5 +133,32 @@ $(function(){
 
 	<!-- footer -->
 	<%@include file="/WEB-INF/view/footer.jsp"%>
+	
+	<script type="text/javascript">
+		$(function(){
+			$('#confirm').on('click', function(e){
+				var contextPath = "${contextPath}";
+				var memEmail = $('#memEmail').val();
+				var memPasswd = $('#memPasswd').val();
+				
+				$.ajax({
+					type:"GET",
+					url: contextPath + "/api/selectMember/" + memEmail + "/" + memPasswd,
+					contentType: "application/json; charset=utf-8",
+					async: false,
+					success: function(json){
+						if (json.length < 1) {
+							alert('비밀번호가 일치하지 않습니다.');
+							e.preventDefault();
+						} else {
+							alert('수정 완료');
+							$("#info_form").submit();
+						}
+					}
+				});
+			});
+			
+		});
+	</script>
 </body>
 </html>
