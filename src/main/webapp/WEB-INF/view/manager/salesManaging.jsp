@@ -66,7 +66,7 @@
 
 				var salesOptions = {
 					title:'지난 7일간 매출',
-					width:800,
+					width:600,
 					height:400, 
 					hAxis:{
 					},
@@ -98,7 +98,7 @@
 
 				var audienceOptions = {
 					title:'지난 7일간 관람객 수',
-					width:800,
+					width:600,
 					height:400, 
 					hAxis:{
 					},
@@ -139,7 +139,7 @@
 
 				var salesOptions = {
 					title:'월별 매출',
-					width:800,
+					width:600,
 					height:400, 
 					hAxis:{
 					},
@@ -169,7 +169,7 @@
 
 				var audienceOptions = {
 					title:'월별 관람객 수',
-					width:800,
+					width:600,
 					height:400, 
 					hAxis:{
 					},
@@ -190,7 +190,7 @@
 			contentType:"application/json; charset=utf-8",
 			dataType:"json",
 			success: function(json){
-				alert("됨.")
+
 			}
 		})
 	}
