@@ -183,6 +183,7 @@
 				audienceChart.draw(audienceMonth, audienceOptions);
 			} // end of success
 		});
+		var advanceRate= new google.visualization.DataTable();
 		
 		$.ajax({
 			url:contextPath+"/api/movieAudience",
@@ -190,7 +191,46 @@
 			contentType:"application/json; charset=utf-8",
 			dataType:"json",
 			success: function(json){
+				
+				var sum = 0;
+				var avg = 0;
+				
+				advanceRate.addColumn('string', '영화');
+				advanceRate.addColumn('number', '관람인원');
+				
+				for(i=0;i<json.length;i++){
+					advanceRate.addRows([
+						[json[i].movTitle, json[i].audience ]
+					]);
+					sum += json[i].audience;
+				} // end of for
+				avg = sum/(i+1);
 
+				var reservationOptions = {
+					title:'예매율',
+					width:600,
+					height:400, 
+					vAxis:{
+						scaleType:'linear'
+					}
+							
+				};
+				
+				var audienceOptions = {
+						title:'영화별 관람객 수',
+						width:600,
+						height:400, 
+						vAxis:{
+							scaleType:'linear'
+						}
+								
+					};
+				
+				var audienceChart = new google.visualization.PieChart(document.getElementById('reservation_chart_div'));
+				audienceChart.draw(advanceRate, reservationOptions);
+				
+				var audienceChart = new google.visualization.ColumnChart(document.getElementById('reservation_columnchart_div'));
+				audienceChart.draw(advanceRate, audienceOptions);
 			}
 		})
 	}
@@ -222,6 +262,11 @@
 					<td style="width:50%"><div id="sales_monthchart_div"></div></td>
 					<td style="width:50%"><div id="audience_monthchart_div"></div></td>
 				</tr>
+				<tr>
+					<td style="width:50%"><div id="reservation_chart_div"></div></td>
+					<td style="width:50%"><div id="reservation_columnchart_div"></div></td>
+				</tr>
+				
 			</table>
 		</div>
 	</div>
