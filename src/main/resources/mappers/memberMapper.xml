@@ -3,8 +3,8 @@
 <mapper namespace="proj21_movie.mapper.MemberMapper">
 
 	<resultMap type="Member" id="resMember">
-		<id column="memEmail" property="memEmail"/>
-		<result column="memBirthdate" property="memBirthdate"/>
+		<id column="mem_email" property="memEmail"/>
+		<result column="mem_birthdate" property="memBirthdate"/>
 	</resultMap>
 
 	<select id="selectMemberByAll" resultMap="resMember">
@@ -19,7 +19,7 @@
 	</select>
 	
 	<select id="selectMemberByEmail" resultMap="resMember">
-		select mem_email, mem_passwd, mem_name
+		select mem_no, mem_email, mem_passwd, mem_birthdate, mem_name, mem_phone
 		  from member
 		 where mem_email = #{memEmail} 
 	</select>
@@ -90,7 +90,7 @@
 	</update>
 	
 	<!-- 회원정보 삭제 -->
-  	<delete id="withdrawal" parameterType="member">
+  	<delete id="withdrawal" parameterType="Member">
         DELETE 
           FROM member
          WHERE mem_email = #{memEmail}
@@ -98,7 +98,7 @@
     </delete>
 	
 	<!-- 회원정보 수정 -->
-	<update id="updatemyinfo" parameterType="member">
+	<update id="updatemyinfo" parameterType="Member">
 		update member
 		   set mem_birthdate = #{memBirthdate},
 		       mem_name = #{memName},
