@@ -57,11 +57,11 @@ $(function(){
 	});
 	
 	<!-- 회원정보 수정 -->
-    $("#confirm").click(function(){
+   <%--  $("#confirm").click(function(){
     	var contextPath = "<%=request.getContextPath()%>";
         $("#info_form").attr("action", contextPath + "/myinfo");
         $("#info_form").submit();
-    });
+    }); --%>
 	
 });
 </script>
@@ -86,7 +86,7 @@ $(function(){
 			</div>
 			
 			<!-- 수정페이지 -->
-			<form action="/myinfo" method="post" id="info_form">
+			<form action="updateinfo" method="post" id="info_form">
 				<div id="myinfo-wrap">
 					<h2>개인정보 수정</h2>
 					<div>
@@ -115,7 +115,7 @@ $(function(){
 							<tr>
 								<th>휴대폰</th>
 								<td>
-									<input type="text" id="memPhone" value="${member.memPhone}" maxlength="13" required>
+									<input type="text" name="memPhone" id="memPhone" value="${member.memPhone}" maxlength="13" required>
 								</td>
 							</tr>						
 							<tr>
